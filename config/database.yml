@@ -1,0 +1,41 @@
+development:
+  adapter: postgresql
+  template: template_postgis
+  encoding: unicode
+  host: localhost
+  database: iom_development
+  username: postgres
+  password:
+
+test:
+  adapter: postgresql
+  template: template_postgis
+  encoding: unicode
+  database: iom_test
+  username: postgres
+  password:
+
+staging:
+  adapter: postgresql
+  template: template_postgis
+  encoding: unicode
+  database: iom_production_2
+  username: postgres
+  password:
+
+smbtc:
+  adapter: postgresql
+  template: template_postgis
+  encoding: unicode
+  database: iom_production
+  username: postgres
+  password:
+
+production:
+  adapter: postgresql
+  template: template_postgis
+  encoding: unicode
+  host: <%= ENV["DB_HOST"] %>
+  database: iom_production
+  username: postgres
+  password: <%= ENV["DB_PSW"] %>
