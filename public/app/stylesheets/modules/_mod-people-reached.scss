@@ -1,0 +1,13 @@
+.mod-people-reached {
+  span {
+    position: relative;
+    font-size: 48px;
+    font-weight: lighter;
+    &:after {
+      display: block;
+      content:  "(target)";
+      font-size: 15px;
+      font-weight: bold;
+    }
+  }
+}

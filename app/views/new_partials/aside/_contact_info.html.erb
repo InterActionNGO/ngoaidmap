@@ -1,0 +1,14 @@
+<% unless ((@donor.contact_person_name.nil? || @donor.contact_person_name.empty?) && (@donor.contact_person_position.nil? || @donor.contact_person_position.empty?) && (@donor.contact_phone_number.nil? || @donor.contact_phone_number.empty?) && (@donor.contact_email.nil?||@donor.contact_email.empty?)) %>
+
+  <div class="contact-info mod-info">
+    <h3>Contact information</h3>
+    <div class="mod-contact-info">
+      <h4><%= @donor.contact_person_name %></h4>
+      <p><%= @donor.contact_person_position %></p>
+      <p><%= @donor.contact_phone_number %></p>
+      <% unless (@donor.contact_email.nil?)||(@donor.contact_email.empty?) %>
+        <p><%= link_to(@donor.contact_email, "mailto:#{@donor.contact_email}") %></p>
+      <%end%>
+    </div>
+  </div>
+<%end%>

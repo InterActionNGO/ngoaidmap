@@ -1,0 +1,17 @@
+<% donors = @area.donors(@site) %>
+<div class="donors-in-this-country mod-info">
+  <h3>donors in this <%= word_for_geo_context(@area) %></h3>
+  <% unless donors.empty? %>
+    <ul>
+      <% index = 1 %>
+      <% donors.each do |donor| %>
+        <% if index < 12 %>
+          <li><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+          <% index = index + 1 %>
+        <% end %>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>The are no donors</p>
+  <% end %>
+</div>

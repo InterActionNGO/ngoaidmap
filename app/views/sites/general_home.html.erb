@@ -1,0 +1,39 @@
+  <!-- div id="header_sites" -->
+  <div class="iom-counter">
+    <div class="map"></div>
+    <div class="date"><span id="remaining-days"></span></div>
+    <p class="counter">DAYS UNTIL<br>THE GLOBAL MAP</p>
+  </div>
+  <!-- <div id="gallery">
+    <div class="content_gallery">
+      <%# @sites.shuffle.each do |site| %>
+        <%# link_to(image_tag(site.aid_map_image.url(:huge), :title => site.try(:name), :desc => truncate(site.short_description, :length => 72), :alt => truncate(site.long_description, :length => 278)), url(site)) %>
+      <%# end %>
+    </div>
+    <%# link_to 'Photo credits', '/p/photo-credits', :class => 'credits' %>
+  </div> -->
+  <!-- <div id="gallery"> -->
+  <ul id="gallery_thumbails">
+
+    <% @sites.each_with_index do |site, i| %>
+      <li class="<%= ((1+i) % 4 == 0 && i > 0) ? 'last' : '' %>">
+        <div id="image">
+          <%= link_to(image_tag(site.aid_map_image.url(:small), :alt => site.name), url(site)) %>
+        </div>
+        <a class="site_name" href="<%= url(site) %>"><%= site.name %></a>
+        <% if site.partners.present?%>
+        <p class="sponsor">
+          Site funded by <%= link_to site.partners.first.name, site.partners.first.url %>
+        </p>
+        <% end %>
+      </li>
+    <% end %>
+    <li class="<%= ((@sites.size + 1) % 4 == 0) ? 'last' : '' %>">
+        <div id="image">
+          <%= image_tag("sites/home/more_project.jpg", :alt => 'More projects coming soon') %>
+        </div>
+        <a class="site_name">MORE PROJECTS SOON!</a>
+    </li>
+  </ul>
+
+  <%=raw(javascript_include_merged(:sites_general_home)) %>

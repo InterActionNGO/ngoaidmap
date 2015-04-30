@@ -1,14 +1,96 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>NgoFront</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>IOM - Administrator</title>
+    <%= stylesheet_link_tag 'backoffice.css' %>
+    <%= stylesheet_link_tag 'backoffice/jscroll.css', 'backoffice/chosen.css', 'backoffice/plugins/fineuploader-3.3.0.css', 'backoffice/jquery-ui-1.7.2.custom.css', 'backoffice/layout.css', 'backoffice/smbtc-layout.css', 'backoffice.css' %>
 
-<%= yield %>
+    <%= javascript_include_tag 'http://maps.google.com/maps/api/js?sensor=false', 'backoffice/jquery.min.js', 'backoffice/jquery.ui.core.js', 'backoffice/jquery.ui.widget.js', 'backoffice/jquery.ui.position.js', 'backoffice/jquery.ui.autocomplete.js', 'backoffice/rails.js', 'backoffice/plugins/chosen/chosen.jquery.js', 'backoffice/plugins/jquery.mousewheel.js','backoffice/plugins/jquery.jscrollpane.js', 'backoffice/plugins/date_combos.js', 'backoffice/plugins/jquery.mousewheel.js', 'backoffice/plugins/jquery.livequery.min.js', 'backoffice/plugins/jquery.stylish-select.js', 'backoffice/plugins/jHtmlArea-0.7.0.min.js', 'backoffice/plugins/fineuploader-3.3.0.js' %>
 
-</body>
+    <%= csrf_meta_tag %>
+
+    <% if Rails.env.development? %>
+      <link rel="icon" type="image/png" href="/app/images/favicon-dev.png">
+    <% else %>
+      <link rel="icon" type="image/png" href="/dist/images/favicon.png">
+    <% end %>
+  </head>
+  <body>
+
+    <% if logged_in? %>
+        <div class="mod-backoffice-menu">
+
+          <a href="<%= admin_admin_path %>" class="interaction-logo"><%= image_tag "interaction-white.svg", :alt  => "interaction logo", :height => '98', :width => '150' %></a>
+
+          <ul class="admin-menu">
+            <% if current_user.admin? -%>
+              <li><%= link_to('settings', edit_admin_setting_path(Settings.first)) %></li>
+            <% end -%>
+            <li class="last"><%= link_to('close', logout_path) %></li>
+          </ul>
+
+          <ul class="main-menu">
+            <% if current_user.admin? -%>
+              <li class="<%= (controller_name == 'admin' ? 'selected' : nil) %>"><%= link_to(admin_admin_path) do %>dashboard<% end %></li>
+              <li class="<%= ((controller_name == 'sites' || (@element && @element.is_a?(Site))) ? 'selected' : nil) %>"><%= link_to(admin_sites_path) do %>sites<% end %></li>
+              <li class="<%= (((controller_name == 'projects' && !@organization) || (@element && @element.is_a?(Project)) || (controller_name == 'activities' && action_name == 'show' && @project.present?)) ? 'selected' : nil) %>"><%= link_to(admin_projects_path) do %>projects<% end %></li>
+              <li class="<%= ((@organization || controller_name == 'organizations' || (@element && @element.is_a?(Organization))) ? 'selected' : nil) %>"><%= link_to(admin_organizations_path) do %>organizations<% end %></li>
+              <li class="<%= ((controller_name == 'donors' || (@element && @element.is_a?(Donor)) || (controller_name == 'offices' && params[:donor_id].present?)) ? 'selected' : nil) %>"><%= link_to(admin_donors_path) do %>donors<% end %></li>
+              <!--<li class="<%= (((controller_name == 'offices' && params[:donor_id].blank?) || (@element && @element.is_a?(Office))) ? 'selected' : nil) %>"><%= link_to(admin_offices_path) do %><span class="museo_sans">offices</span><% end %></li>-->
+              <li class="<%= (controller_name == 'activities' && action_name == 'show' && @project.blank? && @organization.blank? ? 'selected' : nil) %>"><%= link_to(admin_activity_path) do %>activity<% end %></li>
+              <li class="<%= (controller_name == 'pages' && @site.blank? ? 'selected' : nil) %>"><%= link_to(admin_pages_path) do %>pages<% end %></li>
+              <li class="<%= (controller_name == 'layers' && @site.blank? ? 'selected' : nil) %>"><%= link_to(admin_layers_path) do %>layers<% end %></li>
+            <% else -%>
+              <li class="<%= (controller_name == 'admin' ? 'selected' : nil) %>"><%= link_to(admin_admin_path) do %>dashboard<% end %></li>
+              <li class="<%= (((controller_name == 'projects' && !@organization) || (@element && @element.is_a?(Project))) ? 'selected' : nil) %>"><%= link_to(admin_projects_path) do %>Your projects<% end %></li>
+              <li class="<%= ((@organization || controller_name == 'organizations' || (@element && @element.is_a?(Organization))) ? 'selected' : nil) %>"><%= link_to(edit_admin_organization_path(current_user.organization)) do %>Your organization<% end %></li>
+            <% end -%>
+          </ul>
+        </div> <!--  mod-backoffice-menu -->
+    <% end %>
+
+
+    <% if flash[:notice] -%>
+      <div class="flash">
+        <div class="notice"><%= raw flash[:notice] %></div>
+      </div>
+    <% end -%>
+
+    <div class="row">
+      <%= yield %>
+    </div>
+
+
+    <% if logged_in? %>
+      <div class="mod-backoffice-footer">
+        <div class="inner_footer">
+          <a class="logo" href="<%= admin_admin_path %>" target="_blank">
+            <%= image_tag "interaction-white.svg", :alt  => "interaction logo", :height => '65', :width => '100' %>
+          </a>
+          <ul>
+            <li class="last"><a href="/">ngoaidmap</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="modal_window">
+        <div class="alert">
+          <div class="top_border"></div>
+          <h4></h4>
+
+          <ul id="errors">
+          </ul>
+
+          <p></p>
+          <div class="messages">
+            <a class="cancel">cancel</a>
+            <a href="#" class="button remove"></a>
+          </div>
+          <div class="bottom_border"></div>
+        </div>
+      </div>
+    <% end %>
+
+  </body>
 </html>

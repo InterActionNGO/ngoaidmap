@@ -1,0 +1,130 @@
+<div id="header">
+  <div class="inner_header">
+    <div class="left <%= (action_name == 'home') ? 'home' : '' %>">
+      <h1><%= link_to(@site.name,root_path) %></h1>
+      <ul class="menu">
+
+          <% if @site.cluster %>
+            <li><a class="main_option" href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_cluster_sector.upcase.singularize %></a></li>
+          <% elsif @site.sector %>
+            <li><a class="main_option" href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_cluster_sector.upcase.singularize %></a></li>
+          <% else %>
+            <li id="<%= @site.navigate_by_cluster? ? 'cluster' : 'sector' %>_option">
+              <a class="geneva main_option with_suboptions"><%= @site.word_for_cluster_sector.upcase %><span class="with_suboptions"></span></a>
+              <div class="header_title"><a><%= @site.word_for_cluster_sector.upcase %><span class="with_suboptions"></span></a></div>
+              <ul class="suboptions">
+                <span class="top_content"></span>
+                <span class="bottom_content"></span>
+                <% @site.clusters_or_sectors.reject{|c| c.name.eql?('N/A') || c.total_projects(@site) == 0}.each do |category| %>
+                <li>
+                  <a href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" class="geneva <%= category.css_class %> <%= (category.name.size > 17)? 'double_line':''%> icon_menu">
+                    <% if category.name.size>25 %>
+                      <%= category.name[0..22] + '...' %>
+                    <% else %>
+                      <%= category.name %>
+                    <% end %>
+                  </a>
+                </li>
+                <% end %>
+
+              </ul>
+            </li>
+          <% end %>
+
+          <% if @site.navigate_by == :country %>
+            <li id="country_option">
+              <a class="geneva main_option with_suboptions">COUNTRIES<span class="with_suboptions"></span></a>
+              <div class="header_title"><a>COUNTRIES<span class="with_suboptions"></span></a></div>
+              <div class="suboptions_body">
+                <div class="wrapper">
+                  <ul class="content scroll_pane">
+                    <% @site.countries_select.each do |country| %>
+                    <li><%= link_to(country.name, location_path(:ids => country), :class => 'geneva') %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          <% else %>
+            <li id="region_option">
+              <a class="geneva main_option with_suboptions"><%= @site.word_for_regions.pluralize.upcase %><span class="with_suboptions"></span></a>
+              <div class="header_title"><a><%= @site.word_for_regions.pluralize.upcase %><span class="with_suboptions"></span></a></div>
+              <div class="suboptions_body">
+                <span class="suboptions_body_top"></span>
+                <div class="wrapper">
+                  <!-- We have to ask for numbers of elements to show (or not) custom scroll bar -->
+                  <ul id="regions" class="content <%= (@site.regions_select.length > 11) ? 'scroll_pane' : ''%>">
+                    <% @site.regions_select.each do |region| %>
+                    <li>
+                      <%= link_to(region.name, location_path(:ids => region) , :class => 'geneva') %>
+                    </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+              </li>
+          <% end %>
+
+          <li id="organization_option">
+            <a class="geneva main_option with_suboptions">ORGANIZATIONS<span class="with_suboptions"></span></a>
+            <div class="header_title"><a>ORGANIZATIONS<span class="with_suboptions"></span></a></div>
+            <div class="suboptions_body">
+              <span class="suboptions_body_top"></span>
+              <form method="get">
+                <input id="ngos_search" type="text" value="" name="ngos_search"/>
+              </form>
+              <div class="wrapper">
+                <ul id="orgs_list" class="content scroll_pane">
+                    <p class="no_founded">No organizations found</p>
+                    <% @site.organizations_select.each do |organization| %>
+                      <li><a href="<%= organization_path(organization) %>"><%= organization.name %></a></li>
+                    <% end %>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+
+          <li id="donor_option">
+            <a class="geneva main_option with_suboptions">DONORS<span class="with_suboptions"></span></a>
+            <div class="header_title"><a>DONORS<span class="with_suboptions"></span></a></div>
+            <div class="suboptions_body">
+              <span class="suboptions_body_top"></span>
+              <form method="get">
+                <input id="dgos_search" type="text" value="" name="dgos_search"/>
+              </form>
+              <div class="wrapper">
+                <ul id="donors_list_menu" class="content scroll_pane">
+                    <p class="no_founded">No donors found</p>
+                    <% @site.donors_select.each do |donor| %>
+                      <li><a href="<%= donor_path(donor) %>"><%= CGI.unescapeHTML(donor.name) %></a></li>
+                    <% end %>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <% @site.pages.highlighted.each do |page| %>
+            <li><a href="<%= page_path(page) %>" class="geneva main_option"><%= page.title.upcase %></a></li>
+          <% end %>
+          <% if @site.show_blog? %>
+            <li><a href="<%= @site.blog_url %>" class="geneva main_option" rel="nofollow">BLOG</a></li>
+          <% end %>
+
+      </ul>
+    </div>
+
+    <div class="right">
+      <%= form_tag(search_path, :method => :get, :class => 'search') do %>
+        <span class="input_search">
+          <%= label_tag :q, 'Search...' %>
+          <%= text_field_tag :q, params[:q], :value=>'' %>
+          <% unless @site.published? %>
+          <input type="hidden" name="force_site_id" value="<%= @site.id %>" />
+          <% end %>
+          <%= submit_tag '' %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+</div>

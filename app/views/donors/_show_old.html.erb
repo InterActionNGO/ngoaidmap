@@ -1,0 +1,111 @@
+
+  <div id="layout">
+    <div id="pages">
+      <div class="left" id="relative_content">
+        <div class="outer_head">
+          <div class="head">
+            <h1><%= @donor.name.html_safe %></h1>
+            <p>Funding <%= pluralize(@donor.donated_projects_count(@site), 'project', 'projects') %></p>
+          </div>
+        </div>
+        <div class="results_list" id="projects">
+          <%= render :partial => 'donors/projects' %>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="block <%unless @donor.logo.url.empty? && @donor.description.empty? && @donor.twitter.empty? && @donor.facebook.empty? %>border<%end%>">
+          <% if @donor.logo_file_name? %>
+            <div class="logo">
+                <%= image_tag(@donor.logo.url(:small), :id=>'image_logo') %>
+            </div>
+          <% end %>
+          <%= anglo(simple_format(@donor.description)) unless @donor.description.blank? %>
+          <p class="social">
+            <% if @donor.twitter? %>
+              <%= link_to("follow us", "http://twitter.com/#{@donor.twitter}", :class=>"twitter", :target=>"_blank") %>
+            <% end %>
+            <% if @donor.twitter? &&  @donor.facebook? %> / <% end %>
+            <% if @donor.facebook? %>
+              <%= link_to("visit our page", "http://facebook.com/#{@donor.facebook}", :class=>"facebook", :target=>"_blank") %>
+              <% end %>
+          </p>
+
+          <% if @donor.website? %>
+            <p class="website"><%= link_to(@donor.website, @donor.website, :rel => 'nofollow', :target => '_blank') %></p>
+          <% end %>
+        </div>
+
+        <!-- CLUSTER -->
+        <div class="block border statistics">
+          <h2>PROJECT <%= @site.word_for_cluster_sector %></h2>
+          <ul class="statistics_list">
+            <% @donor.projects_sectors_or_clusters(@site)[0...3].each do |category,count| %>
+              <li>
+                <div class="tooltip">
+                  <span class="body_tooltip">
+                    <label><%= category.name %></label>
+                  </span>
+                  <span class="bottom_tooltip"></span>
+                </div>
+                <a class="<%= category.css_class %> icon_statistics" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @donor.projects_sectors_or_clusters(@site)[0...3].map{|e| e.last}.max) %>px"><%= count %></span></a>
+              </li>
+            <% end %>
+          </ul>
+          <% unless @donor.projects_sectors_or_clusters(@site).size < 4%>
+              <p class="other">and <%= pluralize(@donor.projects_sectors_or_clusters(@site).size - 3,"more #{@site.word_for_cluster_sector.singularize}", "more #{@site.word_for_cluster_sector.pluralize}") %></p>
+          <% end %>
+        </div>
+
+        <!-- PROJECTS BY AREA -->
+        <div class="block border statistics">
+          <h2>PROJECT LOCATIONS</h2>
+          <% if @site.navigate_by_country? %>
+            <%= raw(projects_by_location(@site, @donor.projects_countries(@site))) %>
+          <% else %>
+            <%= raw(projects_by_location(@site, @donor.projects_regions(@site))) %>
+          <% end %>
+        </div>
+
+        <!-- OFFICES -->
+        <!--<% if @donor.offices.present? %>
+        <div class="block border statistics">
+          <h2>DONOR'S OFFICES</h2>
+          <ul>
+            <% @donor.offices.each do |office| %>
+              <li>
+                <%= link_to office.name, office_path(office) %>
+                <p>Funding <%= pluralize(office.donations.count, 'project') %></p>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>-->
+
+        <% unless @donor.resources.empty? %>
+        <div class="block border">
+          <h2>Additional information</h2>
+          <ul>
+            <% @donor.resources.each do |resource| %>
+            <li><%= link_to(resource.title, resource.url, :rel => 'nofollow', :target => '_blank') %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+
+        <% unless (@donor.contact_person_name.blank?)&&(@donor.contact_person_position.blank?)&&(@donor.contact_company.blank?)&&(@donor.contact_phone_number.blank?)&&(@donor.contact_email.blank?) %>
+        <div class="block border last">
+          <h2>Contact information</h2>
+          <p><strong><%= @donor.contact_person_name %></strong><br/><%= @donor.contact_person_position %><br/><%= @donor.contact_company %></p>
+          <p><%= @donor.contact_phone_number %><br/><%= link_to(@donor.contact_email, "mailto:#{@donor.contact_email}") %></p>
+        </div>
+        <% end %>
+
+      </div>
+
+      <div class="view_more" id="projects_view_more">
+        <%= render :partial => "donors/pagination" %>
+      </div>
+    </div>
+
+    <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>

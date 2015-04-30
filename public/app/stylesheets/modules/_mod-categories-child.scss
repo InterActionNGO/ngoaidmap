@@ -1,0 +1,57 @@
+.mod-categories-child {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  overflow: scroll;
+  height: 290px;
+  padding: 15px 0;
+  -webkit-overflow-scrolling: touch;
+
+  li {
+    float: none;
+    line-height: 15px;
+    margin: 0;
+  }
+  a {
+    font-size: 16px;
+    text-transform: none;
+  }
+  .sector & {
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    li {
+      width: 95%;
+      padding: 8px 0 8px 5%;
+    }
+    a {
+      position: relative;
+      padding: 0 0 0 40px;}
+    a:before {
+      @include before('', block, absolute, 0px, 0px, 30px, 30px);
+      border-radius: 50%;
+      background-color: $color-4;
+    }
+    span {
+      padding-left: 40px;
+      color: $color-5;
+      text-transform: none;
+    }
+  }
+}
+.sector-child {
+  @include categorie-selector-child($color-2);
+  li:hover { background:none;}
+}
+.organizations-child {
+  @include categorie-selector-child($color-6);
+}
+.donors-child {
+  @include categorie-selector-child($color-7);
+}
+.countries-child {
+   @include categorie-selector-child($color-8);
+}
+.regions-child {
+  @include categorie-selector-child($color-9);
+}

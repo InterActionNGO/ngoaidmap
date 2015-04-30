@@ -1,0 +1,47 @@
+
+<div class="about-subsections">
+
+  <div class="mod-hero"></div>
+
+  <div class="main-content">
+    <div class="row">
+      <div class="grid-4">
+        <aside class="layout-sidebar">
+          <div class="mod-info mod-sites-info" id="menuFixedView">
+
+            <% if @pages.present? -%>
+                <h3>About</h3>
+                <ul>
+                  <% @pages.each do |child| %>
+                    <li><%= link_to_unless(child==@page,child.title, page_path(child)) %></li>
+                  <% end %>
+                </ul>
+            <% else -%>
+            <% top_parent = @page.top_parent %>
+            <h3><%= link_to(top_parent.title, page_path(top_parent)) %></h3>
+            <% pages = top_parent.children.published %>
+            <% if pages.any? %>
+              <ul>
+                <% pages.each do |child| %>
+                  <li><%= link_to_unless(child==@page,child.title, page_path(child)) %></li>
+                <% end %>
+              </ul>
+            <% end %>
+            <% end -%>
+
+          </div>
+        </aside>
+      </div>
+
+      <div class="grid-12 offset-1">
+        <section class="layout-content about">
+          <h1><%= @page.title %></h1>
+          <article class="mod-content-article">
+            <%= raw @page.body  %>
+          </article>
+        </section>
+      </div>
+    </div>
+  </div>
+
+</div>

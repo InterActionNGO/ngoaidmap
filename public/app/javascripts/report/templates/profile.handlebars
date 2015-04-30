@@ -1,0 +1,78 @@
+<h2>{{name}}</h2>
+{{#if details.description}}<p>{{details.description}}</p>{{/if}}
+
+<div class="profile-item mod-report-summary">
+  <div class="summary-wrap">
+    <div class="summary-item">
+      <h3>Projects</h3>
+      <span class="value">{{projects.length}}</span>
+    </div>
+
+    {{#if donors}}
+      <div class="summary-item">
+        <h3>Donors</h3>
+        <span class="value">{{donors.length}}</span>
+      </div>
+    {{/if}}
+
+    {{#if countries}}
+      <div class="summary-item">
+        <h3>Countries</h3>
+        <span class="value">{{countries.length}}</span>
+      </div>
+    {{/if}}
+
+    {{#if sectors}}
+      <div class="summary-item">
+        <h3>Sectors</h3>
+        <span class="value">{{sectors.length}}</span>
+      </div>
+    {{/if}}
+
+    {{#if organizations}}
+      <div class="summary-item">
+        <h3>Organizations</h3>
+        <span class="value">{{organizations.length}}</span>
+      </div>
+    {{/if}}
+  </div>
+</div>
+
+{{#if budgets}}
+  <div class="profile-item is-flex">
+    <div class="budget-item">min. (USD): ${{commas budgets.min}}</div>
+    <div class="budget-item">median (USD): ${{commas budgets.mid}}</div>
+    <div class="budget-item">max. (USD): ${{commas budgets.max}}</div>
+  </div>
+{{/if}}
+
+  
+<div class="profile-item row">
+  <h3 class="profile-item-title">Profile Overview</h3>
+  {{#each charts}}
+    <div class="mod-report-grid-3">
+      <h3>{{name}}</h3>
+      <div class="mod-report-stacked-chart"></div>
+    </div>
+  {{/each}}
+</div>
+{{#if details}}
+  <div class="row profile-item">
+    <div class="grid-8">
+      <h3>Contact info</h3>
+      <p>{{details.contact_info.contact_name}}, {{details.contact_info.contact_position}}<br>
+      {{details.contact_info.phone}}<br>
+      <a href="mailto:{{details.contact_info.email}}">{{details.contact_info.email}}</a></p>
+    </div>
+
+    <div class="grid-8 offset-1">
+      <h3>Donation info</h3>
+      <p>{{details.donation_info.donation_address}}<br>
+      <a href="{{details.donation_info.donation_website}}">{{details.donation_info.donation_website}}</a></p>
+    </div>
+  </div>
+{{/if}}
+
+{{#if map}}
+  <div class="profile-item profile-map"></div>
+{{/if}}

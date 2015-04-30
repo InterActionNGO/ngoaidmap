@@ -1,0 +1,311 @@
+@mixin absolute($top: auto, $left: auto, $bottom: auto, $right: auto, $zindex: auto) {
+  bottom: $bottom;
+  left: $left;
+  position: absolute;
+  right: $right;
+  top: $top;
+  z-index: $zindex;
+}
+
+@mixin fixed($top: auto, $left: auto, $bottom: auto, $right: auto, $zindex: auto) {
+  bottom: $bottom;
+  left: $left;
+  position: fixed;
+  right: $right;
+  top: $top;
+  z-index: $zindex;
+}
+
+@mixin clearfix() {
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+      clear: both;
+  }
+}
+
+@mixin grid($column) {
+  width: ((100 / $grid-columns) * $column) - ($grid-gutter-width * 2);
+}
+
+@mixin offset($column) {
+  margin-left: ((100 / $grid-columns) * $column) - ($grid-gutter-width * 2);
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+@mixin before($content, $display, $position, $left, $top, $width, $height) {
+  content: $content;
+  display: $display;
+  position: $position;
+  left: $left;
+  top: $top;
+  width: $width;
+  height: $height;
+}
+@mixin after($content, $display, $position, $right, $bottom, $width, $height) {
+  content: $content;
+  display: $display;
+  position: $position;
+  right: $right;
+  bottom: $bottom;
+  width: $width;
+  height: $height;
+}
+@mixin arrow ($width, $color, $border-width) {
+  width: $width;
+  height: $width;
+  border-top: $border-width solid $color;
+  border-left:  $border-width solid $color;
+}
+
+@mixin link-states($primary-color, $display) {
+  display: $display;
+  color: $primary-color;
+  &:hover { text-decoration: underline;}
+}
+
+@mixin theme-color-1 { $primary-color: $color-1;}
+@mixin theme-color-2 { $primary-color: $color-2;}
+@mixin theme-color-3 { $primary-color: $color-3;}
+@mixin theme-color-7 { $primary-color: $color-7;}
+@mixin theme-color-8 { $primary-color: $color-8;}
+@mixin theme-color-9 { $primary-color: $color-9;}
+
+@mixin negative-radius-upper($background-color, $height) {
+  background: linear-gradient(315deg, transparent $height, $background-color 0) bottom right;
+  background-image: radial-gradient(circle at 100% 100%, transparent $height, $background-color $height+2px);
+}
+
+@mixin negative-radius-down($background-color, $height) {
+  background: linear-gradient(45deg, transparent $height, $background-color 0) top right;
+  background-image: radial-gradient(circle at 100% 0%, transparent $height, $background-color $height+2px);
+}
+
+@mixin categorie-selector($primary-color, $bg-color) {
+  .mod-go-up-menu {
+    border-bottom: 10px solid $primary-color;
+  }
+  .mod-drop-down-menu {
+    border-top: 10px solid $primary-color;
+    ul {
+      background-color: $bg-color;
+    }
+  }
+
+  .no-touch &:hover, &.active, &.is-touched {
+    background-color: $primary-color;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: $color-0;
+  }
+  &.active {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  .no-touch &:hover:after, &.is-touched:after {
+    @include after('', block, absolute, -15px, auto, 15px, 15px);
+    top: 0;
+    @include negative-radius-upper($primary-color, 15px);
+  }
+
+  .is-fixed & {
+    .no-touch &:hover, &.active, &.is-touched {
+      background-color: $primary-color;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+    &.active {
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+    .no-touch &:hover:after, &.is-touched:after {
+      @include after('', block, absolute, -15px, 0, 15px, 15px);
+      top: auto;
+      @include negative-radius-down($primary-color, 15px);
+    }
+  }
+
+  .no-touch &.no-child:hover {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    &:after {
+      display: none;
+    }
+    a { color: $color-0;}
+  }
+
+  input {
+    color: $primary-color;
+    @include placeholder { color: $primary-color;}
+    background-color: rgba($primary-color, 0.3);
+  }
+}
+
+@mixin categorie-selector-child($primary-color) {
+  a { color: $primary-color;
+    &:hover { color: $primary-color;}
+  }
+  li {
+    &:hover, &.active { background-color: rgba($primary-color, 0.1)}
+  }
+  input {
+    background-color: rgba($primary-color, .3);
+  }
+}
+
+@mixin menu-item($primary-color){
+  &:hover .index-item {
+    background-color: rgba($primary-color, .3);
+    border-radius: 15px;
+  }
+  .submenu {
+    border-top: 5px solid rgba($primary-color, .3);
+  }
+  .submenu-item { background-color: rgba($primary-color, .1);
+    &:hover {
+      background-color: rgba($primary-color, .3);
+    }
+  }
+  &.active {
+    background-color: $primary-color;
+    color: $color-0;
+  }
+
+}
+
+@mixin drop-down-menu($primary-color){
+  &:hover {
+    .submenu { display: block;}
+    .index-item {
+      background-color: rgba($primary-color, .3);
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      &:after {
+        @include after('', block, absolute, -12px, 0, 12px, 12px);
+        @include negative-radius-down(rgba($primary-color, .3), 12px);
+      }
+    }
+    .father a { color: $color-0;}
+  }
+  &.no-child:hover .index-item {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    &:after {
+      display: none;
+    }
+  }
+
+  .submenu {
+    border-top: 5px solid rgba($primary-color, .3);
+  }
+  .submenu-item { background-color: rgba($primary-color, .1);
+    &:hover a{
+      color: $primary-color;
+    }
+    &:last-child {
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+  }
+  &:hover .active {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  &.active {
+    background-color: $primary-color;
+    color: $color-0;
+    &:hover {
+      color: $color-3;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      a { color: $color-3;}
+    }
+  }
+}
+
+@mixin triangle ($width, $color) {
+  width: 0;
+  height: 0;
+  border-left: $width solid transparent;
+  border-right: $width solid transparent;
+  border-top: 2*$width solid $color;
+}
+
+@mixin circle-decoration ($color) {
+  @include before('', inline-block, absolute, 0, 5px, 10px, 10px);
+  background-color: $color;
+  border-radius: 50%;
+}
+
+@mixin gradient-up ($color) {
+  @include after('', block, absolute, 0, 30px, auto, 16px);
+    left:0;
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0, $color),
+      color-stop(1, rgba(255,255,255, 0))
+    );
+    background-image: -o-linear-gradient(top, $color 0%, rgba(255,255,255, 0) 100%);
+    background-image: -moz-linear-gradient(top, $color 0%,  rgba(255,255,255, 0) 100%);
+    background-image: -webkit-linear-gradient(top, $color 0%, rgba(255,255,255, 0) 100%);
+    background-image: -ms-linear-gradient(top, $color 0%,  rgba(255,255,255, 0) 100%);
+    background-image: linear-gradient(to top, $color 0%,  rgba(255,255,255, 0) 100%);
+    pointer-events: none;
+}
+@mixin gradient-down ($color) {
+  @include before('', block, absolute, 0, 0, auto, 25px);
+    right: 0;
+    z-index: 100;
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0, $color),
+      color-stop(1, rgba(255,255,255, 0))
+    );
+    background-image: -o-linear-gradient(bottom, $color 0%, rgba(255,255,255, 0) 100%);
+    background-image: -moz-linear-gradient(bottom, $color 0%,  rgba(255,255,255, 0) 100%);
+    background-image: -webkit-linear-gradient(bottom, $color 0%, rgba(255,255,255, 0) 100%);
+    background-image: -ms-linear-gradient(bottom, $color 0%,  rgba(255,255,255, 0) 100%);
+    background-image: linear-gradient(to bottom, $color 0%,  rgba(255,255,255, 0) 100%);
+    pointer-events: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

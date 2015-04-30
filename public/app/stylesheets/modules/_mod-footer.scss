@@ -1,0 +1,49 @@
+.mod-footer {
+  font-size: 13px;
+
+  a { display: inline-block;}
+
+  ul { margin-top: 40px;}
+  li {
+    float: none;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+  .aid-map-logo {
+    margin-top: 45px;
+  }
+  .interaction-logo {
+    float: left;
+  }
+  .signature {
+    text-align: right;
+  }
+}
+.mod-footer-top {
+  height: 190px;
+  background: image-url('footer_background_x2.svg') no-repeat left center;
+  background-size: auto 130px;
+  -ms-background-position-x: -60%
+}
+.mod-footer-bottom {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 25px;
+  padding-top: 10px;
+  background-color: $color-1;
+  color: $color-0;
+  font-weight: lighter;
+  a {
+    display: inline-block;
+    font-weight: bold;
+    color: $color-0;
+    text-decoration: underline;
+  }
+  p { color: $color-11;}
+}
+
+
+

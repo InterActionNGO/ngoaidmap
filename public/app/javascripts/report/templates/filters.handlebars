@@ -1,0 +1,23 @@
+<p>Filters applied:</p>
+{{#if filters.organizations}}
+  <p><strong>Organizations</strong>: {{starray filters.organizations}}</p>
+{{/if}}
+
+{{#if filters.countries}}
+  <p><strong>Countries</strong>: {{starray filters.countries}}</p>
+{{/if}}
+
+{{#if filters.sectors}}
+  <p><strong>Sectors</strong>: {{starray filters.sectors}}</p>
+{{/if}}
+
+{{#if filters.donors}}
+  <p><strong>Donors</strong>: {{starray filters.donors}}</p>
+{{/if}}
+
+{{#if filters.term}}
+  <p><strong>Search term</strong>: {{filters.term}}</p>
+{{/if}}
+{{!-- <p><strong>From</strong>: {{filters.startDate}} / <strong>To</strong>: {{filters.endDate}}</p> --}}
+<p><strong>Projects active between</strong>: {{filters.startDate}} <strong>and</strong>: {{filters.endDate}}</p>
+  <p><strong>Important</strong>: Please read the section on limitations of this data below <sup><a href="#limitations1">1</a></sup></p>

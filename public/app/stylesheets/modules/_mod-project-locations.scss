@@ -1,0 +1,15 @@
+.mod-project-locations {
+  a { display: inline-block;}
+  li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 3px;
+    color: $color-5;
+  }
+
+  .pos0:before { @include circle-decoration (#333333); }
+  .pos1:before { @include circle-decoration (#565656); }
+  .pos2:before { @include circle-decoration (#727272); }
+  .pos3:before { @include circle-decoration (#ADADAD); }
+
+}

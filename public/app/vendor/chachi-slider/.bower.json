@@ -1,0 +1,24 @@
+{
+  "name": "chachi-slider",
+  "version": "2.0.4",
+  "homepage": "https://github.com/davidsingal/chachi-slider",
+  "authors": [
+    "David Inga <undakel@gmail.com>"
+  ],
+  "description": "A minimal and simple slider jquery plugin",
+  "main": "jquery.chachi-slider.js",
+  "license": "MIT",
+  "ignore": [
+    ".editorconfig",
+    ".gitignore"
+  ],
+  "_release": "2.0.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.0.4",
+    "commit": "6edcc6f156fc4ce1cad482a9ab6759759844be2b"
+  },
+  "_source": "git://github.com/davidsingal/chachi-slider.git",
+  "_target": "~2.0.4",
+  "_originalSource": "chachi-slider"
+}

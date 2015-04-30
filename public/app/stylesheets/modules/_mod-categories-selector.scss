@@ -1,0 +1,252 @@
+.mod-categories-selector {
+
+  &.is-fixed {
+    min-width: 960px;
+    z-index: 100;
+  }
+
+  nav {
+    float: left;
+    position: relative;
+    width: 98%;
+    margin: 7px 0 0 0;
+    padding: 2px 1%;
+    background-color: $color-0;
+    border-radius: 20px;
+  }
+  ul {
+    @include clearfix();
+  }
+  li {
+    float: left;
+    position: relative;
+    font-weight: lighter;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-right: 2%;
+
+    .father {
+      display: block;
+      padding: 9px 23px;
+      font-weight: lighter;
+      @include border-radius(20px);
+    }
+    &.search { padding: 0;}
+    .no-touch &:hover, &.is-touched {
+      color: $color-0;
+      .mod-go-up-menu { display: block;}
+      .mod-drop-down-menu { display: block;}
+    }
+    li {
+      padding: 0;
+      cursor: default;
+      a {
+        padding: 5px 20px;
+        font-weight: normal;
+      }
+    }
+    .mod-go-up-menu {
+      z-index: 100;
+    }
+  }
+  .fedex-logo {
+    float: right;
+    padding:0;
+  }
+  .search {
+    float: right;
+    height: 25px;
+    width: 170px;
+    margin-top: 3px;
+    margin-right: 0;
+    border-bottom: 2px solid $color-4;
+    input#q {
+      background-color: $color-0;
+      height: 25px;
+    }
+    input[type="submit"] {
+      height: 25px;
+    }
+  }
+
+
+  // Icons
+  .health:before {
+    @include icons-sprite(icon-health);
+    background-position: sprite-position($icons, icon-health, 4px, 5px);
+  }
+
+  .agriculture:before {
+    @include icons-sprite(icon-agriculture);
+    background-position: sprite-position($icons, icon-agriculture, 4px, 5px);
+  }
+
+  .communication:before {
+    @include icons-sprite(icon-communications);
+    background-position: sprite-position($icons, icon-communications, 4px, 5px);
+  }
+
+  .disaster-management:before {
+    @include icons-sprite(icon-disaster-management);
+    background-position: sprite-position($icons, icon-disaster-management, 4px, 5px);
+  }
+
+  .early_recovery:before {
+    @include icons-sprite(icon-early_recovery);
+    background-position: sprite-position($icons, icon-early_recovery, 4px, 5px);
+  }
+
+  .economic_recovery:before {
+    @include icons-sprite(icon-economic_recovery);
+    background-position: sprite-position($icons, icon-economic_recovery, 4px, 5px);
+  }
+
+  .education:before {
+    @include icons-sprite(icon-education);
+    background-position: sprite-position($icons, icon-education, 4px, 5px);
+  }
+
+  .energy:before {
+    @include icons-sprite(icon-energy);
+    background-position: sprite-position($icons, icon-energy, 4px, 5px);
+  }
+
+  .environment:before {
+    @include icons-sprite(icon-environment);
+    background-position: sprite-position($icons, icon-environment, 4px, 5px);
+  }
+
+  .food_aid:before {
+    @include icons-sprite(icon-food-aid);
+    background-position: sprite-position($icons, icon-food-aid, 4px, 5px);
+  }
+
+  .human_rights:before {
+    @include icons-sprite(icon-human_rights);
+    background-position: sprite-position($icons, icon-human_rights, 4px, 5px);
+  }
+
+  .humanitarian-aid:before {
+    @include icons-sprite(icon-humanitarian-aid);
+    background-position: sprite-position($icons, icon-humanitarian-aid, 4px, 5px);
+  }
+
+  .logistics:before {
+    @include icons-sprite(icon-logistics);
+    background-position: sprite-position($icons, icon-logistics, 4px, 5px);
+  }
+
+  .mining-and-extractive-resources:before {
+    @include icons-sprite(icon-mining-and-extractive-resources);
+    background-position: sprite-position($icons, icon-mining-and-extractive-resources, 4px, 5px);
+  }
+
+  .non-food-relief-items:before {
+    @include icons-sprite(icon-non-food-relief-items);
+    background-position: sprite-position($icons, icon-non-food-relief-items, 4px, 5px);
+  }
+
+  .nutrition:before {
+    @include icons-sprite(icon-other);
+    background-position: sprite-position($icons, icon-other, 4px, 5px);
+  }
+
+  .other:before {
+    @include icons-sprite(icon-other);
+    background-position: sprite-position($icons, icon-other, 4px, 5px);
+  }
+
+  .peace_security:before {
+    @include icons-sprite(icon-peace_security);
+    background-position: sprite-position($icons, icon-peace_security, 4px, 5px);
+  }
+
+  .protection:before {
+    @include icons-sprite(icon-protection);
+    background-position: sprite-position($icons, icon-protection, 4px, 5px);
+  }
+
+  .safety-nets:before {
+    @include icons-sprite(icon-safety-nets);
+    background-position: sprite-position($icons, icon-safety-nets, 4px, 5px);
+  }
+
+  .shelter:before {
+    @include icons-sprite(icon-shelter);
+    background-position: sprite-position($icons, icon-shelter, 4px, 5px);
+  }
+
+  .water_sanitation:before {
+    @include icons-sprite(icon-water);
+    background-position: sprite-position($icons, icon-water, 4px, 5px);
+  }
+
+
+
+  // Items
+  .sector {
+    @include categorie-selector($color-2, $color-2a);
+    .mod-go-up-menu:after { @include gradient-up($color-0);
+      bottom: 0;
+    }
+    .mod-go-up-menu:before { @include gradient-down ($color-0);}
+    .mod-drop-down-menu {
+      &:after { @include gradient-up($color-2a); bottom: 0;}
+      &:before { @include gradient-down ($color-2a); ; height:15px; bottom: 0;}
+    }
+    .clusters_sectors-page & .father {
+      background-color: rgba($color-2, .3);
+    }
+  }
+  .organizations {
+    @include categorie-selector($color-6, $color-6a);
+    .mod-go-up-menu {
+      &:after { @include gradient-up($color-0);}
+      &:before { @include gradient-down ($color-0);}
+    }
+    .mod-drop-down-menu {
+      &:after { @include gradient-up($color-6a)}
+      &:before { @include gradient-down ($color-6a); ; height:15px;}
+    }
+    .organizations-page & .father {
+      background-color: rgba($color-6, .3);
+    }
+  }
+  .donors {
+    @include categorie-selector($color-7, $color-7a);
+    .mod-go-up-menu {
+      &:after { @include gradient-up($color-0);}
+      &:before { @include gradient-down ($color-0);}
+    }
+    .mod-drop-down-menu {
+      &:after { @include gradient-up($color-7a)}
+      &:before { @include gradient-down ($color-7a); ; height:15px;}
+    }
+    .donors-page & .father {
+      background-color: rgba($color-7, .3);
+    }
+  }
+  .countries, .regions {
+    @include categorie-selector($color-8, $color-8a);
+    .mod-go-up-menu {
+      &:after { @include gradient-up($color-0);}
+      &:before { @include gradient-down ($color-0);}
+    }
+    .mod-drop-down-menu {
+      &:after { @include gradient-up($color-8a)}
+      &:before { @include gradient-down ($color-8a); ; height:15px;}
+    }
+    .georegion-page & .father {
+      background-color: rgba($color-8, .3);
+    }
+  }
+}
+
+.mod-logos-slider {
+  height: 40px;
+  margin-top: 3px;
+  img {
+    display: block;
+  }
+}

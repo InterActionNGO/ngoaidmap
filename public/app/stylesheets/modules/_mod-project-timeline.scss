@@ -1,0 +1,36 @@
+.mod-project-timeline {
+  overflow: hidden;
+  .timeline {
+    position: relative;
+    padding: 3px;
+    border: 1px solid $color-5;
+    border-radius: 15px;
+  }
+  p {
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+    color: $color-00;
+    font-weight: normal;
+  }
+  .timeline-status {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    background-color: $color-4;
+  }
+  .first_date, .second_date {
+    font-size: 10px;
+    color: $color-5;
+  }
+  .first_date {
+    float: left;
+  }
+  .second_date {
+    float: right;
+  }
+}

@@ -1,0 +1,220 @@
+<div class="mod-applied-filters">
+  <p>Filters applied:</p>
+  {{#if filters.organizations}}
+    <p><strong>Organizations</strong>: {{starray filters.organizations}}</p>
+  {{/if}}
+
+  {{#if filters.countries}}
+    <p><strong>Countries</strong>: {{starray filters.countries}}</p>
+  {{/if}}
+
+  {{#if filters.sectors}}
+    <p><strong>Sectors</strong>: {{starray filters.sectors}}</p>
+  {{/if}}
+
+  {{#if filters.donors}}
+    <p><strong>Donors</strong>: {{starray filters.donors}}</p>
+  {{/if}}
+
+  <p><strong>Active between</strong>: {{filters.start_date}} <strong>and</strong>: {{filters.end_date}}</p>
+</div>
+
+<div class="mod-report mod-report-summary">
+  <table>
+    <tr>
+      <th>Projects</th>
+      <th>Organizations</th>
+      <th>Donors</th>
+      <th>Countries</th>
+      <th>Sectors</th>
+    </tr>
+    <tr>
+      <td>{{commas totals.projects}}</td>
+      <td>{{commas totals.organizations}}</td>
+      <td>{{commas totals.donors}}</td>
+      <td>{{commas totals.countries}}</td>
+      <td>{{commas totals.sectors}}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="mod-report mod-report-budget">
+  <table>
+    <tr>
+      <td colspan="3" class="mod-report-budget-total">
+        <span class="small">$</span>{{commas totals.budget}} <span class="small">(total)</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="mod-report-budget-min">min.: ${{commas budget.min}}</td>
+      <td class="mod-report-budget-average">mdn.: ${{commas budget.average}}</td>
+      <td class="mod-report-budget-max">max.: ${{commas budget.max}}</td>
+    </tr>
+  </table>
+  <div class="mod-report-budget-chart is-clearfix" id="reportBudgetChart" data-min="{{budget.min}}" data-max="{{budget.max}}" data-average="{{budget.average}}"></div>
+</div>
+
+
+<div class="mod-report">
+  <div id="modReportsTabs">
+    <ul>
+      <li><a href="#projectTab">NGO Aid Map Project Number Over Time</a></li>
+      <li><a href="#organizationTab">Active Organizations Over Time</a></li>
+    </ul>
+    <div id="projectTab">
+      <div class="mod-report-line-chart" id="projectChart"></div>
+    </div>
+    <div id="organizationTab">
+      <div class="mod-report-line-chart" id="organizationChart"></div>
+    </div>
+  </div>
+</div>
+
+>>>>>>> features/report-filters:public/app/templates/report.handlebars
+<div class="mod-report is-break-before">
+  <h2>Donors snapshot</h2>
+  <p>A total of {{totals.donors}} found donors, supporting {{totals.projects}} projects by {{totals.organizations}} organizations in {{totals.countries}} countries across {{totals.sectors}} sectors.</p>
+  <div class="row">
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of projects</h3>
+      <div class="mod-report-stacked-chart" id="donorsByProjectsChart"></div>
+    </div>
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of organizations</h3>
+      <div class="mod-report-stacked-chart" id="donorsByOrganizationsChart"></div>
+    </div>
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of countries</h3>
+      <div class="mod-report-stacked-chart" id="donorsByCountriesChart"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mod-report-locations" id="reportDonorsLocations">
+      <div class="mod-report-locations-header">
+        <h3>Supported project locations</h3>
+        <ul>
+          <li>
+            <span class="current">By number of projects</span>
+            <ul class="mod-report-locations-header-child">
+              <li><a href="#by-projects" data-layer="donors_by_projects">By number of projects</a></li>
+              <li><a href="#by-organizations" data-layer="donors_by_organizations">By number of organizations</a></li>
+              <li><a href="#by-countries" data-layer="donors_by_countries">By number of countries</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="mod-report-locations-map" id="reportDonorsMap"></div>
+    </div>
+  </div>
+</div>
+
+<div class="mod-report is-break-before">
+  <h2>Organizations snapshot</h2>
+  <p>A total of {{totals.organizations}} found organizations, supporting {{totals.projects}} projects by {{totals.donors}} donors in {{totals.countries}} countries across {{totals.sectors}} sectors.</p>
+  <div class="row">
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of projects</h3>
+      <div class="mod-report-stacked-chart" id="organizationsByProjectsChart"></div>
+    </div>
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of countries</h3>
+      <div class="mod-report-stacked-chart" id="organizationsByCountriesChart"></div>
+    </div>
+    <div class="mod-report-grid-3">
+      <h3>By budget<br><br></h3>
+      <div class="mod-report-stacked-chart" id="organizationsByBudgetChart"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mod-report-locations" id="reportOrganizationsLocations">
+      <div class="mod-report-locations-header">
+        <h3>Supported project locations</h3>
+        <ul>
+          <li>
+            <span class="current">By number of projects</span>
+            <ul class="mod-report-locations-header-child">
+              <li><a href="#by-projects" data-layer="organizations_by_projects">By number of projects</a></li>
+              <li><a href="#by-countries" data-layer="organizations_by_countries">By number of countries</a></li>
+              <li><a href="#by-budget" data-layer="organizations_by_bugdet">By budget</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="mod-report-locations-map" id="reportOrganizationsMap"></div>
+    </div>
+  </div>
+</div>
+
+<div class="mod-report is-break-before">
+  <h2>Countries snapshot</h2>
+  <p>A total of {{totals.countries}} found countries, with {{totals.projects}} projects by {{totals.organizations}} organizations across {{totals.sectors}} sectors.</p>
+  <div class="row">
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of projects</h3>
+      <div class="mod-report-stacked-chart" id="countriesByProjectsChart"></div>
+    </div>
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of organizations</h3>
+      <div class="mod-report-stacked-chart" id="countriesByOrganizationsChart"></div>
+    </div>
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of donors</h3>
+      <div class="mod-report-stacked-chart" id="countriesByDonorsChart"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mod-report-locations" id="reportCountriesLocations">
+      <div class="mod-report-locations-header">
+        <h3>Supported project locations</h3>
+        <ul>
+          <li>
+            <span class="current">By number of projects</span>
+            <ul class="mod-report-locations-header-child">
+              <li><a href="#by-projects" data-layer="countries_by_donors">By number of projects</a></li>
+              <li><a href="#by-organizations" data-layer="countries_by_organizations">By number of organizations</a></li>
+              <li><a href="#by-donors" data-layer="countries_by_projects">By number of donors</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="mod-report-locations-map" id="reportCountriesMap"></div>
+    </div>
+  </div>
+</div>
+
+<div class="mod-report is-break-before">
+  <h2>Sectors snapshot</h2>
+  <p>A total of {{totals.sectors}} found sectors, supporting {{totals.projects}} projects by {{totals.donors}} donors and {{totals.organizations}} organizations in {{totals.countries}} countries.</p>
+  <div class="row">
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of projects</h3>
+      <div class="mod-report-stacked-chart" id="sectorsByProjectsChart"></div>
+    </div>
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of organizations</h3>
+      <div class="mod-report-stacked-chart" id="sectorsByOrganizationsChart"></div>
+    </div>
+    <div class="mod-report-grid-3">
+      <h3>By number<br> of donors</h3>
+      <div class="mod-report-stacked-chart" id="sectorsByDonorsChart"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mod-report-locations" id="reportSectorsLocations">
+      <div class="mod-report-locations-header">
+        <h3>Supported project locations</h3>
+        <ul>
+          <li>
+            <span class="current">By number of projects</span>
+            <ul class="mod-report-locations-header-child">
+              <li><a href="#by-projects" data-layer="sectors_by_projects">By number of projects</a></li>
+              <li><a href="#by-organizations" data-layer="sectors_by_organizations">By number of organizations</a></li>
+              <li><a href="#by-donors" data-layer="sectors_by_donors">By number of donors</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="mod-report-locations-map" id="reportSectorsMap"></div>
+    </div>
+  </div>
+</div>

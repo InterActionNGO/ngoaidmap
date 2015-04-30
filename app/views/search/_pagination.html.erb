@@ -1,0 +1,5 @@
+<% if @current_page < @total_pages %>
+  <div class="mod-pagination">
+    <%= link_to('More projects', params.merge(:page => @current_page + 1), :id =>'view_more', :class => 'ajax more-projects') %>
+  </div>
+<% end %>

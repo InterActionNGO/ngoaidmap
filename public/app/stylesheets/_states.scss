@@ -1,0 +1,39 @@
+.is-hidden {
+  display: none !important;
+  visibility: hidden;
+}
+.is-visible {
+  display: block;
+}
+
+.is-fixed {
+  position: fixed;
+  .grid-4 & {
+    width: 13%;
+  }
+}
+
+.is-clearfix {
+  @include clearfix();
+}
+
+@media print {
+  .is-unprintable {
+    display: none;
+  }
+}
+
+.is-inline-btn {
+  display: inline-block;
+  padding: 0;
+  color: $color-2;
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  vertical-align: baseline;
+}
+
+.is-flex {
+  display: flex;
+  justify-content: space-between;
+}

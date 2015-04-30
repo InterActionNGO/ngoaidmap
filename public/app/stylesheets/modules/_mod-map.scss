@@ -1,0 +1,183 @@
+.mod-map {
+  position: relative;
+  min-height: 400px;
+  max-height: 670px;
+}
+
+.mod-go-to-projects {
+  z-index: 100;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  img {
+    display: block;
+    max-width: none;
+    height: auto;
+    margin: auto;
+  }
+}
+
+.map-tooltip {
+  display: none;
+  border: 0;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 175px;
+}
+
+.map-top-tooltip {
+  border: 0;
+  position: relative;
+  float: left;
+  padding: 10px;
+  margin-bottom: 15px;
+  margin-left: 3px;
+  width: 150px;
+  height: auto;
+  line-height: 1.2;
+  color: $color-3;
+  font-size: 13px;
+  background-color: $color-0;
+  box-shadow: 0 0 0 5px rgba($color-1, .3);
+  text-align: center;
+
+  h3 {
+    font-size: 30px;
+    font-weight:  lighter;
+    font-family: $font-family;
+    color: $color-1;
+    margin-bottom: 7px;
+    line-height: .9;
+    text-transform: none;
+  }
+
+  &:after, &:before {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &:after {
+    border-color: transparent;
+    border-top-color: $color-0;
+    border-width: 22px;
+    margin-left: -22px;
+  }
+  &:before {
+    border-color: transparent;
+    border-top-color: rgba($color-1, .3);
+    border-width: 23px;
+    margin-left: -23px;
+  }
+
+  strong {
+    font-weight: normal;
+  }
+
+}
+
+.marker-bubble, .marker-project-bubble {
+  @include border-radius(100%);
+  @include box-shadow(0 0 0 3px rgba($color-0, .6));
+}
+
+.marker-project-bubble {
+  @include box-shadow(0 0 0 12px rgba($color-0, .6));
+}
+
+.marker-bubble, .marker-project-bubble {
+  color: $color-0;
+  background-color: $color-2;
+  &.is-marker-region {
+    font-weight: bold;
+  }
+}
+
+.theme-1 {
+  .marker-bubble, .marker-project-bubble {
+    background-color: $color-2;
+    &.is-marker-region {
+      color: $color-2;
+      background-color: rgba($color-0, .85);
+      @include box-shadow(0 0 0 3px $color-2);
+    }
+  }
+  .marker-project-bubble.is-marker-region {
+    @include box-shadow(0 0 0 9px $color-2);
+  }
+}
+
+.theme-2 {
+  .marker-bubble, .marker-project-bubble {
+    background-color: $color-1;
+    &.is-marker-region {
+      color: $color-1;
+      background-color: rgba($color-0, .85);
+      @include box-shadow(0 0 0 3px $color-2);
+    }
+  }
+  .marker-project-bubble.is-marker-region {
+    @include box-shadow(0 0 0 9px $color-1);
+  }
+}
+
+.theme-3 {
+  .marker-bubble, .marker-project-bubble {
+    background-color: $color-9;
+    &.is-marker-region {
+      color: $color-9;
+      background-color: rgba($color-0, .85);
+      @include box-shadow(0 0 0 3px $color-9);
+    }
+  }
+  .marker-project-bubble.is-marker-region {
+    @include box-shadow(0 0 0 9px $color-9);
+  }
+}
+
+.sites-page,
+.projects-page,
+.clusters_sectors-page,
+.organizations-page,
+.donors-page,
+.georegion-page {
+  .cartodb-logo {
+    left: 15px !important;
+  }
+
+  .gm-style > div:nth-child(2) {
+    left: 15px !important;
+  }
+
+  // .gmnoprint {
+  //   bottom: 60px !important;
+  // }
+}
+
+
+.layout-embed-map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  #map {
+    background-color: #6ebcd5 !important;
+  }
+}

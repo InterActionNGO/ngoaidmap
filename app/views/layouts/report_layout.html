@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Report · NGO Aid Map</title>
+    <meta name="content" content="NGO Aid Map report generator.">
+    <meta name="viewport" content="width=980px">
+    <meta name="google-site-verification" content="r4LPeTYNAKGuj7MPrkGpDgZ2ZXaKpVqn-nV7ixs5-sQ">
+
+    <%= stylesheet_link_tag "http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css", :media => 'all' %>
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
+    <![endif]-->
+    <% if Rails.env.production? %>
+      <%= stylesheet_link_tag "report.css", :media => 'all' %>
+    <% else %>
+      <%= stylesheet_link_tag "lib/jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", "vendor/chachi-slider/chachi-slider.css", "vendor/select2/select2.css", "vendor/leaflet.markercluster/dist/MarkerCluster.css", "report.css", :media => 'all' %>
+    <% end %>
+
+    <% if Rails.env.development? %>
+      <link rel="icon" type="image/png" href="/app/images/favicon-dev.png">
+    <% else %>
+      <link rel="icon" type="image/png" href="/dist/images/favicon.png">
+    <% end %>
+
+    <%= javascript_include_tag "../lib/modernizr/modernizr.custom.js" %>
+
+    <%= csrf_meta_tag %>
+  </head>
+  <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %> <%= "section-" + @page.top_parent.permalink if @page.present? %> <%= "linos-" + @page.permalink if @page.present? %>">
+    <%= render 'layouts/header' %>
+
+    <%= yield %>
+
+    <%= render 'layouts/footer' %>
+
+    <%= javascript_include_tag "http://libs.cartocdn.com/cartodb.js/v3/cartodb.js" %>
+    <%= javascript_include_tag "../vendor/requirejs/require.js", "report/main.js" %>
+
+    <% if Rails.env.production? %>
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '<%= @site.google_analytics_id %>']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script>
+    <% end %>
+
+    <!-- START: Feedback -->
+    <%= render 'shared/feedback' %>
+    <!-- END: Feedback -->
+  </body>
+</html>

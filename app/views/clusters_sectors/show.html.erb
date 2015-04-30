@@ -1,0 +1,74 @@
+<%= render 'new_partials/map' %>
+
+<%= render 'new_partials/categories_selector' %>
+
+<div class="main-content">
+  <div class="row">
+    <div class="grid-4">
+      <aside class="layout-sidebar">
+
+      <div class="mod-highlighted-results">
+        <%= render 'new_partials/aside/projects' %>
+      </div>
+
+        <% unless @filter_by_location.present? || @data.projects_regions(@site).empty?%>
+          <div class="project-locations mod-info">
+            <h3>project locations</h3>
+            <div class="mod-project-locations">
+              <%= raw(projects_by_location(@site, @data.projects_countries(@site))) %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="donors-in-this-country mod-info" id="donorsSidebarView">
+          <h3>Donors in this <%= @site.word_for_cluster_sector.singularize %></h3>
+          <% unless @data.donors(@site).empty? %>
+            <ul id="donors_list">
+              <% index = 1 %>
+              <% @data.donors(@site).each do |donor| %>
+                <li<% if (index > 10) %> class="out is-hidden"<% end %>><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+                <% index = index + 1 %>
+              <% end %>
+              <% if @data.donors(@site).length > 10 %>
+                <a href="#donors" id="moreDonorsBtn">See more donors</a>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>The are no donors</p>
+          <% end %>
+        </div>
+
+        <% unless @site.projects_sectors_or_clusters.empty? %>
+          <div class="project-sectors mod-info">
+            <h3>Other sectors</h3>
+            <div class="mod-project-sectors">
+              <ul id="clustersView">
+                <% @site.projects_sectors_or_clusters.each do |category, count| %>
+                  <% next if category == @data %>
+                  <% unless category.name.eql?('N/A') %>
+                    <li>
+                      <a class="<%= category.css_class %> icon_statistics" title="<%= category.name %>" href="<%= url_for(category) %>" data-value="<%= count %>"><span class="aller"><%= count %></span></a>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+
+      </aside>
+    </div>
+
+    <div class="grid-12 offset-1">
+      <section class="layout-content" id="content">
+
+          <h1 class="section-title"><%= clusters_sectors_projects_list_subtitle %></h1>
+
+          <%= render :partial => 'new_partials/downloads', :locals => { :csv_path => @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :csv)) : sector_path(@data, @carry_on_filters.merge(:format => :csv)), :xls_path => @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :xls)) : sector_path(@data, @carry_on_filters.merge(:format => :xls)), :kml_path => @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :kml)) : sector_path(@data, @carry_on_filters.merge(:format => :kml)) } %>
+
+          <%= render "new_partials/index_projects" %>
+
+      </section>
+    </div>
+  </div>
+</div>

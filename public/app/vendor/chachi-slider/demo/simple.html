@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simple chachi slider</title>
+    <link rel="stylesheet" href="../chachi-slider.css">
+    <style>
+      #slider, #slider2 {
+        margin: 50px auto;
+        width: 800px;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="slider" class="chachi-slider">
+      <img class="chachi-item" src="http://www.menucool.com/slider/jsImgSlider/images/image-slider-1.jpg" alt="Slider 1" data-caption="#caption1" />
+      <img class="chachi-item" src="http://www.menucool.com/slider/jsImgSlider/images/image-slider-2.jpg" alt="Slider 2" />
+      <img class="chachi-item" src="http://www.menucool.com/slider/jsImgSlider/images/image-slider-3.jpg" alt="Slider 3" />
+    </div>
+
+    <div id="slider2" class="chachi-slider">
+      <div class="chachi-item">
+        <h1>Título 1</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati aut odit blanditiis id consectetur! Voluptate, quod qui non. Ea, accusantium, quod deleniti adipisci sit a animi quos magnam voluptatum nulla.</p>
+      </div>
+      <div class="chachi-item">
+        <h1>Título 2</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati aut odit blanditiis id consectetur! Voluptate, quod qui non. Ea, accusantium, quod deleniti adipisci sit a animi quos magnam voluptatum nulla.</p>
+      </div>
+      <div class="chachi-item">
+        <h1>Título 3</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati aut odit blanditiis id consectetur! Voluptate, quod qui non. Ea, accusantium, quod deleniti adipisci sit a animi quos magnam voluptatum nulla.</p>
+      </div>
+    </div>
+
+    <div id="caption1" class="chachi-html-caption">
+      <h1>Titulo</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima voluptatibus quasi sint reprehenderit iste? Iusto dignissimos labore assumenda illum maxime ab neque.</p>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="../jquery.chachi-slider.js"></script>
+    <script>
+      function onDocumentReady() {
+        $('#slider').chachiSlider();
+        $('#slider2').chachiSlider();
+      }
+      $(document).on('ready', onDocumentReady);
+    </script>
+  </body>
+</html>

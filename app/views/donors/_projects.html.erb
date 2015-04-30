@@ -1,0 +1,57 @@
+<% unless @projects.empty? %>
+  <ul class="projects">
+  <% @projects.each_with_index do |project,index| %>
+    <li class="<%= (index%2==0) ? 'even' : 'odd' %>">
+      <div class="project_name">
+        <h4><%= link_to(truncate(project['project_name'], :length=>65), project_path(project['project_id'])) %></h4>
+        <p>
+          <%= subtitle_donors_page(project, @site, donor_path( params[:id], @carry_on_filters.merge(:organization_id => project["organization_id"].to_i) ) ) %>
+        </p>
+      </div>
+      <p class="info"><%= anglo(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>")) %>
+      </p>
+      <!--<div class="project_places">
+        <p>
+        <% if @site.world_wide_context? %>
+          <% unless project['countries'].blank? %>
+            <% if project['countries'].split('|').delete_if{ |e| e.blank? }.size > 3 %>
+              <%= project['countries'].split('|').delete_if{ |e| e.blank? }[0..3].join(', ') %> and <%= project['countries'].split('|').delete_if{ |e| e.blank? }.size - 3 %> more
+            <% else %>
+              <%= project['countries'].split('|').delete_if{ |e| e.blank? }.to_sentence(:last_word_connector => ' and ') %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% unless project['regions'].blank? %>
+            <% if project['regions'].split('|').delete_if{ |e| e.blank? }.size > 3 %>
+              <%= project['regions'].split('|').delete_if{ |e| e.blank? }[0..3].join(', ') %> and <%= project['regions'].split('|').delete_if{ |e| e.blank? }.size - 3 %> more
+            <% else %>
+              <%= project['regions'].split('|').delete_if{ |e| e.blank? }.to_sentence(:last_word_connector => ' and ') %>
+            <% end %>
+          <% end %>
+        <% end %>
+        </p>
+      </div> !-->
+    </li>
+  <% end %>
+  </ul>
+<% else %>
+  <ul>
+    <li class="even">
+      <p class="no_results">No projects were found for this donor</p>
+    </li>
+  </ul>
+<% end %>
+
+<div class="view_more" id="projects_view_more">
+  <% if @projects.total_pages > 1 %>
+
+    <% if @projects.current_page > 1 -%>
+      <%= link_to('previous', pagination_link(previous_pagination_params), :id =>'previous') %>
+    <% end -%>
+
+    <% if @projects.current_page < @projects.total_pages -%>
+      <%= link_to('next', pagination_link(next_pagination_params), :id =>'next') %>
+    <% end -%>
+
+  <% end %>
+</div>

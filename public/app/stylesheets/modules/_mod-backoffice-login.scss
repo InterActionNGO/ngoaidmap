@@ -1,0 +1,26 @@
+.mod-login {
+  label {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $color-5;
+  }
+  input {
+    @include box-sizing(border-box);
+    width: 100%;
+    padding: 0 5%;
+    height: 40px;
+    margin-bottom: 20px;
+    color: $color-00;
+    background-color: $color-4;
+    &:active { background-color: $color-4;}
+  }
+  #sign-in {
+    @extend .button;
+  }
+  .forgot-pass {
+    color: $color-2;
+    text-align: center;
+  }
+}

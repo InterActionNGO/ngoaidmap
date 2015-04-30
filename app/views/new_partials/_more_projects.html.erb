@@ -1,0 +1,28 @@
+<section>
+  <% related_projects = @project.related(@site) %>
+  <% unless related_projects.count < 1 %>
+    <h3 class="first">Other projects</h3>
+    <div class="mod-article mod-more-projects">
+      <ul>
+        <% related_projects.each_with_index do |r,i| %>
+          <li>
+            <article class="other-project">
+              <div class="image">
+                <img src="http://maps.google.com/maps/api/staticmap?size=90x70&maptype=roadmap&style=feature:all|element:labels|visibility:off&path=fillcolor:0x00000090|color:0x00000001&sensor=false&center=<%=r['center_lat']%>,<%=r['center_lon']%>&zoom=6" title="<%= r['project_name'] %>" />
+                <img class="marker" src="/app/images/themes/<%=@site.theme_id%>/marker_1.png" alt="<%= r['project_name'] %>" title="<%= r['project_name'] %>" />
+              </div>
+            <div class="info">
+              <h3><a href="<%= project_path(:id => r['project_id']) %>"><%=truncate(r['project_name'], :length => 40)%></a></h3>
+              <p>by <%= truncate(r['organization_name'], :length => 20) %>
+                <% if r['path'] %>
+                  <br>in <a href="<%= location_path(:ids => r['path']) %>"><%= truncate(r['region_name']) %></a>
+                <% end %>
+              </p>
+            </div>
+            </article>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</section>

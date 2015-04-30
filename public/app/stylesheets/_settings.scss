@@ -1,0 +1,61 @@
+@include font-face("Akzidenz", font-files("akzidenz/12_akzidenz_grotesk_roman___05003-webfont.woff", "akzidenz/12_akzidenz_grotesk_roman___05003-webfont.ttf", "akzidenz/12_akzidenz_grotesk_roman___05003-webfont.svg"), "akzidenz/12_akzidenz_grotesk_roman___05003-webfont.eot", normal, normal);
+@include font-face("Akzidenz", font-files("akzidenz/12_akzidenz_grotesk_bold___07003-webfont.woff", "akzidenz/12_akzidenz_grotesk_bold___07003-webfont.ttf", "akzidenz/12_akzidenz_grotesk_bold___07003-webfont.svg"), "akzidenz/12_akzidenz_grotesk_bold___07003-webfont.eot", bold, normal);
+@include font-face("Akzidenz", font-files("akzidenz/12_akzidenz_grotesk_light___02003-webfont.woff", "akzidenz/12_akzidenz_grotesk_light___02003-webfont.ttf", "akzidenz/12_akzidenz_grotesk_light___02003-webfont.svg"), "akzidenz/12_akzidenz_grotesk_light___02003-webfont.eot", lighter, normal);
+
+
+// Typography
+$font-family: "Akzidenz", Helvetica, Arial, sans-serif;
+
+// Colors
+$white: #FFF;
+$black: #000;
+$blue: #156d8d;
+$orange: #c15022;
+$ligth-orange: #F7ECE5;
+$purple: #482e45;
+$light-purple: #EBE8EA;
+$yellow: #d5a823;
+$light-yellow: #FBF5E4;
+$green: #8d9127;
+$light-green: #F2F3E6;
+$turquoise: #5A9198;
+$sea-blue: #B4D2D2;
+$light-grey: #EDEDED;
+$grey: #989898;
+$dark-grey: #444444;
+$medium-grey: #CCC;
+
+$color-0: $white;
+$color-00: $black;
+
+$color-1: $blue;
+$color-2: $orange;
+$color-2a: $ligth-orange;
+$color-3: $dark-grey;
+$color-4: $light-grey;
+$color-5: $grey;
+$color-10: $medium-grey;
+
+$color-6: $purple;
+$color-6a: $light-purple;
+$color-7: $yellow;
+$color-7a: $light-yellow;
+$color-8: $green;
+$color-8a: $light-green;
+$color-9: $turquoise;
+
+$color-11: $sea-blue;
+
+$color-12: #D7A900;
+
+$primary-color: null;
+
+$icons: sprite-map("icons/*.png", $spacing: 10px);
+
+// Separations
+$section-padding: 3em 0;
+
+@media screen and (max-width: 768px) {
+
+}
+

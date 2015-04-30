@@ -1,0 +1,157 @@
+<div class="main-content">
+  <div class="row">
+
+    <div class="grid-5 is-unprintable">
+      <aside class="layout-sidebar">
+        <% cache '#{@site.id}/reports' do %>
+        <div class="mod-report-filter mod-form" id="reportFormView">
+
+          <%= form_tag(report_generate_path(:format=>:json), :remote => true,  :method => :get) do %>
+
+            <div class="block search">
+              <input type="text" value="<%= params[:q] %>" placeholder = "Search Project Titles" name="q" class="main_search"/>
+              <%= submit_tag '' %>
+            </div>
+
+            <ul class="combo_search_select">
+              <li class="comboselect">
+                <label>ORGANIZATION</label>
+                <%= select_tag :organization, options_for_select(@org_combo_values, params[:organization]), :class => :"chzn-select", :multiple => true, :size => 5, :placeholder => "Select organization" %>
+                <%# select_tag :organization_include, options_for_select({:include => 'include', :exclude =>'exclude'}) %>
+                <%# hidden_field_tag 'organization_include', 'include' %>
+              </li>
+
+              <!--
+              <li class="comboselect">
+                <label>Layer</label>
+                <%# select_tag :layer,
+                  options_for_select([['All',0]] + Layer.get_select_values.collect{ |l| [l.title, l.title] }, params[:layer]), :class => :"chzn-select", :multiple => true, :size => 5%>
+                  <%# select_tag :layer_op, options_for_select(['>', '=', '<', '>=', '<=']) %>
+                  <%# text_field_tag (:layer_unit) %>
+              </li>  -->
+
+              <li class="comboselect">
+                <label>COUNTRY</label>
+                <%= select_tag :country,
+                  options_for_select(@countries_combo_values, params[:country]), :class => :"chzn-select", :multiple => true, :size => 5, :placeholder => "Select country" %>
+                <%# select_tag :country_include, options_for_select({:include => 'include', :exclude =>'exclude'}) %>
+                <%# hidden_field_tag 'country_include', 'include' %>
+              </li>
+
+              <li class="comboselect">
+                <label>SECTOR</label>
+                <%= select_tag :sector,
+                  options_for_select(@sectors_combo_values, params[:sector]), :class => :"chzn-select", :multiple => true, :size => 5, :placeholder => "Select sector" %>
+                <%# select_tag :sector_include, options_for_select({:include => 'include', :exclude =>'exclude'}) %>
+                <%# hidden_field_tag 'sector_include', 'include' %>
+              </li>
+
+              <li class="comboselect">
+                <label>DONOR</label>
+                  <%= select_tag :donor,
+                    options_for_select(@donors_combo_values, params[:donor]), :class => :"chzn-select", :multiple => true, :size => 5, :placeholder => "Select donor"%>
+                  <%# select_tag :donor_include, options_for_select({:include => 'include', :exclude =>'exclude'}) %>
+                  <%# hidden_field_tag 'donor_include', 'include' %>
+              </li>
+
+              <li class="comboselect date" id="startDateSelector">
+                <label>Projects Active Between</label>
+                <div class="select_date">
+                  <%= select_date @date_start, {:prefix => :start_date, :use_short_month =>true, :start_year => Date.parse('1985-1-1').year, :end_year => Time.now.year} %>
+                  <%# select_tag :start_date_op, options_for_select(['>', '=', '<', '>=', '<=']) %>
+                </div>
+              </li>
+
+              <li class="comboselect date" id="endDateSelector">
+                <label>AND</label>
+                <div class="select_date">
+                  <%= select_date @date_end, {:prefix => :end_date, :use_short_month =>true, :start_year => Date.parse('1985-1-1').year, :end_year => Time.now.year} %>
+                  <%# select_tag :en1d_date_op, options_for_select(['>', '=', '<', '>=', '<=']) %>
+                </div>
+              </li>
+
+              <li class="comboselect" id="activeProjects">
+                <label><%= check_box_tag 'active_projects', 'yes', params.has_key?(:active_projects) %> Show only currently active projects</label>
+              </li>
+
+              <li>
+                <button class="reset" id="resetBtn" type="reset">Reset filters</button>
+                <button class="apply" type="submit">Apply filters</button>
+              </li>
+            </ul>
+
+          <% end %>
+        </div> <!-- mod-report-filter -->
+        <% end %>
+      </aside>
+    </div>
+
+    <div class="grid-11 offset-1">
+      <section class="layout-content">
+
+        <div class="report-spinner" id="spinView"></div>
+
+        <article class="mod-content-article">
+          <h1 id="titleView" class="report-title">
+            <textarea placeholder="Type your title"></textarea>
+            <button class="is-inline-btn is-unprintable">Edit</button>
+          </h1>
+
+          <div id="introView" class="mod-report mod-report-intro">
+            <p>Start applying some filters to generate a report.</p>
+            <p><%= image_tag "arrow-reports.svg" %></p>
+          </div>
+
+          <div id="filtersView" class="mod-applied-filters is-hidden"></div>
+
+          <div id="summaryView" class="mod-report mod-report-summary is-hidden"></div>
+
+          <div id="budgetsView" class="mod-report mod-report-budget is-hidden"></div>
+
+          <div id="timelineChartsView" class="mod-report is-break-before is-hidden">
+            <div id="modReportsTabs">
+              <ul>
+                <li><a href="#projectTab">Number of Active Projects Over Time</a></li>
+                <li><a href="#organizationTab">Number of Active Organizations Over Time</a></li>
+              </ul>
+              <div id="projectTab">
+                <div class="mod-report-line-chart" id="projectsChart"></div>
+              </div>
+              <div id="organizationTab">
+                <div class="mod-report-line-chart" id="organizationsChart"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="projectsListView" class="mod-report mod-report-lists is-break-before is-hidden"></div>
+          <div id="donorsListView" class="mod-report mod-report-lists is-break-before is-hidden"></div>
+          <div id="organizationsListView" class="mod-report mod-report-lists is-break-before is-hidden"></div>
+          <div id="countriesListView" class="mod-report mod-report-lists is-break-before is-hidden"></div>
+          <div id="sectorsListView" class="mod-report mod-report-lists is-break-before is-hidden"></div>
+
+          <div id="donorsSnapshotView" class="mod-report no-summary-wrap is-break-before is-hidden"></div>
+          <div id="organizationsSnapshotView" class="mod-report no-summary-wrap is-break-before is-hidden"></div>
+          <div id="countriesSnapshotView" class="mod-report no-summary-wrap is-break-before is-hidden"></div>
+          <div id="sectorsSnapshotView" class="mod-report no-summary-wrap is-break-before is-hidden"></div>
+
+          <div id="actionsView" class="mod-report mod-report-actions is-unprintable is-hidden is-clearfix">
+            <button id="printReport">Print</button>
+            <!-- <button id="saveReport">Save PDF</button> -->
+          </div>
+
+          <div id="limitationsView" class="mod-report mod-report-limitations is-hidden is-clearfix">
+            <h3>Limitations</h3>
+            <ol type="1">
+              <li id="limitations1">This reporting tool draws on the full NGO Aid Map database, including both inactive and currently active projects. This is a significantly larger set of data than that visible on the map, which only displays currently active projects. In addition, the database contains data contributed by both InterAction members and non-member organizations. Data may be added and/or modified by organizations at any time, which may lead to different results if two reports are run at different points in time using the same filter parameters. For additional information on data limitations, please visit: <a href="http://ngoaidmap.org/p/data">http://ngoaidmap.org/p/data</a></li>
+              <li id="limitations2">Not all organizations provide project budget information, and organizations may not provide budget information for all projects.</li>
+              <li id="limitations3">The collection of data for NGO Aid Map began in 2010, but the start dates of many of the projects that have been submitted precede that date. For more information about the history of NGO Aid Map, please visit: <a href="http://ngoaidmap.org/p/history">http://ngoaidmap.org/p/history</a>.</li>
+            </ol>
+          </div>
+
+        </article>
+
+      </section>
+    </div>
+
+  </div>
+</div>

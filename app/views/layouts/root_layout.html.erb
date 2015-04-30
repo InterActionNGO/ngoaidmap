@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NGO AID MAP</title>
+  <%=raw(javascript_include_merged(:root_layout)) %>
+  <%=raw(stylesheet_link_merged(:base)) %>
+  <link rel="shortcut icon" href="http://www.interaction.org/sites/default/files/interaction_favicon_0.png" type="image/png" />
+  <% if Rails.env.production? %>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20618949-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+  <% end %>
+</head>
+<body>
+
+  <div id="layout">
+    <div id="header_sites">
+      <div class="left">
+        <h1><a href="/">NGO AID MAP</a></h1>
+      </div>
+      <div class="right">
+        <div class="brand-interaction">
+          <img src="/images/assets/interaction-logo.png">
+        </div>
+      </div>
+      <div class="right">
+        <ul class="menu">
+          <li>
+            <a href="/">HOME</a>
+          </li>
+          <li>
+            <a href="<%= page_path(@main_page) %>">ABOUT</a>
+          </li>
+          <li>
+            <a href="/p/contact">CONTACT US</a>
+          </li>
+          <li class="last">
+            <a href="/admin">MEMBER ACCESS</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- START: Feedback -->
+    <%= render 'shared/feedback' %>
+    <!-- START: Feedback -->
+
+
+  <div id="outer_layout">
+    <%= yield %> <!-- Main layout has to content <div id="layout"> -->
+
+      <div id="footer_sites">
+        <div class="left_footer">
+          <a class="logo" href="/"></a>
+          <div class="project">
+              <p class="site_name"><%= link_to 'NGO Aid Map', "http://#{Settings.main_site_host}" %></p>
+              <p class="all_rights">Copyrighted by <a class="link interaction" href="http://www.interaction.org/">InterAction</a> ©2013. Designed and developed by <a class="link" href="http://www.vizzuality.com/">Vizzuality</a></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <%=yield :js %>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+.mod-map-controls {
+  position: relative;
+  z-index: 1;
+
+  .control-navbar, .control-zoom, .click-to-see {
+    position: absolute;
+    border-radius: 40px;
+    background-color: rgba($color-1, 0.7);
+    box-shadow: 0 0 0 5px rgba($color-1, 0.3);
+    font-weight: lighter;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .control-navbar.featured-control-navbar {
+    box-shadow: 0 0 0 5px rgba($color-1, 0.7);
+  }
+
+  .control-zoom {
+    top: 20px;
+    right: 0px;
+    width: 90px;
+    height: 40px;
+    background-color: $color-0;
+  }
+  .zoom-in, .zoom-out {
+    position: absolute;
+    width: 50%;
+    height: 30px;
+    padding-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    &:hover {
+      background: rgba($color-1, .1);
+    }
+  }
+  .zoom-in {
+    right: -1px;
+    border-left: 1px solid rgba($color-1, .3);
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+  }
+  .zoom-out {
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+  }
+
+  .control-navbar {
+    top: 20px;
+    left: 0px;
+  }
+  .selector {
+    float: left;
+
+    @include drop-down-menu($color-1);
+
+    & > ul {
+      float: left;
+      padding: 5px 15px;
+      background-color: $color-0;
+    }
+
+    &:first-child > ul {
+      border-right: none;
+      @include border-radius(40px 0 0 40px);
+    }
+
+    &:last-child > ul {
+      @include border-radius(0 40px 40px 0);
+    }
+
+    &#mapTypeSelector > ul {
+      @include border-top-right-radius(40px);
+      @include border-bottom-right-radius(40px);
+    }
+
+    &#mapTypeSelector:first-child > ul {
+      @include border-top-left-radius(40px);
+      @include border-bottom-left-radius(40px);
+    }
+  }
+  .featured {
+    float: left;
+    padding: 0 15px;
+    line-height: 40px;
+    font-size: 31px;
+    font-weight: lighter;
+    color: $color-0;
+    text-transform: capitalize;
+    -webkit-font-smoothing: antialiased;
+  }
+  .index-item {
+    display: block;
+    position: relative;
+    padding: 8px 10px;
+    text-align: center;
+  }
+  .submenu {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    width: 250px;
+    background-color: $color-0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    .submenu-item {
+      float: none;
+      text-align: left;
+      &:last-child { padding-bottom: 10px;}
+    }
+    a {
+      text-transform: none;
+      padding: 10px 25px;
+      font-weight: bold;
+    }
+  }
+  .current-selector .icon-info { display: none;}
+}
+.icon-info {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: image-url('icons/icon-info.svg') no-repeat center;
+  vertical-align: -6px;
+}
+.infowindow-pop, .infowindow-layer { display: inline-block;}
+
+div.cartodb-legend-stack {
+  bottom: 95px;
+}
+
+div.cartodb-infowindow {
+  z-index: 1000;
+
+}
+
+.layout-embed-map {
+  .control-zoom {
+    right: 20px;
+  }
+  .control-navbar {
+    left: 20px;
+  }
+}

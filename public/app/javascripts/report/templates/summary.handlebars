@@ -1,0 +1,63 @@
+{{!-- <table>
+  <tr>
+    <th>Projects</th>
+    <th>Organizations</th>
+    <th>Donors</th>
+    <th>Countries</th>
+    <th>Sectors</th>
+  </tr>
+  <tr>
+    <td>
+      {{commas projects.length}}
+      <a href="#show-list" data-list="projects" data-category="donorsCount" class="btn-show-list is-unprintable">Show list</a>
+    </td>
+    <td>
+      {{commas organizations.length}}
+      <a href="#show-list" data-list="organizations" data-category="projectsCount" class="btn-show-list is-unprintable">Show list</a>
+    </td>
+    <td>
+      {{commas donors.length}}
+      <a href="#show-list" data-list="donors" data-category="projectsCount" class="btn-show-list is-unprintable">Show list</a>
+    </td>
+    <td>
+      {{commas countries.length}}
+      <a href="#show-list" data-list="countries" data-category="organizationsCount" class="btn-show-list is-unprintable">Show list</a>
+    </td>
+    <td>
+      {{commas sectors.length}}
+      <a href="#show-list" data-list="sectors" data-category="organizationsCount" class="btn-show-list is-unprintable">Show list</a>
+    </td>
+  </tr>
+</table> --}}
+
+<div class="summary-wrap">
+  <div class="summary-item">
+    <h3>Projects</h3>
+    <span class="value">{{commas projects.length}}</span>
+    <a href="#show-list" data-list="projects" data-category="donorsCount" class="btn-show-list is-unprintable">Show list</a>
+  </div>
+
+  <div class="summary-item">
+    <h3>Organizations</h3>
+    <span class="value">{{commas organizations.length}}</span>
+    <a href="#show-list" data-list="organizations" data-category="projectsCount" class="btn-show-list is-unprintable">Show list</a>
+  </div>
+
+  <div class="summary-item">
+    <h3>Donors</h3>
+    <span class="value">{{commas donors.length}}</span>
+    <a href="#show-list" data-list="donors" data-category="projectsCount" class="btn-show-list is-unprintable">Show list</a>
+  </div>
+
+  <div class="summary-item">
+    <h3>Countries</h3>
+    <span class="value">{{commas countries.length}}</span>
+    <a href="#show-list" data-list="countries" data-category="organizationsCount" class="btn-show-list is-unprintable">Show list</a>
+  </div>
+
+  <div class="summary-item">
+    <h3>Sectors</h3>
+    <span class="value">{{commas sectors.length}}</span>
+    <a href="#show-list" data-list="sectors" data-category="organizationsCount" class="btn-show-list is-unprintable">Show list</a>
+  </div>
+</div>

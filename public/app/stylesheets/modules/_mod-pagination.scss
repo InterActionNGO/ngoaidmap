@@ -1,0 +1,67 @@
+.mod-pagination {
+  margin: 30px 0;
+  text-align: center;
+  color: $color-3;
+  @include clearfix;
+  ul {
+    width: auto;
+    margin: 0 auto;
+    text-align: center;
+  }
+  li {
+    display: block;
+    padding: 0 5px;
+  }
+  a {
+    color: $color-3;
+    font-weight: bold;
+  }
+  .active {
+    color:$color-2;
+    text-decoration: underline;
+  }
+  #next, #previous, .more-projects {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    background-color: $color-4;
+    white-space: nowrap;
+    padding: 0 5%;
+    text-transform: uppercase;
+    &:hover {
+      background-color: darken($color-4, 10%);
+    }
+   }
+  #next {
+    float: right;
+    width: 38%;
+    position: relative;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    text-align: left;
+    &:after {
+      @include after('', block, absolute, 15px, 19px, 8px, 8px);
+      @include arrow (8px, $color-3, 3px);
+      @include rotate(135deg);
+    }
+  }
+  #previous {
+    float: left;
+    width: 38%;
+    position: relative;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    text-align: right;
+    &:before {
+      @include before('', block, absolute, 15px, 19px, 8px, 8px);
+      @include arrow (8px, $color-3, 3px);
+      @include rotate(315deg);
+    }
+  }
+  .more-projects {
+    display: inline-block;
+    text-align: center;
+    border-radius: 30px;
+  }
+
+}

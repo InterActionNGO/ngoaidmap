@@ -1,0 +1,33 @@
+.mod-featured-projects {
+  width: 100%;
+  padding: 60px 0;
+  border-top: 3px solid $color-4;
+  .title {
+    width: 27.41176%;
+    position: relative;
+    display: block;
+    float: left;
+    margin: 0 1%;
+  }
+  .featured-project {
+    width: 15.64706%;
+    position: relative;
+    display: block;
+    float: left;
+    margin: 0 1%;
+  }
+  h4 {
+    font-size: 48px;
+    font-weight: 100;
+    line-height: 48px;
+  }
+  img {
+    width: 150px;
+    height: 100px;
+    margin-bottom: 5px;
+  }
+  p {
+    font-size: 15px;
+    font-weight: bold;
+  }
+}

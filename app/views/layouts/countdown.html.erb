@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>NGO AID MAP</title>
+
+  <%= stylesheet_link_tag "countdown.css" %>
+
+  <link rel="shortcut icon" href="http://www.interaction.org/sites/default/files/interaction_favicon_0.png" type="image/png">
+<script>window["_GOOG_TRANS_EXT_VER"] = "1";</script></head>
+<body>
+
+  <div id="layout">
+    <div id="header_sites">
+      <div class="left">
+        <h1><a href="/">NGO AID MAP</a></h1>
+      </div>
+      <div class="right">
+        <div class="brand-interaction">
+          <img src="/app/images/interaction-logo.png" height="90" width="132">
+        </div>
+      </div>
+      <div class="right">
+        <ul class="menu">
+          <li class="last">
+            <a href="/admin">MEMBER ACCESS</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+  <div id="outer_layout">
+      <!-- div id="header_sites" -->
+  <div class="iom-counter">
+    <div class="map"></div>
+    <div class="date"><span id="remaining-days">5</span></div>
+    <p class="counter">DAYS UNTIL<br>THE GLOBAL MAP</p>
+  </div>
+
+      <div id="footer_sites">
+        <div class="left_footer">
+          <a class="logo" href="/"></a>
+          <div class="project">
+              <p class="site_name"><a href="http://ngoaidmap.org/">NGO Aid Map</a></p>
+              <p class="all_rights">Copyrighted by <a class="link interaction" href="http://www.interaction.org/">InterAction</a> ©2013. Designed and developed by <a class="link" href="http://simbiotica.es">Simbiótica</a></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= javascript_include_tag "../vendor/requirejs/require", "countdown/main" %>
+
+
+</body></html>

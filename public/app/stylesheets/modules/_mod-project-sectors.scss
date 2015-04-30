@@ -1,0 +1,126 @@
+.mod-project-sectors {
+  label { display: none; }
+  li { margin-bottom: 3px;}
+  a { color: $color-3; }
+  .aller {
+    text-align: right;
+    font-size: 16px;
+    display: block;
+    padding: 3px 10px;
+    background-color: $color-4;
+    font-size: 14px;
+    font-family: "Verdana";
+    font-weight: bold;
+    border-radius: 10px;
+  }
+  .icon_statistics { position: relative; padding-left: 25px;}
+  .icon_statistics:before { @include before('', block, absolute, 0, 0, 20px, 20px)}
+
+  // Icons
+  .health:before {
+    @include icons-sprite(icon-health);
+  }
+
+  .agriculture:before {
+    @include icons-sprite(icon-agriculture);
+  }
+
+  .communication:before {
+    @include icons-sprite(icon-communications);
+  }
+
+  .disaster-management:before {
+    @include icons-sprite(icon-disaster-management);
+  }
+
+  .early_recovery:before {
+    @include icons-sprite(icon-early_recovery);
+  }
+
+  .economic_recovery:before {
+    @include icons-sprite(icon-economic_recovery);
+  }
+
+  .education:before {
+    @include icons-sprite(icon-education);
+  }
+
+  .energy:before {
+    @include icons-sprite(icon-energy);
+  }
+
+  .environment:before {
+    @include icons-sprite(icon-environment);
+  }
+
+  .food_aid:before {
+    @include icons-sprite(icon-food-aid);
+  }
+
+  .human_rights:before {
+    @include icons-sprite(icon-human_rights);
+  }
+
+  .humanitarian-aid:before {
+    @include icons-sprite(icon-humanitarian-aid);
+  }
+
+  .logistics:before {
+    @include icons-sprite(icon-logistics);
+  }
+
+  .mining-and-extractive-resources:before {
+    @include icons-sprite(icon-mining-and-extractive-resources);
+  }
+
+  .non-food-relief-items {
+    @include icons-sprite(icon-non-food-relief-items);
+  }
+
+  .nutrition:before {
+    @include icons-sprite(icon-other);
+  }
+
+  .other:before {
+    @include icons-sprite(icon-other);
+  }
+
+  .peace_security:before {
+    @include icons-sprite(icon-peace_security);
+  }
+
+  .protection:before {
+    @include icons-sprite(icon-protection);
+  }
+
+  .safety-nets {
+    @include icons-sprite(icon-safety-nets);
+  }
+
+  .shelter:before {
+    @include icons-sprite(icon-shelter);
+  }
+
+  .water_sanitation:before {
+    @include icons-sprite(icon-water);
+  }
+}
+
+.ui-tooltip {
+  padding: 7px 12px;
+  box-shadow: none;
+  border-radius: 15px;
+  color: $color-0;
+  background-color: $color-3;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  &:after {
+    @include after (" ", block, absolute, 50%, -10px, 0, 0);
+    @include triangle (8px, $color-3);
+  }
+}
+
+

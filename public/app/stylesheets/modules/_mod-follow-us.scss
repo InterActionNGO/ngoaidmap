@@ -1,0 +1,60 @@
+.mod-follow-us {
+  aside & {
+    li {
+      float: left;
+      margin-right: 16px;
+    }
+    a {
+      display: block;
+      height: 43px;
+      width: 43px;
+    }
+
+    .website {
+      word-break: break-all;
+      width: 100%;
+    }
+
+    .twitter { @include icons-sprite(twitter);}
+    .facebook { @include icons-sprite(facebook);}
+    .google { @include icons-sprite(google);}
+    .linkedin { @include icons-sprite(linkedin);}
+    .email { @include icons-sprite(email); margin-top: 2px;}
+  }
+
+  .mod-header & {
+    li {
+      float: left;
+      margin-right: 10px;
+      &:last-child {
+        margin-right: 0;
+        margin-left: 3px;
+      }
+    }
+    a {
+      width: 21px;
+      height: 21px;
+      float: right;
+    }
+    .twitter {
+      @include icons-sprite(icon-tw-lt);
+      &:hover { @include icons-sprite(icon-tw-lt-color);}
+    }
+    .facebook {
+      @include icons-sprite(icon-fb-lt);
+      &:hover { @include icons-sprite(icon-fb-lt-color);}
+    }
+    .email {
+      @include icons-sprite(icon-email-lt);
+      &:hover { @include icons-sprite(icon-email-lt-color);}
+    }
+  }
+}
+
+.organization-logo {
+  max-width: 200px;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+  margin: 0 0 15px 0;
+}

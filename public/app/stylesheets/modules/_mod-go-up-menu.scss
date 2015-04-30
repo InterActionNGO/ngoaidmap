@@ -1,0 +1,21 @@
+.mod-go-up-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: -360px;
+  z-index: 100;
+  width: 250px;
+  height: 350px;
+  background-color: $color-0;
+  input {
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    margin: 0;
+    padding: 5px 5%;
+  }
+  .mod-go-down-menu {
+    top: 40px;
+    border-bottom: none;
+  }
+}

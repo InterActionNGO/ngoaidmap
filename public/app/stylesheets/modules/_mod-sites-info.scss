@@ -1,0 +1,17 @@
+.mod-sites-info {
+  width: 100%;
+
+  li {
+    margin-bottom: 12px;
+    color: $color-5;
+  }
+
+  &.is-fixed {
+    max-width: 200px;
+  }
+
+  &.is-bottom-fixed {
+    position: absolute;
+    width: 100%;
+  }
+}

@@ -1,0 +1,56 @@
+.mod-downloads {
+  padding-bottom: 40px;
+  font-weight: bold;
+  font-size: 16px;
+  span {
+    display: inline-block;
+    color: $color-5;
+    font-weight: normal;
+  }
+  ul {
+    display: inline-block;
+    position: relative;
+    top: 10px;
+    margin-left: 10px;
+  }
+  li {
+    float: left;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  a {
+    position: relative;
+    padding: 15px;
+    padding-bottom: 5px;
+    background-color: $color-4;
+    &:hover { background-color: darken($color-4, 10%); color: $color-3;}
+    &:after {
+      @include after('', block, absolute, 0px, auto, 0, 0);
+      top: 0;
+      border-top: 12px solid $color-0;
+    }
+    &:before {
+      @include after('', block, absolute, 0px, auto, 0, 0);
+      top: 12px;
+      border-top: 4px solid darken($color-4, 10%);
+      border-right: 12px solid transparent;
+    }
+  }
+  .csv:after { border-left: 12px solid $color-7;}
+  .xls:after { border-left: 12px solid $color-8;}
+  .kml:after { border-left: 12px solid $color-1;}
+
+  .embebed {
+    font-weight: bold;
+    text-transform: none;
+    &:after { border-left: 12px solid $color-2;}
+  }
+  aside & {
+    ul {
+      margin-left: 0;
+    }
+    a { color: $color-3; font-weight: bold;}
+    li { margin-right: 7px;}
+  }
+}

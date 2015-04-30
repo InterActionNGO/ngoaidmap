@@ -1,0 +1,14 @@
+<div class="mod-donors mod-info">
+  <h3>Donors in this <%= word_for_geo_context(@area) %></h3>
+  <% unless donors.empty? %>
+    <ul>
+      <% index = 1 %>
+      <% donors.each do |donor| %>
+        <li class="<%= (index > 10)? "out" : "" %>"><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+        <% index = index + 1 %>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>The are no donors</p>
+  <% end %>
+</div>

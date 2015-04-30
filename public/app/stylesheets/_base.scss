@@ -1,0 +1,136 @@
+body {
+  margin: 0;
+  min-width: 960px;
+  padding: 0;
+  font-family: $font-family;
+  font-size: 16px;
+  color: $color-3;
+  text-rendering: optimizeLegibility;
+
+  &.embed-page {
+    min-width: 0;
+  }
+}
+
+h1, h2, h3 {
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+ul, li, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+p {
+  line-height: 21px;
+  font-weight: 100;
+}
+
+strong {
+  font-weight: bold;
+}
+
+button, input {
+  font-family: $font-family;
+  &:focus {
+    outline: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  body { font-size: 1em;}
+}
+
+iframe {
+  margin: 20px auto;
+}
+
+sup {
+  font-size: .83em;
+  vertical-align: super;
+}
+
+/*********************************************************************************************/
+/******************************************LINKS**********************************************/
+/*********************************************************************************************/
+a {
+  text-decoration: none;
+  display: block;
+  color: $color-3;
+}
+/*********************************************************************************************/
+/******************************************TITLES*********************************************/
+/*********************************************************************************************/
+h1 {
+  margin-bottom: 25px;
+  font-size: 48px;
+  font-weight: lighter;
+
+  .section-data & { color: $color-1;}
+  .section-about & { color: $color-8;}
+  .linos-history & { display: none;}
+}
+h2 {
+  margin-bottom: 10px;
+  font-size: 36px;
+  font-weight: lighter;
+  text-transform: capitalize;
+
+  .section-data & { color: $color-1;}
+  .section-about & { color: $color-8;}
+}
+h3 {
+  margin-bottom: 20px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.inline { display: inline-block;}
+
+/*********************************************************************************************/
+/******************************************BUTTONS********************************************/
+/*********************************************************************************************/
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+}
+.button {
+  width: 100%;
+  height: 40px;
+  background-color: #c15022;
+  color: #fff;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+/*********************************************************************************************/
+/******************************************BORDERS********************************************/
+/*********************************************************************************************/
+$border-bottom-color-1: 5px solid rgba($color-1, .3);
+$border-bottom-color-8: 5px solid $color-8;
+
+
+
+
+
+/*********************************************************************************************/
+/**************************************FORMULARIOS********************************************/
+/*********************************************************************************************/
+input {
+  padding: 0;
+  border: none;
+  color: $color-5;
+  font-size: 14px;
+}

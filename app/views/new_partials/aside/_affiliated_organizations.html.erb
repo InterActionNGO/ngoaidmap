@@ -1,0 +1,10 @@
+<div class="affiliated-organizations mod-info">
+  <h3>Affiliated organizations</h3>
+  <% if @pageless_organizations %>
+    <ul class="chart chart-bars">
+      <% @pageless_organizations.each do |o| %>
+        <li><a href="<%= donor_path(@donor, @carry_on_filters.merge(:organization_id => o[1][:id])) %>"><%= o[1][:name] %></a></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

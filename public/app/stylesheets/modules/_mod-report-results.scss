@@ -1,0 +1,480 @@
+.mod-report {
+  padding: 20px 0;
+  border-bottom: 3px solid #eee;
+  width: 100%;
+
+  .mod-report-grid-3 h3 {
+    margin: 20px 0;
+    min-height: 30px;
+  }
+
+  table {  width: 100%; }
+  td { padding: 2px 0; }
+  &:last-child { border-bottom: 0; }
+
+  &.mod-report-intro {
+    border-bottom: 0;
+    padding-top: 0;
+
+    img {
+      display: inline-block;
+      margin-top: 30px;
+    }
+    p {
+      margin-bottom: 1em;
+      text-align: left;
+      font-size: 16px;
+    }
+  }
+  &.no-summary-wrap{
+    .summary-wrap {
+      display: none;  
+    }   
+  }
+
+
+  .is-btn {
+    @extend .apply;
+    display: block;
+    width: 50%;
+    margin: .5em auto 0 auto;
+  }
+
+  .profile-item {
+    margin-top: 1em;
+    .profile-item-title{
+      margin: 10px 0 0 1%;
+      font-size: 21px;
+      @include transform(translate(0,10px));
+    }  
+  }
+
+  .profile-map {
+    min-height: 400px;
+    background-color: $color-4;
+  }
+
+  .profile-marker {
+    width: 20px;
+    height: 20px;
+    color: $color-0;
+    background-color: $color-2;
+    @include border-radius(10px);
+    @include box-shadow(0 0 0 3px rgba($color-0, .6));
+  }
+}
+
+.mod-applied-filters {
+  padding: 15px 20px;
+
+  border: 3px solid #eee;
+
+  @include border-radius(10px);
+
+  a {
+    color: $color-2;
+    display: inline;
+  }
+
+  p {
+    margin: .5em 0;
+  }
+}
+
+.report-title {
+  textarea {
+    display: inline-block;
+    width: auto;
+
+    border: 0;
+
+    color: $color-1;
+    font-family: $font-family;
+    font-size: 48px;
+    font-weight: lighter;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+
+    overflow: hidden;
+    resize: none;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  .is-inline-btn {
+    vertical-align: 18px;
+    margin-left: -10px;
+  }
+}
+
+.mod-report-grid-3 {
+  float: left;
+  margin: 0 1%;
+  width: 31.333334%;
+}
+
+.report-spinner {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+}
+
+.mod-report-summary {
+  th {
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  td {
+    font-weight: lighter;
+    font-size: 36px;
+  }
+  .btn-show-list {
+    display: block;
+    font-size: 15px;
+    font-weight: normal;
+    color: $color-1;
+  }
+
+  .summary-wrap {
+    @extend .is-flex;
+  }
+  .no-summary-wrap{
+    display: none !important;
+  }
+
+  .summary-item {
+    text-align: center;
+
+    h3 {
+      font-weight: bold;
+      font-size: 15px;
+      text-transform: uppercase;
+      margin: 2px 0 5px 0;
+    }
+
+    .value {
+      font-weight: lighter;
+      font-size: 36px;
+    }
+  }
+}
+
+.budget-item {
+  text-transform: uppercase;
+}
+
+.mod-report-budget {
+  .mod-report-budget-total {
+    font-weight: lighter;
+    font-size: 36px;
+    text-transform: uppercase;
+    .small {
+      font-size: 14px;
+      vertical-align: baseline;
+      a {
+        display: inline;
+        color: $color-2;
+      }
+    }
+  }
+
+  .mod-report-budget-min,
+  .mod-report-budget-average,
+  .mod-report-budget-max {
+    padding-top: 20px;
+    text-transform: uppercase;
+    &:before {
+      content: " ";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border: 1px solid #ddd;
+      margin-right: 7px;
+    }
+  }
+  .mod-report-budget-min:before {
+    background-color: $color-1;
+  }
+  .mod-report-budget-average:before {
+    background-color: $color-4;
+  }
+  .mod-report-budget-max:before {
+    background-color: $color-0;
+  }
+
+  .mod-report-budget-chart {
+    border: 1px solid #ddd;
+    overflow: hidden;
+    margin-top: 20px;
+    @include border-radius(4px);
+  }
+
+  .mod-report-budget-chart-item {
+    height: 10px;
+    float: left;
+    &.min {
+      background-color: $color-1;
+    }
+    &.average {
+      background-color: $color-4;
+    }
+    &.max {
+      background-color: $color-0;
+    }
+  }
+}
+
+.mod-report-locations {
+  .mod-report-locations-map {
+    background-color: $color-4;
+    height: 380px;
+  }
+
+  .report-marker {
+    max-width: 50px;
+    max-height: 50px;
+    background-color: $color-2;
+    text-align: center;
+    color: $color-0;
+    @include border-radius(100%);
+    @include box-shadow(0 0 0 3px rgba($color-0, .6));
+  }
+}
+
+#printReport, #saveReport {
+  @extend .apply;
+  width: 48%;
+  float: left;
+  margin-bottom: 0;
+  &:first-child { margin-right: 4%;}
+
+}
+
+.mod-report-locations-header {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 20px;
+  background-color: $color-4;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  h3, ul {
+    display: inline-block;
+  }
+  li {
+    list-style: none;
+    list-decoration: none;
+    overflow: hidden;
+    padding-right: 20px;
+  }
+  ul {
+    position: absolute;
+    top: 16px;
+    right: 35px;
+    padding: 0 !important;
+  }
+  .current {
+    position: relative;
+    font-size: 15px;
+    font-weight: bold;
+    &:after {
+      @include after('', block, absolute, -20px, 3px, 0, 0) ;
+      @include triangle (5px, $color-3);
+    }
+  }
+  &:hover .mod-report-locations-header-child {
+    display: block;
+  }
+}
+ul.mod-report-locations-header-child {
+  display: none;
+  position: absolute;
+  top: 30px;
+  width: 210px;
+  left: -20px;
+  z-index: 1;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  background-color: #ededed;
+    a { color: $color-3}
+    li {
+      padding-left: 20px;
+      font-weight: normal;
+      font-size: 15px;
+    }
+}
+
+.highcharts-title {
+  display: none;
+}
+
+.mod-report-lists {
+  position: relative;
+
+  .report-list-subtitle {
+    @include clearfix();
+    span {
+      float: left;
+    }
+
+    button {
+      float: right;
+    }
+  }
+
+  table {
+    margin: 20px 0 0 0;
+  }
+  th {
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  td {
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: normal;
+    &:first-child {
+      width: 55%;
+    }
+    &.mod-report-lists-project {
+      font-weight: lighter;
+      color: $color-1;
+      strong {
+        color: $color-3;
+      }
+    }
+  }
+  th, td {
+    padding: 10px 7px;
+    text-align: center;
+    &:first-child {
+      padding-left: 0;
+      text-align: left;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+.mod-report-lists-selector {
+  position: absolute;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: $color-4;
+  border-radius: 15px;
+  right: 0;
+  top: 20px;
+  z-index: 1;
+
+  & > li {
+    ul {
+      position: absolute;
+      display: none;
+      padding: 10px 20px;
+      margin-left: -10px;
+      width: calc(100% - 40px);
+      background-color: $color-4;
+      border-radius: 0 0 15px 15px;
+      li {
+        padding: 7px 0;
+      }
+    }
+    &:hover ul {
+      display: block;
+    }
+  }
+
+  li, .current {
+    position: relative;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 15px;
+  }
+
+  .current {
+    padding-right: 20px;
+    &:after {
+      @include after('', block, absolute, 0, 3px, 0, 0) ;
+      @include triangle (5px, $color-3);
+    }
+  }
+
+  .show-toolbar {
+    display: inline-block;
+    padding-left: 5px;
+    margin-left: 5px;
+    border-left: 1px solid $color-10;
+
+    button {
+      width: 20px;
+      height: 20px;
+      border-radius: 100% 100%;
+      &.is-active {
+        background-color: $color-1;
+        color: $color-0;
+      }
+    }
+  }
+}
+
+@media print {
+  .mod-header,
+  .featured-projects,
+  .mod-footer {
+    display: none;
+  }
+
+  .grid-11.offset-1 {
+    margin: 0 auto;
+    float: none;
+  }
+
+  .is-break-before {
+    page-break-before: always;
+  }
+
+  .highcharts-title {
+    display: block;
+  }
+
+  .ui-tabs {
+    .ui-tabs-nav {
+      display: none !important;
+    }
+    .ui-tabs-panel {
+      display: block !important;
+    }
+  }
+}
+
+// maybe this should go to a single mod file?
+.mod-report-limitations {
+  padding-top: 30px;
+  a {
+    display: inline;
+    color: $color-2;
+  }
+
+  ol {
+      margin-left: 2em;
+  }
+
+  ol li {
+      list-style-type: decimal;
+      list-style-position: outside;
+  }
+
+  li {
+    margin-bottom: 10px;
+  }
+}
+
+.mod-report-line-chart .highchart-label a {
+  color: $color-2;
+  display: inline;
+}

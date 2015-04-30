@@ -1,0 +1,26 @@
+<header class="mod-header">
+
+  <div class="follow-us-container">
+    <div class="row">
+      <div class="grid-17">
+        <%= render 'new_partials/aside/follow_us' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="grid-4">
+    	<a href="http://<%= Settings.main_site_host %>" class="aid-map-logo"><%= image_tag "aid-map-logo.png", :alt  => "interaction aid map logo", :height => '90', :width => '185' %></a>
+    </div>
+
+    <div class="grid-10">
+    	<%= render 'new_partials/main-menu' %>
+    </div>
+
+    <div class="grid-3">
+      <a href="http://www.interaction.org/" target="_blank" class="interaction-logo">
+        <%= image_tag "interaction-logo.png" , :alt  => "interaction logo", :width => '132', :height => '85' %>
+      </a>
+    </div>
+  </div>
+</header>

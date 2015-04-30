@@ -1,0 +1,71 @@
+.mod-header {
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 5px 0 rgba($color-1, 0.3);
+  .section-about & {
+    box-shadow: 0 5px 0 rgba($color-8, 0.7);
+  }
+  .section-data & {
+    box-shadow: 0 5px 0 rgba($color-1, 0.7);
+  }
+  .aid-map-logo {
+    float: left;
+    margin-top: 10px;
+  }
+  .menu {
+    display: block;
+    margin-top: 42px;
+    text-align: right;
+    @include clearfix;
+  }
+  .menu-item {
+    display: inline-block;
+    margin: 0 1%;
+    text-align: center;
+    text-transform: uppercase;
+    .index-item {
+      position: relative;
+      padding: 5px 15px;
+      &.active {
+        border-radius: 15px;
+      }
+    }
+  }
+  .interaction-logo {
+    float: right;
+    margin-top: 10px;
+  }
+  .submenu {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    background-color: $color-0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    .submenu-item {
+      float: none;
+      text-align: left;
+    }
+    a {
+      text-transform: none;
+      padding: 10px 25px;
+      font-weight: bold;
+    }
+  }
+  .home {
+    @include menu-item($color-3);
+  }
+  .about {
+    @include drop-down-menu($color-8);
+  }
+  .data {
+    @include drop-down-menu($color-1);
+  }
+  .access {
+    @include menu-item($color-2);
+  }
+}
+
+.mod-footer .submenu {
+  display: none;
+}

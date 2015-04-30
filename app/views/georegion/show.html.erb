@@ -1,0 +1,93 @@
+<% content_for :js_vars do %>
+  <script>
+    <% if @overview_map_bbox %>
+      var bbox = <%=raw(@overview_map_bbox.to_json)%>;
+    <% end %>
+    var chco = "<%=@georegion_map_chco%>";
+    var chf = "<%=@georegion_map_chf%>";
+    var chld = "<%=@chld%>";
+    var chd = "<%=@chd%>";
+    var marker_source = "<%=@georegion_map_marker_source%>";
+    <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
+      var map_type = "administrative_map";
+    <% else %>
+      var map_type = "georegion";
+    <% end  %>
+    var last_level = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "false" : "true" %>";
+    var show_regions_with_one_project = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "true" : "false" %>";
+    var map_data = <%=raw(@map_data)%>;
+    var max_count = <%=@map_data_max_count%>;
+    var area_stroke_color = "<%=@georegion_map_stroke_color%>";
+    var area_fill_color = "<%=@georegion_map_fill_color%>";
+    var theme = <%=@site.theme_id%>;
+    var kind = window.location.pathname.split('/')[1];
+    var stylez = <%=raw @site.map_styles  %>;
+    var empty_layer = <%= @empty_layer %>;
+    var globalPage = <%= @site.featured?? true : false %>;
+    var page = "<%= params[:controller] %>";
+  </script>
+<% end %>
+
+<%= render 'new_partials/map' %>
+
+<%= render 'new_partials/categories_selector' %>
+
+<div class="main-content">
+  <div class="row">
+    <div class="grid-4">
+      <aside class="layout-sidebar">
+
+        <div class="mod-highlighted-results">
+          <% unless @filter_by_location.present? %>
+            <%= render 'new_partials/aside/projects' %>
+          <% end %>
+        </div>
+
+        <%= render 'new_partials/aside/location' %>
+
+        <% if @filter_by_category.blank? && @area.projects_clusters_sectors(@site).size > 0 %>
+          <div class="project-sectors mod-info">
+            <h3>Project sectors</h3>
+            <div class="mod-project-sectors">
+              <ul id="clustersView">
+                <% @area.projects_clusters_sectors(@site)[0..3].each do |category,count| %>
+                  <li>
+                    <a class="<%= category.css_class %> icon_statistics" title="<%= category.name %>" href="<%= location_path(@area, @carry_on_filters.merge(:category_id => category.id)) %>" data-value="<%= count %>"><span class="aller"><%= count %></span></a>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+
+        <%= render 'new_partials/aside/donors', :donors => @area.donors(@site) %>
+
+        <div class="mod-info">
+          <h3>Projects in other <%= word_for_geo_context(@area).pluralize %></h3>
+          <ul>
+            <% @area.near(@site, 5).each do |area| %>
+              <li><%= link_to(area.name, location_path(area)) %> - <%= pluralize(area.count, 'project', 'projects') %></li>
+            <% end %>
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+
+    <div class="grid-12 offset-1">
+      <section class="layout-content" id="content">
+
+        <header>
+          <h1 class="section-title"><%= georegion_projects_list_subtitle %><%= ", " + @area_parent if @area_parent.present? %></h1>
+          <%= content_tag :p, @area.wiki_description if @area.wiki_description %>
+          <%= content_tag :p, raw("Description provided by Wikipedia #{content_tag(:a, 'Read full article', :href => @area.wiki_url)}"), :class => 'provided' if @area.wiki_url %>
+        </header>
+
+        <%= render :partial => 'new_partials/downloads', :locals => { :csv_path => location_path(@area, @carry_on_filters.merge(:format => :csv)), :xls_path => location_path(@area, @carry_on_filters.merge(:format => :xls)), :kml_path => location_path(@area, @carry_on_filters.merge(:format => :kml)) } %>
+
+        <%= render "new_partials/index_projects" %>
+
+      </section>
+    </div>
+  </div>
+</div>

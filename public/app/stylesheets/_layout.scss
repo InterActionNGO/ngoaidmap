@@ -1,0 +1,95 @@
+/*********************************************************************************************/
+/******************************************HEADER*********************************************/
+/*********************************************************************************************/
+.mod-header {
+  height: 154px;
+  position: relative;
+  z-index: 100;
+  .follow-us-container {
+    width: 100%;
+    padding: 7px 0;
+    height: 20px;
+    border-bottom: 1px solid $color-10;
+    background-color: $color-4;
+  }
+  .mod-info {
+    float: right;
+    margin: 0;
+    padding: 0;
+  }
+  .mod-follow-us {
+    float: right;
+  }
+}
+
+/*********************************************************************************************/
+/******************************************SECTIONS*******************************************/
+/*********************************************************************************************/
+.categories-selector {
+  position: relative;
+  height: 50px;
+  background-color: $color-4;
+  border-bottom: 1px solid rgba($color-4, 0.3);
+  @include transition(border 2s ease);
+  &.is-fixed {
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    border-bottom-color: rgba(152, 152, 152, 0.3);
+  }
+}
+
+.main-content {
+  padding-top: 30px;
+  @include clearfix();
+}
+
+.layout-content {
+  margin-bottom: 30px;
+  header { margin-bottom: 25px;}
+  min-height: 400px;
+
+  .disclaimer {
+    padding: 10px 15px 10px 70px;
+    margin-bottom: 1em;
+    background: rgba($color-7, .3) image-url("disclaimer-alert.svg") no-repeat 10px 50%;
+    background-size: 45px 52px;
+  }
+}
+.layout-sidebar {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.layout-sidebar .is-fixed {
+  top: 60px;
+}
+.layout-content { position: relative;}
+
+.featured-projects {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.about-subsections {
+  p { margin-bottom: 20px;}
+}
+
+/*********************************************************************************************/
+/******************************************ASIDE**********************************************/
+/*********************************************************************************************/
+
+
+
+
+
+/*********************************************************************************************/
+/******************************************FOOTER*********************************************/
+/*********************************************************************************************/
+.mod-footer {
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  background-color: $color-4;
+  border-top: 1px solid rgba($color-5, .3);
+}

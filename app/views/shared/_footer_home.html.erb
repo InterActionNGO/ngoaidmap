@@ -1,0 +1,34 @@
+<!-- FOOTERS -->
+
+<div id="superfooter_pages">
+  <div class="inner_superfooter">
+    <h2>Part of <span>NGO AID MAP</span>. An <strong>InterAction</strong> initiative</h2>
+
+    <%= link_to 'Learn more', "http://#{Settings.main_site_host}", :id => "learnmore" %>
+
+    <ul>
+      <% @footer_sites.each do |footer_site|%>
+        <li>
+          <%= link_to (raw [image_tag(footer_site.aid_map_image.url(:small)), content_tag(:span, footer_site.name)].join), "#{request.protocol}#{footer_site.url}:#{request.port}" %>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+</div>
+
+<div id="footer_pages" class="dark_footer">
+  <div class="inner_footer">
+    <div class="left">
+      <div class="project">
+        <p class="site_name"><%= link_to @site.name, url(@site) %> is a sub-site of <%= link_to 'NGO Aid Map', "http://#{Settings.main_site_host}" %></p>
+        <p class="all_rights">© <a class="link interaction" href="http://www.interaction.org/">InterAction</a> 2013. <!-- Sponsored by <a class="link fedex" href="">FedEx</a>.--> Developed by <a class="link" href="http://www.vizzuality.com/">Vizzuality</a></p>
+      </div>
+    </div>
+  <a href="http://www.interaction.org/" class="logo"></a>
+  <a href="http://www.ngoaidmap.org/" class="logo_ngoaidmap"></a>
+  </div>
+</div>
+
+
+

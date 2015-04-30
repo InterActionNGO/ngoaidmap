@@ -1,0 +1,29 @@
+.mod-index-item {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid $color-4;
+  font-weight: lighter;
+  h2 {
+    font-size: 16px;
+    a {
+      font-size: 16px;
+      font-weight: bold;
+      @include link-states($color-1, inline);
+    }
+  }
+  span {
+    color: $color-5;
+    line-height: 1.5em;
+  }
+  p { line-height: 1.5em;}
+  span a {
+    @include link-states($color-2, inline-block);
+  }
+  .learn_more {
+    @include link-states($color-1, inline-block);
+  }
+}
+
+.articles-list li:last-child .mod-index-item {
+  border-bottom: none;
+}

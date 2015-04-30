@@ -1,0 +1,75 @@
+<%= render 'new_partials/map' %>
+
+<%= render 'new_partials/categories_selector' %>
+
+<div class="row">
+  <aside class="layout-sidebar">
+    <div class="grid-4">
+      <% unless @filter_by_location.present? %>
+        <%= render 'new_partials/aside/projects' %>
+      <% end %>
+
+      <% unless @filter_by_organization.present? %>
+        <%= render 'new_partials/aside/organizations' %>
+      <% end %>
+
+      <% if @site.navigate_by_country %>
+        <%= render 'new_partials/aside/countries' %>
+      <% else %>
+        <%= render 'new_partials/aside/regions' %>
+      <% end %>
+
+      <% unless @filter_by_organization.present? %>
+        <%= render 'new_partials/aside/affiliated_organizations' %>
+      <% end %>
+
+      <% unless @filter_by_location.present? || @donor_projects_by_location.empty? %>
+        <%= render 'new_partials/aside/project_locations' %>
+      <% end %>
+
+      <%# render 'partials/aside/follow_us' %>
+
+      <%# render 'partials/aside/project_sectors' %>
+
+      <%# render 'partials/aside/some_organizations' %>
+
+      <%# render 'partials/aside/donors_in_this_country' %>
+      <%# render 'partials/aside/organizations_in_this_country' %>
+
+      <%# render 'partials/aside/location' %>
+
+      <%# render 'partials/aside/reporting_organization' %>
+
+      <%# render 'partials/aside/project_time_line' %>
+
+      <%# render 'partials/aside/proyect_budget' %>
+
+      <%# render 'partials/aside/donors' %>
+
+      <%# render 'partials/aside/prime_awardee' %>
+
+      <%# render 'partials/aside/local_partners' %>
+
+      <%# render 'partials/aside/people_reached' %>
+
+      <%# render 'partials/aside/target_groups' %>
+
+      <%# render 'partials/aside/contact_info' %>
+
+      <%# render 'partials/aside/proyect_website' %>
+
+      <%# render 'partials/aside/export_data' %>
+
+    </div>
+  </aside>
+
+  <section class="content">
+    <div class="grid-12 offset-1">
+      <h2 class="section-title">Featured Projects</h2>
+
+      <%= render 'new_partials/downloads' %>
+
+      <%= render 'new_partials/index_projects' %>
+
+  </section> <!-- content -->
+</div>
