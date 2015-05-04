@@ -11,6 +11,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'dotenv-rails'
 gem 'pg'
 gem 'paperclip'
+gem 'httparty'
 group :development do
   gem 'foreman'
   gem 'puma'

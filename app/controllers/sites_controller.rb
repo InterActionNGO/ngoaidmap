@@ -3,6 +3,7 @@ class SitesController < ApplicationController
   layout :sites_layout
 
   def home
+    @api_data = HTTParty.get('http://localhost:9292/projects')
   end
 
   def downloads
