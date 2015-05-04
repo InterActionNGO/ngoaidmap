@@ -9,14 +9,14 @@
           </div>
 
           <ul>
-            <% @site.featured_sites.each do |s|  %>
+            <%# @site.featured_sites.each do |s|  %>
                 <li class="featured-project">
-                  <a href="http://<%= s.url %>" target"_self" >
-                    <img src="<%= s.aid_map_image.url %>" alt="" width="200" height="115">
-                    <p><%= s.name %></p>
+                  <a href="http://<%#= s.url %>" target"_self" >
+                    <img src="<%#= s.aid_map_image.url %>" alt="" width="200" height="115">
+                    <p><%#= s.name %></p>
                   </a>
                 </li>
-            <% end %>
+            <%# end %>
           </ul>
 
         </div>
@@ -28,7 +28,7 @@
     <div class="row">
       <div class="mod-footer-top">
         <div class="grid-6 offset-5">
-          <%= render 'new_partials/main-menu' %>
+          <%= render 'new_partials/main_menu' %>
         </div>
         <div class="grid-4">
           <a href="http://<%= Settings.main_site_host %>">

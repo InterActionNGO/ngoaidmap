@@ -34,6 +34,9 @@
 /*.tmproj
 
 .env
+bower_components/
+public/.tmp/
+public/dist/
 
 /public/files/*
 !/public/files/.gitkeep

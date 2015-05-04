@@ -15,7 +15,11 @@
     <% if Rails.env.production? %>
       <%= stylesheet_link_tag "main.css", :media => 'all' %>
     <% else %>
-      <%= stylesheet_link_tag "lib/jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", "vendor/chachi-slider/chachi-slider.css", "vendor/select2/select2.css", "main.css", :media => 'all' %>
+      <%= stylesheet_link_tag "/app/lib/jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", :media => 'all' %>
+      <%= stylesheet_link_tag "/app/vendor/chachi-slider/chachi-slider.css", :media => 'all' %>
+      <%= stylesheet_link_tag "/app/vendor/select2/select2.css", :media => 'all' %>
+      <%= stylesheet_link_tag "main", :media => "all" %>
+      <%#= stylesheet_link_tag "lib/jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", "vendor/chachi-slider/chachi-slider.css", "vendor/select2/select2.css", "main.css", :media => 'all' %>
     <% end %>
 
     <% if Rails.env.development? %>
@@ -51,7 +55,7 @@
     <% else %>
       <%= yield :js_vars %>
     <% end %>
-    <%= javascript_include_tag "../lib/modernizr/modernizr.custom.js" %>
+    <%= javascript_include_tag "/app/lib/modernizr/modernizr.custom.js" %>
 
     <%= csrf_meta_tag %>
   </head>
@@ -66,7 +70,8 @@
 
     <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyA2xfzq0KmJZIlGIpxXK1CjXa6enzmPGlM&sensor=false" %>
     <%= javascript_include_tag "http://libs.cartocdn.com/cartodb.js/v3/cartodb.js" %>
-    <%= javascript_include_tag "../vendor/requirejs/require.js", "application/main.js" %>
+    <%#= requirejs_include_tag "main" %>
+    <%= javascript_include_tag "/app/vendor/requirejs/require.js", "application/main.js" %>
 
     <% if Rails.env.production? %>
       <script type="text/javascript">
