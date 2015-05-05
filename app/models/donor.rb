@@ -42,4 +42,6 @@ class Donor < ActiveRecord::Base
       }
     },
     url: "/system/:attachment/:id/:style.:extension"
+  scope :active, -> {joins([donations: :project]).where("projects.end_date > ? AND projects.start_date < ?", Date.today.to_s(:db), Date.today.to_s(:db))}
+
 end
