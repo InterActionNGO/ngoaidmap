@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     @organizations = Organization.active.order(:name).uniq.pluck(:id, :name)
     @donors = Donor.active.order(:name).uniq.pluck(:id, :name)
     @countries = Country.active.order(:name).uniq.pluck(:id, :name)
-    @sectors = Sector.order(:name).pluck(:id, :name)
+    @sectors = Sector.counting_projects
   end
 
   protected
