@@ -4,10 +4,10 @@
       <% @projects.each do |project| %>
         <li>
           <article class="mod-index-item">
-            <h2><a href="<%= project_path(project['project_id']) %>"><%= truncate(project['project_name'], :length=>60) %></a></h2>
-            <span><%= subtitle(project, @site) %></span>
+            <h2><a href="<%#= project_path(project['project_id']) %>"><%#= truncate(project['project_name'], :length=>60) %></a></h2>
+            <span><%#= subtitle(project, @site) %></span>
             <p>
-              <%= anglo(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>")) %>
+              <%#= anglo(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>")) %>
             </p>
           </article>
         </li>

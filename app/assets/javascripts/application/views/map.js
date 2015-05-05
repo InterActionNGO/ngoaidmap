@@ -98,6 +98,33 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
       return new google.maps.Point(x, y);
     };
 
+    function IOMParser(map_data){
+      var projects = map_data.data;
+      var organizations = _.where(map_data.included,{type: 'organizations'});
+      var regions = _.where(map_data.included,{type: 'regions'});
+      var countries = _.where(map_data.included,{type: 'countries'});
+
+      var markers = [];
+      var countCountries = _.countBy(_.flatten(_.map(projects, function(project){
+        return _.map(project.links.countries, function(link){ return link; });
+      })), function(link){ return link.id });
+
+      _.each(projects, function(project, i){
+        markers[i] = {
+          code: _.find(countries,function(country){ return country.id == project.links.countries.linkage[0].id }).code,
+          count: countCountries[_.find(countries,function(country){ return country.id == project.links.countries.linkage[0].id }).id],
+          id: _.find(countries,function(country){ return country.id == project.links.countries.linkage[0].id }).id,
+          lat: (_.find(countries,function(country){ return country.id == project.links.countries.linkage[0].id }).center_lat).toString(),
+          lon: (_.find(countries,function(country){ return country.id == project.links.countries.linkage[0].id }).center_lon).toString(),
+          name: _.find(countries,function(country){ return country.id == project.links.countries.linkage[0].id }).name,
+          type: _.find(countries,function(country){ return country.id == project.links.countries.linkage[0].id }).type,
+          url: '/location/' + _.find(countries,function(country){ return country.id == project.links.countries.linkage[0].id }).id
+        }
+      });
+      return markers;
+    }
+
+
     function IOMMarker(info, diameter, classname, map) {
       var isRegion = !!(!info.total_in_region && info.code === null && info.region_name);
 
@@ -576,6 +603,7 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
       range = max_count / 5;
     }
     var diameter = 0;
+    map_data = IOMParser(map_data);
     console.log(map_data);
     // If region exist, reject a country object
     _.each(map_data, function(d) {
@@ -667,11 +695,13 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
         // image_source = '/app/images/themes/' + theme + '/project_marker.png';
       }
 
-      if (!countriesAndRegions) {
-        new IOMMarker(map_data[i], diameter, classname, map);
-      } else if (countriesAndRegions && !map_data[i].code) {
-        new IOMMarker(map_data[i], diameter, classname, map);
-      }
+      new IOMMarker(map_data[i], diameter, classname, map);
+
+      // if (!countriesAndRegions) {
+      //   new IOMMarker(map_data[i], diameter, classname, map);
+      // } else if (countriesAndRegions && !map_data[i].code) {
+      //   new IOMMarker(map_data[i], diameter, classname, map);
+      // }
 
       bounds.extend(new google.maps.LatLng(map_data[i].lat, map_data[i].lon));
     }

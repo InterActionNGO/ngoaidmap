@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_menu_items
+    @projects = Project.active
     @organizations = Organization.active.order(:name).uniq.pluck(:id, :name)
     @donors = Donor.active.order(:name).uniq.pluck(:id, :name)
     @countries = Country.active.order(:name).uniq.pluck(:id, :name)
