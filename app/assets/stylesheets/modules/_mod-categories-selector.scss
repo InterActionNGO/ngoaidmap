@@ -82,7 +82,7 @@
     background-position: sprite-position($icons, icon-agriculture, 4px, 5px);
   }
 
-  .communication:before {
+  .communications:before {
     @include icons-sprite(icon-communications);
     background-position: sprite-position($icons, icon-communications, 4px, 5px);
   }
@@ -97,7 +97,7 @@
     background-position: sprite-position($icons, icon-early_recovery, 4px, 5px);
   }
 
-  .economic_recovery:before {
+  .economic-recovery-and-development:before {
     @include icons-sprite(icon-economic_recovery);
     background-position: sprite-position($icons, icon-economic_recovery, 4px, 5px);
   }
@@ -117,12 +117,12 @@
     background-position: sprite-position($icons, icon-environment, 4px, 5px);
   }
 
-  .food_aid:before {
+  .food-aid:before {
     @include icons-sprite(icon-food-aid);
     background-position: sprite-position($icons, icon-food-aid, 4px, 5px);
   }
 
-  .human_rights:before {
+  .human-rights-democracy-and-governance:before {
     @include icons-sprite(icon-human_rights);
     background-position: sprite-position($icons, icon-human_rights, 4px, 5px);
   }
@@ -142,7 +142,7 @@
     background-position: sprite-position($icons, icon-mining-and-extractive-resources, 4px, 5px);
   }
 
-  .non-food-relief-items:before {
+  .non_food-relief-items-nf_is:before {
     @include icons-sprite(icon-non-food-relief-items);
     background-position: sprite-position($icons, icon-non-food-relief-items, 4px, 5px);
   }
@@ -157,7 +157,7 @@
     background-position: sprite-position($icons, icon-other, 4px, 5px);
   }
 
-  .peace_security:before {
+  .peace-and-security:before {
     @include icons-sprite(icon-peace_security);
     background-position: sprite-position($icons, icon-peace_security, 4px, 5px);
   }
@@ -172,12 +172,12 @@
     background-position: sprite-position($icons, icon-safety-nets, 4px, 5px);
   }
 
-  .shelter:before {
+  .shelter-and-housing:before {
     @include icons-sprite(icon-shelter);
     background-position: sprite-position($icons, icon-shelter, 4px, 5px);
   }
 
-  .water_sanitation:before {
+  .water-sanitation-and-hygiene:before {
     @include icons-sprite(icon-water);
     background-position: sprite-position($icons, icon-water, 4px, 5px);
   }
