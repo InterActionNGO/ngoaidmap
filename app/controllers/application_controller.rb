@@ -25,6 +25,11 @@ class ApplicationController < ActionController::Base
     @sectors = Sector.counting_projects
   end
 
+  def get_sidebar_items
+    @sectors_by_num = Sector.counting_projects
+  end
+
+
   protected
 
     # Site management
