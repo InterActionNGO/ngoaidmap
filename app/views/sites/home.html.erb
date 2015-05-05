@@ -21,11 +21,17 @@
             <h3>Project sectors</h3>
             <div class="mod-project-sectors">
               <ul id="clustersView">
+                <% @sectors.each do |category| %>
+                  <li>
+                    <a class="<%= category[0][1].underscore.parameterize %> icon_statistics" title="<%= category[0][1] %>" href="<%= sector_path(category[0][0]) %>" data-value="<%= category[1] %>"><span class="aller"><%= category[1] %></span></a>
+                  </li>
+                <% end %>
+
                 <%# @site.projects_sectors_or_clusters.each do |category, count| %>
                   <%# unless category.name.eql?('N/A') %>
-                    <li>
-                      <a class="<%#= category.css_class %> icon_statistics" title="<%#= category.name %>" href="<%#= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" data-value="<%#= count %>"><span class="aller"><%#= count %></span></a>
-                    </li>
+                    <!-- <li> -->
+                      <!-- <a class="<%#= category.css_class %> icon_statistics" title="<%#= category.name %>" href="<%#= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" data-value="<%#= count %>"><span class="aller"><%#= count %></span></a> -->
+                    <!-- </li> -->
                   <%# end %>
                 <%# end %>
               </ul>

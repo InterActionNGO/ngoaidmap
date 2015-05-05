@@ -604,7 +604,6 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
     }
     var diameter = 0;
     map_data = IOMParser(map_data);
-    console.log(map_data);
     // If region exist, reject a country object
     _.each(map_data, function(d) {
       if (d.type === 'region') {
