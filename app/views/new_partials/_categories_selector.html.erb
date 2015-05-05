@@ -1,4 +1,4 @@
-<% cache("#{@site.id}/categories") do %>
+
   <section class="categories-selector">
     <div class="row">
       <div class="grid-14">
@@ -9,7 +9,7 @@
                 <li class="menu-item sector"><span class="father"><a href="<%= cluster_path(@site.cluster) %>"><%= @site.word_for_cluster_sector.upcase.singularize %></a></span></li>
               <% elsif true #@site.sector %>
                 <li class="menu-item sector">
-                  <span class="father"><a href="<%#= sector_path(@site.sector) %>"><%#= @site.word_for_cluster_sector.upcase.singularize %></a></span>
+                  <span class="father"><a href="<%# sector_path(@site.sector) %>"><%# @site.word_for_cluster_sector.upcase.singularize %>Sectors</a></span>
                 </li>
               <% else %>
                 <li class="menu-item sector" id="<%= @site.navigate_by_cluster? ? 'cluster' : 'sector' %>_option">
@@ -18,7 +18,7 @@
                     <ul class="mod-categories-child sector-child submenu">
                       <% @site.clusters_or_sectors.reject{|c| c.name.eql?('N/A') || c.total_projects(@site) == 0}.sort_by(&:name).each do |category| %>
                         <li>
-                          <a class="<%= category.css_class %>" href="<%#= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>">
+                          <a class="<%= category.css_class %>" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>">
                               <%= category.name %>
                           </a>
                           <span><% unless @site.featured? %><%= category.projects.reject{|p| p.end_date < DateTime.now.to_date}.size %> projects<% end %></span>
@@ -34,8 +34,9 @@
                 <div class="mod-go-up-menu menu">
                   <ul class="mod-categories-child organizations-child">
                     <%# @site.organizations_select.each do |organization| %>
-                      <!-- <li><a href="<%#= organization_path(organization) %>"><%#= organization.name %></a></li> -->
-                    <%# end %>
+                    <% @organizations.each do |organization| %>
+                      <li><a href="<%= organization_path(organization) %>"><%= organization.name %></a></li>
+                    <% end %>
                   </ul>
                   <input type="text" class="mod-categories-search" placeholder="Search Organization">
                 </div>
@@ -46,38 +47,38 @@
                 <div class="mod-go-up-menu menu">
                   <ul class="mod-categories-child donors-child">
                     <%# @site.donors_select.each do |donor| %>
-                      <!-- <li><a href="<%#= donor_path(donor) %>"><%#= CGI.unescapeHTML(donor.name) %></a></li> -->
+                      <!-- <li><a href="<%# donor_path(donor) %>"><%# CGI.unescapeHTML(donor.name) %></a></li> -->
                     <%# end %>
                   </ul>
                   <input type="text" class="mod-categories-search" placeholder="Search Donor">
                 </div>
               </li>
 
-            <%# if @site.navigate_by == :country %>
+            <% if true#@site.navigate_by == :country %>
               <li class="countries">
                 <span class="father">Countries</span>
                 <div class="mod-go-up-menu menu">
                   <ul class="mod-categories-child countries-child">
                     <%# @site.countries_select.each do |country| %>
-                      <!-- <li><%#= link_to(country.name, location_path(:ids => country)) %></li> -->
+                      <li><%# link_to(country.name, location_path(:ids => country)) %></li>
                     <%# end %>
                   </ul>
                   <input type="text" class="mod-categories-search" placeholder="Search Country">
                 </div>
               </li>
-            <%# else %>
+            <% else %>
               <li class="regions">
                 <span class="father">Regions</span>
                 <div class="mod-go-up-menu menu">
                   <ul class="mod-categories-child regions-child">
                     <%# @site.regions_select.each do |region| %>
-                      <!-- <li><%#= link_to(region.name, location_path(:ids => region)) %></li> -->
+                      <li><%# link_to(region.name, location_path(:ids => region)) %></li>
                     <%# end %>
                   </ul>
                   <input type="text" class="mod-categories-search" placeholder="Search Region">
                 </div>
               </li>
-            <%# end %>
+            <% end %>
 
             <li class="mod-form search">
               <%= form_tag(search_path, :method => :get) do %>
@@ -100,4 +101,3 @@
 
     </div>
   </section>
-<% end %>

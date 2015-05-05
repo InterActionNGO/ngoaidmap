@@ -11,9 +11,14 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :set_site, :browser_is_ie6_or_lower?
+  before_action :get_menu_items
 
   def old_browser
     render :file => "/public/old_browser.html.erb", :status => 200, :layout => false
+  end
+
+  def get_menu_items
+    @organizations = Organization.active
   end
 
   protected

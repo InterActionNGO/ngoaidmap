@@ -48,6 +48,7 @@ GEM
     annotate (2.6.8)
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
+    api_cache (0.3.0)
     arel (6.0.0)
     awesome_print (1.6.1)
     better_errors (2.1.1)
@@ -275,6 +276,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (~> 2.6.5)
+  api_cache
   awesome_print
   better_errors
   binding_of_caller

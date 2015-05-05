@@ -576,7 +576,7 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
       range = max_count / 5;
     }
     var diameter = 0;
-
+    console.log(map_data);
     // If region exist, reject a country object
     _.each(map_data, function(d) {
       if (d.type === 'region') {

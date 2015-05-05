@@ -12,6 +12,7 @@ gem 'dotenv-rails'
 gem 'pg'
 gem 'paperclip'
 gem 'httparty'
+gem 'api_cache'
 group :development do
   gem 'foreman'
   gem 'puma'

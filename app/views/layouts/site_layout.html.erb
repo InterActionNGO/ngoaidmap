@@ -27,7 +27,6 @@
     <% else %>
       <link rel="icon" type="image/png" href="/dist/images/favicon.png">
     <% end %>
-
     <% unless content_for?(:js_vars) %>
       <% if defined?(@map_data) %>
         <script>
@@ -46,7 +45,7 @@
           var map_type = '<%= @filter_by_location.present?? "administrative_map" : "overview_map" %>';
           var theme = "<%= @site.theme_id %>";
           var kind = window.location.pathname.split('/')[1];
-          var stylez = <%=raw @site.map_styles  %>
+          var stylez = <%= @site.map_styles.present?? raw(@site.map_styles) : false  %>
           var empty_layer = <%= @empty_layer.present?? @empty_layer : false %>;
           var globalPage = <%= @site.featured?? false : true %>;
           var page = "<%= params[:controller] %>";
