@@ -1,0 +1,48 @@
+{
+  "resource": "Donors",
+  "http_method": "GET",
+  "route": "/api/donors/:id",
+  "description": "Get data for one donor",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "id",
+      "description": "A donor's id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/donors/2",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"type\":\"donor\",\"id\":\"2\",\"name\":\"Red Cross\",\"description\":null,\"website\":null,\"twitter\":null,\"facebook\":null,\"contact_person_name\":null,\"contact_company\":null,\"contact_person_position\":null,\"contact_email\":null,\"contact_phone_number\":null,\"site_specific_information\":null,\"logo\":\"/logos/medium/missing.png\",\"links\":{\"donated_projects\":{\"linkage\":[]},\"offices\":{\"linkage\":[]}}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"6b03f1984a4873a09b2bdcb550fea62f\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "15b1d080-6c86-493f-8ac8-f1647f183d29",
+        "X-Runtime": "0.076620",
+        "Content-Length": "385"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/donors/2\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.api+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

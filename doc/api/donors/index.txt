@@ -1,0 +1,28 @@
+Get data for one donor
+----------------------
+
+Parameters:
+  * id - A donor's id
+
+Request:
+  GET /api/donors/2
+  Accept: application/json; application/vnd.api+json
+  Content-Type: application/vnd.api+json
+  Cookie: 
+  Host: http://ngoaidmap.org
+
+Response:
+  Status: 200 OK
+  Cache-Control: max-age=0, private, must-revalidate
+  Content-Length: 385
+  Content-Type: application/json; charset=utf-8
+  ETag: W/"6b03f1984a4873a09b2bdcb550fea62f"
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-Request-Id: 15b1d080-6c86-493f-8ac8-f1647f183d29
+  X-Runtime: 0.076620
+  X-XSS-Protection: 1; mode=block
+
+  {"data":{"type":"donor","id":"2","name":"Red Cross","description":null,"website":null,"twitter":null,"facebook":null,"contact_person_name":null,"contact_company":null,"contact_person_position":null,"contact_email":null,"contact_phone_number":null,"site_specific_information":null,"logo":"/logos/medium/missing.png","links":{"donated_projects":{"linkage":[]},"offices":{"linkage":[]}}}}
+
+

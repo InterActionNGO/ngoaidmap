@@ -71,5 +71,5 @@ class Organization < ActiveRecord::Base
   has_many :sites, foreign_key: :project_context_organization_id
   has_many :donations, through: :projects
   has_one :user
-  scope :active, -> {joins(:projects).where("projects.end_date > ? AND projects.start_date < ?", Date.today.to_s(:db), Date.today.to_s(:db))}
+  scope :active, -> {joins(:projects).where("projects.end_date IS NULL OR (projects.end_date > ? AND projects.start_date < ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
 end

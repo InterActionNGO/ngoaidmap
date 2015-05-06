@@ -1,0 +1,69 @@
+{
+  "resources": [
+    {
+      "name": "Donors",
+      "examples": [
+        {
+          "description": "Get data for one donor",
+          "link": "donors/get_data_for_one_donor.json",
+          "groups": "all"
+        }
+      ]
+    },
+    {
+      "name": "Organizations",
+      "examples": [
+        {
+          "description": "Get data for one organization",
+          "link": "organizations/get_data_for_one_organization.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of organizations",
+          "link": "organizations/getting_a_list_of_organizations.json",
+          "groups": "all"
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "examples": [
+        {
+          "description": "Get a particular project data",
+          "link": "projects/get_a_particular_project_data.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of projects",
+          "link": "projects/getting_a_list_of_projects.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of projects by countries",
+          "link": "projects/getting_a_list_of_projects_by_countries.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of projects by donors",
+          "link": "projects/getting_a_list_of_projects_by_donors.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of projects by implementing organization",
+          "link": "projects/getting_a_list_of_projects_by_implementing_organization.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of projects by regions",
+          "link": "projects/getting_a_list_of_projects_by_regions.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of projects by sectors",
+          "link": "projects/getting_a_list_of_projects_by_sectors.json",
+          "groups": "all"
+        }
+      ]
+    }
+  ]
+}

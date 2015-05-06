@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
   # Home
   root :to => "sites#home"
+
+  #Api
+  namespace :api, defaults: {format: 'json'} do
+    #scope module: :v1, constraints: APIVersion.new(version: 1) do
+    scope module: :v1 do
+      resources :projects, only: [:index, :show]
+      resources :donors, only: [:show]
+      resources :organizations, only: [:index, :show]
+      resources :sectors, only: [:index, :show]
+    end
+  end
+  mount Raddocs::App => "/docs"
+
   # report page
   get 'p/analysis', to: 'reports#index' , :as => :report_index
   get 'report_generate', to: 'reports#report', :as => :report_generate

@@ -1,0 +1,51 @@
+{
+  "resource": "Projects",
+  "http_method": "GET",
+  "route": "/api/projects?sectors[]=:sector",
+  "description": "Getting a list of projects by sectors",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "sector",
+      "description": "Array. Sector ids"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/projects?sectors[]=1",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.esios-api-v1+json",
+        "Content-Type": "application/json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "sectors": [
+          "1"
+        ]
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"3\",\"name\":\"project_with_sector\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[{\"type\":\"sectors\",\"id\":\"1\"}]},\"countries\":{\"linkage\":[]},\"regions\":{\"linkage\":[]}}}],\"included\":[{\"type\":\"sectors\",\"id\":\"1\",\"name\":\"Agriculture\"}],\"meta\":{\"total\":{\"[3, nil, nil, 1, nil, nil]\":1}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"426713c9fb35661c7b3df8fef39f100a\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "07ea1384-a6ed-4692-a1ad-81dc0cb40a75",
+        "X-Runtime": "0.037153",
+        "Content-Length": "345"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?sectors[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "resource": "Projects",
+  "http_method": "GET",
+  "route": "/api/projects?donors[]=:donor",
+  "description": "Getting a list of projects by donors",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "donors",
+      "description": "Array. Donor ids"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/projects?donors[]=1",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.esios-api-v1+json",
+        "Content-Type": "application/json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "donors": [
+          "1"
+        ]
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"2\",\"name\":\"project_with_donor\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"countries\":{\"linkage\":[]},\"regions\":{\"linkage\":[]}}}],\"meta\":{\"total\":{\"[2, nil, nil, nil, 1, nil]\":1}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"1c0f17232d5314e5a05aa39274104f1b\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "814d3261-8e87-4e08-a23b-71e3d1c20698",
+        "X-Runtime": "0.036465",
+        "Content-Length": "255"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?donors[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}
