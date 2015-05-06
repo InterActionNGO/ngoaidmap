@@ -40,3 +40,5 @@ public/dist/
 
 /public/files/*
 !/public/files/.gitkeep
+/install
+/install/rails
