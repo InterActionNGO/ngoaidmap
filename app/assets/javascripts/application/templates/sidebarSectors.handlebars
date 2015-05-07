@@ -1,0 +1,10 @@
+<h3>Project sectors</h3>
+<div class="mod-project-sectors">
+  <ul id="clustersView">
+    {{#each sectors}}
+      <li>
+        <a class="{{this.class}} icon_statistics" title="{{this.name}}" href="{{this.url}}" data-value="{{this.count}}"><span class="aller">{{this.count}}</span></a>
+      </li>
+    {{/each}}
+  </ul>
+</div>

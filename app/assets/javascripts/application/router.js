@@ -3,7 +3,6 @@
 define([
   'backbone',
 
-  'views/clusters',
   'views/map',
   'views/filters',
   'views/menu-fixed',
@@ -13,20 +12,12 @@ define([
   'views/layer-overlay',
   'views/timeline',
   'views/donors-sidebar',
-  'views/gallery'
-], function(Backbone) {
-
-  var ClustersView = arguments[1],
-    MapView = arguments[2],
-    FiltersView = arguments[3],
-    MenuFixedView = arguments[4],
-    DownloadsView = arguments[5],
-    EmbedMapView = arguments[6],
-    SearchView = arguments[7],
-    LayerOverlayView = arguments[8],
-    TimelineView = arguments[9],
-    DonorsSidebarView = arguments[10],
-    GalleryView = arguments[11];
+  'views/gallery',
+  'views/sidebarHighlights',
+  'views/sidebarSectors',
+  'views/sidebarLocations',
+  'views/sidebarOrganizations',
+], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView, TimelineView, DonorsSidebarView, GalleryView, SidebarHighlights, SidebarSectors, SidebarLocations, SidebarOrganizations) {
 
   var Router = Backbone.Router.extend({
 
@@ -57,13 +48,16 @@ define([
     },
 
     lists: function() {
-      new ClustersView();
       new MapView();
       new FiltersView();
       new DownloadsView();
       new EmbedMapView();
       new LayerOverlayView();
       new DonorsSidebarView();
+      new SidebarHighlights();
+      new SidebarSectors();
+      new SidebarLocations();
+      new SidebarOrganizations();
     },
 
     project: function() {

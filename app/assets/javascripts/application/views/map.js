@@ -1,4 +1,4 @@
-/*global google,map_type,map_data:true,map_center,kind,map_zoom,MAP_EMBED,show_regions_with_one_project,max_count,empty_layer,globalPage,page*/
+/*global google,map_type,map_data_parse:true,map_center,kind,map_zoom,MAP_EMBED,show_regions_with_one_project,max_count,empty_layer,globalPage,page*/
 'use strict';
 
 define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
@@ -98,9 +98,9 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
       return new google.maps.Point(x, y);
     };
 
-    function IOMParser(map_data){
-      var projectsByCountry = _.groupBy(map_data.data, function(project){ return project.links.countries.linkage[0].id });
-      var included = map_data.included;
+    function IOMParser(map_data_parse){
+      var projectsByCountry = _.groupBy(map_data_parse.data, function(project){ return project.links.countries.linkage[0].id });
+      var included = map_data_parse.included;
 
       var markers = _.sortBy(_.map(projectsByCountry, function(country, countryKey){
         var countryF = _.findWhere(included, {id: countryKey, type:'countries'});
@@ -602,12 +602,12 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
     }
     var diameter = 0;
 
-    map_data = IOMParser(map_data);
+    var map_data_parse = IOMParser(map_data);
 
     // If region exist, reject a country object
-    _.each(map_data, function(d) {
+    _.each(map_data_parse, function(d) {
       if (d.type === 'region') {
-        map_data = _.reject(map_data, function(d) {
+        map_data_parse = _.reject(map_data_parse, function(d) {
           return d.type === 'country';
         });
         return false;
@@ -630,24 +630,24 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
         console.log(err);
       });
 
-    var countriesAndRegions = (_.where(map_data, {code: null}).length > 0);
+    var countriesAndRegions = (_.where(map_data_parse, {code: null}).length > 0);
 
     // Markers
-    for (var i = 0; i < map_data.length; i++) {
+    for (var i = 0; i < map_data_parse.length; i++) {
       // var image_source = '';
       var classname = 'marker-bubble';
 
       if (document.URL.indexOf('force_site_id=3') >= 0) {
-        if (map_data[i].count < 5) {
+        if (map_data_parse[i].count < 5) {
           diameter = 20;
           //image_source = '/app/images/themes/' + theme + '/marker_2.png';
-        } else if ((map_data[i].count >= 5) && (map_data[i].count < 10)) {
+        } else if ((map_data_parse[i].count >= 5) && (map_data_parse[i].count < 10)) {
           diameter = 26;
           //image_source = '/app/images/themes/' + theme + '/marker_3.png';
-        } else if ((map_data[i].count >= 10) && (map_data[i].count < 18)) {
+        } else if ((map_data_parse[i].count >= 10) && (map_data_parse[i].count < 18)) {
           diameter = 34;
           //image_source = '/app/images/themes/' + theme + '/marker_4.png';
-        } else if ((map_data[i].count >= 18) && (map_data[i].count < 30)) {
+        } else if ((map_data_parse[i].count >= 18) && (map_data_parse[i].count < 30)) {
           diameter = 42;
           //image_source = '/app/images/themes/' + theme + '/marker_5.png';
         } else {
@@ -655,16 +655,16 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
           //image_source = '/app/images/themes/' + theme + '/marker_6.png';
         }
       } else if (map_type === 'overview_map') {
-        if (map_data[i].count < 25) {
+        if (map_data_parse[i].count < 25) {
           diameter = 20;
           //image_source = '/app/images/themes/' + theme + '/marker_2.png';
-        } else if ((map_data[i].count >= 25) && (map_data[i].count < 50)) {
+        } else if ((map_data_parse[i].count >= 25) && (map_data_parse[i].count < 50)) {
           diameter = 26;
           // image_source = '/app/images/themes/' + theme + '/marker_3.png';
-        } else if ((map_data[i].count >= 50) && (map_data[i].count < 90)) {
+        } else if ((map_data_parse[i].count >= 50) && (map_data_parse[i].count < 90)) {
           diameter = 34;
           // image_source = '/app/images/themes/' + theme + '/marker_4.png';
-        } else if ((map_data[i].count >= 90) && (map_data[i].count < 130)) {
+        } else if ((map_data_parse[i].count >= 90) && (map_data_parse[i].count < 130)) {
           diameter = 42;
           // image_source = '/app/images/themes/' + theme + '/marker_5.png';
         } else {
@@ -672,16 +672,16 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
           // image_source = '/app/images/themes/' + theme + '/marker_6.png';
         }
       } else if (map_type === 'administrative_map') {
-        if (map_data[i].count < range) {
+        if (map_data_parse[i].count < range) {
           diameter = 20;
           // image_source = '/app/images/themes/' + theme + '/marker_2.png';
-        } else if ((map_data[i].count >= range) && (map_data[i].count < (range * 2))) {
+        } else if ((map_data_parse[i].count >= range) && (map_data_parse[i].count < (range * 2))) {
           diameter = 26;
           // image_source = '/app/images/themes/' + theme + '/marker_3.png';
-        } else if ((map_data[i].count >= (range * 2)) && (map_data[i].count < (range * 3))) {
+        } else if ((map_data_parse[i].count >= (range * 2)) && (map_data_parse[i].count < (range * 3))) {
           diameter = 34;
           // image_source = '/app/images/themes/' + theme + '/marker_4.png';
-        } else if ((map_data[i].count >= (range * 3)) && (map_data[i].count < (range * 4))) {
+        } else if ((map_data_parse[i].count >= (range * 3)) && (map_data_parse[i].count < (range * 4))) {
           diameter = 42;
           // image_source = '/app/images/themes/' + theme + '/marker_5.png';
         } else {
@@ -694,22 +694,22 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
         // image_source = '/app/images/themes/' + theme + '/project_marker.png';
       }
 
-      new IOMMarker(map_data[i], diameter, classname, map);
+      new IOMMarker(map_data_parse[i], diameter, classname, map);
 
       // if (!countriesAndRegions) {
-      //   new IOMMarker(map_data[i], diameter, classname, map);
-      // } else if (countriesAndRegions && !map_data[i].code) {
-      //   new IOMMarker(map_data[i], diameter, classname, map);
+      //   new IOMMarker(map_data_parse[i], diameter, classname, map);
+      // } else if (countriesAndRegions && !map_data_parse[i].code) {
+      //   new IOMMarker(map_data_parse[i], diameter, classname, map);
       // }
 
-      bounds.extend(new google.maps.LatLng(map_data[i].lat, map_data[i].lon));
+      bounds.extend(new google.maps.LatLng(map_data_parse[i].lat, map_data_parse[i].lon));
     }
 
     if (!globalPage || page !== 'sites') {
       map.fitBounds(bounds);
     }
 
-    if (page === 'georegion' && map_data.length === 1) {
+    if (page === 'georegion' && map_data_parse.length === 1) {
       setTimeout(function() {
         map.setZoom(8);
       }, 300);

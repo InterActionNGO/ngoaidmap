@@ -9,10 +9,17 @@ require.config({
     underscore: '/app/vendor/underscore/underscore',
     underscoreString: '/app/vendor/underscore.string/lib/underscore.string',
     backbone: '/app/vendor/backbone/backbone',
+    select2: '/app/vendor/select2/select2',
+    handlebars: '/app/vendor/handlebars/handlebars',
+    highcharts: '/app/vendor/highcharts-release/highcharts',
+    spin: '/app/vendor/spinjs/spin',
+    moment: '/app/vendor/moment/moment',
+    momentRange: '/app/vendor/moment-range/lib/moment-range.bare',
+    markerCluster: '/app/vendor/leaflet.markercluster/dist/leaflet.markercluster',
+    text: '/app/vendor/requirejs-text/text',
     quicksilver: '/app/lib/liveupdate/quicksilver',
     liveupdate: '/app/lib/liveupdate/jquery.liveupdate',
     jqueryui: '/app/lib/jquery-ui/js/jquery-ui-1.10.4.custom',
-    select2: '/app/vendor/select2/select2',
     chachiSlider: '/app/vendor/chachi-slider/jquery.chachi-slider'
   },
 
