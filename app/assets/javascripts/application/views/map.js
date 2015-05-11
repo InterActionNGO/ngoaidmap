@@ -573,7 +573,7 @@ define([
 
     initViews: function(){
       new MapTypeView(map);
-      new LayersView(map, currentLayer);
+      new LayersView(map);
     },
 
     resizeMap: function() {

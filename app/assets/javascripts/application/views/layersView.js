@@ -44,11 +44,9 @@ define([
       'click .icon-info' : 'showInfo'
     },
 
-    initialize: function(map,currentLayer) {
+    initialize: function(map) {
       this.cacheVars();
       this.map = map;
-      this.currentLayer = currentLayer;
-
       this.createLayer();
     },
 
@@ -95,12 +93,12 @@ define([
       var layer = $el.data('layer');
       var overlay = $el.data('overlay');
       var currentDiff;
-      var latlng, zoom, sublayer;
+      var latlng, zoom;
 
       if (layer === 'none' && this.currentLayer.getSubLayer(0)) {
-        sublayer = this.currentLayer.getSubLayer(0);
-        sublayer.setSQL('SELECT * from ne_10m_admin_0_countries');
-        sublayer.setCartoCSS('#ne_10m_admin_0_countries{}');
+        this.sublayer = this.currentLayer.getSubLayer(0);
+        this.sublayer.setSQL('SELECT * from ne_10m_admin_0_countries');
+        this.sublayer.setCartoCSS('#ne_10m_admin_0_countries{}');
       }
 
       if (window.sessionStorage) {
@@ -140,9 +138,9 @@ define([
             currentLegend = this.legends.red;
         }
 
-        currentMin = Number(currentMin);
-        currentMax = Number(currentMax);
-        currentDiff = currentMax + currentMin;
+        var currentMin = Number(currentMin);
+        var currentMax = Number(currentMax);
+        var currentDiff = currentMax + currentMin;
 
         var currentCSS = _.str.sprintf('#%1$s{line-color: #ffffff; line-opacity: 1; line-width: 1; polygon-opacity: 0.8;}', currentTable);
         var c_len = currentLegend.colors.length;
@@ -154,38 +152,46 @@ define([
         var iconHtml = _.str.sprintf('%1$s <a href="#" class="infowindow-pop" data-overlay="%2$s"><span class="icon-info"></span></a>', layer, overlay);
         var infowindowHtml = _.str.sprintf('<div class="cartodb-popup light"><a href="#close" class="cartodb-popup-close-button close">x</a><div class="cartodb-popup-content-wrapper"><div class="cartodb-popup-content"><h2>{{content.data.country_name}}</h2><p class="infowindow-layer">%s<p><p><span class="infowindow-data">{{#content.data.data}}{{content.data.data}}</span>%s{{/content.data.data}}{{^content.data.data}}No data{{/content.data.data}}</p><p class="data-year">{{content.data.year}}</p></div></div><div class="cartodb-popup-tip-container"></div></div>', iconHtml, currentUnits);
 
-        var sublayer = this.currentLayer.getSubLayer(0);
 
-        if (sublayer) {
-          sublayer.remove();
+
+        // Set sublayer
+        this.sublayer = this.currentLayer.getSubLayer(0);
+
+        if (this.sublayer) {
+          this.sublayer.remove();
         }
-        sublayer = this.currentLayer.createSubLayer({
+        this.sublayer = this.currentLayer.createSubLayer({
           sql: 'SELECT ' + currentTable + '.country_name, ' + currentTable + '.code, ' + currentTable + '.year,' + currentTable + '.data, ne_10m_admin_0_countries.the_geom, ne_10m_admin_0_countries.the_geom_webmercator FROM ' + currentTable + ' join ne_10m_admin_0_countries on ' + currentTable + '.code=ne_10m_admin_0_countries.adm0_a3_is',
           cartocss: currentCSS,
           interaction: 'country_name, data, year',
         });
 
-        sublayer.on();
-        $('.infowindow-pop').unbind('click');
+        this.sublayer.on();
 
-        var infowindow = cdb.vis.Vis.addInfowindow(this.map, sublayer, ['country_name', 'data', 'year'], {
-          infowindowTemplate: infowindowHtml
-        });
+        // Set Interaction
+        this.setInteraction(infowindowHtml);
 
-        infowindow.model.on('change:visibility', function(model) {
-          if (model.get('visibility')) {
-            $('.infowindow-pop').click(function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-
-              $($(e.currentTarget).data('overlay')).fadeIn();
-            });
-          }
-        });
-
-        sublayer.setInteraction(true);
       }
     },
+
+    setInteraction: function(infowindowHtml){
+      $('.infowindow-pop').unbind('click');
+
+      var infowindow = cdb.vis.Vis.addInfowindow(this.map, this.sublayer, ['country_name', 'data', 'year'], {
+        infowindowTemplate: infowindowHtml
+      });
+
+      infowindow.model.on('change:visibility', function(model) {
+        if (model.get('visibility')) {
+          $('.infowindow-pop').click(function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $($(e.currentTarget).data('overlay')).fadeIn();
+          });
+        }
+      });
+      this.sublayer.setInteraction(true);
+    }
 
 
   });
@@ -193,12 +199,3 @@ define([
   return LayerMap;
 
 });
-
-
-
-    // $layerSelector.find('.icon-info').click(function(e) {
-    //   e.preventDefault();
-    //   e.stopPropagation();
-
-    //   $($(e.currentTarget).parent().data('overlay')).fadeIn();
-    // });
