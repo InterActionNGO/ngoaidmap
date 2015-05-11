@@ -1,28 +1,66 @@
 'use strict';
 
 define([
-  'Class'
-  ], function(Class) {
+  'Class',
+  'underscore'
+  ], function(Class, _) {
 
   var Conexion = Class.extend({
 
     init: function(){
       this.data = map_data;
+      this.projects = this.data.data;
+      this.included = this.data.included;
     },
 
     getProjects: function(){
-      return this.data.data;
+      return this.projects;
+    },
+
+    getIncluded: function(){
+      return this.included;
     },
 
     getOrganizations: function(){
-      return _.filter(this.data.included, function(include){ return include.type == 'organizations' });
+      this.organizations = this.organizations || _.groupBy(_.flatten(_.map(this.projects, function(project){return project.links.organization.linkage})), function(organization){ return organization.id;});
+      return this.organizations
+    },
+
+    getCountries: function(){
+      this.countries = this.countries || _.groupBy(_.flatten(_.map(this.projects, function(project){return project.links.countries.linkage})), function(country){ return country.id;});
+      return this.countries
+    },
+
+    getLocationsByCountry: function(){
+      return _.sortBy(_.map(this.getCountries(), _.bind(function(country, countryKey){
+        var countryF = _.findWhere(this.included, {id: countryKey, type:'countries'});
+        return {
+          count: country.length,
+          id: countryF.id,
+          name: countryF.name,
+          url: '/location/' + countryF.id
+        }
+      }, this )), function(country){
+        return -country.count;
+      });
+    },
+
+    getOrganizationByProjects: function(){
+      return _.sortBy(_.map(this.getOrganizations(), _.bind(function(organization, organizationKey){
+        var organizationF = _.findWhere(this.included, {id: organizationKey, type:'organizations'});
+        return{
+          name: organizationF.name,
+          id: organizationF.id,
+          url: '/organizations/'+organizationF.id,
+          class: organizationF.name.toLowerCase().replace(/\s/g, "-"),
+          count: organization.length
+        }
+      }, this )), function(organization){
+        return -organization.count;
+      });
     }
 
-
-
-
   });
-  var conexion = new Conexion();
-  return conexion;
+  return new Conexion();
 
 });

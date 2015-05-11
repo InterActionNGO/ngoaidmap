@@ -21,7 +21,7 @@ define([
     parseData: function(){
       return {
         projectsLength: this.conexion.getProjects().length.toLocaleString(),
-        organizationsLength: this.conexion.getOrganizations().length.toLocaleString()
+        organizationsLength: _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'organizations' }).length.toLocaleString()
       }
     },
 

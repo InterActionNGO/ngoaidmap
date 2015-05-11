@@ -3,8 +3,9 @@
 define([
   'backbone',
   'handlebars',
+  'conexion/conexion',
   'text!templates/sidebarOrganizations.handlebars'
-  ], function(Backbone, handlebars, tpl) {
+  ], function(Backbone, handlebars, conexion, tpl) {
 
   var SidebarOrganizations = Backbone.View.extend({
 
@@ -14,30 +15,12 @@ define([
 
     initialize: function() {
       this.data = map_data;
+      this.conexion = conexion;
       this.render();
     },
 
     parseData: function(){
-      var projects = this.data.data;
-      var included = this.data.included;
-
-      var organizations = _.groupBy(_.flatten(_.map(projects, function(project){return project.links.organization.linkage})), function(organization){
-        return organization.id;
-      });
-
-      var organizationsByProjects = _.sortBy(_.map(organizations, function(organization, organizationKey){
-        var organizationF = _.findWhere(included, {id: organizationKey, type:'organizations'});
-        return{
-          name: organizationF.name,
-          id: organizationF.id,
-          url: '/organizations/'+organizationF.id,
-          class: organizationF.name.toLowerCase().replace(/\s/g, "-"),
-          count: organization.length
-        }
-      }), function(organization){
-        return -organization.count;
-      });
-
+      var organizationsByProjects = this.conexion.getOrganizationByProjects();
       return { organizations: organizationsByProjects.slice(0, 9) };
     },
 
