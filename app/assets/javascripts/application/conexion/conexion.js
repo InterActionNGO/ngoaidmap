@@ -58,6 +58,25 @@ define([
       }, this )), function(organization){
         return -organization.count;
       });
+    },
+
+    getCountriesByProjects: function(){
+      return _.sortBy(_.map(this.getCountries(), _.bind(function(country, countryKey){
+        var countryF = _.findWhere(this.included, {id: countryKey, type:'countries'});
+        return{
+          name: countryF.name,
+          id: countryF.id,
+          url: '/countries/'+countryF.id,
+          class: countryF.name.toLowerCase().replace(/\s/g, "-"),
+          count: country.length
+        }
+      }, this )), function(country){
+        return -country.count;
+      });
+    },
+
+    getDonorsBySectors: function(){
+
     }
 
   });
