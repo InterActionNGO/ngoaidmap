@@ -3,8 +3,9 @@
 define([
   'backbone',
   'handlebars',
+  'conexion/conexion',
   'text!templates/sidebarHighlights.handlebars'
-  ], function(Backbone, handlebars, tpl) {
+  ], function(Backbone, handlebars, conexion, tpl) {
 
   var SidebarHighlights = Backbone.View.extend({
 
@@ -13,14 +14,14 @@ define([
     template: Handlebars.compile(tpl),
 
     initialize: function() {
-      this.data = map_data;
+      this.conexion = conexion;
       this.render();
     },
 
     parseData: function(){
       return {
-        projectsLength: this.data.data.length.toLocaleString(),
-        organizationsLength: _.filter(this.data.included, function(include){ return include.type == 'organizations' }).length.toLocaleString()
+        projectsLength: this.conexion.getProjects().length.toLocaleString(),
+        organizationsLength: this.conexion.getOrganizations().length.toLocaleString()
       }
     },
 

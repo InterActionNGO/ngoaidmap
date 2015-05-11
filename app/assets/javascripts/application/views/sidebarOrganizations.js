@@ -1,11 +1,10 @@
 'use strict';
 
 define([
-  'jqueryui',
   'backbone',
   'handlebars',
   'text!templates/sidebarOrganizations.handlebars'
-  ], function(jqueryui,Backbone, handlebars, tpl) {
+  ], function(Backbone, handlebars, tpl) {
 
   var SidebarOrganizations = Backbone.View.extend({
 

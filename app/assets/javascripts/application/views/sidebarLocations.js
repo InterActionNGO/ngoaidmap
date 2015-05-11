@@ -1,11 +1,10 @@
 'use strict';
 
 define([
-  'jqueryui',
   'backbone',
   'handlebars',
   'text!templates/sidebarLocations.handlebars'
-  ], function(jqueryui,Backbone, handlebars, tpl) {
+  ], function(Backbone, handlebars, tpl) {
 
   var SidebarLocations = Backbone.View.extend({
 
@@ -40,31 +39,6 @@ define([
       var locationsTop3 = locations.slice(0,3);
       var otherLocations = _.reduce(locations.slice(3), function(memo, location){ return memo + location.count; }, 0);
       var values = _.map(locationsTop3, function(location){ return location.count });
-      values.push(otherLocations);
-
-      console.log(locationsTop3);
-      console.log(otherLocations);
-      console.log(values);
-
-
-
-
-      // var organizations = _.groupBy(_.flatten(_.map(projects, function(project){return project.links.organization.linkage})), function(organization){
-      //   return organization.id;
-      // });
-
-      // var organizationsByProjects = _.sortBy(_.map(organizations, function(organization, organizationKey){
-      //   var organizationF = _.findWhere(included, {id: organizationKey, type:'organizations'});
-      //   return{
-      //     name: organizationF.name,
-      //     id: organizationF.id,
-      //     url: '/organizations/'+organizationF.id,
-      //     class: organizationF.name.toLowerCase().replace(/\s/g, "-"),
-      //     count: organization.length
-      //   }
-      // }), function(organization){
-      //   return -organization.count;
-      // });
 
       return { locations: locationsTop3, other: otherLocations, values: values.join(',') };
     },

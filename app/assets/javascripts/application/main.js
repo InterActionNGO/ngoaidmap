@@ -9,6 +9,7 @@ require.config({
     underscore: '/app/vendor/underscore/underscore',
     underscoreString: '/app/vendor/underscore.string/lib/underscore.string',
     backbone: '/app/vendor/backbone/backbone',
+    Class: '/app/vendor/class.js/Class',
     select2: '/app/vendor/select2/select2',
     handlebars: '/app/vendor/handlebars/handlebars',
     highcharts: '/app/vendor/highcharts-release/highcharts',
@@ -53,6 +54,9 @@ require.config({
     chachiSlider: {
       deps: ['jquery'],
       exports: '$'
+    },
+    Class: {
+      exports: 'Class'
     }
   }
 
