@@ -71,4 +71,14 @@ class Project < ActiveRecord::Base
     projects = projects.group('projects.id', 'countries.id', 'regions.id', 'sectors.id', 'donors.id', 'organizations.id')
     projects.uniq
   end
+  ############################################## IATI ##############################################
+  def activity_status
+    if self.start_date > Time.now.in_time_zone
+      1
+    elsif self.end_date > Time.now.in_time_zone
+      2
+    else
+      3
+    end
+  end
 end
