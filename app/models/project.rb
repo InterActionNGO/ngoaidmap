@@ -72,7 +72,9 @@ class Project < ActiveRecord::Base
     projects = projects.group('projects.id', 'countries.id', 'regions.id', 'sectors.id', 'donors.id', 'organizations.id')
     projects.uniq
   end
+
   ############################################## IATI ##############################################
+
   def activity_status
     if self.start_date > Time.now.in_time_zone
       1
@@ -82,4 +84,38 @@ class Project < ActiveRecord::Base
       3
     end
   end
+
+  def activity_scope_code
+    geos = self.geolocations
+    if geos.present?
+      if geos.length == 1
+        activity_scope_code = case geos.first.adm_level
+                                when 0
+                                  4
+                                when 1
+                                  6
+                                when 2
+                                  7
+                                else
+                                  8
+                                end
+      elsif geos.pluck(:country_code).uniq.length > 1
+         activity_scope_code = 3
+      else
+        activity_scope_code = 5
+      end
+    else
+      activity_scope_code = 1
+    end
+    activity_scope_code
+  end
+
+  def iati_countries
+    self.geolocations.pluck(:country_code)
+  end
+
+  def iati_locations
+    self.geolocations.where('adm_level > 0')
+  end
+
 end
