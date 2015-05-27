@@ -8,7 +8,10 @@ module Api
 
       def show
         @project = Project.find(params[:id])
-        render json: @project, root: 'data', include: ['organization', 'sectors', 'donors', 'countries', 'regions']
+        respond_to do |format|
+          format.json {render json: @project, root: 'data', include: ['organization', 'sectors', 'donors', 'countries', 'regions']}
+          format.xml {@project}
+        end
       end
 
 

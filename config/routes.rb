@@ -12,6 +12,10 @@ Rails.application.routes.draw do
       resources :sectors, only: [:index, :show]
     end
   end
+
+  get 'iati/activities', to: 'api/v1/projects#index', format: 'xml'
+  get 'iati/activities/:id', to: 'api/v1/projects#show', format: 'xml'
+
   mount Raddocs::App => "/docs"
 
   # report page
