@@ -3,7 +3,7 @@ class SitesController < ApplicationController
   layout :sites_layout
 
   def home
-    map_data = APICache.get('projects1', :cache => 3600, timeout: 60) do
+    map_data = APICache.get('projects1', :cache => 3600, timeout: 120) do
       HTTParty.get('http://localhost:9292/projects')
     end
     @map_data = map_data.to_json
