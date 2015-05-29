@@ -3,8 +3,8 @@ class PagesController < ApplicationController
   before_filter :set_site_if_exists
 
   layout :sites_layout
-  caches_action :show, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
-  caches_action :pages, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
+  #caches_action :show, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
+  #caches_action :pages, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
 
   def show
     unless @page = pages.published.find_by_permalink(params[:id])
