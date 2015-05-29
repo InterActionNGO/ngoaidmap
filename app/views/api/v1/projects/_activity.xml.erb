@@ -7,7 +7,7 @@
    <narrative><%= project.name %></narrative>
   </title>
   <description type="1">
-   <narrative><%= project.description %></narrative>
+   <narrative><%= strip_tags(project.description) %></narrative>
   </description>
   <participating-org ref="TBC" role="4" type="TBC">
     <narrative><%= project.primary_organization.try(:name) %> </narrative>
@@ -66,7 +66,7 @@
       <narrative><%=l.name %>, <%= l.country_name %></narrative>
      </description>
      <activity-description>
-      <narrative><%= project.description %></narrative>
+      <narrative><%= strip_tags(project.description) %></narrative>
      </activity-description>
      <administrative vocabulary="G1" level="<%= l.adm_level %>" code="<%= l.geonameid %>" />
      <point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
