@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   unless Rails.application.config.consider_all_requests_local
     rescue_from ActiveRecord::RecordNotFound,   :with => :render_404
     rescue_from ActionController::RoutingError, :with => :render_404
-    rescue_from Iom::InvalidOffset,             :with => :render_404
     rescue_from NotFound,                       :with => :render_404
     rescue_from BrowserIsIE6OrLower,            :with => :old_browser
   end

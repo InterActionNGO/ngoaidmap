@@ -1,7 +1,7 @@
 namespace :db do
   desc "Populate locations projects relations"
   task petate: :environment do
-    if Rails.env == "development"
+    if Rails.env == "development" || Rails.env == "production" || Rails.env == "staging"
       ActiveRecord::Base.connection.execute("TRUNCATE geolocations_projects")
       puts 'old relations table dropped'
       projects = Project.all

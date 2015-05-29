@@ -19,6 +19,7 @@ gem 'pg'
 gem 'paperclip'
 gem 'httparty'
 gem 'api_cache'
+gem 'responders', '~> 2.0'
 group :development do
   gem 'foreman'
   gem 'puma'

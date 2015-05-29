@@ -1,13 +1,13 @@
 lock '3.4.0'
 
-set :application, 'ngo-front'
+set :application, 'ngo-v2'
 set :repo_url, 'git@github.com:Vizzuality/ngoaidmap.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 set :branch, 'master'
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/home/ubuntu/www/ngo-front'
+set :deploy_to, '/home/ubuntu/www/ngo-v2'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -44,13 +44,13 @@ set :assets_dependencies, %w(app/assets lib/asset/usr/local/rvm/bin/rvm's vendor
     end
   end
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      within release_path do
-        execute :rake, 'memcached:flush RAILS_ENV=production'
-      end
-    end
-  end
+  # after :restart, :clear_cache do
+  #   on roles(:web), in: :groups, limit: 3, wait: 10 do
+  #     within release_path do
+  #       execute :rake, 'memcached:flush RAILS_ENV=production'
+  #     end
+  #   end
+  # end
 
  # after :failed, :rollback
 

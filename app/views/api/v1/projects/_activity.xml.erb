@@ -1,4 +1,4 @@
-<iati-activity xml:lang="en" default-currency="USD" last-updated-datetime="2014-09-10T07:15:37Z" linked-data-uri="http://ngoaidmap.org/iati/activities/<%= project.id %>" hierarchy="1">
+<iati-activity xml:lang="en" default-currency="USD" last-updated-datetime="<%= Time.now.xmlschema %>" linked-data-uri="http://ngoaidmap.org/iati/activities/<%= project.id %>" hierarchy="1">
   <iati-identifier>TBC</iati-identifier>
   <reporting-org ref="TBC" type="TBC" secondary-reporter="0">
       <narrative>NGO Aid Map</narrative>
@@ -116,6 +116,5 @@
    <language code="en" />
   </document-link>
   <!--document-link ends-->
-  <activity-website><%= project.website %></activity-website>
  </iati-activity>
   <!--iati-activity ends-->

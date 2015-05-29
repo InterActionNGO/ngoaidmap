@@ -1,7 +1,7 @@
 class ClustersSectorsController < ApplicationController
 
   layout :sites_layout
-  caches_action :show, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
+  #caches_action :show, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
 
   def show
     if params[:location_id].present?
