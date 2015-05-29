@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Organizations API</title>
+    <title>Donors API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Organizations API</h1>
+      <h1>Donors API</h1>
 
       <div class="article">
-        <h2>Getting a list of organizations</h2>
-        <h3>GET /api/organizations</h3>
+        <h2>Getting a list of donors</h2>
+        <h3>GET /api/donors</h3>
 
 
 
@@ -123,12 +123,12 @@ Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/organizations</pre>
+          <pre class="request route highlight">GET /api/donors</pre>
 
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/organizations&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/donors&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.api+json&quot; \
 	-H &quot;Content-Type: application/vnd.api+json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
@@ -140,15 +140,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;de7c26291752aa3acb6803611602c576&quot;
+ETag: W/&quot;512a94ba3317fdbeaadce087b7758d1b&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 770642c8-eac4-4905-94de-5e25d11875a8
-X-Runtime: 0.008358
-Content-Length: 89</pre>
+X-Request-Id: ac6e2d58-ea52-49e5-867b-d2a216b13b2d
+X-Runtime: 0.011462
+Content-Length: 75</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;One Organization&quot;,&quot;type&quot;:&quot;organizations&quot;}],&quot;meta&quot;:{&quot;total&quot;:1}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;Red Cross&quot;,&quot;type&quot;:&quot;donors&quot;}],&quot;meta&quot;:{&quot;total&quot;:1}}</pre>
       </div>
     </div>
   </body>

@@ -7,6 +7,11 @@
           "description": "Get data for one donor",
           "link": "donors/get_data_for_one_donor.json",
           "groups": "all"
+        },
+        {
+          "description": "Getting a list of donors",
+          "link": "donors/getting_a_list_of_donors.json",
+          "groups": "all"
         }
       ]
     },
@@ -61,6 +66,16 @@
         {
           "description": "Getting a list of projects by sectors",
           "link": "projects/getting_a_list_of_projects_by_sectors.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of projects with a limit",
+          "link": "projects/getting_a_list_of_projects_with_a_limit.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of projects with an offset",
+          "link": "projects/getting_a_list_of_projects_with_an_offset.json",
           "groups": "all"
         }
       ]

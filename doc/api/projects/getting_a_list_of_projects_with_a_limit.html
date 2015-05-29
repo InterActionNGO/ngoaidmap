@@ -109,8 +109,8 @@ table th, table td {
       <h1>Projects API</h1>
 
       <div class="article">
-        <h2>Getting a list of projects by implementing organization</h2>
-        <h3>GET /api/projects?organizations[]=:organization</h3>
+        <h2>Getting a list of projects with a limit</h2>
+        <h3>GET /api/projects?limit=:limit</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -123,10 +123,10 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">organizations</span>
+                    <span class="name">limit</span>
                 </td>
                 <td>
-                  <span class="description">Array. Organization ids</span>
+                  <span class="description">Integer. An integer number representing the maximum number of projects</span>
                 </td>
               </tr>
             </tbody>
@@ -142,14 +142,14 @@ Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/projects?organizations[]=1</pre>
+          <pre class="request route highlight">GET /api/projects?limit=3</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">organizations: [&quot;1&quot;]</pre>
+            <pre class="request query_parameters highlight">limit: 3</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?organizations[]=1&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?limit=3&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.esios-api-v1+json&quot; \
 	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
@@ -161,15 +161,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;ce8560ce6b9931f7b752debc9f100a0b&quot;
+ETag: W/&quot;ee53f0304bb599a4c49cab9113d38577&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 02d3a693-7dca-483d-bd49-381e9f19d6f0
-X-Runtime: 0.033720
-Content-Length: 364</pre>
+X-Request-Id: c01d7234-f172-4729-97ea-6d0d7c50a239
+X-Runtime: 0.055893
+Content-Length: 893</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;project_with_organization&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:{&quot;type&quot;:&quot;organizations&quot;,&quot;id&quot;:&quot;1&quot;}},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;countries&quot;:{&quot;linkage&quot;:[]},&quot;regions&quot;:{&quot;linkage&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;One Organization&quot;,&quot;type&quot;:&quot;organizations&quot;}],&quot;meta&quot;:{&quot;total&quot;:{&quot;[1, nil, nil, nil, nil, 1]&quot;:1}}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;project_with_organization&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:{&quot;type&quot;:&quot;organizations&quot;,&quot;id&quot;:&quot;1&quot;}},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;countries&quot;:{&quot;linkage&quot;:[]},&quot;regions&quot;:{&quot;linkage&quot;:[]}}},{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;project_with_donor&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;countries&quot;:{&quot;linkage&quot;:[]},&quot;regions&quot;:{&quot;linkage&quot;:[]}}},{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;3&quot;,&quot;name&quot;:&quot;project_with_sector&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[{&quot;type&quot;:&quot;sectors&quot;,&quot;id&quot;:&quot;1&quot;}]},&quot;countries&quot;:{&quot;linkage&quot;:[]},&quot;regions&quot;:{&quot;linkage&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;One Organization&quot;,&quot;type&quot;:&quot;organizations&quot;},{&quot;type&quot;:&quot;sectors&quot;,&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;Agriculture&quot;}],&quot;meta&quot;:{&quot;total&quot;:{&quot;[2, nil, nil, nil, 1, nil]&quot;:1,&quot;[1, nil, nil, nil, nil, 1]&quot;:1,&quot;[3, nil, nil, 1, nil, nil]&quot;:1}}}</pre>
       </div>
     </div>
   </body>

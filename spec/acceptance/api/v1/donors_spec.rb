@@ -34,4 +34,19 @@ resource 'Donors' do
       expect(results['errors'].first['status']).to be == '404'
     end
   end
+
+  get "/api/donors" do
+    let!(:organizations) do
+      3.times do |o|
+        FactoryGirl.create(:organization, name: "donor#{o}")
+      end
+    end
+
+    example_request "Getting a list of donors" do
+      expect(status).to eq(200)
+      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      expect results.include?(['donor0',
+                               'donor1', 'donor2'])
+    end
+  end
 end

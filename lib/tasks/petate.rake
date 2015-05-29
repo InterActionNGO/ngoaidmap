@@ -4,7 +4,7 @@ namespace :db do
     if Rails.env == "development"
       ActiveRecord::Base.connection.execute("TRUNCATE geolocations_projects")
       puts 'old relations table dropped'
-      projects = Project.active
+      projects = Project.all
       geos = Geolocation.where('adm_level IS NOT NULL')
       g_size = geos.size
       p_size = projects.size

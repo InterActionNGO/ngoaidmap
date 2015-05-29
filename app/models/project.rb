@@ -68,6 +68,8 @@ class Project < ActiveRecord::Base
     projects = projects.regions(options[:regions])             if options[:regions]
     projects = projects.sectors(options[:sectors])             if options[:sectors]
     projects = projects.donors(options[:donors])               if options[:donors]
+    projects = projects.offset(options[:offset])               if options[:offset]
+    projects = projects.limit(options[:limit])                 if options[:limit]
     projects = projects.active
     projects = projects.group('projects.id', 'countries.id', 'regions.id', 'sectors.id', 'donors.id', 'organizations.id')
     projects.uniq
