@@ -23,7 +23,7 @@
 
 class MediaResource < ActiveRecord::Base
 
-  has_attached_file :picture, :styles: {
+  has_attached_file :picture, styles: {
                                       small: {
                                         geometry: "80x46#",
                                         format: 'jpg'

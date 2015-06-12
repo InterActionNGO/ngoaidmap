@@ -3,11 +3,13 @@ class SitesController < ApplicationController
   layout :sites_layout
 
   def home
-    map_data = APICache.get('projects1', :cache => 3600, timeout: 120) do
-      HTTParty.get('http://localhost:9292/projects')
-    end
-    @map_data = map_data.to_json
-    @map_data_max_count = 0
+    # map_data = APICache.get('projects1', :cache => 3600, timeout: 120) do
+    #   HTTParty.get('http://localhost:9292/projects')
+    # end
+    # @map_data = map_data.to_json
+    # @map_data_max_count = 0
+    @map_data = Project.fetch_all(projects_params)
+    @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
   end
 
   def downloads
@@ -42,6 +44,11 @@ class SitesController < ApplicationController
   end
 
   def contact
+  end
+
+  private
+  def projects_params
+    params.permit(organizations:[], countries:[], regions:[], sectors:[], donors:[], sectors:[])
   end
 
 

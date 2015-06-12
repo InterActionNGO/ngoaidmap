@@ -31,6 +31,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
+  gem 'kaminari'
 end
 group :development, :test do
   gem 'byebug'
