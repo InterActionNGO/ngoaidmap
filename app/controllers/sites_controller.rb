@@ -8,7 +8,9 @@ class SitesController < ApplicationController
     # end
     # @map_data = map_data.to_json
     # @map_data_max_count = 0
-    @map_data = Project.fetch_all(projects_params)
+    # @map_data = Project.fetch_all(projects_params).to_json
+    @map_data = ActiveModel::Serializer.new(Project.fetch_all(projects_params), each_serializer: ProjectSerializer).to_json
+    Rails.logger.info(@map_data)
     @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
   end
 
