@@ -10,7 +10,7 @@ class SitesController < ApplicationController
     # @map_data_max_count = 0
     # @map_data = Project.fetch_all(projects_params).to_json
     m = ActiveModel::Serializer::ArraySerializer.new(Project.fetch_all(projects_params), each_serializer: ProjectSerializer)
-    @map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m).to_json
+    @map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'countries', 'regions']).to_json
     @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
   end
 
