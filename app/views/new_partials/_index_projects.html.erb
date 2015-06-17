@@ -2,12 +2,13 @@
   <% unless @projects.empty? %>
     <ul>
       <% @projects.each do |project| %>
+        <script> var projects = <%= raw(@projects.to_json) %>; console.log(projects)</script>
         <li>
           <article class="mod-index-item">
-            <h2><a href="<%#= project_path(project['project_id']) %>"><%#= truncate(project['project_name'], :length=>60) %></a></h2>
-            <span><%#= subtitle(project, @site) %></span>
+            <h2><a href="<%= project_path(project['id']) %>"><%= truncate(project['name'], :length=>60) %></a></h2>
+            <span ><%#= subtitle(project, @site) %></span>
             <p>
-              <%#= anglo(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>")) %>
+              <%= html_truncate(project['description'], 175, :omission => "... <a href=\"#{project_path(project['id'])}\" class=\"learn_more\">Learn more</a>").html_safe %>
             </p>
           </article>
         </li>
@@ -23,21 +24,22 @@
     </ul>
   <% end %>
 </div>
-
-<% if @projects.total_pages > 1 %>
+<!--
+<%# if @projects.total_pages > 1 %>
   <div class="mod-pagination" id="projects_view_more">
     <ul>
-      <% if @projects.current_page > 1 %>
+      <%# if @projects.current_page > 1 %>
         <li>
-          <%= link_to('previous', pagination_link(previous_pagination_params), :id =>'previous') %>
+          <%#= link_to('previous', pagination_link(previous_pagination_params), :id =>'previous') %>
 
         </li>
-      <% end %>
-      <% if @projects.current_page < @projects.total_pages %>
+      <%# end %>
+      <%# if @projects.current_page < @projects.total_pages %>
         <li>
-          <%= link_to('next', pagination_link(next_pagination_params), :id =>'next') %>
+          <%#= link_to('next', pagination_link(next_pagination_params), :id =>'next') %>
         </li>
-      <% end %>
+      <%# end %>
     </ul>
   </div>
-<% end %>
+<%# end %>
+ -->

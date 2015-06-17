@@ -13,6 +13,7 @@ class SitesController < ApplicationController
     @map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'countries', 'regions']).to_json
     @map_data_max_count = 0;
     @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
+    puts Project.fetch_all(projects_params).page(params[:page]).per(10)
   end
 
   def downloads

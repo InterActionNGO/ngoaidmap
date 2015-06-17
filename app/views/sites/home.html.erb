@@ -31,9 +31,13 @@
           <h1 class="section-title">All projects</h1>
         </header>
 
-        <%#= render :partial => 'new_partials/downloads', :locals => { :csv_path => "/sites/download/#{@site.id}.csv", :xls_path => "/sites/download/#{@site.id}.xls", :kml_path => "/sites/download/#{@site.id}.kml" } %>
+        <%= render :partial => 'new_partials/downloads', :locals => {
+            :csv_path => "/sites/download/#{@site.id}.csv",
+            :xls_path => "/sites/download/#{@site.id}.xls",
+            :kml_path => "/sites/download/#{@site.id}.kml"
+        } %>
 
-        <%#= render "new_partials/index_projects" %>
+        <%= render "new_partials/index_projects" %>
 
       </section>
     </div>
