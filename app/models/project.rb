@@ -62,7 +62,7 @@ class Project < ActiveRecord::Base
   scope :regions, -> (regions){where(regions: {id: regions})}
 
   def self.fetch_all(options = {})
-    projects = Project.includes([:primary_organization]).eager_load(:countries, :regions, :sectors, :donors)
+    projects = Project.includes([:primary_organization]).eager_load(:countries, :regions, :sectors, :donors).references(:organizations)
     projects = projects.organizations(options[:organizations]) if options[:organizations]
     projects = projects.countries(options[:countries])         if options[:countries]
     projects = projects.regions(options[:regions])             if options[:regions]
