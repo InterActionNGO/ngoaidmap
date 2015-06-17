@@ -73,6 +73,7 @@ class Project < ActiveRecord::Base
     projects = projects.active
     projects = projects.group('projects.id', 'countries.id', 'regions.id', 'sectors.id', 'donors.id', 'organizations.id')
     projects.uniq
+    projects
   end
 
   ############################################## IATI ##############################################

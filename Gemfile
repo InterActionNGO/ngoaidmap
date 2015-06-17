@@ -31,7 +31,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
-  gem 'kaminari'
+  gem 'will_paginate', '~> 3.0.6'
 end
 group :development, :test do
   gem 'byebug'
