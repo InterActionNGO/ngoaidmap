@@ -3,17 +3,15 @@ class SitesController < ApplicationController
   layout :sites_layout
 
   def home
-    # map_data = APICache.get('projects1', :cache => 3600, timeout: 120) do
-    #   HTTParty.get('http://localhost:9292/projects')
-    # end
-    # @map_data = map_data.to_json
-    # @map_data_max_count = 0
-    # @map_data = Project.fetch_all(projects_params).to_json
     m = ActiveModel::Serializer::ArraySerializer.new(Project.fetch_all(projects_params), each_serializer: ProjectSerializer)
     @map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'countries', 'regions']).to_json
     @map_data_max_count = 0;
+<<<<<<< HEAD
     projects_count = Project.fetch_all(projects_params).length
     @projects = Project.fetch_all(projects_params).paginate(page: params[:page], per_page: 10, total_entries: projects_count)
+=======
+    @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
+>>>>>>> b995fb8023f82d89e027bfb26b0899ea1cb8c633
   end
 
   def downloads
