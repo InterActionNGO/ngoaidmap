@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_action :merge_params, on: :show
+  #before_action :merge_params, on: :show
   layout :sites_layout
   include ProjectsFiltering
 

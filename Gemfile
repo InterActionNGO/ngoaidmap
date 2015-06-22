@@ -21,7 +21,7 @@ gem 'httparty'
 gem 'api_cache'
 gem 'responders', '~> 2.0'
 gem 'dalli'
-gem 'will_paginate', '~> 3.0.6'
+gem 'kaminari'
 group :development do
   gem 'foreman'
   gem 'puma'

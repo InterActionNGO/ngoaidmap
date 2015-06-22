@@ -72,7 +72,7 @@ class Project < ActiveRecord::Base
     projects = projects.limit(options[:limit])                 if options[:limit]
     projects = projects.active
     projects = projects.group('projects.id', 'countries.id', 'regions.id', 'sectors.id', 'donors.id', 'organizations.id')
-    projects.uniq
+    projects = projects.uniq
     projects
   end
 
