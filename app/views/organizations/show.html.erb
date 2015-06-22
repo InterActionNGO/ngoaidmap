@@ -26,14 +26,11 @@
       <section class="layout-content">
 
         <header>
-          <!-- <h1 class="section-title"><%#= projects_list_subtitle %></h1> -->
-
-
-          <h1 class="section-title">Nombre organization</h1>
-          <%#= simple_format(@organization.description) if @organization.description.present? %>
+          <h1 class="section-title"><%= projects_list_subtitle %></h1>
+          <%= simple_format(@organization.description) if @organization.description.present? %>
         </header>
 
-        <%= render :partial => 'new_partials/downloads', :locals => { :csv_path => organization_path(@organization, @carry_on_filters.merge(:format => :csv)), :xls_path => organization_path(@organization, @carry_on_filters.merge(:format => :xls)), :kml_path => organization_path(@organization, @carry_on_filters.merge(:format => :kml)) } %>
+        <%#= render :partial => 'new_partials/downloads', :locals => { :csv_path => organization_path(@organization, @carry_on_filters.merge(:format => :csv)), :xls_path => organization_path(@organization, @carry_on_filters.merge(:format => :xls)), :kml_path => organization_path(@organization, @carry_on_filters.merge(:format => :kml)) } %>
 
         <%= render "new_partials/index_projects" %>
 

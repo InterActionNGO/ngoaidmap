@@ -6,7 +6,7 @@
         <li>
           <article class="mod-index-item">
             <h2><a href="<%= project_path(project['id']) %>"><%= truncate(project['name'], :length=>60) %></a></h2>
-            <span ><%#= subtitle(project, @site) %></span>
+            <span ><%= subtitle(project, @site) %></span>
             <p>
               <%= html_truncate(project['description'], 175, :omission => "... <a href=\"#{project_path(project['id'])}\" class=\"learn_more\">Learn more</a>").html_safe %>
             </p>

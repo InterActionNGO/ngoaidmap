@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-
+  before_action :merge_params, on: :show
   layout :sites_layout
   include ProjectsFiltering
 
@@ -11,6 +11,7 @@ class OrganizationsController < ApplicationController
   end
 
   def show
+    @organization = Organization.find(params[:id])
     # unless @organization = @site.organizations.select{ |org| org.id == params[:id].to_i }.first
     #   raise ActiveRecord::RecordNotFound
     # end
@@ -46,5 +47,7 @@ class OrganizationsController < ApplicationController
   def filter_by_category_valid?
     @filter_by_category.present? && @filter_by_category.to_i > 0
   end
-
+  def merge_params
+    params.merge({organizations: [params[:id]]})
+  end
 end
