@@ -1,6 +1,8 @@
 class OrganizationsController < ApplicationController
 
   layout :sites_layout
+  include ProjectsFiltering
+
   #caches_action :index, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
   #caches_action :show, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
 
