@@ -20,6 +20,8 @@ gem 'paperclip'
 gem 'httparty'
 gem 'api_cache'
 gem 'responders', '~> 2.0'
+gem 'dalli'
+gem 'will_paginate', '~> 3.0.6'
 group :development do
   gem 'foreman'
   gem 'puma'
@@ -31,7 +33,6 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
-  gem 'will_paginate', '~> 3.0.6'
 end
 group :development, :test do
   gem 'byebug'
