@@ -14,4 +14,8 @@ module ProjectsFiltering
     projects_count = Project.fetch_all(projects_params).length
     @projects = Project.fetch_all(projects_params).paginate(page: params[:page], per_page: 10, total_entries: projects_count)
   end
+  private
+  def projects_params
+    params.permit(:page, organizations:[], countries:[], regions:[], sectors:[], donors:[], sectors:[])
+  end
 end

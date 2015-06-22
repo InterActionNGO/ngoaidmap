@@ -44,10 +44,7 @@ class SitesController < ApplicationController
   def contact
   end
 
-  private
-  def projects_params
-    params.permit(:page, organizations:[], countries:[], regions:[], sectors:[], donors:[], sectors:[])
-  end
+
 
 
 end
