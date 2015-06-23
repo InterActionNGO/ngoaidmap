@@ -25,5 +25,5 @@
   <% end %>
 </div>
 <div class="mod-pagination">
-  <%= paginate(@projects, total_count: @projects_count, remote: true) %>
+  <%= paginate(@projects, total_pages: (@projects_count/10).ceil, remote: true) %>
 </div>

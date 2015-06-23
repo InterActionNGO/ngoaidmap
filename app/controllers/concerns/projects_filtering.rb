@@ -13,7 +13,6 @@ module ProjectsFiltering
     @map_data_max_count = 0;
     @projects_count = Project.fetch_all(projects_params).uniq.length
     @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
-    puts "*******************************************************#{@projects_count}"
   end
   private
   def projects_params
