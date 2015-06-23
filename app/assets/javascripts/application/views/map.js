@@ -10,99 +10,59 @@ define([
   ], function(_, Backbone, LayersView, MapTypeView) {
 
   var stylesArray = [{
-    'featureType': 'landscape.natural',
-    'elementType': 'geometry',
-    'stylers': [{
-      'saturation': -81
+      'featureType': 'landscape.natural',
+      'elementType': 'geometry',
+      'stylers': [
+        {
+          'saturation': -81
+        }, {
+          'gamma': 1.57
+        }
+      ]
     }, {
-      'gamma': 1.57
-    }]
-  }, {
-    'featureType': 'water',
-    'elementType': 'geometry',
-    'stylers': [{
-      'color': '#016d90'
+      'featureType': 'water',
+      'elementType': 'geometry',
+      'stylers': [
+        {
+          'color': '#016d90'
+        }, {
+          'saturation': -44
+        }, {
+          'gamma': 2.75
+        }
+      ]
     }, {
-      'saturation': -44
-    }, {
-      'gamma': 2.75
-    }]
-  }, {
-    'featureType': 'road',
-    'stylers': [{
-      'saturation': -100
-    }, {
-      'gamma': 2.19
-    }]
-  }];
+      'featureType': 'road',
+      'stylers': [
+        {
+          'saturation': -100
+        }, {
+          'gamma': 2.19
+        }
+      ]
+    }
+  ];
 
   var map, bounds, currentLayer;
 
   var sprintf = _.str.sprintf;
 
   function old() {
-    var MERCATOR_RANGE = 256;
 
-    function bound(value, opt_min, opt_max) {
-      if (opt_min !== null) {
-        value = Math.max(value, opt_min);
+    function setDiameter(diameters, bounds, i){
+      var count = map_data_parse[i].count;
+      if (count < bounds[0]) {
+        diameter = diameters[0];
+      } else if ((count >= bounds[0]) && (count < bounds[1])) {
+        diameter = diameters[1];
+      } else if ((count >= bounds[1]) && (count < bounds[2])) {
+        diameter = diameters[2];
+      } else if ((count >= bounds[2]) && (count < bounds[3])) {
+        diameter = diameters[3];
+      } else {
+        diameter = diameters[1];
       }
-      if (opt_max !== null) {
-        value = Math.min(value, opt_max);
-      }
-      return value;
     }
-
-    function degreesToRadians(deg) {
-      return deg * (Math.PI / 180);
-    }
-
-    function radiansToDegrees(rad) {
-      return rad / (Math.PI / 180);
-    }
-
-    function MercatorProjection() {
-      this.pixelOrigin_ = new google.maps.Point(MERCATOR_RANGE / 2, MERCATOR_RANGE / 2);
-      this.pixelsPerLonDegree_ = MERCATOR_RANGE / 360;
-      this.pixelsPerLonRadian_ = MERCATOR_RANGE / (2 * Math.PI);
-    }
-
-    MercatorProjection.prototype.fromLatLngToPoint = function(latLng, opt_point) {
-      var me = this;
-
-      var point = opt_point || new google.maps.Point(0, 0);
-
-      var origin = me.pixelOrigin_;
-      point.x = origin.x + latLng.lng() * me.pixelsPerLonDegree_;
-      // NOTE(appleton): Truncating to 0.9999 effectively limits latitude to
-      // 89.189.  This is about a third of a tile past the edge of the world tile.
-      var siny = bound(Math.sin(degreesToRadians(latLng.lat())), -0.9999, 0.9999);
-      point.y = origin.y + 0.5 * Math.log((1 + siny) / (1 - siny)) * -me.pixelsPerLonRadian_;
-      return point;
-    };
-
-    MercatorProjection.prototype.fromDivPixelToLatLng = function(pixel, zoom) {
-      var me = this;
-
-      var origin = me.pixelOrigin_;
-      var scale = Math.pow(2, zoom);
-      var lng = (pixel.x / scale - origin.x) / me.pixelsPerLonDegree_;
-      var latRadians = (pixel.y / scale - origin.y) / -me.pixelsPerLonRadian_;
-      var lat = radiansToDegrees(2 * Math.atan(Math.exp(latRadians)) - Math.PI / 2);
-      return new google.maps.LatLng(lat, lng);
-    };
-
-    MercatorProjection.prototype.fromDivPixelToSphericalMercator = function(pixel, zoom) {
-      var me = this;
-      var coord = me.fromDivPixelToLatLng(pixel, zoom);
-
-      var r = 6378137.0;
-      var x = r * degreesToRadians(coord.lng());
-      var latRad = degreesToRadians(coord.lat());
-      var y = (r / 2) * Math.log((1 + Math.sin(latRad)) / (1 - Math.sin(latRad)));
-
-      return new google.maps.Point(x, y);
-    };
 
     function IOMParser(map_data_parse){
       var projectsByCountry = _.groupBy(map_data_parse.data, function(project){ return project.links.countries.linkage[0].id });
@@ -435,78 +395,31 @@ define([
       }
     });
 
+    var diametersCount = {
+      diameter: [20,26,34,42,26],
+      bounds:{
+        force_site: [5,10,18,30],
+        overview_map: [25,50,90,130],
+        administrative_map: [range,range*2,range*3,range*4]
+      }
+    }
+
 
     var countriesAndRegions = (_.where(map_data_parse, {code: null}).length > 0);
-
     // Markers
     for (var i = 0; i < map_data_parse.length; i++) {
-      // var image_source = '';
-      var classname = 'marker-bubble';
-
       if (document.URL.indexOf('force_site_id=3') >= 0) {
-        if (map_data_parse[i].count < 5) {
-          diameter = 20;
-          //image_source = '/app/images/themes/' + theme + '/marker_2.png';
-        } else if ((map_data_parse[i].count >= 5) && (map_data_parse[i].count < 10)) {
-          diameter = 26;
-          //image_source = '/app/images/themes/' + theme + '/marker_3.png';
-        } else if ((map_data_parse[i].count >= 10) && (map_data_parse[i].count < 18)) {
-          diameter = 34;
-          //image_source = '/app/images/themes/' + theme + '/marker_4.png';
-        } else if ((map_data_parse[i].count >= 18) && (map_data_parse[i].count < 30)) {
-          diameter = 42;
-          //image_source = '/app/images/themes/' + theme + '/marker_5.png';
-        } else {
-          diameter = 26;
-          //image_source = '/app/images/themes/' + theme + '/marker_6.png';
-        }
+        setDiameter(diametersCount.diameter, diametersCount.bounds['force_site'],i);
       } else if (map_type === 'overview_map') {
-        if (map_data_parse[i].count < 25) {
-          diameter = 20;
-          //image_source = '/app/images/themes/' + theme + '/marker_2.png';
-        } else if ((map_data_parse[i].count >= 25) && (map_data_parse[i].count < 50)) {
-          diameter = 26;
-          // image_source = '/app/images/themes/' + theme + '/marker_3.png';
-        } else if ((map_data_parse[i].count >= 50) && (map_data_parse[i].count < 90)) {
-          diameter = 34;
-          // image_source = '/app/images/themes/' + theme + '/marker_4.png';
-        } else if ((map_data_parse[i].count >= 90) && (map_data_parse[i].count < 130)) {
-          diameter = 42;
-          // image_source = '/app/images/themes/' + theme + '/marker_5.png';
-        } else {
-          diameter = 26;
-          // image_source = '/app/images/themes/' + theme + '/marker_6.png';
-        }
+        setDiameter(diametersCount.diameter, diametersCount.bounds['overview_map'],i);
       } else if (map_type === 'administrative_map') {
-        if (map_data_parse[i].count < range) {
-          diameter = 20;
-          // image_source = '/app/images/themes/' + theme + '/marker_2.png';
-        } else if ((map_data_parse[i].count >= range) && (map_data_parse[i].count < (range * 2))) {
-          diameter = 26;
-          // image_source = '/app/images/themes/' + theme + '/marker_3.png';
-        } else if ((map_data_parse[i].count >= (range * 2)) && (map_data_parse[i].count < (range * 3))) {
-          diameter = 34;
-          // image_source = '/app/images/themes/' + theme + '/marker_4.png';
-        } else if ((map_data_parse[i].count >= (range * 3)) && (map_data_parse[i].count < (range * 4))) {
-          diameter = 42;
-          // image_source = '/app/images/themes/' + theme + '/marker_5.png';
-        } else {
-          diameter = 26;
-          // image_source = '/app/images/themes/' + theme + '/marker_6.png';
-        }
+        setDiameter(diametersCount.diameter, diametersCount.bounds['administrative_map'],i);
       } else {
         diameter = 34;
         classname = 'marker-project-bubble';
-        // image_source = '/app/images/themes/' + theme + '/project_marker.png';
       }
 
-      new IOMMarker(map_data_parse[i], diameter, classname, map);
-
-      // if (!countriesAndRegions) {
-      //   new IOMMarker(map_data_parse[i], diameter, classname, map);
-      // } else if (countriesAndRegions && !map_data_parse[i].code) {
-      //   new IOMMarker(map_data_parse[i], diameter, classname, map);
-      // }
+      new IOMMarker(map_data_parse[i], diameter, 'marker-bubble', map);
 
       bounds.extend(new google.maps.LatLng(map_data_parse[i].lat, map_data_parse[i].lon));
     }
@@ -521,25 +434,16 @@ define([
       }, 300);
     }
 
-    $('#zoomOut').click(function(e) {
-      e.preventDefault();
-      map.setZoom(map.getZoom() - 1);
-    });
-
-    $('#zoomIn').click(function(e) {
-      e.preventDefault();
-      map.setZoom(map.getZoom() + 1);
-    });
   }
 
   var MapView = Backbone.View.extend({
 
     el: '#mapView',
 
-    // events: {
-    //   'click #map': 'resizeMap',
-    //   'mouseleave': 'resetMap'
-    // },
+    events: {
+      'click #zoomOut': 'zoomOut',
+      'click #zoomIn': 'zoomIn'
+    },
 
     initialize: function() {
       if (this.$el.length === 0) {
@@ -602,6 +506,16 @@ define([
     block: function(e) {
       e.preventDefault();
       return false;
+    },
+
+    zoomIn: function(e){
+      e.preventDefault();
+      map.setZoom(map.getZoom() + 1);
+    },
+
+    zoomOut: function(e){
+      e.preventDefault();
+      map.setZoom(map.getZoom() - 1);
     }
 
   });
