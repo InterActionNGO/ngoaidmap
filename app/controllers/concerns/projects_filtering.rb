@@ -2,6 +2,7 @@ module ProjectsFiltering
   extend ActiveSupport::Concern
   require 'digest/sha1'
   included do
+    before_action :merge_params,  only: [:home, :show]
     before_action :get_projects,  only: [:home, :show]
   end
   def get_projects
@@ -17,5 +18,11 @@ module ProjectsFiltering
   private
   def projects_params
     params.permit(:page, organizations:[], countries:[], regions:[], sectors:[], donors:[], sectors:[])
+  end
+  def merge_params
+    params.merge!({organizations: [params[:id]]}) if controller_name == 'organizations'
+    params.merge!({donors: [params[:id]]}) if controller_name == 'donors'
+    params.merge!({sectors: [params[:id]]}) if controller_name == 'sectors'
+    params.merge!({countries: [params[:id]]}) if controller_name == 'countries'
   end
 end
