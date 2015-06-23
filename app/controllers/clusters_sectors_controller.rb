@@ -4,7 +4,7 @@ class ClustersSectorsController < ApplicationController
   layout :sites_layout
 
   def show
-
+    @sector = Sector.find(params[:id])
   end
 
 end

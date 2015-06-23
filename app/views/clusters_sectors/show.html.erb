@@ -7,66 +7,35 @@
     <div class="grid-4">
       <aside class="layout-sidebar">
 
-      <div class="mod-highlighted-results">
-        <%= render 'new_partials/aside/projects' %>
-      </div>
+        <!-- Highlighted results -->
+        <div id="sidebar-highlights" class="mod-highlighted-results mod-info"></div>
 
-        <% unless @filter_by_location.present? || @data.projects_regions(@site).empty?%>
-          <div class="project-locations mod-info">
-            <h3>project locations</h3>
-            <div class="mod-project-locations">
-              <%= raw(projects_by_location(@site, @data.projects_countries(@site))) %>
-            </div>
-          </div>
-        <% end %>
+        <!-- Projects locations -->
+        <div id="sidebar-locations" class="mod-info"></div>
 
-        <div class="donors-in-this-country mod-info" id="donorsSidebarView">
-          <h3>Donors in this <%= @site.word_for_cluster_sector.singularize %></h3>
-          <% unless @data.donors(@site).empty? %>
-            <ul id="donors_list">
-              <% index = 1 %>
-              <% @data.donors(@site).each do |donor| %>
-                <li<% if (index > 10) %> class="out is-hidden"<% end %>><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
-                <% index = index + 1 %>
-              <% end %>
-              <% if @data.donors(@site).length > 10 %>
-                <a href="#donors" id="moreDonorsBtn">See more donors</a>
-              <% end %>
-            </ul>
-          <% else %>
-            <p>The are no donors</p>
-          <% end %>
-        </div>
+        <!-- Sectors by projects -->
+        <div id="sidebar-sectors" class="project-sectors mod-info"></div>
 
-        <% unless @site.projects_sectors_or_clusters.empty? %>
-          <div class="project-sectors mod-info">
-            <h3>Other sectors</h3>
-            <div class="mod-project-sectors">
-              <ul id="clustersView">
-                <% @site.projects_sectors_or_clusters.each do |category, count| %>
-                  <% next if category == @data %>
-                  <% unless category.name.eql?('N/A') %>
-                    <li>
-                      <a class="<%= category.css_class %> icon_statistics" title="<%= category.name %>" href="<%= url_for(category) %>" data-value="<%= count %>"><span class="aller"><%= count %></span></a>
-                    </li>
-                  <% end %>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        <% end %>
+        <!-- Sectors by projects -->
+        <div id="sidebar-donors" class="project-donors mod-info"></div>
 
+
+        <script> var sector = <%= raw(@sector.to_json) %>; console.log('** sector **'); console.log(sector); console.log('** ********* **')</script>
       </aside>
     </div>
 
     <div class="grid-12 offset-1">
-      <section class="layout-content" id="content">
+      <section class="layout-content">
 
-          <h1 class="section-title"><%= clusters_sectors_projects_list_subtitle %></h1>
+        <header>
+          <h1 class="section-title"><%= @sector.name %></h1>
+          <!-- <h1 class="section-title"><%#= projects_list_subtitle %></h1> -->
+          <%#= simple_format(@organization.description) if @organization.description.present? %>
+        </header>
 
-          <%= render :partial => 'new_partials/downloads', :locals => { :csv_path => @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :csv)) : sector_path(@data, @carry_on_filters.merge(:format => :csv)), :xls_path => @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :xls)) : sector_path(@data, @carry_on_filters.merge(:format => :xls)), :kml_path => @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :kml)) : sector_path(@data, @carry_on_filters.merge(:format => :kml)) } %>
+        <%#= render :partial => 'new_partials/downloads', :locals => { :csv_path => organization_path(@organization, @carry_on_filters.merge(:format => :csv)), :xls_path => organization_path(@organization, @carry_on_filters.merge(:format => :xls)), :kml_path => organization_path(@organization, @carry_on_filters.merge(:format => :kml)) } %>
 
-          <%= render "new_partials/index_projects" %>
+        <%= render "new_partials/index_projects" %>
 
       </section>
     </div>
