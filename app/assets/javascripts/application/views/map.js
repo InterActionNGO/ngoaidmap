@@ -1,7 +1,13 @@
 /*global google,map_type,map_data_parse:true,map_center,kind,map_zoom,MAP_EMBED,show_regions_with_one_project,max_count,empty_layer,globalPage,page*/
 'use strict';
 
-define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
+define([
+  'underscore',
+  'backbone',
+  'views/layersView',
+  'views/mapTypeView',
+  'underscoreString'
+  ], function(_, Backbone, LayersView, MapTypeView) {
 
   var stylesArray = [{
     'featureType': 'landscape.natural',
@@ -30,7 +36,7 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
     }]
   }];
 
-  var map, bounds;
+  var map, bounds, currentLayer;
 
   var sprintf = _.str.sprintf;
 
@@ -369,31 +375,7 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
 
     var global_index = 10;
 
-    /**
-     * @constructor
-     * @implements {google.maps.MapType}
-     */
-    function EmptyMapType() {}
-
-    EmptyMapType.prototype.tileSize = new google.maps.Size(256, 256);
-    EmptyMapType.prototype.maxZoom = 19;
-
-    EmptyMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
-      var div = ownerDocument.createElement('div');
-      div.style.width = this.tileSize.width + 'px';
-      div.style.height = this.tileSize.height + 'px';
-      div.style.fontSize = '10';
-      div.style.borderWidth = '0';
-      div.style.backgroundColor = '#91abcd';
-      return div;
-    };
-
-    EmptyMapType.prototype.name = 'Void';
-    EmptyMapType.prototype.alt = 'A empty tile';
-
-    var emptyMapType = new EmptyMapType();
-
-    var latlng, zoom, mapOptions, cartodbOptions, currentLayer, $layerSelector, legends, $legendWrapper, $mapTypeSelector, layerActive;
+    var latlng, zoom, mapOptions, cartodbOptions, currentLayer, legends, layerActive;
 
     if (map_type === 'project_map') {
       latlng = new google.maps.LatLng(map_center[0], map_center[1]);
@@ -402,10 +384,6 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
       latlng = new google.maps.LatLng(28.576419976370865, 0.5943599084500972);
       zoom = 2;
     }
-
-    $layerSelector = $('#layerSelector');
-    $mapTypeSelector = $('#mapTypeSelector');
-    $legendWrapper = $('#legendWrapper');
 
     mapOptions = {
       zoom: zoom,
@@ -428,174 +406,16 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
     //   });
     // }
 
-    cartodbOptions = {
-      user_name: 'ngoaidmap',
-      type: 'cartodb',
-      cartodb_logo: true,
-      legends: false,
-      sublayers: [{
-        sql: 'SELECT * from ne_10m_admin_0_countries',
-        cartocss: '#ne_10m_admin_0_countries{}'
-      }]
-    };
-
-    legends = {
-      red: {
-        left: '0%',
-        right: '100%',
-        colors: ['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#b10026']
-      },
-      blue: {
-        left: '0%',
-        right: '100%',
-        colors: ['#f0f9e8', '#ccebc5', '#a8ddb5', '#7bccc4', '#4eb3d3', '#2b8cbe', '#08589e']
-      },
-      green: {
-        left: '0%',
-        right: '100%',
-        colors: ['#edf8fb', '#ccece6', '#99d8c9', '#66c2a4', '#41ae76', '#238b45', '#005824']
-      }
-    };
 
     bounds = new google.maps.LatLngBounds();
 
-    var sublayer;
-
-    function onSelectLayer(e) {
-      var $el = $(e.currentTarget);
-      var $emptyLayer = $('#emptyLayer');
-
-      var currentTable = $el.data('table');
-      var currentMin = $el.data('min');
-      var currentMax = $el.data('max');
-      var currentUnits = $el.data('units');
-      var layerStyle = $el.data('style');
-      var currentDiff;
-
-      $legendWrapper.html('');
-
-      if ($el.data('layer') === 'none' && currentLayer.getSubLayer(0)) {
-        sublayer = currentLayer.getSubLayer(0);
-        sublayer.setSQL('SELECT * from ne_10m_admin_0_countries');
-        sublayer.setCartoCSS('#ne_10m_admin_0_countries{}');
-      }
-
-      if (window.sessionStorage) {
-        window.sessionStorage.setItem('layer', $el.attr('id'));
-      }
-
-      layerActive = false;
-
-      if (currentTable) {
-
-        var currentLegend;
-
-        switch (layerStyle) {
-          case 'yellow-to-red':
-            currentLegend = legends.red;
-            break;
-          case 'light-to-green':
-            currentLegend = legends.green;
-            break;
-          case 'yellow-to-blue':
-            currentLegend = legends.blue;
-            break;
-          default:
-            currentLegend = legends.red;
-        }
-
-
-        var choroplethLegend = new cdb.geo.ui.Legend.Choropleth(_.extend(currentLegend, {
-          title: $el.data('layer'),
-          left: currentMin + currentUnits,
-          right: currentMax + currentUnits
-        }));
-
-        currentMin = Number(currentMin);
-        currentMax = Number(currentMax);
-        currentDiff = currentMax + currentMin;
-
-        var currentCSS = sprintf('#%1$s{line-color: #ffffff; line-opacity: 1; line-width: 1; polygon-opacity: 0.8;}', currentTable);
-        var c_len = currentLegend.colors.length;
-
-        _.each(currentLegend.colors, function(c, i) {
-          currentCSS = currentCSS + sprintf(' #%1$s [data <= %3$s] {polygon-fill: %2$s;}', currentTable, currentLegend.colors[c_len - i - 1], (((currentDiff / c_len) * (c_len - i)) - currentMin).toFixed(1));
-        });
-
-        var stackedLegend = new cdb.geo.ui.Legend.Stacked({
-          legends: [choroplethLegend]
-        });
-
-        var iconHtml = sprintf('%1$s <a href="#" class="infowindow-pop" data-overlay="%2$s"><span class="icon-info"></span></a>', $el.data('layer'), $el.data('overlay'));
-        var infowindowHtml = sprintf('<div class="cartodb-popup light"><a href="#close" class="cartodb-popup-close-button close">x</a><div class="cartodb-popup-content-wrapper"><div class="cartodb-popup-content"><h2>{{content.data.country_name}}</h2><p class="infowindow-layer">%s<p><p><span class="infowindow-data">{{#content.data.data}}{{content.data.data}}</span>%s{{/content.data.data}}{{^content.data.data}}No data{{/content.data.data}}</p><p class="data-year">{{content.data.year}}</p></div></div><div class="cartodb-popup-tip-container"></div></div>', iconHtml, $el.data('units'));
-
-        sublayer = currentLayer.getSubLayer(0);
-
-        if (sublayer) {
-          sublayer.remove();
-        }
-
-        sublayer = currentLayer.createSubLayer({
-          sql: 'SELECT ' + currentTable + '.country_name, ' + currentTable + '.code, ' + currentTable + '.year,' + currentTable + '.data, ne_10m_admin_0_countries.the_geom, ne_10m_admin_0_countries.the_geom_webmercator FROM ' + currentTable + ' join ne_10m_admin_0_countries on ' + currentTable + '.code=ne_10m_admin_0_countries.adm0_a3_is',
-          cartocss: currentCSS,
-          interaction: 'country_name, data, year',
-        });
-
-        sublayer.on();
-
-        $('.infowindow-pop').unbind('click');
-
-        var infowindow = cdb.vis.Vis.addInfowindow(map, sublayer, ['country_name', 'data', 'year'], {
-          infowindowTemplate: infowindowHtml
-        });
-
-        infowindow.model.on('change:visibility', function(model) {
-          if (model.get('visibility')) {
-            $('.infowindow-pop').click(function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-
-              $($(e.currentTarget).data('overlay')).fadeIn();
-            });
-          }
-        });
-
-        sublayer.setInteraction(true);
-
-        layerActive = true;
-
-        $legendWrapper.html(stackedLegend.render().$el);
-      }
-
-      if (layerActive) {
-        if (window.sessionStorage && window.sessionStorage.getItem('type')) {
-          $('#' + window.sessionStorage.getItem('type')).trigger('click');
-        }
-        $emptyLayer.removeClass('is-hidden').find('a').trigger('click');
-      } else {
-        $emptyLayer.addClass('is-hidden').next().find('a').trigger('click');
-      }
-
-      $layerSelector.find('.current-selector').html($el.html());
-    }
-
     var range;
-
-    if (empty_layer) {
-      window.sessionStorage.setItem('layer', '');
-    }
-
-    $layerSelector = $('#layerSelector');
-    $mapTypeSelector = $('#mapTypeSelector');
-    $legendWrapper = $('#legendWrapper');
 
     if ($('#map').length > 0) {
       map = new google.maps.Map(document.getElementById('map'), mapOptions);
     } else {
       map = new google.maps.Map(document.getElementById('small_map'), mapOptions);
     }
-
-    map.mapTypes.set('EMPTY', emptyMapType);
 
     if (map_type === 'administrative_map') {
       range = max_count / 5;
@@ -615,21 +435,6 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
       }
     });
 
-    // Cartodb
-    cartodb.createLayer(map, cartodbOptions)
-      .addTo(map, map.overlayMapTypes.length)
-      .on('done', function(layer) {
-        currentLayer = layer;
-        currentLayer.on('error', function(err) {
-          console.log(err);
-        });
-        if (window.sessionStorage && window.sessionStorage.getItem('layer')) {
-          $('#' + window.sessionStorage.getItem('layer')).trigger('click');
-        }
-      })
-      .on('error', function(err) {
-        console.log(err);
-      });
 
     var countriesAndRegions = (_.where(map_data_parse, {code: null}).length > 0);
 
@@ -716,35 +521,6 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
       }, 300);
     }
 
-    // Layer selector
-    $layerSelector.find('a').click(function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      onSelectLayer(e);
-    });
-
-    $layerSelector.find('.icon-info').click(function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      $($(e.currentTarget).parent().data('overlay')).fadeIn();
-    });
-
-    $mapTypeSelector.find('a').click(function(e) {
-      e.preventDefault();
-      var $current = $(e.currentTarget);
-      var type = $current.data('type');
-      if (type === 'EMPTY') {
-        map.setMapTypeId(type);
-      } else {
-        map.setMapTypeId(google.maps.MapTypeId[type]);
-      }
-      $mapTypeSelector.find('.current-selector').text($current.text());
-      if (window.sessionStorage) {
-        window.sessionStorage.setItem('type', $current.attr('id'));
-      }
-    });
-
     $('#zoomOut').click(function(e) {
       e.preventDefault();
       map.setZoom(map.getZoom() - 1);
@@ -754,7 +530,6 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
       e.preventDefault();
       map.setZoom(map.getZoom() + 1);
     });
-
   }
 
   var MapView = Backbone.View.extend({
@@ -780,6 +555,8 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
 
       // this.resizeMap();
 
+      this.initViews();
+
       if (this.$el.hasClass('layout-embed-map')) {
         this.undelegateEvents();
       } else {
@@ -791,6 +568,11 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
           }
         });
       }
+    },
+
+    initViews: function(){
+      new MapTypeView(map);
+      new LayersView(map);
     },
 
     resizeMap: function() {
