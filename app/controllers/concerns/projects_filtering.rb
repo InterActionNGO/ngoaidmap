@@ -11,8 +11,9 @@ module ProjectsFiltering
     m = ActiveModel::Serializer::ArraySerializer.new(Project.fetch_all(projects_params), each_serializer: ProjectSerializer)
     @map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'countries', 'regions']).to_json
     @map_data_max_count = 0;
-    projects_count = Project.fetch_all(projects_params).length
-    @projects = Project.fetch_all(projects_params).paginate(page: params[:page], per_page: 10, total_entries: projects_count)
+    @projects_count = Project.fetch_all(projects_params).uniq.length
+    @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
+    puts "*******************************************************#{@projects_count}"
   end
   private
   def projects_params

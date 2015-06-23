@@ -1,5 +1,5 @@
 class ProjectSerializer < ActiveModel::Serializer
-  # cache key: "project_#{object.id}", expires_in: 3.hours
+  #cache key: "project_#{object.id}", expires_in: 3.hours
   attributes :type, :id, :name, :description
   has_one :organization, serializer: OrganizationPreviewSerializer
   has_many :sectors, serializer: SectorPreviewSerializer
