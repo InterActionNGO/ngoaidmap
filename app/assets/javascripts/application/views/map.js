@@ -778,16 +778,16 @@ define(['underscore', 'backbone', 'underscoreString'], function(_, Backbone) {
 
       old();
 
-      this.resizeMap();
+      // this.resizeMap();
 
       if (this.$el.hasClass('layout-embed-map')) {
         this.undelegateEvents();
       } else {
         $w.on('resize', function() {
           if (self.active) {
-            self.resizeMap();
+            // self.resizeMap();
           } else {
-            self.resetMap();
+            // self.resetMap();
           }
         });
       }
