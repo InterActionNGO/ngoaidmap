@@ -8,17 +8,23 @@
       <aside class="layout-sidebar">
 
         <!-- Highlighted results -->
-        <div id="sidebar-highlights" class="mod-highlighted-results"></div>
+        <div id="sidebar-highlights" class="mod-highlighted-results mod-info"></div>
 
         <!-- Sectors by projects -->
         <div id="sidebar-sectors" class="project-sectors mod-info"></div>
 
         <!-- Projects locations -->
-        <div id="sidebar-locations"></div>
+        <div id="sidebar-locations" class="mod-info"></div>
 
-        <!-- Organizations by projects -->
-        <div id="sidebar-organizations"></div>
+        <!-- Organization Sidebar -->
+        <div id="sidebar-organization-infocontact" class="mod-info"></div>
+        <div id="sidebar-organization-donationcontact" class="mod-info"></div>
+        <div id="sidebar-organization-mediacontact" class="mod-info"></div>
+        <div id="sidebar-organization-followus" class="mod-info"></div>
 
+
+
+        <script> var organization = <%= raw(@organization.to_json) %>; console.log('** organization **'); console.log(organization); console.log('** ********* **')</script>
       </aside>
     </div>
 

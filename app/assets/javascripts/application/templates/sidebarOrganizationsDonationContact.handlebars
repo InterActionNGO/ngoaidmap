@@ -1,0 +1,11 @@
+<div class="contact-info">
+  <h3>Donation contact information</h3>
+  <div class="mod-contact-info">
+    {{#if donation_address}}<h4>{{donation_address}}</h4>{{/if}}
+    {{#if city}}<p class="inline">{{city}},</p>{{/if}}
+    {{#if zip_code}}<p class="inline">{{zip_code}},</p>{{/if}}
+    {{#if state}}<p class="inline">{{state}},</p>{{/if}}
+    {{#if donation_phone_number}}<p>{{donation_phone_number}}</p>{{/if}}
+    {{#if donation_website}}<p><a href="{{donation_website}}" target="blank" class="donations-website">Donations website</a></p>{{/if}}
+  </div>
+</div>

@@ -1,0 +1,27 @@
+{{#if sozial}}
+<div class="follow-us">
+  {{#if logo}}
+    {{#if website}}
+      <a href="{{website}}"><img alt="Medium" class="organization-logo" src="/system/logos/{{id}}/{{logo}}"></a>
+    {{ else }}
+      <img alt="Medium" class="organization-logo" src="/system/logos/83/medium.jpg?1351174130">
+    {{/if}}
+  {{/if}}
+  {{#if sozial}}
+  <div class="mod-follow-us">
+    {{#if website}}<a href="{{website}}" class="website">Organization website</a>{{/if}}
+    <ul>
+      {{#if twitter}}
+        <li><a href="{{twitter}}" class="twitter" target="_blank"> </a></li>
+      {{/if}}
+      {{#if facebook}}
+        <li><a href="{{facebook}}" class="facebook" target="_blank"> </a></li>
+      {{/if}}
+      {{#if contact_email}}
+        <li><a href="mailto:{{contact_email}}" class="email" target="_blank"> </a></li>
+      {{/if}}
+    </ul>
+  </div>
+  {{/if}}
+</div>
+{{/if}}
