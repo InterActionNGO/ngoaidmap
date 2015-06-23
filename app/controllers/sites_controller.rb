@@ -1,13 +1,8 @@
 class SitesController < ApplicationController
-
   layout :sites_layout
+  include ProjectsFiltering
 
   def home
-    map_data = APICache.get('projects1', :cache => 3600, timeout: 60) do
-      HTTParty.get('http://localhost:9292/projects')
-    end
-    @map_data = map_data.to_json
-    @map_data_max_count = 0
   end
 
   def downloads
@@ -43,6 +38,8 @@ class SitesController < ApplicationController
 
   def contact
   end
+
+
 
 
 end

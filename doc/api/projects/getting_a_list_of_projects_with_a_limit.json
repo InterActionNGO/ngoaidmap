@@ -1,0 +1,49 @@
+{
+  "resource": "Projects",
+  "http_method": "GET",
+  "route": "/api/projects?limit=:limit",
+  "description": "Getting a list of projects with a limit",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "limit",
+      "description": "Integer. An integer number representing the maximum number of projects"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/projects?limit=3",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.esios-api-v1+json",
+        "Content-Type": "application/json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "limit": "3"
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"1\",\"name\":\"project_with_organization\",\"description\":null,\"links\":{\"organization\":{\"linkage\":{\"type\":\"organizations\",\"id\":\"1\"}},\"sectors\":{\"linkage\":[]},\"countries\":{\"linkage\":[]},\"regions\":{\"linkage\":[]}}},{\"type\":\"projects\",\"id\":\"2\",\"name\":\"project_with_donor\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"countries\":{\"linkage\":[]},\"regions\":{\"linkage\":[]}}},{\"type\":\"projects\",\"id\":\"3\",\"name\":\"project_with_sector\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[{\"type\":\"sectors\",\"id\":\"1\"}]},\"countries\":{\"linkage\":[]},\"regions\":{\"linkage\":[]}}}],\"included\":[{\"id\":\"1\",\"name\":\"One Organization\",\"type\":\"organizations\"},{\"type\":\"sectors\",\"id\":\"1\",\"name\":\"Agriculture\"}],\"meta\":{\"total\":{\"[2, nil, nil, nil, 1, nil]\":1,\"[1, nil, nil, nil, nil, 1]\":1,\"[3, nil, nil, 1, nil, nil]\":1}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"ee53f0304bb599a4c49cab9113d38577\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "c01d7234-f172-4729-97ea-6d0d7c50a239",
+        "X-Runtime": "0.055893",
+        "Content-Length": "893"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?limit=3\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

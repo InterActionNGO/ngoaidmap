@@ -72,4 +72,7 @@ class Organization < ActiveRecord::Base
   has_many :donations, through: :projects
   has_one :user
   scope :active, -> {joins(:projects).where("projects.end_date IS NULL OR (projects.end_date > ? AND projects.start_date < ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
+  def projects_count
+    self.projects.size
+  end
 end

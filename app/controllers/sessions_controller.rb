@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  include AuthenticatedSystem
+  #include AuthenticatedSystem
 
   def new
     redirect_back_or_default(admin_admin_path) and return if logged_in?

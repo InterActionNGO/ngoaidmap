@@ -422,6 +422,7 @@ define([
     }
     var diameter = 0;
 
+    console.log(map_data);
     var map_data_parse = IOMParser(map_data);
 
     // If region exist, reject a country object
@@ -552,9 +553,7 @@ define([
 
       old();
 
-
-
-      this.resizeMap();
+      // this.resizeMap();
 
       this.initViews();
 
@@ -563,9 +562,9 @@ define([
       } else {
         $w.on('resize', function() {
           if (self.active) {
-            self.resizeMap();
+            // self.resizeMap();
           } else {
-            self.resetMap();
+            // self.resetMap();
           }
         });
       }

@@ -19,6 +19,38 @@ resource 'Projects' do
     end
   end
 
+  get "/api/projects?offset=:offset" do
+    parameter :offset, "Integer. An integer number representing the number of projects from where to start the collection"
+    let(:offset) {7}
+    let!(:projects) do
+      10.times do |p|
+        FactoryGirl.create(:project, name: "project#{p}")
+      end
+    end
+
+    example_request "Getting a list of projects with an offset" do
+      expect(status).to eq(200)
+      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      expect results.include?(['project8', 'project9', 'project10'])
+    end
+  end
+
+  get "/api/projects?limit=:limit" do
+    parameter :limit, "Integer. An integer number representing the maximum number of projects"
+    let(:limit) {3}
+    let!(:projects) do
+      10.times do |p|
+        FactoryGirl.create(:project, name: "project#{p}")
+      end
+    end
+
+    example_request "Getting a list of projects with a limit" do
+      expect(status).to eq(200)
+      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      expect results.include?(['project1', 'project2', 'project3'])
+    end
+  end
+
   get "/api/projects?organizations[]=:organization" do
     parameter :organizations, "Array. Organization ids"
     p = FactoryGirl.create(:project, name: "project_with_organization")

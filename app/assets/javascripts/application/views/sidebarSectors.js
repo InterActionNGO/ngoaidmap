@@ -14,6 +14,9 @@ define([
     template: Handlebars.compile(tpl),
 
     initialize: function() {
+      if (!this.$el.length) {
+        return
+      }
       this.data = map_data;
       this.render();
     },

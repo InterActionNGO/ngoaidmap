@@ -42,6 +42,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :regions
   has_and_belongs_to_many :countries
   has_and_belongs_to_many :tags
+  has_and_belongs_to_many :geolocations
   #has_many :resources, :conditions => proc {"resources.element_type = #{Iom::ActsAsResource::PROJECT_TYPE}"}, :foreign_key => :element_id, :dependent => :destroy
   #has_many :media_resources, :conditions => proc {"media_resources.element_type = #{Iom::ActsAsResource::PROJECT_TYPE}"}, :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   has_many :donations, :dependent => :destroy
@@ -61,14 +62,63 @@ class Project < ActiveRecord::Base
   scope :regions, -> (regions){where(regions: {id: regions})}
 
   def self.fetch_all(options = {})
-    projects = Project.includes([:primary_organization]).eager_load(:countries, :regions, :sectors, :donors)
+    projects = Project.includes([:primary_organization]).eager_load(:countries, :regions, :sectors, :donors).references(:organizations)
     projects = projects.organizations(options[:organizations]) if options[:organizations]
     projects = projects.countries(options[:countries])         if options[:countries]
     projects = projects.regions(options[:regions])             if options[:regions]
     projects = projects.sectors(options[:sectors])             if options[:sectors]
     projects = projects.donors(options[:donors])               if options[:donors]
+    projects = projects.offset(options[:offset])               if options[:offset]
+    projects = projects.limit(options[:limit])                 if options[:limit]
     projects = projects.active
     projects = projects.group('projects.id', 'countries.id', 'regions.id', 'sectors.id', 'donors.id', 'organizations.id')
-    projects.uniq
+    projects = projects.uniq
+    projects
   end
+
+  ############################################## IATI ##############################################
+
+  def activity_status
+    if self.start_date > Time.now.in_time_zone
+      1
+    elsif self.end_date > Time.now.in_time_zone
+      2
+    else
+      3
+    end
+  end
+
+  def activity_scope_code
+    geos = self.geolocations
+    if geos.present?
+      if geos.length == 1
+        activity_scope_code = case geos.first.adm_level
+                                when 0
+                                  4
+                                when 1
+                                  6
+                                when 2
+                                  7
+                                else
+                                  8
+                                end
+      elsif geos.pluck(:country_code).uniq.length > 1
+         activity_scope_code = 3
+      else
+        activity_scope_code = 5
+      end
+    else
+      activity_scope_code = 1
+    end
+    activity_scope_code
+  end
+
+  def iati_countries
+    self.geolocations.pluck(:country_code)
+  end
+
+  def iati_locations
+    self.geolocations.where('adm_level > 0')
+  end
+
 end

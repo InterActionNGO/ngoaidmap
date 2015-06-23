@@ -1,7 +1,7 @@
 class GeoregionController < ApplicationController
 
   layout :sites_layout
-  caches_action :show, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
+  #caches_action :show, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
 
   skip_before_filter :set_site, :only => [:list_regions1_from_country,:list_regions2_from_country,:list_regions3_from_country]
 

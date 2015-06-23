@@ -7,11 +7,15 @@ Rails.application.routes.draw do
     #scope module: :v1, constraints: APIVersion.new(version: 1) do
     scope module: :v1 do
       resources :projects, only: [:index, :show]
-      resources :donors, only: [:show]
+      resources :donors, only: [:index, :show]
       resources :organizations, only: [:index, :show]
       resources :sectors, only: [:index, :show]
     end
   end
+
+  get 'iati/activities', to: 'api/v1/projects#index', format: 'xml'
+  get 'iati/activities/:id', to: 'api/v1/projects#show', format: 'xml'
+
   mount Raddocs::App => "/docs"
 
   # report page
