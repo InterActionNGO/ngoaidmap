@@ -48,6 +48,6 @@ class OrganizationsController < ApplicationController
     @filter_by_category.present? && @filter_by_category.to_i > 0
   end
   def merge_params
-    params.merge({organizations: [params[:id]]})
+    params.merge!({organizations: [params[:id]]})
   end
 end
