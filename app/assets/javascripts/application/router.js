@@ -17,7 +17,13 @@ define([
   'views/sidebarSectors',
   'views/sidebarLocations',
   'views/sidebarOrganizations',
-], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView, TimelineView, DonorsSidebarView, GalleryView, SidebarHighlights, SidebarSectors, SidebarLocations, SidebarOrganizations) {
+  'views/sidebarOrganizationsInfoContact',
+  'views/sidebarOrganizationsDonationContact',
+  'views/sidebarOrganizationsMediaContact',
+  'views/sidebarOrganizationsFollowUs'
+], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView, TimelineView,
+  DonorsSidebarView, GalleryView, SidebarHighlights, SidebarSectors, SidebarLocations, SidebarOrganizations,
+  SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs) {
 
   var Router = Backbone.Router.extend({
 
@@ -58,6 +64,12 @@ define([
       new SidebarSectors();
       new SidebarLocations();
       new SidebarOrganizations();
+
+      // Organization sidebars
+      new SidebarOrganizationsInfoContact();
+      new SidebarOrganizationsDonationContact();
+      new SidebarOrganizationsMediaContact();
+      new SidebarOrganizationsFollowUs();
     },
 
     project: function() {

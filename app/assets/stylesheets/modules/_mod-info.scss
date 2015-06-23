@@ -2,6 +2,7 @@
   border-bottom: 3px solid $color-4;
   padding-bottom: 20px;
   margin-bottom: 30px;
+  @include clearfix();
   &:last-child {
     border-bottom: 0;
   }
