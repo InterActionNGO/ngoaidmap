@@ -39,8 +39,27 @@ define([
 
   IOMMarker.prototype = new google.maps.OverlayView();
 
-  IOMMarker.prototype.setStyles = function() {
+  IOMMarker.prototype.setStyles = function(div) {
+    var fontByDiameters = {
+      20: 10,
+      26: 11,
+      34: 12,
+      42: 15
+    }
+    var count = document.createElement('p');
+    var fSize = fontByDiameters[this.diameter] || 18;
+    count.style.position = 'absolute';
+    count.style.top = '0%';
+    count.style.left = '0%';
+    count.style.width = '100%';
+    count.style.height = '100%';
+    count.style.textAlign = 'center';
+    count.style.margin = 0;
+    count.style.font = 'normal '+fSize+'px Arial';
+    count.style.lineHeight = this.diameter +'px';
 
+    $(count).text(this.count);
+    div.appendChild(count);
   }
 
   IOMMarker.prototype.draw = function() {
@@ -59,57 +78,11 @@ define([
 
       try {
         if (show_regions_with_one_project) {
-          var count = document.createElement('p');
-          count.style.position = 'absolute';
-          count.style.top = '50%';
-          count.style.left = '50%';
-          count.style.height = '15px';
-          count.style.textAlign = 'center';
-          if (this.diameter === 20) {
-            count.style.margin = '-6px 0 0 0px';
-            count.style.font = 'normal 10px Arial';
-          } else if (this.diameter === 26) {
-            count.style.margin = '-6px 0 0 0px';
-            count.style.font = 'normal 11px Arial';
-          } else if (this.diameter === 34) {
-            count.style.margin = '-7px 0 0 0px';
-            count.style.font = 'normal 12px Arial';
-          } else if (this.diameter === 42) {
-            count.style.margin = '-7px 0 0 0px';
-            count.style.font = 'normal 15px Arial';
-          } else {
-            count.style.margin = '-9px 0 0 0px';
-            count.style.font = 'normal 18px Arial';
-          }
-          $(count).text(this.count);
-          div.appendChild(count);
+          this.setStyles(div);
         }
       } catch (e) {
         if (this.count > 1) {
-          var count = document.createElement('p');
-          count.style.position = 'absolute';
-          count.style.top = '50%';
-          count.style.left = '50%';
-          count.style.height = '15px';
-          count.style.textAlign = 'center';
-          if (this.diameter === 20) {
-            count.style.margin = '-6px 0 0 0px';
-            count.style.font = 'normal 10px Arial';
-          } else if (this.diameter === 26) {
-            count.style.margin = '-6px 0 0 0px';
-            count.style.font = 'normal 11px Arial';
-          } else if (this.diameter === 34) {
-            count.style.margin = '-7px 0 0 0px';
-            count.style.font = 'normal 12px Arial';
-          } else if (this.diameter === 42) {
-            count.style.margin = '-7px 0 0 0px';
-            count.style.font = 'normal 15px Arial';
-          } else {
-            count.style.margin = '-9px 0 0 0px';
-            count.style.font = 'normal 18px Arial';
-          }
-          $(count).text(this.count);
-          div.appendChild(count);
+          this.setStyles(div);
         }
       }
 
@@ -221,11 +194,11 @@ define([
       var panes = this.getPanes();
       panes.floatPane.appendChild(div);
 
-      if (($(this.div_).children('p').width() + 6) > this.width_) {
-        $(this.div_).children('p').css('display', 'none');
-      } else {
-        $(this.div_).children('p').css('margin-left', -($(this.div_).children('p').width() / 2) + 'px');
-      }
+      // if (($(this.div_).children('p').width() + 6) > this.width_) {
+      //   $(this.div_).children('p').css('display', 'none');
+      // } else {
+      //   $(this.div_).children('p').css('margin-left', -($(this.div_).children('p').width() / 2) + 'px');
+      // }
 
     }
 
