@@ -4,7 +4,7 @@ define([
   'backbone',
   'handlebars',
   'abstract/conexion',
-  'text!templates/sidebarLocations.handlebars'
+  'text!templates/sidebar/sidebarLocations.handlebars'
   ], function(Backbone, handlebars, conexion, tpl) {
 
   var SidebarLocations = Backbone.View.extend({
