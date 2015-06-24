@@ -3,7 +3,7 @@
 define([
   'backbone',
   'handlebars',
-  'views/sidebarOrganizationsClass',
+  'views/sidebar/sidebarOrganizationsClass',
   'text!templates/sidebarOrganizationsDonationContact.handlebars'
   ], function(Backbone, handlebars, SidebarOrganizationsClass, tpl) {
 

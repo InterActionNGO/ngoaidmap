@@ -60,7 +60,7 @@ define([
       } else if ((count >= bounds[2]) && (count < bounds[3])) {
         diameter = diameters[3];
       } else {
-        diameter = diameters[1];
+        diameter = diameters[4];
       }
     }
 
@@ -404,8 +404,6 @@ define([
       }
     }
 
-
-    var countriesAndRegions = (_.where(map_data_parse, {code: null}).length > 0);
     // Markers
     for (var i = 0; i < map_data_parse.length; i++) {
       if (document.URL.indexOf('force_site_id=3') >= 0) {
