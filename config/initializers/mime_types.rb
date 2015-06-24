@@ -2,7 +2,5 @@
 
 # Add new mime types for use in respond_to blocks:
 # Mime::Type.register "text/richtext", :rtf"
-Mime::Type.register "text/csv", :csv
 Mime::Type.register "application/vnd.google-earth.kml+xml", :kml
 Mime::Type.register "application/vnd.ms-excel", :xls
-Mime::Type.register "application/xml", :xml
