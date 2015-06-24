@@ -3,7 +3,7 @@
 define([
   'backbone',
   'handlebars',
-  'conexion/conexion',
+  'abstract/conexion',
   'text!templates/sidebarLocations.handlebars'
   ], function(Backbone, handlebars, conexion, tpl) {
 
