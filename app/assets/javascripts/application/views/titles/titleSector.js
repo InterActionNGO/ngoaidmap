@@ -1,15 +1,16 @@
 'use strict';
 
 define([
-  'jqueryui',
+  'jquery',
   'backbone',
   'handlebars',
-  'text!templates/sidebar/sidebarDonors.handlebars'
-  ], function(jqueryui,Backbone, handlebars, tpl) {
+  'abstract/conexion',
+  'text!templates/titles/titleSector.handlebars'
+  ], function(jquery, Backbone, handlebars, conexion, tpl) {
 
-  var SidebarDonors = Backbone.View.extend({
+  var TitleSector = Backbone.View.extend({
 
-    el: '#sidebar-donors',
+    el: '#title-sector',
 
     template: Handlebars.compile(tpl),
 
@@ -17,29 +18,45 @@ define([
       if (!this.$el.length) {
         return
       }
-      this.data = map_data;
+      this.conexion = conexion;
       this.render();
     },
 
     parseData: function(){
-      // var projects = this.data.data;
-      // var included = this.data.included;
+      var countP = this.conexion.getProjects().length;
+      var countC = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'countries' }).length;
+      var projects = this.projectString(countP);
+      var countries = this.countryString(countC);
 
-      // var donors = _.groupBy(_.flatten(_.map(projects, function(project){return project.links.donors.linkage})), function(donor){
-      //   return donor.id;
-      // });
+      return {
+        name: projects,
+        country: countries
+      }
+    },
 
-      // return { donors: donors };
+    projectString: function(count){
+      if (count == 1) {
+        return count.toLocaleString() +' '+ this.$el.data('name') +' project';
+      }else{
+        return count.toLocaleString() +' '+ this.$el.data('name') +' projects';
+      }
+    },
+
+    countryString: function(count){
+      if (count == 1) {
+        return _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'countries' })[0].name
+      }else{
+        return count.toLocaleString() +' countries'
+      }
     },
 
     render: function(){
-      // this.$el.html(this.template(this.parseData()));
-      this.$el.remove();
+      this.$el.html(this.template(this.parseData()));
     },
 
 
   });
 
-  return SidebarDonors;
+  return TitleSector;
 
 });
