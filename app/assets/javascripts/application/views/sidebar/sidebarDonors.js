@@ -4,8 +4,9 @@ define([
   'jqueryui',
   'backbone',
   'handlebars',
+  'services/sidebarService',
   'text!templates/sidebar/sidebarDonors.handlebars'
-  ], function(jqueryui,Backbone, handlebars, tpl) {
+  ], function(jqueryui,Backbone, handlebars, service, tpl) {
 
   var SidebarDonors = Backbone.View.extend({
 
@@ -17,8 +18,18 @@ define([
       if (!this.$el.length) {
         return
       }
-      this.data = map_data;
+
+      service.execute('donors-by-sector', _.bind(this.successSidebar, this ), _.bind(this.errorSidebar, this ));
+    },
+
+    successSidebar: function(data){
+      console.log(data);
+      this.data = data.data;
       this.render();
+    },
+
+    errorSidebar: function(){
+      this.$el.remove();
     },
 
     parseData: function(){
@@ -29,12 +40,11 @@ define([
       //   return donor.id;
       // });
 
-      // return { donors: donors };
+      return { donors: this.data };
     },
 
     render: function(){
-      // this.$el.html(this.template(this.parseData()));
-      this.$el.remove();
+      this.$el.html(this.template(this.parseData()));
     },
 
 

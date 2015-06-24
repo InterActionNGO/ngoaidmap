@@ -1,9 +1,9 @@
 /**
- * SidebarService provides access to information about countries.
+ * SidebarService provides access to information about sibebars.
  */
 define([
   'Class',
-  'services/dataService'
+  'services/dataService',
 ], function (Class, ds) {
 
   'use strict';
@@ -11,7 +11,7 @@ define([
   var SidebarService = Class.extend({
 
     requests: {
-      'sectors-all' : '/api/sectors?include=projects_count'
+      'sectors-all' : '/api/sectors?include=projects_count',
     },
 
     /**
@@ -20,6 +20,7 @@ define([
      * @return {SidebarService} instance
      */
     init: function() {
+      this._defineRequestsByPlace();
       this._defineRequests();
     },
 
@@ -33,15 +34,19 @@ define([
      */
     _defineRequests: function() {
       _.each(this.requests, _.bind(function(v, k){
-        console.log(v,k);
         var cache = this._cacheConfig;
         var config = {cache: cache, url: v};
         ds.define(k, config);
       }, this ))
-
     },
 
-    execute: function(id,successCb, failureCb) {
+    _defineRequestsByPlace: function(){
+      if (!!window.sector) {
+        this.requests['donors-by-sector'] = _.str.sprintf('/api/sectors/%s?only=donors', sector.id)
+      }
+    },
+
+    execute: function(id, successCb, failureCb, data) {
       var config = {
         resourceId: id,
         success: successCb,
