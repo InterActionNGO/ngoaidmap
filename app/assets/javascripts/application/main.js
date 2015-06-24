@@ -8,6 +8,7 @@ require.config({
     jquery: '/app/vendor/jquery/dist/jquery',
     underscore: '/app/vendor/underscore/underscore',
     underscoreString: '/app/vendor/underscore.string/lib/underscore.string',
+    amplify: '/app/vendor/amplify/lib/amplify',
     backbone: '/app/vendor/backbone/backbone',
     Class: '/app/vendor/class.js/Class',
     select2: '/app/vendor/select2/select2',
@@ -57,6 +58,9 @@ require.config({
     },
     Class: {
       exports: 'Class'
+    },
+    amplify: {
+      exports: 'amplify'
     }
   }
 

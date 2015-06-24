@@ -17,6 +17,7 @@ define([
   //Sidebar
   'views/sidebar/sidebarHighlights',
   'views/sidebar/sidebarSectors',
+  'views/sidebar/sidebarSectorsAll',
   'views/sidebar/sidebarLocations',
   'views/sidebar/sidebarDonors',
   'views/sidebar/sidebarOrganizations',
@@ -25,7 +26,7 @@ define([
   'views/sidebar/sidebarOrganizationsMediaContact',
   'views/sidebar/sidebarOrganizationsFollowUs'
 ], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView, TimelineView,
-  GalleryView, TitleSector, SidebarHighlights, SidebarSectors, SidebarLocations, SidebarDonors, SidebarOrganizations,
+  GalleryView, TitleSector, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs) {
 
   var Router = Backbone.Router.extend({
@@ -64,6 +65,7 @@ define([
       new LayerOverlayView();
       new SidebarHighlights();
       new SidebarSectors();
+      new SidebarSectorsAll();
       new SidebarLocations();
       new SidebarOrganizations();
       new SidebarDonors();
