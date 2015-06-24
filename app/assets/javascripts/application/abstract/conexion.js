@@ -31,14 +31,14 @@ define([
       return this.countries
     },
 
-    getLocationsByCountry: function(){
+    getLocationsByCountry: function(filter){
       return _.sortBy(_.map(this.getCountries(), _.bind(function(country, countryKey){
         var countryF = _.findWhere(this.included, {id: countryKey, type:'countries'});
         return {
           count: country.length,
           id: countryF.id,
           name: countryF.name,
-          url: '/location/' + countryF.id
+          url: (filter) ? location.href+'?location_id[]='+ countryF.id : '/location/' + countryF.id
         }
       }, this )), function(country){
         return -country.count;
