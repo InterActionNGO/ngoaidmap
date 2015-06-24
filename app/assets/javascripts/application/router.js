@@ -12,17 +12,17 @@ define([
   'views/layer-overlay',
   'views/timeline',
   'views/gallery',
-  'views/sidebarHighlights',
-  'views/sidebarSectors',
-  'views/sidebarLocations',
-  'views/sidebarOrganizations',
-  'views/sidebarDonors',
-  'views/sidebarOrganizationsInfoContact',
-  'views/sidebarOrganizationsDonationContact',
-  'views/sidebarOrganizationsMediaContact',
-  'views/sidebarOrganizationsFollowUs'
+  'views/sidebar/sidebarHighlights',
+  'views/sidebar/sidebarSectors',
+  'views/sidebar/sidebarLocations',
+  'views/sidebar/sidebarDonors',
+  'views/sidebar/sidebarOrganizations',
+  'views/sidebar/sidebarOrganizationsInfoContact',
+  'views/sidebar/sidebarOrganizationsDonationContact',
+  'views/sidebar/sidebarOrganizationsMediaContact',
+  'views/sidebar/sidebarOrganizationsFollowUs'
 ], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView, TimelineView,
-  GalleryView, SidebarHighlights, SidebarSectors, SidebarLocations, SidebarOrganizations, SidebarDonors,
+  GalleryView, SidebarHighlights, SidebarSectors, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs) {
 
   var Router = Backbone.Router.extend({
