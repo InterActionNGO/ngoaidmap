@@ -24,7 +24,8 @@ define([
 
     parseData: function(){
       var organizationsByProjects = this.conexion.getOrganizationByProjects();
-      return { organizations: organizationsByProjects.slice(0, 9) };
+      organizationsByProjects = _.map(organizationsByProjects.slice(0, 40), function(v){ v.name = _.unescape(v.name); return v;});
+      return { organizations: organizationsByProjects };
     },
 
     render: function(){

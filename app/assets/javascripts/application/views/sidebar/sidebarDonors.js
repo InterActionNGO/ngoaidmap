@@ -14,6 +14,10 @@ define([
 
     template: Handlebars.compile(tpl),
 
+    events: {
+      'click #see-more-donors' : 'toggleDonors'
+    },
+
     initialize: function() {
       if (!this.$el.length) {
         return
@@ -23,7 +27,6 @@ define([
     },
 
     successSidebar: function(data){
-      console.log(data);
       this.data = data.data;
       this.render();
     },
@@ -32,20 +35,25 @@ define([
       this.$el.remove();
     },
 
-    parseData: function(){
-      // var projects = this.data.data;
-      // var included = this.data.included;
+    parseData: function(more){
+      // Prepare data to render
 
-      // var donors = _.groupBy(_.flatten(_.map(projects, function(project){return project.links.donors.linkage})), function(donor){
-      //   return donor.id;
-      // });
+      var data_to_render;
+      data_to_render = (more) ? this.data : this.data.slice(0,10);
+      data_to_render = _.map(data_to_render, function(v){ v.name = _.unescape(v.name); return v;});
 
-      return { donors: this.data };
+      return { donors: data_to_render, see_more: !more };
     },
 
-    render: function(){
-      this.$el.html(this.template(this.parseData()));
+    render: function(more){
+      this.$el.html(this.template(this.parseData(!!more)));
     },
+
+    // Events
+    toggleDonors: function(e){
+      e && e.preventDefault();
+      this.render(true);
+    }
 
 
   });

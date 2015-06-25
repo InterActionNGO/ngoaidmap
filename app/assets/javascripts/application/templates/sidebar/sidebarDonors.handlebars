@@ -3,4 +3,7 @@
   {{#each donors}}
     <li><a href="/donors/{{this.id}}">{{this.name}}</a></li>
   {{/each}}
+  {{#if see_more}}
+    <li><a id="see-more-donors" href="#">See more donors</a></li>
+  {{/if}}
 </div>
