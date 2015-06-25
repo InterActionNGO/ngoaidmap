@@ -18,6 +18,7 @@ define([
         return
       }
       this.data = map_data;
+      this.nofilter = !!this.$el.data('nofilter');
       this.render();
 
     },
@@ -30,16 +31,16 @@ define([
         return sector.id;
       });
 
-      var sectorsByProjects = _.sortBy(_.map(sectors, function(sector, sectorKey){
+      var sectorsByProjects = _.sortBy(_.map(sectors, _.bind(function(sector, sectorKey){
         var sectorF = _.findWhere(included, {id: sectorKey, type:'sectors'});
         return{
           name: sectorF.name,
           id: sectorF.id,
-          url: '/sectors/'+sectorF.id,
+          url: (this.nofilter) ? '/sectors/'+sectorF.id : this.setUrl('category_id',sectorF.id),
           class: sectorF.name.toLowerCase().replace(/\s/g, "-"),
           count: sector.length
         }
-      }), function(sector){
+      },this)), function(sector){
         return -sector.count;
       });
 
@@ -50,6 +51,10 @@ define([
 
 
       return { sectors: sectorsByProjects };
+    },
+
+    setUrl: function(param_name, id){
+      return (location.search) ? location.href+'&'+param_name+'='+id : location.href+'?'+param_name+'='+id;
     },
 
     render: function(){

@@ -24,12 +24,18 @@ define([
 
     parseData: function(){
 
-
       var locationsTop3 = this.locations.slice(0,3);
       var otherLocations = _.reduce(this.locations.slice(3), function(memo, location){ return memo + location.count; }, 0);
       var values = _.map(locationsTop3, function(location){ return location.count });
-
-      return { locations: locationsTop3, other: otherLocations, values: values.join(',') };
+      var othersVisibility = (this.locations.length > 3) ? true : false;
+      var chartVisibility = (this.locations.length > 1) ? true : false;
+      return {
+        locations: locationsTop3,
+        other: otherLocations,
+        values: values.join(','),
+        othersVisibility: othersVisibility,
+        chartVisibility: chartVisibility
+      };
     },
 
     render: function(){

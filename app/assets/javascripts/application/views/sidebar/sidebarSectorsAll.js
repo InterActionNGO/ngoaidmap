@@ -44,7 +44,7 @@ define([
       }), function(sector){
         return -sector.count;
       });
-      return { sectors: sectorsByProjects };
+      return { sectors: sectorsByProjects, all: true };
     },
 
     render: function(){
