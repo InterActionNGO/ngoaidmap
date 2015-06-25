@@ -23,8 +23,10 @@ define([
     },
 
     parseData: function(){
+      this.countries = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'countries' });
+
       var countP = this.conexion.getProjects().length;
-      var countC = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'countries' }).length;
+      var countC = this.countries.length;
       var projects = this.projectString(countP);
       var countries = this.countryString(countC);
 
@@ -44,7 +46,7 @@ define([
 
     countryString: function(count){
       if (count == 1) {
-        return _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'countries' })[0].name
+        return this.countries[0].name
       }else{
         return count.toLocaleString() +' countries'
       }

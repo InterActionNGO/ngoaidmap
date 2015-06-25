@@ -19,6 +19,7 @@ define([
       }
       this.data = map_data;
       this.render();
+
     },
 
     parseData: function(){
@@ -41,6 +42,12 @@ define([
       }), function(sector){
         return -sector.count;
       });
+
+      if (sectorsByProjects.length == 1) {
+        this.$el.remove();
+        return
+      }
+
 
       return { sectors: sectorsByProjects };
     },

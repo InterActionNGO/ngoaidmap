@@ -25,6 +25,7 @@ define([
     },
 
     parseData: function(){
+      // console.log('We should check if data is correct. (8 projects - 22 countries)??? Bill & Melinda Gates Foundation (Donor)')
       return {
         projectsLength: this.conexion.getProjects().length.toLocaleString(),
         organizationsLength: _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'organizations' }).length.toLocaleString(),
