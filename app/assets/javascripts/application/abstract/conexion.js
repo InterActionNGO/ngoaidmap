@@ -38,7 +38,7 @@ define([
           count: country.length,
           id: countryF.id,
           name: countryF.name,
-          url: (nofilter) ? '/location/' + countryF.id : location.href+'?location_id[]='+ countryF.id
+          url: (nofilter) ? '/location/' + countryF.id : this.setUrl('location_id[]',countryF.id)
         }
       }, this )), function(country){
         return -country.count;
@@ -77,6 +77,10 @@ define([
 
     getDonorsBySectors: function(){
 
+    },
+
+    setUrl: function(param_name, id){
+      return (location.search) ? location.href+'&'+param_name+'='+id : location.href+'?'+param_name+'='+id;
     }
 
   });
