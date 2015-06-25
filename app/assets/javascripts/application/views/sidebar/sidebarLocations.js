@@ -18,7 +18,7 @@ define([
         return
       }
       this.conexion = conexion;
-      this.locations = this.conexion.getLocationsByCountry(! !!this.$el.data('filter'));
+      this.locations = this.conexion.getLocationsByCountry(!!this.$el.data('nofilter'));
       this.render();
     },
 
