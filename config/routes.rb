@@ -58,6 +58,8 @@ Rails.application.routes.draw do
   get '/sites/download/(:id).xls', :to => 'sites#downloads', :format => :xls
   get '/sites/download/(:id).kml', :to => 'sites#downloads', :format => :kml
 
+  get '/download', to: 'downloads#show', as: 'download'
+
   get 'regions/:id' => 'georegion#old_regions'
   # HACK!! route globbing doesn't work well when trying to get the request format in Rails <=3.0.7
   get 'location/*ids.csv', to: 'georegion#show', :as => 'location_csv', :format => 'csv'

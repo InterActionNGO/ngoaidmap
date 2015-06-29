@@ -76,6 +76,49 @@ class Project < ActiveRecord::Base
     projects
   end
 
+  def self.export_headers(options = {})
+    options = {show_private_fields: false}.merge(options || {})
+
+    if options[:show_private_fields]
+      %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description activities additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups location verbatim_location idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status donors)
+    else
+      %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description activities additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups location project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status donors)
+    end
+  end
+
+  def self.to_csv(options = {})
+    projects = all
+    csv_headers = self.export_headers(options[:headers_options])
+    csv_data = CSV.generate(:col_sep => ',') do |csv|
+      csv << csv_headers
+      projects.each do |project|
+        line = []
+        csv_headers.each do |field_name|
+          v = project[field_name]
+          line << if v.nil?
+            ""
+          else
+            if %W{ start_date end_date date_provided date_updated }.include?(field_name)
+              if v =~ /^00(\d\d\-.+)/
+                "20#{$1}"
+              else
+                v
+              end
+            else
+              v.to_s.text2array.join(',')
+            end
+          end
+        end
+        csv << line
+      end
+    end
+    csv_data
+  end
+
+  def self.to_excel(options = {})
+    all.to_xls(headers: self.export_headers(options[:headers_options]))
+  end
+
   ############################################## IATI ##############################################
 
   def activity_status
