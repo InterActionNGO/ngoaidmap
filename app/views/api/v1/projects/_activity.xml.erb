@@ -9,7 +9,7 @@
   <description type="1">
    <narrative><%= strip_tags(project.description) %></narrative>
   </description>
-  <participating-org ref="TBC" role="4" type="TBC">
+  <participating-org ref="TBC" role="4" type="<%= project.primary_organization.try(:organization_type_code) %>">
     <narrative><%= project.primary_organization.try(:name) %> </narrative>
   </participating-org>
   <% project.donors.each do  |d| %>
@@ -109,8 +109,7 @@
   <!--document-link starts-->
   <document-link format="application/vnd.oasis.opendocument.text" url="http:www.example.org/docs/report_en.odt">
    <title>
-    <narrative>Project Report 2013</narrative>
-    <narrative xml:lang="fr">Rapport de projet 2013</narrative>
+    <narrative>Project Report</narrative>
    </title>
    <category code="A01" />
    <language code="en" />
