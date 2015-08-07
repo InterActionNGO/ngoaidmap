@@ -56,9 +56,9 @@
     <recipient-country code="<%= c %>" percentage="<%= 100/project.iati_countries.length %>" />
   <% end %>
   <% project.iati_locations.each do |l| %>
-    <location ref="<%= l.geonameid %>">
+    <location ref="<%= l.uid %>">
      <location-reach code="1" />
-     <location-id vocabulary="G1" code="<%= l.geonameid %>" />
+     <location-id vocabulary="G1" code="<%= l.uid %>" />
      <name>
       <narrative><%= l.name %></narrative>
      </name>
@@ -68,7 +68,7 @@
      <activity-description>
       <narrative><%= strip_tags(project.description) %></narrative>
      </activity-description>
-     <administrative vocabulary="G1" level="<%= l.adm_level %>" code="<%= l.geonameid %>" />
+     <administrative vocabulary="G1" level="<%= l.adm_level %>" code="<%= l.uid %>" />
      <point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
       <pos><%= l.latitude %> <%= l.longitude %></pos>
      </point>

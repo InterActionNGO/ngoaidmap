@@ -21,6 +21,7 @@ gem 'httparty'
 gem 'api_cache'
 gem 'responders', '~> 2.0'
 gem 'dalli'
+gem 'to_xls-rails'
 gem 'kaminari'
 group :development do
   gem 'foreman'
@@ -33,6 +34,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
+  gem 'brakeman', :require => false
 end
 group :development, :test do
   gem 'byebug'

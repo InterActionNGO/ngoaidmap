@@ -35,10 +35,11 @@ define([
       this.$el.remove();
     },
 
-    parseData: function(more){
+    parseData: function(_more){
       // Prepare data to render
 
-      var data_to_render;
+      var data_to_render, more;
+      more = (this.data.length > 10) ? _more : true;
       data_to_render = (more) ? this.data : this.data.slice(0,10);
       data_to_render = _.map(data_to_render, function(v){ v.name = _.unescape(v.name); return v;});
       (! !!data_to_render.length) ? this.$el.remove() : null;

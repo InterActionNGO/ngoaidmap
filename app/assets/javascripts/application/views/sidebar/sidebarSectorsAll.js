@@ -18,7 +18,7 @@ define([
       if (!this.$el.length) {
         return
       }
-
+      this.sectorId = sector.id;
       service.execute('sectors-all', _.bind(this.successSidebar, this ), _.bind(this.errorSidebar, this ));
 
     },
@@ -44,6 +44,8 @@ define([
       }), function(sector){
         return -sector.count;
       });
+
+      sectorsByProjects = _.without(sectorsByProjects, _.findWhere(sectorsByProjects, {id: this.sectorId.toString() }));
       return { sectors: sectorsByProjects, all: true };
     },
 
