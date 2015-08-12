@@ -1,6 +1,6 @@
 <iati-activity xml:lang="en" default-currency="USD" last-updated-datetime="<%= Time.now.xmlschema %>" linked-data-uri="http://ngoaidmap.org/iati/activities/<%= project.id %>" hierarchy="1">
   <iati-identifier>TBC</iati-identifier>
-  <reporting-org ref="TBC" type="TBC" secondary-reporter="0">
+  <reporting-org ref="TBC#NGO Number" type="TBC#Will send" secondary-reporter="1">
       <narrative>NGO Aid Map</narrative>
   </reporting-org>
   <title>
@@ -9,38 +9,27 @@
   <description type="1">
    <narrative><%= strip_tags(project.description) %></narrative>
   </description>
-  <participating-org ref="TBC" role="4" type="<%= project.primary_organization.try(:organization_type_code) %>">
+  <participating-org ref="<%= project.primary_organization.try(:iati_organizationid) %>" role="4" type="<%= project.primary_organization.try(:organization_type_code) %>">
     <narrative><%= project.primary_organization.try(:name) %> </narrative>
   </participating-org>
   <% project.donors.each do  |d| %>
-    <participating-org ref="TBC" role="1" type="TBC">
+    <participating-org ref="TBC #ADD field to donors" role="1" type="TBC #Add field to donors">
       <narrative><%= d.name %> </narrative>
     </participating-org>
   <% end %>
-  <other-identifier ref="TBC" type="TBC">
-   <owner-org ref="TBC">
-    <narrative><%= project.primary_organization.try(:name) %></narrative>
+  <other-identifier ref="TBC #organization intervention id" type="A1">
+   <owner-org ref="TBC Organization Intervention ID">
+    <narrative>TBC Organization reference</narrative>
    </owner-org>
   </other-identifier>
   <activity-status code="<%= project.activity_status %>" />
-  <% if project.start_date > Time.now.in_time_zone %>
     <activity-date iso-date="<%= project.start_date %>" type="1">
      <narrative>Planned start date of the activity</narrative>
     </activity-date>
-  <% else %>
-    <activity-date iso-date="<%= project.start_date %>" type="2">
-     <narrative>Actual start date of the activity</narrative>
-    </activity-date>
-  <% end %>
-  <% if project.end_date > Time.now.in_time_zone %>
     <activity-date iso-date="<%= project.end_date %>" type="3">
      <narrative>Planned end date of the activity</narrative>
     </activity-date>
-  <% else %>
-    <activity-date iso-date="<%= project.end_date %>" type="4">
-     <narrative>Actual end date of the activity</narrative>
-    </activity-date>
-  <% end %>
+
   <contact-info type="1">
    <person-name>
     <narrative><%= project.contact_person %></narrative>
@@ -53,41 +42,38 @@
   </contact-info>
   <activity-scope code="<%= project.activity_scope_code %>" />
   <% project.iati_countries.each do |c| %>
-    <recipient-country code="<%= c %>" percentage="<%= 100/project.iati_countries.length %>" />
+    <recipient-country code="<%= c %>" percentage="<%= 100/project.iati_countries.length #if there is more than one country blank %>" />
   <% end %>
   <% project.iati_locations.each do |l| %>
     <location ref="<%= l.uid %>">
-     <location-reach code="1" />
-     <location-id vocabulary="G1" code="<%= l.uid %>" />
+     <!-- <location-reach code="1" /> -->
+     <location-id vocabulary="G1 #Provider" code="<%= l.uid %>" />
      <name>
       <narrative><%= l.name %></narrative>
      </name>
      <description>
       <narrative><%=l.name %>, <%= l.country_name %></narrative>
      </description>
-     <activity-description>
-      <narrative><%= strip_tags(project.description) %></narrative>
-     </activity-description>
-     <administrative vocabulary="G1" level="<%= l.adm_level %>" code="<%= l.uid %>" />
+     <administrative vocabulary="G1 #provider " level="<%= l.adm_level %>" code="<%= l.uid %>" />
      <point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
       <pos><%= l.latitude %> <%= l.longitude %></pos>
      </point>
-     <exactness code="1"/>
-     <location-class code="1"/>
+     <exactness code="2"/>
+     <location-class code="1 #if is adm1 then 1 else blank"/>
      <feature-designation code="<%= l.fcode %>"/>
     </location>
   <% end %>
   <!--sector starts-->
-  <sector vocabulary="2" code="111" percentage="50" />
-  <sector vocabulary="2" code="112" percentage="50" />
+  <sector vocabulary="2" code="111" percentage="50#if there is more than one sector blank" />
+  <sector vocabulary="2" code="112" percentage="50#if there is more than one sector blank" />
   <!--sector ends-->
   <!--transaction starts-->
-  <transaction ref="1234">
-   <transaction-type code="1" />
-   <transaction-date iso-date="2012-01-01" />
-   <value currency="EUR" value-date="2012-01-01">1000</value>
+  <transaction ref="">
+   <transaction-type code="2" />
+   <transaction-date iso-date="# Project start date" />
+   <value currency="EUR #Currency field" value-date="# Start date"># Project budget</value>
    <description>
-    <narrative>Transaction description text</narrative>
+    <narrative>Total project budget</narrative>
    </description>
    <provider-org provider-activity-id="BB-BBB-123456789-1234AA" ref="BB-BBB-123456789">
     <narrative>Agency B</narrative>
@@ -95,24 +81,20 @@
    <receiver-org receiver-activity-id="AA-AAA-123456789-1234" ref="AA-AAA-123456789">
     <narrative>Agency A</narrative>
    </receiver-org>
-   <disbursement-channel code="1" />
-   <sector vocabulary="2" code="111" />
+   <disbursement-channel code="" />
    <!--Note: only a recipient-region OR a recipient-country is expected-->
-   <recipient-country code="AF" />
-   <recipient-region code="456" vocabulary="1" />
-   <flow-type code="10" />
-   <finance-type code="110" />
-   <aid-type code="A01" />
-   <tied-status code="3" />
+   <recipient-country code="AF" /> #As many as countries
+   <flow-type code="10????30" />
+   <finance-type code="100" />
   </transaction>
   <!--transaction ends-->
   <!--document-link starts-->
-  <document-link format="application/vnd.oasis.opendocument.text" url="http:www.example.org/docs/report_en.odt">
+<!--   <document-link format="application/vnd.oasis.opendocument.text" url="http:www.example.org/docs/report_en.odt">
    <title>
     <narrative>Project Report</narrative>
    </title>
    <category code="A01" />
-   <language code="en" />
+   <language code="en" /> -->
   </document-link>
   <!--document-link ends-->
  </iati-activity>

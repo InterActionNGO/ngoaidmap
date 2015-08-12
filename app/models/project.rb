@@ -137,13 +137,13 @@ class Project < ActiveRecord::Base
       if geos.length == 1
         activity_scope_code = case geos.first.adm_level
                                 when 0
-                                  4
+                                  4 # Not clear if covers whole country, blank
                                 when 1
                                   6
                                 when 2
                                   7
                                 else
-                                  8
+                                  0 # blank
                                 end
       elsif geos.pluck(:country_code).uniq.length > 1
          activity_scope_code = 3
@@ -151,7 +151,7 @@ class Project < ActiveRecord::Base
         activity_scope_code = 5
       end
     else
-      activity_scope_code = 1
+      activity_scope_code = 5
     end
     activity_scope_code
   end
