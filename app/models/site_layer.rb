@@ -2,11 +2,9 @@
 #
 # Table name: site_layers
 #
-#  site_id           :integer     
-#  layer_id       	 :integer   
-#  color	       	 :string
-#  division	      	 :integer   
-#  description     	 :text
+#  site_id        :integer
+#  layer_id       :integer
+#  layer_style_id :integer
 #
 
 class SiteLayer < ActiveRecord::Base

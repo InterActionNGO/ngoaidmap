@@ -2,7 +2,7 @@
 #
 # Table name: sectors
 #
-#  id   :integer         not null, primary key
+#  id   :integer          not null, primary key
 #  name :string(255)
 #
 

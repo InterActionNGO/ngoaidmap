@@ -1,10 +1,10 @@
 # == Schema Information
 #
-# Table name: layer_style
+# Table name: layer_styles
 #
-#  id             :integer         not null, primary key
-#  name           :string(255)
-#  style       	  :text
+#  id    :integer          not null, primary key
+#  title :string(255)
+#  name  :string(255)
 #
 
 class LayerStyle < ActiveRecord::Base

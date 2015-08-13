@@ -21,6 +21,11 @@
 #  adm_level         :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  g0                :string
+#  g1                :string
+#  g2                :string
+#  g3                :string
+#  g4                :string
 #
 
 class Geolocation < ActiveRecord::Base
