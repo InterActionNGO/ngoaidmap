@@ -1,6 +1,6 @@
 <iati-activity xml:lang="en" default-currency="USD" last-updated-datetime="<%= Time.now.xmlschema %>" linked-data-uri="http://ngoaidmap.org/iati/activities/<%= project.id %>" hierarchy="1">
-  <iati-identifier>TBC</iati-identifier>
-  <reporting-org ref="TBC#NGO Number" type="TBC#Will send" secondary-reporter="1">
+  <iati-identifier>US-EIN-13-3287064-<%= project.intervention_id %></iati-identifier>
+  <reporting-org ref="US-EIN-13-3287064" type="2" secondary-reporter="1">
       <narrative>NGO Aid Map</narrative>
   </reporting-org>
   <title>
@@ -13,13 +13,13 @@
     <narrative><%= project.primary_organization.try(:name) %> </narrative>
   </participating-org>
   <% project.donors.each do  |d| %>
-    <participating-org ref="TBC #ADD field to donors" role="1" type="TBC #Add field to donors">
+    <participating-org ref="<%= d.iati_organizationid %>" role="1" type="<%= d.organization_type_code %>">
       <narrative><%= d.name %> </narrative>
     </participating-org>
   <% end %>
-  <other-identifier ref="TBC #organization intervention id" type="A1">
-   <owner-org ref="TBC Organization Intervention ID">
-    <narrative>TBC Organization reference</narrative>
+  <other-identifier ref="<%= project.intervention_id %>" type="A1">
+   <owner-org ref="Organization Intervention ID">
+    <narrative>Organization reporting data</narrative>
    </owner-org>
   </other-identifier>
   <activity-status code="<%= project.activity_status %>" />
@@ -42,19 +42,19 @@
   </contact-info>
   <activity-scope code="<%= project.activity_scope_code %>" />
   <% project.iati_countries.each do |c| %>
-    <recipient-country code="<%= c %>" percentage="<%= 100/project.iati_countries.length #if there is more than one country blank %>" />
+    <recipient-country code="<%= c %>" percentage="<%= project.iati_countries.length == 1 ? 100 : '' #if there is more than one country then blank %>" />
   <% end %>
   <% project.iati_locations.each do |l| %>
     <location ref="<%= l.uid %>">
      <!-- <location-reach code="1" /> -->
-     <location-id vocabulary="G1 #Provider" code="<%= l.uid %>" />
+     <location-id vocabulary="<%= l.provider %>" code="<%= l.uid %>" />
      <name>
       <narrative><%= l.name %></narrative>
      </name>
      <description>
       <narrative><%=l.name %>, <%= l.country_name %></narrative>
      </description>
-     <administrative vocabulary="G1 #provider " level="<%= l.adm_level %>" code="<%= l.uid %>" />
+     <administrative vocabulary="<%= l.provider %>" level="<%= l.adm_level %>" code="<%= l.uid %>" />
      <point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
       <pos><%= l.latitude %> <%= l.longitude %></pos>
      </point>
