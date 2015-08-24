@@ -101,12 +101,12 @@ resource 'Projects' do
   end
 
   get "/api/projects?countries[]=:country" do
-    parameter :countries, "Array. Country ids"
+    parameter :countries, "Array. Country uids"
     p = FactoryGirl.create(:project, name: "project_with_country")
-    s = FactoryGirl.create(:country)
-    p.countries=[s]
+    c = FactoryGirl.create(:geolocation, name: 'India', adm_level: 0, uid: 'ggg', country_uid: 'ggg')
+    p.geolocations=[c]
     let(:country) do
-      s.id
+      c.uid
     end
 
     example_request "Getting a list of projects by countries" do
@@ -116,19 +116,20 @@ resource 'Projects' do
     end
   end
 
-  get "/api/projects?regions[]=:region" do
-    parameter :regions, "Array. Region ids"
-    p = FactoryGirl.create(:project, name: "project_with_region")
-    s = FactoryGirl.create(:region)
-    p.regions=[s]
-    let(:region) do
-      s.id
+  get "/api/projects?geolocations[]=:geolocation" do
+    parameter :geolocations, "Array. Geolocation uids"
+    p = FactoryGirl.create(:project, name: "project_with_geolocation")
+    g1 = FactoryGirl.create(:geolocation, name: 'Madrid', adm_level: 1, uid: '111', g1: '000')
+    g = FactoryGirl.create(:geolocation, name: 'Spain', adm_level: 0, uid: '000')
+    p.geolocations=[g]
+    let(:geolocation) do
+      g.uid
     end
 
     example_request "Getting a list of projects by regions" do
       expect(status).to eq(200)
       results = JSON.parse(response_body)['data'].map{|r| r['name']}
-      expect(results).to eq(['project_with_region'])
+      expect(results).to eq(['project_with_geolocation'])
     end
   end
 

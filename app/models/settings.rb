@@ -2,8 +2,8 @@
 #
 # Table name: settings
 #
-#  id   :integer         not null, primary key
-#  data :text            
+#  id   :integer          not null, primary key
+#  data :text
 #
 
 class Settings < ActiveRecord::Base

@@ -4,7 +4,7 @@ module Api
       def index
         @projects = Project.fetch_all(project_params)
         respond_to do |format|
-         format.json {render json: @projects, root: 'data', meta: {total: @projects.size}, include: ['organization', 'sectors', 'donors', 'countries', 'regions']}
+         format.json {render json: @projects, root: 'data', meta: {total: @projects.size}, include: ['organization', 'sectors', 'donors', 'geolocations']}
          format.xml {@projects}
         end
       end
@@ -19,7 +19,7 @@ module Api
 
 
       def project_params
-        params.permit(:offset, :limit, :format, organizations:[], sectors:[], donors:[], countries:[], regions:[])
+        params.permit(:offset, :limit, :format, organizations:[], sectors:[], donors:[], countries:[], geolocations:[])
       end
     end
   end

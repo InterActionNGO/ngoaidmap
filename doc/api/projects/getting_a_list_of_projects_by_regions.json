@@ -1,13 +1,13 @@
 {
   "resource": "Projects",
   "http_method": "GET",
-  "route": "/api/projects?regions[]=:region",
+  "route": "/api/projects?geolocations[]=:geolocation",
   "description": "Getting a list of projects by regions",
   "explanation": null,
   "parameters": [
     {
-      "name": "regions",
-      "description": "Array. Region ids"
+      "name": "geolocations",
+      "description": "Array. Geolocation uids"
     }
   ],
   "response_fields": [
@@ -16,7 +16,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/projects?regions[]=1",
+      "request_path": "/api/projects?geolocations[]=000",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.esios-api-v1+json",
@@ -25,27 +25,27 @@
         "Cookie": ""
       },
       "request_query_parameters": {
-        "regions": [
-          "1"
+        "geolocations": [
+          "000"
         ]
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"5\",\"name\":\"project_with_region\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"countries\":{\"linkage\":[]},\"regions\":{\"linkage\":[{\"type\":\"regions\",\"id\":\"1\"}]}}}],\"included\":[{\"id\":\"1\",\"name\":\"New Dehli\",\"level\":2,\"the_geom\":null,\"center_lat\":null,\"center_lon\":null,\"type\":\"regions\"}],\"meta\":{\"total\":{\"[5, nil, 1, nil, nil, nil]\":1}}}",
+      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"5\",\"name\":\"project_with_geolocation\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"geolocations\":{\"linkage\":[{\"type\":\"geolocations\",\"id\":\"3\"}]}}}],\"included\":[{\"id\":\"3\",\"uid\":\"000\",\"name\":\"Spain\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":null,\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null,\"type\":\"geolocations\"}],\"meta\":{\"total\":{\"[5, 3, nil, nil, nil, nil]\":1}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"cdabf4819a2554dd19207e2fdf6e1204\"",
+        "ETag": "W/\"56c83a024799e40088528a4e2f867e95\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "d711a0fa-bf67-41c1-81c6-8d516757ea0f",
-        "X-Runtime": "0.034322",
-        "Content-Length": "405"
+        "X-Request-Id": "9c4f12de-95a6-4173-a3bf-96099c77287b",
+        "X-Runtime": "0.037907",
+        "Content-Length": "547"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/projects?regions[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?geolocations[]=000\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

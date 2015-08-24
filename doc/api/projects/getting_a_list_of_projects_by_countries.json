@@ -7,7 +7,7 @@
   "parameters": [
     {
       "name": "countries",
-      "description": "Array. Country ids"
+      "description": "Array. Country uids"
     }
   ],
   "response_fields": [
@@ -16,7 +16,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/projects?countries[]=1",
+      "request_path": "/api/projects?countries[]=ggg",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.esios-api-v1+json",
@@ -26,26 +26,26 @@
       },
       "request_query_parameters": {
         "countries": [
-          "1"
+          "ggg"
         ]
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"4\",\"name\":\"project_with_country\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"countries\":{\"linkage\":[{\"type\":\"countries\",\"id\":\"1\"}]},\"regions\":{\"linkage\":[]}}}],\"included\":[{\"id\":\"1\",\"name\":\"India\",\"code\":null,\"center_lat\":null,\"center_lon\":null,\"type\":\"countries\"}],\"meta\":{\"total\":{\"[4, 1, nil, nil, nil, nil]\":1}}}",
+      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"4\",\"name\":\"project_with_country\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"geolocations\":{\"linkage\":[{\"type\":\"geolocations\",\"id\":\"1\"}]}}}],\"included\":[{\"id\":\"1\",\"uid\":\"ggg\",\"name\":\"India\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":\"ggg\",\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null,\"type\":\"geolocations\"}],\"meta\":{\"total\":{\"[4, 1, \\\"ggg\\\", nil, nil, nil]\":1}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"5e09588cac7ac02f7a8d666426b66f2b\"",
+        "ETag": "W/\"7ba22bb64ce0f6c7f97b4f6764260ad2\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "9314faf4-71a4-42d0-9e4c-051268b15e31",
-        "X-Runtime": "0.035770",
-        "Content-Length": "392"
+        "X-Request-Id": "45b2cf3f-70cf-457f-8aae-c9fb8f06f1d9",
+        "X-Runtime": "0.034301",
+        "Content-Length": "548"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/projects?countries[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?countries[]=ggg\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

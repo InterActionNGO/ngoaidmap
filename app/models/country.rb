@@ -2,16 +2,16 @@
 #
 # Table name: countries
 #
-#  id               :integer         not null, primary key
+#  id               :integer          not null, primary key
 #  name             :string(255)
 #  code             :string(255)
-#  center_lat       :float
-#  center_lon       :float
-#  the_geom         :string
+#  the_geom         :geometry
 #  wiki_url         :string(255)
 #  wiki_description :text
 #  iso2_code        :string(255)
 #  iso3_code        :string(255)
+#  center_lat       :float
+#  center_lon       :float
 #  the_geom_geojson :text
 #
 

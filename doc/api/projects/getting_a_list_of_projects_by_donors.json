@@ -32,17 +32,17 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"2\",\"name\":\"project_with_donor\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"countries\":{\"linkage\":[]},\"regions\":{\"linkage\":[]}}}],\"meta\":{\"total\":{\"[2, nil, nil, nil, 1, nil]\":1}}}",
+      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"2\",\"name\":\"project_with_donor\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"geolocations\":{\"linkage\":[]}}}],\"meta\":{\"total\":{\"[2, nil, nil, nil, 1, nil]\":1}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"1c0f17232d5314e5a05aa39274104f1b\"",
+        "ETag": "W/\"29841cddeeaf41d8cfab8b4c7ecf12a1\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "91c0bc63-f09c-4162-93e4-77f9e9a7e984",
-        "X-Runtime": "0.036094",
-        "Content-Length": "255"
+        "X-Request-Id": "c0db2b9a-74f4-4a2b-81f5-561acb3f94dd",
+        "X-Runtime": "0.034115",
+        "Content-Length": "233"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/projects?donors[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

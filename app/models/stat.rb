@@ -2,7 +2,7 @@
 #
 # Table name: stats
 #
-#  id      :integer         not null, primary key
+#  id      :integer          not null, primary key
 #  site_id :integer
 #  visits  :integer
 #  date    :date

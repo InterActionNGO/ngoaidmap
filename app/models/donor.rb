@@ -2,7 +2,7 @@
 #
 # Table name: donors
 #
-#  id                        :integer         not null, primary key
+#  id                        :integer          not null, primary key
 #  name                      :string(2000)
 #  description               :text
 #  website                   :string(255)

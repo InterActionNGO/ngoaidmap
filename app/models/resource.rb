@@ -2,7 +2,7 @@
 #
 # Table name: resources
 #
-#  id                        :integer         not null, primary key
+#  id                        :integer          not null, primary key
 #  title                     :string(255)
 #  url                       :string(255)
 #  element_id                :integer

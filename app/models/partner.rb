@@ -2,7 +2,7 @@
 #
 # Table name: partners
 #
-#  id                :integer         not null, primary key
+#  id                :integer          not null, primary key
 #  site_id           :integer
 #  name              :string(255)
 #  url               :string(255)
@@ -12,6 +12,7 @@
 #  logo_updated_at   :datetime
 #  created_at        :datetime
 #  updated_at        :datetime
+#  label             :string(255)
 #
 
 class Partner < ActiveRecord::Base

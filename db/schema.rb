@@ -124,6 +124,46 @@ ActiveRecord::Schema.define(:version => 20140530130528) do
 
   add_index "donors", ["name"], :name => "index_donors_on_name"
 
+  create_table "geolocations", :force => true do |t|
+    t.string   "uid",               :limit => nil
+    t.string   "name",              :limit => nil
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "fclass",            :limit => nil
+    t.string   "fcode",             :limit => nil
+    t.string   "country_code",      :limit => nil
+    t.string   "country_name",      :limit => nil
+    t.string   "country_uid",       :limit => nil
+    t.string   "cc2",               :limit => nil
+    t.string   "admin1",            :limit => nil
+    t.string   "admin2",            :limit => nil
+    t.string   "admin3",            :limit => nil
+    t.string   "admin4",            :limit => nil
+    t.string   "provider",          :limit => nil, :default => "Geonames"
+    t.integer  "adm_level"
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+    t.string   "g0",                :limit => nil
+    t.string   "g1",                :limit => nil
+    t.string   "g2",                :limit => nil
+    t.string   "g3",                :limit => nil
+    t.string   "g4",                :limit => nil
+    t.string   "custom_geo_source", :limit => nil
+  end
+
+  add_index "geolocations", ["admin1"], :name => "index_geolocations_on_admin1"
+  add_index "geolocations", ["admin2"], :name => "index_geolocations_on_admin2"
+  add_index "geolocations", ["admin3"], :name => "index_geolocations_on_admin3"
+  add_index "geolocations", ["admin4"], :name => "index_geolocations_on_admin4"
+  add_index "geolocations", ["uid"], :name => "index_geolocations_on_uid"
+
+  create_table "geolocations_projects", :id => false, :force => true do |t|
+    t.integer "geolocation_id"
+    t.integer "project_id"
+  end
+
+  add_index "geolocations_projects", ["geolocation_id", "project_id"], :name => "index_geolocations_projects_on_geolocation_id_and_project_id"
+
   create_table "layer_styles", :force => true do |t|
     t.string "title"
     t.string "name"
