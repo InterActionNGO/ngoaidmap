@@ -109,8 +109,8 @@ table th, table td {
       <h1>Projects API</h1>
 
       <div class="article">
-        <h2>Getting a list of projects by regions</h2>
-        <h3>GET /api/projects?geolocations[]=:geolocation</h3>
+        <h2>Getting a list of projects by geolocation</h2>
+        <h3>GET /api/projects?geolocation=:geolocation&amp;level=:level</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -123,10 +123,18 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">geolocations</span>
+                    <span class="name">geolocation</span>
                 </td>
                 <td>
-                  <span class="description">Array. Geolocation uids</span>
+                  <span class="description">Geolocation uid</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">level</span>
+                </td>
+                <td>
+                  <span class="description">Admin level</span>
                 </td>
               </tr>
             </tbody>
@@ -142,14 +150,15 @@ Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/projects?geolocations[]=000</pre>
+          <pre class="request route highlight">GET /api/projects?geolocation=000&amp;level=0</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">geolocations: [&quot;000&quot;]</pre>
+            <pre class="request query_parameters highlight">geolocation: 000
+level: 0</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?geolocations[]=000&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?geolocation=000&amp;level=0&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.esios-api-v1+json&quot; \
 	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
@@ -161,15 +170,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;56c83a024799e40088528a4e2f867e95&quot;
+ETag: W/&quot;9cb4cc171613d9d08b1b408d722c5350&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 9c4f12de-95a6-4173-a3bf-96099c77287b
-X-Runtime: 0.037907
-Content-Length: 547</pre>
+X-Request-Id: f6c30272-3506-486e-bf6d-92e61f0bf354
+X-Runtime: 0.033981
+Content-Length: 548</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;5&quot;,&quot;name&quot;:&quot;project_with_geolocation&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;geolocations&quot;:{&quot;linkage&quot;:[{&quot;type&quot;:&quot;geolocations&quot;,&quot;id&quot;:&quot;3&quot;}]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;3&quot;,&quot;uid&quot;:&quot;000&quot;,&quot;name&quot;:&quot;Spain&quot;,&quot;latitude&quot;:null,&quot;longitude&quot;:null,&quot;country_code&quot;:null,&quot;country_name&quot;:null,&quot;country_uid&quot;:null,&quot;provider&quot;:&quot;Geonames&quot;,&quot;adm_level&quot;:0,&quot;g0&quot;:null,&quot;g1&quot;:null,&quot;g2&quot;:null,&quot;g3&quot;:null,&quot;g4&quot;:null,&quot;custom_geo_source&quot;:null,&quot;type&quot;:&quot;geolocations&quot;}],&quot;meta&quot;:{&quot;total&quot;:{&quot;[5, 3, nil, nil, nil, nil]&quot;:1}}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;5&quot;,&quot;name&quot;:&quot;project_with_geolocation&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;geolocations&quot;:{&quot;linkage&quot;:[{&quot;type&quot;:&quot;geolocations&quot;,&quot;id&quot;:&quot;3&quot;}]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;3&quot;,&quot;uid&quot;:&quot;000&quot;,&quot;name&quot;:&quot;Spain&quot;,&quot;latitude&quot;:null,&quot;longitude&quot;:null,&quot;country_code&quot;:null,&quot;country_name&quot;:null,&quot;country_uid&quot;:null,&quot;provider&quot;:&quot;Geonames&quot;,&quot;adm_level&quot;:0,&quot;g0&quot;:&quot;000&quot;,&quot;g1&quot;:null,&quot;g2&quot;:null,&quot;g3&quot;:null,&quot;g4&quot;:null,&quot;custom_geo_source&quot;:null,&quot;type&quot;:&quot;geolocations&quot;}],&quot;meta&quot;:{&quot;total&quot;:{&quot;[5, 3, nil, nil, nil, nil]&quot;:1}}}</pre>
       </div>
     </div>
   </body>

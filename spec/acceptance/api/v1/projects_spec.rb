@@ -116,17 +116,19 @@ resource 'Projects' do
     end
   end
 
-  get "/api/projects?geolocations[]=:geolocation" do
-    parameter :geolocations, "Array. Geolocation uids"
+  get "/api/projects?geolocation=:geolocation&level=:level" do
+    parameter :geolocation, "Geolocation uid"
+    parameter :level, "Admin level"
     p = FactoryGirl.create(:project, name: "project_with_geolocation")
-    g1 = FactoryGirl.create(:geolocation, name: 'Madrid', adm_level: 1, uid: '111', g1: '000')
-    g = FactoryGirl.create(:geolocation, name: 'Spain', adm_level: 0, uid: '000')
+    g1 = FactoryGirl.create(:geolocation, name: 'Madrid', adm_level: 1, uid: '111', g0: '000', g1: '111')
+    g = FactoryGirl.create(:geolocation, name: 'Spain', adm_level: 0, uid: '000', g0: '000')
     p.geolocations=[g]
+    let(:level) { 0 }
     let(:geolocation) do
       g.uid
     end
 
-    example_request "Getting a list of projects by regions" do
+    example_request "Getting a list of projects by geolocation" do
       expect(status).to eq(200)
       results = JSON.parse(response_body)['data'].map{|r| r['name']}
       expect(results).to eq(['project_with_geolocation'])

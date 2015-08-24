@@ -73,18 +73,18 @@ class Project < ActiveRecord::Base
   scope :organizations, -> (orgs){where(organizations: {id: orgs})}
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){where(donors: {id: donors})}
-  scope :geolocations, -> (geolocations){where('geolocations.uid IN (?) OR geolocations.g1 IN (?) OR geolocations.g2 IN (?) OR geolocations.g3 IN (?) OR geolocations.g4 IN (?)', geolocations, geolocations, geolocations, geolocations, geolocations)}
+  scope :geolocation, -> (geolocation,level){where("g#{level}=?", geolocation)}
   scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
 
   def self.fetch_all(options = {})
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
-    projects = projects.geolocations(options[:geolocations])   if options[:geolocations]
-    projects = projects.countries(options[:countries])         if options[:countries]
-    projects = projects.organizations(options[:organizations]) if options[:organizations]
-    projects = projects.sectors(options[:sectors])             if options[:sectors]
-    projects = projects.donors(options[:donors])               if options[:donors]
-    projects = projects.offset(options[:offset])               if options[:offset]
-    projects = projects.limit(options[:limit])                 if options[:limit]
+    projects = projects.geolocation(options[:geolocation], options[:level])     if options[:geolocation] && options[:level]
+    projects = projects.countries(options[:countries])                          if options[:countries]
+    projects = projects.organizations(options[:organizations])                  if options[:organizations]
+    projects = projects.sectors(options[:sectors])                              if options[:sectors]
+    projects = projects.donors(options[:donors])                                if options[:donors]
+    projects = projects.offset(options[:offset])                                if options[:offset]
+    projects = projects.limit(options[:limit])                                  if options[:limit]
     projects = projects.active
     projects = projects.group('projects.id', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id')
     projects = projects.uniq

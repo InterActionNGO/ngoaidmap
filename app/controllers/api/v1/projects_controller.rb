@@ -19,7 +19,7 @@ module Api
 
 
       def project_params
-        params.permit(:offset, :limit, :format, organizations:[], sectors:[], donors:[], countries:[], geolocations:[])
+        params.permit(:offset, :limit, :format, :geolocation, :level, organizations:[], sectors:[], donors:[], countries:[])
       end
     end
   end

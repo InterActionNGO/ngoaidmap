@@ -54,13 +54,13 @@
           "groups": "all"
         },
         {
-          "description": "Getting a list of projects by implementing organization",
-          "link": "projects/getting_a_list_of_projects_by_implementing_organization.json",
+          "description": "Getting a list of projects by geolocation",
+          "link": "projects/getting_a_list_of_projects_by_geolocation.json",
           "groups": "all"
         },
         {
-          "description": "Getting a list of projects by regions",
-          "link": "projects/getting_a_list_of_projects_by_regions.json",
+          "description": "Getting a list of projects by implementing organization",
+          "link": "projects/getting_a_list_of_projects_by_implementing_organization.json",
           "groups": "all"
         },
         {
