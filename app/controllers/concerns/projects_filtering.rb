@@ -9,6 +9,7 @@ module ProjectsFiltering
     timestamp = Project.order('updated_at desc').first.updated_at.to_s
     string = timestamp + projects_params.inspect
     digest = Digest::SHA1.hexdigest(string)
+    projects_params['from_api'] = false
     results = Project.fetch_all(projects_params)
     m = ActiveModel::Serializer::ArraySerializer.new(results[0], each_serializer: ProjectSerializer)
     @map_data = Rails.cache.fetch("map_data_projects_#{digest}", :expires_in => 24.hours) {ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'geolocations']).to_json + results[1].to_json}
@@ -25,6 +26,5 @@ module ProjectsFiltering
     params.merge!({donors: [params[:id]]}) if controller_name == 'donors'
     params.merge!({sectors: [params[:id]]}) if controller_name == 'clusters_sectors'
     params.merge!({countries: [params[:id]]}) if controller_name == 'countries'
-    params['from_api'] = false
   end
 end
