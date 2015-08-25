@@ -424,6 +424,9 @@ ActiveRecord::Schema.define(:version => 20140530130528) do
 
   create_table "sectors", :force => true do |t|
     t.string "name"
+    t.string "oec_dac_name"
+    t.string "sector_vocab_code"
+    t.string "oec_dac_purpose_code"
   end
 
   create_table "settings", :force => true do |t|
