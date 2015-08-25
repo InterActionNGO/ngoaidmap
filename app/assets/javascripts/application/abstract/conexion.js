@@ -8,9 +8,11 @@ define([
   var Conexion = Class.extend({
 
     init: function(){
-      this.data = map_data;
+      this.data = JSON.parse(map_data[0]);
+      this.regions = JSON.parse(map_data[1]).regions;
       this.projects = this.data.data;
       this.included = this.data.included;
+      console.log(this.regions);
     },
 
     getProjects: function(){
@@ -27,8 +29,29 @@ define([
     },
 
     getCountries: function(){
-      this.countries = this.countries || _.groupBy(_.flatten(_.map(this.projects, function(project){return project.links.countries.linkage})), function(country){ return country.id;});
+      this.countries = this.countries || this.getLocationsByAdminLevel(0);
       return this.countries
+    },
+
+    getLocationsByAdminLevel: function(level, nofilter) {
+      var projectLocations = _.groupBy(_.filter(this.included, function(include){ return include.type == 'geolocations'}), 'g'+level);
+
+      return _.compact(_.map(projectLocations,_.bind(function(location, locationKey) {
+        var locationF = _.findWhere(this.regions, { uid: locationKey });
+        if (!!locationF && !!location) {
+          return {
+            count: location.length,
+            id: locationF.id,
+            name: locationF.name,
+            type: locationF.type,
+            lat: locationF.latitude,
+            lon: locationF.longitude,
+            url: (nofilter) ? '/location/' + locationF.id : this.setUrl('location_id[]',locationF.id),
+          }
+        }
+        return null;
+      }, this )));
+
     },
 
     getLocationsByCountry: function(nofilter){

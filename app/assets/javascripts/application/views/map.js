@@ -7,8 +7,9 @@ define([
   'views/layersView',
   'views/mapTypeView',
   'abstract/markerClass',
+  'abstract/conexion',
   'underscoreString'
-  ], function(_, Backbone, LayersView, MapTypeView, IOMMarker) {
+  ], function(_, Backbone, LayersView, MapTypeView, IOMMarker, conexion) {
 
   var MapView = Backbone.View.extend({
 
@@ -39,6 +40,8 @@ define([
       if (this.$el.length === 0) {
         return false;
       }
+
+      this.conexion = conexion;
 
       this.$map = $('#map');
 
@@ -124,22 +127,8 @@ define([
     },
 
     markerParser: function(data){
-      var projectsByCountry = _.groupBy(data.data, function(project){ return project.links.countries.linkage[0].id });
-      var included = data.included;
-
-      var markers = _.sortBy(_.map(projectsByCountry, function(country, countryKey){
-        var countryF = _.findWhere(included, {id: countryKey, type:'countries'});
-        return {
-          code: countryF.code,
-          count: country.length,
-          id: countryF.id,
-          lat: countryF.center_lat,
-          lon: countryF.center_lon,
-          name: countryF.name,
-          type: countryF.type,
-          url: '/location/' + countryF.id
-        }
-      }), function(country){
+      console.log(this.conexion.getLocationsByAdminLevel(0));
+      var markers = _.sortBy(this.conexion.getLocationsByAdminLevel(0), function(country){
         return country.count;
       });
 

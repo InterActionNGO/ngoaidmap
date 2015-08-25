@@ -31,7 +31,7 @@
       var chld = "<%=@chld%>";
       var chd = "<%=@chd%>";
       var marker_source = "<%=@georegion_map_marker_source%>";
-      var map_data = <%=raw(@map_data)%>;
+      var map_data = <%=@map_data%>;
       var max_count = <%=@map_data_max_count? @map_data_max_count : 1 %>;
       var map_type = '<%= @map_type || 'overview_map' %>';
       var theme = "<%=@site.theme_id%>";
