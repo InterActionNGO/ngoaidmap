@@ -86,9 +86,16 @@ class Project < ActiveRecord::Base
     projects = projects.offset(options[:offset])                                if options[:offset]
     projects = projects.limit(options[:limit])                                  if options[:limit]
     projects = projects.active
-    projects = projects.group('projects.id', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id')
+    projects = projects.group('projects.id', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
     projects = projects.uniq
-    projects
+    if options[:from_api] = false
+      project_gs = projects.pluck(:g0, :g1, :g2, :g3, :g4).flatten.uniq
+      region_groups = {}
+      region_groups['regions'] = Geolocation.where("uid IN (?)", project_gs)
+      [projects, region_groups]
+    else
+      projects
+    end
   end
 
   def self.export_headers(options = {})

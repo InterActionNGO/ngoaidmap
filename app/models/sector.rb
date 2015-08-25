@@ -14,7 +14,4 @@ class Sector < ActiveRecord::Base
   def self.counting_projects
     Sector.joins(:projects).select('sectors.id', 'sectors.name').group('sectors.id', 'sectors.name').order('sectors.name').where('(projects.end_date is null OR projects.end_date > now()) and (projects.start_date < now())').distinct.count('projects.id')
   end
-  def donors
-    Project.active.joins([:sectors, :donors]).where(sectors: {id: self.id}).pluck('donors.id', 'donors.name').uniq
-  end
 end
