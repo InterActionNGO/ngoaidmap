@@ -73,7 +73,7 @@ class Project < ActiveRecord::Base
   scope :organizations, -> (orgs){where(organizations: {id: orgs})}
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){where(donors: {id: donors})}
-  scope :geolocation, -> (geolocation,level){where("g#{level}=?", geolocation)}
+  scope :geolocation, -> (geolocation,level){where("g#{level}=?", geolocation).where('adm_level <= ?', level)}
   scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
 
   def self.fetch_all(options = {})
