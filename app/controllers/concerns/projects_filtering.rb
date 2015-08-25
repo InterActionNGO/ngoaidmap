@@ -11,7 +11,7 @@ module ProjectsFiltering
     digest = Digest::SHA1.hexdigest(string)
     results = Project.fetch_all(projects_params, false)
     m = ActiveModel::Serializer::ArraySerializer.new(results[0], each_serializer: ProjectSerializer)
-    @map_data = Rails.cache.fetch("map_data_projects_#{digest}", :expires_in => 24.hours) {ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'geolocations']).to_json + results[1].to_json}
+    @map_data = Rails.cache.fetch("map_data_projects_#{digest}", :expires_in => 24.hours) {[ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'geolocations']).to_json, results[1].to_json]}
     @map_data_max_count = 0;
     @projects_count = Rails.cache.fetch("projects_count_#{digest}", :expires_in => 24.hours) {results[0].uniq.length}
     @projects = Rails.cache.fetch("projects_#{digest}", :expires_in => 24.hours) {results[0].page(params[:page]).per(10)}
