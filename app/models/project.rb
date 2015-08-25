@@ -76,7 +76,7 @@ class Project < ActiveRecord::Base
   scope :geolocation, -> (geolocation,level){where("g#{level}=?", geolocation).where('adm_level <= ?', level)}
   scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
 
-  def self.fetch_all(options = {})
+  def self.fetch_all(options = {}, from_api = true)
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
     projects = projects.geolocation(options[:geolocation], options[:level])     if options[:geolocation] && options[:level]
     projects = projects.countries(options[:countries])                          if options[:countries]
@@ -88,13 +88,13 @@ class Project < ActiveRecord::Base
     projects = projects.active
     projects = projects.group('projects.id', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
     projects = projects.uniq
-    if options[:from_api] == false
+    if from_api
+      projects
+    else
       project_gs = projects.pluck(:g0, :g1, :g2, :g3, :g4).flatten.uniq
       region_groups = {}
       region_groups['regions'] = Geolocation.where("uid IN (?)", project_gs)
       [projects, region_groups]
-    else
-      projects
     end
   end
 
