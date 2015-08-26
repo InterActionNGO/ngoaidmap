@@ -25,6 +25,7 @@ define([
     },
 
     successSidebar: function(data){
+      this.data = data.data;
       this.render();
     },
 
@@ -33,7 +34,7 @@ define([
     },
 
     parseData: function(){
-      var sectorsByProjects = this.conexion.getSectorsByProjectsAll(sector.id);
+      var sectorsByProjects = this.conexion.getSectorsByProjectsAll(this.data,sector.id);
       return { sectors: sectorsByProjects, all: true };
     },
 

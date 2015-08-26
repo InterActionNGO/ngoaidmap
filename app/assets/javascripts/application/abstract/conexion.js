@@ -40,11 +40,12 @@ define([
           return {
             count: location.length,
             id: locationF.id,
+            uid: locationF.uid,
             name: locationF.name,
             type: locationF.type,
             lat: locationF.latitude,
             lon: locationF.longitude,
-            url: (nofilter) ? '/location/' + locationF.id : this.setUrl('location_id[]',locationF.id),
+            url: (nofilter) ? '/geolocation/' + locationF.uid : this.setUrl('geolocation',locationF.uid),
           }
         }
         return null;
@@ -108,8 +109,10 @@ define([
       return sectorsByProjects;
     },
 
-    getSectorsByProjectsAll: function(sectorId) {
-      var sectorsByProjects = _.sortBy(_.map(this.getProjects(), function(v){
+    getSectorsByProjectsAll: function(data,sectorId) {
+      console.log(data);
+      debugger;
+      var sectorsByProjects = _.sortBy(_.map(data, function(v){
         return {
           name: v.name,
           id: v.id,

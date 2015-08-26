@@ -29,7 +29,7 @@ define([
       return {
         projectsLength: this.conexion.getProjects().length.toLocaleString(),
         organizationsLength: _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'organizations' }).length.toLocaleString(),
-        countriesLength: _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'countries' }).length.toLocaleString(),
+        countriesLength: this.conexion.getCountries().length.toLocaleString(),
         renderOrganizations: this.renderOrganizations,
         renderCountries: this.renderCountries,
       }

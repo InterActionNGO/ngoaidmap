@@ -24,7 +24,7 @@ define([
 
     parseData: function(){
 
-      this.countries = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'countries' });
+      this.countries = this.conexion.getCountries();
       this.organizations = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'organizations' });
       this.sectors = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'sectors' });
 
