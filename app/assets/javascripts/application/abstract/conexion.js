@@ -12,7 +12,6 @@ define([
       this.regions = JSON.parse(map_data[1]).regions;
       this.projects = this.data.data;
       this.included = this.data.included;
-      console.log(this.regions);
     },
 
     getProjects: function(){
@@ -35,7 +34,6 @@ define([
 
     getLocationsByAdminLevel: function(level, nofilter) {
       var projectLocations = _.groupBy(_.filter(this.included, function(include){ return include.type == 'geolocations'}), 'g'+level);
-
       return _.compact(_.map(projectLocations,_.bind(function(location, locationKey) {
         var locationF = _.findWhere(this.regions, { uid: locationKey });
         if (!!locationF && !!location) {
@@ -55,15 +53,7 @@ define([
     },
 
     getLocationsByCountry: function(nofilter){
-      return _.sortBy(_.map(this.getCountries(), _.bind(function(country, countryKey){
-        var countryF = _.findWhere(this.included, {id: countryKey, type:'countries'});
-        return {
-          count: country.length,
-          id: countryF.id,
-          name: countryF.name,
-          url: (nofilter) ? '/location/' + countryF.id : this.setUrl('location_id[]',countryF.id)
-        }
-      }, this )), function(country){
+      return _.sortBy(this.getLocationsByAdminLevel(0,nofilter), function(country){
         return -country.count;
       });
     },
@@ -96,6 +86,43 @@ define([
       }, this )), function(country){
         return -country.count;
       });
+    },
+
+    getSectorsByProjects: function(nofilter) {
+      var sectors = _.groupBy(_.flatten(_.map(this.getProjects(), function(project){return project.links.sectors.linkage})), function(sector){
+        return sector.id;
+      });
+
+      var sectorsByProjects = _.sortBy(_.map(sectors, _.bind(function(sector, sectorKey){
+        var sectorF = _.findWhere(this.included, {id: sectorKey, type:'sectors'});
+        return{
+          name: sectorF.name,
+          id: sectorF.id,
+          url: (nofilter) ? '/sectors/'+sectorF.id : this.setUrl('category_id',sectorF.id),
+          class: sectorF.name.toLowerCase().replace(/\s/g, "-"),
+          count: sector.length
+        }
+      },this)), function(sector){
+        return -sector.count;
+      });
+      return sectorsByProjects;
+    },
+
+    getSectorsByProjectsAll: function(sectorId) {
+      var sectorsByProjects = _.sortBy(_.map(this.getProjects(), function(v){
+        return {
+          name: v.name,
+          id: v.id,
+          url: '/sectors/'+v.id,
+          class: v.name.toLowerCase().replace(/\s/g, "-"),
+          count: v.projects_count
+        }
+      }), function(sector){
+        return -sector.count;
+      });
+      sectorsByProjects = _.without(sectorsByProjects, _.findWhere(sectorsByProjects, {id: sectorId.toString() }));
+      return sectorsByProjects;
+
     },
 
     getDonorsBySectors: function(){

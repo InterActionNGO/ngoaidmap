@@ -23,7 +23,7 @@ define([
     },
 
     parseData: function(){
-      this.countries = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'countries' });
+      this.countries = this.conexion.getCountries();
 
       var countP = this.conexion.getProjects().length;
       var countC = this.countries.length;

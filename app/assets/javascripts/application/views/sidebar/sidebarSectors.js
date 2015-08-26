@@ -4,8 +4,9 @@ define([
   'jqueryui',
   'backbone',
   'handlebars',
+  'abstract/conexion',
   'text!templates/sidebar/sidebarSectors.handlebars'
-  ], function(jqueryui,Backbone, handlebars, tpl) {
+  ], function(jqueryui,Backbone, handlebars, conexion, tpl) {
 
   var SidebarSectors = Backbone.View.extend({
 
@@ -17,38 +18,17 @@ define([
       if (!this.$el.length) {
         return
       }
-      this.data = map_data;
-      this.nofilter = !!this.$el.data('nofilter');
+      this.conexion = conexion;
       this.render();
 
     },
 
     parseData: function(){
-      var projects = this.data.data;
-      var included = this.data.included;
-
-      var sectors = _.groupBy(_.flatten(_.map(projects, function(project){return project.links.sectors.linkage})), function(sector){
-        return sector.id;
-      });
-
-      var sectorsByProjects = _.sortBy(_.map(sectors, _.bind(function(sector, sectorKey){
-        var sectorF = _.findWhere(included, {id: sectorKey, type:'sectors'});
-        return{
-          name: sectorF.name,
-          id: sectorF.id,
-          url: (this.nofilter) ? '/sectors/'+sectorF.id : this.setUrl('category_id',sectorF.id),
-          class: sectorF.name.toLowerCase().replace(/\s/g, "-"),
-          count: sector.length
-        }
-      },this)), function(sector){
-        return -sector.count;
-      });
-
+      var sectorsByProjects = this.conexion.getSectorsByProjects(!!this.$el.data('nofilter'));
       if (sectorsByProjects.length == 1) {
         this.$el.remove();
         return
       }
-
 
       return { sectors: sectorsByProjects };
     },
