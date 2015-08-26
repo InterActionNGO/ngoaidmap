@@ -127,7 +127,7 @@ define([
     },
 
     markerParser: function(data){
-      var markers = _.sortBy(this.conexion.getLocationsByAdminLevel(0), function(country){
+      var markers = _.sortBy(this.conexion.getLocationsByAdminLevel(0, true), function(country){
         return country.count;
       });
 
