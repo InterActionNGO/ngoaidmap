@@ -45,7 +45,7 @@ define([
             type: locationF.type,
             lat: locationF.latitude,
             lon: locationF.longitude,
-            url: (nofilter) ? '/geolocation/' + locationF.uid : this.setUrl('geolocation',locationF.uid),
+            url: (nofilter) ? '/location/' + locationF.id : this.setUrl('location',locationF.id),
           }
         }
         return null;
@@ -71,21 +71,6 @@ define([
         }
       }, this )), function(organization){
         return -organization.count;
-      });
-    },
-
-    getCountriesByProjects: function(){
-      return _.sortBy(_.map(this.getCountries(), _.bind(function(country, countryKey){
-        var countryF = _.findWhere(this.included, {id: countryKey, type:'countries'});
-        return{
-          name: countryF.name,
-          id: countryF.id,
-          url: '/countries/'+countryF.id,
-          class: countryF.name.toLowerCase().replace(/\s/g, "-"),
-          count: country.length
-        }
-      }, this )), function(country){
-        return -country.count;
       });
     },
 
