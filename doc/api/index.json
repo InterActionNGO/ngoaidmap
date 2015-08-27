@@ -12,6 +12,11 @@
           "description": "Getting a list of donors",
           "link": "donors/getting_a_list_of_donors.json",
           "groups": "all"
+        },
+        {
+          "description": "Getting a list of donors for a particular sector",
+          "link": "donors/getting_a_list_of_donors_for_a_particular_sector.json",
+          "groups": "all"
         }
       ]
     },

@@ -19,7 +19,7 @@
       "request_path": "/api/projects?limit=3",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json; application/vnd.esios-api-v1+json",
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
         "Content-Type": "application/json",
         "Host": "http://ngoaidmap.org",
         "Cookie": ""
@@ -30,20 +30,20 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"5\",\"name\":\"project_with_geolocation\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"geolocations\":{\"linkage\":[{\"type\":\"geolocations\",\"id\":\"3\"}]}}},{\"type\":\"projects\",\"id\":\"21\",\"name\":\"One Project\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"geolocations\":{\"linkage\":[]}}},{\"type\":\"projects\",\"id\":\"26\",\"name\":\"project4\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"geolocations\":{\"linkage\":[]}}}],\"included\":[{\"id\":\"3\",\"uid\":\"000\",\"name\":\"Spain\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":null,\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":\"000\",\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null,\"type\":\"geolocations\"}],\"meta\":{\"total\":{\"[26, nil, nil, nil, nil, nil]\":1,\"[5, 3, nil, nil, nil, nil]\":1,\"[21, nil, nil, nil, nil, nil]\":1}}}",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_organization\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[{\"type\":\"sectors\",\"id\":\"1\"}]},\"geolocations\":{\"data\":[]}}},{\"id\":\"2\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_organization\",\"description\":null},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"1\"}},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]}}},{\"id\":\"3\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_donor\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]}}}],\"included\":[{\"id\":\"1\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\"}},{\"id\":\"1\",\"type\":\"organizations\",\"attributes\":{\"name\":\"One Organization\"}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"991053d62451817b78265e61986a886b\"",
+        "ETag": "W/\"c4759da84df398fb3cbee7b25a19c952\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "a10d1c79-ac6a-4cd5-aafe-5f7b0d8e8a39",
-        "X-Runtime": "0.049724",
-        "Content-Length": "947"
+        "X-Request-Id": "c98b4cd5-ab54-4dd5-8199-73260993520d",
+        "X-Runtime": "0.047273",
+        "Content-Length": "793"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/projects?limit=3\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?limit=3\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

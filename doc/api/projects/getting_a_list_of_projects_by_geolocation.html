@@ -144,7 +144,7 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Accept: application/json; application/vnd.esios-api-v1+json
+            <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
 Content-Type: application/json
 Host: http://ngoaidmap.org
 Cookie: </pre>
@@ -159,7 +159,7 @@ level: 0</pre>
 
             <h4>cURL</h4>
             <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?geolocation=000&amp;level=0&quot; -X GET \
-	-H &quot;Accept: application/json; application/vnd.esios-api-v1+json&quot; \
+	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
@@ -170,15 +170,15 @@ level: 0</pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;9cb4cc171613d9d08b1b408d722c5350&quot;
+ETag: W/&quot;cbe3d870ef7cb5b48880ad816ff877c6&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: f6c30272-3506-486e-bf6d-92e61f0bf354
-X-Runtime: 0.033981
-Content-Length: 548</pre>
+X-Request-Id: 18b2f27a-9b4e-43c5-82d4-1ddb77d3b916
+X-Runtime: 0.029802
+Content-Length: 527</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;5&quot;,&quot;name&quot;:&quot;project_with_geolocation&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;geolocations&quot;:{&quot;linkage&quot;:[{&quot;type&quot;:&quot;geolocations&quot;,&quot;id&quot;:&quot;3&quot;}]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;3&quot;,&quot;uid&quot;:&quot;000&quot;,&quot;name&quot;:&quot;Spain&quot;,&quot;latitude&quot;:null,&quot;longitude&quot;:null,&quot;country_code&quot;:null,&quot;country_name&quot;:null,&quot;country_uid&quot;:null,&quot;provider&quot;:&quot;Geonames&quot;,&quot;adm_level&quot;:0,&quot;g0&quot;:&quot;000&quot;,&quot;g1&quot;:null,&quot;g2&quot;:null,&quot;g3&quot;:null,&quot;g4&quot;:null,&quot;custom_geo_source&quot;:null,&quot;type&quot;:&quot;geolocations&quot;}],&quot;meta&quot;:{&quot;total&quot;:{&quot;[5, 3, nil, nil, nil, nil]&quot;:1}}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;6&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_geolocation&quot;,&quot;description&quot;:null},&quot;relationships&quot;:{&quot;organization&quot;:{&quot;data&quot;:null},&quot;sectors&quot;:{&quot;data&quot;:[]},&quot;geolocations&quot;:{&quot;data&quot;:[{&quot;type&quot;:&quot;geolocations&quot;,&quot;id&quot;:&quot;3&quot;}]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;3&quot;,&quot;type&quot;:&quot;geolocations&quot;,&quot;attributes&quot;:{&quot;uid&quot;:&quot;000&quot;,&quot;name&quot;:&quot;Spain&quot;,&quot;latitude&quot;:null,&quot;longitude&quot;:null,&quot;country_code&quot;:null,&quot;country_name&quot;:null,&quot;country_uid&quot;:null,&quot;provider&quot;:&quot;Geonames&quot;,&quot;adm_level&quot;:0,&quot;g0&quot;:&quot;000&quot;,&quot;g1&quot;:null,&quot;g2&quot;:null,&quot;g3&quot;:null,&quot;g4&quot;:null,&quot;custom_geo_source&quot;:null}}]}</pre>
       </div>
     </div>
   </body>

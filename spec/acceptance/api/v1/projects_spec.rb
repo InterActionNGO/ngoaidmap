@@ -1,7 +1,7 @@
 require 'acceptance_helper'
 
 resource 'Projects' do
-  header "Accept", "application/json; application/vnd.esios-api-v1+json"
+  header "Accept", "application/json; application/vnd.ngoaidmap-api-v1+json"
   header "Content-Type", "application/json"
   header 'Host', 'http://ngoaidmap.org'
 
@@ -14,7 +14,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect results.include?(['project0', 'project1', 'project2'])
     end
   end
@@ -30,7 +30,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects with an offset" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect results.include?(['project8', 'project9', 'project10'])
     end
   end
@@ -46,7 +46,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects with a limit" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect results.include?(['project1', 'project2', 'project3'])
     end
   end
@@ -63,7 +63,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects by implementing organization" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect(results).to eq(['project_with_organization'])
     end
   end
@@ -79,7 +79,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects by donors" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect(results).to eq(['project_with_donor'])
     end
   end
@@ -95,7 +95,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects by sectors" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect(results).to eq(['project_with_sector'])
     end
   end
@@ -111,7 +111,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects by countries" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect(results).to eq(['project_with_country'])
     end
   end
@@ -130,7 +130,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects by geolocation" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect(results).to eq(['project_with_geolocation'])
     end
   end
@@ -148,7 +148,7 @@ resource 'Projects' do
       expect(status).to eq(200)
       results = JSON.parse(response_body)
       expect(results.length).to be == 1
-      expect(results['data']['name']).to  be == name
+      expect(results['data']['attributes']['name']).to  be == name
     end
   end
 

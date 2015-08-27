@@ -78,7 +78,7 @@ class OrganizationSerializer < ActiveModel::Serializer
         sectors << { id: sector.id, name: sector.name }
       end
     end
-    sectors
+    sectors.uniq
   end
   def logo
     object.logo(:medium)

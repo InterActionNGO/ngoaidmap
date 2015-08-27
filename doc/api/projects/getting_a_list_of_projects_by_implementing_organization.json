@@ -19,7 +19,7 @@
       "request_path": "/api/projects?organizations[]=1",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json; application/vnd.esios-api-v1+json",
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
         "Content-Type": "application/json",
         "Host": "http://ngoaidmap.org",
         "Cookie": ""
@@ -32,20 +32,20 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"1\",\"name\":\"project_with_organization\",\"description\":null,\"links\":{\"organization\":{\"linkage\":{\"type\":\"organizations\",\"id\":\"1\"}},\"sectors\":{\"linkage\":[]},\"geolocations\":{\"linkage\":[]}}}],\"included\":[{\"id\":\"1\",\"name\":\"One Organization\",\"type\":\"organizations\"}],\"meta\":{\"total\":{\"[1, nil, nil, nil, nil, 1]\":1}}}",
+      "response_body": "{\"data\":[{\"id\":\"2\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_organization\",\"description\":null},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"1\"}},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]}}}],\"included\":[{\"id\":\"1\",\"type\":\"organizations\",\"attributes\":{\"name\":\"One Organization\"}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"87cca5050778801444debea2a493d5c8\"",
+        "ETag": "W/\"51c1bc05cabee76daf74f014518ec49d\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "f04a0f6e-1c57-44a5-9add-a8ca6c10ebbd",
-        "X-Runtime": "0.032084",
-        "Content-Length": "342"
+        "X-Request-Id": "4ffa8083-da81-49b4-9bca-7c33cfeef70c",
+        "X-Runtime": "0.029228",
+        "Content-Length": "321"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/projects?organizations[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?organizations[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

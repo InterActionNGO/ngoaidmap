@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Projects API</title>
+    <title>Donors API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Projects API</h1>
+      <h1>Donors API</h1>
 
       <div class="article">
-        <h2>Getting a list of projects by sectors</h2>
-        <h3>GET /api/projects?sectors[]=:sector</h3>
+        <h2>Getting a list of donors for a particular sector</h2>
+        <h3>GET /api/donors?sectors[]=:sector</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -123,7 +123,7 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">sector</span>
+                    <span class="name">sectors</span>
                 </td>
                 <td>
                   <span class="description">Array. Sector ids</span>
@@ -137,21 +137,21 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
-Content-Type: application/json
+Content-Type: application/vnd.api+json
 Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/projects?sectors[]=2</pre>
+          <pre class="request route highlight">GET /api/donors?sectors[]=1</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">sectors: [&quot;2&quot;]</pre>
+            <pre class="request query_parameters highlight">sectors: [&quot;1&quot;]</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?sectors[]=2&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/donors?sectors[]=1&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
-	-H &quot;Content-Type: application/json&quot; \
+	-H &quot;Content-Type: application/vnd.api+json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
 
@@ -161,15 +161,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;d700d14175333864d6b5fc563a29de36&quot;
+ETag: W/&quot;1fa25f21adac1eb26acd37264cb7e99e&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 8f193af7-7c72-4c5e-a797-fc7292fff27c
-X-Runtime: 0.031100
-Content-Length: 302</pre>
+X-Request-Id: 5ac58e3a-56c7-4b68-b347-cec53337ae2f
+X-Runtime: 0.012093
+Content-Length: 98</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;4&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_sector&quot;,&quot;description&quot;:null},&quot;relationships&quot;:{&quot;organization&quot;:{&quot;data&quot;:null},&quot;sectors&quot;:{&quot;data&quot;:[{&quot;type&quot;:&quot;sectors&quot;,&quot;id&quot;:&quot;2&quot;}]},&quot;geolocations&quot;:{&quot;data&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;2&quot;,&quot;type&quot;:&quot;sectors&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;Agriculture&quot;}}]}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;5&quot;,&quot;type&quot;:&quot;donors&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;donor_with_sector&quot;}}],&quot;meta&quot;:{&quot;total&quot;:1}}</pre>
       </div>
     </div>
   </body>

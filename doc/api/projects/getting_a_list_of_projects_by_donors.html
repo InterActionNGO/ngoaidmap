@@ -136,7 +136,7 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Accept: application/json; application/vnd.esios-api-v1+json
+            <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
 Content-Type: application/json
 Host: http://ngoaidmap.org
 Cookie: </pre>
@@ -150,7 +150,7 @@ Cookie: </pre>
 
             <h4>cURL</h4>
             <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?donors[]=1&quot; -X GET \
-	-H &quot;Accept: application/json; application/vnd.esios-api-v1+json&quot; \
+	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
@@ -161,15 +161,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;29841cddeeaf41d8cfab8b4c7ecf12a1&quot;
+ETag: W/&quot;3b90a9d5e65b17746ac5df97d54694a1&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: e52b3341-7706-441d-941c-1d26ca7b97c9
-X-Runtime: 0.033974
-Content-Length: 233</pre>
+X-Request-Id: f345c0aa-0852-4afe-93a1-376bb3f84c88
+X-Runtime: 0.028841
+Content-Length: 197</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;project_with_donor&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;geolocations&quot;:{&quot;linkage&quot;:[]}}}],&quot;meta&quot;:{&quot;total&quot;:{&quot;[2, nil, nil, nil, 1, nil]&quot;:1}}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;3&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_donor&quot;,&quot;description&quot;:null},&quot;relationships&quot;:{&quot;organization&quot;:{&quot;data&quot;:null},&quot;sectors&quot;:{&quot;data&quot;:[]},&quot;geolocations&quot;:{&quot;data&quot;:[]}}}]}</pre>
       </div>
     </div>
   </body>
