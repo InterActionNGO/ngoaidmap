@@ -136,7 +136,7 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Accept: application/json; application/ngoaidmap-api-v1+json
+            <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
 Content-Type: application/vnd.api+json
 Host: http://ngoaidmap.org
 Cookie: </pre>
@@ -148,7 +148,7 @@ Cookie: </pre>
 
             <h4>cURL</h4>
             <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/donors/2&quot; -X GET \
-	-H &quot;Accept: application/json; application/ngoaidmap-api-v1+json&quot; \
+	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/vnd.api+json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
@@ -159,15 +159,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;6b03f1984a4873a09b2bdcb550fea62f&quot;
+ETag: W/&quot;6c33369f3e641f9abd0fb292ff9923af&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 5a84aaef-be40-454f-acaa-2bc9907bbd4d
-X-Runtime: 0.118799
-Content-Length: 385</pre>
+X-Request-Id: a897e3e9-85ca-4005-9e57-d79797bc4c27
+X-Runtime: 0.083196
+Content-Length: 402</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:{&quot;type&quot;:&quot;donor&quot;,&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Red Cross&quot;,&quot;description&quot;:null,&quot;website&quot;:null,&quot;twitter&quot;:null,&quot;facebook&quot;:null,&quot;contact_person_name&quot;:null,&quot;contact_company&quot;:null,&quot;contact_person_position&quot;:null,&quot;contact_email&quot;:null,&quot;contact_phone_number&quot;:null,&quot;site_specific_information&quot;:null,&quot;logo&quot;:&quot;/logos/medium/missing.png&quot;,&quot;links&quot;:{&quot;donated_projects&quot;:{&quot;linkage&quot;:[]},&quot;offices&quot;:{&quot;linkage&quot;:[]}}}}</pre>
+              <pre class="response body">{&quot;data&quot;:{&quot;id&quot;:&quot;2&quot;,&quot;type&quot;:&quot;donor&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;Red Cross&quot;,&quot;description&quot;:null,&quot;website&quot;:null,&quot;twitter&quot;:null,&quot;facebook&quot;:null,&quot;contact_person_name&quot;:null,&quot;contact_company&quot;:null,&quot;contact_person_position&quot;:null,&quot;contact_email&quot;:null,&quot;contact_phone_number&quot;:null,&quot;site_specific_information&quot;:null,&quot;logo&quot;:&quot;/logos/medium/missing.png&quot;},&quot;relationships&quot;:{&quot;donated_projects&quot;:{&quot;data&quot;:[]},&quot;offices&quot;:{&quot;data&quot;:[]}}}}</pre>
       </div>
     </div>
   </body>

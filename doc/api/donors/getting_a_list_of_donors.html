@@ -117,7 +117,7 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Accept: application/json; application/ngoaidmap-api-v1+json
+            <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
 Content-Type: application/vnd.api+json
 Host: http://ngoaidmap.org
 Cookie: </pre>
@@ -129,7 +129,7 @@ Cookie: </pre>
 
             <h4>cURL</h4>
             <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/donors&quot; -X GET \
-	-H &quot;Accept: application/json; application/ngoaidmap-api-v1+json&quot; \
+	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/vnd.api+json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
@@ -140,15 +140,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;512a94ba3317fdbeaadce087b7758d1b&quot;
+ETag: W/&quot;99bba54659ba53668436daac4696fa86&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: c7c0f7ec-c0d4-470f-9623-879843fbf59b
-X-Runtime: 0.012256
-Content-Length: 75</pre>
+X-Request-Id: f18f5f7c-c8d9-41d8-a88b-479e68723f0f
+X-Runtime: 0.015270
+Content-Length: 90</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;Red Cross&quot;,&quot;type&quot;:&quot;donors&quot;}],&quot;meta&quot;:{&quot;total&quot;:1}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;type&quot;:&quot;donors&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;Red Cross&quot;}}],&quot;meta&quot;:{&quot;total&quot;:1}}</pre>
       </div>
     </div>
   </body>

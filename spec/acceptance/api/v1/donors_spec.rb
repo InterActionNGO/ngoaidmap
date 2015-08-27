@@ -18,7 +18,7 @@ resource 'Donors' do
       expect(status).to eq(200)
       results = JSON.parse(response_body)
       expect(results.length).to be == 1
-      expect(results['data']['name']).to  be == name
+      expect(results['data']['attributes']['name']).to  be == name
     end
   end
 
@@ -44,9 +44,30 @@ resource 'Donors' do
 
     example_request "Getting a list of donors" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect results.include?(['donor0',
                                'donor1', 'donor2'])
     end
   end
+
+  get "/api/donors?sectors[]=:sector" do
+    parameter :sectors, "Array. Sector ids"
+    p = FactoryGirl.create(:project, name: "project_with_organization")
+    s = FactoryGirl.create(:sector)
+    p.sectors = [s]
+    p.save!
+    let(:sector) do
+      s.id
+    end
+    let!(:donor) do
+      FactoryGirl.create(:donor, name: "donor_with_sector", donations: [FactoryGirl.create(:donation, project_id: p.id)])
+    end
+
+    example_request "Getting a list of donors for a particular sector" do
+      expect(status).to eq(200)
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
+      expect results.include?("donor_with_sector")
+    end
+  end
 end
+

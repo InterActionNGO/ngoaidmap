@@ -16,7 +16,7 @@
       "request_path": "/api/organizations",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json; application/ngoaidmap-api-v1+json",
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
         "Content-Type": "application/vnd.api+json",
         "Host": "http://ngoaidmap.org",
         "Cookie": ""
@@ -26,20 +26,20 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"1\",\"name\":\"One Organization\",\"type\":\"organizations\"}],\"meta\":{\"total\":1}}",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"organizations\",\"attributes\":{\"name\":\"One Organization\"}}],\"meta\":{\"total\":1}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"de7c26291752aa3acb6803611602c576\"",
+        "ETag": "W/\"5a0c478ff619c8ddfe386ee469606ff3\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "41dbc8cf-5b11-47ac-878f-b11704127560",
-        "X-Runtime": "0.008936",
-        "Content-Length": "89"
+        "X-Request-Id": "0f3ce634-01aa-49a1-8cab-a4956f604341",
+        "X-Runtime": "0.009051",
+        "Content-Length": "104"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/organizations\" -X GET \\\n\t-H \"Accept: application/json; application/ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/organizations\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

@@ -136,7 +136,7 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Accept: application/json; application/ngoaidmap-api-v1+json
+            <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
 Content-Type: application/vnd.api+json
 Host: http://ngoaidmap.org
 Cookie: </pre>
@@ -148,7 +148,7 @@ Cookie: </pre>
 
             <h4>cURL</h4>
             <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/organizations/5&quot; -X GET \
-	-H &quot;Accept: application/json; application/ngoaidmap-api-v1+json&quot; \
+	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/vnd.api+json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
@@ -159,15 +159,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;10705a7df50a68691595a022141f1dc1&quot;
+ETag: W/&quot;0158c8f8b70f692208555813e6dbdf4e&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 6c2d86a3-6bec-4ac8-bfdd-760914cdca6c
-X-Runtime: 0.099079
-Content-Length: 171</pre>
+X-Request-Id: 543b6004-cff5-446e-b24f-3803ae61f94e
+X-Runtime: 0.085793
+Content-Length: 191</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:{&quot;type&quot;:&quot;organizations&quot;,&quot;id&quot;:&quot;5&quot;,&quot;name&quot;:&quot;One Organization&quot;,&quot;description&quot;:null,&quot;sectors&quot;:[],&quot;logo&quot;:&quot;/logos/medium/missing.png&quot;,&quot;links&quot;:{&quot;projects&quot;:{&quot;linkage&quot;:[]}}}}</pre>
+              <pre class="response body">{&quot;data&quot;:{&quot;id&quot;:&quot;5&quot;,&quot;type&quot;:&quot;organizations&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;One Organization&quot;,&quot;description&quot;:null,&quot;sectors&quot;:[],&quot;logo&quot;:&quot;/logos/medium/missing.png&quot;},&quot;relationships&quot;:{&quot;projects&quot;:{&quot;data&quot;:[]}}}}</pre>
       </div>
     </div>
   </body>

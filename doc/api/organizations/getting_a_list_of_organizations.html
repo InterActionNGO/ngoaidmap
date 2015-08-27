@@ -117,7 +117,7 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Accept: application/json; application/ngoaidmap-api-v1+json
+            <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
 Content-Type: application/vnd.api+json
 Host: http://ngoaidmap.org
 Cookie: </pre>
@@ -129,7 +129,7 @@ Cookie: </pre>
 
             <h4>cURL</h4>
             <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/organizations&quot; -X GET \
-	-H &quot;Accept: application/json; application/ngoaidmap-api-v1+json&quot; \
+	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/vnd.api+json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
@@ -140,15 +140,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;de7c26291752aa3acb6803611602c576&quot;
+ETag: W/&quot;5a0c478ff619c8ddfe386ee469606ff3&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 41dbc8cf-5b11-47ac-878f-b11704127560
-X-Runtime: 0.008936
-Content-Length: 89</pre>
+X-Request-Id: 0f3ce634-01aa-49a1-8cab-a4956f604341
+X-Runtime: 0.009051
+Content-Length: 104</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;One Organization&quot;,&quot;type&quot;:&quot;organizations&quot;}],&quot;meta&quot;:{&quot;total&quot;:1}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;type&quot;:&quot;organizations&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;One Organization&quot;}}],&quot;meta&quot;:{&quot;total&quot;:1}}</pre>
       </div>
     </div>
   </body>
