@@ -136,7 +136,7 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Accept: application/json; application/vnd.esios-api-v1+json
+            <pre class="request headers">Accept: application/json; application/ngoaidmap-api-v1+json
 Content-Type: application/json
 Host: http://ngoaidmap.org
 Cookie: </pre>
@@ -150,7 +150,7 @@ Cookie: </pre>
 
             <h4>cURL</h4>
             <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?limit=3&quot; -X GET \
-	-H &quot;Accept: application/json; application/vnd.esios-api-v1+json&quot; \
+	-H &quot;Accept: application/json; application/ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
@@ -161,15 +161,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;991053d62451817b78265e61986a886b&quot;
+ETag: W/&quot;f9be4060cf5591b61e4013053d0ab49c&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: a10d1c79-ac6a-4cd5-aafe-5f7b0d8e8a39
-X-Runtime: 0.049724
-Content-Length: 947</pre>
+X-Request-Id: 2b0dc28c-0dcd-4eaa-aa88-efb70b59c6a6
+X-Runtime: 0.039969
+Content-Length: 715</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;5&quot;,&quot;name&quot;:&quot;project_with_geolocation&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;geolocations&quot;:{&quot;linkage&quot;:[{&quot;type&quot;:&quot;geolocations&quot;,&quot;id&quot;:&quot;3&quot;}]}}},{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;21&quot;,&quot;name&quot;:&quot;One Project&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;geolocations&quot;:{&quot;linkage&quot;:[]}}},{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;26&quot;,&quot;name&quot;:&quot;project4&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;geolocations&quot;:{&quot;linkage&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;3&quot;,&quot;uid&quot;:&quot;000&quot;,&quot;name&quot;:&quot;Spain&quot;,&quot;latitude&quot;:null,&quot;longitude&quot;:null,&quot;country_code&quot;:null,&quot;country_name&quot;:null,&quot;country_uid&quot;:null,&quot;provider&quot;:&quot;Geonames&quot;,&quot;adm_level&quot;:0,&quot;g0&quot;:&quot;000&quot;,&quot;g1&quot;:null,&quot;g2&quot;:null,&quot;g3&quot;:null,&quot;g4&quot;:null,&quot;custom_geo_source&quot;:null,&quot;type&quot;:&quot;geolocations&quot;}],&quot;meta&quot;:{&quot;total&quot;:{&quot;[26, nil, nil, nil, nil, nil]&quot;:1,&quot;[5, 3, nil, nil, nil, nil]&quot;:1,&quot;[21, nil, nil, nil, nil, nil]&quot;:1}}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;project_with_organization&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:{&quot;type&quot;:&quot;organizations&quot;,&quot;id&quot;:&quot;1&quot;}},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;geolocations&quot;:{&quot;linkage&quot;:[]}}},{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;project_with_donor&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;geolocations&quot;:{&quot;linkage&quot;:[]}}},{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;3&quot;,&quot;name&quot;:&quot;project_with_sector&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[{&quot;type&quot;:&quot;sectors&quot;,&quot;id&quot;:&quot;1&quot;}]},&quot;geolocations&quot;:{&quot;linkage&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;One Organization&quot;,&quot;type&quot;:&quot;organizations&quot;},{&quot;type&quot;:&quot;sectors&quot;,&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;Agriculture&quot;}]}</pre>
       </div>
     </div>
   </body>

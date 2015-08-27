@@ -1,7 +1,7 @@
 require 'acceptance_helper'
 
 resource 'Projects' do
-  header "Accept", "application/json; application/vnd.esios-api-v1+json"
+  header "Accept", "application/json; application/vnd.ngoaidmap-api-v1+json"
   header "Content-Type", "application/json"
   header 'Host', 'http://ngoaidmap.org'
 

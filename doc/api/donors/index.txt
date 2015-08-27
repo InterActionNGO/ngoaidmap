@@ -6,7 +6,7 @@ Parameters:
 
 Request:
   GET /api/donors/2
-  Accept: application/json; application/vnd.api+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -19,8 +19,8 @@ Response:
   ETag: W/"6b03f1984a4873a09b2bdcb550fea62f"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 39c9c7fa-4592-492c-a3f6-6721de67fd33
-  X-Runtime: 0.078386
+  X-Request-Id: 5a84aaef-be40-454f-acaa-2bc9907bbd4d
+  X-Runtime: 0.118799
   X-XSS-Protection: 1; mode=block
 
   {"data":{"type":"donor","id":"2","name":"Red Cross","description":null,"website":null,"twitter":null,"facebook":null,"contact_person_name":null,"contact_company":null,"contact_person_position":null,"contact_email":null,"contact_phone_number":null,"site_specific_information":null,"logo":"/logos/medium/missing.png","links":{"donated_projects":{"linkage":[]},"offices":{"linkage":[]}}}}
@@ -31,7 +31,7 @@ Getting a list of donors
 
 Request:
   GET /api/donors
-  Accept: application/json; application/vnd.api+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -44,8 +44,8 @@ Response:
   ETag: W/"512a94ba3317fdbeaadce087b7758d1b"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 62e5b318-2eee-4253-9810-8b178bde3f8c
-  X-Runtime: 0.011760
+  X-Request-Id: c7c0f7ec-c0d4-470f-9623-879843fbf59b
+  X-Runtime: 0.012256
   X-XSS-Protection: 1; mode=block
 
   {"data":[{"id":"1","name":"Red Cross","type":"donors"}],"meta":{"total":1}}

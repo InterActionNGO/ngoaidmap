@@ -3,7 +3,7 @@ Getting a list of projects
 
 Request:
   GET /api/projects
-  Accept: application/json; application/vnd.esios-api-v1+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -11,16 +11,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 2626
+  Content-Length: 2316
   Content-Type: application/json; charset=utf-8
-  ETag: W/"535d5a1766163ee6e845ed879476ca85"
+  ETag: W/"d290ab8903365c4709c837c2ccdf1b63"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 1e06018d-7b3b-41e7-abc9-b0fc966941f8
-  X-Runtime: 0.075498
+  X-Request-Id: 37da4460-c8d0-4298-8025-2e4047b3283e
+  X-Runtime: 0.102284
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"type":"projects","id":"1","name":"project_with_organization","description":null,"links":{"organization":{"linkage":{"type":"organizations","id":"1"}},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"2","name":"project_with_donor","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"3","name":"project_with_sector","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[{"type":"sectors","id":"1"}]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"4","name":"project_with_country","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"1"}]}}},{"type":"projects","id":"5","name":"project_with_geolocation","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"3"}]}}},{"type":"projects","id":"6","name":"One Project","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"7","name":"project0","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"8","name":"project1","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"9","name":"project2","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}}],"included":[{"id":"1","name":"One Organization","type":"organizations"},{"type":"sectors","id":"1","name":"Agriculture"},{"id":"1","uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"},{"id":"3","uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"}],"meta":{"total":{"[5, 3, nil, nil, nil, nil]":1,"[6, nil, nil, nil, nil, nil]":1,"[8, nil, nil, nil, nil, nil]":1,"[2, nil, nil, nil, 1, nil]":1,"[4, 1, \"ggg\", nil, nil, nil]":1,"[9, nil, nil, nil, nil, nil]":1,"[1, nil, nil, nil, nil, 1]":1,"[7, nil, nil, nil, nil, nil]":1,"[3, nil, nil, 1, nil, nil]":1}}}
+  {"data":[{"type":"projects","id":"1","name":"project_with_organization","description":null,"links":{"organization":{"linkage":{"type":"organizations","id":"1"}},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"2","name":"project_with_donor","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"3","name":"project_with_sector","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[{"type":"sectors","id":"1"}]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"4","name":"project_with_country","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"1"}]}}},{"type":"projects","id":"5","name":"project_with_geolocation","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"3"}]}}},{"type":"projects","id":"6","name":"One Project","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"7","name":"project0","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"8","name":"project1","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"9","name":"project2","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}}],"included":[{"id":"1","name":"One Organization","type":"organizations"},{"type":"sectors","id":"1","name":"Agriculture"},{"id":"1","uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"},{"id":"3","uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"}]}
 
 
 Getting a list of projects with an offset
@@ -31,7 +31,7 @@ Parameters:
 
 Request:
   GET /api/projects?offset=7
-  Accept: application/json; application/vnd.esios-api-v1+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -41,16 +41,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 4020
+  Content-Length: 3468
   Content-Type: application/json; charset=utf-8
-  ETag: W/"300dc23df0fc14793f256f8602b2e976"
+  ETag: W/"e03f948a4bc987cd2523017a3b67f696"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 416ce7d4-4a7d-4040-a971-ce462e9afd34
-  X-Runtime: 0.071518
+  X-Request-Id: e495ae00-649a-4242-969f-649083c65ea3
+  X-Runtime: 0.061332
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"type":"projects","id":"1","name":"project_with_organization","description":null,"links":{"organization":{"linkage":{"type":"organizations","id":"1"}},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"2","name":"project_with_donor","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"3","name":"project_with_sector","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[{"type":"sectors","id":"1"}]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"4","name":"project_with_country","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"1"}]}}},{"type":"projects","id":"5","name":"project_with_geolocation","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"3"}]}}},{"type":"projects","id":"10","name":"One Project","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"11","name":"project0","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"12","name":"project1","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"13","name":"project2","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"14","name":"project3","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"15","name":"project4","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"16","name":"project5","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"17","name":"project6","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"18","name":"project7","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"19","name":"project8","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"20","name":"project9","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}}],"included":[{"id":"1","name":"One Organization","type":"organizations"},{"type":"sectors","id":"1","name":"Agriculture"},{"id":"1","uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"},{"id":"3","uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"}],"meta":{"total":{"[11, nil, nil, nil, nil, nil]":1,"[17, nil, nil, nil, nil, nil]":1,"[5, 3, nil, nil, nil, nil]":1,"[18, nil, nil, nil, nil, nil]":1,"[12, nil, nil, nil, nil, nil]":1,"[10, nil, nil, nil, nil, nil]":1,"[20, nil, nil, nil, nil, nil]":1,"[2, nil, nil, nil, 1, nil]":1,"[4, 1, \"ggg\", nil, nil, nil]":1,"[14, nil, nil, nil, nil, nil]":1,"[19, nil, nil, nil, nil, nil]":1,"[1, nil, nil, nil, nil, 1]":1,"[16, nil, nil, nil, nil, nil]":1,"[15, nil, nil, nil, nil, nil]":1,"[13, nil, nil, nil, nil, nil]":1,"[3, nil, nil, 1, nil, nil]":1}}}
+  {"data":[{"type":"projects","id":"1","name":"project_with_organization","description":null,"links":{"organization":{"linkage":{"type":"organizations","id":"1"}},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"2","name":"project_with_donor","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"3","name":"project_with_sector","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[{"type":"sectors","id":"1"}]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"4","name":"project_with_country","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"1"}]}}},{"type":"projects","id":"5","name":"project_with_geolocation","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"3"}]}}},{"type":"projects","id":"10","name":"One Project","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"11","name":"project0","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"12","name":"project1","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"13","name":"project2","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"14","name":"project3","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"15","name":"project4","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"16","name":"project5","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"17","name":"project6","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"18","name":"project7","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"19","name":"project8","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"20","name":"project9","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}}],"included":[{"id":"1","name":"One Organization","type":"organizations"},{"type":"sectors","id":"1","name":"Agriculture"},{"id":"1","uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"},{"id":"3","uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"}]}
 
 
 Getting a list of projects with a limit
@@ -61,7 +61,7 @@ Parameters:
 
 Request:
   GET /api/projects?limit=3
-  Accept: application/json; application/vnd.esios-api-v1+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -71,16 +71,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 947
+  Content-Length: 715
   Content-Type: application/json; charset=utf-8
-  ETag: W/"991053d62451817b78265e61986a886b"
+  ETag: W/"f9be4060cf5591b61e4013053d0ab49c"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: a10d1c79-ac6a-4cd5-aafe-5f7b0d8e8a39
-  X-Runtime: 0.049724
+  X-Request-Id: 2b0dc28c-0dcd-4eaa-aa88-efb70b59c6a6
+  X-Runtime: 0.039969
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"type":"projects","id":"5","name":"project_with_geolocation","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"3"}]}}},{"type":"projects","id":"21","name":"One Project","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"26","name":"project4","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}}],"included":[{"id":"3","uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"}],"meta":{"total":{"[26, nil, nil, nil, nil, nil]":1,"[5, 3, nil, nil, nil, nil]":1,"[21, nil, nil, nil, nil, nil]":1}}}
+  {"data":[{"type":"projects","id":"1","name":"project_with_organization","description":null,"links":{"organization":{"linkage":{"type":"organizations","id":"1"}},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"2","name":"project_with_donor","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}},{"type":"projects","id":"3","name":"project_with_sector","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[{"type":"sectors","id":"1"}]},"geolocations":{"linkage":[]}}}],"included":[{"id":"1","name":"One Organization","type":"organizations"},{"type":"sectors","id":"1","name":"Agriculture"}]}
 
 
 Getting a list of projects by implementing organization
@@ -91,7 +91,7 @@ Parameters:
 
 Request:
   GET /api/projects?organizations[]=1
-  Accept: application/json; application/vnd.esios-api-v1+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -101,16 +101,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 342
+  Content-Length: 292
   Content-Type: application/json; charset=utf-8
-  ETag: W/"87cca5050778801444debea2a493d5c8"
+  ETag: W/"bb0377ee80200f84a7e768e4f51e09ce"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: f04a0f6e-1c57-44a5-9add-a8ca6c10ebbd
-  X-Runtime: 0.032084
+  X-Request-Id: 23037542-503a-43ee-bc2f-81e84f215871
+  X-Runtime: 0.025077
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"type":"projects","id":"1","name":"project_with_organization","description":null,"links":{"organization":{"linkage":{"type":"organizations","id":"1"}},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}}],"included":[{"id":"1","name":"One Organization","type":"organizations"}],"meta":{"total":{"[1, nil, nil, nil, nil, 1]":1}}}
+  {"data":[{"type":"projects","id":"1","name":"project_with_organization","description":null,"links":{"organization":{"linkage":{"type":"organizations","id":"1"}},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}}],"included":[{"id":"1","name":"One Organization","type":"organizations"}]}
 
 
 Getting a list of projects by donors
@@ -121,7 +121,7 @@ Parameters:
 
 Request:
   GET /api/projects?donors[]=1
-  Accept: application/json; application/vnd.esios-api-v1+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -131,16 +131,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 233
+  Content-Length: 183
   Content-Type: application/json; charset=utf-8
-  ETag: W/"29841cddeeaf41d8cfab8b4c7ecf12a1"
+  ETag: W/"50aebeb49e5fef111873115a3e819e81"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: e52b3341-7706-441d-941c-1d26ca7b97c9
-  X-Runtime: 0.033974
+  X-Request-Id: 5b759e9e-a1b2-4728-932e-e76596a0b099
+  X-Runtime: 0.024799
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"type":"projects","id":"2","name":"project_with_donor","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}}],"meta":{"total":{"[2, nil, nil, nil, 1, nil]":1}}}
+  {"data":[{"type":"projects","id":"2","name":"project_with_donor","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}}]}
 
 
 Getting a list of projects by sectors
@@ -151,7 +151,7 @@ Parameters:
 
 Request:
   GET /api/projects?sectors[]=1
-  Accept: application/json; application/vnd.esios-api-v1+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -161,16 +161,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 323
+  Content-Length: 273
   Content-Type: application/json; charset=utf-8
-  ETag: W/"7e4c3a6655edd6f8f6b11dec50c7067d"
+  ETag: W/"b46e7832dc06c4803c763a2d61a11078"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: b403f845-de98-4423-bbf7-0c03a3c5fb45
-  X-Runtime: 0.034078
+  X-Request-Id: 2bccb3c8-22e9-458d-beab-db0cc6cc0241
+  X-Runtime: 0.024817
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"type":"projects","id":"3","name":"project_with_sector","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[{"type":"sectors","id":"1"}]},"geolocations":{"linkage":[]}}}],"included":[{"type":"sectors","id":"1","name":"Agriculture"}],"meta":{"total":{"[3, nil, nil, 1, nil, nil]":1}}}
+  {"data":[{"type":"projects","id":"3","name":"project_with_sector","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[{"type":"sectors","id":"1"}]},"geolocations":{"linkage":[]}}}],"included":[{"type":"sectors","id":"1","name":"Agriculture"}]}
 
 
 Getting a list of projects by countries
@@ -181,7 +181,7 @@ Parameters:
 
 Request:
   GET /api/projects?countries[]=ggg
-  Accept: application/json; application/vnd.esios-api-v1+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -191,16 +191,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 548
+  Content-Length: 494
   Content-Type: application/json; charset=utf-8
-  ETag: W/"7ba22bb64ce0f6c7f97b4f6764260ad2"
+  ETag: W/"52599c0c4d268ab8a77bdcd25d180030"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 05203854-d52d-407f-929e-34c73f1f5519
-  X-Runtime: 0.033762
+  X-Request-Id: 8dfe3969-6800-48d5-bfa0-67f573cf01fd
+  X-Runtime: 0.026600
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"type":"projects","id":"4","name":"project_with_country","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"1"}]}}}],"included":[{"id":"1","uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"}],"meta":{"total":{"[4, 1, \"ggg\", nil, nil, nil]":1}}}
+  {"data":[{"type":"projects","id":"4","name":"project_with_country","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"1"}]}}}],"included":[{"id":"1","uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"}]}
 
 
 Getting a list of projects by geolocation
@@ -212,7 +212,7 @@ Parameters:
 
 Request:
   GET /api/projects?geolocation=000&level=0
-  Accept: application/json; application/vnd.esios-api-v1+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -223,16 +223,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 548
+  Content-Length: 498
   Content-Type: application/json; charset=utf-8
-  ETag: W/"9cb4cc171613d9d08b1b408d722c5350"
+  ETag: W/"680b1a442a9a65039126d65eae4ebcc2"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: f6c30272-3506-486e-bf6d-92e61f0bf354
-  X-Runtime: 0.033981
+  X-Request-Id: 4372366e-aaa9-441c-8631-8cfb90a42f3b
+  X-Runtime: 0.025961
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"type":"projects","id":"5","name":"project_with_geolocation","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"3"}]}}}],"included":[{"id":"3","uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"}],"meta":{"total":{"[5, 3, nil, nil, nil, nil]":1}}}
+  {"data":[{"type":"projects","id":"5","name":"project_with_geolocation","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[{"type":"geolocations","id":"3"}]}}}],"included":[{"id":"3","uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null,"type":"geolocations"}]}
 
 
 Get a particular project data
@@ -243,7 +243,7 @@ Parameters:
 
 Request:
   GET /api/projects/37
-  Accept: application/json; application/vnd.esios-api-v1+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -256,8 +256,8 @@ Response:
   ETag: W/"e6850dfd69c4f0b0bc3e2d37a28717ee"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 39b2d86d-f8da-4244-99d6-d0489db296fa
-  X-Runtime: 0.008543
+  X-Request-Id: 7177a098-10bc-4dec-8693-f390a2b15a2e
+  X-Runtime: 0.008047
   X-XSS-Protection: 1; mode=block
 
   {"data":{"type":"projects","id":"37","name":"One Project","description":null,"links":{"organization":{"linkage":null},"sectors":{"linkage":[]},"geolocations":{"linkage":[]}}}}

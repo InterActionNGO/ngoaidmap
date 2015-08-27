@@ -16,7 +16,7 @@
       "request_path": "/api/organizations",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json; application/vnd.api+json",
+        "Accept": "application/json; application/ngoaidmap-api-v1+json",
         "Content-Type": "application/vnd.api+json",
         "Host": "http://ngoaidmap.org",
         "Cookie": ""
@@ -34,12 +34,12 @@
         "Content-Type": "application/json; charset=utf-8",
         "ETag": "W/\"de7c26291752aa3acb6803611602c576\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "e76c0b66-9b39-4630-86c9-5185c4583eec",
-        "X-Runtime": "0.008325",
+        "X-Request-Id": "41dbc8cf-5b11-47ac-878f-b11704127560",
+        "X-Runtime": "0.008936",
         "Content-Length": "89"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/organizations\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.api+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/organizations\" -X GET \\\n\t-H \"Accept: application/json; application/ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

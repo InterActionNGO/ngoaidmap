@@ -6,7 +6,7 @@ Parameters:
 
 Request:
   GET /api/organizations/5
-  Accept: application/json; application/vnd.api+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -19,8 +19,8 @@ Response:
   ETag: W/"10705a7df50a68691595a022141f1dc1"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: ca74063f-48b4-4fc6-9f12-a80b42cd3a0d
-  X-Runtime: 0.086241
+  X-Request-Id: 6c2d86a3-6bec-4ac8-bfdd-760914cdca6c
+  X-Runtime: 0.099079
   X-XSS-Protection: 1; mode=block
 
   {"data":{"type":"organizations","id":"5","name":"One Organization","description":null,"sectors":[],"logo":"/logos/medium/missing.png","links":{"projects":{"linkage":[]}}}}
@@ -31,7 +31,7 @@ Getting a list of organizations
 
 Request:
   GET /api/organizations
-  Accept: application/json; application/vnd.api+json
+  Accept: application/json; application/ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -44,8 +44,8 @@ Response:
   ETag: W/"de7c26291752aa3acb6803611602c576"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: e76c0b66-9b39-4630-86c9-5185c4583eec
-  X-Runtime: 0.008325
+  X-Request-Id: 41dbc8cf-5b11-47ac-878f-b11704127560
+  X-Runtime: 0.008936
   X-XSS-Protection: 1; mode=block
 
   {"data":[{"id":"1","name":"One Organization","type":"organizations"}],"meta":{"total":1}}

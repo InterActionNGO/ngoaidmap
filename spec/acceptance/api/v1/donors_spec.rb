@@ -1,7 +1,7 @@
 require 'acceptance_helper'
 
 resource 'Donors' do
-  header "Accept", "application/json; application/vnd.api+json"
+  header "Accept", "application/json; application/vnd.ngoaidmap-api-v1+json"
   header "Content-Type", "application/vnd.api+json"
   header 'Host', 'http://ngoaidmap.org'
 
