@@ -66,7 +66,7 @@ Rails.application.routes.draw do
   get 'location/*ids.xls' , to: 'georegion#show', :as => 'location_xls', :format => 'xls'
   get 'location/*ids.kml' , to: 'georegion#show', :as => 'location_kml', :format => 'kml'
   # End HACK!!
-  get 'location/*ids' , to: 'georegion#show', :as => 'location'
+  get 'location/:ids' , to: 'georegion#show', :as => 'location'
 
   # clusters and sector work through the same controller and view
   get 'sectors/:id' , to: 'clusters_sectors#show', :as => 'sector'
