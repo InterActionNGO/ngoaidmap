@@ -15,16 +15,20 @@ module ProjectsFiltering
     @map_data_max_count = 0;
     @projects_count = Rails.cache.fetch("projects_count_#{digest}", :expires_in => 24.hours) {results[0].uniq.length}
     @projects = Rails.cache.fetch("projects_#{digest}", :expires_in => 24.hours) {results[0].page(params[:page]).per(10)}
+    puts "***********************************************************************************************"
+    puts @projects
   end
   private
   def projects_params
-    params.permit(:page, :geolocation, :level, organizations:[], countries:[], sectors:[], donors:[], sectors:[])
+    params.permit(:page, :level, :ids, :geolocation, organizations:[], countries:[], sectors:[], donors:[], sectors:[])
   end
   def merge_params
     params.merge!({organizations: [params[:id]]}) if controller_name == 'organizations'
     params.merge!({donors: [params[:id]]}) if controller_name == 'donors'
     params.merge!({sectors: [params[:id]]}) if controller_name == 'clusters_sectors'
-    params.merge!({geolocations: [params[:ids]]}) if controller_name == 'georegion'
-    params.merge!({level: [params[:level]]}) if controller_name == 'georegion' && params[:level]
+    params.merge!({geolocation: params[:ids]}) if controller_name == 'georegion'
+    params.merge!({level: params[:level]}) if controller_name == 'georegion'
+    params[:level] = 0 if controller_name == 'georegion' && !params[:level]
+    params
   end
 end
