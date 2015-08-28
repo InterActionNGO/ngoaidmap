@@ -8,11 +8,7 @@
     var chld = "<%=@chld%>";
     var chd = "<%=@chd%>";
     var marker_source = "<%=@georegion_map_marker_source%>";
-    <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
-      var map_type = "administrative_map";
-    <% else %>
-      var map_type = "georegion";
-    <% end  %>
+    var map_type = "administrative_map";
     var last_level = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "false" : "true" %>";
     var show_regions_with_one_project = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "true" : "false" %>";
     var map_data = <%=raw(@map_data)%>;
@@ -21,8 +17,8 @@
     var area_fill_color = "<%=@georegion_map_fill_color%>";
     var theme = <%=@site.theme_id%>;
     var kind = window.location.pathname.split('/')[1];
-    var stylez = <%=raw @site.map_styles  %>;
-    var empty_layer = <%= @empty_layer %>;
+    // var stylez = <%=raw @site.map_styles  %>;
+    // var empty_layer = <%= @empty_layer %>;
     var globalPage = <%= @site.featured?? true : false %>;
     var page = "<%= params[:controller] %>";
   </script>
@@ -44,7 +40,7 @@
         <div id="sidebar-sectors" class="project-sectors mod-info"></div>
 
         <!-- Sectors by projects -->
-        <div id="sidebar-donors" class="project-donors mod-info"></div>
+        <!-- <div id="sidebar-donors" class="project-donors mod-info"></div> -->
 
         <!-- <div class="mod-info">
           <h3>Projects in other <%#= word_for_geo_context(@area).pluralize %></h3>
