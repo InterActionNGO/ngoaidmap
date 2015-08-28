@@ -1,4 +1,5 @@
 class GeoregionController < ApplicationController
+  include ProjectsFiltering
 
   layout :sites_layout
   #caches_action :show, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
