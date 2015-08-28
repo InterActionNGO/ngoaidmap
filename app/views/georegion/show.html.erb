@@ -65,7 +65,7 @@
 
         <%#= render :partial => 'new_partials/downloads', :locals => { :csv_path => location_path(@area, @carry_on_filters.merge(:format => :csv)), :xls_path => location_path(@area, @carry_on_filters.merge(:format => :xls)), :kml_path => location_path(@area, @carry_on_filters.merge(:format => :kml)) } %>
 
-        <%#= render "new_partials/index_projects" %>
+        <%= render "new_partials/index_projects" %>
 
       </section>
     </div>
