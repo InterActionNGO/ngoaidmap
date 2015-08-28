@@ -42,7 +42,7 @@ define([
 
     _defineRequestsByPlace: function(){
       if (!!window.sector) {
-        this.requests['donors-by-sector'] = _.str.sprintf('/api/sectors/%s?only=donors', sector.id)
+        this.requests['donors-by-sector'] = _.str.sprintf('/api/donors?sectors[]=%s', sector.id)
       }
     },
 

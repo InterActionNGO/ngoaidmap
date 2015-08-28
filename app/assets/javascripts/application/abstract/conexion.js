@@ -36,7 +36,6 @@ define([
       var projectLocations = _.groupBy(_.filter(this.included, function(include){ return include.type == 'geolocations'}), function(geo){return geo.attributes['g'+level]} );
       return _.compact(_.map(projectLocations,_.bind(function(location, locationKey) {
         var locationF = _.findWhere(this.regions, { uid: locationKey });
-        console.log(locationF,location);
         if (!!locationF && !!location) {
           return {
             count: location.length,
@@ -98,15 +97,13 @@ define([
     },
 
     getSectorsByProjectsAll: function(data,sectorId) {
-      console.log(data);
-      debugger;
       var sectorsByProjects = _.sortBy(_.map(data, function(v){
         return {
-          name: v.name,
+          name: v.attributes.name,
           id: v.id,
           url: '/sectors/'+v.id,
-          class: v.name.toLowerCase().replace(/\s/g, "-"),
-          count: v.projects_count
+          class: v.attributes.name.toLowerCase().replace(/\s/g, "-"),
+          count: v.attributes.projects_count
         }
       }), function(sector){
         return -sector.count;
