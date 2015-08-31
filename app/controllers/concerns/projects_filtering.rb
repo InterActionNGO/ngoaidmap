@@ -27,8 +27,8 @@ module ProjectsFiltering
     params.merge!({donors: [params[:id]]}) if controller_name == 'donors'
     params.merge!({sectors: [params[:id]]}) if controller_name == 'clusters_sectors'
     params.merge!({geolocation: params[:ids]}) if controller_name == 'georegion'
-    params.merge!({level: params[:level]}) if controller_name == 'georegion'
-    params[:level] = 0 if controller_name == 'georegion' && !params[:level]
+    params.merge!({level: params[:level]}) if controller_name == 'georegion' || (params[:geolocation] && !params[:level])
+    params[:level] = 0 if ((controller_name == 'georegion' && !params[:level]) || (params[:geolocation] && !params[:level]))
     params
   end
 end
