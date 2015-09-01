@@ -7,6 +7,7 @@ class GeoregionController < ApplicationController
   skip_before_filter :set_site, :only => [:list_regions1_from_country,:list_regions2_from_country,:list_regions3_from_country]
 
   def show
+    @geolocation = Geolocation.find_by(uid: params[:ids])
   #   raise NotFound if params[:ids].blank?
 
   #   ids = params[:ids]

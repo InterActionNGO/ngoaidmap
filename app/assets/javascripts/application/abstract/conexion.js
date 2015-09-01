@@ -33,9 +33,12 @@ define([
     },
 
     getLocationsByAdminLevel: function(level, nofilter) {
+      var level = level || 0;
       var projectLocations = _.groupBy(_.filter(this.included, function(include){ return include.type == 'geolocations'}), function(geo){return geo.attributes['g'+level]} );
-      return _.compact(_.map(projectLocations,_.bind(function(location, locationKey) {
-        var locationF = _.findWhere(this.regions, { uid: locationKey });
+      return _.compact(_.map(projectLocations,_.bind(function(_location, _locationKey) {
+        var location = _location;
+        var locationF = _.findWhere(this.regions, { uid: _locationKey });
+
         if (!!locationF && !!location) {
           return {
             count: location.length,
@@ -45,7 +48,7 @@ define([
             type: locationF.type,
             lat: locationF.latitude,
             lon: locationF.longitude,
-            url: (nofilter) ? '/location/' + locationF.id : this.setUrl('location',locationF.id),
+            url: (nofilter) ? '/location/' + locationF.uid : this.setUrl('geolocation',locationF.uid),
           }
         }
         return null;
@@ -75,7 +78,6 @@ define([
     },
 
     getSectorsByProjects: function(nofilter) {
-      console.log(this.getProjects());
       var sectors = _.groupBy(_.flatten(_.map(this.getProjects(), function(project){return project.relationships.sectors.data})), function(sector){
         return sector.id;
       });
@@ -86,7 +88,7 @@ define([
         return{
           name: sectorF.attributes.name,
           id: sectorF.id,
-          url: (nofilter) ? '/sectors/'+sectorF.id : this.setUrl('category_id',sectorF.id),
+          url: (nofilter) ? '/sectors/'+sectorF.id : this.setUrl('sectors[]',sectorF.id),
           class: sectorF.attributes.name.toLowerCase().replace(/\s/g, "-"),
           count: sector.length
         }

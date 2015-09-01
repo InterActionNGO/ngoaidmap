@@ -32,7 +32,7 @@
       <section class="layout-content">
 
         <header>
-          <h1 class="section-title"><%= projects_list_subtitle %></h1>
+          <h1 id="title-organization" data-id="<%= @organization.id %>" data-name="<%= @organization.name.html_safe %>" class="section-title"><%= @organization.name %></h1>
           <%= simple_format(@organization.description) if @organization.description.present? %>
         </header>
 

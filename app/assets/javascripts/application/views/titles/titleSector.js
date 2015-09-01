@@ -46,7 +46,7 @@ define([
 
     countryString: function(count){
       if (count == 1) {
-        return this.countries[0].name
+        return this.countries[0].attributes.name
       }else{
         return count.toLocaleString() +' countries'
       }
