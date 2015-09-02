@@ -44,6 +44,9 @@ define([
       if (!!window.sector) {
         this.requests['donors-by-sector'] = _.str.sprintf('/api/donors?sectors[]=%s', sector.id)
       }
+      if (!!window.geolocation) {
+        this.requests['donors-by-geolocation'] = _.str.sprintf('/api/donors?geolocation=%s', geolocation.uid)
+      }
     },
 
     execute: function(id, successCb, failureCb, data) {
