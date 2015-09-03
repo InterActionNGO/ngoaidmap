@@ -5,12 +5,12 @@ define([
   'backbone',
   'handlebars',
   'abstract/conexion',
-  'text!templates/titles/titleDonor.handlebars'
+  'text!templates/titles/titleCountry.handlebars'
   ], function(jquery, Backbone, handlebars, conexion, tpl) {
 
-  var TitleDonor = Backbone.View.extend({
+  var TitleCountry = Backbone.View.extend({
 
-    el: '#title-donor',
+    el: '#title-country',
 
     template: Handlebars.compile(tpl),
 
@@ -24,22 +24,15 @@ define([
 
     parseData: function(){
 
-      this.countries = this.conexion.getCountries();
-      this.organizations = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'organizations' });
       this.sectors = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'sectors' });
 
-
       var countP = this.conexion.getProjects().length;
-      var countC = this.countries.length;
-      var countO = this.organizations.length;
       var countS = this.sectors.length;
       var projects = this.projectString(countP);
 
       return {
         name: this.$el.data('name'),
         projects: this.projectString(countP,countS),
-        country: this.countryString(countC),
-        organization: this.organizationString(countO),
       }
     },
 
@@ -56,10 +49,6 @@ define([
       return (count == 1) ? this.countries[0].name : null;
     },
 
-    organizationString: function(count){
-      return (count == 1) ? this.organizations[0].attributes.name : null;
-    },
-
 
     render: function(){
       this.$el.html(this.template(this.parseData()));
@@ -68,6 +57,6 @@ define([
 
   });
 
-  return TitleDonor;
+  return TitleCountry;
 
 });

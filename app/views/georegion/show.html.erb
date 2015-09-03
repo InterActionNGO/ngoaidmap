@@ -21,6 +21,9 @@
     // var empty_layer = <%= @empty_layer %>;
     var globalPage = <%= @site.featured?? true : false %>;
     var page = "<%= params[:controller] %>";
+    var adm_level = <%= @geolocation.adm_level + 1 %>;
+    var geolocation = <%= raw(@geolocation.to_json) %>;
+    console.log(<%= raw(@geolocation.to_json) %>);
   </script>
 <% end %>
 
@@ -35,12 +38,11 @@
 
         <div id="sidebar-highlights" class="mod-highlighted-results mod-info"></div>
 
-        <%#= render 'new_partials/aside/location' %>
+        <div id="sidebar-location" class="location mod-info"></div>
 
         <div id="sidebar-sectors" class="project-sectors mod-info"></div>
 
-        <!-- Sectors by projects -->
-        <!-- <div id="sidebar-donors" class="project-donors mod-info"></div> -->
+        <div id="sidebar-donors" class="project-donors mod-info"></div>
 
         <!-- <div class="mod-info">
           <h3>Projects in other <%#= word_for_geo_context(@area).pluralize %></h3>
@@ -57,15 +59,14 @@
     <div class="grid-12 offset-1">
       <section class="layout-content" id="content">
 
-        <!-- <header>
-          <h1 class="section-title"><%#= georegion_projects_list_subtitle %><%#= ", " + @area_parent if @area_parent.present? %></h1>
+        <header>
+          <h1 id="title-country" data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="section-title"><%= @geolocation.name %></h1>
           <%#= content_tag :p, @area.wiki_description if @area.wiki_description %>
           <%#= content_tag :p, raw("Description provided by Wikipedia #{content_tag(:a, 'Read full article', :href => @area.wiki_url)}"), :class => 'provided' if @area.wiki_url %>
-        </header> -->
+        </header>
 
-        <%#= render :partial => 'new_partials/downloads', :locals => { :csv_path => location_path(@area, @carry_on_filters.merge(:format => :csv)), :xls_path => location_path(@area, @carry_on_filters.merge(:format => :xls)), :kml_path => location_path(@area, @carry_on_filters.merge(:format => :kml)) } %>
 
-        <%#= render "new_partials/index_projects" %>
+        <%= render "new_partials/index_projects" %>
 
       </section>
     </div>

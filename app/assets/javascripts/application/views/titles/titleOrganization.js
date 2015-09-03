@@ -10,7 +10,7 @@ define([
 
   var TitleDonor = Backbone.View.extend({
 
-    el: '#title-donor',
+    el: '#title-organization',
 
     template: Handlebars.compile(tpl),
 
@@ -25,13 +25,11 @@ define([
     parseData: function(){
 
       this.countries = this.conexion.getCountries();
-      this.organizations = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'organizations' });
       this.sectors = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'sectors' });
 
 
       var countP = this.conexion.getProjects().length;
       var countC = this.countries.length;
-      var countO = this.organizations.length;
       var countS = this.sectors.length;
       var projects = this.projectString(countP);
 
@@ -39,7 +37,6 @@ define([
         name: this.$el.data('name'),
         projects: this.projectString(countP,countS),
         country: this.countryString(countC),
-        organization: this.organizationString(countO),
       }
     },
 
@@ -54,10 +51,6 @@ define([
 
     countryString: function(count){
       return (count == 1) ? this.countries[0].name : null;
-    },
-
-    organizationString: function(count){
-      return (count == 1) ? this.organizations[0].attributes.name : null;
     },
 
 

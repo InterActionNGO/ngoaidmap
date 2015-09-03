@@ -12,6 +12,8 @@ define([
       this.regions = JSON.parse(map_data[1]).regions;
       this.projects = this.data.data;
       this.included = this.data.included;
+      console.log(this.projects);
+      console.log(this.included);
     },
 
     getProjects: function(){
@@ -33,9 +35,12 @@ define([
     },
 
     getLocationsByAdminLevel: function(level, nofilter) {
+      var level = level || 0;
       var projectLocations = _.groupBy(_.filter(this.included, function(include){ return include.type == 'geolocations'}), function(geo){return geo.attributes['g'+level]} );
-      return _.compact(_.map(projectLocations,_.bind(function(location, locationKey) {
-        var locationF = _.findWhere(this.regions, { uid: locationKey });
+      return _.compact(_.map(projectLocations,_.bind(function(_location, _locationKey) {
+        var location = _location;
+        var locationF = _.findWhere(this.regions, { uid: _locationKey });
+
         if (!!locationF && !!location) {
           return {
             count: location.length,
@@ -45,13 +50,43 @@ define([
             type: locationF.type,
             lat: locationF.latitude,
             lon: locationF.longitude,
-            url: (nofilter) ? '/location/' + locationF.id : this.setUrl('location',locationF.id),
+            url: (nofilter) ? '/location/' + locationF.uid : this.setUrl('geolocation',locationF.uid),
           }
         }
         return null;
       }, this )));
-
     },
+
+    getLocationsByProjects: function() {
+      var geolocations = _.groupBy(_.flatten(_.map(this.projects, function(p) {
+        return _.map(p.relationships.geolocations.data, function(g){
+          return g;
+        })
+      })), 'id' );
+
+      return _.map(geolocations, _.bind(function(_location, _locationKey){
+        var location = _location;
+        var locationF = _.findWhere(this.regions, { uid: _locationKey });
+        console.log(location);
+        console.log(locationF);
+        console.log(this.regions);
+        if (!!locationF && !!location) {
+          return {
+            count: g.length,
+            id: locationF.id,
+            uid: locationF.uid,
+            name: locationF.name,
+            type: locationF.type,
+            lat: locationF.latitude,
+            lon: locationF.longitude,
+            url: (nofilter) ? '/location/' + locationF.uid : this.setUrl('geolocation',locationF.uid),
+          }
+        }
+
+
+      }, this ));
+    },
+
 
     getLocationsByCountry: function(nofilter){
       return _.sortBy(this.getLocationsByAdminLevel(0,nofilter), function(country){
@@ -75,7 +110,6 @@ define([
     },
 
     getSectorsByProjects: function(nofilter) {
-      console.log(this.getProjects());
       var sectors = _.groupBy(_.flatten(_.map(this.getProjects(), function(project){return project.relationships.sectors.data})), function(sector){
         return sector.id;
       });
@@ -86,7 +120,7 @@ define([
         return{
           name: sectorF.attributes.name,
           id: sectorF.id,
-          url: (nofilter) ? '/sectors/'+sectorF.id : this.setUrl('category_id',sectorF.id),
+          url: (nofilter) ? '/sectors/'+sectorF.id : this.setUrl('sectors[]',sectorF.id),
           class: sectorF.attributes.name.toLowerCase().replace(/\s/g, "-"),
           count: sector.length
         }

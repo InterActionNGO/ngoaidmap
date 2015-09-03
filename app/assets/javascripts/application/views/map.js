@@ -40,7 +40,6 @@ define([
       if (this.$el.length === 0) {
         return false;
       }
-
       this.conexion = conexion;
 
       this.$map = $('#map');
@@ -113,9 +112,9 @@ define([
       }
 
       if (page === 'georegion' && this.markers.length === 1) {
-        setTimeout(function() {
+        setTimeout(_.bind(function() {
           this.map.setZoom(8);
-        }, 300);
+        }, this), 300);
       }
 
 
@@ -127,7 +126,16 @@ define([
     },
 
     markerParser: function(data){
-      var markers = _.sortBy(this.conexion.getLocationsByAdminLevel(0, true), function(country){
+      // if (geolocation) {
+      //   var markers = _.sortBy(this.conexion.getLocationsByProjects(), function(location){
+      //     return location.count;
+      //   });
+      // }else{
+      //   var markers = _.sortBy(this.conexion.getLocationsByAdminLevel(adm_level, true), function(country){
+      //     return country.count;
+      //   });
+      // }
+      var markers = _.sortBy(this.conexion.getLocationsByAdminLevel(adm_level, true), function(country){
         return country.count;
       });
 

@@ -15,10 +15,13 @@ define([
   //Titles
   'views/titles/titleSector',
   'views/titles/titleDonor',
+  'views/titles/titleOrganization',
+  'views/titles/titleCountry',
   //Sidebar
   'views/sidebar/sidebarHighlights',
   'views/sidebar/sidebarSectors',
   'views/sidebar/sidebarSectorsAll',
+  'views/sidebar/sidebarLocation',
   'views/sidebar/sidebarLocations',
   'views/sidebar/sidebarDonors',
   'views/sidebar/sidebarOrganizations',
@@ -27,7 +30,7 @@ define([
   'views/sidebar/sidebarOrganizationsMediaContact',
   'views/sidebar/sidebarOrganizationsFollowUs'
 ], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView, TimelineView,
-  GalleryView, TitleSector, TitleDonor, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocations, SidebarDonors, SidebarOrganizations,
+  GalleryView, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs) {
 
   var Router = Backbone.Router.extend({
@@ -67,6 +70,7 @@ define([
       new SidebarHighlights();
       new SidebarSectors();
       new SidebarSectorsAll();
+      new SidebarLocation();
       new SidebarLocations();
       new SidebarOrganizations();
       new SidebarDonors();
@@ -74,6 +78,8 @@ define([
       // Titles
       new TitleSector();
       new TitleDonor();
+      new TitleOrganization();
+      new TitleCountry();
 
       // Organization sidebars
       new SidebarOrganizationsInfoContact();

@@ -71,7 +71,6 @@ require([
   'router',
   'chachiSlider'
 ], function($, Router) {
-
   // Extensions
   Number.prototype.toCommas = function() {
     return this.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
