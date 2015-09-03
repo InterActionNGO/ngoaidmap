@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(:version => 20140530130528) do
   add_index "geolocations", ["uid"], :name => "index_geolocations_on_uid"
 
   create_table "geolocations_projects", :id => false, :force => true do |t|
-    t.integer "geolocation_id"
+    t.integer  "geolocation_id"
     t.integer "project_id"
   end
 
