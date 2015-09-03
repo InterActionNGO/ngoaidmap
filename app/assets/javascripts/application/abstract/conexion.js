@@ -12,6 +12,8 @@ define([
       this.regions = JSON.parse(map_data[1]).regions;
       this.projects = this.data.data;
       this.included = this.data.included;
+      console.log(this.projects);
+      console.log(this.included);
     },
 
     getProjects: function(){
@@ -53,8 +55,38 @@ define([
         }
         return null;
       }, this )));
-
     },
+
+    getLocationsByProjects: function() {
+      var geolocations = _.groupBy(_.flatten(_.map(this.projects, function(p) {
+        return _.map(p.relationships.geolocations.data, function(g){
+          return g;
+        })
+      })), 'id' );
+
+      return _.map(geolocations, _.bind(function(_location, _locationKey){
+        var location = _location;
+        var locationF = _.findWhere(this.regions, { uid: _locationKey });
+        console.log(location);
+        console.log(locationF);
+        console.log(this.regions);
+        if (!!locationF && !!location) {
+          return {
+            count: g.length,
+            id: locationF.id,
+            uid: locationF.uid,
+            name: locationF.name,
+            type: locationF.type,
+            lat: locationF.latitude,
+            lon: locationF.longitude,
+            url: (nofilter) ? '/location/' + locationF.uid : this.setUrl('geolocation',locationF.uid),
+          }
+        }
+
+
+      }, this ));
+    },
+
 
     getLocationsByCountry: function(nofilter){
       return _.sortBy(this.getLocationsByAdminLevel(0,nofilter), function(country){

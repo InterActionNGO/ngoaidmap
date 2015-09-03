@@ -15,6 +15,7 @@
     var chld = '<%= @chld %>';
     var chd = '<%= @chd %>';
     var map_data = <%=raw(@map_data)%>;
+    console.log(map_data);
     var max_count = <%=@map_data_max_count%>;
     var map_type = 'project_map';
     var theme = "<%= @site.theme_id %>";
@@ -24,6 +25,8 @@
     var video_players = [];
     var globalPage = <%= @site.featured?? true : false %>;
     var page = "<%= params[:controller] %>";
+    var project = <%= raw(@raw_project.to_json) %>;
+    console.log(project);
   </script>
 <% end %>
 
@@ -236,4 +239,3 @@
     </section>
   </div>
 </div>
-
