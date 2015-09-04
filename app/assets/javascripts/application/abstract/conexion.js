@@ -9,11 +9,17 @@ define([
 
     init: function(){
       this.data = JSON.parse(map_data[0]);
+      console.log(this.data);
       this.regions = JSON.parse(map_data[1]).regions;
       this.projects = this.data.data;
       this.included = this.data.included;
+
+      console.log('************PROJECTS************');
       console.log(this.projects);
+      console.log('************INCLUDED************');
       console.log(this.included);
+      console.log('************REGIONS************');
+      console.log(this.regions);
     },
 
     getProjects: function(){
@@ -30,16 +36,49 @@ define([
     },
 
     getCountries: function(){
-      this.countries = this.countries || this.getLocationsByAdminLevel(0);
-      return this.countries
+      var countries = _.groupBy(_.filter(this.included, function(include){ return include.type == 'geolocations'}), function(geo){return geo.attributes['g0']} );
+      var projectsGeolocations = _.flatten(_.map(this.projects, function(p) {
+        return _.map(p.relationships.geolocations.data, function(g){
+          return {
+            location: g.id,
+            project: p
+          };
+        })
+      }));
+
+      return _.map(countries, _.bind(function(_locations, _countryKey){
+        var country = _.findWhere(this.regions, { uid: _countryKey });
+        var projects = _.uniq(_.flatten(_.map(_locations, function(_location){
+          return _.map(_.where(projectsGeolocations, { location: _location.id}), function(l){
+            return l.project;
+          });
+        })), function(p){ return p.id});
+
+        return {
+          count: projects.length,
+          id: country.id,
+          uid: country.uid,
+          name: country.name,
+          type: country.type,
+          lat: country.latitude,
+          lon: country.longitude,
+          url: '/location/' + country.uid,
+        }
+
+      }, this ));
     },
 
-    getLocationsByAdminLevel: function(level, nofilter) {
-      var level = level || 0;
-      var projectLocations = _.groupBy(_.filter(this.included, function(include){ return include.type == 'geolocations'}), function(geo){return geo.attributes['g'+level]} );
-      return _.compact(_.map(projectLocations,_.bind(function(_location, _locationKey) {
+    getLocationsByGeolocation: function(adm_level) {
+      var geolocations = _.groupBy(_.flatten(_.map(this.projects, function(p) {
+        return _.map(p.relationships.geolocations.data, function(g){
+          return g;
+        })
+      })), 'id' );
+
+      return _.compact(_.map(geolocations, _.bind(function(_location, _locationKey) {
         var location = _location;
-        var locationF = _.findWhere(this.regions, { uid: _locationKey });
+        var uid = _.findWhere(this.included, { id: _locationKey }).attributes.uid;
+        var locationF = _.findWhere(this.regions, { uid: uid , adm_level: adm_level });
 
         if (!!locationF && !!location) {
           return {
@@ -50,46 +89,16 @@ define([
             type: locationF.type,
             lat: locationF.latitude,
             lon: locationF.longitude,
-            url: (nofilter) ? '/location/' + locationF.uid : this.setUrl('geolocation',locationF.uid),
+            url: '/location/' + locationF.uid
           }
         }
         return null;
       }, this )));
     },
 
-    getLocationsByProjects: function() {
-      var geolocations = _.groupBy(_.flatten(_.map(this.projects, function(p) {
-        return _.map(p.relationships.geolocations.data, function(g){
-          return g;
-        })
-      })), 'id' );
-
-      return _.map(geolocations, _.bind(function(_location, _locationKey){
-        var location = _location;
-        var locationF = _.findWhere(this.regions, { uid: _locationKey });
-        console.log(location);
-        console.log(locationF);
-        console.log(this.regions);
-        if (!!locationF && !!location) {
-          return {
-            count: g.length,
-            id: locationF.id,
-            uid: locationF.uid,
-            name: locationF.name,
-            type: locationF.type,
-            lat: locationF.latitude,
-            lon: locationF.longitude,
-            url: (nofilter) ? '/location/' + locationF.uid : this.setUrl('geolocation',locationF.uid),
-          }
-        }
-
-
-      }, this ));
-    },
-
 
     getLocationsByCountry: function(nofilter){
-      return _.sortBy(this.getLocationsByAdminLevel(0,nofilter), function(country){
+      return _.sortBy(this.getCountries(), function(country){
         return -country.count;
       });
     },

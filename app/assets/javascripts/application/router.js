@@ -28,10 +28,16 @@ define([
   'views/sidebar/sidebarOrganizationsInfoContact',
   'views/sidebar/sidebarOrganizationsDonationContact',
   'views/sidebar/sidebarOrganizationsMediaContact',
-  'views/sidebar/sidebarOrganizationsFollowUs'
+  'views/sidebar/sidebarOrganizationsFollowUs',
+
+  //Project
+  'views/sidebar/project/projectOrganization',
+  'views/sidebar/project/projectTimeline',
+
+
 ], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView, TimelineView,
   GalleryView, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
-  SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs) {
+  SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, ProjectOrganization, ProjectTimeline) {
 
   var Router = Backbone.Router.extend({
 
@@ -90,6 +96,11 @@ define([
 
     project: function() {
       this.lists();
+
+      // Project Sidebar
+      new ProjectOrganization();
+      new ProjectTimeline();
+
       new TimelineView();
       new GalleryView();
     },

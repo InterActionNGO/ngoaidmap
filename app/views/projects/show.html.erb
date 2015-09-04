@@ -34,33 +34,10 @@
   <div class="row">
     <div class="grid-4">
       <aside class="layout-sidebar">
+        <div id="project-organization" class="mod-info mod-reporting-organisation"></div>
 
-        <div class="mod-info mod-reporting-organisation">
-          <h3>Reporting organisation</h3>
-          <% if @project.primary_organization.logo.file? %>
-            <a href="<%= organization_path(@project.primary_organization) %>"><%= image_tag(@project.primary_organization.logo.url(:medium)) %></a>
-            <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
-          <% else %>
-            <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization), :class=>'long') %>
-          <% end %>
-        </div>
+        <div id="project-timeline" class="mod-info"></div>
 
-        <% if !@project.end_date.nil? %>
-          <div class="mod-info mod-project-timeline" id="timelineView">
-            <h3>Project timeline</h3>
-            <div class="timeline">
-              <span class="timeline-status"></span>
-              <!-- <%# if @project.finished? %>Completed project<%# else %><p class="months_left"><%#= pluralize(@project.months_left, 'month', 'months') %> left</p><%# end %> -->
-            </div>
-            <p class="first_date"><%= @project.start_date.strftime("%m/%d/%Y") %></p>
-            <p class="second_date"><%= @project.end_date.strftime("%m/%d/%Y") %></p>
-          </div>
-        <% elsif @project.start_date? %>
-          <div class="mod-info">
-            <h3>Project timeline</h3>
-            <p>Active since <%= @project.start_date.strftime("%m/%d/%Y") %></p>
-          </div>
-        <% end %>
 
         <% unless @project.budget.nil? || @project.budget.eql?(0.0) %>
           <div class="mod-project-budget mod-info">
