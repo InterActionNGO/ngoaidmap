@@ -14,16 +14,16 @@ module ProjectsFiltering
     if map_data = $redis.get(map_data_digest)
     puts "***********************************************************************************************"
       @map_data = map_data
-      @projects_count = $redis.get(projects_count_digest).to_i
       puts @map_data
+      @projects_count = JSON.load $redis.get(projects_count_digest)
       # @projects = $redis.get(projects_digest).split(",")
     else
       results = Project.fetch_all(projects_params, false)
       m = ActiveModel::Serializer::ArraySerializer.new(results[0], each_serializer: ProjectSerializer, meta: results[1])
       map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'geolocations']).to_json
       # @map_data_max_count = 0
-      @map_data = map_data.to_json
-      $redis.set(map_data_digest, @map_data)
+      @map_data = map_data
+      $redis.set(map_data_digest, map_data)
       projects_count = results[0].uniq.length.to_f
       $redis.set(projects_count_digest, projects_count)
       @projects_count = projects_count
