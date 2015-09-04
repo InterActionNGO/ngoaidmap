@@ -32,7 +32,6 @@
       var chd = "<%=@chd%>";
       var marker_source = "<%=@georegion_map_marker_source%>";
       var map_data = <%=@map_data%>;
-      var max_count = <%=@map_data_max_count? @map_data_max_count : 1 %>;
       var map_type = '<%= @map_type || 'overview_map' %>';
       var theme = "<%=@site.theme_id%>";
       var stylez = <%=raw @site.map_styles  %>
@@ -42,6 +41,7 @@
       var page = "<%= params[:controller] %>";
       var adm_level = 0;
       var geolocation = false;
+      var project = false;
     </script>
     <%= javascript_include_tag "../lib/modernizr/modernizr.custom.js" %>
 

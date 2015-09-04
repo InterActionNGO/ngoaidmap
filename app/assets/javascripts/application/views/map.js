@@ -126,13 +126,15 @@ define([
     },
 
     markerParser: function(data){
-      if (!geolocation) {
-        var markers = _.sortBy(this.conexion.getCountries(true), function(country){
-          return country.count;
-        });
-      }else{
+      if (geolocation) {
         var markers = _.sortBy(this.conexion.getLocationsByGeolocation(adm_level), function(location){
           return location.count;
+        });
+      } else if(project) {
+        console.log('project point');
+      } else{
+        var markers = _.sortBy(this.conexion.getCountries(true), function(country){
+          return country.count;
         });
       }
 
