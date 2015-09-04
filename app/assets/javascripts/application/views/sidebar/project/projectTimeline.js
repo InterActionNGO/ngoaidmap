@@ -23,7 +23,6 @@ define([
     },
 
     parseData: function(){
-      console.log(this.project);
       if (this.project.end_date) {
         this.project.end_date = (this.project.end_date) ? moment(this.project.end_date).format('MM/DD/YYYY') : null;
         this.project.finished = (new Date().getTime() > moment(this.project.end_date)) ? true : false;

@@ -24,7 +24,7 @@
     var globalPage = <%= @site.featured?? true : false %>;
     var page = "<%= params[:controller] %>";
     var geolocation = false;
-    var project = <%= raw(@raw_project.to_json) %>;
+    var project = <%= raw(@project.to_json) %>;
     console.log(project);
   </script>
 <% end %>
