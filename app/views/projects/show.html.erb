@@ -15,15 +15,18 @@
     var chld = '<%= @chld %>';
     var chd = '<%= @chd %>';
     var map_data = <%=raw(@map_data)%>;
+    console.log(map_data);
     var max_count = <%=@map_data_max_count%>;
     var map_type = 'project_map';
     var theme = "<%= @site.theme_id %>";
     var kind = window.location.pathname.split('/')[1];
-    var stylez = <%=raw @site.map_styles  %>
+    var stylez = '<%=raw @site.map_styles  %>';
     var empty_layer = <%= @empty_layer.present?? @empty_layer : false %>;
     var video_players = [];
     var globalPage = <%= @site.featured?? true : false %>;
     var page = "<%= params[:controller] %>";
+    var project = <%= raw(@raw_project.to_json) %>;
+    console.log(project);
   </script>
 <% end %>
 
@@ -47,7 +50,7 @@
             <h3>Project timeline</h3>
             <div class="timeline">
               <span class="timeline-status"></span>
-              <% if @project.finished? %>Completed project<% else %><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p><% end %>
+              <!-- <%# if @project.finished? %>Completed project<%# else %><p class="months_left"><%#= pluralize(@project.months_left, 'month', 'months') %> left</p><%# end %> -->
             </div>
             <p class="first_date"><%= @project.start_date.strftime("%m/%d/%Y") %></p>
             <p class="second_date"><%= @project.end_date.strftime("%m/%d/%Y") %></p>
@@ -143,16 +146,16 @@
           </div>
         <% end %>
 
-        <% unless @project.resources.empty? %>
-          <div class="mod-info">
+        <%# unless @project.resources.empty? %>
+          <!-- <div class="mod-info">
             <h3>Additional resources</h3>
             <ul>
-              <% @project.resources.each do |resource| %>
-                <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
-              <% end %>
+              <%# @project.resources.each do |resource| %>
+                <li><a href="<%#= resource.url %>" target="_blank"><%#= resource.title %></a></li>
+              <%# end %>
             </ul>
-          </div>
-        <% end %>
+          </div> -->
+        <%# end %>
 
         <div class="mod-downloads mod-info">
           <h3>Export data</h3>
@@ -178,18 +181,18 @@
             </section>
           <% end %>
 
-          <% unless @project.media_resources.empty? %>
-            <div class="mod-gallery chachi-slider">
-              <% @project.media_resources.each do |media_resource| %>
-                <% if media_resource.is_a_video? %>
+          <%# unless @project.media_resources.empty? %>
+            <!-- <div class="mod-gallery chachi-slider">
+              <%# @project.media_resources.each do |media_resource| %>
+                <%# if media_resource.is_a_video? %>
                   <%# image_tag(media_resource.video_thumb.url(:medium), :alt => media_resource.caption, :video_id => media_resource.id, :class => "chachi-item") %>
-                  <div class="chachi-item"><%= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
-                <% else %>
-                  <%= image_tag(media_resource.picture.url(:medium), :alt=>media_resource.caption, :class => "chachi-item") %>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
+                  <div class="chachi-item"><%#= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
+                <%# else %>
+                  <%#= image_tag(media_resource.picture.url(:medium), :alt=>media_resource.caption, :class => "chachi-item") %>
+                <%# end %>
+              <%# end %>
+            </div> -->
+          <%# end %>
 
           <% if @project.activities || @project.additional_information || @project.cross_cutting_issues || (@locations.present? && @locations.to_a.join.present?)%>
             <section>
@@ -210,25 +213,25 @@
               <%end%>
             </section>
 
-            <section>
-              <%if @locations.present? && @locations.to_a.join.present? %>
-                <h2 class="<%= (@project.activities.blank? && @project.additional_information.blank? && @project.cross_cutting_issues.blank?)? 'first':''%>">
-                  <%= @locations.count == 1 ? 'Location' : 'Locations' %>
+            <!-- <section>
+              <%#if @locations.present? && @locations.to_a.join.present? %>
+                <h2 class="<%#= (@project.activities.blank? && @project.additional_information.blank? && @project.cross_cutting_issues.blank?)? 'first':''%>">
+                  <%#= @locations.count == 1 ? 'Location' : 'Locations' %>
                 </h2>
                 <ul>
-                  <% @locations.each do |location| %>
-                    <% if @site.navigate_by_country? && location['country_id'].present? %>
-                      <li><%= location['name'] + ', ' if location['name'] and location['name'] != '' %> <%= Country.find(location['country_id'], :select => 'name').name %></li>
-                    <% else %>
-                      <li><%= location['name'] %></li>
-                    <% end %>
-                  <% end %>
+                  <%# @locations.each do |location| %>
+                    <%# if @site.navigate_by_country? && location['country_id'].present? %>
+                      <li><%#= location['name'] + ', ' if location['name'] and location['name'] != '' %> <%#= Country.find(location['country_id'], :select => 'name').name %></li>
+                    <%# else %>
+                      <li><%#= location['name'] %></li>
+                    <%# end %>
+                  <% #end %>
                 </ul>
-              <%end%>
-            </section>
+              <%#end%>
+            </section> -->
           <% end %>
 
-          <%= render 'new_partials/more_projects' %>
+          <%#= render 'new_partials/more_projects' %>
 
         </div>
       </article>
@@ -236,4 +239,3 @@
     </section>
   </div>
 </div>
-

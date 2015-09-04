@@ -49,6 +49,7 @@
           var empty_layer = <%= @empty_layer.present?? @empty_layer : false %>;
           var globalPage = <%= @site.featured?? false : true %>;
           var page = "<%= params[:controller] %>";
+          var adm_level = 0;
         </script>
       <% end %>
     <% else %>

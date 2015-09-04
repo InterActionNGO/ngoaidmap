@@ -40,7 +40,6 @@ define([
       if (this.$el.length === 0) {
         return false;
       }
-
       this.conexion = conexion;
 
       this.$map = $('#map');
@@ -127,6 +126,15 @@ define([
     },
 
     markerParser: function(data){
+      // if (geolocation) {
+      //   var markers = _.sortBy(this.conexion.getLocationsByProjects(), function(location){
+      //     return location.count;
+      //   });
+      // }else{
+      //   var markers = _.sortBy(this.conexion.getLocationsByAdminLevel(adm_level, true), function(country){
+      //     return country.count;
+      //   });
+      // }
       var markers = _.sortBy(this.conexion.getLocationsByAdminLevel(adm_level, true), function(country){
         return country.count;
       });
