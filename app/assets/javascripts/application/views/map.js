@@ -74,10 +74,7 @@ define([
     },
 
     initMarkers: function(){
-      var range;
-      if (map_type === 'administrative_map') {
-        range = max_count / 5;
-      }
+      var range = 5;
       var diametersCount = {
         diameter: [20,26,34,42,26],
         bounds:{

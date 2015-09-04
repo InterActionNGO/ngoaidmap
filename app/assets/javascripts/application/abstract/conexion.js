@@ -49,26 +49,28 @@ define([
         })
       }));
 
-      this.countries = _.map(countries, _.bind(function(_locations, _countryKey){
+      this.countries = _.compact(_.map(countries, _.bind(function(_locations, _countryKey){
         var country = _.findWhere(this.regions, { uid: _countryKey });
         var projects = _.uniq(_.flatten(_.map(_locations, function(_location){
           return _.map(_.where(projectsGeolocations, { location: _location.id}), function(l){
             return l.project;
           });
         })), function(p){ return p.id});
-
-        return {
-          count: projects.length,
-          id: country.id,
-          uid: country.uid,
-          name: country.name,
-          type: country.type,
-          lat: country.latitude,
-          lon: country.longitude,
-          url: (nofilter) ? '/location/' + country.uid : this.setUrl('geolocation',country.uid)
+        if (!!country && !!projects) {
+          return {
+            count: projects.length,
+            id: country.id,
+            uid: country.uid,
+            name: country.name,
+            type: country.type,
+            lat: country.latitude,
+            lon: country.longitude,
+            url: (nofilter) ? '/location/' + country.uid : this.setUrl('geolocation',country.uid)
+          }
         }
+        return null;
 
-      }, this ));
+      }, this )));
       return this.countries;
     },
 
