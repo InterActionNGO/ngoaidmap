@@ -127,7 +127,7 @@ define([
 
     markerParser: function(data){
       if (!geolocation) {
-        var markers = _.sortBy(this.conexion.getCountries(), function(country){
+        var markers = _.sortBy(this.conexion.getCountries(true), function(country){
           return country.count;
         });
       }else{

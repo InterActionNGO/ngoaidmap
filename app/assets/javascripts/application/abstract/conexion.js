@@ -8,11 +8,10 @@ define([
   var Conexion = Class.extend({
 
     init: function(){
-      this.data = JSON.parse(map_data[0]);
-      console.log(this.data);
-      this.regions = JSON.parse(map_data[1]).regions;
+      this.data = map_data;
       this.projects = this.data.data;
       this.included = this.data.included;
+      this.regions = this.data.meta.regions;
 
       console.log('************PROJECTS************');
       console.log(this.projects);
@@ -35,7 +34,11 @@ define([
       return this.organizations
     },
 
-    getCountries: function(){
+    getCountries: function(nofilter){
+      return this.countries || this.getCountriesByProjects(nofilter);
+    },
+
+    getCountriesByProjects: function(nofilter) {
       var countries = _.groupBy(_.filter(this.included, function(include){ return include.type == 'geolocations'}), function(geo){return geo.attributes['g0']} );
       var projectsGeolocations = _.flatten(_.map(this.projects, function(p) {
         return _.map(p.relationships.geolocations.data, function(g){
@@ -46,7 +49,7 @@ define([
         })
       }));
 
-      return _.map(countries, _.bind(function(_locations, _countryKey){
+      this.countries = _.map(countries, _.bind(function(_locations, _countryKey){
         var country = _.findWhere(this.regions, { uid: _countryKey });
         var projects = _.uniq(_.flatten(_.map(_locations, function(_location){
           return _.map(_.where(projectsGeolocations, { location: _location.id}), function(l){
@@ -62,10 +65,11 @@ define([
           type: country.type,
           lat: country.latitude,
           lon: country.longitude,
-          url: '/location/' + country.uid,
+          url: (nofilter) ? '/location/' + country.uid : this.setUrl('geolocation',country.uid)
         }
 
       }, this ));
+      return this.countries;
     },
 
     getLocationsByGeolocation: function(adm_level) {
@@ -98,7 +102,7 @@ define([
 
 
     getLocationsByCountry: function(nofilter){
-      return _.sortBy(this.getCountries(), function(country){
+      return _.sortBy(this.getCountries(nofilter), function(country){
         return -country.count;
       });
     },
