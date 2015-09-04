@@ -62,9 +62,9 @@ Rails.application.routes.draw do
 
   get 'regions/:id' => 'georegion#old_regions'
   # HACK!! route globbing doesn't work well when trying to get the request format in Rails <=3.0.7
-  get 'location/*ids.csv', to: 'georegion#show', :as => 'location_csv', :format => 'csv'
-  get 'location/*ids.xls' , to: 'georegion#show', :as => 'location_xls', :format => 'xls'
-  get 'location/*ids.kml' , to: 'georegion#show', :as => 'location_kml', :format => 'kml'
+  # get 'location/*ids.csv', to: 'georegion#show', :as => 'location_csv', :format => 'csv'
+  # get 'location/*ids.xls' , to: 'georegion#show', :as => 'location_xls', :format => 'xls'
+  # get 'location/*ids.kml' , to: 'georegion#show', :as => 'location_kml', :format => 'kml'
   # End HACK!!
   get 'location/:ids' , to: 'georegion#show', :as => 'location'
 
