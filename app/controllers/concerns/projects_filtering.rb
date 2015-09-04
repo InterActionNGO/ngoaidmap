@@ -6,16 +6,31 @@ module ProjectsFiltering
     before_action :get_projects,  only: [:home, :show]
   end
   def get_projects
-    # timestamp = Project.order('updated_at desc').first.updated_at.to_s
-    # string = timestamp + projects_params.inspect
-    # digest = Digest::SHA1.hexdigest(string)
-    results = Project.fetch_all(projects_params, false)
-    m = ActiveModel::Serializer::ArraySerializer.new(results[0], each_serializer: ProjectSerializer, meta: results[1])
-    @map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'geolocations']).to_json.to_s
-    @map_data_max_count = 0
-    @projects_count = results[0].uniq.length.to_f
-    @projects = results[0].page(params[:page]).per(10)
+    timestamp = Project.order('updated_at desc').first.updated_at.to_s
+    string = timestamp + projects_params.inspect
+    map_data_digest = "map_data_#{Digest::SHA1.hexdigest(string)}"
+    projects_digest = "projects_#{Digest::SHA1.hexdigest(string)}"
+    projects_count_digest = "projects_count_#{Digest::SHA1.hexdigest(string)}"
+    if map_data = $redis.get(map_data_digest)
     puts "***********************************************************************************************"
+      @map_data = JSON.load map_data
+      @projects_count = JSON.load $redis.get(projects_count_digest)
+      # @projects = $redis.get(projects_digest).split(",")
+    else
+      results = Project.fetch_all(projects_params, false)
+      m = ActiveModel::Serializer::ArraySerializer.new(results[0], each_serializer: ProjectSerializer, meta: results[1])
+      map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'geolocations']).to_json
+      # @map_data_max_count = 0
+      @map_data = map_data
+      $redis.set(map_data_digest, map_data)
+      projects_count = results[0].uniq.length.to_f
+      $redis.set(projects_count_digest, projects_count)
+      @projects_count = projects_count
+      # projects = results[0].page(params[:page]).per(10)
+      # $redis.set(projects_digest, projects)
+      # @projects = projects
+    end
+    @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
   end
   private
   def projects_params
