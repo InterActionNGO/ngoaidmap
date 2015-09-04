@@ -173,15 +173,22 @@ ActiveRecord::Schema.define(version: 0) do
     t.string   "admin4"
     t.string   "provider",          default: "Geonames"
     t.integer  "adm_level"
-    t.datetime "created_at",                                                             null: false
-    t.datetime "updated_at",                                                             null: false
-    t.string   "g0"
-    t.string   "g1"
-    t.string   "g2"
-    t.string   "g3"
-    t.string   "g4"
-    t.string   "custom_geo_source"
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+    t.string   "g0",                :limit => nil
+    t.string   "g1",                :limit => nil
+    t.string   "g2",                :limit => nil
+    t.string   "g3",                :limit => nil
+    t.string   "g4",                :limit => nil
+    t.string   "custom_geo_source", :limit => nil
   end
+
+  add_index "geolocations", ["admin1"], :name => "index_geolocations_on_admin1"
+  add_index "geolocations", ["admin2"], :name => "index_geolocations_on_admin2"
+  add_index "geolocations", ["admin3"], :name => "index_geolocations_on_admin3"
+  add_index "geolocations", ["admin4"], :name => "index_geolocations_on_admin4"
+  add_index "geolocations", ["uid"], :name => "index_geolocations_on_uid"
+
 
   create_table "geolocations_projects", id: false, force: :cascade do |t|
     t.integer "geolocation_id"
