@@ -41,6 +41,7 @@
       var globalPage = <%= @site.featured?? true : false %>;
       var page = "<%= params[:controller] %>";
       var adm_level = 0;
+      var geolocation = false;
     </script>
     <%= javascript_include_tag "../lib/modernizr/modernizr.custom.js" %>
 

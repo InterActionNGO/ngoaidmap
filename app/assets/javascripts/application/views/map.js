@@ -62,8 +62,8 @@ define([
 
     initMap: function(){
       if (map_type === 'project_map') {
-        this.mapOtions.zoom = map_zoom;
-        this.mapOtions.center = new google.maps.LatLng(map_center[0], map_center[1]);
+        this.mapOptions.zoom = map_zoom;
+        this.mapOptions.center = new google.maps.LatLng(map_center[0], map_center[1]);
       }
 
       var idMap = (this.$map.length > 0) ? 'map' : 'small_map';
@@ -126,18 +126,19 @@ define([
     },
 
     markerParser: function(data){
-      // if (geolocation) {
-      //   var markers = _.sortBy(this.conexion.getLocationsByProjects(), function(location){
-      //     return location.count;
-      //   });
-      // }else{
-      //   var markers = _.sortBy(this.conexion.getLocationsByAdminLevel(adm_level, true), function(country){
-      //     return country.count;
-      //   });
-      // }
-      var markers = _.sortBy(this.conexion.getLocationsByAdminLevel(adm_level, true), function(country){
-        return country.count;
-      });
+      if (!geolocation) {
+        var markers = _.sortBy(this.conexion.getCountries(), function(country){
+          return country.count;
+        });
+      }else{
+        var markers = _.sortBy(this.conexion.getLocationsByGeolocation(adm_level), function(location){
+          return location.count;
+        });
+      }
+
+
+
+
 
       // If region exist, reject a country object
       _.each(markers, function(d) {

@@ -1,0 +1,20 @@
+{{#if this.end_date}}
+<div class="mod-project-timeline" id="timelineView">
+  <h3>Project timeline</h3>
+  <div class="timeline">
+    <span class="timeline-status"></span>
+    {{#if this.finished}}
+      Completed project
+    {{else}}
+      <p class="months_left">{{this.months_left}} left</p>
+    {{/if}}
+  </div>
+  <p class="first_date">{{this.start_date}}</p>
+  <p class="second_date">{{this.end_date}}</p>
+</div>
+{{else}}
+<div>
+  <h3>Project timeline</h3>
+  <p>Active since {{this.start_date}}</p>
+</div>
+{{/if}}
