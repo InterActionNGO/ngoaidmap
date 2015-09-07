@@ -67,12 +67,7 @@
         <% end %>
 
 
-        <% if @project.partner_organizations? && !@project.partner_organizations.eql?('N/A') %>
-          <div class="mod-info">
-            <h3 class="margin">Local Partners</h3>
-            <p><%= @project.partner_organizations %></p>
-          </div>
-        <% end %>
+        <div id="project-partnerorganizations" class="mod-info"></div>
 
         <div id="project-peoplereached" class="mod-info"></div>
 
