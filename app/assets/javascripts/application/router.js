@@ -10,7 +10,6 @@ define([
   'views/embed-map',
   'views/search',
   'views/layer-overlay',
-  'views/timeline',
   'views/gallery',
   //Titles
   'views/titles/titleSector',
@@ -43,7 +42,7 @@ define([
   'views/sidebar/project/projectImplementingOrganization',
 
 
-], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView, TimelineView,
+], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
   GalleryView, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs,
   ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization) {
@@ -118,7 +117,6 @@ define([
       new ProjectPartnerOrganizations();
       new ProjectImplementingOrganization();
 
-      new TimelineView();
       new GalleryView();
     },
 

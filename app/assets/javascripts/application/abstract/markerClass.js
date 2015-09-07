@@ -89,7 +89,6 @@ define([
       //Marker address
       if (this.count) {
         if (map_type === 'overview_map' || map_type === 'administrative_map') {
-
           var hidden_div = document.createElement('div');
           hidden_div.className = 'map-tooltip';
           hidden_div.style.bottom = this.diameter + 4 + 'px';
@@ -118,13 +117,7 @@ define([
           google.maps.event.addDomListener(div, 'mouseout', function() {
             $(this).children('div').hide();
           });
-        } else {
-          google.maps.event.addDomListener(div, 'mouseover', function() {
-            $(this).css('zIndex', global_index++);
-          });
-        }
-      } else {
-        if (map_type === 'project_map') {
+        } else if (map_type === 'project_map') {
           var _hidden_div = document.createElement('div');
           _hidden_div.className = 'map-tooltip';
           _hidden_div.style.bottom = this.diameter + 4 + 'px';
@@ -154,6 +147,11 @@ define([
 
           google.maps.event.addDomListener(div, 'mouseout', function() {
             $(this).children('div').hide();
+          });
+
+        } else {
+          google.maps.event.addDomListener(div, 'mouseover', function() {
+            $(this).css('zIndex', global_index++);
           });
         }
       }

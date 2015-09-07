@@ -33,7 +33,10 @@ define([
     },
 
     parseData: function(){
-      return this.organization.data;
+      var org = this.organization.data;
+      var logo = org.attributes.logo;
+      org.attributes.logo = (logo != '/logos/medium/missing.png') ? logo : null;
+      return org;
     },
 
     render: function(){
