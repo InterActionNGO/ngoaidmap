@@ -57,12 +57,7 @@
           </div>
         <% end %>
 
-        <% if @project.awardee_type.present? %>
-          <div class="mod-info">
-            <h3>Prime Awardee</h3>
-            <p><%= @project.awardee_type %></p>
-          </div>
-        <% end %>
+        <div id="project-awardee" class="mod-info"></div>
 
         <% if @project.implementing_organization? %>
           <div class="mod-info">
@@ -90,14 +85,7 @@
 
         <div id="project-contact" class="mod-info"></div>
 
-        <% unless @project.website.blank? %>
-          <div class="mod-info">
-            <h3>Project website</h3>
-            <% unless (@project.website.nil?)||(@project.website.empty?) %>
-              <a class="donations-website" href="<%= @project.website %>">Project website</a>
-            <%end%>
-          </div>
-        <% end %>
+        <div id="project-website" class="mod-info"></div>
 
         <%# unless @project.resources.empty? %>
           <!-- <div class="mod-info">
