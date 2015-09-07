@@ -14,7 +14,7 @@ module ProjectsFiltering
     if map_data = $redis.get(map_data_digest)
     puts "***********************************************************************************************"
       @map_data = map_data
-      puts @map_data
+      #puts @map_data
       @projects_count = JSON.load $redis.get(projects_count_digest)
       # @projects = $redis.get(projects_digest).split(",")
     else
