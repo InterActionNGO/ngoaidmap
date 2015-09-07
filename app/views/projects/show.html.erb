@@ -88,19 +88,7 @@
           </div>
         <% end %>
 
-        <% unless @project.contact_email.blank? && @project.contact_person.blank? && @project.contact_phone_number.blank? %>
-          <div class="contact-info mod-info">
-            <h3>Contact information</h3>
-            <div class="mod-contact-info">
-              <h4><%= @project.contact_person %></h4>
-              <p><%= @project.contact_position %></p>
-              <p><%= @project.contact_phone_number %></p>
-              <% unless (@project.contact_email.nil?)||(@project.contact_email.empty?) %>
-               <a class="donations-website" href="mailto:<%= @project.contact_email %>">Project contact email</a>
-              <%end%>
-            </div>
-          </div>
-        <% end %>
+        <div id="project-contact" class="mod-info"></div>
 
         <% unless @project.website.blank? %>
           <div class="mod-info">

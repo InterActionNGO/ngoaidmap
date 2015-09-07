@@ -1,0 +1,12 @@
+<div class="contact-info">
+  <h3>Contact information</h3>
+  <div class="mod-contact-info">
+
+    <h4>{{this.contact_person}}</h4>
+    <p>{{this.contact_position}}</p>
+    <p>{{this.contact_phone_number}}</p>
+    {{#if this.contact_email}}
+     <a class="donations-website" href="mailto:{{this.contact_email}}">Project contact email</a>
+    {{/if}}
+  </div>
+</div>
