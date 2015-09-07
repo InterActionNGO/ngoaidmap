@@ -23,7 +23,6 @@ define([
     },
 
     parseData: function(){
-      console.log(this.project);
       if (this.project.end_date) {
         this.project.end_date = (this.project.end_date) ? moment(this.project.end_date).format('MM/DD/YYYY') : null;
         this.project.finished = (new Date().getTime() > moment(this.project.end_date)) ? true : false;
@@ -32,7 +31,6 @@ define([
           this.project.months_left = (months === 1) ? months+' month' : months+ ' months';
         }
       }
-      console.log(this.project.start_date);
       this.project.start_date = (this.project.start_date) ? moment(this.project.start_date).format('MM/DD/YYYY') : null;
       return this.project;
     },

@@ -75,6 +75,7 @@ define([
 
     initMarkers: function(){
       var range = 5;
+      var classname;
       var diametersCount = {
         diameter: [20,26,34,42,26],
         bounds:{
@@ -128,27 +129,14 @@ define([
           return location.count;
         });
       } else if(project) {
-        console.log('project point');
+        var markers = _.sortBy(this.conexion.getLocationsByProject(), function(location){
+          return location.count;
+        });
       } else{
         var markers = _.sortBy(this.conexion.getCountries(true), function(country){
           return country.count;
         });
       }
-
-
-
-
-
-      // If region exist, reject a country object
-      _.each(markers, function(d) {
-        if (d.type === 'region') {
-          map_data_parse = _.reject(map_data_parse, function(d) {
-            return d.type === 'country';
-          });
-          return false;
-        }
-      });
-
 
       return markers;
     },

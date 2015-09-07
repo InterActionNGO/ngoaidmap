@@ -74,14 +74,44 @@ define([
       return this.countries;
     },
 
+    getLocationsByProject: function() {
+      var geolocations = _.groupBy(_.flatten(_.map(this.projects, function(p) {
+        return _.map(p.relationships.geolocations.data, function(g){
+          return g;
+        })
+      })), 'id' );
+      var locations;
+
+      var locations = _.compact(_.map(geolocations, _.bind(function(_location, _locationKey) {
+        var location = _location;
+        var uid = _.findWhere(this.included, { id: _locationKey }).attributes.uid;
+        var locationF = _.findWhere(this.regions, { uid: uid });
+
+        if (!!locationF && !!location) {
+          return {
+            count: location.length,
+            id: locationF.id,
+            uid: locationF.uid,
+            name: locationF.name,
+            type: locationF.type,
+            lat: locationF.latitude,
+            lon: locationF.longitude,
+          }
+        }
+        return null;
+      }, this )));
+      return locations;
+    },
+
     getLocationsByGeolocation: function(adm_level) {
       var geolocations = _.groupBy(_.flatten(_.map(this.projects, function(p) {
         return _.map(p.relationships.geolocations.data, function(g){
           return g;
         })
       })), 'id' );
+      var locations;
 
-      return _.compact(_.map(geolocations, _.bind(function(_location, _locationKey) {
+      var locations = _.compact(_.map(geolocations, _.bind(function(_location, _locationKey) {
         var location = _location;
         var uid = _.findWhere(this.included, { id: _locationKey }).attributes.uid;
         var locationF = _.findWhere(this.regions, { uid: uid , adm_level: adm_level });
@@ -95,11 +125,25 @@ define([
             type: locationF.type,
             lat: locationF.latitude,
             lon: locationF.longitude,
-            url: '/location/' + locationF.uid
+            url: '/location/' + locationF.uid + '?level='+adm_level
           }
         }
         return null;
       }, this )));
+
+      if (!locations.length) {
+        locations = [{
+          count: this.projects.length,
+          id: geolocation.id,
+          uid: geolocation.uid,
+          name: geolocation.name,
+          type: geolocation.type,
+          lat: geolocation.latitude,
+          lon: geolocation.longitude,
+        }]
+      }
+
+      return locations
     },
 
 

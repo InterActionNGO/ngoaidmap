@@ -12,7 +12,6 @@ module ProjectsFiltering
     projects_digest = "projects_#{Digest::SHA1.hexdigest(string)}"
     projects_count_digest = "projects_count_#{Digest::SHA1.hexdigest(string)}"
     if map_data = $redis.get(map_data_digest)
-    puts "***********************************************************************************************"
       @map_data = map_data
       #puts @map_data
       @projects_count = JSON.load $redis.get(projects_count_digest)
@@ -31,13 +30,15 @@ module ProjectsFiltering
       # $redis.set(projects_digest, projects)
       # @projects = projects
     end
+    puts "***********************************************************************************************"
     @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
   end
   private
   def projects_params
-    params.permit(:page, :level, :ids, :geolocation, organizations:[], countries:[], sectors:[], donors:[], sectors:[])
+    params.permit(:page, :level, :ids, :geolocation, organizations:[], countries:[], sectors:[], donors:[], sectors:[], projects:[])
   end
   def merge_params
+    params.merge!({projects: [params[:id]]}) if controller_name == 'projects'
     params.merge!({organizations: [params[:id]]}) if controller_name == 'organizations'
     params.merge!({donors: [params[:id]]}) if controller_name == 'donors'
     params.merge!({sectors: [params[:id]]}) if controller_name == 'clusters_sectors'
