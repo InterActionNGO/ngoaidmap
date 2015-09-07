@@ -56,6 +56,7 @@ class ProjectSerializer < ActiveModel::Serializer
   has_one :organization, serializer: OrganizationPreviewSerializer
   has_many :sectors, serializer: SectorPreviewSerializer
   has_many :geolocations, serializer: GeolocationPreviewSerializer
+  has_many :donors, serializer: DonorPreviewSerializer
 
   def organization
     object.primary_organization
