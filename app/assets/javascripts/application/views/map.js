@@ -90,17 +90,20 @@ define([
       // Markers
       for (var i = 0; i < this.markers.length; i++) {
         if (document.URL.indexOf('force_site_id=3') >= 0) {
+          classname = 'marker-bubble';
           this.setDiameter(diametersCount.diameter, diametersCount.bounds['force_site'],i);
         } else if (map_type === 'overview_map') {
+          classname = 'marker-bubble';
           this.setDiameter(diametersCount.diameter, diametersCount.bounds['overview_map'],i);
         } else if (map_type === 'administrative_map') {
+          classname = 'marker-bubble';
           this.setDiameter(diametersCount.diameter, diametersCount.bounds['administrative_map'],i);
         } else {
           this.diameter = 34;
           classname = 'marker-project-bubble';
         }
 
-        new IOMMarker(this.markers[i], this.diameter, 'marker-bubble', this.map);
+        new IOMMarker(this.markers[i], this.diameter, classname, this.map);
 
         this.bounds.extend(new google.maps.LatLng(this.markers[i].lat, this.markers[i].lon));
       }

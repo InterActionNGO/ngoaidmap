@@ -23,7 +23,6 @@ define([
     },
 
     parseData: function(){
-      console.log(this.project.budget);
       this.project.budgetString = (!!this.project.budget) ? utils.formatCurrency(this.project.budget) : this.$el.remove();
       return this.project;
     },
