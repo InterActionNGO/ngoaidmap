@@ -106,18 +106,18 @@
             </section>
           <% end %>
 
-          <%# unless @project.media_resources.empty? %>
-            <!-- <div class="mod-gallery chachi-slider">
-              <%# @project.media_resources.each do |media_resource| %>
-                <%# if media_resource.is_a_video? %>
-                  <%# image_tag(media_resource.video_thumb.url(:medium), :alt => media_resource.caption, :video_id => media_resource.id, :class => "chachi-item") %>
-                  <div class="chachi-item"><%#= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
-                <%# else %>
-                  <%#= image_tag(media_resource.picture.url(:medium), :alt=>media_resource.caption, :class => "chachi-item") %>
-                <%# end %>
-              <%# end %>
-            </div> -->
-          <%# end %>
+          <% unless @project.media_resources.empty? %>
+            <div class="mod-gallery chachi-slider">
+              <% @project.media_resources.each do |media_resource| %>
+                <% if media_resource.is_a_video? %>
+                  <% image_tag(media_resource.video_thumb.url(:medium), :alt => media_resource.caption, :video_id => media_resource.id, :class => "chachi-item") %>
+                  <div class="chachi-item"><%= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
+                <% else %>
+                  <%= image_tag(media_resource.picture.url(:medium), :alt=> media_resource.caption, :class => "chachi-item") %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
 
           <% if @project.activities || @project.additional_information || @project.cross_cutting_issues || (@locations.present? && @locations.to_a.join.present?)%>
             <section>
