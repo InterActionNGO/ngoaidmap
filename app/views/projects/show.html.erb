@@ -76,12 +76,7 @@
 
         <div id="project-peoplereached" class="mod-info"></div>
 
-        <% if @project.target? %>
-          <div class="mod-info mod-target-groups">
-            <h3 class="<%= (@project.estimated_people_reached?)? 'margin':'' %>">Target groups</h3>
-            <p><%= @project.target %></p>
-          </div>
-        <% end %>
+        <div id="project-target" class="mod-info"></div>
 
         <div id="project-contact" class="mod-info"></div>
 
