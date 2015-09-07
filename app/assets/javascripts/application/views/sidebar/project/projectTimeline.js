@@ -31,7 +31,6 @@ define([
           this.project.months_left = (months === 1) ? months+' month' : months+ ' months';
         }
       }
-      console.log(this.project.start_date);
       this.project.start_date = (this.project.start_date) ? moment(this.project.start_date).format('MM/DD/YYYY') : null;
       return this.project;
     },

@@ -5,12 +5,12 @@ define([
   'handlebars',
   'abstract/conexion',
   'abstract/utils',
-  'text!templates/sidebar/project/projectBudget.handlebars'
+  'text!templates/sidebar/project/projectPeopleReached.handlebars'
   ], function(Backbone, handlebars, conexion, utils, tpl) {
 
-  var ProjectBudget = Backbone.View.extend({
+  var ProjectPeopleReached = Backbone.View.extend({
 
-    el: '#project-budget',
+    el: '#project-peoplereached',
 
     template: Handlebars.compile(tpl),
 
@@ -23,8 +23,7 @@ define([
     },
 
     parseData: function(){
-      console.log(this.project.budget);
-      this.project.budgetString = (!!this.project.budget) ? utils.formatCurrency(this.project.budget) : this.$el.remove();
+      this.project.estimated_people_reached_string = (!!this.project.estimated_people_reached) ? utils.formatCurrency(this.project.estimated_people_reached) : this.$el.remove();
       return this.project;
     },
 
@@ -34,6 +33,6 @@ define([
 
   });
 
-  return ProjectBudget;
+  return ProjectPeopleReached;
 
 });

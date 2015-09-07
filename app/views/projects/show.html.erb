@@ -79,12 +79,7 @@
           </div>
         <% end %>
 
-        <% if @project.estimated_people_reached? %>
-          <div class="mod-info mod-people-reached">
-            <h3>People reached</h3>
-            <span estimate="<%= @project.estimated_people_reached %>" class="people_amount"><%= number_with_delimiter(@project.estimated_people_reached) %></span>
-          </div>
-        <% end %>
+        <div id="project-peoplereached" class="mod-info"></div>
 
         <% if @project.target? %>
           <div class="mod-info mod-target-groups">

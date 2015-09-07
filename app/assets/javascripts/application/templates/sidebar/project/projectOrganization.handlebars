@@ -1,6 +1,6 @@
 <h3>Reporting organisation</h3>
-<a href="/organizations/{{this.organization_id}}"><img src="http://ngoaidmap.org/system/logos/{{this.organization_id}}/medium.jpg" alt="Medium"></a>
-<a href="/organizations/{{this.organization_id}}">{{this.organization_name}}</a>
+{{#if this.attributes.logo}}<a href="/organizations/{{this.id}}"><img src="http://ngoaidmap.org{{this.attributes.logo}}" alt="Medium"></a>{{/if}}
+<a href="/organizations/{{this.id}}">{{this.attributes.name}}</a>
 {{!-- <% if @project.primary_organization.logo.file? %>
   <a href="<%= organization_path(@project.primary_organization) %>"><%= image_tag(@project.primary_organization.logo.url(:medium)) %></a>
   <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
