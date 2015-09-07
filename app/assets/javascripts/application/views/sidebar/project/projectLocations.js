@@ -27,7 +27,7 @@ define([
     parseData: function(){
       var data = {
         name: (this.locations.length == 1) ? 'Location' : 'Locations',
-        locations: this.locations,
+        locations: _.sortBy(this.locations, 'name'),
       }
       return data;
     },
