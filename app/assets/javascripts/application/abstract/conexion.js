@@ -35,7 +35,7 @@ define([
     },
 
     getCountries: function(nofilter){
-      return this.countries || this.getCountriesByProjects(nofilter);
+      return this.getCountriesByProjects(nofilter);
     },
 
     getCountriesByProjects: function(nofilter) {
