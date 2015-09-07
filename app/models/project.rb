@@ -55,14 +55,15 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :clusters
   has_and_belongs_to_many :sectors
   has_and_belongs_to_many :regions
-  has_and_belongs_to_many :countries
+  #has_and_belongs_to_many :countries
   has_and_belongs_to_many :tags
   has_and_belongs_to_many :geolocations
   has_many :resources, -> {where(element_type: 0)}, :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, -> {where(element_type: 0).order('position ASC')}, :foreign_key => :element_id, :dependent => :destroy
   has_many :donations, :dependent => :destroy
   has_many :donors, :through => :donations
-  has_many :cached_sites, :class_name => 'Site'#, :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
+  has_and_belongs_to_many :sites #, :class_name => 'Site', :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
+  has_and_belongs_to_many :countries,  -> {where(adm_level: 0)}, class_name: 'Geolocation'
 
   scope :active, -> {where("end_date > ?", Date.today.to_s(:db))}
   scope :closed, -> {where("end_date < ?", Date.today.to_s(:db))}
@@ -97,6 +98,17 @@ class Project < ActiveRecord::Base
       region_groups = {}
       region_groups['regions'] = Geolocation.where("uid IN (?)", project_gs)
       [projects, region_groups]
+    end
+  end
+
+
+  def related(site, limit = 2)
+    if result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(primary_organization_id: self.primary_organization_id).where(sites: {id: site.id}).active.limit(limit)
+      result
+    elsif result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(sites: {id: site.id}).active.limit(limit)
+      result
+    else
+      result = Project.where.not(id: self.id).limit(limit)
     end
   end
 

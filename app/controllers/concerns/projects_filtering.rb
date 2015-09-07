@@ -31,11 +31,12 @@ module ProjectsFiltering
       # @projects = projects
     end
     puts "***********************************************************************************************"
+    puts @map_data
     @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
   end
   private
   def projects_params
-    params.permit(:page, :level, :ids, :geolocation, organizations:[], countries:[], sectors:[], donors:[], sectors:[], projects:[])
+    params.permit(:page, :level, :ids, :id, :geolocation, organizations:[], countries:[], donors:[], sectors:[], projects:[])
   end
   def merge_params
     params.merge!({projects: [params[:id]]}) if controller_name == 'projects'
