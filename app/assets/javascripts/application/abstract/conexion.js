@@ -9,6 +9,7 @@ define([
 
     init: function(){
       this.data = map_data;
+      console.log(this.data);
       this.projects = this.data.data;
       this.included = this.data.included;
       this.regions = this.data.meta.regions;
@@ -35,7 +36,7 @@ define([
     },
 
     getCountries: function(nofilter){
-      return this.countries || this.getCountriesByProjects(nofilter);
+      return this.getCountriesByProjects(nofilter);
     },
 
     getCountriesByProjects: function(nofilter) {

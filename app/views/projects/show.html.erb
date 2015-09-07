@@ -119,7 +119,7 @@
             </div>
           <% end %>
 
-          <% if @project.activities || @project.additional_information || @project.cross_cutting_issues || (@locations.present? && @locations.to_a.join.present?)%>
+          <% if @project.activities || @project.additional_information || @project.cross_cutting_issues%>
             <section>
               <%unless @project.activities.blank? %>
                 <h2>Activities</h2>
@@ -138,22 +138,7 @@
               <%end%>
             </section>
 
-            <!-- <section>
-              <%#if @locations.present? && @locations.to_a.join.present? %>
-                <h2 class="<%#= (@project.activities.blank? && @project.additional_information.blank? && @project.cross_cutting_issues.blank?)? 'first':''%>">
-                  <%#= @locations.count == 1 ? 'Location' : 'Locations' %>
-                </h2>
-                <ul>
-                  <%# @locations.each do |location| %>
-                    <%# if @site.navigate_by_country? && location['country_id'].present? %>
-                      <li><%#= location['name'] + ', ' if location['name'] and location['name'] != '' %> <%#= Country.find(location['country_id'], :select => 'name').name %></li>
-                    <%# else %>
-                      <li><%#= location['name'] %></li>
-                    <%# end %>
-                  <% #end %>
-                </ul>
-              <%#end%>
-            </section> -->
+            <section id="project-locations"></section>
           <% end %>
 
           <%= render 'new_partials/more_projects' %>
