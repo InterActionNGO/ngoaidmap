@@ -13,7 +13,7 @@ module ProjectsFiltering
     projects_count_digest = "projects_count_#{Digest::SHA1.hexdigest(string)}"
     if map_data = $redis.get(map_data_digest)
       @map_data = map_data
-      puts @map_data
+      #puts @map_data
       @projects_count = JSON.load $redis.get(projects_count_digest)
       # @projects = $redis.get(projects_digest).split(",")
     else
