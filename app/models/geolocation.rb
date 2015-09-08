@@ -17,7 +17,7 @@
 #  admin2            :string
 #  admin3            :string
 #  admin4            :string
-#  provider          :string           default(Geonames)
+#  provider          :string           default("Geonames")
 #  adm_level         :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null

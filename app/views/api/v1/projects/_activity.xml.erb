@@ -42,7 +42,7 @@
   </contact-info>
   <activity-scope code="<%= project.activity_scope_code %>" />
   <% project.iati_countries.each do |c| %>
-    <recipient-country code="<%= c %>" percentage="<%= project.iati_countries.length == 1 ? 100 : '' #if there is more than one country then blank %>" />
+    <recipient-country code="<%= c %>" percentage="<%=  %>" />
   <% end %>
   <% project.iati_locations.each do |l| %>
     <location ref="<%= l.uid %>">
@@ -89,7 +89,7 @@
   </transaction>
   <!--transaction ends-->
   <!--document-link starts-->
-<!--   <document-link format="application/vnd.oasis.opendocument.text" url="http:www.example.org/docs/report_en.odt">
+   <document-link format="application/vnd.oasis.opendocument.text" url="http:www.example.org/docs/report_en.odt">
    <title>
     <narrative>Project Report</narrative>
    </title>
