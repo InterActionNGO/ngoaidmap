@@ -1,7 +1,6 @@
 class CountriesSummingSerializer < ActiveModel::Serializer
-  attributes :id, :type, :name, :uid, :total_projects
+  attributes :type, :name, :uid, :total_projects
   def id
-    object["g0"]
   end
   def type
     "Geolocations"
