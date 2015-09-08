@@ -1,0 +1,1 @@
+$redis = Redis::Namespace.new("ngo_aidmap", redis: Redis.new)

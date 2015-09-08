@@ -10,25 +10,45 @@ define([
   'views/embed-map',
   'views/search',
   'views/layer-overlay',
-  'views/timeline',
   'views/gallery',
   //Titles
   'views/titles/titleSector',
   'views/titles/titleDonor',
+  'views/titles/titleOrganization',
+  'views/titles/titleCountry',
   //Sidebar
   'views/sidebar/sidebarHighlights',
   'views/sidebar/sidebarSectors',
   'views/sidebar/sidebarSectorsAll',
+  'views/sidebar/sidebarLocation',
   'views/sidebar/sidebarLocations',
   'views/sidebar/sidebarDonors',
   'views/sidebar/sidebarOrganizations',
   'views/sidebar/sidebarOrganizationsInfoContact',
   'views/sidebar/sidebarOrganizationsDonationContact',
   'views/sidebar/sidebarOrganizationsMediaContact',
-  'views/sidebar/sidebarOrganizationsFollowUs'
-], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView, TimelineView,
-  GalleryView, TitleSector, TitleDonor, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocations, SidebarDonors, SidebarOrganizations,
-  SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs) {
+  'views/sidebar/sidebarOrganizationsFollowUs',
+  'views/sidebar/sidebarOtherCountries',
+
+  //Project
+  'views/sidebar/project/projectOrganization',
+  'views/sidebar/project/projectTimeline',
+  'views/sidebar/project/projectBudget',
+  'views/sidebar/project/projectPeopleReached',
+  'views/sidebar/project/projectContact',
+  'views/sidebar/project/projectWebsite',
+  'views/sidebar/project/projectAwardee',
+  'views/sidebar/project/projectTarget',
+  'views/sidebar/project/projectPartnerOrganizations',
+  'views/sidebar/project/projectImplementingOrganization',
+  'views/sidebar/project/projectLocations',
+
+
+
+], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
+  GalleryView, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
+  SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOtherCountries,
+  ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization, ProjectLocations) {
 
   var Router = Backbone.Router.extend({
 
@@ -67,13 +87,17 @@ define([
       new SidebarHighlights();
       new SidebarSectors();
       new SidebarSectorsAll();
+      new SidebarLocation();
       new SidebarLocations();
       new SidebarOrganizations();
       new SidebarDonors();
+      new SidebarOtherCountries();
 
       // Titles
       new TitleSector();
       new TitleDonor();
+      new TitleOrganization();
+      new TitleCountry();
 
       // Organization sidebars
       new SidebarOrganizationsInfoContact();
@@ -84,7 +108,20 @@ define([
 
     project: function() {
       this.lists();
-      new TimelineView();
+
+      // Project Sidebar
+      new ProjectOrganization();
+      new ProjectTimeline();
+      new ProjectBudget();
+      new ProjectPeopleReached();
+      new ProjectContact();
+      new ProjectWebsite();
+      new ProjectAwardee();
+      new ProjectTarget();
+      new ProjectPartnerOrganizations();
+      new ProjectImplementingOrganization();
+      new ProjectLocations();
+
       new GalleryView();
     },
 

@@ -55,14 +55,15 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :clusters
   has_and_belongs_to_many :sectors
   has_and_belongs_to_many :regions
-  has_and_belongs_to_many :countries
+  #has_and_belongs_to_many :countries
   has_and_belongs_to_many :tags
   has_and_belongs_to_many :geolocations
-  #has_many :resources, :conditions => proc {"resources.element_type = #{Iom::ActsAsResource::PROJECT_TYPE}"}, :foreign_key => :element_id, :dependent => :destroy
-  #has_many :media_resources, :conditions => proc {"media_resources.element_type = #{Iom::ActsAsResource::PROJECT_TYPE}"}, :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
+  has_many :resources, -> {where(element_type: 0)}, :foreign_key => :element_id, :dependent => :destroy
+  has_many :media_resources, -> {where(element_type: 0).order('position ASC')}, :foreign_key => :element_id, :dependent => :destroy
   has_many :donations, :dependent => :destroy
   has_many :donors, :through => :donations
-  has_many :cached_sites, :class_name => 'Site'#, :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
+  has_and_belongs_to_many :sites #, :class_name => 'Site', :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
+  has_and_belongs_to_many :countries,  -> {where(adm_level: 0)}, class_name: 'Geolocation'
 
   scope :active, -> {where("end_date > ?", Date.today.to_s(:db))}
   scope :closed, -> {where("end_date < ?", Date.today.to_s(:db))}
@@ -71,14 +72,16 @@ class Project < ActiveRecord::Base
                           includes(:countries).
                           where('countries_projects.project_id IS NULL AND regions.id IS NOT NULL')}
   scope :organizations, -> (orgs){where(organizations: {id: orgs})}
+  scope :projects, -> (projects){where(projects: {id: projects})}
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){where(donors: {id: donors})}
-  scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level <= ?', level)}
+  scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
 
   def self.fetch_all(options = {}, from_api = true)
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
-    projects = projects.geolocation(options[:geolocation], options[:level])     if options[:geolocation] && options[:level]
+    projects = projects.geolocation(options[:geolocation], options[:level])     if options[:geolocation]
+    projects = projects.projects(options[:projects])                          if options[:projects]
     projects = projects.countries(options[:countries])                          if options[:countries]
     projects = projects.organizations(options[:organizations])                  if options[:organizations]
     projects = projects.sectors(options[:sectors])                              if options[:sectors]
@@ -95,6 +98,17 @@ class Project < ActiveRecord::Base
       region_groups = {}
       region_groups['regions'] = Geolocation.where("uid IN (?)", project_gs)
       [projects, region_groups]
+    end
+  end
+
+
+  def related(site, limit = 2)
+    if result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(primary_organization_id: self.primary_organization_id).where(sites: {id: site.id}).active.limit(limit)
+      result
+    elsif result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(sites: {id: site.id}).active.limit(limit)
+      result
+    else
+      result = Project.where.not(id: self.id).limit(limit)
     end
   end
 

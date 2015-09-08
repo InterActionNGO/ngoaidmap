@@ -8,23 +8,20 @@
     var chld = "<%=@chld%>";
     var chd = "<%=@chd%>";
     var marker_source = "<%=@georegion_map_marker_source%>";
-    <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
-      var map_type = "administrative_map";
-    <% else %>
-      var map_type = "georegion";
-    <% end  %>
+    var map_type = "administrative_map";
     var last_level = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "false" : "true" %>";
     var show_regions_with_one_project = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "true" : "false" %>";
     var map_data = <%=raw(@map_data)%>;
-    var max_count = <%=@map_data_max_count%>;
     var area_stroke_color = "<%=@georegion_map_stroke_color%>";
     var area_fill_color = "<%=@georegion_map_fill_color%>";
     var theme = <%=@site.theme_id%>;
     var kind = window.location.pathname.split('/')[1];
-    var stylez = <%=raw @site.map_styles  %>;
-    var empty_layer = <%= @empty_layer %>;
+    // var stylez = <%=raw @site.map_styles  %>;
+    // var empty_layer = <%= @empty_layer %>;
     var globalPage = <%= @site.featured?? true : false %>;
     var page = "<%= params[:controller] %>";
+    var adm_level = <%= @geolocation.adm_level + 1 %>;
+    var geolocation = <%= raw(@geolocation.to_json) %>;
   </script>
 <% end %>
 
@@ -37,39 +34,24 @@
     <div class="grid-4">
       <aside class="layout-sidebar">
 
-        <div class="mod-highlighted-results">
-          <% unless @filter_by_location.present? %>
-            <%= render 'new_partials/aside/projects' %>
-          <% end %>
-        </div>
+        <div id="sidebar-highlights" class="mod-highlighted-results mod-info"></div>
 
-        <%= render 'new_partials/aside/location' %>
+        <div id="sidebar-location" class="location mod-info"></div>
 
-        <% if @filter_by_category.blank? && @area.projects_clusters_sectors(@site).size > 0 %>
-          <div class="project-sectors mod-info">
-            <h3>Project sectors</h3>
-            <div class="mod-project-sectors">
-              <ul id="clustersView">
-                <% @area.projects_clusters_sectors(@site)[0..3].each do |category,count| %>
-                  <li>
-                    <a class="<%= category.css_class %> icon_statistics" title="<%= category.name %>" href="<%= location_path(@area, @carry_on_filters.merge(:category_id => category.id)) %>" data-value="<%= count %>"><span class="aller"><%= count %></span></a>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        <% end %>
+        <div id="sidebar-sectors" class="project-sectors mod-info"></div>
 
-        <%= render 'new_partials/aside/donors', :donors => @area.donors(@site) %>
+        <div id="sidebar-donors" class="project-donors mod-info"></div>
 
-        <div class="mod-info">
-          <h3>Projects in other <%= word_for_geo_context(@area).pluralize %></h3>
+        <div id="sidebar-other-countries" class="mod-info"></div>
+
+        <!-- <div class="mod-info">
+          <h3>Projects in other <%#= word_for_geo_context(@area).pluralize %></h3>
           <ul>
-            <% @area.near(@site, 5).each do |area| %>
-              <li><%= link_to(area.name, location_path(area)) %> - <%= pluralize(area.count, 'project', 'projects') %></li>
-            <% end %>
+            <%# @area.near(@site, 5).each do |area| %>
+              <li><%#= link_to(area.name, location_path(area)) %> - <%#= pluralize(area.count, 'project', 'projects') %></li>
+            <%# end %>
           </ul>
-        </div>
+        </div> -->
 
       </aside>
     </div>
@@ -78,12 +60,11 @@
       <section class="layout-content" id="content">
 
         <header>
-          <h1 class="section-title"><%= georegion_projects_list_subtitle %><%= ", " + @area_parent if @area_parent.present? %></h1>
-          <%= content_tag :p, @area.wiki_description if @area.wiki_description %>
-          <%= content_tag :p, raw("Description provided by Wikipedia #{content_tag(:a, 'Read full article', :href => @area.wiki_url)}"), :class => 'provided' if @area.wiki_url %>
+          <h1 id="title-country" data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="section-title"><%= @geolocation.name %></h1>
+          <%#= content_tag :p, @area.wiki_description if @area.wiki_description %>
+          <%#= content_tag :p, raw("Description provided by Wikipedia #{content_tag(:a, 'Read full article', :href => @area.wiki_url)}"), :class => 'provided' if @area.wiki_url %>
         </header>
 
-        <%= render :partial => 'new_partials/downloads', :locals => { :csv_path => location_path(@area, @carry_on_filters.merge(:format => :csv)), :xls_path => location_path(@area, @carry_on_filters.merge(:format => :xls)), :kml_path => location_path(@area, @carry_on_filters.merge(:format => :kml)) } %>
 
         <%= render "new_partials/index_projects" %>
 

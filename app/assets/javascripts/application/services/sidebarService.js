@@ -12,6 +12,7 @@ define([
 
     requests: {
       'sectors-all' : '/api/sectors?include=projects_count',
+      'countries-all' : '/api/countries?summing=projects'
     },
 
     /**
@@ -42,7 +43,10 @@ define([
 
     _defineRequestsByPlace: function(){
       if (!!window.sector) {
-        this.requests['donors-by-sector'] = _.str.sprintf('/api/sectors/%s?only=donors', sector.id)
+        this.requests['donors-by-sector'] = _.str.sprintf('/api/donors?sectors[]=%s', sector.id)
+      }
+      if (!!window.geolocation) {
+        this.requests['donors-by-geolocation'] = _.str.sprintf('/api/donors?geolocation=%s', geolocation.uid)
       }
     },
 

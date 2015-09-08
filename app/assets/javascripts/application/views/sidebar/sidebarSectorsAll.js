@@ -5,8 +5,9 @@ define([
   'backbone',
   'handlebars',
   'services/sidebarService',
+  'abstract/conexion',
   'text!templates/sidebar/sidebarSectors.handlebars'
-  ], function(jqueryui,Backbone, handlebars, service, tpl) {
+  ], function(jqueryui,Backbone, handlebars, service, conexion, tpl) {
 
   var SidebarSectors = Backbone.View.extend({
 
@@ -18,7 +19,7 @@ define([
       if (!this.$el.length) {
         return
       }
-      this.sectorId = sector.id;
+      this.conexion = conexion;
       service.execute('sectors-all', _.bind(this.successSidebar, this ), _.bind(this.errorSidebar, this ));
 
     },
@@ -33,19 +34,7 @@ define([
     },
 
     parseData: function(){
-      var sectorsByProjects = _.sortBy(_.map(this.data, function(v){
-        return {
-          name: v.name,
-          id: v.id,
-          url: '/sectors/'+v.id,
-          class: v.name.toLowerCase().replace(/\s/g, "-"),
-          count: v.projects_count
-        }
-      }), function(sector){
-        return -sector.count;
-      });
-
-      sectorsByProjects = _.without(sectorsByProjects, _.findWhere(sectorsByProjects, {id: this.sectorId.toString() }));
+      var sectorsByProjects = this.conexion.getSectorsByProjectsAll(this.data,sector.id);
       return { sectors: sectorsByProjects, all: true };
     },
 

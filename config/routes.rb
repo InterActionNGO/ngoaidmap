@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :donors, only: [:index, :show]
       resources :organizations, only: [:index, :show]
       resources :sectors, only: [:index, :show]
+      resources :countries, only: [:index, :show]
     end
   end
 
@@ -62,11 +63,11 @@ Rails.application.routes.draw do
 
   get 'regions/:id' => 'georegion#old_regions'
   # HACK!! route globbing doesn't work well when trying to get the request format in Rails <=3.0.7
-  get 'location/*ids.csv', to: 'georegion#show', :as => 'location_csv', :format => 'csv'
-  get 'location/*ids.xls' , to: 'georegion#show', :as => 'location_xls', :format => 'xls'
-  get 'location/*ids.kml' , to: 'georegion#show', :as => 'location_kml', :format => 'kml'
+  # get 'location/*ids.csv', to: 'georegion#show', :as => 'location_csv', :format => 'csv'
+  # get 'location/*ids.xls' , to: 'georegion#show', :as => 'location_xls', :format => 'xls'
+  # get 'location/*ids.kml' , to: 'georegion#show', :as => 'location_kml', :format => 'kml'
   # End HACK!!
-  get 'location/*ids' , to: 'georegion#show', :as => 'location'
+  get 'location/:ids' , to: 'georegion#show', :as => 'location'
 
   # clusters and sector work through the same controller and view
   get 'sectors/:id' , to: 'clusters_sectors#show', :as => 'sector'

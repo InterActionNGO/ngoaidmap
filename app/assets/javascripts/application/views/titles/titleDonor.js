@@ -24,7 +24,7 @@ define([
 
     parseData: function(){
 
-      this.countries = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'countries' });
+      this.countries = this.conexion.getCountries();
       this.organizations = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'organizations' });
       this.sectors = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'sectors' });
 
@@ -44,7 +44,7 @@ define([
     },
 
     projectString: function(count,sectorCount){
-      var sector = (sectorCount == 1) ? this.sectors[0].name : '';
+      var sector = (sectorCount == 1) ? this.sectors[0].attributes.name : '';
       if (count == 1) {
         return count.toLocaleString() +' '+sector+' project';
       }else{
@@ -57,7 +57,7 @@ define([
     },
 
     organizationString: function(count){
-      return (count == 1) ? this.organizations[0].name : null;
+      return (count == 1) ? this.organizations[0].attributes.name : null;
     },
 
 

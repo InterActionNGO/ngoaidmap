@@ -7,8 +7,9 @@ define([
   'views/layersView',
   'views/mapTypeView',
   'abstract/markerClass',
+  'abstract/conexion',
   'underscoreString'
-  ], function(_, Backbone, LayersView, MapTypeView, IOMMarker) {
+  ], function(_, Backbone, LayersView, MapTypeView, IOMMarker, conexion) {
 
   var MapView = Backbone.View.extend({
 
@@ -39,6 +40,7 @@ define([
       if (this.$el.length === 0) {
         return false;
       }
+      this.conexion = conexion;
 
       this.$map = $('#map');
 
@@ -60,8 +62,8 @@ define([
 
     initMap: function(){
       if (map_type === 'project_map') {
-        this.mapOtions.zoom = map_zoom;
-        this.mapOtions.center = new google.maps.LatLng(map_center[0], map_center[1]);
+        this.mapOptions.zoom = map_zoom;
+        this.mapOptions.center = new google.maps.LatLng(map_center[0], map_center[1]);
       }
 
       var idMap = (this.$map.length > 0) ? 'map' : 'small_map';
@@ -72,10 +74,8 @@ define([
     },
 
     initMarkers: function(){
-      var range;
-      if (map_type === 'administrative_map') {
-        range = max_count / 5;
-      }
+      var range = 5;
+      var classname;
       var diametersCount = {
         diameter: [20,26,34,42,26],
         bounds:{
@@ -90,17 +90,20 @@ define([
       // Markers
       for (var i = 0; i < this.markers.length; i++) {
         if (document.URL.indexOf('force_site_id=3') >= 0) {
+          classname = 'marker-bubble';
           this.setDiameter(diametersCount.diameter, diametersCount.bounds['force_site'],i);
         } else if (map_type === 'overview_map') {
+          classname = 'marker-bubble';
           this.setDiameter(diametersCount.diameter, diametersCount.bounds['overview_map'],i);
         } else if (map_type === 'administrative_map') {
+          classname = 'marker-bubble';
           this.setDiameter(diametersCount.diameter, diametersCount.bounds['administrative_map'],i);
         } else {
           this.diameter = 34;
           classname = 'marker-project-bubble';
         }
 
-        new IOMMarker(this.markers[i], this.diameter, 'marker-bubble', this.map);
+        new IOMMarker(this.markers[i], this.diameter, classname, this.map);
 
         this.bounds.extend(new google.maps.LatLng(this.markers[i].lat, this.markers[i].lon));
       }
@@ -110,9 +113,9 @@ define([
       }
 
       if (page === 'georegion' && this.markers.length === 1) {
-        setTimeout(function() {
+        setTimeout(_.bind(function() {
           this.map.setZoom(8);
-        }, 300);
+        }, this), 300);
       }
 
 
@@ -124,35 +127,19 @@ define([
     },
 
     markerParser: function(data){
-      var projectsByCountry = _.groupBy(data.data, function(project){ return project.links.countries.linkage[0].id });
-      var included = data.included;
-
-      var markers = _.sortBy(_.map(projectsByCountry, function(country, countryKey){
-        var countryF = _.findWhere(included, {id: countryKey, type:'countries'});
-        return {
-          code: countryF.code,
-          count: country.length,
-          id: countryF.id,
-          lat: countryF.center_lat,
-          lon: countryF.center_lon,
-          name: countryF.name,
-          type: countryF.type,
-          url: '/location/' + countryF.id
-        }
-      }), function(country){
-        return country.count;
-      });
-
-      // If region exist, reject a country object
-      _.each(markers, function(d) {
-        if (d.type === 'region') {
-          map_data_parse = _.reject(map_data_parse, function(d) {
-            return d.type === 'country';
-          });
-          return false;
-        }
-      });
-
+      if (geolocation) {
+        var markers = _.sortBy(this.conexion.getLocationsByGeolocation(adm_level), function(location){
+          return location.count;
+        });
+      } else if(project) {
+        var markers = _.sortBy(this.conexion.getLocationsByProject(), function(location){
+          return location.count;
+        });
+      } else{
+        var markers = _.sortBy(this.conexion.getCountries(true), function(country){
+          return country.count;
+        });
+      }
 
       return markers;
     },

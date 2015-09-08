@@ -41,7 +41,6 @@
           var chld = '<%= @chld %>';
           var chd = '<%= @chd %>';
           var map_data = <%=raw(@map_data)%>;
-          var max_count = <%=@map_data_max_count%>;
           var map_type = '<%= @filter_by_location.present?? "administrative_map" : "overview_map" %>';
           var theme = "<%= @site.theme_id %>";
           var kind = window.location.pathname.split('/')[1];
@@ -49,6 +48,9 @@
           var empty_layer = <%= @empty_layer.present?? @empty_layer : false %>;
           var globalPage = <%= @site.featured?? false : true %>;
           var page = "<%= params[:controller] %>";
+          var adm_level = 0;
+          var geolocation = false;
+          var project = false;
         </script>
       <% end %>
     <% else %>
