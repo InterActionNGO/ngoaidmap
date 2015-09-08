@@ -2,11 +2,12 @@
 #
 # Table name: donations
 #
-#  id         :integer         not null, primary key
+#  id         :integer          not null, primary key
 #  donor_id   :integer
 #  project_id :integer
 #  amount     :float
 #  date       :date
+#  office_id  :integer
 #
 
 class Donation < ActiveRecord::Base

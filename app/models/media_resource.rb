@@ -2,8 +2,8 @@
 #
 # Table name: media_resources
 #
-#  id                       :integer         not null, primary key
-#  position                 :integer         default(0)
+#  id                       :integer          not null, primary key
+#  position                 :integer          default(0)
 #  element_id               :integer
 #  element_type             :integer
 #  picture_file_name        :string(255)
@@ -48,4 +48,8 @@ class MediaResource < ActiveRecord::Base
                               all: "-quality 90"
                             },
                             url: "/system/:attachment/:id/:style.:extension"
+
+  def is_a_video?
+    video_url?
+  end
 end

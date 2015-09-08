@@ -6,7 +6,7 @@ module ProjectsHelper
     end
   end
 
-  def subtitle(project, site)
+  def old_subtitle(project, site)
     clusters_sectors = if site.navigate_by_sector?
       sectors_to_sentence(project)
     else
@@ -14,6 +14,25 @@ module ProjectsHelper
     end
     place        = project_regions_and_countries(project)
     organization = "by #{link_to project['organization_name'], organization_path(project['organization_id'])}"
+
+    case controller_name
+    when 'sites'
+      raw("#{clusters_sectors} #{place} #{organization}")
+    when 'organizations'
+      raw("#{clusters_sectors} #{place}")
+    when 'clusters_sectors'
+      raw("#{place} #{organization}")
+    when 'georegion'
+      raw("#{clusters_sectors} #{organization}")
+    when 'donors'
+      raw("#{clusters_sectors} #{place} #{organization}")
+    end
+  end
+
+  def subtitle(project, site)
+    clusters_sectors = sectors_to_sentence(project)
+    place        = project_regions_and_countries(project)
+    organization = "by #{link_to project.primary_organization.name, organization_path(project.primary_organization.id)}"
 
     case controller_name
     when 'sites'
@@ -65,9 +84,9 @@ module ProjectsHelper
   end
 
   def sectors_to_sentence(project)
-    return "" if project['sectors'].nil? || project['sector_ids'].nil?
-    sectors = project['sectors'].split('|').reject{|s| s.blank?}
-    sectors_ids = project['sector_ids'].delete('{}').split(',')
+    return "" if project.sectors.nil?
+    sectors = project.sectors.uniq.map{|s| s.name}
+    sectors_ids = project.sectors.uniq.map{|s| s.id}
     if sectors.size == 1
       "#{link_to sectors.first.indefinitize.capitalize, sector_path(sectors_ids.first), :title => sectors.first} project"
     else
@@ -98,9 +117,9 @@ module ProjectsHelper
 
   def project_regions_and_countries(project)
     if @site.navigate_by_country?
-      return if project['countries'].nil? || project['countries_ids'].nil?
-      countries     = project['countries'].split('|').reject{|r| r.blank?}
-      countries_ids = project['countries_ids'].delete('{}').split(',')
+      return if project.countries.nil?
+      countries     = project.countries.map{|c| c.name}
+      countries_ids =  project.countries.map{|c| c.id}
       if countries.size == 1
         "in #{link_to(countries.first, location_path(:ids => [countries_ids.first]), :title => countries.first)}"
       else

@@ -31,8 +31,7 @@
       var chld = "<%=@chld%>";
       var chd = "<%=@chd%>";
       var marker_source = "<%=@georegion_map_marker_source%>";
-      var map_data = <%=raw(@map_data)%>;
-      var max_count = <%=@map_data_max_count? @map_data_max_count : 1 %>;
+      var map_data = <%=@map_data%>;
       var map_type = '<%= @map_type || 'overview_map' %>';
       var theme = "<%=@site.theme_id%>";
       var stylez = <%=raw @site.map_styles  %>
@@ -40,6 +39,9 @@
       var kind = window.location.pathname.split('/')[1];
       var globalPage = <%= @site.featured?? true : false %>;
       var page = "<%= params[:controller] %>";
+      var adm_level = 0;
+      var geolocation = false;
+      var project = false;
     </script>
     <%= javascript_include_tag "../lib/modernizr/modernizr.custom.js" %>
 

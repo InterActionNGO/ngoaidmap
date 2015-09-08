@@ -2,7 +2,7 @@
 #
 # Table name: donors
 #
-#  id                        :integer         not null, primary key
+#  id                        :integer          not null, primary key
 #  name                      :string(2000)
 #  description               :text
 #  website                   :string(255)
@@ -20,6 +20,9 @@
 #  site_specific_information :text
 #  created_at                :datetime
 #  updated_at                :datetime
+#  iati_organizationid       :string(255)
+#  organization_type         :string(255)
+#  organization_type_code    :integer
 #
 
 class Donor < ActiveRecord::Base
@@ -43,5 +46,15 @@ class Donor < ActiveRecord::Base
     },
     url: "/system/:attachment/:id/:style.:extension"
   scope :active, -> {joins([donations: :project]).where("projects.end_date is null or (projects.end_date > ? AND projects.start_date < ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
+  scope :sectors, -> (sectors) {joins([donations: [project: :sectors]]).where(sectors: {id: sectors})}
 
+  def self.fetch_all(options={})
+    donors = Donor.active
+    donors = donors.sectors(options[:sectors]) if options[:sectors]
+    donors = donors.offset(options[:offset])   if options[:offset]
+    donors = donors.limit(options[:limit])     if options[:limit]
+    donors = donors.uniq
+    donors = donors.order(:name)
+    donors
+  end
 end

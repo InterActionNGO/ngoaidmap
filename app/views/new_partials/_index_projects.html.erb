@@ -4,10 +4,10 @@
       <% @projects.each do |project| %>
         <li>
           <article class="mod-index-item">
-            <h2><a href="<%#= project_path(project['project_id']) %>"><%#= truncate(project['project_name'], :length=>60) %></a></h2>
-            <span><%#= subtitle(project, @site) %></span>
+            <h2><a href="<%= project_path(project['id']) %>"><%= truncate(project['name'], :length=>60) %></a></h2>
+            <span ><%= subtitle(project, @site) %></span>
             <p>
-              <%#= anglo(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>")) %>
+              <%= html_truncate(project['description'], 175, :omission => "... <a href=\"#{project_path(project['id'])}\" class=\"learn_more\">Learn more</a>").html_safe %>
             </p>
           </article>
         </li>
@@ -17,27 +17,12 @@
     <ul>
       <li>
         <article class="mod-index-item">
-          <p class="no_results">No projects were found for this organizaton</p>
+          <p class="no_results">No projects were found for this organization/donor/country</p>
         </article>
       </li>
     </ul>
   <% end %>
 </div>
-
-<% if @projects.total_pages > 1 %>
-  <div class="mod-pagination" id="projects_view_more">
-    <ul>
-      <% if @projects.current_page > 1 %>
-        <li>
-          <%= link_to('previous', pagination_link(previous_pagination_params), :id =>'previous') %>
-
-        </li>
-      <% end %>
-      <% if @projects.current_page < @projects.total_pages %>
-        <li>
-          <%= link_to('next', pagination_link(next_pagination_params), :id =>'next') %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<div class="mod-pagination">
+  <%= paginate(@projects, total_pages: (@projects_count/10).ceil, remote: true) %>
+</div>

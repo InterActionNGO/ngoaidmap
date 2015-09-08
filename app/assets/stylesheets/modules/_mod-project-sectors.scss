@@ -14,7 +14,7 @@
     border-radius: 10px;
   }
   .icon_statistics { position: relative; padding-left: 25px;}
-  .icon_statistics:before { @include before('', block, absolute, 0, 0, 20px, 20px)}
+  .icon_statistics:before { @include before('', block, absolute, 0, -3px, 20px, 20px)}
 
   // Icons
   .health:before {

@@ -1,0 +1,51 @@
+{
+  "resource": "Donors",
+  "http_method": "GET",
+  "route": "/api/donors?sectors[]=:sector",
+  "description": "Getting a list of donors for a particular sector",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "sectors",
+      "description": "Array. Sector ids"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/donors?sectors[]=1",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
+        "Content-Type": "application/vnd.api+json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "sectors": [
+          "1"
+        ]
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"id\":\"5\",\"type\":\"donors\",\"attributes\":{\"name\":\"donor_with_sector\"}}],\"meta\":{\"total\":1}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"1fa25f21adac1eb26acd37264cb7e99e\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "5ac58e3a-56c7-4b68-b347-cec53337ae2f",
+        "X-Runtime": "0.012093",
+        "Content-Length": "98"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/donors?sectors[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

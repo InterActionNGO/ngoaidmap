@@ -136,7 +136,7 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Accept: application/json; application/vnd.esios-api-v1+json
+            <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
 Content-Type: application/json
 Host: http://ngoaidmap.org
 Cookie: </pre>
@@ -150,7 +150,7 @@ Cookie: </pre>
 
             <h4>cURL</h4>
             <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?organizations[]=1&quot; -X GET \
-	-H &quot;Accept: application/json; application/vnd.esios-api-v1+json&quot; \
+	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
@@ -161,15 +161,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;ce8560ce6b9931f7b752debc9f100a0b&quot;
+ETag: W/&quot;51c1bc05cabee76daf74f014518ec49d&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 02d3a693-7dca-483d-bd49-381e9f19d6f0
-X-Runtime: 0.033720
-Content-Length: 364</pre>
+X-Request-Id: 4ffa8083-da81-49b4-9bca-7c33cfeef70c
+X-Runtime: 0.029228
+Content-Length: 321</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;project_with_organization&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:{&quot;type&quot;:&quot;organizations&quot;,&quot;id&quot;:&quot;1&quot;}},&quot;sectors&quot;:{&quot;linkage&quot;:[]},&quot;countries&quot;:{&quot;linkage&quot;:[]},&quot;regions&quot;:{&quot;linkage&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;One Organization&quot;,&quot;type&quot;:&quot;organizations&quot;}],&quot;meta&quot;:{&quot;total&quot;:{&quot;[1, nil, nil, nil, nil, 1]&quot;:1}}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;2&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_organization&quot;,&quot;description&quot;:null},&quot;relationships&quot;:{&quot;organization&quot;:{&quot;data&quot;:{&quot;type&quot;:&quot;organizations&quot;,&quot;id&quot;:&quot;1&quot;}},&quot;sectors&quot;:{&quot;data&quot;:[]},&quot;geolocations&quot;:{&quot;data&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;type&quot;:&quot;organizations&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;One Organization&quot;}}]}</pre>
       </div>
     </div>
   </body>

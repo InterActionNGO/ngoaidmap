@@ -1,7 +1,7 @@
 require 'acceptance_helper'
 
 resource 'Projects' do
-  header "Accept", "application/json; application/vnd.esios-api-v1+json"
+  header "Accept", "application/json; application/vnd.ngoaidmap-api-v1+json"
   header "Content-Type", "application/json"
   header 'Host', 'http://ngoaidmap.org'
 
@@ -14,7 +14,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect results.include?(['project0', 'project1', 'project2'])
     end
   end
@@ -30,7 +30,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects with an offset" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect results.include?(['project8', 'project9', 'project10'])
     end
   end
@@ -46,7 +46,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects with a limit" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect results.include?(['project1', 'project2', 'project3'])
     end
   end
@@ -63,7 +63,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects by implementing organization" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect(results).to eq(['project_with_organization'])
     end
   end
@@ -79,7 +79,7 @@ resource 'Projects' do
 
     example_request "Getting a list of projects by donors" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect(results).to eq(['project_with_donor'])
     end
   end
@@ -95,40 +95,43 @@ resource 'Projects' do
 
     example_request "Getting a list of projects by sectors" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect(results).to eq(['project_with_sector'])
     end
   end
 
   get "/api/projects?countries[]=:country" do
-    parameter :countries, "Array. Country ids"
+    parameter :countries, "Array. Country uids"
     p = FactoryGirl.create(:project, name: "project_with_country")
-    s = FactoryGirl.create(:country)
-    p.countries=[s]
+    c = FactoryGirl.create(:geolocation, name: 'India', adm_level: 0, uid: 'ggg', country_uid: 'ggg')
+    p.geolocations=[c]
     let(:country) do
-      s.id
+      c.uid
     end
 
     example_request "Getting a list of projects by countries" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect(results).to eq(['project_with_country'])
     end
   end
 
-  get "/api/projects?regions[]=:region" do
-    parameter :regions, "Array. Region ids"
-    p = FactoryGirl.create(:project, name: "project_with_region")
-    s = FactoryGirl.create(:region)
-    p.regions=[s]
-    let(:region) do
-      s.id
+  get "/api/projects?geolocation=:geolocation&level=:level" do
+    parameter :geolocation, "Geolocation uid"
+    parameter :level, "Admin level"
+    p = FactoryGirl.create(:project, name: "project_with_geolocation")
+    g1 = FactoryGirl.create(:geolocation, name: 'Madrid', adm_level: 1, uid: '111', g0: '000', g1: '111')
+    g = FactoryGirl.create(:geolocation, name: 'Spain', adm_level: 0, uid: '000', g0: '000')
+    p.geolocations=[g]
+    let(:level) { 0 }
+    let(:geolocation) do
+      g.uid
     end
 
-    example_request "Getting a list of projects by regions" do
+    example_request "Getting a list of projects by geolocation" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
-      expect(results).to eq(['project_with_region'])
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
+      expect(results).to eq(['project_with_geolocation'])
     end
   end
 
@@ -145,7 +148,7 @@ resource 'Projects' do
       expect(status).to eq(200)
       results = JSON.parse(response_body)
       expect(results.length).to be == 1
-      expect(results['data']['name']).to  be == name
+      expect(results['data']['attributes']['name']).to  be == name
     end
   end
 

@@ -2,7 +2,7 @@
 #
 # Table name: resources
 #
-#  id                        :integer         not null, primary key
+#  id                        :integer          not null, primary key
 #  title                     :string(255)
 #  url                       :string(255)
 #  element_id                :integer
@@ -15,6 +15,7 @@
 class Resource < ActiveRecord::Base
 
   #acts_as_resource
+  belongs_to :project
 
   serialize :site_specific_information
 

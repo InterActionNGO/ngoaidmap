@@ -136,21 +136,21 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Accept: application/json; application/vnd.esios-api-v1+json
+            <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
 Content-Type: application/json
 Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/projects?sectors[]=1</pre>
+          <pre class="request route highlight">GET /api/projects?sectors[]=2</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">sectors: [&quot;1&quot;]</pre>
+            <pre class="request query_parameters highlight">sectors: [&quot;2&quot;]</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?sectors[]=1&quot; -X GET \
-	-H &quot;Accept: application/json; application/vnd.esios-api-v1+json&quot; \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?sectors[]=2&quot; -X GET \
+	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
@@ -161,15 +161,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;426713c9fb35661c7b3df8fef39f100a&quot;
+ETag: W/&quot;d700d14175333864d6b5fc563a29de36&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 3755c80f-c1a5-427f-a2bc-a01ae3ffbf24
-X-Runtime: 0.036011
-Content-Length: 345</pre>
+X-Request-Id: 8f193af7-7c72-4c5e-a797-fc7292fff27c
+X-Runtime: 0.031100
+Content-Length: 302</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;type&quot;:&quot;projects&quot;,&quot;id&quot;:&quot;3&quot;,&quot;name&quot;:&quot;project_with_sector&quot;,&quot;description&quot;:null,&quot;links&quot;:{&quot;organization&quot;:{&quot;linkage&quot;:null},&quot;sectors&quot;:{&quot;linkage&quot;:[{&quot;type&quot;:&quot;sectors&quot;,&quot;id&quot;:&quot;1&quot;}]},&quot;countries&quot;:{&quot;linkage&quot;:[]},&quot;regions&quot;:{&quot;linkage&quot;:[]}}}],&quot;included&quot;:[{&quot;type&quot;:&quot;sectors&quot;,&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;Agriculture&quot;}],&quot;meta&quot;:{&quot;total&quot;:{&quot;[3, nil, nil, 1, nil, nil]&quot;:1}}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;4&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_sector&quot;,&quot;description&quot;:null},&quot;relationships&quot;:{&quot;organization&quot;:{&quot;data&quot;:null},&quot;sectors&quot;:{&quot;data&quot;:[{&quot;type&quot;:&quot;sectors&quot;,&quot;id&quot;:&quot;2&quot;}]},&quot;geolocations&quot;:{&quot;data&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;2&quot;,&quot;type&quot;:&quot;sectors&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;Agriculture&quot;}}]}</pre>
       </div>
     </div>
   </body>

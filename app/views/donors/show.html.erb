@@ -7,137 +7,32 @@
     <div class="grid-4">
       <aside class="layout-sidebar">
 
-        <div class="mod-highlighted-results">
-          <% unless @filter_by_location.present? %>
-              <%= render 'new_partials/aside/projects' %>
-          <% end %>
+        <!-- Highlighted results -->
+        <div id="sidebar-highlights" class="mod-highlighted-results mod-info" data-rendercountries="true"></div>
 
-          <% if @site.navigate_by_country %>
-            <%= render 'new_partials/aside/countries' %>
-          <% else %>
-            <%= render 'new_partials/aside/regions' %>
-          <% end %>
-          </div>
+        <!-- Projects locations -->
+        <div id="sidebar-locations" class="mod-info"></div>
 
-        <% unless @filter_by_organization.present? %>
-          <%= render 'new_partials/aside/affiliated_organizations' %>
-        <% end %>
+        <!-- Sectors by projects -->
+        <div id="sidebar-sectors" class="project-sectors mod-info"></div>
 
-        <% unless @filter_by_location.present? || @donor_projects_by_location.empty? %>
-          <div class="project-locations mod-info">
-            <h3>Project locations</h3>
-            <div class="mod-project-locations">
-              <%= raw(projects_by_location(@site, @donor_projects_by_location)) %>
-            </div>
-          </div>
-        <% end %>
-
-        <% unless @site.nil? || @filter_by_category.present? || @donor_projects_clusters_sectors.empty? %>
-          <%= render 'new_partials/aside/project_sectors' %>
-        <% end %>
-
-
-        <%= render 'new_partials/aside/contact_info' %>
-
-        <% unless @donor.twitter.blank? && @donor.facebook.blank? && @donor.website.blank? %>
-          <div class="follow-us mod-info">
-            <% if @donor.logo? %>
-              <% if @donor.website? %>
-                <a href="<%= @donor.website %>"><%= image_tag(@donor.logo.url(:small), :class=>'logo') %></a>
-              <% else %>
-                <%= image_tag(@donor.logo.url(:small), :class=>'logo') %>
-              <% end %>
-            <%end%>
-
-            <% if @donor.twitter? || @donor.facebook? || @donor.website? %>
-              <div class="mod-follow-us">
-                <ul>
-                  <% if @donor.twitter? %>
-                    <li><%= link_to(' ', "#{@donor.twitter}", :class=>"twitter", :target=>"_blank") %></li>
-                  <% end %>
-                  <% if @donor.facebook? %>
-                    <li><%= link_to(' ', "#{@donor.facebook}", :class=>"facebook", :target=>"_blank") %></li>
-                  <% end %>
-                  <% if @donor.website? %>
-                    <li><%= link_to(' ', @donor.website, :class => 'email', :target => '_blank') %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
-          </div>
-        <%end%>
-
-        <% if !@donor.media_resources.empty? && 0==1 %>
-          <div class="mod-info">
-            <h3>Media resources</h3>
-            <% @donor.media_resources.each do |media| %>
-              <ul>
-                <li><a href="<%= media.is_a_video? ? media.video_url : media.picture.url(:medium) %>" target="_blank"><%= media.caption.present? ? media.caption : media.picture_file_name.present? ? media.picture_file_name : media.video_url %></a></li>
-              </ul>
-            <%end%>
-          </div>
-        <% end %>
-
+        <script> var donor = <%= raw(@donor.to_json) %>;</script>
       </aside>
     </div>
 
     <div class="grid-12 offset-1">
-      <section class="layout-content" id="content">
+      <section class="layout-content">
 
         <header>
-          <h1 class="section-title"><%= donors_list_subtitle(false) %></h1>
-          <%= simple_format(@donor.description) if @donor.description.present? %>
+          <h1 id="title-donor" class="section-title" data-id="<%= @donor.id %>" data-name="<%= @donor.name.html_safe %>"><%= @donor.name.html_safe %></h1>
+          <!-- <h1 class="section-title"><%#= clusters_sectors_projects_list_subtitle %></h1> -->
         </header>
 
         <p class="disclaimer"><%= params[:organization_id] ? "In some cases, this organization may be sub-recipient (rather than a direct recipient) of this donor's funding." : "The projects presented here are voluntarily provided by InterAction members and are not intended to be a complete representation of this donor’s activities." %> </p>
 
-        <%= render :partial => 'new_partials/downloads', :locals => { :csv_path => donor_path(@donor, @carry_on_filters.merge(:format => :csv)), :xls_path => donor_path(@donor, @carry_on_filters.merge(:format => :xls)), :kml_path => donor_path(@donor, @carry_on_filters.merge(:format => :kml)) } %>
+        <%#= render :partial => 'new_partials/downloads', :locals => { :csv_path => organization_path(@organization, @carry_on_filters.merge(:format => :csv)), :xls_path => organization_path(@organization, @carry_on_filters.merge(:format => :xls)), :kml_path => organization_path(@organization, @carry_on_filters.merge(:format => :kml)) } %>
 
-        <div class="articles-list">
-          <% unless @projects.empty? %>
-            <ul>
-              <% @projects.each_with_index do |project,index| %>
-                <li>
-                  <article class="mod-index-item">
-                    <h2><%= link_to(truncate(project['project_name'], :length=>65), project_path(project['project_id'])) %></h2>
-                    <span>
-                      <%= subtitle_donors_page(project, @site, donor_path( params[:id], @carry_on_filters.merge(:organization_id => project["organization_id"].to_i) ) ) %>
-                    </span>
-                    <p>
-                      <%= anglo(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>")) %>
-                    </p>
-                  </article>
-                </li>
-              <% end %>
-            </ul>
-          <% else %>
-            <ul>
-              <li>
-                <article class="mod-index-item">
-                  <p class="no_results">No projects were found for this donor</p>
-                </article>
-              </li>
-            </ul>
-          <% end %>
-        </div>
-
-        <div class="mod-pagination" id="projects_view_more">
-          <% if @projects.total_pages > 1 %>
-            <ul>
-              <% if @projects.current_page > 1 -%>
-                <li>
-                  <%= link_to('< previous', pagination_link(previous_pagination_params), :id =>'previous') %>
-                  <% end -%>
-                </li>
-
-                <li>
-                  <% if @projects.current_page < @projects.total_pages -%>
-                    <%= link_to('next >', pagination_link(next_pagination_params), :id =>'next') %>
-                  <% end -%>
-                </li>
-            </ul>
-          <% end %>
-        </div>
+        <%= render "new_partials/index_projects" %>
 
       </section>
     </div>

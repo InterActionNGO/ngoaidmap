@@ -7,160 +7,36 @@
     <div class="grid-4">
       <aside class="layout-sidebar">
 
-        <div class="mod-highlighted-results">
-          <%= render 'new_partials/aside/projects' %>
-        </div>
+        <!-- Highlighted results -->
+        <div id="sidebar-highlights" class="mod-highlighted-results mod-info"></div>
 
-        <% unless @site.nil? || @filter_by_category.present? || @organization_projects_clusters_sectors.empty? %>
-          <div class="project-sectors mod-info">
-            <h3>Project sectors</h3>
-            <div class="mod-project-sectors">
-              <ul id="clustersView">
-                <% @organization_projects_clusters_sectors[0...3].each do |category,count| %>
-                  <% unless category.name.eql?('N/A') %>
-                    <li>
-                      <a class="<%= category.css_class %> icon_statistics" title="<%= category.name %>" href="<%= organization_path(@organization, @carry_on_filters.merge(:category_id => category.id)) %>" data-value="<%= count %>"><span class="aller"><%= count %></span></a>
-                    </li>
-                  <% end %>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        <% end %>
+        <!-- Sectors by projects -->
+        <div id="sidebar-sectors" class="project-sectors mod-info"></div>
 
-        <% unless @filter_by_location.present? || @organization_projects_by_location.empty? %>
-          <%= render 'new_partials/aside/project_locations' %>
-        <% end %>
+        <!-- Projects locations -->
+        <div id="sidebar-locations" class="mod-info"></div>
 
-        <% unless @organization.resources_for_site(@site).empty? %>
-          <div class="mod-info">
-            <h3>Additional resources</h3>
-            <% @organization.resources_for_site(@site).each do |resource| %>
-              <ul>
-                <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
-              </ul>
-            <%end%>
-          </div>
-        <% end %>
+        <!-- Organization Sidebar -->
+        <div id="sidebar-organization-infocontact" class="mod-info"></div>
+        <div id="sidebar-organization-donationcontact" class="mod-info"></div>
+        <div id="sidebar-organization-mediacontact" class="mod-info"></div>
+        <div id="sidebar-organization-followus" class="mod-info"></div>
 
-        <% unless (@organization.contact_name.nil? || @organization.contact_name.empty?) &&  (@organization.contact_position.nil? || @organization.contact_position.empty?) && (@organization.contact_phone_number.nil? || @organization.contact_phone_number.empty?) && (@organization.contact_email.nil? || @organization.contact_email.empty?)%>
-        <div class="contact-info mod-info">
-          <h3>Contact information</h3>
-          <div class="mod-contact-info">
-            <% if @organization.contact_name? %>
-              <h4><%= @organization.contact_name %></h4>
-            <% end %>
-            <p><%= @organization.contact_position %></p>
-            <p><%= @organization.contact_phone_number %></p>
-            <% unless (@organization.contact_email.nil?) || (@organization.contact_email.empty?) %>
-              <a href="mailto:<%= @organization.contact_email%>" class="donations-website">Contact e-mail address</a>
-            <% end %>
-          </div>
-          </div>
-        <% end %>
 
-        <!-- <%# unless (@organization.main_data_contact_name.nil? || @organization.main_data_contact_name.empty?) &&  (@organization.main_data_contact_position.nil? || @organization.main_data_contact_position.empty?) && (@organization.main_data_contact_phone_number.nil? || @organization.main_data_contact_phone_number.empty?) && (@organization.main_data_contact_email.nil? || @organization.main_data_contact_email.empty?)%>
-        <div class="contact-info mod-info">
-          <h3>Data contact information</h3>
-          <div class="mod-contact-info">
-            <%# if @organization.main_data_contact_name? %>
-              <h4><%#= @organization.main_data_contact_name %></h4>
-            <%# end %>
-            <p><%#= @organization.main_data_contact_position %></p>
-            <p><%#= @organization.main_data_contact_phone_number %></p>
-            <%# unless (@organization.main_data_contact_email.nil?) || (@organization.main_data_contact_email.empty?) %>
-              <p><%#= link_to(@organization.main_data_contact_email, "mailto:#{@organization.main_data_contact_email}") %></p>
-            <%# end %>
-          </div>
-        </div>
-        <%# end %> -->
 
-        <% unless (@organization.media_contact_name.nil? || @organization.media_contact_name.empty?) &&  (@organization.media_contact_position.nil? || @organization.media_contact_position.empty?) && (@organization.media_contact_phone_number.nil? || @organization.media_contact_phone_number.empty?) && (@organization.media_contact_email.nil? || @organization.media_contact_email.empty?) %>
-        <div class="contact-info mod-info">
-          <h3>Media contact information</h3>
-          <div class="mod-contact-info">
-            <% if @organization.media_contact_name? %>
-              <h4><%= @organization.media_contact_name %></h4>
-            <% end %>
-            <p><%= @organization.media_contact_position %></p>
-            <p><%= @organization.media_contact_phone_number %></p>
-            <% unless (@organization.media_contact_email.nil?) || (@organization.media_contact_email.empty?) %>
-              <p><%= link_to("Contact e-mail address", "mailto:#{@organization.media_contact_email}") %></p>
-            <% end %>
-          </div>
-        </div>
-        <% end %>
-
-        <% unless (@organization.donation_address.nil? || @organization.donation_address.empty?) &&  (@organization.city.nil? || @organization.city.empty?) && (@organization.donation_phone_number.nil? || @organization.donation_phone_number.empty?) && (@organization.zip_code.nil? || @organization.zip_code.empty?) && (@organization.state.nil? || @organization.state.empty?) && (@organization.donation_website.nil? || @organization.donation_website.empty?) %>
-        <div class="contact-info mod-info">
-          <h3>Donation contact information</h3>
-          <div class="mod-contact-info">
-            <% if @organization.donation_address? %>
-              <h4><%= @organization.donation_address %></h4>
-            <% end %>
-            <% unless @organization.city.empty? || @organization.city.nil? %>
-              <p class="inline"><%= @organization.city %>,</p>
-            <% end %>
-            <% unless @organization.zip_code.empty? || @organization.zip_code.nil? %>
-              <p class="inline"><%= @organization.zip_code %>,</p>
-            <% end %>
-            <% unless @organization.state.empty? || @organization.state.nil? %>
-              <p class="inline"><%= @organization.state %>,</p>
-            <% end %>
-            <p><%= @organization.donation_phone_number %></p>
-            <% unless (@organization.donation_website.nil?) || (@organization.donation_website.empty?) %>
-              <a href="<%= @organization.donation_website %>" target="blank" class="donations-website">Donations website</a>
-            <% end %>
-          </div>
-        </div>
-        <% end %>
-
-        <% unless @organization.twitter.nil? &&  @organization.facebook.nil? && @organization.contact_email.nil? %>
-          <div class="follow-us mod-info">
-            <% if @organization.logo? %>
-              <% if @organization.website? %>
-                <a href="<%= @organization.website %>"><%= image_tag(@organization.logo.url(:medium), :class => 'organization-logo') %></a>
-              <% else %>
-                <%= image_tag(@organization.logo.url(:medium), :class => 'organization-logo') %>
-              <% end %>
-            <% end %>
-
-            <% if @organization.twitter? || @organization.facebook? || @organization.website? %>
-              <div class="mod-follow-us">
-
-                <% if @organization.website? %>
-                 <a href="<%= @organization.website %>" class='website'>Organization website</a>
-                <% end %>
-
-                <ul>
-                  <% if @organization.twitter? %>
-                    <li><%= link_to(' ' ,"#{@organization.twitter}", :class=>"twitter", :target=>"_blank") %></li>
-                  <% end %>
-                  <% if @organization.facebook? %>
-                    <li><%= link_to(' ' ,"#{@organization.facebook}", :class=>"facebook", :target=>"_blank") %></li>
-                  <% end %>
-                  <% if @organization.contact_email? %>
-                    <li><%= link_to(' ', "mailto:#{@organization.contact_email}", :class=>"email", :target=>"_blank") %></li>
-                  <% end %>
-                </ul>
-
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-
+        <script> var organization = <%= raw(@organization.to_json) %>; console.log('** organization **'); console.log(organization); console.log('** ********* **')</script>
       </aside>
     </div>
 
     <div class="grid-12 offset-1">
-      <section class="layout-content" id="content">
+      <section class="layout-content">
 
         <header>
-          <h1 class="section-title"><%= projects_list_subtitle %></h1>
+          <h1 id="title-organization" data-id="<%= @organization.id %>" data-name="<%= @organization.name.html_safe %>" class="section-title"><%= @organization.name %></h1>
           <%= simple_format(@organization.description) if @organization.description.present? %>
         </header>
 
-        <%= render :partial => 'new_partials/downloads', :locals => { :csv_path => organization_path(@organization, @carry_on_filters.merge(:format => :csv)), :xls_path => organization_path(@organization, @carry_on_filters.merge(:format => :xls)), :kml_path => organization_path(@organization, @carry_on_filters.merge(:format => :kml)) } %>
+        <%#= render :partial => 'new_partials/downloads', :locals => { :csv_path => organization_path(@organization, @carry_on_filters.merge(:format => :csv)), :xls_path => organization_path(@organization, @carry_on_filters.merge(:format => :xls)), :kml_path => organization_path(@organization, @carry_on_filters.merge(:format => :kml)) } %>
 
         <%= render "new_partials/index_projects" %>
 

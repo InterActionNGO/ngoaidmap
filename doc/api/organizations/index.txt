@@ -6,7 +6,7 @@ Parameters:
 
 Request:
   GET /api/organizations/5
-  Accept: application/json; application/vnd.api+json
+  Accept: application/json; application/vnd.ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -14,16 +14,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 171
+  Content-Length: 191
   Content-Type: application/json; charset=utf-8
-  ETag: W/"10705a7df50a68691595a022141f1dc1"
+  ETag: W/"0158c8f8b70f692208555813e6dbdf4e"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 357c2762-d8a0-49a9-b5fa-6eb964e814b9
-  X-Runtime: 0.046393
+  X-Request-Id: 543b6004-cff5-446e-b24f-3803ae61f94e
+  X-Runtime: 0.085793
   X-XSS-Protection: 1; mode=block
 
-  {"data":{"type":"organizations","id":"5","name":"One Organization","description":null,"sectors":[],"logo":"/logos/medium/missing.png","links":{"projects":{"linkage":[]}}}}
+  {"data":{"id":"5","type":"organizations","attributes":{"name":"One Organization","description":null,"sectors":[],"logo":"/logos/medium/missing.png"},"relationships":{"projects":{"data":[]}}}}
 
 
 Getting a list of organizations
@@ -31,7 +31,7 @@ Getting a list of organizations
 
 Request:
   GET /api/organizations
-  Accept: application/json; application/vnd.api+json
+  Accept: application/json; application/vnd.ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
   Host: http://ngoaidmap.org
@@ -39,15 +39,15 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 89
+  Content-Length: 104
   Content-Type: application/json; charset=utf-8
-  ETag: W/"de7c26291752aa3acb6803611602c576"
+  ETag: W/"5a0c478ff619c8ddfe386ee469606ff3"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 770642c8-eac4-4905-94de-5e25d11875a8
-  X-Runtime: 0.008358
+  X-Request-Id: 0f3ce634-01aa-49a1-8cab-a4956f604341
+  X-Runtime: 0.009051
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"1","name":"One Organization","type":"organizations"}],"meta":{"total":1}}
+  {"data":[{"id":"1","type":"organizations","attributes":{"name":"One Organization"}}],"meta":{"total":1}}
 
 

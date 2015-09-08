@@ -19,7 +19,7 @@
       "request_path": "/api/projects?donors[]=1",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json; application/vnd.esios-api-v1+json",
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
         "Content-Type": "application/json",
         "Host": "http://ngoaidmap.org",
         "Cookie": ""
@@ -32,20 +32,20 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"type\":\"projects\",\"id\":\"2\",\"name\":\"project_with_donor\",\"description\":null,\"links\":{\"organization\":{\"linkage\":null},\"sectors\":{\"linkage\":[]},\"countries\":{\"linkage\":[]},\"regions\":{\"linkage\":[]}}}],\"meta\":{\"total\":{\"[2, nil, nil, nil, 1, nil]\":1}}}",
+      "response_body": "{\"data\":[{\"id\":\"3\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_donor\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]}}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"1c0f17232d5314e5a05aa39274104f1b\"",
+        "ETag": "W/\"3b90a9d5e65b17746ac5df97d54694a1\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "91c0bc63-f09c-4162-93e4-77f9e9a7e984",
-        "X-Runtime": "0.036094",
-        "Content-Length": "255"
+        "X-Request-Id": "f345c0aa-0852-4afe-93a1-376bb3f84c88",
+        "X-Runtime": "0.028841",
+        "Content-Length": "197"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/projects?donors[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.esios-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?donors[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

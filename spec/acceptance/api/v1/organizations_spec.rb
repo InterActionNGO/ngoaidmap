@@ -2,7 +2,7 @@ require 'acceptance_helper'
 
 resource 'Organizations' do
 
-  header "Accept", "application/json; application/vnd.api+json"
+  header "Accept", "application/json; application/vnd.ngoaidmap-api-v1+json"
   header "Content-Type", "application/vnd.api+json"
   header 'Host', 'http://ngoaidmap.org'
 
@@ -19,7 +19,7 @@ resource 'Organizations' do
       expect(status).to eq(200)
       results = JSON.parse(response_body)
       expect(results.length).to be == 1
-      expect(results['data']['name']).to  be == name
+      expect(results['data']['attributes']['name']).to  be == name
     end
   end
 
@@ -44,7 +44,7 @@ resource 'Organizations' do
 
     example_request "Getting a list of organizations" do
       expect(status).to eq(200)
-      results = JSON.parse(response_body)['data'].map{|r| r['name']}
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
       expect results.include?(['organization0',
                                'organization1', 'organization2'])
     end

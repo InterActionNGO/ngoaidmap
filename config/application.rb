@@ -22,5 +22,6 @@ module NgoFront
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.cache_store  = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 24.minutes }
   end
 end
