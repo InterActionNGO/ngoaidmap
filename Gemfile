@@ -38,6 +38,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
+  gem 'capistrano-bower'
   gem 'brakeman', :require => false
 end
 group :development, :test do
