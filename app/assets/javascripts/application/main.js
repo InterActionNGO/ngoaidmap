@@ -10,7 +10,7 @@ require.config({
     underscoreString: '/app/vendor/underscore.string/lib/underscore.string',
     amplify: '/app/vendor/amplify/lib/amplify',
     backbone: '/app/vendor/backbone/backbone',
-    Class: '/app/vendor/class.js/Class',
+    Class: '/app/vendor/Class.js/Class',
     select2: '/app/vendor/select2/select2',
     handlebars: '/app/vendor/handlebars/handlebars',
     highcharts: '/app/vendor/highcharts-release/highcharts',
