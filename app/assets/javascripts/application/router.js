@@ -28,6 +28,7 @@ define([
   'views/sidebar/sidebarOrganizationsDonationContact',
   'views/sidebar/sidebarOrganizationsMediaContact',
   'views/sidebar/sidebarOrganizationsFollowUs',
+  'views/sidebar/sidebarOtherCountries',
 
   //Project
   'views/sidebar/project/projectOrganization',
@@ -46,7 +47,7 @@ define([
 
 ], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
   GalleryView, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
-  SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs,
+  SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOtherCountries,
   ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization, ProjectLocations) {
 
   var Router = Backbone.Router.extend({
@@ -90,6 +91,7 @@ define([
       new SidebarLocations();
       new SidebarOrganizations();
       new SidebarDonors();
+      new SidebarOtherCountries();
 
       // Titles
       new TitleSector();

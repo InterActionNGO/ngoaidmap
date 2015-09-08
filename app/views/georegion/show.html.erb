@@ -22,7 +22,6 @@
     var page = "<%= params[:controller] %>";
     var adm_level = <%= @geolocation.adm_level + 1 %>;
     var geolocation = <%= raw(@geolocation.to_json) %>;
-    console.log(<%= raw(@geolocation.to_json) %>);
   </script>
 <% end %>
 
@@ -42,6 +41,8 @@
         <div id="sidebar-sectors" class="project-sectors mod-info"></div>
 
         <div id="sidebar-donors" class="project-donors mod-info"></div>
+
+        <div id="sidebar-other-countries" class="mod-info"></div>
 
         <!-- <div class="mod-info">
           <h3>Projects in other <%#= word_for_geo_context(@area).pluralize %></h3>

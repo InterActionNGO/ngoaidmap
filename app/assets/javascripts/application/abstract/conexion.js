@@ -9,17 +9,9 @@ define([
 
     init: function(){
       this.data = map_data;
-      console.log(this.data);
       this.projects = this.data.data;
       this.included = this.data.included;
       this.regions = this.data.meta.regions;
-
-      console.log('************PROJECTS************');
-      console.log(this.projects);
-      console.log('************INCLUDED************');
-      console.log(this.included);
-      console.log('************REGIONS************');
-      console.log(this.regions);
     },
 
     getProjects: function(){

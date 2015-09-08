@@ -12,6 +12,7 @@ define([
 
     requests: {
       'sectors-all' : '/api/sectors?include=projects_count',
+      'countries-all' : '/api/countries?summing=projects'
     },
 
     /**
