@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :donors, only: [:index, :show]
       resources :organizations, only: [:index, :show]
       resources :sectors, only: [:index, :show]
+      resources :countries, only: [:index, :show]
     end
   end
 
