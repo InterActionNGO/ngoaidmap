@@ -48,4 +48,8 @@ class MediaResource < ActiveRecord::Base
                               all: "-quality 90"
                             },
                             url: "/system/:attachment/:id/:style.:extension"
+
+  def is_a_video?
+    video_url?
+  end
 end

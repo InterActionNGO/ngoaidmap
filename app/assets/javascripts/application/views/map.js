@@ -75,6 +75,7 @@ define([
 
     initMarkers: function(){
       var range = 5;
+      var classname;
       var diametersCount = {
         diameter: [20,26,34,42,26],
         bounds:{
@@ -89,17 +90,20 @@ define([
       // Markers
       for (var i = 0; i < this.markers.length; i++) {
         if (document.URL.indexOf('force_site_id=3') >= 0) {
+          classname = 'marker-bubble';
           this.setDiameter(diametersCount.diameter, diametersCount.bounds['force_site'],i);
         } else if (map_type === 'overview_map') {
+          classname = 'marker-bubble';
           this.setDiameter(diametersCount.diameter, diametersCount.bounds['overview_map'],i);
         } else if (map_type === 'administrative_map') {
+          classname = 'marker-bubble';
           this.setDiameter(diametersCount.diameter, diametersCount.bounds['administrative_map'],i);
         } else {
           this.diameter = 34;
           classname = 'marker-project-bubble';
         }
 
-        new IOMMarker(this.markers[i], this.diameter, 'marker-bubble', this.map);
+        new IOMMarker(this.markers[i], this.diameter, classname, this.map);
 
         this.bounds.extend(new google.maps.LatLng(this.markers[i].lat, this.markers[i].lon));
       }
@@ -128,27 +132,14 @@ define([
           return location.count;
         });
       } else if(project) {
-        console.log('project point');
+        var markers = _.sortBy(this.conexion.getLocationsByProject(), function(location){
+          return location.count;
+        });
       } else{
         var markers = _.sortBy(this.conexion.getCountries(true), function(country){
           return country.count;
         });
       }
-
-
-
-
-
-      // If region exist, reject a country object
-      _.each(markers, function(d) {
-        if (d.type === 'region') {
-          map_data_parse = _.reject(map_data_parse, function(d) {
-            return d.type === 'country';
-          });
-          return false;
-        }
-      });
-
 
       return markers;
     },

@@ -18,7 +18,7 @@
 class Country < ActiveRecord::Base
 
   has_many :regions
-  has_and_belongs_to_many :projects
+  #has_and_belongs_to_many :projects
   def self.custom_fields
     (columns.map{ |c| c.name } - ['the_geom']).map{ |c| "#{self.table_name}.#{c}" }
   end

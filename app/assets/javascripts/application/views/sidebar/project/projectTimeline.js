@@ -23,7 +23,6 @@ define([
     },
 
     parseData: function(){
-      console.log(this.project);
       if (this.project.end_date) {
         this.project.end_date = (this.project.end_date) ? moment(this.project.end_date).format('MM/DD/YYYY') : null;
         this.project.finished = (new Date().getTime() > moment(this.project.end_date)) ? true : false;
@@ -32,7 +31,6 @@ define([
           this.project.months_left = (months === 1) ? months+' month' : months+ ' months';
         }
       }
-      console.log(this.project.start_date);
       this.project.start_date = (this.project.start_date) ? moment(this.project.start_date).format('MM/DD/YYYY') : null;
       return this.project;
     },
@@ -65,25 +63,7 @@ define([
       } else if (days_completed < total_days) {
         this.$el.find('.timeline-status').width((days_completed * w) / total_days);
       }
-
     },
-
-
-
-    // var w = this.$el.find('.timeline').width();
-    // var d = new Date();
-    // var total_days = this.daydiff(this.parseDate($('p.first_date').text()), this.parseDate($('p.second_date').text()));
-    // var days_completed = this.daydiff(this.parseDate($('p.first_date').text()), this.parseDate((d.getMonth() + 1) + '/' + (d.getDate()) + '/' + (d.getFullYear())));
-    // var days_left = total_days - days_completed;
-    // var days_in_current_month = daysInMonth(d.getMonth(), d.getYear());
-    // var days_left_text = (days_left === 1) ? ' day' : ' days';
-
-    // if (days_left < days_in_current_month) {
-    //   this.$el.find('.timeline-status').width((days_completed * w) / total_days);
-    //   this.$el.find('.months_left').text(days_left + days_left_text);
-    // } else if (days_completed < total_days) {
-    //   this.$el.find('.timeline-status').width((days_completed * w) / total_days);
-    // }
 
 
     render: function(){

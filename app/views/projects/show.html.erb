@@ -24,7 +24,7 @@
     var globalPage = <%= @site.featured?? true : false %>;
     var page = "<%= params[:controller] %>";
     var geolocation = false;
-    var project = <%= raw(@raw_project.to_json) %>;
+    var project = <%= raw(@project.to_json) %>;
     console.log(project);
   </script>
 <% end %>
@@ -37,13 +37,7 @@
 
         <div id="project-timeline" class="mod-info"></div>
 
-
-        <% unless @project.budget.nil? || @project.budget.eql?(0.0) %>
-          <div class="mod-project-budget mod-info">
-            <h3>Project budget</h3>
-            $<span id="projectBudgetValue"><%= number_with_precision(@project.budget, :precision => 0, :delimiter => ',') %></span>
-          </div>
-        <%end%>
+        <div id="project-budget" class="mod-info"></div>
 
         <% unless @project.donations.empty? %>
           <div class="mod-donors mod-info">
@@ -63,75 +57,30 @@
           </div>
         <% end %>
 
-        <% if @project.awardee_type.present? %>
+        <div id="project-awardee" class="mod-info"></div>
+
+        <div id="project-implementingorganization" class="mod-info"></div>
+
+        <div id="project-partnerorganizations" class="mod-info"></div>
+
+        <div id="project-peoplereached" class="mod-info"></div>
+
+        <div id="project-target" class="mod-info"></div>
+
+        <div id="project-contact" class="mod-info"></div>
+
+        <div id="project-website" class="mod-info"></div>
+
+        <% unless @project.resources.empty? %>
           <div class="mod-info">
-            <h3>Prime Awardee</h3>
-            <p><%= @project.awardee_type %></p>
-          </div>
-        <% end %>
-
-        <% if @project.implementing_organization? %>
-          <div class="mod-info">
-            <h3>International Partners</h3>
-            <p><%= @project.implementing_organization %></p>
-          </div>
-        <% end %>
-
-
-        <% if @project.partner_organizations? && !@project.partner_organizations.eql?('N/A') %>
-          <div class="mod-info">
-            <h3 class="margin">Local Partners</h3>
-            <p><%= @project.partner_organizations %></p>
-          </div>
-        <% end %>
-
-        <% if @project.estimated_people_reached? %>
-          <div class="mod-info mod-people-reached">
-            <h3>People reached</h3>
-            <span estimate="<%= @project.estimated_people_reached %>" class="people_amount"><%= number_with_delimiter(@project.estimated_people_reached) %></span>
-          </div>
-        <% end %>
-
-        <% if @project.target? %>
-          <div class="mod-info mod-target-groups">
-            <h3 class="<%= (@project.estimated_people_reached?)? 'margin':'' %>">Target groups</h3>
-            <p><%= @project.target %></p>
-          </div>
-        <% end %>
-
-        <% unless @project.contact_email.blank? && @project.contact_person.blank? && @project.contact_phone_number.blank? %>
-          <div class="contact-info mod-info">
-            <h3>Contact information</h3>
-            <div class="mod-contact-info">
-              <h4><%= @project.contact_person %></h4>
-              <p><%= @project.contact_position %></p>
-              <p><%= @project.contact_phone_number %></p>
-              <% unless (@project.contact_email.nil?)||(@project.contact_email.empty?) %>
-               <a class="donations-website" href="mailto:<%= @project.contact_email %>">Project contact email</a>
-              <%end%>
-            </div>
-          </div>
-        <% end %>
-
-        <% unless @project.website.blank? %>
-          <div class="mod-info">
-            <h3>Project website</h3>
-            <% unless (@project.website.nil?)||(@project.website.empty?) %>
-              <a class="donations-website" href="<%= @project.website %>">Project website</a>
-            <%end%>
-          </div>
-        <% end %>
-
-        <%# unless @project.resources.empty? %>
-          <!-- <div class="mod-info">
             <h3>Additional resources</h3>
             <ul>
-              <%# @project.resources.each do |resource| %>
-                <li><a href="<%#= resource.url %>" target="_blank"><%#= resource.title %></a></li>
-              <%# end %>
+              <% @project.resources.each do |resource| %>
+                <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
+              <% end %>
             </ul>
-          </div> -->
-        <%# end %>
+          </div>
+        <% end %>
 
         <div class="mod-downloads mod-info">
           <h3>Export data</h3>
@@ -157,20 +106,20 @@
             </section>
           <% end %>
 
-          <%# unless @project.media_resources.empty? %>
-            <!-- <div class="mod-gallery chachi-slider">
-              <%# @project.media_resources.each do |media_resource| %>
-                <%# if media_resource.is_a_video? %>
-                  <%# image_tag(media_resource.video_thumb.url(:medium), :alt => media_resource.caption, :video_id => media_resource.id, :class => "chachi-item") %>
-                  <div class="chachi-item"><%#= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
-                <%# else %>
-                  <%#= image_tag(media_resource.picture.url(:medium), :alt=>media_resource.caption, :class => "chachi-item") %>
-                <%# end %>
-              <%# end %>
-            </div> -->
-          <%# end %>
+          <% unless @project.media_resources.empty? %>
+            <div class="mod-gallery chachi-slider">
+              <% @project.media_resources.each do |media_resource| %>
+                <% if media_resource.is_a_video? %>
+                  <% image_tag(media_resource.video_thumb.url(:medium), :alt => media_resource.caption, :video_id => media_resource.id, :class => "chachi-item") %>
+                  <div class="chachi-item"><%= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
+                <% else %>
+                  <%= image_tag(media_resource.picture.url(:medium), :alt=> media_resource.caption, :class => "chachi-item") %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
 
-          <% if @project.activities || @project.additional_information || @project.cross_cutting_issues || (@locations.present? && @locations.to_a.join.present?)%>
+          <% if @project.activities || @project.additional_information || @project.cross_cutting_issues%>
             <section>
               <%unless @project.activities.blank? %>
                 <h2>Activities</h2>
@@ -189,25 +138,10 @@
               <%end%>
             </section>
 
-            <!-- <section>
-              <%#if @locations.present? && @locations.to_a.join.present? %>
-                <h2 class="<%#= (@project.activities.blank? && @project.additional_information.blank? && @project.cross_cutting_issues.blank?)? 'first':''%>">
-                  <%#= @locations.count == 1 ? 'Location' : 'Locations' %>
-                </h2>
-                <ul>
-                  <%# @locations.each do |location| %>
-                    <%# if @site.navigate_by_country? && location['country_id'].present? %>
-                      <li><%#= location['name'] + ', ' if location['name'] and location['name'] != '' %> <%#= Country.find(location['country_id'], :select => 'name').name %></li>
-                    <%# else %>
-                      <li><%#= location['name'] %></li>
-                    <%# end %>
-                  <% #end %>
-                </ul>
-              <%#end%>
-            </section> -->
           <% end %>
+          <section id="project-locations"></section>
 
-          <%#= render 'new_partials/more_projects' %>
+          <%= render 'new_partials/more_projects' %>
 
         </div>
       </article>

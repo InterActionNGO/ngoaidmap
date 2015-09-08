@@ -9,6 +9,7 @@ define([
 
     init: function(){
       this.data = map_data;
+      console.log(this.data);
       this.projects = this.data.data;
       this.included = this.data.included;
       this.regions = this.data.meta.regions;
@@ -35,7 +36,7 @@ define([
     },
 
     getCountries: function(nofilter){
-      return this.countries || this.getCountriesByProjects(nofilter);
+      return this.getCountriesByProjects(nofilter);
     },
 
     getCountriesByProjects: function(nofilter) {
@@ -62,6 +63,7 @@ define([
             id: country.id,
             uid: country.uid,
             name: country.name,
+            country_name: country.country_name,
             type: country.type,
             lat: country.latitude,
             lon: country.longitude,
@@ -72,6 +74,36 @@ define([
 
       }, this )));
       return this.countries;
+    },
+
+    getLocationsByProject: function() {
+      var geolocations = _.groupBy(_.flatten(_.map(this.projects, function(p) {
+        return _.map(p.relationships.geolocations.data, function(g){
+          return g;
+        })
+      })), 'id' );
+      var locations;
+
+      var locations = _.compact(_.map(geolocations, _.bind(function(_location, _locationKey) {
+        var location = _location;
+        var uid = _.findWhere(this.included, { id: _locationKey }).attributes.uid;
+        var locationF = _.findWhere(this.regions, { uid: uid });
+
+        if (!!locationF && !!location) {
+          return {
+            count: location.length,
+            id: locationF.id,
+            uid: locationF.uid,
+            name: locationF.name,
+            country_name: locationF.country_name,
+            type: locationF.type,
+            lat: locationF.latitude,
+            lon: locationF.longitude,
+          }
+        }
+        return null;
+      }, this )));
+      return locations;
     },
 
     getLocationsByGeolocation: function(adm_level) {
@@ -93,6 +125,7 @@ define([
             id: locationF.id,
             uid: locationF.uid,
             name: locationF.name,
+            country_name: locationF.country_name,
             type: locationF.type,
             lat: locationF.latitude,
             lon: locationF.longitude,
@@ -108,6 +141,7 @@ define([
           id: geolocation.id,
           uid: geolocation.uid,
           name: geolocation.name,
+          country_name: geolocation.country_name,
           type: geolocation.type,
           lat: geolocation.latitude,
           lon: geolocation.longitude,

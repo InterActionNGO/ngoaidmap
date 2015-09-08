@@ -1,0 +1,12 @@
+<section>
+  <h2>{{this.name}}</h2>
+  <ul>
+    {{#each this.locations}}
+      <li>{{this.name}}</li>
+    {{/each}}
+  </ul>
+</section>
+
+{{!-- Be careful, there is som navigate by country that we don't understand --}}
+{{!-- <%# if @site.navigate_by_country? && location['country_id'].present? %> --}}
+{{!-- <li><%#= location['name'] + ', ' if location['name'] and location['name'] != '' %> <%#= Country.find(location['country_id'], :select => 'name').name %></li> --}}
