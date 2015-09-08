@@ -19,7 +19,7 @@ staging:
   adapter: postgresql
   template: template_postgis
   encoding: unicode
-  database: iom_production_2
+  database: iom_production_v2
   username: postgres
   password:
 
@@ -27,7 +27,7 @@ smbtc:
   adapter: postgresql
   template: template_postgis
   encoding: unicode
-  database: iom_production
+  database: iom_production_v2
   username: postgres
   password:
 
@@ -36,6 +36,6 @@ production:
   template: template_postgis
   encoding: unicode
   host: <%= ENV["DB_HOST"] %>
-  database: iom_production
+  database: iom_production_v2
   username: postgres
   password: <%= ENV["DB_PSW"] %>
