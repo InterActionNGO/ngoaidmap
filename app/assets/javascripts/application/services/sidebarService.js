@@ -3,8 +3,9 @@
  */
 define([
   'Class',
-  'services/dataService',
-], function (Class, ds) {
+  'application/services/dataService',
+  '_string'
+], function (Class, ds, _string) {
 
   'use strict';
 

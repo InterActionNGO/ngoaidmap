@@ -4,8 +4,8 @@ define([
   'jqueryui',
   'backbone',
   'handlebars',
-  'services/sidebarService',
-  'text!templates/sidebar/sidebarDonors.handlebars'
+  'application/services/sidebarService',
+  'text!application/templates/sidebar/sidebarDonors.handlebars'
   ], function(jqueryui,Backbone, handlebars, service, tpl) {
 
   var SidebarDonors = Backbone.View.extend({

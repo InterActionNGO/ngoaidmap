@@ -2,9 +2,9 @@
 
 define([
   'underscore',
-  'underscoreString',
+  '_string',
   'backbone'
-], function(_, underscoreString, Backbone) {
+], function(_, _string, Backbone) {
 
   var ProfileModel = Backbone.Model.extend({
 

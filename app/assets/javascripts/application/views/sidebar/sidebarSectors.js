@@ -4,8 +4,8 @@ define([
   'jqueryui',
   'backbone',
   'handlebars',
-  'abstract/conexion',
-  'text!templates/sidebar/sidebarSectors.handlebars'
+  'application/abstract/conexion',
+  'text!application/templates/sidebar/sidebarSectors.handlebars'
   ], function(jqueryui,Backbone, handlebars, conexion, tpl) {
 
   var SidebarSectors = Backbone.View.extend({

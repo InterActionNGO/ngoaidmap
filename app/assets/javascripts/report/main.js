@@ -8,7 +8,7 @@ require.config({
     jquery: '../../vendor/jquery/dist/jquery',
     jqueryui: '../../lib/jquery-ui/js/jquery-ui-1.10.4.custom',
     underscore: '../../vendor/underscore/underscore',
-    underscoreString: '../../vendor/underscore.string/lib/underscore.string',
+    _string: '../../vendor/underscore.string/lib/underscore.string',
     backbone: '../../vendor/backbone/backbone',
     select2: '../../vendor/select2/select2',
     handlebars: '../../vendor/handlebars/handlebars',
@@ -31,7 +31,7 @@ require.config({
     underscore: {
       exports: '_'
     },
-    underscoreString: {
+    _string: {
       deps: ['underscore'],
       exports: '_.str'
     },
@@ -67,7 +67,7 @@ require.config({
 
 require([
   'underscore',
-  'underscoreString',
+  '_string',
   'handlebars',
   'highcharts',
 
@@ -93,7 +93,7 @@ require([
   'views/countries-list',
   'views/sectors-list'
 ], function(
-  _, underscoreString, Handlebars, Highcharts,
+  _, _string, Handlebars, Highcharts,
   SpinView, FiltersFormView, IntroView,
   TitleView, FiltersView, SummaryView, BudgetsView, TimelineChartsView, ActionsView, LimitationsView,
   DonorsSnapshotView, OrganizationsSnapshotView, CountriesSnapshotView, SectorsSnapshotView,

@@ -2,10 +2,10 @@
 
 define([
   'underscore',
-  'underscoreString',
+  '_string',
   'backbone',
   'moment'
-], function(_, underscoreString, Backbone, moment) {
+], function(_, _string, Backbone, moment) {
 
   var FilterModel = Backbone.Model.extend({
 

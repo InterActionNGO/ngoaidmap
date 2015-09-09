@@ -3,8 +3,8 @@
 define([
   'backbone',
   'handlebars',
-  'abstract/conexion',
-  'text!templates/sidebar/sidebarHighlights.handlebars'
+  'application/abstract/conexion',
+  'text!application/templates/sidebar/sidebarHighlights.handlebars'
   ], function(Backbone, handlebars, conexion, tpl) {
 
   var SidebarHighlights = Backbone.View.extend({

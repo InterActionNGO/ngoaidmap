@@ -2,7 +2,7 @@
 
 define([
   'underscore',
-  'underscoreString',
+  '_string',
   'backbone',
   'handlebars',
   'markerCluster',
@@ -11,7 +11,7 @@ define([
   'models/profile',
   'text!templates/profile.handlebars',
   'text!templates/snapshot.handlebars'
-], function(_, underscoreString, Backbone, Handlebars, markerCluster,
+], function(_, _string, Backbone, Handlebars, markerCluster,
   SnapshotChart, ReportModel, ProfileModel, profileTpl, snapshotTpl) {
 
   var SnapshotView = Backbone.View.extend({

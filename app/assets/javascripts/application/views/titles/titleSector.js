@@ -4,8 +4,8 @@ define([
   'jquery',
   'backbone',
   'handlebars',
-  'abstract/conexion',
-  'text!templates/titles/titleSector.handlebars'
+  'application/abstract/conexion',
+  'text!application/templates/titles/titleSector.handlebars'
   ], function(jquery, Backbone, handlebars, conexion, tpl) {
 
   var TitleSector = Backbone.View.extend({
