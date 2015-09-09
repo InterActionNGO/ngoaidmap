@@ -42,13 +42,14 @@ define([
   'application/views/sidebar/project/projectPartnerOrganizations',
   'application/views/sidebar/project/projectImplementingOrganization',
   'application/views/sidebar/project/projectLocations',
+  'application/views/sidebar/project/projectDonors',
 
 
 
 ], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
   GalleryView, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOtherCountries,
-  ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization, ProjectLocations) {
+  ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization, ProjectLocations, ProjectDonors) {
 
   var Router = Backbone.Router.extend({
 
@@ -121,6 +122,7 @@ define([
       new ProjectPartnerOrganizations();
       new ProjectImplementingOrganization();
       new ProjectLocations();
+      new ProjectDonors();
 
       new GalleryView();
     },

@@ -39,23 +39,7 @@
 
         <div id="project-budget" class="mod-info"></div>
 
-        <% unless @project.donations.empty? %>
-          <div class="mod-donors mod-info">
-            <h3>Donors</h3>
-            <ul class="donor_list">
-              <% index = 0 %>
-              <% @project.donations.group_by(&:donor).each_with_index do |donor_with_donations, index| %>
-                <% donor = donor_with_donations.first %>
-                <% donations = donor_with_donations.last %>
-                <li><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
-                <% index = index + 1 %>
-              <% end %>
-            </ul>
-            <% if index > 5 %>
-              <a href="/donors" class="more">More donors</a>
-            <% end %>
-          </div>
-        <% end %>
+        <div id="project-donors" class="mod-info"></div>
 
         <div id="project-awardee" class="mod-info"></div>
 
