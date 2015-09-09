@@ -4,8 +4,8 @@ define([
   'jquery',
   'backbone',
   'handlebars',
-  'abstract/conexion',
-  'text!templates/titles/titleCountry.handlebars'
+  'application/abstract/conexion',
+  'text!application/templates/titles/titleCountry.handlebars'
   ], function(jquery, Backbone, handlebars, conexion, tpl) {
 
   var TitleCountry = Backbone.View.extend({

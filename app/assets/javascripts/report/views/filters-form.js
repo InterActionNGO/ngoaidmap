@@ -4,7 +4,7 @@ define([
   'jquery',
   'select2',
   'underscore',
-  'underscoreString',
+  '_string',
   'backbone',
   'moment',
   'models/report',
@@ -16,7 +16,7 @@ define([
   'collections/sectors'
 
 ], function(
-  $, select2, _, underscoreString, Backbone, moment, ReportModel, FilterModel,
+  $, select2, _, _string, Backbone, moment, ReportModel, FilterModel,
   ProjectsCollection, OrganizationsCollection, DonorsCollection, CountriesCollection, SectorsCollection
 ) {
 

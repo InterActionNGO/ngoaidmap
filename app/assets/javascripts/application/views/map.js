@@ -1,15 +1,14 @@
-/*global google,map_type,map_data_parse:true,map_center,kind,map_zoom,MAP_EMBED,show_regions_with_one_project,max_count,empty_layer,globalPage,page*/
 'use strict';
 
 define([
   'underscore',
   'backbone',
-  'views/layersView',
-  'views/mapTypeView',
-  'abstract/markerClass',
-  'abstract/conexion',
-  'underscoreString'
-  ], function(_, Backbone, LayersView, MapTypeView, IOMMarker, conexion) {
+  'application/views/layersView',
+  'application/views/mapTypeView',
+  'application/abstract/markerClass',
+  'application/abstract/conexion',
+  '_string'
+  ], function(_, Backbone, LayersView, MapTypeView, IOMMarker, conexion, _string) {
 
   var MapView = Backbone.View.extend({
 

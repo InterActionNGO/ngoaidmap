@@ -3,9 +3,9 @@
 define([
   'backbone',
   'handlebars',
-  'abstract/conexion',
-  'abstract/utils',
-  'text!templates/sidebar/project/projectWebsite.handlebars'
+  'application/abstract/conexion',
+  'application/abstract/utils',
+  'text!application/templates/sidebar/project/projectWebsite.handlebars'
   ], function(Backbone, handlebars, conexion, utils, tpl) {
 
   var ProjectWebsite = Backbone.View.extend({
