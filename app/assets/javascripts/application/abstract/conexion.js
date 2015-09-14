@@ -33,15 +33,18 @@ define([
 
     getDonors: function(){
       var donors = _.filter(this.included, function(include){ return include.type == 'donors'});
-      return _.map(_.groupBy(_.flatten(_.map(this.projects, function(project){return project.relationships.donors.data})), function(donor){ return donor.id;}),function(donor,_donorKey){
-        var donorF = _.findWhere(donors, { id: _donorKey });
-        return {
-          name: donorF.attributes.name,
-          id: donorF.id,
-          url: '/donors/'+donorF.id,
-          count: donor.length,
-        }
-      });
+      if (!!donors.length) {
+        return _.map(_.groupBy(_.flatten(_.map(this.projects, function(project){return project.relationships.donors.data})), function(donor){ return donor.id;}),function(donor,_donorKey){
+          var donorF = _.findWhere(donors, { id: _donorKey });
+          return {
+            name: donorF.attributes.name,
+            id: donorF.id,
+            url: '/donors/'+donorF.id,
+            count: donor.length,
+          }
+        });
+      }
+      return [];
     },
 
     getCountriesByProjects: function(nofilter) {
@@ -218,6 +221,23 @@ define([
 
     getDonorsBySectors: function(){
 
+    },
+
+    getFilters: function() {
+      var params = {};
+      if (location.search.length) {
+        var paramsArr = decodeURIComponent(location.search.slice(1)).split('&'),
+          temp = [];
+        for (var p = paramsArr.length; p--;) {
+          temp = paramsArr[p].split('=');
+          if (temp[1] && !_.isNaN(Number(temp[1]))) {
+            params[temp[0]] = Number(temp[1]);
+          } else if (temp[1]) {
+            params[temp[0]] = temp[1];
+          }
+        }
+      }
+      return params;
     },
 
     setUrl: function(param_name, id){

@@ -54,14 +54,6 @@ require([
   addClassToBody();
   $('.menu-item').noHandleChildren();
 
-  var $projectBudget = $('#projectBudgetValue');
-
-  if ($projectBudget.text().length > 8) {
-    $projectBudget.css({
-      'font-size': '35px'
-    });
-  }
-
   $('.mod-logos-slider').chachiSlider({
     navigation: false,
     pauseTime: 7000

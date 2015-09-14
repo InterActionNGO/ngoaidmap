@@ -26,6 +26,9 @@
   span {
     font-size: 48px;
     font-weight: lighter;
+    &.font-small {
+      font-size: 35px;
+    }
   }
   li {
     margin-bottom: 15px;

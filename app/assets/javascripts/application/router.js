@@ -11,6 +11,7 @@ define([
   'application/views/search',
   'application/views/layer-overlay',
   'application/views/gallery',
+  'application/views/filteredBubble',
   //Titles
   'application/views/titles/titleSector',
   'application/views/titles/titleDonor',
@@ -47,7 +48,7 @@ define([
 
 
 ], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
-  GalleryView, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
+  GalleryView, FilteredBubble, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOtherCountries,
   ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization, ProjectLocations, ProjectDonors) {
 
@@ -93,6 +94,8 @@ define([
       new SidebarOrganizations();
       new SidebarDonors();
       new SidebarOtherCountries();
+
+      new FilteredBubble();
 
       // Titles
       new TitleSector();

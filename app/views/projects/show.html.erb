@@ -23,9 +23,12 @@
     var video_players = [];
     var globalPage = <%= @site.featured?? true : false %>;
     var page = "<%= params[:controller] %>";
-    var geolocation = false;
     var project = <%= raw(@project.to_json) %>;
-    console.log(project);
+    var geolocation = <%= raw(@geolocation.to_json) %>;
+    var organization = false;
+    var donor = false;
+    var sector = false;
+
   </script>
 <% end %>
 

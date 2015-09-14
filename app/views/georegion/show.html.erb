@@ -22,6 +22,11 @@
     var page = "<%= params[:controller] %>";
     var adm_level = <%= @geolocation.adm_level + 1 %>;
     var geolocation = <%= raw(@geolocation.to_json) %>;
+    var project = false;
+    var organization = false;
+    var donor = false;
+    var sector = false;
+
   </script>
 <% end %>
 

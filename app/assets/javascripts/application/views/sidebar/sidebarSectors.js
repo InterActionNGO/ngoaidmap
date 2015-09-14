@@ -19,13 +19,14 @@ define([
         return
       }
       this.conexion = conexion;
+      this.filters = this.conexion.getFilters();
       this.render();
 
     },
 
     parseData: function(){
       var sectorsByProjects = this.conexion.getSectorsByProjects(!!this.$el.data('nofilter'));
-      if (sectorsByProjects.length == 1) {
+      if (sectorsByProjects.length == 1 && !!this.filters['sectors[]']) {
         this.$el.remove();
         return
       }
