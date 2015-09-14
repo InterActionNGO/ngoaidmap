@@ -31,7 +31,6 @@ module ProjectsFiltering
       # @projects = projects
     end
     puts "***********************************************************************************************"
-    puts @map_data
     @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
   end
   private
