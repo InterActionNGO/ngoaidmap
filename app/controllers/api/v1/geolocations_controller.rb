@@ -2,7 +2,7 @@ module Api
   module V1
     class GeolocationsController < ApiController
       def index
-        @geolocations = Geolocation.offset(geolocations_params[:offset]).limit(geolocations_params[:limit]).order(:name).uniq
+        @geolocations = Geolocation.offset(geolocations_params[:offset]).limit(geolocations_params[:limit]).order(geolocations_params[:order]).uniq
         render json: @geolocations, root: 'data',
         meta: { total: @geolocations.size },
         each_serializer: GeolocationPreviewSerializer
@@ -22,7 +22,8 @@ module Api
         end
       end
       def geolocations_params
-        params.permit(:id, :get_parents)
+        params.reject!(:order) if params[:order] && !['name', 'id', 'uid', 'country_name'].include?(params[:order])
+        params.permit(:id, :get_parents, :offset, :limit, :format, :order)
       end
     end
   end
