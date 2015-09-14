@@ -2,17 +2,10 @@ module Api
   module V1
     class GeolocationsController < ApiController
       def index
-        if geolocations_params && geolocations_params[:get_parents] == 'true'
-          @countries = Geolocation.sum_projects
-          render json: @countries, root: 'data',
-          meta: { total: @countries.size },
-          each_serializer: CountriesSummingSerializer
-        else
-          @countries = Geolocation.where(adm_level: 0).order(:name).uniq
-          render json: @countries, root: 'data',
-          meta: { total: @countries.size },
-          each_serializer: GeolocationPreviewSerializer
-        end
+        @geolocations = Geolocation.offset(geolocations_params[:offset]).limit(geolocations_params[:limit]).order(:name).uniq
+        render json: @geolocations, root: 'data',
+        meta: { total: @geolocations.size },
+        each_serializer: GeolocationPreviewSerializer
       end
       def show
         @geolocation = Geolocation.find_by(uid: params[:id])
@@ -22,7 +15,7 @@ module Api
           @geolocations = Geolocation.where(uid: gs).where.not(id: @geolocation.id).order('adm_level ASC')
           render json: @geolocation,
           serializer: GeolocationPreviewSerializer,
-          meta: @geolocations.select(:id, :uid, :name, :adm_level)
+          meta: {parents: @geolocations.select(:id, :uid, :name, :adm_level)}
         else
           render json: @geolocation,
           serializer: GeolocationPreviewSerializer
