@@ -21,13 +21,13 @@
           <p class="filtered">
             <strong>Showing</strong>:
             <% if @donor && @projects_count %>
-              <strong><%= CGI.unescapeHTML(@donor.name) %></strong>, <%= @projects_count %> <% if @projects_count === 1 %>project<% else %>projects<% end %>
+              <strong><%= CGI.unescapeHTML(@donor.name) %></strong>, <%= @projects_count.floor %> <% if @projects_count === 1 %>project<% else %>projects<% end %>
             <% elsif @organization_projects_count %>
-              <strong><%= CGI.unescapeHTML(@organization.name) %></strong>, <%= @organization_projects_count %> <% if @organization_projects_count === 1 %>project<% else %>projects<% end %>
+              <strong><%= CGI.unescapeHTML(@organization.name) %></strong>, <%= @organization_projects_count.floor %> <% if @organization_projects_count === 1 %>project<% else %>projects<% end %>
             <% elsif @cluster_sector_projects_count  %>
-              <strong><%= CGI.unescapeHTML(@data.name) %></strong>, <%= @cluster_sector_projects_count %> <% if @cluster_sector_projects_count === 1 %>project<% else %>projects<% end %>
+              <strong><%= CGI.unescapeHTML(@data.name) %></strong>, <%= @cluster_sector_projects_count.floor %> <% if @cluster_sector_projects_count === 1 %>project<% else %>projects<% end %>
             <% elsif @georegion_projects_count %>
-              <strong><%= CGI.unescapeHTML(@area.name) %><%= ", " + @area_parent if @area_parent.present? %></strong>, <%= @georegion_projects_count %> <% if @georegion_projects_count === 1 %>project<% else %>projects<% end %>
+              <strong><%= CGI.unescapeHTML(@area.name) %><%= ", " + @area_parent if @area_parent.present? %></strong>, <%= @georegion_projects_count.floor %> <% if @georegion_projects_count === 1 %>project<% else %>projects<% end %>
             <% elsif @project %>
               <strong><%= @project.name %></strong>
             <% else %>
