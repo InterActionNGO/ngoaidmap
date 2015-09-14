@@ -5,8 +5,9 @@ define([
   'backbone',
   'handlebars',
   'application/abstract/conexion',
+  'application/services/sidebarService',
   'text!application/templates/filteredBubble.handlebars'
-  ], function(jquery, Backbone, handlebars, conexion, tpl) {
+  ], function(jquery, Backbone, handlebars, conexion, service, tpl) {
 
   var FilteredBubble = Backbone.View.extend({
 
@@ -14,13 +15,21 @@ define([
 
     template: Handlebars.compile(tpl),
 
+    events: {
+      'click .breadcrumb-link' : 'navigateTo'
+    },
+
     initialize: function() {
       if (!this.$el.length) {
         return
       }
       this.conexion = conexion;
       this.filters = this.conexion.getFilters();
-      this.render();
+      if (geolocation) {
+        service.execute('breadcrumbs', _.bind(this.successBreadcrumbs, this ), _.bind(this.errorBreadcrumbs, this ));
+      }else{
+        this.render();
+      }
     },
 
     parseData: function(){
@@ -31,7 +40,7 @@ define([
 
       return {
         name: this.getName(),
-        country_name: (geolocation && geolocation.adm_level != 0) ? geolocation.country_name : '',
+        breadcrumbs: this.breadcrumbs,
         projects_string: (this.conexion.getProjects().length == 1) ? 'project' : 'projects',
         count: this.conexion.getProjects().length,
         sector: (this.filters['sectors[]']) ? this.sectors[0].attributes.name : '',
@@ -60,6 +69,24 @@ define([
     render: function(){
       this.$el.html(this.template(this.parseData()));
     },
+
+    navigateTo: function(e) {
+      var href = $(e.currentTarget).data('href');
+      window.location = href;
+    },
+
+    successBreadcrumbs: function(data) {
+      var breadcrumbs = _.map(data.meta.parents.reverse(), function(parent){
+        return '<a class="breadcrumb-link" href="/location/'+parent.uid+'?level='+parent.adm_level+'">'+parent.name+'</a>';
+      });
+      this.breadcrumbs = breadcrumbs.join(', ');
+      this.render();
+    },
+
+    errorBreadcrumbs: function() {
+      console.log('error calling breadcrumbs');
+    }
+
 
 
   });

@@ -47,7 +47,8 @@ define([
         this.requests['donors-by-sector'] = _.str.sprintf('/api/donors?sectors[]=%s', sector.id)
       }
       if (!!window.geolocation) {
-        this.requests['donors-by-geolocation'] = _.str.sprintf('/api/donors?geolocation=%s', geolocation.uid)
+        this.requests['breadcrumbs'] = _.str.sprintf('/api/geolocations/%s?get_parents=true', geolocation.uid);
+        this.requests['donors-by-geolocation'] = _.str.sprintf('/api/donors?geolocation=%s', geolocation.uid);
       }
     },
 
