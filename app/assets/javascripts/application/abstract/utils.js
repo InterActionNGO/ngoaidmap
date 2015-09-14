@@ -35,9 +35,7 @@ define([
       // *    returns 11: '1.2000'
       // *    example 12: number_format('1.2000', 3);
       // *    returns 12: '1.200'
-      var num = (number > 999999) ? number/1000 : number,
-          k = (number > 999999) ? 'k' : '',
-          n = !isFinite(+num) ? 0 : +num,
+      var n = !isFinite(+number) ? 0 : +number,
           prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
           sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
           dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
@@ -54,7 +52,7 @@ define([
           s[1] = s[1] || '';
           s[1] += new Array(prec - s[1].length + 1).join('0');
       }
-      return s.join(dec)+k;
+      return s.join(dec);
     }
 
   });

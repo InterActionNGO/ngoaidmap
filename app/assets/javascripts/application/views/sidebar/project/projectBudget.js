@@ -24,6 +24,7 @@ define([
 
     parseData: function(){
       this.project.budgetString = (!!this.project.budget) ? utils.formatCurrency(this.project.budget) : this.$el.remove();
+      this.project.budgetSize = (!!this.project.budget && this.project.budget.length > 6) ? true : false;
       return this.project;
     },
 
