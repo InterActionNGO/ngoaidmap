@@ -47,13 +47,6 @@ ActiveRecord::Schema.define(version: 20150825162340) do
 # Could not dump table "countries" because of following StandardError
 #   Unknown type 'geometry' for column 'the_geom'
 
-  create_table "countries_projects", id: false, force: :cascade do |t|
-    t.integer "country_id", null: false
-    t.integer "project_id", null: false
-  end
-
-  add_index "countries_projects", ["country_id"], name: "index_countries_projects_on_country_id", using: :btree
-  add_index "countries_projects", ["project_id"], name: "index_countries_projects_on_project_id", using: :btree
 
   create_table "data_denormalization", id: false, force: :cascade do |t|
     t.integer  "project_id"
@@ -399,16 +392,62 @@ ActiveRecord::Schema.define(version: 20150825162340) do
 
   add_index "partners", ["site_id"], name: "index_partners_on_site_id", using: :btree
 
+  create_table "projects", :force => true do |t|
+    t.string   "name",                                    :limit => 2000
+    t.text     "description"
+    t.integer  "primary_organization_id"
+    t.text     "implementing_organization"
+    t.text     "partner_organizations"
+    t.text     "cross_cutting_issues"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.float    "budget"
+    t.text     "target"
+    t.integer  "estimated_people_reached",                :limit => 8
+    t.string   "contact_person"
+    t.string   "contact_email"
+    t.string   "contact_phone_number"
+    t.text     "site_specific_information"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.geometry "the_geom",                                :limit => nil,                        :srid => 4326
+    t.text     "activities"
+    t.string   "intervention_id"
+    t.text     "additional_information"
+    t.string   "awardee_type"
+    t.date     "date_provided"
+    t.date     "date_updated"
+    t.string   "contact_position"
+    t.string   "website"
+    t.text     "verbatim_location"
+    t.text     "calculation_of_number_of_people_reached"
+    t.text     "project_needs"
+    t.text     "idprefugee_camp"
+    t.string   "organization_id"
+    t.string   "budget_currency"
+    t.date     "budget_value_date"
+    t.integer  "target_project_reach"
+    t.integer  "actual_project_reach"
+    t.string   "project_reach_unit"
+    t.date     "project_reach_actual_start_date"
+    t.date     "project_reach_target_start_date"
+    t.date     "project_reach_actual_end_date"
+    t.date     "project_reach_target_end_date"
+    t.string   "project_reach_type",                                      :default => "Output"
+    t.integer  "project_reach_type_code",                                 :default => 1
+    t.string   "project_reach_measure",                                   :default => "Unit"
+    t.integer  "project_reach_measure_code",                              :default => 1
+    t.text     "project_reach_description"
+  end
+
+  add_index "projects", ["end_date"], :name => "index_projects_on_end_date"
+  add_index "projects", ["name"], :name => "index_projects_on_name"
+  add_index "projects", ["primary_organization_id"], :name => "index_projects_on_primary_organization_id"
+  add_index "projects", ["the_geom"], :name => "index_projects_on_the_geom", using: :gist
+
 # Could not dump table "projects" because of following StandardError
 #   Unknown type 'geometry' for column 'the_geom'
 
-  create_table "projects_regions", id: false, force: :cascade do |t|
-    t.integer "region_id"
-    t.integer "project_id"
-  end
-
-  add_index "projects_regions", ["project_id"], name: "index_projects_regions_on_project_id", using: :btree
-  add_index "projects_regions", ["region_id"], name: "index_projects_regions_on_region_id", using: :btree
 
   create_table "projects_sectors", id: false, force: :cascade do |t|
     t.integer "sector_id"
@@ -522,6 +561,4 @@ ActiveRecord::Schema.define(version: 20150825162340) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
-
-  add_foreign_key "projects_regions", "regions", name: "region_id_fk"
 end
