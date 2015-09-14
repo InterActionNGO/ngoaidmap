@@ -2,7 +2,7 @@ module Api
   module V1
     class GeolocationsController < ApiController
       def index
-        if geolocations_params && geolocations_params[:get_hierarchy] == 'true'
+        if geolocations_params && geolocations_params[:get_parents] == 'true'
           @countries = Geolocation.sum_projects
           render json: @countries, root: 'data',
           meta: { total: @countries.size },
@@ -15,9 +15,9 @@ module Api
         end
       end
       def show
-        @geolocation = Geolocation.find(params[:id])
-        if geolocations_params && geolocations_params[:get_hierarchy] == 'true'
-          geolocation = Geolocation.find(params[:id])
+        @geolocation = Geolocation.find_by(uid: params[:id])
+        if geolocations_params && geolocations_params[:get_parents] == 'true'
+          geolocation = Geolocation.find_by(uid: params[:id])
           gs = [@geolocation.g0, @geolocation.g1, @geolocation.g2, @geolocation.g3, @geolocation.g4].reject!(&:blank?)
           @geolocations = Geolocation.where(uid: gs).where.not(id: @geolocation.id).order('adm_level ASC')
           render json: @geolocation,
@@ -29,7 +29,7 @@ module Api
         end
       end
       def geolocations_params
-        params.permit(:id, :get_hierarchy)
+        params.permit(:id, :get_parents)
       end
     end
   end
