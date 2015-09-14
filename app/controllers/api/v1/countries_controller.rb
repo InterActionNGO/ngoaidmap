@@ -15,8 +15,10 @@ module Api
         end
       end
       def show
-        @organization = Organization.eager_load([projects:[:donors, :sectors, :countries, :regions]]).find(params[:id])
-        render json: @organization, root: 'data', include: ['projects']
+        geolocation = Geolocation.find(params[:id]).try(:country_uid)
+        @country = Geolocation.where(uid: geolocation)
+          render json: @country, root: 'data',
+          serializer: GeolocationPreviewSerializer
       end
       def countries_params
         params.permit(:id, :summing)

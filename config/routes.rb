@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :organizations, only: [:index, :show]
       resources :sectors, only: [:index, :show]
       resources :countries, only: [:index, :show]
+      resources :geolocations, only: [:index, :show]
     end
   end
 

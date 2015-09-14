@@ -7,7 +7,7 @@ class SearchController < ApplicationController
     limit = 20
     @current_page = params[:page] ? params[:page].to_i : 1
     @clusters = @regions = @filtered_regions = @filtered_sectors = @filtered_clusters = @filtered_organizations = @filtered_donors = []
-    @navigate_by_cluster = @site.navigate_by_cluster?
+    @navigate_by_cluster = false
 
     p params[:regions_ids]
 
@@ -114,17 +114,6 @@ class SearchController < ApplicationController
       format.html do
         q_filter = q.present?? "AND (p.name ilike '#{q}' OR p.description ilike '#{q}')" : ''
         # cluster / sector Facet
-        if @site.navigate_by_cluster?
-          sql = <<-SQL
-            SELECT DISTINCT c.id,c.name AS title
-            FROM clusters AS c
-            INNER JOIN clusters_projects AS cp ON c.id=cp.cluster_id
-            INNER JOIN projects_sites AS ps ON cp.project_id=ps.project_id AND ps.site_id=#{@site.id}
-            INNER JOIN projects AS p ON ps.project_id=p.id AND (p.end_date is NULL OR p.end_date > now()) #{q_filter}
-            #{filtered_clusters_where}
-          SQL
-          @clusters = Cluster.find_by_sql(sql)
-        else
           sql = <<-SQL
             SELECT DISTINCT s.id,s.name AS title
             FROM sectors AS s
@@ -134,8 +123,6 @@ class SearchController < ApplicationController
             #{filtered_sectors_where}
           SQL
           @sectors = Sector.find_by_sql(sql)
-        end
-
         sql = <<-SQL
           SELECT DISTINCT
             r.id, r.name AS title,
