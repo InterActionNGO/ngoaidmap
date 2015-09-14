@@ -223,6 +223,23 @@ define([
 
     },
 
+    getFilters: function() {
+      var params = {};
+      if (location.search.length) {
+        var paramsArr = decodeURIComponent(location.search.slice(1)).split('&'),
+          temp = [];
+        for (var p = paramsArr.length; p--;) {
+          temp = paramsArr[p].split('=');
+          if (temp[1] && !_.isNaN(Number(temp[1]))) {
+            params[temp[0]] = Number(temp[1]);
+          } else if (temp[1]) {
+            params[temp[0]] = temp[1];
+          }
+        }
+      }
+      return params;
+    },
+
     setUrl: function(param_name, id){
       return (location.search) ? location.href+'&'+param_name+'='+id : location.href+'?'+param_name+'='+id;
     }

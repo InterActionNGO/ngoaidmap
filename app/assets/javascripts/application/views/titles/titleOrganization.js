@@ -19,6 +19,7 @@ define([
         return
       }
       this.conexion = conexion;
+      this.filters = this.conexion.getFilters();
       this.render();
     },
 
@@ -41,7 +42,7 @@ define([
     },
 
     projectString: function(count,sectorCount){
-      var sector = (sectorCount == 1) ? this.sectors[0].attributes.name : '';
+      var sector = (sectorCount == 1 && !!this.filters['sectors[]']) ? this.sectors[0].attributes.name : '';
       if (count == 1) {
         return count.toLocaleString() +' '+sector+' project';
       }else{
@@ -50,7 +51,7 @@ define([
     },
 
     countryString: function(count){
-      return (count == 1) ? this.countries[0].name : null;
+      return (count == 1 && !!this.filters.geolocation) ? this.countries[0].name : null;
     },
 
 

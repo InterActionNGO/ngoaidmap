@@ -19,6 +19,7 @@ define([
         return
       }
       this.conexion = conexion;
+      this.filters = this.conexion.getFilters();
       this.render();
     },
 
@@ -45,7 +46,7 @@ define([
     },
 
     countryString: function(count){
-      if (count == 1) {
+      if (count == 1 && !!this.filters.geolocation) {
         return this.countries[0].name
       }else{
         return count.toLocaleString() +' countries'
