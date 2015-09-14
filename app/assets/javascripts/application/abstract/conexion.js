@@ -33,15 +33,18 @@ define([
 
     getDonors: function(){
       var donors = _.filter(this.included, function(include){ return include.type == 'donors'});
-      return _.map(_.groupBy(_.flatten(_.map(this.projects, function(project){return project.relationships.donors.data})), function(donor){ return donor.id;}),function(donor,_donorKey){
-        var donorF = _.findWhere(donors, { id: _donorKey });
-        return {
-          name: donorF.attributes.name,
-          id: donorF.id,
-          url: '/donors/'+donorF.id,
-          count: donor.length,
-        }
-      });
+      if (!!donors.length) {
+        return _.map(_.groupBy(_.flatten(_.map(this.projects, function(project){return project.relationships.donors.data})), function(donor){ return donor.id;}),function(donor,_donorKey){
+          var donorF = _.findWhere(donors, { id: _donorKey });
+          return {
+            name: donorF.attributes.name,
+            id: donorF.id,
+            url: '/donors/'+donorF.id,
+            count: donor.length,
+          }
+        });
+      }
+      return [];
     },
 
     getCountriesByProjects: function(nofilter) {
