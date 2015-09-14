@@ -13,7 +13,7 @@ module Api
       end
 
       def donor_params
-        params.permit(:offset, :limit, sectors:[])
+        params.permit(:offset, :limit, :geolocation, sectors:[])
       end
     end
   end

@@ -47,12 +47,14 @@ class Donor < ActiveRecord::Base
     url: "/system/:attachment/:id/:style.:extension"
   scope :active, -> {joins([donations: :project]).where("projects.end_date is null or (projects.end_date > ? AND projects.start_date < ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :sectors, -> (sectors) {joins([donations: [project: :sectors]]).where(sectors: {id: sectors})}
+  scope :geolocation, -> (geolocation) {joins([donations: [project: :geolocations]]).where('geolocations.g0=? OR geolocations.g1=? OR geolocations.g2=? OR geolocations.g3=? OR geolocations.g4=?', geolocation, geolocation, geolocation, geolocation, geolocation).uniq}
 
   def self.fetch_all(options={})
     donors = Donor.active
-    donors = donors.sectors(options[:sectors]) if options[:sectors]
-    donors = donors.offset(options[:offset])   if options[:offset]
-    donors = donors.limit(options[:limit])     if options[:limit]
+    donors = donors.sectors(options[:sectors])         if options[:sectors]
+    donors = donors.geolocation(options[:geolocation]) if options[:geolocation]
+    donors = donors.offset(options[:offset])           if options[:offset]
+    donors = donors.limit(options[:limit])             if options[:limit]
     donors = donors.uniq
     donors = donors.order(:name)
     donors
