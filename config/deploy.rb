@@ -26,7 +26,7 @@ set :rvm_type, :system
 set :linked_files, %w{.env}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/app/vendor}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/usr/local/rvm/gems/ruby-2.2.1@ngo-api/bin/bundler" }
@@ -38,10 +38,10 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 set :assets_dependencies, %w(app/assets lib/asset/usr/local/rvm/bin/rvm's vendor/assets Gemfile.lock config/routes.rb)
 
 
-set :bower_flags, '--quiet --config.interactive=false'
+set :bower_flags, '--config.interactive=false'
 set :bower_roles, :web
 set :bower_target_path, "#{release_path}/public/app/vendor"
-set :bower_bin, :bower
+set :bower_bin, '/usr/bin/bower'
 
 desc 'Restart application'
 after :deploy, :restart do
