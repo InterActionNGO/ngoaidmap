@@ -8,10 +8,12 @@ define([
   var Conexion = Class.extend({
 
     init: function(){
-      this.data = map_data;
-      this.projects = this.data.data;
-      this.included = this.data.included;
-      this.regions = this.data.meta.regions;
+      if (map_data) {
+        this.data = map_data;
+        this.projects = this.data.data;
+        this.included = this.data.included;
+        this.regions = this.data.meta.regions;
+      }
     },
 
     getProjects: function(){
