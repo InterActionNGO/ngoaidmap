@@ -7,7 +7,7 @@ class SearchController < ApplicationController
     # where  = ["site_id=#{@site.id}"]
     # limit = 20
     # @current_page = params[:page] ? params[:page].to_i : 1
-    # @clusters = @regions = @filtered_regions = @filtered_sectors = @filtered_clusters = @filtered_organizations = @filtered_donors = []
+     @clusters = @regions = @filtered_regions = @filtered_sectors = @filtered_clusters = @filtered_organizations = @filtered_donors = []
     # @navigate_by_cluster = false
 
     # p params[:regions_ids]
