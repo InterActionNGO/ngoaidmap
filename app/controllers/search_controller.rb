@@ -13,7 +13,7 @@ class SearchController < ApplicationController
     p params[:regions_ids]
 
     if params[:regions_ids].present?
-       @filtered_regions = Geolocation.find_by_sql("select g.id, g.name as title, g.country_name as subtitle from geolocations as g
+       @filtered_regions = Geolocation.find_by_sql("select g.id, g.name, g.country_name from geolocations as g
        where g.id in (#{params[:regions_ids].join(",")})")
        filtered_regions_where = "where g.id not in (#{params[:regions_ids].join(",")})"
        where << params[:regions_ids].map{|region_id| "regions_ids && ('{'||#{region_id}||'}')::integer[]"}.join(' OR ')
@@ -43,7 +43,7 @@ class SearchController < ApplicationController
     end
 
     if params[:donors_ids].present?
-      @filtered_donors = Donor.find_by_sql("select d.id, d.name as title from donors as d where d.id in (#{params[:donors_ids].join(",")})")
+      @filtered_donors = Donor.find_by_sql("select d.id, d.name from donors as d where d.id in (#{params[:donors_ids].join(",")})")
       filtered_donors_where = "where d.id not in (#{params[:donors_ids].join(",")})"
       where << params[:donors_ids].map{|donor_id| "donors_ids && ('{'||#{donor_id}||'}')::integer[]"}.join(' OR ')
     end
@@ -127,14 +127,13 @@ class SearchController < ApplicationController
           @sectors = Sector.find_by_sql(sql)
         sql = <<-SQL
           SELECT DISTINCT
-            r.id, r.name AS title,
-            CASE WHEN ps.site_id = 1 THEN null ELSE r.country_name END AS subtitle
+            r.id, r.name,r.country_name
           FROM geolocations AS r
           INNER JOIN geolocations_projects AS pr ON r.id=pr.geolocation_id
           INNER JOIN projects_sites AS ps ON pr.project_id=ps.project_id AND ps.site_id=#{@site.id}
           INNER JOIN projects AS p ON ps.project_id=p.id AND (p.end_date is NULL OR p.end_date > now()) #{q_filter}
           #{filtered_regions_where}
-          ORDER BY subtitle, title
+          ORDER BY r.country_name, r.name
         SQL
         @regions = Geolocation.find_by_sql(sql)
 
@@ -149,13 +148,13 @@ class SearchController < ApplicationController
         @organizations = Organization.find_by_sql(sql)
 
         sql = <<-SQL
-          SELECT DISTINCT d.id, d.name AS title
+          SELECT DISTINCT d.id, d.name
           FROM donors AS d
           INNER JOIN projects AS p ON (p.end_date is NULL OR p.end_date > now()) #{q_filter}
           INNER JOIN projects_sites AS ps ON ps.project_id = p.id AND ps.site_id = #{@site.id}
           INNER JOIN donations AS dn ON dn.donor_id = d.id AND dn.project_id = p.id
           #{filtered_donors_where}
-          ORDER BY title
+          ORDER BY d.name
         SQL
         @donors = Donor.find_by_sql(sql)
 
