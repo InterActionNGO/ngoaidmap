@@ -22,6 +22,11 @@
     var page = "<%= params[:controller] %>";
     var adm_level = <%= @geolocation.adm_level + 1 %>;
     var geolocation = <%= raw(@geolocation.to_json) %>;
+    var project = false;
+    var organization = false;
+    var donor = false;
+    var sector = false;
+
   </script>
 <% end %>
 
@@ -43,15 +48,6 @@
         <div id="sidebar-donors" class="project-donors mod-info"></div>
 
         <div id="sidebar-other-countries" class="mod-info"></div>
-
-        <!-- <div class="mod-info">
-          <h3>Projects in other <%#= word_for_geo_context(@area).pluralize %></h3>
-          <ul>
-            <%# @area.near(@site, 5).each do |area| %>
-              <li><%#= link_to(area.name, location_path(area)) %> - <%#= pluralize(area.count, 'project', 'projects') %></li>
-            <%# end %>
-          </ul>
-        </div> -->
 
       </aside>
     </div>

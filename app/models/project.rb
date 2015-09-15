@@ -63,7 +63,12 @@ class Project < ActiveRecord::Base
   has_many :donations, :dependent => :destroy
   has_many :donors, :through => :donations
   has_and_belongs_to_many :sites #, :class_name => 'Site', :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
-  has_and_belongs_to_many :countries,  -> {where(adm_level: 0)}, class_name: 'Geolocation'
+  # has_and_belongs_to_many :countries,  -> {joins('
+  #                                                   RIGHT OUTER JOIN geolocations AS geos
+  #                                                   on geolocations_projects.geolocation_id = geos.id
+  #                                                   RIGHT OUTER JOIN geolocations as g
+  #                                                   ON g.g0 = geos.uid
+  #                                                 ').where('g.adm_level=?', 0).uniq}, class_name: 'Geolocation'
 
   scope :active, -> {where("end_date > ?", Date.today.to_s(:db))}
   scope :closed, -> {where("end_date < ?", Date.today.to_s(:db))}
@@ -77,6 +82,10 @@ class Project < ActiveRecord::Base
   scope :donors, -> (donors){where(donors: {id: donors})}
   scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
+
+  def countries
+    Geolocation.where(uid: self.geolocations.pluck(:country_uid)).uniq
+  end
 
   def self.fetch_all(options = {}, from_api = true)
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
@@ -103,12 +112,12 @@ class Project < ActiveRecord::Base
 
 
   def related(site, limit = 2)
-    if result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(primary_organization_id: self.primary_organization_id).where(sites: {id: site.id}).active.limit(limit)
+    if result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(primary_organization_id: self.primary_organization_id).where(sites: {id: site.id}).active.uniq.limit(limit)
       result
-    elsif result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(sites: {id: site.id}).active.limit(limit)
+    elsif result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(sites: {id: site.id}).active.uniq.limit(limit)
       result
     else
-      result = Project.where.not(id: self.id).limit(limit)
+      result = Project.where.not(id: self.id).uniq.limit(limit)
     end
   end
 
@@ -193,7 +202,7 @@ class Project < ActiveRecord::Base
   end
 
   def iati_countries
-    self.geolocations.pluck(:country_code)
+    self.geolocations.pluck(:country_code).uniq
   end
 
   def iati_locations

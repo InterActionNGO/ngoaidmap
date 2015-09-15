@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
 
+  include PreloadVars
   include ProjectsFiltering
   layout 'site_layout'
   #caches_action :show, :expires_in => 300, :cache_path => Proc.new { |c| c.params }

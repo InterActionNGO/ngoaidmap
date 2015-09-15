@@ -5,12 +5,12 @@ define([
   'handlebars',
   'application/abstract/conexion',
   'application/abstract/utils',
-  'text!application/templates/sidebar/project/projectContact.handlebars'
+  'text!application/templates/sidebar/project/projectDonors.handlebars'
   ], function(Backbone, handlebars, conexion, utils, tpl) {
 
-  var ProjectContact = Backbone.View.extend({
+  var ProjectDonors = Backbone.View.extend({
 
-    el: '#project-contact',
+    el: '#project-donors',
 
     template: Handlebars.compile(tpl),
 
@@ -19,12 +19,14 @@ define([
       if (!this.$el.length) {
         return
       }
-      (this.project && !!this.project.contact_email && !!this.project.contact_person && !!this.project.contact_phone_number) ? this.render() : this.$el.remove();
+      this.conexion = conexion;
+      this.render();
     },
 
     parseData: function(){
-
-      return this.project;
+      var donors = this.conexion.getDonors();
+      (!donors.length) ? this.$el.remove() : null;
+      return { donors: donors };
     },
 
     render: function(){
@@ -33,6 +35,6 @@ define([
 
   });
 
-  return ProjectContact;
+  return ProjectDonors;
 
 });

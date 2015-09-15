@@ -4,8 +4,8 @@ define([
   'jqueryui',
   'backbone',
   'handlebars',
-  'services/sidebarService',
-  'text!templates/sidebar/sidebarDonors.handlebars'
+  'application/services/sidebarService',
+  'text!application/templates/sidebar/sidebarDonors.handlebars'
   ], function(jqueryui,Backbone, handlebars, service, tpl) {
 
   var SidebarDonors = Backbone.View.extend({
@@ -27,7 +27,7 @@ define([
         service.execute('donors-by-sector', _.bind(this.successSidebar, this ), _.bind(this.errorSidebar, this ));
       }
       if (!!window.geolocation) {
-        this.name= 'DONORS IN THIS GEOLOCATION';
+        this.name= 'DONORS IN THIS LOCATION';
         service.execute('donors-by-geolocation', _.bind(this.successSidebar, this ), _.bind(this.errorSidebar, this ));
       }
     },

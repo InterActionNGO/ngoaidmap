@@ -10,7 +10,7 @@
             <article class="other-project">
               <div class="image">
                 <img src="http://maps.google.com/maps/api/staticmap?size=90x70&maptype=roadmap&style=feature:all|element:labels|visibility:off&path=fillcolor:0x00000090|color:0x00000001&sensor=false&center=<%=r.geolocations.first.latitude%>,<%=r.geolocations.first.longitude%>&zoom=6" title="<%= r.name %>" />
-                <img class="marker" src="/app/images/themes/<%=@site.theme_id%>/marker_1.png" alt="<%= r.name %>" title="<%= r.name %>" />
+                <img class="marker" src="/assets/themes/<%=@site.theme_id%>/marker_1.png" alt="<%= r.name %>" title="<%= r.name %>" />
               </div>
             <div class="info">
               <h3><a href="<%= project_path(:id => r.id) %>"><%=truncate(r.name, :length => 40)%></a></h3>

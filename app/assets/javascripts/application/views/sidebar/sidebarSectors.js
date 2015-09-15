@@ -4,8 +4,8 @@ define([
   'jqueryui',
   'backbone',
   'handlebars',
-  'abstract/conexion',
-  'text!templates/sidebar/sidebarSectors.handlebars'
+  'application/abstract/conexion',
+  'text!application/templates/sidebar/sidebarSectors.handlebars'
   ], function(jqueryui,Backbone, handlebars, conexion, tpl) {
 
   var SidebarSectors = Backbone.View.extend({
@@ -19,13 +19,14 @@ define([
         return
       }
       this.conexion = conexion;
+      this.filters = this.conexion.getFilters();
       this.render();
 
     },
 
     parseData: function(){
       var sectorsByProjects = this.conexion.getSectorsByProjects(!!this.$el.data('nofilter'));
-      if (sectorsByProjects.length == 1) {
+      if (sectorsByProjects.length == 1 && !!this.filters['sectors[]']) {
         this.$el.remove();
         return
       }

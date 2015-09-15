@@ -4,9 +4,9 @@ define([
   'jqueryui',
   'backbone',
   'handlebars',
-  'services/sidebarService',
-  'abstract/conexion',
-  'text!templates/sidebar/sidebarOtherCountries.handlebars'
+  'application/services/sidebarService',
+  'application/abstract/conexion',
+  'text!application/templates/sidebar/sidebarOtherCountries.handlebars'
   ], function(jqueryui,Backbone, handlebars, service, conexion, tpl) {
 
   var SidebarOtherCountries = Backbone.View.extend({

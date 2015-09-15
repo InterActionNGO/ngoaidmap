@@ -3,8 +3,8 @@
 define([
   'backbone',
   'handlebars',
-  'abstract/conexion',
-  'text!templates/sidebar/project/projectOrganization.handlebars'
+  'application/abstract/conexion',
+  'text!application/templates/sidebar/project/projectOrganization.handlebars'
   ], function(Backbone, handlebars, conexion, tpl) {
 
   var projectOrganizationModel = Backbone.Model.extend({

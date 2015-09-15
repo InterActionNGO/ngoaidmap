@@ -3,8 +3,8 @@
 define([
   'backbone',
   'handlebars',
-  'views/sidebar/sidebarOrganizationsClass',
-  'text!templates/sidebar/sidebarOrganizationsFollowUs.handlebars'
+  'application/views/sidebar/sidebarOrganizationsClass',
+  'text!application/templates/sidebar/sidebarOrganizationsFollowUs.handlebars'
   ], function(Backbone, handlebars, SidebarOrganizationsClass, tpl) {
 
   var sidebarOrganizationsFollowUs = SidebarOrganizationsClass.extend({

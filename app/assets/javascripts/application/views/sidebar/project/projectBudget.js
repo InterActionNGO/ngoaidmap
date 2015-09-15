@@ -3,9 +3,9 @@
 define([
   'backbone',
   'handlebars',
-  'abstract/conexion',
-  'abstract/utils',
-  'text!templates/sidebar/project/projectBudget.handlebars'
+  'application/abstract/conexion',
+  'application/abstract/utils',
+  'text!application/templates/sidebar/project/projectBudget.handlebars'
   ], function(Backbone, handlebars, conexion, utils, tpl) {
 
   var ProjectBudget = Backbone.View.extend({
@@ -24,6 +24,7 @@ define([
 
     parseData: function(){
       this.project.budgetString = (!!this.project.budget) ? utils.formatCurrency(this.project.budget) : this.$el.remove();
+      this.project.budgetSize = (!!this.project.budget && this.project.budget.length > 6) ? true : false;
       return this.project;
     },
 

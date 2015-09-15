@@ -8,7 +8,7 @@ module Api
         each_serializer: OrganizationPreviewSerializer
       end
       def show
-        @organization = Organization.eager_load([projects:[:donors, :sectors, :countries, :regions]]).find(params[:id])
+        @organization = Organization.eager_load([projects:[:donors, :sectors, :geolocations]]).find(params[:id])
         render json: @organization, root: 'data', include: ['projects']
       end
     end

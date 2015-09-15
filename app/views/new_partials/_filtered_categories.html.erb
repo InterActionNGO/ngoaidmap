@@ -1,41 +1,7 @@
 <div class="mod-filtered-categories">
   <div class="row">
     <div class="grid-17">
-      <% unless title.empty? %>
-        <% if @filter_name.present? || @filter_by_location || @filter_by_category || @filter_by_organization %>
-          <p class="filtered">
-            <strong>Showing</strong>:
-            <% if @organization %>
-              <strong><%= CGI.unescapeHTML(@organization.name) %></strong>, <%= link_to raw(@filter_name), organization_path(@organization), :class => 'filter' %>
-            <% elsif @donor %>
-              <strong><%= CGI.unescapeHTML(@donor.name) %></strong>, <%= link_to raw(@filter_name), donor_path(@donor), :class => 'filter' %>
-            <% elsif @area %>
-              <strong><%= CGI.unescapeHTML(@area.name) %></strong>, <%= link_to raw(@filter_name), location_path(@area), :class => 'filter' %>
-            <% elsif @site.navigate_by_cluster? %>
-              <strong><%= CGI.unescapeHTML(@data.name) %></strong>, <%= link_to raw(@filter_name), cluster_path(params[:category_id]), :class => 'filter' %>
-            <% else @site.navigate_by_sector? %>
-              <strong><%= CGI.unescapeHTML(@data.name) %></strong>, <%= link_to raw(@filter_name), sector_path(params[:category_id]), :class => 'filter' %>
-            <% end %>
-          </p>
-        <% elsif title != @site.name %>
-          <p class="filtered">
-            <strong>Showing</strong>:
-            <% if @donor && @projects_count %>
-              <strong><%= CGI.unescapeHTML(@donor.name) %></strong>, <%= @projects_count %> <% if @projects_count === 1 %>project<% else %>projects<% end %>
-            <% elsif @organization_projects_count %>
-              <strong><%= CGI.unescapeHTML(@organization.name) %></strong>, <%= @organization_projects_count %> <% if @organization_projects_count === 1 %>project<% else %>projects<% end %>
-            <% elsif @cluster_sector_projects_count  %>
-              <strong><%= CGI.unescapeHTML(@data.name) %></strong>, <%= @cluster_sector_projects_count %> <% if @cluster_sector_projects_count === 1 %>project<% else %>projects<% end %>
-            <% elsif @georegion_projects_count %>
-              <strong><%= CGI.unescapeHTML(@area.name) %><%= ", " + @area_parent if @area_parent.present? %></strong>, <%= @georegion_projects_count %> <% if @georegion_projects_count === 1 %>project<% else %>projects<% end %>
-            <% elsif @project %>
-              <strong><%= @project.name %></strong>
-            <% else %>
-              <strong><%= CGI.unescapeHTML(title) %></strong>
-            <% end %>
-          </p>
-        <% end %>
-      <% end %>
+      <div id="filtered-bubble"></div>
 
       <div class="mod-btn-projects">
         <a href="#content" class="btn-go-to-projects">View projects list</a>

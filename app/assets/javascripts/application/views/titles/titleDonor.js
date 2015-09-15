@@ -4,8 +4,8 @@ define([
   'jquery',
   'backbone',
   'handlebars',
-  'abstract/conexion',
-  'text!templates/titles/titleDonor.handlebars'
+  'application/abstract/conexion',
+  'text!application/templates/titles/titleDonor.handlebars'
   ], function(jquery, Backbone, handlebars, conexion, tpl) {
 
   var TitleDonor = Backbone.View.extend({
@@ -19,6 +19,7 @@ define([
         return
       }
       this.conexion = conexion;
+      this.filters = this.conexion.getFilters();
       this.render();
     },
 
@@ -44,7 +45,7 @@ define([
     },
 
     projectString: function(count,sectorCount){
-      var sector = (sectorCount == 1) ? this.sectors[0].attributes.name : '';
+      var sector = (sectorCount == 1 && !!this.filters['sectors[]']) ? this.sectors[0].attributes.name : '';
       if (count == 1) {
         return count.toLocaleString() +' '+sector+' project';
       }else{
@@ -53,11 +54,11 @@ define([
     },
 
     countryString: function(count){
-      return (count == 1) ? this.countries[0].name : null;
+      return (count == 1 && !!this.filters.geolocation) ? this.countries[0].name : null;
     },
 
     organizationString: function(count){
-      return (count == 1) ? this.organizations[0].attributes.name : null;
+      return (count == 1 && !!this.filters['organizations[]']) ? this.organizations[0].attributes.name : null;
     },
 
 

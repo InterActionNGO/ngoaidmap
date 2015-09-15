@@ -3,39 +3,41 @@ class SearchController < ApplicationController
   layout 'site_layout'
 
   def index
+    @regions = Geolocation.all.select(:id, :name, :country_name)
     where  = ["site_id=#{@site.id}"]
     limit = 20
     @current_page = params[:page] ? params[:page].to_i : 1
     @clusters = @regions = @filtered_regions = @filtered_sectors = @filtered_clusters = @filtered_organizations = @filtered_donors = []
-    @navigate_by_cluster = @site.navigate_by_cluster?
+    @navigate_by_cluster = false
 
     p params[:regions_ids]
 
     if params[:regions_ids].present?
-      @filtered_regions = Region.find_by_sql("select r.id, r.name as title, c.name as subtitle from regions as r inner join countries as c on c.id = r.country_id where r.id in (#{params[:regions_ids].join(",")})")
-      filtered_regions_where = "where r.id not in (#{params[:regions_ids].join(",")})"
-      where << params[:regions_ids].map{|region_id| "regions_ids && ('{'||#{region_id}||'}')::integer[]"}.join(' OR ')
+       @filtered_regions = Geolocation.find_by_sql("select g.id, g.name as title, g.country_name as subtitle from geolocations as g
+       where g.id in (#{params[:regions_ids].join(",")})")
+       filtered_regions_where = "where g.id not in (#{params[:regions_ids].join(",")})"
+       where << params[:regions_ids].map{|region_id| "regions_ids && ('{'||#{region_id}||'}')::integer[]"}.join(' OR ')
 
       #p params[:regions_ids]
-      #p where
+       #p where
     end
 
-    if params[:sectors_ids].present?
-      @filtered_sectors = Sector.find_by_sql("select s.id, s.name as title from sectors as s where s.id in (#{params[:sectors_ids].join(",")})")
-      filtered_sectors_where = "where s.id not in (#{params[:sectors_ids].join(",")})"
-      where << params[:sectors_ids].map{|sector_id| "sector_ids && ('{'||#{sector_id}||'}')::integer[]"}.join(' OR ')
+     if params[:sectors_ids].present?
+       @filtered_sectors = Sector.find_by_sql("select s.id, s.name as title from sectors as s where s.id in (#{params[:sectors_ids].join(",")})")
+       filtered_sectors_where = "where s.id not in (#{params[:sectors_ids].join(",")})"
+       where << params[:sectors_ids].map{|sector_id| "sector_ids && ('{'||#{sector_id}||'}')::integer[]"}.join(' OR ')
 
-      #p where
-    end
+       #p where
+     end
 
-    if params[:clusters_ids].present?
-      @filtered_clusters = Cluster.find_by_sql("select c.id, c.name as title from clusters as c where c.id in (#{params[:clusters_ids].join(",")})")
-      filtered_clusters_where = "where c.id not in (#{params[:clusters_ids].join(",")})"
-      where << params[:clusters_ids].map{|cluster_id| "cluster_ids && ('{'||#{cluster_id}||'}')::integer[]"}.join(' OR ')
-    end
+    # if params[:clusters_ids].present?
+    #   @filtered_clusters = Cluster.find_by_sql("select c.id, c.name as title from clusters as c where c.id in (#{params[:clusters_ids].join(",")})")
+    #   filtered_clusters_where = "where c.id not in (#{params[:clusters_ids].join(",")})"
+    #   where << params[:clusters_ids].map{|cluster_id| "cluster_ids && ('{'||#{cluster_id}||'}')::integer[]"}.join(' OR ')
+    # end
 
     if params[:organizations_ids].present?
-      @filtered_organizations = Cluster.find_by_sql("select o.id, o.name as title from organizations as o where o.id in (#{params[:organizations_ids].join(",")})")
+      @filtered_organizations = Organization.find_by_sql("select o.id, o.name as title from organizations as o where o.id in (#{params[:organizations_ids].join(",")})")
       filtered_organizations_where = "where o.id not in (#{params[:organizations_ids].join(",")})"
       where << "organization_id IN (#{params[:organizations_ids].join(",")})"
     end
@@ -114,17 +116,6 @@ class SearchController < ApplicationController
       format.html do
         q_filter = q.present?? "AND (p.name ilike '#{q}' OR p.description ilike '#{q}')" : ''
         # cluster / sector Facet
-        if @site.navigate_by_cluster?
-          sql = <<-SQL
-            SELECT DISTINCT c.id,c.name AS title
-            FROM clusters AS c
-            INNER JOIN clusters_projects AS cp ON c.id=cp.cluster_id
-            INNER JOIN projects_sites AS ps ON cp.project_id=ps.project_id AND ps.site_id=#{@site.id}
-            INNER JOIN projects AS p ON ps.project_id=p.id AND (p.end_date is NULL OR p.end_date > now()) #{q_filter}
-            #{filtered_clusters_where}
-          SQL
-          @clusters = Cluster.find_by_sql(sql)
-        else
           sql = <<-SQL
             SELECT DISTINCT s.id,s.name AS title
             FROM sectors AS s
@@ -134,21 +125,18 @@ class SearchController < ApplicationController
             #{filtered_sectors_where}
           SQL
           @sectors = Sector.find_by_sql(sql)
-        end
-
         sql = <<-SQL
           SELECT DISTINCT
             r.id, r.name AS title,
-            CASE WHEN ps.site_id = 1 THEN null ELSE c.name END AS subtitle
-          FROM regions AS r
-          INNER JOIN projects_regions AS pr ON r.id=pr.region_id AND r.level=#{@site.level_for_region}
+            CASE WHEN ps.site_id = 1 THEN null ELSE r.country_name END AS subtitle
+          FROM geolocations AS r
+          INNER JOIN geolocations_projects AS pr ON r.id=pr.geolocation_id
           INNER JOIN projects_sites AS ps ON pr.project_id=ps.project_id AND ps.site_id=#{@site.id}
           INNER JOIN projects AS p ON ps.project_id=p.id AND (p.end_date is NULL OR p.end_date > now()) #{q_filter}
-          INNER JOIN countries AS c ON c.id = r.country_id
           #{filtered_regions_where}
           ORDER BY subtitle, title
         SQL
-        @regions = Region.find_by_sql(sql)
+        @regions = Geolocation.find_by_sql(sql)
 
         sql = <<-SQL
           SELECT DISTINCT o.id, o.name AS title

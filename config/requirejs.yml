@@ -1,0 +1,72 @@
+modules:
+  - name: "application"
+  - name: "report"
+  - name: "countdown"
+
+wrap: false
+
+paths:
+  jquery: "jquery/dist/jquery"
+  underscore: "underscore/underscore"
+  _string: "underscore.string/dist/underscore.string.min"
+  amplify: "amplify/lib/amplify"
+  backbone: "backbone/backbone"
+  Class: "Class.js/Class"
+  select2: "select2/select2"
+  handlebars: "handlebars/handlebars"
+  highcharts: "highcharts-release/highcharts"
+  spin: "spinjs/spin"
+  moment: "moment/moment"
+  momentRange: "moment-range/lib/moment-range.bare"
+  markerCluster: "leaflet.markercluster/dist/leaflet.markercluster"
+  text: "requirejs-text/text"
+  quicksilver: "/app/lib/liveupdate/quicksilver"
+  liveupdate: "/app/lib/liveupdate/jquery.liveupdate"
+  jqueryui: "/app/lib/jquery-ui/js/jquery-ui-1.10.4.custom"
+  chachiSlider: "chachi-slider/jquery.chachi-slider"
+
+
+shim:
+  jquery:
+    exports: "$"
+
+  underscore:
+    exports: "_"
+
+  _string:
+    exports: "_string"
+    deps:
+      - "underscore"
+
+  backbone:
+    deps:
+      - "jquery"
+      - "underscore"
+    exports: "Backbone"
+
+  liveupdate:
+    deps:
+      - "jquery"
+      - "quicksilver"
+    exports: "$"
+
+  jqueryui:
+    deps:
+      - "jquery"
+    exports: "$"
+
+  select2:
+    deps:
+      - "jquery"
+    exports: "$"
+
+  chachiSlider:
+    deps:
+      - "jquery"
+    exports: "$"
+
+  Class:
+    exports: "Class"
+
+  amplify:
+    exports: "amplify"
