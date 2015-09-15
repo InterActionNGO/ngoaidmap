@@ -20,6 +20,7 @@ module NgoFront
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.assets.paths << File.join(Rails.root, 'lib', 'assets')
     config.assets.paths << File.join(Rails.root, 'public', 'app', 'vendor')
 
     config.generators.assets = false
@@ -34,12 +35,14 @@ module NgoFront
     # Explicitly register the extensions we are interested in compiling
     config.assets.precompile.push(Proc.new do |path|
       File.extname(path).in? [
-        '.html', '.erb', '.haml',                 # Templates
+        '.html', '.erb', '.haml', '.handlebars',  # Templates
         '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
         '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
       ]
     end)
 
+    # RequireJs
+    config.requirejs.logical_asset_filter += [/\.handlebars$/]
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
