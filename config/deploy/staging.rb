@@ -12,4 +12,4 @@ set :ssh_options, {
   password: fetch(:password)
 }
 
-set :rails_env, "staging"
+set :rails_env, "production"
