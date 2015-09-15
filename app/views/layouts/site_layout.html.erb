@@ -13,12 +13,12 @@
       <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
     <![endif]-->
     <% if Rails.env.production? %>
-      <%= stylesheet_link_tag "/app/lib/jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", :media => 'all' %>
+      <%= stylesheet_link_tag "jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", :media => 'all' %>
       <%= stylesheet_link_tag "/app/vendor/chachi-slider/chachi-slider.css", :media => 'all' %>
       <%= stylesheet_link_tag "/app/vendor/select2/select2.css", :media => 'all' %>
       <%= stylesheet_link_tag "main.css", :media => 'all' %>
     <% else %>
-      <%= stylesheet_link_tag "/app/lib/jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", :media => 'all' %>
+      <%= stylesheet_link_tag "jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", :media => 'all' %>
       <%= stylesheet_link_tag "/app/vendor/chachi-slider/chachi-slider.css", :media => 'all' %>
       <%= stylesheet_link_tag "/app/vendor/select2/select2.css", :media => 'all' %>
       <%= stylesheet_link_tag "main", :media => "all" %>
@@ -62,7 +62,7 @@
     <% else %>
       <%= yield :js_vars %>
     <% end %>
-    <%= javascript_include_tag "/app/lib/modernizr/modernizr.custom.js" %>
+    <%= javascript_include_tag "modernizr/modernizr.custom.js" %>
 
     <%= csrf_meta_tag %>
   </head>
