@@ -37,20 +37,26 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # set the locations that we will look for changed assets to determine whether to precompile
 set :assets_dependencies, %w(app/assets lib/asset/usr/local/rvm/bin/rvm's vendor/assets Gemfile.lock config/routes.rb)
 
-  desc 'Restart application'
-  after :deploy, :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
 
-  # after :restart, :clear_cache do
-  #   on roles(:web), in: :groups, limit: 3, wait: 10 do
-  #     within release_path do
-  #       execute :rake, 'memcached:flush RAILS_ENV=production'
-  #     end
-  #   end
-  # end
+set :bower_flags, '--quiet --config.interactive=false'
+set :bower_roles, :web
+set :bower_target_path, "#{release_path}/public/app/vendor"
+set :bower_bin, :bower
+
+desc 'Restart application'
+after :deploy, :restart do
+  on roles(:app), in: :sequence, wait: 5 do
+    execute :touch, release_path.join('tmp/restart.txt')
+  end
+end
+
+# after :restart, :clear_cache do
+#   on roles(:web), in: :groups, limit: 3, wait: 10 do
+#     within release_path do
+#       execute :rake, 'memcached:flush RAILS_ENV=production'
+#     end
+#   end
+# end
 
  # after :failed, :rollback
 
