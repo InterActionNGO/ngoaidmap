@@ -1,5 +1,6 @@
 class SitesController < ApplicationController
   layout :sites_layout
+  include PreloadVars
   include ProjectsFiltering
 
   def home
