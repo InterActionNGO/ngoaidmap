@@ -1,7 +1,5 @@
 modules:
   - name: "application"
-  - name: "report"
-  - name: "countdown"
 
 wrap: false
 
@@ -20,9 +18,9 @@ paths:
   momentRange: "moment-range/lib/moment-range.bare"
   markerCluster: "leaflet.markercluster/dist/leaflet.markercluster"
   text: "requirejs-text/text"
-  quicksilver: "/app/lib/liveupdate/quicksilver"
-  liveupdate: "/app/lib/liveupdate/jquery.liveupdate"
-  jqueryui: "/app/lib/jquery-ui/js/jquery-ui-1.10.4.custom"
+  quicksilver: "liveupdate/quicksilver"
+  liveupdate: "liveupdate/jquery.liveupdate"
+  jqueryui: "jquery-ui/js/jquery-ui-1.10.4.custom"
   chachiSlider: "chachi-slider/jquery.chachi-slider"
 
 
@@ -70,3 +68,6 @@ shim:
 
   amplify:
     exports: "amplify"
+
+  handlebars:
+    exports: "Handlebars"
