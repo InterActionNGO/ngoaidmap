@@ -38,6 +38,7 @@ group :development do
   gem 'capistrano', '~> 3.4.0', github: 'capistrano/capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
+  gem 'capistrano-bower'
   gem 'capistrano-bundler'
   gem 'brakeman', :require => false
 end

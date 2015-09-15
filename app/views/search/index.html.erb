@@ -121,7 +121,7 @@
                     <h2><%= link_to(truncate(project['project_name'],:length=>43,:omission=>"..."), project_path(project['project_id'])) %></h2>
                     <span>by <%= link_to(project['organization_name'], organization_path(project['organization_id'])) %></span>
                     <p>
-                      <% regions = project['regions'] ? project['regions'].text2array : [] %>
+                      <% regions = project['geolocations'] ? project['geolocations'].text2array : [] %>
                       <% regions.slice!(0, 2).each do |region| %>
                           <%= "#{region}, #{project['countries'].text2array}"%>
                       <% end %>

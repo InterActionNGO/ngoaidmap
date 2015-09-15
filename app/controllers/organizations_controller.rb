@@ -1,6 +1,7 @@
 class OrganizationsController < ApplicationController
   #before_action :merge_params, on: :show
   layout :sites_layout
+  include PreloadVars
   include ProjectsFiltering
 
   #caches_action :index, :expires_in => 300, :cache_path => Proc.new { |c| c.params }

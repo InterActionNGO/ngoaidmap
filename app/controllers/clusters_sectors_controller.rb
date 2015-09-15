@@ -1,6 +1,7 @@
 class ClustersSectorsController < ApplicationController
 
   include ProjectsFiltering
+  include PreloadVars
   layout :sites_layout
 
   def show

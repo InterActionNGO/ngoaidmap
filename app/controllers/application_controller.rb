@@ -10,18 +10,10 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :set_site, :browser_is_ie6_or_lower?
-  before_action :get_menu_items
+
 
   def old_browser
     render :file => "/public/old_browser.html.erb", :status => 200, :layout => false
-  end
-
-  def get_menu_items
-    @projects = Project.active
-    @organizations = Organization.active.order(:name).uniq.pluck(:id, :name)
-    @donors = Donor.active.order(:name).uniq.pluck(:id, :name)
-    @countries = Geolocation.where(adm_level: 0).order(:name).uniq.pluck(:uid, :name)
-    @sectors = Sector.counting_projects
   end
 
   def get_sidebar_items
