@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   layout 'site_layout'
 
   def index
-    @regions = Geolocation.all.select(:id, :name)
+    @regions = Geolocation.all.select(:id, :name, :country_name)
     # where  = ["site_id=#{@site.id}"]
     # limit = 20
     # @current_page = params[:page] ? params[:page].to_i : 1
