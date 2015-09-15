@@ -42,20 +42,20 @@ set :bower_roles, :web
 set :bower_target_path, "#{release_path}/public/app/vendor"
 set :bower_bin, :bower
 
-  desc 'Restart application'
-  after :deploy, :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
+desc 'Restart application'
+after :deploy, :restart do
+  on roles(:app), in: :sequence, wait: 5 do
+    execute :touch, release_path.join('tmp/restart.txt')
   end
+end
 
-  # after :restart, :clear_cache do
-  #   on roles(:web), in: :groups, limit: 3, wait: 10 do
-  #     within release_path do
-  #       execute :rake, 'memcached:flush RAILS_ENV=production'
-  #     end
-  #   end
-  # end
+# after :restart, :clear_cache do
+#   on roles(:web), in: :groups, limit: 3, wait: 10 do
+#     within release_path do
+#       execute :rake, 'memcached:flush RAILS_ENV=production'
+#     end
+#   end
+# end
 
  # after :failed, :rollback
 
