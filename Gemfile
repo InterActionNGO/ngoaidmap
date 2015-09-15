@@ -40,7 +40,6 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-bower'
   gem 'capistrano-bundler'
-  gem 'capistrano-bower'
   gem 'brakeman', :require => false
 end
 group :development, :test do
