@@ -37,10 +37,20 @@
 
     vertical-align: middle;
 
+
     a {
       position: relative;
       display: inline;
       color: $color-0;
+
+      &.breadcrumb-link {
+        &:after{
+          display: none;
+        }
+        &:hover{
+          text-decoration: underline;
+        }
+      }
 
       &:after {
         display: inline-block;
