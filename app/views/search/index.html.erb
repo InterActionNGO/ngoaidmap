@@ -16,7 +16,7 @@
 
           <div class="block region">
             <h3>Regions</h3>
-            <select name="regions_ids[]" multiple placeholder="All regions">
+            <select name="geolocations[]" multiple placeholder="All regions">
               <% @regions.each do |region| %>
                 <option value="<%= region.id %>"><%= region.name %>, <%= region.country_name %></option>
               <% end %>
@@ -26,35 +26,22 @@
             </select>
           </div>
 
-          <% if @navigate_by_cluster %>
-            <div class="block cluster">
-              <h3><%= @site.word_for_clusters %></h3>
-              <select name="clusters_ids[]" multiple placeholder="All clusters">
-                <% @clusters.each do |cluster| %>
-                  <option value="<%= cluster.id %>"><%= cluster.name %></option>
-                <% end %>
-                <% @filtered_clusters.each do |region| %>
-                  <option selected value="<%= region.id %>"><%= region.name %></option>
-                <% end %>
-              </select>
-            </div>
-          <% else %>
-            <div class="block sectors">
-              <h3>Sectors</h3>
-              <select name="sectors_ids[]" multiple placeholder="All sectors">
-                <% @sectors.each do |sector| %>
-                  <option value="<%= sector.id %>"><%= sector.title %></option>
-                <% end %>
-                <% @filtered_sectors.each do |sector| %>
-                  <option selected value="<%= sector.id %>"><%= sector.title %></option>
-                <% end %>
-              </select>
-            </div>
-          <% end %>
+
+          <div class="block sectors">
+            <h3>Sectors</h3>
+            <select name="sectors[]" multiple placeholder="All sectors">
+              <% @sectors.each do |sector| %>
+                <option value="<%= sector.id %>"><%= sector.title %></option>
+              <% end %>
+              <% @filtered_sectors.each do |sector| %>
+                <option selected value="<%= sector.id %>"><%= sector.title %></option>
+              <% end %>
+            </select>
+          </div>
 
           <div class="block organization">
             <h3>Organization</h3>
-            <select name="organizations_ids[]" multiple placeholder="All organizations">
+            <select name="organizations[]" multiple placeholder="All organizations">
               <% @organizations.each do |organization| %>
                 <option value="<%= organization.id %>"><%= organization.title %></option>
               <% end %>
@@ -66,7 +53,7 @@
 
           <div class="block donor">
             <h3>Donor</h3>
-            <select name="donors_ids[]" multiple placeholder="All donors">
+            <select name="donors[]" multiple placeholder="All donors">
               <% @donors.each do |donor| %>
                 <option value="<%= donor.id %>"><%= donor.name %></option>
               <% end %>
