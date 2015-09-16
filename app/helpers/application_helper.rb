@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  def download_link(text, type)
+    params_string = params.except(:action, :controller,:id).to_query
+    link_to text, "/downloads?doc=#{type}&#{params_string}", :class => type
+  end
+
   def selected_if_current_page(url_path, extra_condition = false)
     if @organization || @pages || @donor
       if (action_name == "specific_information" || action_name == 'new' || action_name == 'edit' || action_name == 'create' || action_name == 'update' || action_name == "index")
