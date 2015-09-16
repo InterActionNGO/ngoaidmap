@@ -4,56 +4,40 @@ class SearchController < ApplicationController
 
   def index
     @regions = Geolocation.all.select(:id, :name, :country_name)
-    where  = ["site_id=#{@site.id}"]
     limit = 20
     @current_page = params[:page] ? params[:page].to_i : 1
     @clusters = @regions = @filtered_regions = @filtered_sectors = @filtered_clusters = @filtered_organizations = @filtered_donors = []
     @navigate_by_cluster = false
 
-    p params[:regions_ids]
+    p params[:regions]
 
-    if params[:regions_ids].present?
+    if params[:regions].present?
        @filtered_regions = Geolocation.find_by_sql("select g.id, g.name, g.country_name from geolocations as g
-       where g.id in (#{params[:regions_ids].join(",")})")
-       filtered_regions_where = "where g.id not in (#{params[:regions_ids].join(",")})"
-       where << params[:regions_ids].map{|region_id| "regions_ids && ('{'||#{region_id}||'}')::integer[]"}.join(' OR ')
-
-      #p params[:regions_ids]
-       #p where
+       where g.id in (#{params[:regions].join(",")})")
+       filtered_regions_where = "where g.id not in (#{params[:regions].join(",")})"
     end
 
-     if params[:sectors_ids].present?
-       @filtered_sectors = Sector.find_by_sql("select s.id, s.name as title from sectors as s where s.id in (#{params[:sectors_ids].join(",")})")
-       filtered_sectors_where = "where s.id not in (#{params[:sectors_ids].join(",")})"
-       where << params[:sectors_ids].map{|sector_id| "sector_ids && ('{'||#{sector_id}||'}')::integer[]"}.join(' OR ')
-
-       #p where
+     if params[:sectors].present?
+       @filtered_sectors = Sector.find_by_sql("select s.id, s.name as title from sectors as s where s.id in (#{params[:sectors].join(",")})")
+       filtered_sectors_where = "where s.id not in (#{params[:sectors].join(",")})"
      end
 
-    # if params[:clusters_ids].present?
-    #   @filtered_clusters = Cluster.find_by_sql("select c.id, c.name as title from clusters as c where c.id in (#{params[:clusters_ids].join(",")})")
-    #   filtered_clusters_where = "where c.id not in (#{params[:clusters_ids].join(",")})"
-    #   where << params[:clusters_ids].map{|cluster_id| "cluster_ids && ('{'||#{cluster_id}||'}')::integer[]"}.join(' OR ')
-    # end
-
-    if params[:organizations_ids].present?
-      @filtered_organizations = Organization.find_by_sql("select o.id, o.name as title from organizations as o where o.id in (#{params[:organizations_ids].join(",")})")
-      filtered_organizations_where = "where o.id not in (#{params[:organizations_ids].join(",")})"
-      where << "organization_id IN (#{params[:organizations_ids].join(",")})"
+    if params[:organizations].present?
+      @filtered_organizations = Organization.find_by_sql("select o.id, o.name as title from organizations as o where o.id in (#{params[:organizations].join(",")})")
+      filtered_organizations_where = "where o.id not in (#{params[:organizations].join(",")})"
     end
 
-    if params[:donors_ids].present?
-      @filtered_donors = Donor.find_by_sql("select d.id, d.name from donors as d where d.id in (#{params[:donors_ids].join(",")})")
-      filtered_donors_where = "where d.id not in (#{params[:donors_ids].join(",")})"
-      where << params[:donors_ids].map{|donor_id| "donors_ids && ('{'||#{donor_id}||'}')::integer[]"}.join(' OR ')
+    if params[:donors].present?
+      @filtered_donors = Donor.find_by_sql("select d.id, d.name from donors as d where d.id in (#{params[:donors].join(",")})")
+      filtered_donors_where = "where d.id not in (#{params[:donors].join(",")})"
     end
 
     if params[:status].present? and params[:status] != 'Any'
       case params[:status]
         when 'Active'
-          then where << "(end_date is null OR end_date > now())"
+          #then where << "(end_date is null OR end_date > now())"
         when 'Inactive'
-          then where << "end_date < now()"
+          #then where << "end_date < now()"
       end
     end
 
@@ -67,48 +51,66 @@ class SearchController < ApplicationController
         start_month = start_month.sanitize_sql!.to_i
         start_year = start_year.sanitize_sql!.to_i
         @start_date = Date.new(start_year, start_month, 1)
-        where << "start_date >= '#{@start_date.strftime('%Y-%m-%d')}'"
+        #where << "start_date >= '#{@start_date.strftime('%Y-%m-%d')}'"
       elsif start_month.blank? && start_year.present?
         start_year = start_year.sanitize_sql!.to_i
         @start_date = Date.new(start_year, 1, 1)
-        where << "start_date >= '#{@start_date.strftime('%Y-%m-%d')}'"
+        #where << "start_date >= '#{@start_date.strftime('%Y-%m-%d')}'"
       end
 
       if end_month.present? && end_year.present?
         end_month = end_month.sanitize_sql!.to_i
         end_year = end_year.sanitize_sql!.to_i
         @end_date = Date.new(end_year, end_month, 1)
-        where << "end_date <= '#{@end_date.strftime('%Y-%m-%d')}'"
+        #where << "end_date <= '#{@end_date.strftime('%Y-%m-%d')}'"
       elsif end_month.blank? && end_year.present?
         end_year = end_year.sanitize_sql!.to_i
         @end_date = Date.new(end_year, 12, 31)
-        where << "end_date <= '#{@end_date.strftime('%Y-%m-%d')}'"
+        #where << "end_date <= '#{@end_date.strftime('%Y-%m-%d')}'"
       end
     end
 
     if params[:q].present?
       q = "%#{params[:q].sanitize_sql!}%"
-      where << "(project_name ilike '#{q}' OR
-                 project_description ilike '#{q}' OR
-                 organization_name ilike '#{q}' OR
-                 sectors ilike '#{q}' OR
-                 regions ilike '#{q}' )"
+      #where << "(project_name ilike '#{q}' OR
+      #           project_description ilike '#{q}' OR
+      #           organization_name ilike '#{q}' OR
+      #           sectors ilike '#{q}' OR
+      #           regions ilike '#{q}' )"
     end
 
-    where << "(end_date is null OR end_date >= now())"
+    #where << "(end_date is null OR end_date >= now())"
 
-    where = where.present? ? "WHERE #{where.join(' AND ')}" : ''
+    #where = where.present? ? "WHERE #{where.join(' AND ')}" : ''
 
-    sql = "select * from data_denormalization as dn
-              #{where}
-              order by created_at DESC
-              limit #{limit} offset #{limit * (@current_page - 1)}"
+    #sql = "select * from projects p
+    #                 INNER JOIN projects_sectors ps ON (p.id = ps.project_id)
+    #                 INNER JOIN projects_sites psi ON (psi.project_id = p.id)
+    #                 LEFT OUTER JOIN sectors s ON (s.id = ps.sector_id)
+    #                 LEFT OUTER JOIN donations dt ON (p.id = dt.project_id)
+    #                 LEFT OUTER JOIN donors d ON (d.id = dt.donor_id)
+    #                 INNER JOIN organizations o ON (p.primary_organization_id = o.id)
+    #                 INNER JOIN geolocations_projects gp ON (p.id = gp.project_id)
+    #                 INNER JOIN geolocations g ON (g.id = gp.geolocation_id)
+    #          #{where}
+    #          order by created_at DESC
+    #          limit #{limit} offset #{limit * (@current_page - 1)}"
 
-    @projects = ActiveRecord::Base.connection.execute(sql)
+    @projects = Project.fetch_all(projects_params)
 
-    sql_count = "select count(*) as count from data_denormalization #{where}"
-    @total_projects = ActiveRecord::Base.connection.execute(sql_count).first['count'].to_i
-    @total_pages = (@total_projects.to_f / limit.to_f).ceil
+    #sql_count = "select count(*) as count from projects p
+    #                 INNER JOIN projects_sectors ps ON (p.id = ps.project_id)
+    #                 INNER JOIN projects_sites psi ON (psi.project_id = p.id)
+    #                 LEFT OUTER JOIN sectors s ON (s.id = ps.sector_id)
+    #                 LEFT OUTER JOIN donations dt ON (p.id = dt.project_id)
+    #                 LEFT OUTER JOIN donors d ON (d.id = dt.donor_id)
+    #                 INNER JOIN organizations o ON (p.primary_organization_id = o.id)
+    #                 INNER JOIN geolocations_projects gp ON (p.id = gp.project_id)
+    #                 INNER JOIN geolocations g ON (g.id = gp.geolocation_id)
+    #
+    #                  #{where}"
+    @total_projects = @projects.count.length if @projects
+    @total_pages = @projects.present? ? (@total_projects.to_f / limit.to_f).ceil : 0
 
     #TODO: I am not taking in consideration the search on organization and location when using the facets.
 
@@ -168,6 +170,10 @@ class SearchController < ApplicationController
         end
       end
     end
+  end
+
+  def projects_params
+    params.permit(:offset, :limit, :format, :geolocation, :level, :q, :status, organizations:[], sectors:[], donors:[], countries:[], regions:[])
   end
 
 end

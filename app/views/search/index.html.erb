@@ -13,7 +13,7 @@
             <%= text_field_tag :q, params[:q], :placeholder => 'Search' %>
             <%= submit_tag '' %>
           </div>
-
+<%= @total_projects %>
           <div class="block region">
             <h3>Regions</h3>
             <select name="geolocations[]" multiple placeholder="All regions">
@@ -106,8 +106,8 @@
               <% @projects.each_with_index do |project,index| %>
                 <li>
                   <article class="mod-index-item">
-                    <h2><%= link_to(truncate(project['project_name'],:length=>43,:omission=>"..."), project_path(project['project_id'])) %></h2>
-                    <span>by <%= link_to(project['organization_name'], organization_path(project['organization_id'])) %></span>
+                    <h2><%= link_to(truncate(project.name,:length=>43,:omission=>"..."), project_path(project.id)) %></h2>
+                    <span>by <%= link_to(project.primary_organization.try(:name), organization_path(project.primary_organization.try(:id))) %></span>
                     <p>
                       <% regions = project['geolocations'] ? project['geolocations'].text2array : [] %>
                       <% regions.slice!(0, 2).each do |region| %>
