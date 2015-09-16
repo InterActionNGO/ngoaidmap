@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def download_link(text, type)
-    params_string = params.except(:action, :controller,:id).to_query
+    params_string = params.except(:action, :controller,:id, :ids).to_query
     link_to text, "/downloads?doc=#{type}&#{params_string}", :class => type
   end
 
