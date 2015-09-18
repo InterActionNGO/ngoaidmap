@@ -1,11 +1,14 @@
 {
-  "resource": "Organizations",
+  "resource": "Sectors",
   "http_method": "GET",
-  "route": "/api/organizations",
-  "description": "Getting a list of organizations",
+  "route": "/api/sectors/:id",
+  "description": "Get data for one sector",
   "explanation": null,
   "parameters": [
-
+    {
+      "name": "id",
+      "description": "A sector id"
+    }
   ],
   "response_fields": [
 
@@ -13,7 +16,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/organizations",
+      "request_path": "/api/sectors/3?focus=true",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
@@ -22,24 +25,25 @@
         "Cookie": ""
       },
       "request_query_parameters": {
+        "focus": "true"
       },
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"2\",\"type\":\"organizations\",\"attributes\":{\"name\":\"One Organization\"}}],\"meta\":{\"total\":1}}",
+      "response_body": "{\"data\":{\"id\":\"3\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Sector\",\"donors\":[]},\"relationships\":{\"projects\":{\"data\":[]}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"092500e3fa808951dd5d20def399d6e7\"",
+        "ETag": "W/\"1045225587b261f742dbb231b24f7667\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "509022f8-23a8-4543-b653-eb2293f5f2cf",
-        "X-Runtime": "0.011292",
-        "Content-Length": "104"
+        "X-Request-Id": "6084473f-a196-4816-a5e2-8f2ea197f0cd",
+        "X-Runtime": "0.039040",
+        "Content-Length": "120"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/organizations\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/sectors/3?focus=true\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

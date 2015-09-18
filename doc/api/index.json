@@ -129,6 +129,21 @@
           "groups": "all"
         }
       ]
+    },
+    {
+      "name": "Sectors",
+      "examples": [
+        {
+          "description": "Get data for one sector",
+          "link": "sectors/get_data_for_one_sector.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of sectors",
+          "link": "sectors/getting_a_list_of_sectors.json",
+          "groups": "all"
+        }
+      ]
     }
   ]
 }

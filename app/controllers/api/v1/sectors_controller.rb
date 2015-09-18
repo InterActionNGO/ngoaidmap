@@ -3,13 +3,13 @@ module Api
     class SectorsController < ApiController
       def index
         if params[:include].present? && params[:include] == 'projects_count'
-          @sectors = Sector.counting_projects
+          @sectors = Sector.counting_projects(sector_params)
           @sectors_hash = normalize_projects @sectors
           render json: @sectors_hash, root: 'data',
           meta: { total: @sectors.size },
           each_serializer: SectorWithProjectsCountSerializer
         else
-          @sectors = Sector.order(:name)
+          @sectors = Sector.fetch_all(sector_params).order(:name)
           render json: @sectors, root: 'data',
           meta: { total: @sectors.size },
           each_serializer: SectorPreviewSerializer
@@ -25,9 +25,12 @@ module Api
           meta: { total: @donors.size },
           each_serializer: DonorFromSectorSerializer
         else
-        @sector = Sector.eager_load([projects:[:donors, :primary_organization, :countries, :regions]]).find(params[:id])
+        @sector = Sector.eager_load([projects:[:donors, :primary_organization]]).find(params[:id])
           render json: @sector, root: 'data', include: ['projects']
         end
+      end
+      def sector_params
+        params.permit(:status)
       end
 
       private

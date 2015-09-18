@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Projects API</title>
+    <title>Sectors API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Projects API</h1>
+      <h1>Sectors API</h1>
 
       <div class="article">
-        <h2>Getting a list of projects by sectors</h2>
-        <h3>GET /api/projects?sectors[]=:sector</h3>
+        <h2>Getting a list of sectors</h2>
+        <h3>GET /api/sectors</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -123,10 +123,18 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">sector</span>
+                    <span class="name">include</span>
                 </td>
                 <td>
-                  <span class="description">Array. Sector ids</span>
+                  <span class="description">Optional, string. Should be &#39;projects_count&#39; to get the sum of projects per sector.</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">status</span>
+                </td>
+                <td>
+                  <span class="description">Optional, string. Should be &#39;active&#39; to get only sectors that include active projects.</span>
                 </td>
               </tr>
             </tbody>
@@ -137,21 +145,22 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
-Content-Type: application/json
+Content-Type: application/vnd.api+json
 Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/projects?sectors[]=2</pre>
+          <pre class="request route highlight">GET /api/sectors?include=projects_count&amp;status=inactive</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">sectors: [&quot;2&quot;]</pre>
+            <pre class="request query_parameters highlight">include: projects_count
+status: inactive</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?sectors[]=2&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/sectors?include=projects_count&amp;status=inactive&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
-	-H &quot;Content-Type: application/json&quot; \
+	-H &quot;Content-Type: application/vnd.api+json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
 
@@ -161,15 +170,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;5338044da23c6fe32b6413832ef129ea&quot;
+ETag: W/&quot;1b8e42bd68eb3fa17d209e2e27f071e6&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 66937cdc-9286-42e8-8391-73bb26ab9b1d
-X-Runtime: 0.029778
-Content-Length: 323</pre>
+X-Request-Id: 977c54ae-3e73-409e-b39f-d3700a56383f
+X-Runtime: 0.009164
+Content-Length: 195</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;6&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_sector&quot;,&quot;description&quot;:null},&quot;relationships&quot;:{&quot;organization&quot;:{&quot;data&quot;:null},&quot;sectors&quot;:{&quot;data&quot;:[{&quot;type&quot;:&quot;sectors&quot;,&quot;id&quot;:&quot;2&quot;}]},&quot;geolocations&quot;:{&quot;data&quot;:[]},&quot;donors&quot;:{&quot;data&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;2&quot;,&quot;type&quot;:&quot;sectors&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;Agriculture&quot;}}]}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;type&quot;:&quot;sectors&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;Agriculture&quot;,&quot;projects_count&quot;:1}},{&quot;id&quot;:&quot;2&quot;,&quot;type&quot;:&quot;sectors&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;Agriculture&quot;,&quot;projects_count&quot;:1}}],&quot;meta&quot;:{&quot;total&quot;:2}}</pre>
       </div>
     </div>
   </body>

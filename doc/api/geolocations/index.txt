@@ -22,8 +22,8 @@ Response:
   ETag: W/"3a22d89ad7cf9d1714009355115a3894"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: bc7e812c-f711-4a62-a560-a93ea3c08dc9
-  X-Runtime: 0.029756
+  X-Request-Id: 81cf6ae5-84d2-499e-a12e-04460b067f87
+  X-Runtime: 0.013518
   X-XSS-Protection: 1; mode=block
 
   {"data":{"id":"10","type":"geolocations","attributes":{"uid":"gn00001","name":"geo","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}}}
@@ -56,8 +56,8 @@ Response:
   ETag: W/"ff608d3d0fb7e87fd7e5f9bb851b7e54"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: ba7c9b02-d2cf-4a85-adbe-0cbdf4d00cec
-  X-Runtime: 0.016320
+  X-Request-Id: 3deb7a67-de84-4af8-ad2e-5b2ce039e8c4
+  X-Runtime: 0.013689
   X-XSS-Protection: 1; mode=block
 
   {"data":[{"id":"1","type":"geolocations","attributes":{"uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"2","type":"geolocations","attributes":{"uid":"111","name":"Madrid","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":1,"g0":"000","g1":"111","g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"3","type":"geolocations","attributes":{"uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"11","type":"geolocations","attributes":{"uid":"gn00001","name":"geo","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"12","type":"geolocations","attributes":{"uid":"gn{p}","name":"geolocation 0","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"gn","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"13","type":"geolocations","attributes":{"uid":"gn{p}","name":"geolocation 1","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"gn","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"14","type":"geolocations","attributes":{"uid":"gn{p}","name":"geolocation 2","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"gn","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}}],"meta":{"total":7}}
