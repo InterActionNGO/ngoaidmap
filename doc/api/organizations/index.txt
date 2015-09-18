@@ -5,7 +5,7 @@ Parameters:
   * id - An organization's id
 
 Request:
-  GET /api/organizations/5
+  GET /api/organizations/6
   Accept: application/json; application/vnd.ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
@@ -16,14 +16,14 @@ Response:
   Cache-Control: max-age=0, private, must-revalidate
   Content-Length: 191
   Content-Type: application/json; charset=utf-8
-  ETag: W/"0158c8f8b70f692208555813e6dbdf4e"
+  ETag: W/"b2c3324bae1d3e29a2ce9638fca0044d"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 543b6004-cff5-446e-b24f-3803ae61f94e
-  X-Runtime: 0.085793
+  X-Request-Id: 73af3af3-ffb4-4bcd-a6a6-45b33045ef55
+  X-Runtime: 0.162129
   X-XSS-Protection: 1; mode=block
 
-  {"data":{"id":"5","type":"organizations","attributes":{"name":"One Organization","description":null,"sectors":[],"logo":"/logos/medium/missing.png"},"relationships":{"projects":{"data":[]}}}}
+  {"data":{"id":"6","type":"organizations","attributes":{"name":"One Organization","description":null,"sectors":[],"logo":"/logos/medium/missing.png"},"relationships":{"projects":{"data":[]}}}}
 
 
 Getting a list of organizations
@@ -41,13 +41,43 @@ Response:
   Cache-Control: max-age=0, private, must-revalidate
   Content-Length: 104
   Content-Type: application/json; charset=utf-8
-  ETag: W/"5a0c478ff619c8ddfe386ee469606ff3"
+  ETag: W/"092500e3fa808951dd5d20def399d6e7"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 0f3ce634-01aa-49a1-8cab-a4956f604341
-  X-Runtime: 0.009051
+  X-Request-Id: ec0c3419-accc-4993-85b9-d2b9c4e0dddf
+  X-Runtime: 0.029766
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"1","type":"organizations","attributes":{"name":"One Organization"}}],"meta":{"total":1}}
+  {"data":[{"id":"2","type":"organizations","attributes":{"name":"One Organization"}}],"meta":{"total":1}}
+
+
+Getting a list of active organizations only
+-------------------------------------------
+
+Parameters:
+  * status - String. should be 'active'
+
+Request:
+  GET /api/organizations?status=active
+  Accept: application/json; application/vnd.ngoaidmap-api-v1+json
+  Content-Type: application/vnd.api+json
+  Cookie: 
+  Host: http://ngoaidmap.org
+
+  status=active
+
+Response:
+  Status: 200 OK
+  Cache-Control: max-age=0, private, must-revalidate
+  Content-Length: 344
+  Content-Type: application/json; charset=utf-8
+  ETag: W/"4ff06df49c111e21f198c33d2efab87e"
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-Request-Id: f70ebf58-c4ac-404e-b243-9f36040ce780
+  X-Runtime: 0.011582
+  X-XSS-Protection: 1; mode=block
+
+  {"data":[{"id":"2","type":"organizations","attributes":{"name":"One Organization"}},{"id":"13","type":"organizations","attributes":{"name":"active_organization0"}},{"id":"14","type":"organizations","attributes":{"name":"active_organization1"}},{"id":"15","type":"organizations","attributes":{"name":"active_organization2"}}],"meta":{"total":4}}
 
 

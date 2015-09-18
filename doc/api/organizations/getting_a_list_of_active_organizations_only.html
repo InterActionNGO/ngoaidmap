@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Donors API</title>
+    <title>Organizations API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Donors API</h1>
+      <h1>Organizations API</h1>
 
       <div class="article">
-        <h2>Getting a list of donors for a particular sector</h2>
-        <h3>GET /api/donors?sectors[]=:sector</h3>
+        <h2>Getting a list of active organizations only</h2>
+        <h3>GET /api/organizations?status=:status</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -123,18 +123,10 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">sectors</span>
-                </td>
-                <td>
-                  <span class="description">Array. Sector ids</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
                     <span class="name">status</span>
                 </td>
                 <td>
-                  <span class="description">Optional, string. Should be &#39;active&#39; to filter active projects only.</span>
+                  <span class="description">String. should be &#39;active&#39;</span>
                 </td>
               </tr>
             </tbody>
@@ -150,14 +142,14 @@ Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/donors?sectors[]=1?status=active</pre>
+          <pre class="request route highlight">GET /api/organizations?status=active</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">sectors: [&quot;1?status=active&quot;]</pre>
+            <pre class="request query_parameters highlight">status: active</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/donors?sectors[]=1?status=active&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/organizations?status=active&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/vnd.api+json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
@@ -169,15 +161,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;1fa25f21adac1eb26acd37264cb7e99e&quot;
+ETag: W/&quot;4ff06df49c111e21f198c33d2efab87e&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: effd8a76-ee6c-449a-a821-45e63fcdcf8c
-X-Runtime: 0.013688
-Content-Length: 98</pre>
+X-Request-Id: f70ebf58-c4ac-404e-b243-9f36040ce780
+X-Runtime: 0.011582
+Content-Length: 344</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;5&quot;,&quot;type&quot;:&quot;donors&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;donor_with_sector&quot;}}],&quot;meta&quot;:{&quot;total&quot;:1}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;2&quot;,&quot;type&quot;:&quot;organizations&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;One Organization&quot;}},{&quot;id&quot;:&quot;13&quot;,&quot;type&quot;:&quot;organizations&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;active_organization0&quot;}},{&quot;id&quot;:&quot;14&quot;,&quot;type&quot;:&quot;organizations&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;active_organization1&quot;}},{&quot;id&quot;:&quot;15&quot;,&quot;type&quot;:&quot;organizations&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;active_organization2&quot;}}],&quot;meta&quot;:{&quot;total&quot;:4}}</pre>
       </div>
     </div>
   </body>

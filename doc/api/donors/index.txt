@@ -19,8 +19,8 @@ Response:
   ETag: W/"6c33369f3e641f9abd0fb292ff9923af"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: a897e3e9-85ca-4005-9e57-d79797bc4c27
-  X-Runtime: 0.083196
+  X-Request-Id: b204c1a4-04b6-4de6-811b-e9fa2a4a2906
+  X-Runtime: 0.086447
   X-XSS-Protection: 1; mode=block
 
   {"data":{"id":"2","type":"donor","attributes":{"name":"Red Cross","description":null,"website":null,"twitter":null,"facebook":null,"contact_person_name":null,"contact_company":null,"contact_person_position":null,"contact_email":null,"contact_phone_number":null,"site_specific_information":null,"logo":"/logos/medium/missing.png"},"relationships":{"donated_projects":{"data":[]},"offices":{"data":[]}}}}
@@ -29,12 +29,17 @@ Response:
 Getting a list of donors
 ------------------------
 
+Parameters:
+  * status - Optional, string. Should be 'active' to filter active projects only.
+
 Request:
-  GET /api/donors
+  GET /api/donors?status=active
   Accept: application/json; application/vnd.ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
   Host: http://ngoaidmap.org
+
+  status=active
 
 Response:
   Status: 200 OK
@@ -44,8 +49,8 @@ Response:
   ETag: W/"99bba54659ba53668436daac4696fa86"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: f18f5f7c-c8d9-41d8-a88b-479e68723f0f
-  X-Runtime: 0.015270
+  X-Request-Id: 2f53fede-4d35-4c59-8f03-9f77001c91a3
+  X-Runtime: 0.058046
   X-XSS-Protection: 1; mode=block
 
   {"data":[{"id":"1","type":"donors","attributes":{"name":"Red Cross"}}],"meta":{"total":1}}
@@ -56,15 +61,16 @@ Getting a list of donors for a particular sector
 
 Parameters:
   * sectors - Array. Sector ids
+  * status - Optional, string. Should be 'active' to filter active projects only.
 
 Request:
-  GET /api/donors?sectors[]=1
+  GET /api/donors?sectors[]=1?status=active
   Accept: application/json; application/vnd.ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
   Host: http://ngoaidmap.org
 
-  sectors=["1"]
+  sectors=["1?status=active"]
 
 Response:
   Status: 200 OK
@@ -74,8 +80,8 @@ Response:
   ETag: W/"1fa25f21adac1eb26acd37264cb7e99e"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 5ac58e3a-56c7-4b68-b347-cec53337ae2f
-  X-Runtime: 0.012093
+  X-Request-Id: effd8a76-ee6c-449a-a821-45e63fcdcf8c
+  X-Runtime: 0.013688
   X-XSS-Protection: 1; mode=block
 
   {"data":[{"id":"5","type":"donors","attributes":{"name":"donor_with_sector"}}],"meta":{"total":1}}

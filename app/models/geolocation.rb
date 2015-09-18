@@ -31,7 +31,11 @@
 
 class Geolocation < ActiveRecord::Base
   has_and_belongs_to_many :projects
-  def self.sum_projects
+  def self.sum_projects(options='')
+    where=''
+    if options && options == 'active'
+        where= 'WHERE projects.end_date > NOW() AND projects.start_date < NOW()'
+    end
     query = %{
         SELECT geolocations.g0, geolocations.country_name,
         COUNT(DISTINCT(projects.id)) as total_projects FROM geolocations
@@ -39,7 +43,7 @@ class Geolocation < ActiveRecord::Base
         ON geolocations_projects.geolocation_id = geolocations.id
         INNER JOIN projects
         ON projects.id = geolocations_projects.project_id
-        WHERE projects.end_date > NOW()
+        #{where}
         GROUP BY geolocations.g0, geolocations.country_name
         ORDER BY total_projects DESC
     }

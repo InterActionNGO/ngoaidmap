@@ -1,0 +1,59 @@
+{
+  "resource": "Geolocations",
+  "http_method": "GET",
+  "route": "/api/geolocations",
+  "description": "Getting a list of geolocations",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "offset",
+      "description": "Optional, integer. Shows the list with a particular offset."
+    },
+    {
+      "name": "limit",
+      "description": "Optional, integer. Shows the list with a particular limit of results."
+    },
+    {
+      "name": "order",
+      "description": "Optional, string. Shows the list with a particular order. Can be 'name', 'id', 'uid' or 'country_name'"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/geolocations?offset=0&limit=10&order=name",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
+        "Content-Type": "application/vnd.api+json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "offset": "0",
+        "limit": "10",
+        "order": "name"
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"ggg\",\"name\":\"India\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":\"ggg\",\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"2\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"111\",\"name\":\"Madrid\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":null,\"provider\":\"Geonames\",\"adm_level\":1,\"g0\":\"000\",\"g1\":\"111\",\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"3\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"000\",\"name\":\"Spain\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":null,\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":\"000\",\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"11\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn00001\",\"name\":\"geo\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":null,\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"12\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn{p}\",\"name\":\"geolocation 0\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":\"gn\",\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"13\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn{p}\",\"name\":\"geolocation 1\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":\"gn\",\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"14\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn{p}\",\"name\":\"geolocation 2\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":\"gn\",\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}}],\"meta\":{\"total\":7}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"ff608d3d0fb7e87fd7e5f9bb851b7e54\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "ba7c9b02-d2cf-4a85-adbe-0cbdf4d00cec",
+        "X-Runtime": "0.016320",
+        "Content-Length": "2016"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/geolocations?offset=0&limit=10&order=name\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

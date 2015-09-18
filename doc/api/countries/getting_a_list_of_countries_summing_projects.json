@@ -1,0 +1,54 @@
+{
+  "resource": "Countries",
+  "http_method": "GET",
+  "route": "/api/countries?summing=:summing&status=:status",
+  "description": "Getting a list of countries summing projects",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "summing",
+      "description": "String, value should be 'projects'"
+    },
+    {
+      "name": "status",
+      "description": "String, Optional, should be 'active' to sum only active projects"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/countries?summing=projects&status=active",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
+        "Content-Type": "application/vnd.api+json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "summing": "projects",
+        "status": "active"
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"id\":\"\",\"type\":\"Geolocations\",\"attributes\":{\"name\":null,\"uid\":\"000\",\"total_projects\":\"1\"}},{\"id\":\"\",\"type\":\"Geolocations\",\"attributes\":{\"name\":null,\"uid\":null,\"total_projects\":\"1\"}}],\"meta\":{\"total\":2}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"59d09eb388334732493fa8a6c45fbb9d\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "078cdd4c-cfa0-49b9-84bf-ae53b6d45008",
+        "X-Runtime": "0.019065",
+        "Content-Length": "212"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/countries?summing=projects&status=active\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}
