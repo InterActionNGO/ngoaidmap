@@ -30,7 +30,7 @@
 
         <p class="disclaimer"><%= params[:organization_id] ? "In some cases, this organization may be sub-recipient (rather than a direct recipient) of this donor's funding." : "The projects presented here are voluntarily provided by InterAction members and are not intended to be a complete representation of this donor’s activities." %> </p>
 
-        <%#= render :partial => 'new_partials/downloads', :locals => { :csv_path => organization_path(@organization, @carry_on_filters.merge(:format => :csv)), :xls_path => organization_path(@organization, @carry_on_filters.merge(:format => :xls)), :kml_path => organization_path(@organization, @carry_on_filters.merge(:format => :kml)) } %>
+        <%= render :partial => 'new_partials/downloads' %>
 
         <%= render "new_partials/index_projects" %>
 

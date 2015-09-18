@@ -51,6 +51,27 @@ resource 'Projects' do
     end
   end
 
+  get "/api/projects?status=:status" do
+    parameter :status, "String. should be 'active'"
+    let(:status) {'active'}
+    let!(:projects) do
+      3.times do |p|
+        FactoryGirl.create(:project, name: "project#{p}", end_date: Time.now + 10.years, start_date: 1.year.ago)
+      end
+    end
+    let!(:project) do
+        FactoryGirl.create(:project, name: "inactive project", end_date: Time.now - 10.years, start_date: 11.years.ago)
+    end
+
+    example_request "Getting a list of active projects only" do
+      #expect(status).to eq(200)
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
+      expect results.include?(['project1', 'project2', 'project3'])
+      expect !results.include?(['inactive project'])
+    end
+  end
+
+
   get "/api/projects?organizations[]=:organization" do
     parameter :organizations, "Array. Organization ids"
     p = FactoryGirl.create(:project, name: "project_with_organization")

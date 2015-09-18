@@ -129,6 +129,14 @@ table th, table td {
                   <span class="description">Array. Sector ids</span>
                 </td>
               </tr>
+              <tr>
+                <td>
+                    <span class="name">status</span>
+                </td>
+                <td>
+                  <span class="description">Optional, string. Should be &#39;active&#39; to filter active projects only.</span>
+                </td>
+              </tr>
             </tbody>
           </table>
 
@@ -142,14 +150,14 @@ Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/donors?sectors[]=1</pre>
+          <pre class="request route highlight">GET /api/donors?sectors[]=1?status=active</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">sectors: [&quot;1&quot;]</pre>
+            <pre class="request query_parameters highlight">sectors: [&quot;1?status=active&quot;]</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/donors?sectors[]=1&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/donors?sectors[]=1?status=active&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/vnd.api+json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
@@ -163,8 +171,8 @@ X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
 ETag: W/&quot;1fa25f21adac1eb26acd37264cb7e99e&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 5ac58e3a-56c7-4b68-b347-cec53337ae2f
-X-Runtime: 0.012093
+X-Request-Id: effd8a76-ee6c-449a-a821-45e63fcdcf8c
+X-Runtime: 0.013688
 Content-Length: 98</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>

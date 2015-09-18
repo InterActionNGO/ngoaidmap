@@ -1,0 +1,45 @@
+{
+  "resource": "Countries",
+  "http_method": "GET",
+  "route": "/api/countries",
+  "description": "Getting a list of countries",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/countries",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
+        "Content-Type": "application/vnd.api+json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"ggg\",\"name\":\"India\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":\"ggg\",\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"3\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"000\",\"name\":\"Spain\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":null,\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":\"000\",\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"5\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn00001\",\"name\":\"country\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":null,\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"6\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn{p}\",\"name\":\"country 0\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":\"gn\",\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"7\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn{p}\",\"name\":\"country 1\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":\"gn\",\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}},{\"id\":\"8\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn{p}\",\"name\":\"country 2\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":\"gn\",\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}}],\"meta\":{\"total\":6}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"4698932a09b41b242931b9d108a1443c\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "42aaf6f2-c88b-4fc9-9e45-5accda9ca131",
+        "X-Runtime": "0.020959",
+        "Content-Length": "1723"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/countries\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

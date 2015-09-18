@@ -70,7 +70,7 @@ class Project < ActiveRecord::Base
   #                                                   ON g.g0 = geos.uid
   #                                                 ').where('g.adm_level=?', 0).uniq}, class_name: 'Geolocation'
 
-  scope :active, -> {where("end_date > ?", Date.today.to_s(:db))}
+  scope :active, -> {where("end_date > ? AND start_date < ?", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :closed, -> {where("end_date < ?", Date.today.to_s(:db))}
   scope :with_no_country, -> {select('projects.*').
                           joins(:regions).
@@ -90,14 +90,14 @@ class Project < ActiveRecord::Base
   def self.fetch_all(options = {}, from_api = true)
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
     projects = projects.geolocation(options[:geolocation], options[:level])     if options[:geolocation]
-    projects = projects.projects(options[:projects])                          if options[:projects]
+    projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries])                          if options[:countries]
     projects = projects.organizations(options[:organizations])                  if options[:organizations]
     projects = projects.sectors(options[:sectors])                              if options[:sectors]
     projects = projects.donors(options[:donors])                                if options[:donors]
     projects = projects.offset(options[:offset])                                if options[:offset]
     projects = projects.limit(options[:limit])                                  if options[:limit]
-    projects = projects.active
+    projects = projects.active                                                  if options[:status] && options[:status] == 'active'
     projects = projects.group('projects.id', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
     projects = projects.uniq
     if from_api

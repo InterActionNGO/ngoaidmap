@@ -31,7 +31,7 @@
           <h1 id="title-sector" class="section-title" data-id="<%= @sector.id %>" data-name="<%= @sector.name.html_safe %>"><%= @sector.name.html_safe %></h1>
         </header>
 
-        <%#= render :partial => 'new_partials/downloads', :locals => { :csv_path => organization_path(@organization, @carry_on_filters.merge(:format => :csv)), :xls_path => organization_path(@organization, @carry_on_filters.merge(:format => :xls)), :kml_path => organization_path(@organization, @carry_on_filters.merge(:format => :kml)) } %>
+        <%= render :partial => 'new_partials/downloads' %>
 
         <%= render "new_partials/index_projects" %>
 

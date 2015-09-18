@@ -49,4 +49,24 @@ resource 'Organizations' do
                                'organization1', 'organization2'])
     end
   end
+
+  get "/api/organizations?status=:status" do
+    parameter :status, "String. should be 'active'"
+    let(:status) {'active'}
+    let!(:organizations) do
+      3.times do |o|
+        org = FactoryGirl.create(:organization, name: "active_organization#{o}")
+        FactoryGirl.create(:project, name: "active_project#{o}", end_date: Time.now + 10.years, start_date: 1.year.ago, primary_organization_id: org.id)
+      end
+    end
+    org = FactoryGirl.create(:organization, name: 'inactive_organization')
+    p = FactoryGirl.create(:project, name: "inactive_project", end_date: Time.now - 10.days, start_date: 1.year.ago, primary_organization_id: org.id)
+
+
+    example_request "Getting a list of active organizations only" do
+      #expect(status).to eq(200)
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
+      expect results.include?(['inactive_organization'])
+    end
+  end
 end

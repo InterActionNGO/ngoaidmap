@@ -1,6 +1,26 @@
 {
   "resources": [
     {
+      "name": "Countries",
+      "examples": [
+        {
+          "description": "Get data for one country",
+          "link": "countries/get_data_for_one_country.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of countries",
+          "link": "countries/getting_a_list_of_countries.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of countries summing projects",
+          "link": "countries/getting_a_list_of_countries_summing_projects.json",
+          "groups": "all"
+        }
+      ]
+    },
+    {
       "name": "Donors",
       "examples": [
         {
@@ -21,11 +41,31 @@
       ]
     },
     {
+      "name": "Geolocations",
+      "examples": [
+        {
+          "description": "Get data for one geolocation",
+          "link": "geolocations/get_data_for_one_geolocation.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of geolocations",
+          "link": "geolocations/getting_a_list_of_geolocations.json",
+          "groups": "all"
+        }
+      ]
+    },
+    {
       "name": "Organizations",
       "examples": [
         {
           "description": "Get data for one organization",
           "link": "organizations/get_data_for_one_organization.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of active organizations only",
+          "link": "organizations/getting_a_list_of_active_organizations_only.json",
           "groups": "all"
         },
         {
@@ -41,6 +81,11 @@
         {
           "description": "Get a particular project data",
           "link": "projects/get_a_particular_project_data.json",
+          "groups": "all"
+        },
+        {
+          "description": "Getting a list of active projects only",
+          "link": "projects/getting_a_list_of_active_projects_only.json",
           "groups": "all"
         },
         {
