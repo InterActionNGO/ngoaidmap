@@ -14,8 +14,8 @@
             <%= submit_tag '' %>
           </div>
           <div class="block region">
-            <h3>Regions</h3>
-            <select name="countries[]" multiple placeholder="All regions">
+            <h3>Countries</h3>
+            <select name="countries[]" multiple placeholder="All countries">
               <% @regions.each do |region| %>
                 <option value="<%= region.uid %>"><%= region.name %></option>
               <% end %>
