@@ -71,6 +71,7 @@ class Project < ActiveRecord::Base
   #                                                 ').where('g.adm_level=?', 0).uniq}, class_name: 'Geolocation'
 
   scope :active, -> {where("end_date > ? AND start_date < ?", Date.today.to_s(:db), Date.today.to_s(:db))}
+  scope :inactive, -> {where("end_date < ? OR start_date > ?", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :closed, -> {where("end_date < ?", Date.today.to_s(:db))}
   scope :with_no_country, -> {select('projects.*').
                           joins(:regions).
@@ -82,6 +83,9 @@ class Project < ActiveRecord::Base
   scope :donors, -> (donors){where(donors: {id: donors})}
   scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
+  scope :text_query, -> (q){where('projects.name ilike ? OR projects.description ilike ?', "%%#{q}%%", "%%#{q}%%")}
+  scope :starting_after, -> (date){where "start_date > ?", date}
+  scope :ending_before, -> (date){where "end_date < ?", date}
 
   def countries
     Geolocation.where(uid: self.geolocations.pluck(:country_uid)).uniq
@@ -95,9 +99,13 @@ class Project < ActiveRecord::Base
     projects = projects.organizations(options[:organizations])                  if options[:organizations]
     projects = projects.sectors(options[:sectors])                              if options[:sectors]
     projects = projects.donors(options[:donors])                                if options[:donors]
+    projects = projects.text_query(options[:q])                                 if options[:q]
+    projects = projects.starting_after(options[:starting_after])                if options[:starting_after]
+    projects = projects.ending_before(options[:ending_before])                  if options[:ending_before]
     projects = projects.offset(options[:offset])                                if options[:offset]
     projects = projects.limit(options[:limit])                                  if options[:limit]
     projects = projects.active                                                  if options[:status] && options[:status] == 'active'
+    projects = projects.inactive                                                if options[:status] && options[:status] == 'inactive'
     projects = projects.group('projects.id', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
     projects = projects.uniq
     if from_api

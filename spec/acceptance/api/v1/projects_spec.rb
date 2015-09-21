@@ -52,7 +52,7 @@ resource 'Projects' do
   end
 
   get "/api/projects?status=:status" do
-    parameter :status, "String. should be 'active'"
+    parameter :status, "String. should be 'active' for active projects or 'inactive' for inactive projects"
     let(:status) {'active'}
     let!(:projects) do
       3.times do |p|
@@ -170,6 +170,18 @@ resource 'Projects' do
       results = JSON.parse(response_body)
       expect(results.length).to be == 1
       expect(results['data']['attributes']['name']).to  be == name
+    end
+  end
+
+    get "/api/projects?q=:q" do
+    parameter :q, "String. Text to search"
+    p = FactoryGirl.create(:project, name: "project", description:'lore ipsum text to find')
+    let(:q){'text to find'}
+
+    example_request "Getting a list of projects by text search on name or description" do
+      expect(status).to eq(200)
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['description']}
+      expect(results).to eq(['lore ipsum text to find'])
     end
   end
 

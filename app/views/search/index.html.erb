@@ -65,7 +65,7 @@
 
           <div class="block active">
             <h3>Project status</h3>
-            <%= select_tag :status, options_for_select(['Any', 'Active', 'Inactive'], params[:status]), :class => :"chzn-select" %>
+            <%= select_tag :status, options_for_select({'Any' => 'any', 'Active' => 'active', 'Inactive' => 'inactive'}, params[:status]), :class => :"chzn-select" %>
           </div>
 
           <div class="block">
