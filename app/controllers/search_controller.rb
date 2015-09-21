@@ -5,18 +5,20 @@ class SearchController < ApplicationController
   before_action :parse_dates
 
   def index
-    @regions = Geolocation.all.select(:id, :name, :country_name)
+    @regions = Geolocation.where(adm_level: 0).select(:id, :name, :country_name, :uid)
     limit = 20
     @current_page = params[:page] ? params[:page].to_i : 1
     @clusters = @regions = @filtered_regions = @filtered_sectors = @filtered_clusters = @filtered_organizations = @filtered_donors = []
     @navigate_by_cluster = false
 
-    p params[:regions]
+    p params[:countries]
 
-    if params[:regions].present?
-       @filtered_regions = Geolocation.find_by_sql("select g.id, g.name, g.country_name from geolocations as g
-       where g.id in (#{params[:regions].join(",")})")
-       filtered_regions_where = "where g.id not in (#{params[:regions].join(",")})"
+    if params[:countries].present?
+       @filtered_regions = Geolocation.find_by_sql("select g.id, g.uid, g.name, g.country_name from geolocations as g
+       where g.uid IN (#{params[:countries].map{|x| x.inspect}.join(', ').tr('"', "'")}) AND g.adm_level=0")
+       filtered_regions_where = "where g.uid not in (#{params[:countries].map{|x| x.inspect}.join(', ').tr('"', "'")}) AND adm_level=0"
+    else
+       filtered_regions_where = "where adm_level=0"
     end
 
      if params[:sectors].present?
@@ -69,8 +71,7 @@ class SearchController < ApplicationController
     #          order by created_at DESC
     #          limit #{limit} offset #{limit * (@current_page - 1)}"
 
-    @projects = Project.fetch_all(projects_params)
-    puts "******************************************#{projects_params}"
+    @projects = Project.fetch_all(projects_params).order('projects.name ASC').page(params[:page]).per(10)
 
     #sql_count = "select count(*) as count from projects p
     #                 INNER JOIN projects_sectors ps ON (p.id = ps.project_id)
@@ -83,8 +84,8 @@ class SearchController < ApplicationController
     #                 INNER JOIN geolocations g ON (g.id = gp.geolocation_id)
     #
     #                  #{where}"
-    @total_projects = @projects.count.length if @projects
-    @total_pages = @projects.present? ? (@total_projects.to_f / limit.to_f).ceil : 0
+   # @projects_count = Project.fetch_all(projects_params).order('projects.name ASC').length if @projects
+    @total_pages = @projects.total_pages
 
     #TODO: I am not taking in consideration the search on organization and location when using the facets.
 
@@ -103,13 +104,13 @@ class SearchController < ApplicationController
           @sectors = Sector.find_by_sql(sql)
         sql = <<-SQL
           SELECT DISTINCT
-            r.id, r.name,r.country_name
-          FROM geolocations AS r
-          INNER JOIN geolocations_projects AS pr ON r.id=pr.geolocation_id
-          INNER JOIN projects_sites AS ps ON pr.project_id=ps.project_id AND ps.site_id=#{@site.id}
+            g.id, g.name,g.country_name,g.uid
+          FROM geolocations AS g
+          INNER JOIN geolocations_projects AS gp ON g.id=gp.geolocation_id
+          INNER JOIN projects_sites AS ps ON gp.project_id=ps.project_id AND ps.site_id=#{@site.id}
           INNER JOIN projects AS p ON ps.project_id=p.id AND (p.end_date is NULL OR p.end_date > now()) #{q_filter}
           #{filtered_regions_where}
-          ORDER BY r.country_name, r.name
+          ORDER BY g.country_name, g.name
         SQL
         @regions = Geolocation.find_by_sql(sql)
 
@@ -182,7 +183,7 @@ class SearchController < ApplicationController
   end
 
   def projects_params
-    params.permit(:offset, :limit, :format, :geolocation, :level, :q, :status, :starting_after, :ending_before, organizations:[], sectors:[], donors:[], countries:[], regions:[])
+    params.permit(:offset, :limit, :format, :geolocation, :level, :q, :status, :starting_after, :ending_before, organizations:[], sectors:[], donors:[], countries:[])
   end
 
 end

@@ -13,15 +13,14 @@
             <%= text_field_tag :q, params[:q], :placeholder => 'Search' %>
             <%= submit_tag '' %>
           </div>
-<%= @total_projects %>
           <div class="block region">
             <h3>Regions</h3>
-            <select name="geolocations[]" multiple placeholder="All regions">
+            <select name="countries[]" multiple placeholder="All regions">
               <% @regions.each do |region| %>
-                <option value="<%= region.id %>"><%= region.name %>, <%= region.country_name %></option>
+                <option value="<%= region.uid %>"><%= region.name %></option>
               <% end %>
               <% @filtered_regions.each do |region| %>
-                <option selected value="<%= region.id %>"><%= region.name %>, <%= region.country_name %></option>
+                <option selected value="<%= region.uid %>"><%= region.name %></option>
               <% end %>
             </select>
           </div>
@@ -122,11 +121,11 @@
           </div>
         <% end %>
 
-        <!-- <div class="mod-pagination">
-          <%#= paginate(@projects, total_pages: (@projects_count/10).ceil, remote: true) %>
-        </div> -->
+         <div class="mod-pagination">
+          <%= paginate(@projects, total_pages: @total_pages) %>
+        </div>
 
-        <%= render 'search/pagination' %>
+        <%# render 'search/pagination' %>
 
       </section>
     </div>

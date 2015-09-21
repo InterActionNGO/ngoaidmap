@@ -106,7 +106,7 @@ class Project < ActiveRecord::Base
     projects = projects.limit(options[:limit])                                  if options[:limit]
     projects = projects.active                                                  if options[:status] && options[:status] == 'active'
     projects = projects.inactive                                                if options[:status] && options[:status] == 'inactive'
-    projects = projects.group('projects.id', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
+    #projects = projects.group('projects.id', 'projects.name', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
     projects = projects.uniq
     if from_api
       projects
