@@ -13,17 +13,19 @@ class DownloadsController < ApplicationController
           :type        => 'application/vnd.ms-excel',
           :disposition => "attachment; filename=#{name}.xls"
       }
-      # format.kml {
-      #   send_data Project.fetch_all(projects_params).to_kml,
-      #     :type        => 'application/vnd.google-earth.kml+xml',
-      #     :disposition => "attachment; filename=#{name}.kml"
-      # }
+      format.kml {
+        @locations = Project.fetch_all(projects_params).pluck('geolocations.name', 'geolocations.longitude', 'geolocations.latitude')
+        stream = render_to_string(:template => "downloads/index" )
+        send_data stream,
+          :type        => 'application/vnd.google-earth.kml+xml',
+          :disposition => "attachment; filename=#{name}.kml"
+      }
     end
   end
   def set_format
      request.format = 'csv' if params[:doc]=='csv'
      request.format = 'xls' if params[:doc]=='xls'
-     #request.format = 'kml' if params[:doc]=='kml'
+     request.format = 'kml' if params[:doc]=='kml'
   end
   private
   def projects_params

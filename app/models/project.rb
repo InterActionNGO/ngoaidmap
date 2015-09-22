@@ -170,35 +170,6 @@ class Project < ActiveRecord::Base
     donors 'donors' do |s| s.map{ |se| se.name }.join('|') end
   end
 
-  def self.to_csv(options = {})
-    projects = self.fetch_all(options)
-    csv_headers = self.export_headers(options[:headers_options])
-    csv_data = CSV.generate(:col_sep => ',') do |csv|
-      csv << csv_headers
-      projects.each do |project|
-        line = []
-        csv_headers.each do |field_name|
-          v = project[field_name]
-          line << if v.nil?
-            ""
-          else
-            if %W{ start_date end_date date_provided date_updated }.include?(field_name)
-              if v =~ /^00(\d\d\-.+)/
-                "20#{$1}"
-              else
-                v
-              end
-            else
-              v.to_s.text2array.join(',')
-            end
-          end
-        end
-        csv << line
-      end
-    end
-    csv_data
-  end
-
   def self.to_excel(options = {})
     all.to_xls(headers: self.export_headers(options[:headers_options]))
   end
