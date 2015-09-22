@@ -28,6 +28,7 @@ gem 'redis'
 gem 'redis-namespace'
 gem 'redis-rails'
 gem 'redis-rack-cache'
+gem "comma", "~> 3.2.1"
 group :development do
   gem 'foreman'
   gem 'puma'

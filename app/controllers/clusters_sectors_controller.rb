@@ -8,4 +8,7 @@ class ClustersSectorsController < ApplicationController
     @sector = Sector.find(params[:id])
   end
 
+  def resource
+    Sector
+  end
 end
