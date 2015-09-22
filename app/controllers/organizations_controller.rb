@@ -43,6 +43,9 @@ class OrganizationsController < ApplicationController
       end
     end
   end
+  def resource
+    Organization
+  end
 
   private
   def filter_by_category_valid?

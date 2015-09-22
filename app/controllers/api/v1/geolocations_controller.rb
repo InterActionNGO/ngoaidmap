@@ -6,7 +6,6 @@ module Api
         @geolocations = @geolocations.offset(geolocations_params[:offset]) if geolocations_params[:offset]
         @geolocations = @geolocations.limit(geolocations_params[:limit]) if geolocations_params[:limit]
         @geolocations = @geolocations.order(geolocations_params[:order]) if geolocations_params[:order]
-        puts @geolocations.to_json
         render json: @geolocations, root: 'data',
         meta: { total: @geolocations.size },
         each_serializer: GeolocationPreviewSerializer

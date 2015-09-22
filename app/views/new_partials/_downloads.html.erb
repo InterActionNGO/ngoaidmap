@@ -1,9 +1,9 @@
 <div class="mod-downloads" id="downloadsView">
   <span>Download this list: </span>
   <ul>
-    <li><%= link_to 'CSV', download_path(params.reject{|k,v| k == 'action' || k == 'controller'}), :class => 'csv' %></li>
-    <li><%= link_to 'XLS', xls_path, :class => 'xls' %></li>
-    <li><%= link_to 'KML', kml_path, :class => 'kml' %></li>
+    <li><%= download_link('CSV','csv') %></li>
+    <li><%= download_link('XLS','xls') %></li>
+    <!-- <li><%#= download_link('KML','kml') %></li> -->
     <li><%= link_to 'Embed this map', '#embedMapView', :class => 'embebed', :id => 'embedMapBtn' %></li>
   </ul>
 </div>

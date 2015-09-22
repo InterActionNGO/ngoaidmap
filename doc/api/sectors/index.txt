@@ -1,0 +1,60 @@
+Get data for one sector
+-----------------------
+
+Parameters:
+  * id - A sector id
+
+Request:
+  GET /api/sectors/3?focus=true
+  Accept: application/json; application/vnd.ngoaidmap-api-v1+json
+  Content-Type: application/vnd.api+json
+  Cookie: 
+  Host: http://ngoaidmap.org
+
+  focus=true
+
+Response:
+  Status: 200 OK
+  Cache-Control: max-age=0, private, must-revalidate
+  Content-Length: 120
+  Content-Type: application/json; charset=utf-8
+  ETag: W/"1045225587b261f742dbb231b24f7667"
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-Request-Id: 6084473f-a196-4816-a5e2-8f2ea197f0cd
+  X-Runtime: 0.039040
+  X-XSS-Protection: 1; mode=block
+
+  {"data":{"id":"3","type":"sectors","attributes":{"name":"Sector","donors":[]},"relationships":{"projects":{"data":[]}}}}
+
+
+Getting a list of sectors
+-------------------------
+
+Parameters:
+  * include - Optional, string. Should be 'projects_count' to get the sum of projects per sector.
+  * status - Optional, string. Should be 'active' to get only sectors that include active projects.
+
+Request:
+  GET /api/sectors?include=projects_count&status=inactive
+  Accept: application/json; application/vnd.ngoaidmap-api-v1+json
+  Content-Type: application/vnd.api+json
+  Cookie: 
+  Host: http://ngoaidmap.org
+
+  include=projects_count
+  status=inactive
+
+Response:
+  Status: 200 OK
+  Cache-Control: max-age=0, private, must-revalidate
+  Content-Length: 195
+  Content-Type: application/json; charset=utf-8
+  ETag: W/"1b8e42bd68eb3fa17d209e2e27f071e6"
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-Request-Id: 977c54ae-3e73-409e-b39f-d3700a56383f
+  X-Runtime: 0.009164
+  X-XSS-Protection: 1; mode=block
+
+  {"data":[{"id":"1","type":"sectors","attributes":{"name":"Agriculture","projects_count":1}},{"id":"2","type":"sectors","attributes":{"name":"Agriculture","projects_count":1}}],"meta":{"total":2}}

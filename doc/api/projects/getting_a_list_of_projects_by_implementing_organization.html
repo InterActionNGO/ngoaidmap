@@ -142,14 +142,14 @@ Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/projects?organizations[]=1</pre>
+          <pre class="request route highlight">GET /api/projects?organizations[]=2</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">organizations: [&quot;1&quot;]</pre>
+            <pre class="request query_parameters highlight">organizations: [&quot;2&quot;]</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?organizations[]=1&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?organizations[]=2&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
@@ -161,15 +161,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;51c1bc05cabee76daf74f014518ec49d&quot;
+ETag: W/&quot;b8640e33b4317593546c472d128e3aa2&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 4ffa8083-da81-49b4-9bca-7c33cfeef70c
-X-Runtime: 0.029228
-Content-Length: 321</pre>
+X-Request-Id: 877aa495-58fd-4e37-9e58-15ec2c47a9a1
+X-Runtime: 0.030126
+Content-Length: 342</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;2&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_organization&quot;,&quot;description&quot;:null},&quot;relationships&quot;:{&quot;organization&quot;:{&quot;data&quot;:{&quot;type&quot;:&quot;organizations&quot;,&quot;id&quot;:&quot;1&quot;}},&quot;sectors&quot;:{&quot;data&quot;:[]},&quot;geolocations&quot;:{&quot;data&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;type&quot;:&quot;organizations&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;One Organization&quot;}}]}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;4&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_organization&quot;,&quot;description&quot;:null},&quot;relationships&quot;:{&quot;organization&quot;:{&quot;data&quot;:{&quot;type&quot;:&quot;organizations&quot;,&quot;id&quot;:&quot;2&quot;}},&quot;sectors&quot;:{&quot;data&quot;:[]},&quot;geolocations&quot;:{&quot;data&quot;:[]},&quot;donors&quot;:{&quot;data&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;2&quot;,&quot;type&quot;:&quot;organizations&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;One Organization&quot;}}]}</pre>
       </div>
     </div>
   </body>

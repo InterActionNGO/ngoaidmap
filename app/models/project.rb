@@ -70,7 +70,8 @@ class Project < ActiveRecord::Base
   #                                                   ON g.g0 = geos.uid
   #                                                 ').where('g.adm_level=?', 0).uniq}, class_name: 'Geolocation'
 
-  scope :active, -> {where("end_date > ?", Date.today.to_s(:db))}
+  scope :active, -> {where("end_date > ? AND start_date < ?", Date.today.to_s(:db), Date.today.to_s(:db))}
+  scope :inactive, -> {where("end_date < ? OR start_date > ?", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :closed, -> {where("end_date < ?", Date.today.to_s(:db))}
   scope :with_no_country, -> {select('projects.*').
                           joins(:regions).
@@ -82,6 +83,9 @@ class Project < ActiveRecord::Base
   scope :donors, -> (donors){where(donors: {id: donors})}
   scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
+  scope :text_query, -> (q){where('projects.name ilike ? OR projects.description ilike ?', "%%#{q}%%", "%%#{q}%%")}
+  scope :starting_after, -> (date){where "start_date > ?", date}
+  scope :ending_before, -> (date){where "end_date < ?", date}
 
   def countries
     Geolocation.where(uid: self.geolocations.pluck(:country_uid)).uniq
@@ -90,15 +94,19 @@ class Project < ActiveRecord::Base
   def self.fetch_all(options = {}, from_api = true)
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
     projects = projects.geolocation(options[:geolocation], options[:level])     if options[:geolocation]
-    projects = projects.projects(options[:projects])                          if options[:projects]
+    projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries])                          if options[:countries]
     projects = projects.organizations(options[:organizations])                  if options[:organizations]
     projects = projects.sectors(options[:sectors])                              if options[:sectors]
     projects = projects.donors(options[:donors])                                if options[:donors]
+    projects = projects.text_query(options[:q])                                 if options[:q]
+    projects = projects.starting_after(options[:starting_after])                if options[:starting_after]
+    projects = projects.ending_before(options[:ending_before])                  if options[:ending_before]
     projects = projects.offset(options[:offset])                                if options[:offset]
     projects = projects.limit(options[:limit])                                  if options[:limit]
-    projects = projects.active
-    projects = projects.group('projects.id', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
+    projects = projects.active                                                  if options[:status] && options[:status] == 'active'
+    projects = projects.inactive                                                if options[:status] && options[:status] == 'inactive'
+    #projects = projects.group('projects.id', 'projects.name', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
     projects = projects.uniq
     if from_api
       projects
@@ -125,14 +133,45 @@ class Project < ActiveRecord::Base
     options = {show_private_fields: false}.merge(options || {})
 
     if options[:show_private_fields]
-      %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description activities additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups location verbatim_location idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status donors)
+      %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups location verbatim_location idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status donors)
     else
-      %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description activities additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups location project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status donors)
+      %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups location project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status donors)
     end
   end
 
+  comma do
+    primary_organization 'primary_organization' do |primary_organization| primary_organization.name end
+    intervention_id 'interaction_intervention_id'
+    organization_id 'org_intervention_id'
+    tags 'project_tags' do |s| s.map{ |se| se.name }.join('|') end
+    name 'project_name'
+    description 'project_description'
+    activities
+    additional_information
+    start_date
+    end_date
+    sectors 'sectors' do |s| s.map{ |se| se.name }.join('|') end
+    cross_cutting_issues
+    budget 'budget_numeric'
+    partner_organizations 'international_partners'
+    #local_partners
+    awardee_type 'prime_awardee'
+    estimated_people_reached
+    target 'target_groups'
+    verbatim_location 'location'
+    contact_person 'project_contact_person'
+    contact_position 'project_contact_position'
+    contact_email 'project_contact_email'
+    contact_phone_number 'project_contact_phone_number'
+    website 'project_website'
+    date_provided
+    date_updated
+    activity_status 'status'
+    donors 'donors' do |s| s.map{ |se| se.name }.join('|') end
+  end
+
   def self.to_csv(options = {})
-    projects = all
+    projects = self.fetch_all(options)
     csv_headers = self.export_headers(options[:headers_options])
     csv_data = CSV.generate(:col_sep => ',') do |csv|
       csv << csv_headers

@@ -89,4 +89,9 @@ class Organization < ActiveRecord::Base
   def projects_count
     self.projects.active.size
   end
+  def self.fetch_all(options={})
+    organizations = Organization.all
+    organizations = organizations.active if options && options[:status] = 'active'
+    organizations
+  end
 end

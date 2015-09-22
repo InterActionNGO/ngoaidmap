@@ -36,7 +36,7 @@
           <%= simple_format(@organization.description) if @organization.description.present? %>
         </header>
 
-        <%#= render :partial => 'new_partials/downloads', :locals => { :csv_path => organization_path(@organization, @carry_on_filters.merge(:format => :csv)), :xls_path => organization_path(@organization, @carry_on_filters.merge(:format => :xls)), :kml_path => organization_path(@organization, @carry_on_filters.merge(:format => :kml)) } %>
+        <%= render :partial => 'new_partials/downloads' %>
 
         <%= render "new_partials/index_projects" %>
 

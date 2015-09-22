@@ -1,5 +1,19 @@
 module ApplicationHelper
 
+  def download_link(text, type)
+    if action_name == 'show'
+      if controller.resource == Geolocation
+        name = "#{controller.resource.find_by(uid: params[:ids]).name.underscore}_projects"
+      else
+        name = "#{controller.resource.find(params[:id]).name.parameterize}_projects"
+      end
+    else
+      name = "#{@site.id}_projects"
+    end
+    params_string = params.except(:action, :controller,:id, :ids).merge(:name => name).to_query
+    link_to text, "/downloads?doc=#{type}&#{params_string}", :class => type
+  end
+
   def selected_if_current_page(url_path, extra_condition = false)
     if @organization || @pages || @donor
       if (action_name == "specific_information" || action_name == 'new' || action_name == 'edit' || action_name == 'create' || action_name == 'update' || action_name == "index")

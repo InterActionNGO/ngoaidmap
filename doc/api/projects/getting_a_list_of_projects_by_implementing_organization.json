@@ -16,7 +16,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/projects?organizations[]=1",
+      "request_path": "/api/projects?organizations[]=2",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
@@ -26,26 +26,26 @@
       },
       "request_query_parameters": {
         "organizations": [
-          "1"
+          "2"
         ]
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"2\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_organization\",\"description\":null},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"1\"}},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]}}}],\"included\":[{\"id\":\"1\",\"type\":\"organizations\",\"attributes\":{\"name\":\"One Organization\"}}]}",
+      "response_body": "{\"data\":[{\"id\":\"4\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_organization\",\"description\":null},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"2\"}},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}}],\"included\":[{\"id\":\"2\",\"type\":\"organizations\",\"attributes\":{\"name\":\"One Organization\"}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"51c1bc05cabee76daf74f014518ec49d\"",
+        "ETag": "W/\"b8640e33b4317593546c472d128e3aa2\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "4ffa8083-da81-49b4-9bca-7c33cfeef70c",
-        "X-Runtime": "0.029228",
-        "Content-Length": "321"
+        "X-Request-Id": "877aa495-58fd-4e37-9e58-15ec2c47a9a1",
+        "X-Runtime": "0.030126",
+        "Content-Length": "342"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/projects?organizations[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?organizations[]=2\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

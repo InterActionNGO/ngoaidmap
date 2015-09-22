@@ -32,17 +32,17 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"4\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_sector\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[{\"type\":\"sectors\",\"id\":\"2\"}]},\"geolocations\":{\"data\":[]}}}],\"included\":[{\"id\":\"2\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\"}}]}",
+      "response_body": "{\"data\":[{\"id\":\"6\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_sector\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[{\"type\":\"sectors\",\"id\":\"2\"}]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}}],\"included\":[{\"id\":\"2\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\"}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"d700d14175333864d6b5fc563a29de36\"",
+        "ETag": "W/\"5338044da23c6fe32b6413832ef129ea\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "8f193af7-7c72-4c5e-a797-fc7292fff27c",
-        "X-Runtime": "0.031100",
-        "Content-Length": "302"
+        "X-Request-Id": "66937cdc-9286-42e8-8391-73bb26ab9b1d",
+        "X-Runtime": "0.029778",
+        "Content-Length": "323"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/projects?sectors[]=2\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

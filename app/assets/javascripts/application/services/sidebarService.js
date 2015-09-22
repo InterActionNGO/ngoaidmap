@@ -12,8 +12,8 @@ define([
   var SidebarService = Class.extend({
 
     requests: {
-      'sectors-all' : '/api/sectors?include=projects_count',
-      'countries-all' : '/api/countries?summing=projects'
+      'sectors-all' : '/api/sectors?include=projects_count&status=true',
+      'countries-all' : '/api/countries?summing=projects&status=true'
     },
 
     /**
@@ -44,11 +44,11 @@ define([
 
     _defineRequestsByPlace: function(){
       if (!!window.sector) {
-        this.requests['donors-by-sector'] = _.str.sprintf('/api/donors?sectors[]=%s', sector.id)
+        this.requests['donors-by-sector'] = _.str.sprintf('/api/donors?sectors[]=%s&status=true', sector.id)
       }
       if (!!window.geolocation) {
-        this.requests['breadcrumbs'] = _.str.sprintf('/api/geolocations/%s?get_parents=true', geolocation.uid);
-        this.requests['donors-by-geolocation'] = _.str.sprintf('/api/donors?geolocation=%s', geolocation.uid);
+        this.requests['breadcrumbs'] = _.str.sprintf('/api/geolocations/%s?get_parents=true&status=true', geolocation.uid);
+        this.requests['donors-by-geolocation'] = _.str.sprintf('/api/donors?geolocation=%s&status=true', geolocation.uid);
       }
     },
 

@@ -61,6 +61,7 @@
           <%#= content_tag :p, raw("Description provided by Wikipedia #{content_tag(:a, 'Read full article', :href => @area.wiki_url)}"), :class => 'provided' if @area.wiki_url %>
         </header>
 
+        <%= render :partial => 'new_partials/downloads' %>
 
         <%= render "new_partials/index_projects" %>
 

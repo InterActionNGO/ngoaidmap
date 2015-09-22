@@ -3,7 +3,7 @@ module Api
     class CountriesController < ApiController
       def index
         if countries_params && countries_params[:summing] == 'projects'
-          @countries = Geolocation.sum_projects
+          @countries = Geolocation.sum_projects(countries_params[:status])
           render json: @countries, root: 'data',
           meta: { total: @countries.size },
           each_serializer: CountriesSummingSerializer
@@ -15,13 +15,12 @@ module Api
         end
       end
       def show
-        geolocation = Geolocation.find(params[:id]).try(:country_uid)
-        @country = Geolocation.where(uid: geolocation)
+        @country = Geolocation.find_by(uid: params[:id], adm_level: 0)
           render json: @country, root: 'data',
           serializer: GeolocationPreviewSerializer
       end
       def countries_params
-        params.permit(:id, :summing)
+        params.permit(:id, :summing, :status)
       end
     end
   end

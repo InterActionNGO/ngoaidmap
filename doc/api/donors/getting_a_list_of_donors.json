@@ -5,7 +5,10 @@
   "description": "Getting a list of donors",
   "explanation": null,
   "parameters": [
-
+    {
+      "name": "status",
+      "description": "Optional, string. Should be 'active' to filter active projects only."
+    }
   ],
   "response_fields": [
 
@@ -13,7 +16,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/donors",
+      "request_path": "/api/donors?status=active",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
@@ -22,6 +25,7 @@
         "Cookie": ""
       },
       "request_query_parameters": {
+        "status": "active"
       },
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
@@ -34,12 +38,12 @@
         "Content-Type": "application/json; charset=utf-8",
         "ETag": "W/\"99bba54659ba53668436daac4696fa86\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "f18f5f7c-c8d9-41d8-a88b-479e68723f0f",
-        "X-Runtime": "0.015270",
+        "X-Request-Id": "6fe28e29-0762-458b-9fd5-566c5ea68553",
+        "X-Runtime": "0.013202",
         "Content-Length": "90"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/donors\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/donors?status=active\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

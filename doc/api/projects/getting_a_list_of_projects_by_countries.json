@@ -32,17 +32,17 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"5\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_country\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[{\"type\":\"geolocations\",\"id\":\"1\"}]}}}],\"included\":[{\"id\":\"1\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"ggg\",\"name\":\"India\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":\"ggg\",\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}}]}",
+      "response_body": "{\"data\":[{\"id\":\"7\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_country\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[{\"type\":\"geolocations\",\"id\":\"1\"}]},\"donors\":{\"data\":[]}}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"0fb9b6651e97814a2bdd234727976049\"",
+        "ETag": "W/\"3e06a980b066a30b6c698d6f3f0ac892\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "492074f8-f8a9-4cfd-8598-61695b8e6de4",
-        "X-Runtime": "0.032144",
-        "Content-Length": "523"
+        "X-Request-Id": "4208ab28-495d-4d24-b8a0-4c49b5b7b990",
+        "X-Runtime": "0.029499",
+        "Content-Length": "252"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/projects?countries[]=ggg\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

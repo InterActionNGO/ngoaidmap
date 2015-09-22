@@ -50,7 +50,8 @@ class Donor < ActiveRecord::Base
   scope :geolocation, -> (geolocation) {joins([donations: [project: :geolocations]]).where('geolocations.g0=? OR geolocations.g1=? OR geolocations.g2=? OR geolocations.g3=? OR geolocations.g4=?', geolocation, geolocation, geolocation, geolocation, geolocation).uniq}
 
   def self.fetch_all(options={})
-    donors = Donor.active
+    donors = Donor.all
+    donors = donors.active                             if options[:status] && options[:status] == 'active'
     donors = donors.sectors(options[:sectors])         if options[:sectors]
     donors = donors.geolocation(options[:geolocation]) if options[:geolocation]
     donors = donors.offset(options[:offset])           if options[:offset]
