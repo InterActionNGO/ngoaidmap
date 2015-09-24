@@ -34,20 +34,6 @@
 #  project_needs                           :text
 #  idprefugee_camp                         :text
 #  organization_id                         :string(255)
-#  budget_currency                         :string(255)
-#  budget_value_date                       :date
-#  target_project_reach                    :integer
-#  actual_project_reach                    :integer
-#  project_reach_unit                      :string(255)
-#  project_reach_actual_start_date         :date
-#  project_reach_target_start_date         :date
-#  project_reach_actual_end_date           :date
-#  project_reach_target_end_date           :date
-#  project_reach_type                      :string(255)      default("Output")
-#  project_reach_type_code                 :integer          default(1)
-#  project_reach_measure                   :string(255)      default("Unit")
-#  project_reach_measure_code              :integer          default(1)
-#  project_reach_description               :text
 #
 
 class ProjectSerializer < ActiveModel::Serializer

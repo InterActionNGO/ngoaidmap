@@ -2,8 +2,11 @@
 #
 # Table name: sectors
 #
-#  id   :integer          not null, primary key
-#  name :string(255)
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  iati_name         :string(255)
+#  sector_vocab_code :string(255)
+#  iati_code         :string(255)
 #
 
 class Sector < ActiveRecord::Base
