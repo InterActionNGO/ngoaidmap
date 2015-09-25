@@ -44,7 +44,7 @@
 
 class Project < ActiveRecord::Base
   belongs_to :primary_organization, foreign_key: :primary_organization_id, class_name: 'Organization'
-  belongs_to :primare_awardee, foreign_key: :prime_awardee_id, class_name: 'Organization'
+  belongs_to :prime_awardee, foreign_key: :prime_awardee_id, class_name: 'Organization'
   has_and_belongs_to_many :clusters
   has_and_belongs_to_many :sectors
   has_and_belongs_to_many :regions
