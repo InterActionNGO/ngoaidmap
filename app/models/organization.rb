@@ -58,6 +58,7 @@
 #  main_data_contact_state         :string(255)
 #  main_data_contact_country       :string(255)
 #  organization_id                 :string(255)
+#  interaction_member              :boolean          default(FALSE)
 #
 
 class Organization < ActiveRecord::Base
