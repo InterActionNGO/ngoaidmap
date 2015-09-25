@@ -65,6 +65,7 @@ class Organization < ActiveRecord::Base
   #has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::ORGANIZATION_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   #has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::ORGANIZATION_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   has_many :projects, foreign_key: :primary_organization_id
+  has_many :awarded_projects, foreign_key: :prime_awardee_id, class_name: 'Project'
 
   has_attached_file :logo, styles: {
                                       small: {

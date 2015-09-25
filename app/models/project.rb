@@ -34,10 +34,17 @@
 #  project_needs                           :text
 #  idprefugee_camp                         :text
 #  organization_id                         :string(255)
+#  prime_awardee_id                        :integer
+#  budget_currency                         :string(255)
+#  budget_value_date                       :date
+#  target_project_reach                    :integer
+#  actual_project_reach                    :integer
+#  project_reach_unit                      :string(255)
 #
 
 class Project < ActiveRecord::Base
   belongs_to :primary_organization, foreign_key: :primary_organization_id, class_name: 'Organization'
+  belongs_to :primare_awardee, foreign_key: :prime_awardee_id, class_name: 'Organization'
   has_and_belongs_to_many :clusters
   has_and_belongs_to_many :sectors
   has_and_belongs_to_many :regions
