@@ -91,4 +91,7 @@ class Organization < ActiveRecord::Base
     organizations = organizations.active if options && options[:status] = 'active'
     organizations
   end
+  def iati_organization_id
+    self.organization_id
+  end
 end

@@ -20,6 +20,9 @@
 #  site_specific_information :text
 #  created_at                :datetime
 #  updated_at                :datetime
+#  iati_organizationid       :string(255)
+#  organization_type         :string(255)
+#  organization_type_code    :integer
 #
 
 class Donor < ActiveRecord::Base

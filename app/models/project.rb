@@ -168,6 +168,15 @@ class Project < ActiveRecord::Base
   end
 
   ############################################## IATI ##############################################
+  def funding_org
+    if self.prime_awardee.present? && self.prime_awardee == self.primary_organization
+      self.donors.first
+    elsif self.prime_awardee.present?
+      self.prime_awardee
+    else
+      self.donors.first
+    end
+  end
 
   def activity_status
     if self.start_date > Time.now.in_time_zone
@@ -204,12 +213,8 @@ class Project < ActiveRecord::Base
     activity_scope_code
   end
 
-  def iati_countries
-    self.geolocations.pluck(:country_code).uniq
-  end
-
   def iati_locations
-    self.geolocations.where('adm_level > 0')
+    self.geolocations.where('adm_level > 0').uniq
   end
 
 end
