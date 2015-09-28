@@ -13,15 +13,14 @@
             <%= text_field_tag :q, params[:q], :placeholder => 'Search' %>
             <%= submit_tag '' %>
           </div>
-
           <div class="block region">
-            <h3>Regions</h3>
-            <select name="geolocations[]" multiple placeholder="All regions">
+            <h3>Countries</h3>
+            <select name="countries[]" multiple placeholder="All countries">
               <% @regions.each do |region| %>
-                <option value="<%= region.id %>"><%= region.name %>, <%= region.country_name %></option>
+                <option value="<%= region.uid %>"><%= region.name %></option>
               <% end %>
               <% @filtered_regions.each do |region| %>
-                <option selected value="<%= region.id %>"><%= region.name %>, <%= region.country_name %></option>
+                <option selected value="<%= region.uid %>"><%= region.name %></option>
               <% end %>
             </select>
           </div>
@@ -65,7 +64,7 @@
 
           <div class="block active">
             <h3>Project status</h3>
-            <%= select_tag :status, options_for_select(['Any', 'Active', 'Inactive'], params[:status]), :class => :"chzn-select" %>
+            <%= select_tag :status, options_for_select({'Any' => 'any', 'Active' => 'active', 'Inactive' => 'inactive'}, params[:status]), :class => :"chzn-select" %>
           </div>
 
           <div class="block">
@@ -106,8 +105,8 @@
               <% @projects.each_with_index do |project,index| %>
                 <li>
                   <article class="mod-index-item">
-                    <h2><%= link_to(truncate(project['project_name'],:length=>43,:omission=>"..."), project_path(project['project_id'])) %></h2>
-                    <span>by <%= link_to(project['organization_name'], organization_path(project['organization_id'])) %></span>
+                    <h2><%= link_to(truncate(project.name,:length=>43,:omission=>"..."), project_path(project.id)) %></h2>
+                    <span>by <%= link_to(project.primary_organization.try(:name), organization_path(project.primary_organization.try(:id))) %></span>
                     <p>
                       <% regions = project['geolocations'] ? project['geolocations'].text2array : [] %>
                       <% regions.slice!(0, 2).each do |region| %>
@@ -122,11 +121,11 @@
           </div>
         <% end %>
 
-        <!-- <div class="mod-pagination">
-          <%#= paginate(@projects, total_pages: (@projects_count/10).ceil, remote: true) %>
-        </div> -->
+         <div class="mod-pagination">
+          <%= paginate(@projects, total_pages: @total_pages) %>
+        </div>
 
-        <%= render 'search/pagination' %>
+        <%# render 'search/pagination' %>
 
       </section>
     </div>

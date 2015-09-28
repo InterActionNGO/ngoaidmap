@@ -13,29 +13,25 @@ module ProjectsFiltering
     projects_count_digest = "projects_count_#{Digest::SHA1.hexdigest(string)}"
     if map_data = $redis.get(map_data_digest)
       @map_data = map_data
-      #puts @map_data
       @projects_count = JSON.load $redis.get(projects_count_digest)
-      # @projects = $redis.get(projects_digest).split(",")
     else
+      expire_time = ((Time.now + 1.day).beginning_of_day - Time.now).ceil
       results = Project.fetch_all(projects_params, false)
       m = ActiveModel::Serializer::ArraySerializer.new(results[0], each_serializer: ProjectSerializer, meta: results[1])
       map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'geolocations']).to_json
-      # @map_data_max_count = 0
       @map_data = map_data
       $redis.set(map_data_digest, map_data)
+      $redis.expire map_data_digest, expire_time
       projects_count = results[0].uniq.length.to_f
       $redis.set(projects_count_digest, projects_count)
+      $redis.expire projects_count_digest, expire_time
       @projects_count = projects_count
-      # projects = results[0].page(params[:page]).per(10)
-      # $redis.set(projects_digest, projects)
-      # @projects = projects
     end
-    puts "***********************************************************************************************"
     @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
   end
   private
   def projects_params
-    params.permit(:page, :level, :ids, :id, :geolocation, organizations:[], countries:[], donors:[], sectors:[], projects:[])
+    params.permit(:page, :level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, organizations:[], countries:[], donors:[], sectors:[], projects:[])
   end
   def merge_params
     params.merge!({projects: [params[:id]]}) if controller_name == 'projects'
@@ -44,6 +40,7 @@ module ProjectsFiltering
     params.merge!({sectors: [params[:id]]}) if controller_name == 'clusters_sectors'
     params.merge!({geolocation: params[:ids]}) if controller_name == 'georegion'
     params.merge!({level: params[:level]}) if controller_name == 'georegion' || (params[:geolocation] && !params[:level])
+    params.merge!({status: 'active'})
     params[:level] = 0 if ((controller_name == 'georegion' && !params[:level]) || (params[:geolocation] && !params[:level]))
     params
   end

@@ -112,6 +112,25 @@ table th, table td {
         <h2>Getting a list of donors</h2>
         <h3>GET /api/donors</h3>
 
+          <h3>Parameters</h3>
+          <table class="parameters table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                    <span class="name">status</span>
+                </td>
+                <td>
+                  <span class="description">Optional, string. Should be &#39;active&#39; to filter active projects only.</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
 
           <h3>Request</h3>
@@ -123,12 +142,14 @@ Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/donors</pre>
+          <pre class="request route highlight">GET /api/donors?status=active</pre>
 
+            <h4>Query Parameters</h4>
+            <pre class="request query_parameters highlight">status: active</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/donors&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/donors?status=active&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/vnd.api+json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
@@ -142,8 +163,8 @@ X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
 ETag: W/&quot;99bba54659ba53668436daac4696fa86&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: f18f5f7c-c8d9-41d8-a88b-479e68723f0f
-X-Runtime: 0.015270
+X-Request-Id: 6fe28e29-0762-458b-9fd5-566c5ea68553
+X-Runtime: 0.013202
 Content-Length: 90</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>

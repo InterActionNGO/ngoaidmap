@@ -4,7 +4,7 @@ module Api
       def index
         @projects = Project.fetch_all(projects_params)
         respond_to do |format|
-         format.json {render json: @projects, root: 'data', include: ['organization', 'sectors', 'donors', 'geolocations']}
+         format.json {render json: @projects, root: 'data', include: ['organization', 'sectors', 'donors']}
          format.xml {@projects}
         end
       end
@@ -12,14 +12,17 @@ module Api
       def show
         @project = Project.find(params[:id])
         respond_to do |format|
-          format.json {render json: @project, root: 'data', include: ['organization', 'sectors', 'donors', 'countries', 'regions']}
+          format.json {render json: @project, root: 'data', include: ['organization', 'sectors', 'donors']}
           format.xml {@project}
         end
       end
 
 
       def projects_params
-        params.permit(:offset, :limit, :format, :geolocation, :level, organizations:[], sectors:[], donors:[], countries:[])
+        if request.fullpath.include?('iati') && (!params[:limit] or params[:limit].to_i > 100)
+          params.merge!(limit: '10')
+        end
+        params.permit(:offset, :limit, :format, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[])
       end
     end
   end

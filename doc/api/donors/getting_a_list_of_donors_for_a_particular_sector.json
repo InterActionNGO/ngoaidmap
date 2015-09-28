@@ -8,6 +8,10 @@
     {
       "name": "sectors",
       "description": "Array. Sector ids"
+    },
+    {
+      "name": "status",
+      "description": "Optional, string. Should be 'active' to filter active projects only."
     }
   ],
   "response_fields": [
@@ -16,7 +20,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/donors?sectors[]=1",
+      "request_path": "/api/donors?sectors[]=1?status=active",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
@@ -26,7 +30,7 @@
       },
       "request_query_parameters": {
         "sectors": [
-          "1"
+          "1?status=active"
         ]
       },
       "request_content_type": "application/vnd.api+json",
@@ -40,12 +44,12 @@
         "Content-Type": "application/json; charset=utf-8",
         "ETag": "W/\"1fa25f21adac1eb26acd37264cb7e99e\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "5ac58e3a-56c7-4b68-b347-cec53337ae2f",
-        "X-Runtime": "0.012093",
+        "X-Request-Id": "91375c94-10e6-452e-9422-d0cd353a29ce",
+        "X-Runtime": "0.011573",
         "Content-Length": "98"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/donors?sectors[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/donors?sectors[]=1?status=active\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

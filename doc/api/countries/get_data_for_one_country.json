@@ -1,0 +1,48 @@
+{
+  "resource": "Countries",
+  "http_method": "GET",
+  "route": "/api/countries/:id",
+  "description": "Get data for one country",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "id",
+      "description": "A country geolocaton uid"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/countries/gn00001",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
+        "Content-Type": "application/vnd.api+json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn00001\",\"name\":\"country\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":null,\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"bd10311374abe6be156cebb2e1ea2b70\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "96b70ae0-94a0-46ef-80ca-bcd7c3953267",
+        "X-Runtime": "0.070797",
+        "Content-Length": "292"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/countries/gn00001\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

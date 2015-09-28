@@ -1,0 +1,54 @@
+{
+  "resource": "Sectors",
+  "http_method": "GET",
+  "route": "/api/sectors",
+  "description": "Getting a list of sectors",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "include",
+      "description": "Optional, string. Should be 'projects_count' to get the sum of projects per sector."
+    },
+    {
+      "name": "status",
+      "description": "Optional, string. Should be 'active' to get only sectors that include active projects."
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/sectors?include=projects_count&status=inactive",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
+        "Content-Type": "application/vnd.api+json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "include": "projects_count",
+        "status": "inactive"
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\",\"projects_count\":1}},{\"id\":\"2\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\",\"projects_count\":1}}],\"meta\":{\"total\":2}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"1b8e42bd68eb3fa17d209e2e27f071e6\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "977c54ae-3e73-409e-b39f-d3700a56383f",
+        "X-Runtime": "0.009164",
+        "Content-Length": "195"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/sectors?include=projects_count&status=inactive\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

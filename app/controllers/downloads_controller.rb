@@ -1,17 +1,34 @@
 class DownloadsController < ApplicationController
-  include ProjectsFiltering
-  def show
+  before_action :set_format
+  def index
+    name = params[:name]
     respond_to do |format|
       format.csv {
-        send_data @projects.to_csv,
-          :type => 'text/plain; charset=utf-8; application/download',
-          :disposition => "attachment; filename=#{Time.now.in_time_zone}_projects.csv"
+      send_data Project.fetch_all(projects_params).to_comma,
+        :type        => 'application/vnd.ms-excel',
+        :disposition => "attachment; filename=#{name}.csv"
       }
       format.xls {
-        send_data @projects.to_excel,
+        send_data Project.fetch_all(projects_params).to_xls,
           :type        => 'application/vnd.ms-excel',
-          :disposition => "attachment; filename=#{@site.id}_projects.xls"
+          :disposition => "attachment; filename=#{name}.xls"
+      }
+      format.kml {
+        @locations = Project.fetch_all(projects_params).pluck('geolocations.name', 'geolocations.longitude', 'geolocations.latitude')
+        stream = render_to_string(:template => "downloads/index" )
+        send_data stream,
+          :type        => 'application/vnd.google-earth.kml+xml',
+          :disposition => "attachment; filename=#{name}.kml"
       }
     end
+  end
+  def set_format
+     request.format = 'csv' if params[:doc]=='csv'
+     request.format = 'xls' if params[:doc]=='xls'
+     request.format = 'kml' if params[:doc]=='kml'
+  end
+  private
+  def projects_params
+    params.permit(:level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, organizations:[], countries:[], donors:[], sectors:[], projects:[])
   end
 end

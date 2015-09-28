@@ -11,16 +11,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 2788
+  Content-Length: 3065
   Content-Type: application/json; charset=utf-8
-  ETag: W/"3e1f4f3a767756887dbbc4017e515a51"
+  ETag: W/"e0c8879c3b36158a41f22eaec0b42b74"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 8d8419d2-2f5c-4ea1-bf8b-5628aee15ca6
-  X-Runtime: 0.091432
+  X-Request-Id: b8473b27-5602-41e0-94a4-2f83fb171c06
+  X-Runtime: 0.081019
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"1","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"1"}]},"geolocations":{"data":[]}}},{"id":"2","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"3","type":"projects","attributes":{"name":"project_with_donor","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"4","type":"projects","attributes":{"name":"project_with_sector","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"2"}]},"geolocations":{"data":[]}}},{"id":"5","type":"projects","attributes":{"name":"project_with_country","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"1"}]}}},{"id":"6","type":"projects","attributes":{"name":"project_with_geolocation","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"3"}]}}},{"id":"7","type":"projects","attributes":{"name":"One Project","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"8","type":"projects","attributes":{"name":"project0","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"9","type":"projects","attributes":{"name":"project1","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"10","type":"projects","attributes":{"name":"project2","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}}],"included":[{"id":"1","type":"sectors","attributes":{"name":"Agriculture"}},{"id":"1","type":"organizations","attributes":{"name":"One Organization"}},{"id":"2","type":"sectors","attributes":{"name":"Agriculture"}},{"id":"1","type":"geolocations","attributes":{"uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"3","type":"geolocations","attributes":{"uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}}]}
+  {"data":[{"id":"1","type":"projects","attributes":{"name":"project_in_different_countries","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"2","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"1"}]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"3","type":"projects","attributes":{"name":"inactive_project","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"4","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"2"}},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"5","type":"projects","attributes":{"name":"project_with_donor","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[{"type":"donors","id":"1"}]}}},{"id":"6","type":"projects","attributes":{"name":"project_with_sector","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"2"}]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"7","type":"projects","attributes":{"name":"project_with_country","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"1"}]},"donors":{"data":[]}}},{"id":"8","type":"projects","attributes":{"name":"project_with_geolocation","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"3"}]},"donors":{"data":[]}}},{"id":"12","type":"projects","attributes":{"name":"One Project","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"13","type":"projects","attributes":{"name":"project0","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"14","type":"projects","attributes":{"name":"project1","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"15","type":"projects","attributes":{"name":"project2","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}}],"included":[{"id":"1","type":"sectors","attributes":{"name":"Agriculture"}},{"id":"1","type":"organizations","attributes":{"name":"inactive_organization"}},{"id":"2","type":"organizations","attributes":{"name":"One Organization"}},{"id":"1","type":"donors","attributes":{"name":"Red Cross"}},{"id":"2","type":"sectors","attributes":{"name":"Agriculture"}}]}
 
 
 Getting a list of projects with an offset
@@ -41,16 +41,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 4037
+  Content-Length: 4458
   Content-Type: application/json; charset=utf-8
-  ETag: W/"40499d75254f68365d87bec5c61275dc"
+  ETag: W/"b7543a99317a9aceb1368d30f020a113"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: cfd851e8-74c8-4575-b2de-34a3165eef1d
-  X-Runtime: 0.062900
+  X-Request-Id: 76474efd-e641-4305-b77f-01c48491fe44
+  X-Runtime: 0.078667
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"1","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"1"}]},"geolocations":{"data":[]}}},{"id":"2","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"3","type":"projects","attributes":{"name":"project_with_donor","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"4","type":"projects","attributes":{"name":"project_with_sector","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"2"}]},"geolocations":{"data":[]}}},{"id":"5","type":"projects","attributes":{"name":"project_with_country","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"1"}]}}},{"id":"6","type":"projects","attributes":{"name":"project_with_geolocation","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"3"}]}}},{"id":"11","type":"projects","attributes":{"name":"One Project","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"12","type":"projects","attributes":{"name":"project0","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"13","type":"projects","attributes":{"name":"project1","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"14","type":"projects","attributes":{"name":"project2","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"15","type":"projects","attributes":{"name":"project3","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"16","type":"projects","attributes":{"name":"project4","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"17","type":"projects","attributes":{"name":"project5","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"18","type":"projects","attributes":{"name":"project6","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"19","type":"projects","attributes":{"name":"project7","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"20","type":"projects","attributes":{"name":"project8","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"21","type":"projects","attributes":{"name":"project9","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}}],"included":[{"id":"1","type":"sectors","attributes":{"name":"Agriculture"}},{"id":"1","type":"organizations","attributes":{"name":"One Organization"}},{"id":"2","type":"sectors","attributes":{"name":"Agriculture"}},{"id":"1","type":"geolocations","attributes":{"uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"3","type":"geolocations","attributes":{"uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}}]}
+  {"data":[{"id":"1","type":"projects","attributes":{"name":"project_in_different_countries","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"2","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"1"}]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"3","type":"projects","attributes":{"name":"inactive_project","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"4","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"2"}},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"5","type":"projects","attributes":{"name":"project_with_donor","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[{"type":"donors","id":"1"}]}}},{"id":"6","type":"projects","attributes":{"name":"project_with_sector","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"2"}]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"7","type":"projects","attributes":{"name":"project_with_country","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"1"}]},"donors":{"data":[]}}},{"id":"8","type":"projects","attributes":{"name":"project_with_geolocation","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"3"}]},"donors":{"data":[]}}},{"id":"16","type":"projects","attributes":{"name":"One Project","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"17","type":"projects","attributes":{"name":"project0","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"18","type":"projects","attributes":{"name":"project1","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"19","type":"projects","attributes":{"name":"project2","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"20","type":"projects","attributes":{"name":"project3","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"21","type":"projects","attributes":{"name":"project4","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"22","type":"projects","attributes":{"name":"project5","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"23","type":"projects","attributes":{"name":"project6","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"24","type":"projects","attributes":{"name":"project7","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"25","type":"projects","attributes":{"name":"project8","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"26","type":"projects","attributes":{"name":"project9","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}}],"included":[{"id":"1","type":"sectors","attributes":{"name":"Agriculture"}},{"id":"1","type":"organizations","attributes":{"name":"inactive_organization"}},{"id":"2","type":"organizations","attributes":{"name":"One Organization"}},{"id":"1","type":"donors","attributes":{"name":"Red Cross"}},{"id":"2","type":"sectors","attributes":{"name":"Agriculture"}}]}
 
 
 Getting a list of projects with a limit
@@ -71,16 +71,46 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 793
+  Content-Length: 864
   Content-Type: application/json; charset=utf-8
-  ETag: W/"c4759da84df398fb3cbee7b25a19c952"
+  ETag: W/"5a743c12199b129a8bbc68a68d30978a"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: c98b4cd5-ab54-4dd5-8199-73260993520d
-  X-Runtime: 0.047273
+  X-Request-Id: d42a07eb-1437-4d57-b523-62c8cb6331ca
+  X-Runtime: 0.050932
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"1","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"1"}]},"geolocations":{"data":[]}}},{"id":"2","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"sectors":{"data":[]},"geolocations":{"data":[]}}},{"id":"3","type":"projects","attributes":{"name":"project_with_donor","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}}],"included":[{"id":"1","type":"sectors","attributes":{"name":"Agriculture"}},{"id":"1","type":"organizations","attributes":{"name":"One Organization"}}]}
+  {"data":[{"id":"1","type":"projects","attributes":{"name":"project_in_different_countries","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"2","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"1"}]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"3","type":"projects","attributes":{"name":"inactive_project","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}}],"included":[{"id":"1","type":"sectors","attributes":{"name":"Agriculture"}},{"id":"1","type":"organizations","attributes":{"name":"inactive_organization"}}]}
+
+
+Getting a list of active projects only
+--------------------------------------
+
+Parameters:
+  * status - String. should be 'active'
+
+Request:
+  GET /api/projects?status=active
+  Accept: application/json; application/vnd.ngoaidmap-api-v1+json
+  Content-Type: application/json
+  Cookie: 
+  Host: http://ngoaidmap.org
+
+  status=active
+
+Response:
+  Status: 200 OK
+  Cache-Control: max-age=0, private, must-revalidate
+  Content-Length: 2548
+  Content-Type: application/json; charset=utf-8
+  ETag: W/"bc47b961343b412d941d493407c045cb"
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-Request-Id: 3b28cacd-dfa4-4dc8-91ee-c2794cdc46b4
+  X-Runtime: 0.056652
+  X-XSS-Protection: 1; mode=block
+
+  {"data":[{"id":"1","type":"projects","attributes":{"name":"project_in_different_countries","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"2","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"1"}]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"4","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"2"}},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"5","type":"projects","attributes":{"name":"project_with_donor","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[{"type":"donors","id":"1"}]}}},{"id":"6","type":"projects","attributes":{"name":"project_with_sector","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"2"}]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"7","type":"projects","attributes":{"name":"project_with_country","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"1"}]},"donors":{"data":[]}}},{"id":"8","type":"projects","attributes":{"name":"project_with_geolocation","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"3"}]},"donors":{"data":[]}}},{"id":"39","type":"projects","attributes":{"name":"project0","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"40","type":"projects","attributes":{"name":"project1","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}},{"id":"41","type":"projects","attributes":{"name":"project2","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}}],"included":[{"id":"1","type":"sectors","attributes":{"name":"Agriculture"}},{"id":"2","type":"organizations","attributes":{"name":"One Organization"}},{"id":"1","type":"donors","attributes":{"name":"Red Cross"}},{"id":"2","type":"sectors","attributes":{"name":"Agriculture"}}]}
 
 
 Getting a list of projects by implementing organization
@@ -90,27 +120,27 @@ Parameters:
   * organizations - Array. Organization ids
 
 Request:
-  GET /api/projects?organizations[]=1
+  GET /api/projects?organizations[]=2
   Accept: application/json; application/vnd.ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
   Host: http://ngoaidmap.org
 
-  organizations=["1"]
+  organizations=["2"]
 
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 321
+  Content-Length: 342
   Content-Type: application/json; charset=utf-8
-  ETag: W/"51c1bc05cabee76daf74f014518ec49d"
+  ETag: W/"b8640e33b4317593546c472d128e3aa2"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 4ffa8083-da81-49b4-9bca-7c33cfeef70c
-  X-Runtime: 0.029228
+  X-Request-Id: 877aa495-58fd-4e37-9e58-15ec2c47a9a1
+  X-Runtime: 0.030126
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"2","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"sectors":{"data":[]},"geolocations":{"data":[]}}}],"included":[{"id":"1","type":"organizations","attributes":{"name":"One Organization"}}]}
+  {"data":[{"id":"4","type":"projects","attributes":{"name":"project_with_organization","description":null},"relationships":{"organization":{"data":{"type":"organizations","id":"2"}},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}}],"included":[{"id":"2","type":"organizations","attributes":{"name":"One Organization"}}]}
 
 
 Getting a list of projects by donors
@@ -131,16 +161,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 197
+  Content-Length: 318
   Content-Type: application/json; charset=utf-8
-  ETag: W/"3b90a9d5e65b17746ac5df97d54694a1"
+  ETag: W/"b8dc23b3ef3c7faaa4c4b927e1986c7b"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: f345c0aa-0852-4afe-93a1-376bb3f84c88
-  X-Runtime: 0.028841
+  X-Request-Id: 1331cd7f-3414-447b-9ef7-d3f258b8dbcb
+  X-Runtime: 0.044306
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"3","type":"projects","attributes":{"name":"project_with_donor","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}}]}
+  {"data":[{"id":"5","type":"projects","attributes":{"name":"project_with_donor","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[{"type":"donors","id":"1"}]}}}],"included":[{"id":"1","type":"donors","attributes":{"name":"Red Cross"}}]}
 
 
 Getting a list of projects by sectors
@@ -161,16 +191,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 302
+  Content-Length: 323
   Content-Type: application/json; charset=utf-8
-  ETag: W/"d700d14175333864d6b5fc563a29de36"
+  ETag: W/"5338044da23c6fe32b6413832ef129ea"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 8f193af7-7c72-4c5e-a797-fc7292fff27c
-  X-Runtime: 0.031100
+  X-Request-Id: 66937cdc-9286-42e8-8391-73bb26ab9b1d
+  X-Runtime: 0.029778
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"4","type":"projects","attributes":{"name":"project_with_sector","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"2"}]},"geolocations":{"data":[]}}}],"included":[{"id":"2","type":"sectors","attributes":{"name":"Agriculture"}}]}
+  {"data":[{"id":"6","type":"projects","attributes":{"name":"project_with_sector","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[{"type":"sectors","id":"2"}]},"geolocations":{"data":[]},"donors":{"data":[]}}}],"included":[{"id":"2","type":"sectors","attributes":{"name":"Agriculture"}}]}
 
 
 Getting a list of projects by countries
@@ -191,16 +221,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 523
+  Content-Length: 252
   Content-Type: application/json; charset=utf-8
-  ETag: W/"0fb9b6651e97814a2bdd234727976049"
+  ETag: W/"3e06a980b066a30b6c698d6f3f0ac892"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 492074f8-f8a9-4cfd-8598-61695b8e6de4
-  X-Runtime: 0.032144
+  X-Request-Id: 4208ab28-495d-4d24-b8a0-4c49b5b7b990
+  X-Runtime: 0.029499
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"5","type":"projects","attributes":{"name":"project_with_country","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"1"}]}}}],"included":[{"id":"1","type":"geolocations","attributes":{"uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}}]}
+  {"data":[{"id":"7","type":"projects","attributes":{"name":"project_with_country","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"1"}]},"donors":{"data":[]}}}]}
 
 
 Getting a list of projects by geolocation
@@ -223,16 +253,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 527
+  Content-Length: 256
   Content-Type: application/json; charset=utf-8
-  ETag: W/"cbe3d870ef7cb5b48880ad816ff877c6"
+  ETag: W/"89e33882dc3d94d057a9d9becbd9eab5"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 18b2f27a-9b4e-43c5-82d4-1ddb77d3b916
-  X-Runtime: 0.029802
+  X-Request-Id: 288d08cd-a971-4f5b-9028-db7640ef77a7
+  X-Runtime: 0.030343
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"6","type":"projects","attributes":{"name":"project_with_geolocation","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"3"}]}}}],"included":[{"id":"3","type":"geolocations","attributes":{"uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}}]}
+  {"data":[{"id":"8","type":"projects","attributes":{"name":"project_with_geolocation","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[{"type":"geolocations","id":"3"}]},"donors":{"data":[]}}}]}
 
 
 Get a particular project data
@@ -242,7 +272,7 @@ Parameters:
   * id - A project's id
 
 Request:
-  GET /api/projects/38
+  GET /api/projects/47
   Accept: application/json; application/vnd.ngoaidmap-api-v1+json
   Content-Type: application/json
   Cookie: 
@@ -251,13 +281,15 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 189
+  Content-Length: 210
   Content-Type: application/json; charset=utf-8
-  ETag: W/"f278f7be9b41983ddd9201218e733d8e"
+  ETag: W/"704c9ad2790ee8d2a69cbc6e13b7bed6"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: bc7f60ba-e391-4658-a79b-c1d0e3053845
-  X-Runtime: 0.010781
+  X-Request-Id: d7c572a6-c696-4298-b19a-ded2a3dfa3e9
+  X-Runtime: 0.010609
   X-XSS-Protection: 1; mode=block
 
-  {"data":{"id":"38","type":"projects","attributes":{"name":"One Project","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]}}}}
+  {"data":{"id":"47","type":"projects","attributes":{"name":"One Project","description":null},"relationships":{"organization":{"data":null},"sectors":{"data":[]},"geolocations":{"data":[]},"donors":{"data":[]}}}}
+
+

@@ -2,8 +2,11 @@
 #
 # Table name: sectors
 #
-#  id   :integer          not null, primary key
-#  name :string(255)
+#  id                    :integer          not null, primary key
+#  name                  :string(255)
+#  oecd_dac_name         :string(255)
+#  sector_vocab_code     :string(255)
+#  oecd_dac_purpose_code :string(255)
 #
 
 class SectorSerializer < ActiveModel::Serializer

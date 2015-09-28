@@ -30,17 +30,17 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_organization\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[{\"type\":\"sectors\",\"id\":\"1\"}]},\"geolocations\":{\"data\":[]}}},{\"id\":\"2\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_organization\",\"description\":null},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"1\"}},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]}}},{\"id\":\"3\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_donor\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]}}}],\"included\":[{\"id\":\"1\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\"}},{\"id\":\"1\",\"type\":\"organizations\",\"attributes\":{\"name\":\"One Organization\"}}]}",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_in_different_countries\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}},{\"id\":\"2\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_organization\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[{\"type\":\"sectors\",\"id\":\"1\"}]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}},{\"id\":\"3\",\"type\":\"projects\",\"attributes\":{\"name\":\"inactive_project\",\"description\":null},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"1\"}},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}}],\"included\":[{\"id\":\"1\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\"}},{\"id\":\"1\",\"type\":\"organizations\",\"attributes\":{\"name\":\"inactive_organization\"}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"c4759da84df398fb3cbee7b25a19c952\"",
+        "ETag": "W/\"5a743c12199b129a8bbc68a68d30978a\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "c98b4cd5-ab54-4dd5-8199-73260993520d",
-        "X-Runtime": "0.047273",
-        "Content-Length": "793"
+        "X-Request-Id": "d42a07eb-1437-4d57-b523-62c8cb6331ca",
+        "X-Runtime": "0.050932",
+        "Content-Length": "864"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/projects?limit=3\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

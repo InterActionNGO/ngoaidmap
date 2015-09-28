@@ -51,6 +51,27 @@ resource 'Projects' do
     end
   end
 
+  get "/api/projects?status=:status" do
+    parameter :status, "String. should be 'active' for active projects or 'inactive' for inactive projects"
+    let(:status) {'active'}
+    let!(:projects) do
+      3.times do |p|
+        FactoryGirl.create(:project, name: "project#{p}", end_date: Time.now + 10.years, start_date: 1.year.ago)
+      end
+    end
+    let!(:project) do
+        FactoryGirl.create(:project, name: "inactive project", end_date: Time.now - 10.years, start_date: 11.years.ago)
+    end
+
+    example_request "Getting a list of active projects only" do
+      #expect(status).to eq(200)
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
+      expect results.include?(['project1', 'project2', 'project3'])
+      expect !results.include?(['inactive project'])
+    end
+  end
+
+
   get "/api/projects?organizations[]=:organization" do
     parameter :organizations, "Array. Organization ids"
     p = FactoryGirl.create(:project, name: "project_with_organization")
@@ -149,6 +170,18 @@ resource 'Projects' do
       results = JSON.parse(response_body)
       expect(results.length).to be == 1
       expect(results['data']['attributes']['name']).to  be == name
+    end
+  end
+
+    get "/api/projects?q=:q" do
+    parameter :q, "String. Text to search"
+    p = FactoryGirl.create(:project, name: "project", description:'lore ipsum text to find')
+    let(:q){'text to find'}
+
+    example_request "Getting a list of projects by text search on name or description" do
+      expect(status).to eq(200)
+      results = JSON.parse(response_body)['data'].map{|r| r['attributes']['description']}
+      expect(results).to eq(['lore ipsum text to find'])
     end
   end
 

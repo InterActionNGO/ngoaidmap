@@ -220,6 +220,10 @@ class GeoregionController < ApplicationController
   #   end
   end
 
+  def resource
+    Geolocation
+  end
+
   def old_regions
     region = Region.find(params[:id], :select => Region.custom_fields)
     raise NotFound unless region
