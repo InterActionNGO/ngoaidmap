@@ -3,6 +3,8 @@
   <strong>
     {{name}}
     {{#if breadcrumbs}}, {{{breadcrumbs}}}{{/if}}
-  </strong>,
-  {{count}} {{sector}} {{projects_string}} {{#if organization}}by {{organization}}{{/if}} {{#if country}}in {{country}}{{/if}}
+  </strong>
+  {{#if countVisibiblity}},
+    {{count}} {{sector}} {{projects_string}} {{#if organization}}by {{organization}}{{/if}} {{#if country}}in {{country}}{{/if}}
+  {{/if}}
 </p>
