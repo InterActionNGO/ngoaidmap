@@ -43,6 +43,7 @@ define([
         breadcrumbs: this.breadcrumbs,
         projects_string: (this.conexion.getProjects().length == 1) ? 'project' : 'projects',
         count: this.conexion.getProjects().length,
+        countVisibiblity: ! !!project,
         sector: (this.filters['sectors[]']) ? this.sectors[0].attributes.name : '',
         country: (this.filters['geolocation']) ? this.countries[0].name : '',
         organization: (this.filters['organizations[]']) ? this.organizations[0].attributes.name : '',
