@@ -3,6 +3,9 @@
   <reporting-org ref="US-EIN-13-3287064" type="2" secondary-reporter="1">
       <narrative>NGO Aid Map</narrative>
   </reporting-org>
+  <participating-org ref="<%= project.funding_org.try(:iati_organization_id) %>" role="Funding">
+    <narrative><%= project.funding_org.try(:name) %></narrative>
+  </participating-org>
   <title>
    <narrative><%= project.name %></narrative>
   </title>
@@ -23,10 +26,10 @@
    </owner-org>
   </other-identifier>
   <activity-status code="<%= project.activity_status %>" />
-    <activity-date iso-date="<%= project.start_date %>" type="1">
+    <activity-date iso-date="<%= project.start_date.strftime("%m/%d/%Y") %>" type="1">
      <narrative>Planned start date of the activity</narrative>
     </activity-date>
-    <activity-date iso-date="<%= project.end_date %>" type="3">
+    <activity-date iso-date="<%= project.end_date.strftime("%m/%d/%Y") %>" type="3">
      <narrative>Planned end date of the activity</narrative>
     </activity-date>
 
@@ -41,12 +44,23 @@
    <website><%= project.website %></website>
   </contact-info>
   <activity-scope code="<%= project.activity_scope_code %>" />
-  <% project.iati_countries.each do |c| %>
-    <recipient-country code="<%= c %>" percentage="<%=  %>" />
+  <% project.countries.each_with_index do |c,i| %>
+    <recipient-country code="<%= c.country_code %>" percentage="<%=
+      if project.countries.size > 1
+        then
+        if i+1 == project.countries.size
+          then
+            (100.to_f/project.countries.size).ceil
+          else
+            (100.to_f/project.countries.size).floor
+          end
+      else
+        100
+      end %>" />
   <% end %>
   <% project.iati_locations.each do |l| %>
     <location ref="<%= l.uid %>">
-     <!-- <location-reach code="1" /> -->
+     <location-reach code="1" />
      <location-id vocabulary="<%= l.provider %>" code="<%= l.uid %>" />
      <name>
       <narrative><%= l.name %></narrative>
@@ -59,19 +73,38 @@
       <pos><%= l.latitude %> <%= l.longitude %></pos>
      </point>
      <exactness code="2"/>
-     <location-class code="1 #if is adm1 then 1 else blank"/>
+     <location-class code="<%= l.adm_level == 1 ? 1 : '' %>"/>
      <feature-designation code="<%= l.fcode %>"/>
     </location>
   <% end %>
   <!--sector starts-->
-  <sector vocabulary="2" code="111" percentage="50#if there is more than one sector blank" />
-  <sector vocabulary="2" code="112" percentage="50#if there is more than one sector blank" />
+  <% project.sectors.each_with_index do |s, i| %>
+    <sector vocabulary="<%= s.sector_vocab_code %>" code="<%= s.oecd_dac_purpose_code.present? ? s.oecd_dac_purpose_code : s.id %>" percentage="<%=
+      if project.sectors.size > 1
+        then
+        if i+1 == project.sectors.size
+          then
+            (100.to_f/project.sectors.size).ceil
+          else
+            (100.to_f/project.sectors.size).floor
+          end
+      else
+        100
+      end %>">
+      <narrative><%= s.oecd_dac_name.present? ? s.oecd_dac_name : s.name %></narrative>
+    </sector>
+  <% end %>
   <!--sector ends-->
+  <budget type="1">
+   <period-start iso-date="<%= project.start_date.strftime("%m/%d/%Y") %>" />
+   <period-end iso-date="<%= project.end_date.strftime("%m/%d/%Y") %>" />
+   <value currency="<%= project.budget_currency.present? ? project.budget_currency : 'USD' %>" value-date="<%= project.start_date.strftime("%m/%d/%Y") %>"><%= project.budget.to_i %></value>
+  </budget>
   <!--transaction starts-->
   <transaction ref="">
    <transaction-type code="2" />
-   <transaction-date iso-date="# Project start date" />
-   <value currency="EUR #Currency field" value-date="# Start date"># Project budget</value>
+   <transaction-date iso-date="<%= project.start_date.strftime("%m/%d/%Y") %>" />
+   <value currency="USD?????" value-date="<%= project.start_date.strftime("%m/%d/%Y") %>"><%= project.budget.to_i %></value>
    <description>
     <narrative>Total project budget</narrative>
    </description>
@@ -83,8 +116,10 @@
    </receiver-org>
    <disbursement-channel code="" />
    <!--Note: only a recipient-region OR a recipient-country is expected-->
-   <recipient-country code="AF" /> #As many as countries
-   <flow-type code="10????30" />
+   <% project.countries.each do |c| %>
+    <recipient-country code="<%= c.country_code %>" />
+   <% end %>
+   <flow-type code="10" />
    <finance-type code="100" />
   </transaction>
   <!--transaction ends-->

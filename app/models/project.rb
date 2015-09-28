@@ -34,24 +34,17 @@
 #  project_needs                           :text
 #  idprefugee_camp                         :text
 #  organization_id                         :string(255)
+#  prime_awardee_id                        :integer
 #  budget_currency                         :string(255)
 #  budget_value_date                       :date
 #  target_project_reach                    :integer
 #  actual_project_reach                    :integer
 #  project_reach_unit                      :string(255)
-#  project_reach_actual_start_date         :date
-#  project_reach_target_start_date         :date
-#  project_reach_actual_end_date           :date
-#  project_reach_target_end_date           :date
-#  project_reach_type                      :string(255)      default("Output")
-#  project_reach_type_code                 :integer          default(1)
-#  project_reach_measure                   :string(255)      default("Unit")
-#  project_reach_measure_code              :integer          default(1)
-#  project_reach_description               :text
 #
 
 class Project < ActiveRecord::Base
   belongs_to :primary_organization, foreign_key: :primary_organization_id, class_name: 'Organization'
+  belongs_to :prime_awardee, foreign_key: :prime_awardee_id, class_name: 'Organization'
   has_and_belongs_to_many :clusters
   has_and_belongs_to_many :sectors
   has_and_belongs_to_many :regions
@@ -175,6 +168,15 @@ class Project < ActiveRecord::Base
   end
 
   ############################################## IATI ##############################################
+  def funding_org
+    if self.prime_awardee.present? && self.prime_awardee == self.primary_organization
+      self.donors.first
+    elsif self.prime_awardee.present?
+      self.prime_awardee
+    else
+      self.donors.first
+    end
+  end
 
   def activity_status
     if self.start_date > Time.now.in_time_zone
@@ -211,12 +213,8 @@ class Project < ActiveRecord::Base
     activity_scope_code
   end
 
-  def iati_countries
-    self.geolocations.pluck(:country_code).uniq
-  end
-
   def iati_locations
-    self.geolocations.where('adm_level > 0')
+    self.geolocations.where('adm_level > 0').uniq
   end
 
 end

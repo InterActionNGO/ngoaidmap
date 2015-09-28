@@ -1,0 +1,29 @@
+name,new_name,oecd_dac_name,oecd_dac_purpose_code,sector_vocab_code
+Agriculture,Agriculture,Agriculture,311,2
+Forestry,Forestry,Forestry,312,2
+Fishing,Fishing,Fishing,313,2
+Communications,Communications/Technology,Communications,220,2
+Disaster Management,Disaster Prevention and Preparedness,Disaster Prevention and Preparedness,740,2
+Economic Recovery and Development,Economic Recovery and Development,,,99
+Education,Education,Education,110,2
+Energy,Energy,Energy Generation and Supply,230,2
+Environment,Environment,General environmental protection,410,2
+Food Aid,Food Aid,,,99
+Health,Health,,,99
+Human Rights Democracy and Governance,Human Rights Democracy and Governance,Government and Civil Society,150,2
+Capacity Strengthening for CSOs (general),Capacity Strengthening for CSOs (general),,,99
+Humanitarian aid,Humanitarian Aid,Humanitarian Aid,700,2
+Mining and extractive resources,Mining and Extractive Resources,Mineral Resources and Mining,322,2
+Peace and Security,Conflict Prevention and Resolution/Peace and Security,"Conflict prevention and resolution, peace and security",152,2
+Protection,Protection,Relief coordination; protection and support services,72050,1
+Shelter and Housing,Shelter and Housing,Low-cost housing,16040,1
+Safety nets,Social Services,Other Social Infrastructure and Services,160,2
+Water Sanitation and Hygiene,Water Sanitation and Hygiene,Water and Sanitation,140,2
+Other,Other,Unallocated/Unspecified,998,2
+Refugee Resettlement,Refugee Resettlement,Refugees in Donor countries,930,2
+Gender,Gender,Women's equality organizations and institutions,15170,1
+Animal Welfare,Animal Welfare,,,99
+Transport / Infrastructure,Transport/Infrastructure,Transport and Storage,210,2
+Construction,Construction,Construction,323,2
+Debt Relief,Debt Relief,Action Relating to Debt,600,2
+Trade,Trade,Trade Policy and Regulations and Trade-Related Adjustment,331,2
