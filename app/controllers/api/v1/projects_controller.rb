@@ -19,6 +19,9 @@ module Api
 
 
       def projects_params
+        if request.fullpath.include?('iati') && (!params[:limit] or params[:limit].to_i > 100)
+          params.merge!(limit: '10')
+        end
         params.permit(:offset, :limit, :format, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[])
       end
     end
