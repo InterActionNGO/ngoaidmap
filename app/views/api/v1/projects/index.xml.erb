@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<iati-activities generated-datetime="<%= Time.now.xmlschema %>" version="2.01" linked-data-default="http://ngoaidmap.org/iati/activities">
+<iati-activities generated-datetime="<%= Time.now.xmlschema %>" version="2.01" linked-data-default="http://ngoaidmap.org">
 <% @projects.each do |p| %>
     <%= render partial: '/api/v1/projects/activity', locals: {project: p} %>
 <% end %>

@@ -168,13 +168,21 @@ class Project < ActiveRecord::Base
   end
 
   ############################################## IATI ##############################################
-  def funding_org
+  def funding_orgs
     if self.prime_awardee.present? && self.prime_awardee == self.primary_organization
-      self.donors.first
+      self.donors
     elsif self.prime_awardee.present?
       self.prime_awardee
     else
-      self.donors.first
+      self.donors
+    end
+  end
+
+  def provider_org
+    if self.funding_orgs.size == 1
+      self.funding_orgs.first
+    else
+      OpenStruct.new(id: '', name: '')
     end
   end
 

@@ -59,6 +59,11 @@
 #  main_data_contact_country       :string(255)
 #  organization_id                 :string(255)
 #  interaction_member              :boolean          default(FALSE)
+#  organization_type               :string(255)
+#  organization_type_code          :integer
+#  iati_organizationid             :string(255)
+#  publishing_to_iati              :boolean          default(FALSE)
+#  membership_status               :string(255)      default("active")
 #
 
 class Organization < ActiveRecord::Base

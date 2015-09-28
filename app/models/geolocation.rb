@@ -50,4 +50,21 @@ class Geolocation < ActiveRecord::Base
     result = ActiveRecord::Base.connection.execute(query)
     result.map{|r| r}
   end
+  def iati_uid
+    uid = self.uid
+    uid = uid.gsub('gn_','') if uid.include?('gn_')
+    uid = uid.gsub('osm_','') if uid.include?('osm_')
+    uid
+    # gadm_ ne_ cust_
+  end
+  def iati_provider
+    case self.provider
+    when 'gn'
+      'G1'
+    when 'osm'
+      'G2'
+    else
+      ''
+    end
+  end
 end

@@ -336,6 +336,11 @@ ActiveRecord::Schema.define(version: 20150925072808) do
     t.string   "main_data_contact_country"
     t.string   "organization_id"
     t.boolean  "interaction_member",              :default => false
+    t.string   "organization_type"
+    t.integer  "organization_type_code"
+    t.string   "iati_organizationid"
+    t.boolean  "publishing_to_iati",              :default => false
+    t.string   "membership_status",               :default => "active"
   end
 
   add_index "organizations", ["name"], :name => "index_organizations_on_name"

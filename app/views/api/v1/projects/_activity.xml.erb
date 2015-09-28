@@ -1,11 +1,8 @@
-<iati-activity xml:lang="en" default-currency="USD" last-updated-datetime="<%= Time.now.xmlschema %>" linked-data-uri="http://ngoaidmap.org/iati/activities/<%= project.id %>" hierarchy="1">
+<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.strftime("%Y%m%d") %>" linked-data-uri="http://ngoaidmap.org/projects/<%= project.id %>">
   <iati-identifier>US-EIN-13-3287064-<%= project.intervention_id %></iati-identifier>
-  <reporting-org ref="US-EIN-13-3287064" type="2" secondary-reporter="1">
-      <narrative>NGO Aid Map</narrative>
+  <reporting-org ref="US-EIN-13-3287064NAM" type="22" secondary-reporter="1">
+  <narrative>InterAction’s NGO Aid Map</narrative>
   </reporting-org>
-  <participating-org ref="<%= project.funding_org.try(:iati_organization_id) %>" role="Funding">
-    <narrative><%= project.funding_org.try(:name) %></narrative>
-  </participating-org>
   <title>
    <narrative><%= project.name %></narrative>
   </title>
@@ -15,122 +12,101 @@
   <participating-org ref="<%= project.primary_organization.try(:iati_organizationid) %>" role="4" type="<%= project.primary_organization.try(:organization_type_code) %>">
     <narrative><%= project.primary_organization.try(:name) %> </narrative>
   </participating-org>
-  <% project.donors.each do  |d| %>
+  <% project.funding_orgs.each do  |d| %>
     <participating-org ref="<%= d.iati_organizationid %>" role="1" type="<%= d.organization_type_code %>">
       <narrative><%= d.name %> </narrative>
     </participating-org>
   <% end %>
-  <other-identifier ref="<%= project.intervention_id %>" type="A1">
-   <owner-org ref="Organization Intervention ID">
-    <narrative>Organization reporting data</narrative>
-   </owner-org>
+  <other-identifier ref="US-EIN-13-3287064NAM" type="A1">
+    <owner-org ref="US-EIN-13-3287064NAM">
+      <narrative>InterAction’s NGO Aid Map</narrative>
+    </owner-org>
+  </other-identifier>
+  <other-identifier ref="<%= project.primary_organization.try(:iati_organizationid) %>" type="B9">
+    <narrative><%= project.primary_organization.try(:name) %></narrative>
   </other-identifier>
   <activity-status code="<%= project.activity_status %>" />
-    <activity-date iso-date="<%= project.start_date.strftime("%m/%d/%Y") %>" type="1">
-     <narrative>Planned start date of the activity</narrative>
-    </activity-date>
-    <activity-date iso-date="<%= project.end_date.strftime("%m/%d/%Y") %>" type="3">
-     <narrative>Planned end date of the activity</narrative>
-    </activity-date>
-
+  <activity-date iso-date="<%= project.start_date.strftime("%Y%m%d") %>" type="1">
+    <narrative>Planned start date of the activity</narrative>
+  </activity-date>
+  <activity-date iso-date="<%= project.end_date.strftime("%Y%m%d") %>" type="3">
+    <narrative>Planned end date of the activity</narrative>
+  </activity-date>
   <contact-info type="1">
-   <person-name>
+  <person-name>
     <narrative><%= project.contact_person %></narrative>
-   </person-name>
-   <job-title>
+  </person-name>
+  <job-title>
     <narrative><%= project.contact_position %></narrative>
-   </job-title>
-   <email><%= project.contact_email %></email>
-   <website><%= project.website %></website>
+  </job-title>
+    <email><%= project.contact_email %></email>
+    <website><%= project.website %></website>
   </contact-info>
-  <activity-scope code="<%= project.activity_scope_code %>" />
   <% project.countries.each_with_index do |c,i| %>
     <recipient-country code="<%= c.country_code %>" percentage="<%=
-      if project.countries.size > 1
+    if project.countries.size > 1
+      then
+      if i+1 == project.countries.size
         then
-        if i+1 == project.countries.size
-          then
-            (100.to_f/project.countries.size).ceil
-          else
-            (100.to_f/project.countries.size).floor
-          end
+        (100.to_f/project.countries.size).ceil
       else
-        100
+        (100.to_f/project.countries.size).floor
+      end
+    else
+      100
       end %>" />
   <% end %>
   <% project.iati_locations.each do |l| %>
-    <location ref="<%= l.uid %>">
-     <location-reach code="1" />
-     <location-id vocabulary="<%= l.provider %>" code="<%= l.uid %>" />
-     <name>
-      <narrative><%= l.name %></narrative>
-     </name>
-     <description>
-      <narrative><%=l.name %>, <%= l.country_name %></narrative>
-     </description>
-     <administrative vocabulary="<%= l.provider %>" level="<%= l.adm_level %>" code="<%= l.uid %>" />
-     <point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
-      <pos><%= l.latitude %> <%= l.longitude %></pos>
-     </point>
-     <exactness code="2"/>
-     <location-class code="<%= l.adm_level == 1 ? 1 : '' %>"/>
-     <feature-designation code="<%= l.fcode %>"/>
+      <location ref="<%= l.iati_uid %>">
+       <location-id vocabulary="<%= l.iati_provider %>" code="<%= l.iati_uid %>" />
+       <name>
+        <narrative><%= l.name %></narrative>
+      </name>
+      <description>
+        <narrative><%=l.name %>, <%= l.country_name %></narrative>
+      </description>
+      <administrative vocabulary="<%= l.iati_provider %>" level="<%= l.adm_level %>" code="<%= l.iati_uid %>" />
+       <point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+        <pos><%= l.latitude %> <%= l.longitude %></pos>
+      </point>
+      <exactness code="2"/>
+      <location-class code="<%= l.adm_level == 1 ? 1 : '' %>"/>
     </location>
   <% end %>
-  <!--sector starts-->
   <% project.sectors.each_with_index do |s, i| %>
     <sector vocabulary="<%= s.sector_vocab_code %>" code="<%= s.oecd_dac_purpose_code.present? ? s.oecd_dac_purpose_code : s.id %>" percentage="<%=
       if project.sectors.size > 1
         then
         if i+1 == project.sectors.size
           then
-            (100.to_f/project.sectors.size).ceil
-          else
-            (100.to_f/project.sectors.size).floor
-          end
+          (100.to_f/project.sectors.size).ceil
+        else
+          (100.to_f/project.sectors.size).floor
+        end
       else
         100
-      end %>">
-      <narrative><%= s.oecd_dac_name.present? ? s.oecd_dac_name : s.name %></narrative>
-    </sector>
+        end %>">
+        <narrative><%= s.oecd_dac_name.present? ? s.oecd_dac_name : s.name %></narrative>
+      </sector>
   <% end %>
-  <!--sector ends-->
-  <budget type="1">
-   <period-start iso-date="<%= project.start_date.strftime("%m/%d/%Y") %>" />
-   <period-end iso-date="<%= project.end_date.strftime("%m/%d/%Y") %>" />
-   <value currency="<%= project.budget_currency.present? ? project.budget_currency : 'USD' %>" value-date="<%= project.start_date.strftime("%m/%d/%Y") %>"><%= project.budget.to_i %></value>
-  </budget>
-  <!--transaction starts-->
   <transaction ref="">
-   <transaction-type code="2" />
-   <transaction-date iso-date="<%= project.start_date.strftime("%m/%d/%Y") %>" />
-   <value currency="USD?????" value-date="<%= project.start_date.strftime("%m/%d/%Y") %>"><%= project.budget.to_i %></value>
-   <description>
-    <narrative>Total project budget</narrative>
-   </description>
-   <provider-org provider-activity-id="BB-BBB-123456789-1234AA" ref="BB-BBB-123456789">
-    <narrative>Agency B</narrative>
-   </provider-org>
-   <receiver-org receiver-activity-id="AA-AAA-123456789-1234" ref="AA-AAA-123456789">
-    <narrative>Agency A</narrative>
-   </receiver-org>
-   <disbursement-channel code="" />
-   <!--Note: only a recipient-region OR a recipient-country is expected-->
-   <% project.countries.each do |c| %>
-    <recipient-country code="<%= c.country_code %>" />
-   <% end %>
-   <flow-type code="10" />
-   <finance-type code="100" />
+    <transaction-type code="2" />
+    <transaction-date iso-date="<%= project.start_date.strftime("%Y%m%d") %>" />
+    <value currency="<%= project.budget_currency %>" value-date="<%= project.start_date.strftime("%Y%m%d") %>"><%= project.budget.to_i == 0 || !project.budget.present? ? '' : project.budget.to_i %></value>
+    <description>
+      <narrative>Total project budget</narrative>
+    </description>
+    <provider-org ref="<%= project.provider_org.id %>">
+      <narrative><%= project.provider_org.name %></narrative>
+    </provider-org>
+    <receiver-org ref="<%= project.primary_organization.organization_id %>">
+      <narrative><%= project.primary_organization.name %></narrative>
+    </receiver-org>
   </transaction>
-  <!--transaction ends-->
-  <!--document-link starts-->
-   <document-link format="application/vnd.oasis.opendocument.text" url="http:www.example.org/docs/report_en.odt">
-   <title>
-    <narrative>Project Report</narrative>
-   </title>
-   <category code="A01" />
-   <language code="en" /> -->
+  <document-link format="text/html" url="<%= project.website %>">
+    <title>
+      <narrative>Project Website</narrative>
+    </title>
+    <category code="A12" />
   </document-link>
-  <!--document-link ends-->
- </iati-activity>
-  <!--iati-activity ends-->
+</iati-activity>
