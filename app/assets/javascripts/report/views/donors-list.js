@@ -1,7 +1,7 @@
 'use strict';
 
 define([
-  'views/class/lists'
+  'report/views/class/lists'
 ], function(ListsView) {
 
   var DonorsListView = ListsView.extend({

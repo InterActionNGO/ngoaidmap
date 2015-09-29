@@ -7,8 +7,8 @@ define([
   'highcharts',
   'moment',
   'momentRange',
-  'models/report',
-  'models/filter'
+  'report/models/report',
+  'report/models/filter'
 ], function($, _, Backbone, highcharts, moment, momentRange, ReportModel, FilterModel) {
 
   var TimelineChartsView = Backbone.View.extend({
