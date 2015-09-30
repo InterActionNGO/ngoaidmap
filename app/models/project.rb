@@ -34,12 +34,13 @@
 #  project_needs                           :text
 #  idprefugee_camp                         :text
 #  organization_id                         :string(255)
-#  prime_awardee_id                        :integer
 #  budget_currency                         :string(255)
 #  budget_value_date                       :date
 #  target_project_reach                    :integer
 #  actual_project_reach                    :integer
 #  project_reach_unit                      :string(255)
+#  prime_awardee_id                        :integer
+#  geographical_scope                      :string(255)      default("regional")
 #
 
 class Project < ActiveRecord::Base
@@ -75,13 +76,13 @@ class Project < ActiveRecord::Base
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){where(donors: {id: donors})}
   scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
-  scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
+  scope :countries, -> (countries){where(geolocations: {country_id: countries})}
   scope :text_query, -> (q){where('projects.name ilike ? OR projects.description ilike ?', "%%#{q}%%", "%%#{q}%%")}
   scope :starting_after, -> (date){where "start_date > ?", date}
   scope :ending_before, -> (date){where "end_date < ?", date}
 
   def countries
-    Geolocation.where(uid: self.geolocations.pluck(:country_uid)).uniq
+    Geolocation.where(uid: self.geolocations.pluck(:country_id)).uniq
   end
 
   def self.fetch_all(options = {}, from_api = true)
@@ -99,7 +100,7 @@ class Project < ActiveRecord::Base
     projects = projects.limit(options[:limit])                                  if options[:limit]
     projects = projects.active                                                  if options[:status] && options[:status] == 'active'
     projects = projects.inactive                                                if options[:status] && options[:status] == 'inactive'
-    #projects = projects.group('projects.id', 'projects.name', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
+    #projects = projects.group('projects.id', 'projects.name', 'geolocations.id', 'geolocations.country_id', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
     projects = projects.uniq
     if from_api
       projects
@@ -503,29 +504,29 @@ class Project < ActiveRecord::Base
 
       # SELECTS FOR BAR CHARTS ON REPORTING
       concrete_select = <<-SQL
-        SELECT country_uid, country_name,
+        SELECT country_id, country_name,
                count(distinct(project_id)) AS n_projects,  count(distinct(organization_id)) AS n_organizations, sum(distinct(donor_id)) as n_donors
           FROM t
-         WHERE country_uid IN
-              (SELECT country_uid FROM
-                (SELECT distinct(country_uid), count(#{criteria[0]}) AS total
+         WHERE country_id IN
+              (SELECT country_id FROM
+                (SELECT distinct(country_id), count(#{criteria[0]}) AS total
                  FROM t
-                 GROUP BY country_uid ORDER BY total DESC LIMIT #{limit}) max
+                 GROUP BY country_id ORDER BY total DESC LIMIT #{limit}) max
               )
-        GROUP BY country_uid, country_name
+        GROUP BY country_id, country_name
         ORDER BY #{criteria[1]} DESC
       SQL
       countries[:bar_chart]["by_"+criteria[1]] = ActiveRecord::Base.connection.execute(base_select + concrete_select)
 
       # SELECTS FOR MAPS ON REPORTING
       projects_map_select = <<-SQL
-        SELECT DISTINCT(country_uid ||'|'|| country_name ||'|'|| lat||'|'||lon) AS country, count(#{criteria[0]}) AS n_projects
+        SELECT DISTINCT(country_id ||'|'|| country_name ||'|'|| lat||'|'||lon) AS country, count(#{criteria[0]}) AS n_projects
         FROM t
-        WHERE country_uid IN
-          (SELECT country_uid FROM
-            (SELECT DISTINCT(country_uid), count(distinct(#{criteria[0]})) as total FROM t group by country_id ORDER BY total desc LIMIT  #{limit}) max
+        WHERE country_id IN
+          (SELECT country_id FROM
+            (SELECT DISTINCT(country_id), count(distinct(#{criteria[0]})) as total FROM t group by country_id ORDER BY total desc LIMIT  #{limit}) max
           )
-        GROUP BY  country_uid, country_name, lat, lon
+        GROUP BY  country_id, country_name, lat, lon
         ORDER BY n_projects desc
       SQL
       countries[:maps]["by_"+criteria[1]] = ActiveRecord::Base.connection.execute(base_select + projects_map_select)
@@ -563,7 +564,7 @@ class Project < ActiveRecord::Base
 
       # SELECTS FOR MAPS ON REPORTING
       projects_map_select = <<-SQL
-        SELECT DISTINCT(country_uid ||'|'|| country_name ||'|'|| lat||'|'||lon) AS country, count(#{criteria[0]}) AS n_projects
+        SELECT DISTINCT(country_id ||'|'|| country_name ||'|'|| lat||'|'||lon) AS country, count(#{criteria[0]}) AS n_projects
         FROM t
         WHERE organization_id IN
           (SELECT organization_id FROM
@@ -571,7 +572,7 @@ class Project < ActiveRecord::Base
                FROM t group by organization_id
                ORDER BY total desc LIMIT  #{limit}) max
           )
-        GROUP BY  country_uid, country_name, lat, lon
+        GROUP BY  country_id, country_name, lat, lon
         ORDER BY n_projects desc
       SQL
       p (base_select + projects_map_select).gsub("\n", " ")
@@ -588,12 +589,12 @@ class Project < ActiveRecord::Base
     donors[:maps] = {}
 
     # ITERATE over the 3 criterias for grouping on Donors scenario
-    [["project_id","n_projects"], ["organization_id","n_organizations"], ["country_uid","n_countries"]].each do |criteria|
+    [["project_id","n_projects"], ["organization_id","n_organizations"], ["country_id","n_countries"]].each do |criteria|
 
       # SELECTS FOR BAR CHARTS ON REPORTING
       concrete_select = <<-SQL
         SELECT donor_id, donor_name,
-               count(distinct(project_id)) AS n_projects, count(distinct(organization_id)) AS n_organizations, count(distinct(country_uid)) AS n_countries
+               count(distinct(project_id)) AS n_projects, count(distinct(organization_id)) AS n_organizations, count(distinct(country_id)) AS n_countries
           FROM t
          WHERE donor_id IN
               (SELECT donor_id FROM
@@ -608,13 +609,13 @@ class Project < ActiveRecord::Base
 
       # SELECTS FOR MAPS ON REPORTING
       projects_map_select = <<-SQL
-        SELECT DISTINCT(country_uid ||'|'|| country_name ||'|'|| lat||'|'||lon) AS country, count(#{criteria[0]}) AS n_projects
+        SELECT DISTINCT(country_id ||'|'|| country_name ||'|'|| lat||'|'||lon) AS country, count(#{criteria[0]}) AS n_projects
         FROM t
         WHERE donor_id IN
           (SELECT donor_id FROM
             (SELECT DISTINCT(donor_id), count(distinct(#{criteria[0]})) as total FROM t group by donor_id ORDER BY total desc LIMIT  #{limit}) max
           )
-        GROUP BY  country_uid, country_name, lat, lon
+        GROUP BY  country_id, country_name, lat, lon
         ORDER BY n_projects desc
       SQL
       donors[:maps]["by_"+criteria[1]] = ActiveRecord::Base.connection.execute(base_select + projects_map_select)
@@ -650,13 +651,13 @@ class Project < ActiveRecord::Base
 
       # SELECTS FOR MAPS ON REPORTING
       projects_map_select = <<-SQL
-        SELECT DISTINCT(country_uid ||'|'|| country_name ||'|'|| lat||'|'||lon) AS country, count(#{criteria[0]}) AS n_projects
+        SELECT DISTINCT(country_id ||'|'|| country_name ||'|'|| lat||'|'||lon) AS country, count(#{criteria[0]}) AS n_projects
         FROM t
         WHERE sector_id IN
           (SELECT sector_id FROM
             (SELECT DISTINCT(sector_id), count(distinct(#{criteria[0]})) as total FROM t group by sector_id ORDER BY total desc LIMIT  #{limit}) max
           )
-        GROUP BY  country_uid, country_name, lat, lon
+        GROUP BY  country_id, country_name, lat, lon
         ORDER BY n_projects desc
       SQL
       sectors[:maps]["by_"+criteria[1]] = ActiveRecord::Base.connection.execute(base_select + projects_map_select)
