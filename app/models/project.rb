@@ -76,13 +76,13 @@ class Project < ActiveRecord::Base
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){where(donors: {id: donors})}
   scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
-  scope :countries, -> (countries){where(geolocations: {country_id: countries})}
+  scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
   scope :text_query, -> (q){where('projects.name ilike ? OR projects.description ilike ?', "%%#{q}%%", "%%#{q}%%")}
   scope :starting_after, -> (date){where "start_date > ?", date}
   scope :ending_before, -> (date){where "end_date < ?", date}
 
   def countries
-    Geolocation.where(uid: self.geolocations.pluck(:country_id)).uniq
+    Geolocation.where(uid: self.geolocations.pluck(:country_uid)).uniq
   end
 
   def self.fetch_all(options = {}, from_api = true)
@@ -100,7 +100,7 @@ class Project < ActiveRecord::Base
     projects = projects.limit(options[:limit])                                  if options[:limit]
     projects = projects.active                                                  if options[:status] && options[:status] == 'active'
     projects = projects.inactive                                                if options[:status] && options[:status] == 'inactive'
-    #projects = projects.group('projects.id', 'projects.name', 'geolocations.id', 'geolocations.country_id', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
+    #projects = projects.group('projects.id', 'projects.name', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
     projects = projects.uniq
     if from_api
       projects

@@ -1,4 +1,4 @@
-<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.strftime("%Y%m%d") %>" linked-data-uri="http://ngoaidmap.org/projects/<%= project.id %>">
+<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.strftime("%Y/%m/%d") %>" linked-data-uri="http://ngoaidmap.org/projects/<%= project.id %>">
   <iati-identifier>US-EIN-13-3287064-<%= project.intervention_id %></iati-identifier>
   <reporting-org ref="US-EIN-13-3287064NAM" type="22" secondary-reporter="1">
   <narrative>InterAction’s NGO Aid Map</narrative>
@@ -26,10 +26,10 @@
     <narrative><%= project.primary_organization.try(:name) %></narrative>
   </other-identifier>
   <activity-status code="<%= project.activity_status %>" />
-  <activity-date iso-date="<%= project.start_date.strftime("%Y%m%d") %>" type="1">
+  <activity-date iso-date="<%= project.start_date.strftime("%Y/%m/%d") %>" type="1">
     <narrative>Planned start date of the activity</narrative>
   </activity-date>
-  <activity-date iso-date="<%= project.end_date.strftime("%Y%m%d") %>" type="3">
+  <activity-date iso-date="<%= project.end_date.strftime("%Y/%m/%d") %>" type="3">
     <narrative>Planned end date of the activity</narrative>
   </activity-date>
   <contact-info type="1">
@@ -91,8 +91,8 @@
   <% end %>
   <transaction ref="">
     <transaction-type code="2" />
-    <transaction-date iso-date="<%= project.start_date.strftime("%Y%m%d") %>" />
-    <value currency="<%= project.budget_currency %>" value-date="<%= project.start_date.strftime("%Y%m%d") %>"><%= project.budget.to_i == 0 || !project.budget.present? ? '' : project.budget.to_i %></value>
+    <transaction-date iso-date="<%= project.start_date.strftime("%Y/%m/%d") %>" />
+    <value currency="<%= project.budget_currency %>" value-date="<%= project.start_date.strftime("%Y/%m/%d") %>"><%= project.budget.to_i == 0 || !project.budget.present? ? '' : project.budget.to_i %></value>
     <description>
       <narrative>Total project budget</narrative>
     </description>
