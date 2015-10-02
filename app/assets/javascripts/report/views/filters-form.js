@@ -7,13 +7,13 @@ define([
   '_string',
   'backbone',
   'moment',
-  'models/report',
-  'models/filter',
-  'collections/projects',
-  'collections/organizations',
-  'collections/donors',
-  'collections/countries',
-  'collections/sectors'
+  'report/models/report',
+  'report/models/filter',
+  'report/collections/projects',
+  'report/collections/organizations',
+  'report/collections/donors',
+  'report/collections/countries',
+  'report/collections/sectors'
 
 ], function(
   $, select2, _, _string, Backbone, moment, ReportModel, FilterModel,

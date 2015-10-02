@@ -4,8 +4,8 @@ define([
   'backbone',
   'handlebars',
   'moment',
-  'models/filter',
-  'text!templates/filters.handlebars'
+  'report/models/filter',
+  'text!report/templates/filters.handlebars'
 ], function(Backbone, Handlebars, moment, FilterModel, tpl) {
 
   var FiltersView = Backbone.View.extend({

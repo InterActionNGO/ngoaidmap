@@ -11,7 +11,9 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 # Rails.application.config.assets.precompile += %w( application/main.js )
 Rails.application.config.assets.precompile += %w( main.css )
+Rails.application.config.assets.precompile += %w( report.css )
 Rails.application.config.assets.precompile += %w( modernizr/modernizr.custom.js )
 Rails.application.config.assets.precompile += %w( jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css )
-Rails.application.config.assets.precompile += %w( report.css )
-Rails.application.config.assets.precompile += %w( report/main.js )
+
+Rails.application.config.assets.precompile += %w( application.js )
+Rails.application.config.assets.precompile += %w( report.js )

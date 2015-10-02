@@ -4,8 +4,8 @@ define([
   'underscore',
   'backbone',
   'handlebars',
-  'models/report',
-  'text!templates/lists.handlebars'
+  'report/models/report',
+  'text!report/templates/lists.handlebars'
 ], function(_, Backbone, Handlebars, ReportModel, tpl) {
 
   var ListView = Backbone.View.extend({

@@ -3,8 +3,8 @@
 define([
   'backbone',
   'handlebars',
-  'models/report',
-  'text!templates/summary.handlebars'
+  'report/models/report',
+  'text!report/templates/summary.handlebars'
 ], function(Backbone, Handlebars, ReportModel, tpl) {
 
   var SummaryView = Backbone.View.extend({

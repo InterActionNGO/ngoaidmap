@@ -6,11 +6,11 @@ define([
   'backbone',
   'handlebars',
   'markerCluster',
-  'views/class/chart',
-  'models/report',
-  'models/profile',
-  'text!templates/profile.handlebars',
-  'text!templates/snapshot.handlebars'
+  'report/views/class/chart',
+  'report/models/report',
+  'report/models/profile',
+  'text!report/templates/profile.handlebars',
+  'text!report/templates/snapshot.handlebars'
 ], function(_, _string, Backbone, Handlebars, markerCluster,
   SnapshotChart, ReportModel, ProfileModel, profileTpl, snapshotTpl) {
 

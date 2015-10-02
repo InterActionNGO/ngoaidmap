@@ -1,97 +1,30 @@
-'use strict';
-
-require.config({
-
-  baseUrl: '/app/javascripts/report',
-
-  paths: {
-    jquery: '../../vendor/jquery/dist/jquery',
-    jqueryui: '../../lib/jquery-ui/js/jquery-ui-1.10.4.custom',
-    underscore: '../../vendor/underscore/underscore',
-    _string: '../../vendor/underscore.string/lib/underscore.string',
-    backbone: '../../vendor/backbone/backbone',
-    select2: '../../vendor/select2/select2',
-    handlebars: '../../vendor/handlebars/handlebars',
-    highcharts: '../../vendor/highcharts-release/highcharts',
-    spin: '../../vendor/spinjs/spin',
-    moment: '../../vendor/moment/moment',
-    momentRange: '../../vendor/moment-range/lib/moment-range.bare',
-    markerCluster: '../../vendor/leaflet.markercluster/dist/leaflet.markercluster',
-    text: '../../vendor/requirejs-text/text'
-  },
-
-  shim: {
-    jquery: {
-      exports: '$'
-    },
-    jqueryui: {
-      deps: ['jquery'],
-      exports: '$'
-    },
-    underscore: {
-      exports: '_'
-    },
-    _string: {
-      deps: ['underscore'],
-      exports: '_.str'
-    },
-    backbone: {
-      deps: ['jquery', 'underscore'],
-      exports: 'Backbone'
-    },
-    sprintf: {
-      exports: 'sprintf'
-    },
-    select2: {
-      deps: ['jquery'],
-      exports: '$'
-    },
-    form: {
-      deps: ['jquery'],
-      exports: '$'
-    },
-    handlebars: {
-      exports: 'Handlebars'
-    },
-    highcharts: {
-      deps: ['jquery'],
-      exports: 'Highcharts'
-    },
-    momentRange: {
-      deps: ['moment'],
-      exports: 'momentRange'
-    }
-  }
-
-});
-
 require([
   'underscore',
   '_string',
   'handlebars',
   'highcharts',
 
-  'views/spin',
-  'views/filters-form',
-  'views/intro',
-  'views/title',
-  'views/filters',
-  'views/summary',
-  'views/budgets',
-  'views/timeline-charts',
-  'views/actions',
-  'views/limitations',
+  'report/views/spin',
+  'report/views/filters-form',
+  'report/views/intro',
+  'report/views/title',
+  'report/views/filters',
+  'report/views/summary',
+  'report/views/budgets',
+  'report/views/timeline-charts',
+  'report/views/actions',
+  'report/views/limitations',
 
-  'views/donors-snapshot',
-  'views/organizations-snapshot',
-  'views/countries-snapshot',
-  'views/sectors-snapshot',
+  'report/views/donors-snapshot',
+  'report/views/organizations-snapshot',
+  'report/views/countries-snapshot',
+  'report/views/sectors-snapshot',
 
-  'views/donors-list',
-  'views/organizations-list',
-  'views/projects-list',
-  'views/countries-list',
-  'views/sectors-list'
+  'report/views/donors-list',
+  'report/views/organizations-list',
+  'report/views/projects-list',
+  'report/views/countries-list',
+  'report/views/sectors-list'
 ], function(
   _, _string, Handlebars, Highcharts,
   SpinView, FiltersFormView, IntroView,
