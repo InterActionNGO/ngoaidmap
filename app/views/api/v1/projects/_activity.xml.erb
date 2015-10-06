@@ -95,7 +95,7 @@
     <transaction ref="">
       <transaction-type code="2" />
       <transaction-date iso-date="<%= project.start_date.strftime("%Y-%m-%d") %>" />
-      <value currency="USD" value-date="<%= project.start_date.strftime("%Y-%m-%d") %>"><%= project.budget.to_i == 0 || !project.budget.present? ? '' : project.budget.to_i %></value>
+      <value currency="USD" value-date="<%= project.budget_value_date.present? ? project.budget_value_date.strftime("%Y-%m-%d") : project.start_date.strftime("%Y-%m-%d") %>"><%= project.budget.to_i == 0 || !project.budget.present? ? '' : project.budget.to_i %></value>
       <description>
         <narrative>Total project budget</narrative>
       </description>
