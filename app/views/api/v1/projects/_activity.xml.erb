@@ -1,5 +1,5 @@
-<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.strftime("%Y%m%d") %>" linked-data-uri="http://ngoaidmap.org/projects/<%= project.id %>">
-  <iati-identifier>US-EIN-13-3287064-<%= project.intervention_id %></iati-identifier>
+<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.strftime("%Y-%m-%d") %>" linked-data-uri="http://ngoaidmap.org/projects/<%= project.id %>">
+  <iati-identifier>US-EIN-13-3287064NAM-<%= project.intervention_id %></iati-identifier>
   <reporting-org ref="US-EIN-13-3287064NAM" type="22" secondary-reporter="1">
   <narrative>InterAction’s NGO Aid Map</narrative>
   </reporting-org>
@@ -17,19 +17,21 @@
       <narrative><%= d.name %> </narrative>
     </participating-org>
   <% end %>
-  <other-identifier ref="US-EIN-13-3287064NAM" type="A1">
+  <other-identifier ref="<%= project.intervention_id %>" type="A1">
     <owner-org ref="US-EIN-13-3287064NAM">
       <narrative>InterAction’s NGO Aid Map</narrative>
     </owner-org>
   </other-identifier>
-  <other-identifier ref="<%= project.primary_organization.try(:iati_organizationid) %>" type="B9">
-    <narrative><%= project.primary_organization.try(:name) %></narrative>
+  <other-identifier ref="<%= project.primary_organization.try(:organization_id) %>" type="B9">
+    <owner-org ref="<%= project.primary_organization.try(:iati_organizationid) %>">
+      <narrative><%= project.primary_organization.name %></narrative>
+    </owner-org>
   </other-identifier>
   <activity-status code="<%= project.activity_status %>" />
-  <activity-date iso-date="<%= project.start_date.strftime("%Y%m%d") %>" type="1">
+  <activity-date iso-date="<%= project.start_date.strftime("%Y-%m-%d") %>" type="1">
     <narrative>Planned start date of the activity</narrative>
   </activity-date>
-  <activity-date iso-date="<%= project.end_date.strftime("%Y%m%d") %>" type="3">
+  <activity-date iso-date="<%= project.end_date.strftime("%Y-%m-%d") %>" type="3">
     <narrative>Planned end date of the activity</narrative>
   </activity-date>
   <contact-info type="1">
@@ -89,24 +91,28 @@
         <narrative><%= s.oecd_dac_name.present? ? s.oecd_dac_name : s.name %></narrative>
       </sector>
   <% end %>
-  <transaction ref="">
-    <transaction-type code="2" />
-    <transaction-date iso-date="<%= project.start_date.strftime("%Y%m%d") %>" />
-    <value currency="<%= project.budget_currency %>" value-date="<%= project.start_date.strftime("%Y%m%d") %>"><%= project.budget.to_i == 0 || !project.budget.present? ? '' : project.budget.to_i %></value>
-    <description>
-      <narrative>Total project budget</narrative>
-    </description>
-    <provider-org ref="<%= project.provider_org.id %>">
-      <narrative><%= project.provider_org.name %></narrative>
-    </provider-org>
-    <receiver-org ref="<%= project.primary_organization.organization_id %>">
-      <narrative><%= project.primary_organization.name %></narrative>
-    </receiver-org>
-  </transaction>
-  <document-link format="text/html" url="<%= project.website %>">
-    <title>
-      <narrative>Project Website</narrative>
-    </title>
-    <category code="A12" />
-  </document-link>
+  <% if project.budget.present? %>
+    <transaction ref="">
+      <transaction-type code="2" />
+      <transaction-date iso-date="<%= project.start_date.strftime("%Y-%m-%d") %>" />
+      <value currency="USD" value-date="<%= project.budget_value_date.present? ? project.budget_value_date.strftime("%Y-%m-%d") : project.start_date.strftime("%Y-%m-%d") %>"><%= project.budget.to_i == 0 || !project.budget.present? ? '' : project.budget.to_i %></value>
+      <description>
+        <narrative>Total project budget</narrative>
+      </description>
+      <provider-org ref="<%= project.provider_org.try(:iati_organizationid) %>">
+        <narrative><%= project.provider_org.name %></narrative>
+      </provider-org>
+      <receiver-org ref="<%= project.primary_organization.try(:iati_organizationid) %>">
+        <narrative><%= project.primary_organization.name %></narrative>
+      </receiver-org>
+    </transaction>
+  <% end %>
+  <% if project.website.present? %>
+    <document-link format="text/html" url="<%= project.website %>">
+      <title>
+        <narrative>Project Website</narrative>
+      </title>
+      <category code="A12" />
+    </document-link>
+  <% end %>
 </iati-activity>

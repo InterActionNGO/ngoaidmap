@@ -1,5 +1,6 @@
 modules:
   - name: "application"
+  - name: "report"
 
 wrap: false
 
@@ -15,7 +16,7 @@ paths:
   highcharts: "highcharts-release/highcharts"
   spin: "spinjs/spin"
   moment: "moment/moment"
-  momentRange: "moment-range/lib/moment-range.bare"
+  momentRange: "moment-range/lib/moment-range"
   markerCluster: "leaflet.markercluster/dist/leaflet.markercluster"
   text: "requirejs-text/text"
   quicksilver: "liveupdate/quicksilver"
@@ -30,6 +31,15 @@ shim:
 
   underscore:
     exports: "_"
+
+  moment:
+    exports: "moment"
+
+  momentRange:
+    deps:
+      - "moment"
+    exports: "momentRange"
+
 
   _string:
     exports: "_string"
@@ -71,3 +81,11 @@ shim:
 
   handlebars:
     exports: "Handlebars"
+
+  highcharts:
+    deps:
+      - "jquery"
+    exports: "Highcharts"
+
+
+

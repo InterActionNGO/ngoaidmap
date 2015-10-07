@@ -4,8 +4,8 @@ define([
   'underscore',
   'backbone',
   'handlebars',
-  'models/report',
-  'text!templates/budgets.handlebars'
+  'report/models/report',
+  'text!report/templates/budgets.handlebars'
 ], function(_, Backbone, Handlebars, ReportModel, tpl) {
 
   var BudgetsView = Backbone.View.extend({

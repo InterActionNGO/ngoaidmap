@@ -2,7 +2,7 @@
 
 define([
   'backbone',
-  'views/class/snapshot'
+  'report/views/class/snapshot'
 ], function(Backbone, SnapshotView) {
 
   var CountriesSnapshotView = SnapshotView.extend({
