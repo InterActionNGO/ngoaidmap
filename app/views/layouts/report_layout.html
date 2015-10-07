@@ -12,10 +12,19 @@
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
     <![endif]-->
+
     <% if Rails.env.production? %>
+      <%= stylesheet_link_tag "jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", :media => 'all' %>
+      <%= stylesheet_link_tag "/app/vendor/chachi-slider/chachi-slider.css", :media => 'all' %>
+      <%= stylesheet_link_tag "/app/vendor/select2/select2.css", :media => 'all' %>
+      <%= stylesheet_link_tag "/app/vendor/leaflet.markercluster/dist/MarkerCluster.css", :media => 'all' %>
       <%= stylesheet_link_tag "report.css", :media => 'all' %>
     <% else %>
-      <%= stylesheet_link_tag "jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", "vendor/chachi-slider/chachi-slider.css", "vendor/select2/select2.css", "vendor/leaflet.markercluster/dist/MarkerCluster.css", "report.css", :media => 'all' %>
+      <%= stylesheet_link_tag "jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", :media => 'all' %>
+      <%= stylesheet_link_tag "/app/vendor/chachi-slider/chachi-slider.css", :media => 'all' %>
+      <%= stylesheet_link_tag "/app/vendor/select2/select2.css", :media => 'all' %>
+      <%= stylesheet_link_tag "/app/vendor/leaflet.markercluster/dist/MarkerCluster.css", :media => 'all' %>
+      <%= stylesheet_link_tag "report.css", :media => "all" %>
     <% end %>
 
     <% if Rails.env.development? %>
