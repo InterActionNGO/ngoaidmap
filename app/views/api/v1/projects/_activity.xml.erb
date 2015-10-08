@@ -1,4 +1,4 @@
-<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.xmlschema %>" linked-data-uri="http://ngoaidmap.org/projects/<%= project.id %>">
+<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.xmlschema %>" <% if project.active? %> linked-data-uri="http://ngoaidmap.org/projects/<%= project.id %>" <% end %> >
   <iati-identifier>US-EIN-13-3287064NAM-<%= project.intervention_id %></iati-identifier>
   <reporting-org ref="US-EIN-13-3287064NAM" type="22" secondary-reporter="1">
   <narrative>InterAction’s NGO Aid Map</narrative>
@@ -9,11 +9,11 @@
   <description type="1">
    <narrative><%= strip_tags(project.description) %></narrative>
   </description>
-  <participating-org ref="<%= project.primary_organization.try(:iati_organizationid) %>" role="4" type="<%= project.primary_organization.try(:organization_type_code) %>">
+  <participating-org <% if project.primary_organization.iati_organizationid.present? %> ref="<%= project.primary_organization.try(:iati_organizationid) %>" <% end %> role="4" <% if project.primary_organization.organization_type_code.present? %> type="<%= project.primary_organization.try(:organization_type_code) %>" <% end %> >
     <narrative><%= project.primary_organization.try(:name) %> </narrative>
   </participating-org>
   <% project.funding_orgs.each do  |d| %>
-    <participating-org ref="<%= d.iati_organizationid %>" role="1" type="<%= d.organization_type_code %>">
+    <participating-org <% if d.iati_organizationid.present? %> ref="<%= d.iati_organizationid %>" <% end %> role="1" <% if d.organization_type_code.present? %> type="<%= d.organization_type_code %>" <% end %> >
       <narrative><%= d.name %> </narrative>
     </participating-org>
   <% end %>
@@ -22,18 +22,28 @@
       <narrative>InterAction’s NGO Aid Map</narrative>
     </owner-org>
   </other-identifier>
-  <other-identifier ref="<%= project.primary_organization.try(:organization_id) %>" type="B9">
-    <owner-org ref="<%= project.primary_organization.try(:iati_organizationid) %>">
+  <other-identifier <% if project.primary_organization.organization_id.present? %> ref="<%= project.primary_organization.try(:organization_id) %>" <% end %> type="B9">
+    <owner-org <% if project.primary_organization.iati_organizationid.present? %> ref="<%= project.primary_organization.try(:iati_organizationid) %>" <% end %> >
       <narrative><%= project.primary_organization.name %></narrative>
     </owner-org>
   </other-identifier>
-  <activity-status code="<%= project.activity_status %>" />
-  <activity-date iso-date="<%= project.start_date.strftime("%Y-%m-%d") %>" type="1">
-    <narrative>Planned start date of the activity</narrative>
-  </activity-date>
-  <activity-date iso-date="<%= project.end_date.strftime("%Y-%m-%d") %>" type="3">
-    <narrative>Planned end date of the activity</narrative>
-  </activity-date>
+  <% if project.active? %>
+    <activity-status code="<%= project.activity_status %>" />
+    <activity-date iso-date="<%= project.start_date.strftime("%Y-%m-%d") %>" type="1">
+      <narrative>Planned start date of the activity</narrative>
+    </activity-date>
+    <activity-date iso-date="<%= project.end_date.strftime("%Y-%m-%d") %>" type="3">
+      <narrative>Planned end date of the activity</narrative>
+    </activity-date>
+  <% else %>
+    <activity-status code="<%= project.activity_status %>" />
+    <activity-date iso-date="<%= project.start_date.strftime("%Y-%m-%d") %>" type="2">
+      <narrative>Actual start date of the activity</narrative>
+    </activity-date>
+    <activity-date iso-date="<%= project.end_date.strftime("%Y-%m-%d") %>" type="4">
+      <narrative>Actual end date of the activity</narrative>
+    </activity-date>
+  <% end %>
   <contact-info type="1">
   <person-name>
     <narrative><%= project.contact_person %></narrative>
@@ -91,18 +101,18 @@
         <narrative><%= s.oecd_dac_name.present? ? s.oecd_dac_name : s.name %></narrative>
       </sector>
   <% end %>
-  <% if project.budget.present? %>
-    <transaction ref="">
+  <% if project.budget.present? && project.budget.to_i != 0 %>
+    <transaction>
       <transaction-type code="2" />
       <transaction-date iso-date="<%= project.start_date.strftime("%Y-%m-%d") %>" />
-      <value currency="USD" value-date="<%= project.budget_value_date.present? ? project.budget_value_date.strftime("%Y-%m-%d") : project.start_date.strftime("%Y-%m-%d") %>"><%= project.budget.to_i == 0 || !project.budget.present? ? '' : project.budget.to_i %></value>
+      <value currency="USD" value-date="<%= project.budget_value_date.present? ? project.budget_value_date.strftime("%Y-%m-%d") : project.start_date.strftime("%Y-%m-%d") %>"><%= project.budget.to_i %></value>
       <description>
         <narrative>Total project budget</narrative>
       </description>
-      <provider-org ref="<%= project.provider_org.try(:iati_organizationid) %>">
+      <provider-org <% if project.provider_org.present? &&  project.provider_org.iati_organizationid.present? %> ref="<%= project.provider_org.try(:iati_organizationid) %>" <% end %> >
         <narrative><%= project.provider_org.name %></narrative>
       </provider-org>
-      <receiver-org ref="<%= project.primary_organization.try(:iati_organizationid) %>">
+      <receiver-org <% if project.primary_organization.iati_organizationid.present? %> ref="<%= project.primary_organization.try(:iati_organizationid) %>" <% end %> >
         <narrative><%= project.primary_organization.name %></narrative>
       </receiver-org>
     </transaction>

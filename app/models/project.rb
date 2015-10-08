@@ -81,6 +81,10 @@ class Project < ActiveRecord::Base
   scope :starting_after, -> (date){where "start_date > ?", date}
   scope :ending_before, -> (date){where "end_date < ?", date}
 
+  def active?
+    self.end_date > Date.today
+  end
+
   def countries
     Geolocation.where(uid: self.geolocations.pluck(:country_uid)).uniq
   end

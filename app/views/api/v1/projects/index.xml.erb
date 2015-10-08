@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<iati-activities generated-datetime="<%= Time.now.xmlschema %>" version="2.01" linked-data-default="http://ngoaidmap.org">
-<iati-summary:interactions-ngoaidmap xmlns:iati-summary="http://ngoaidmap.org" records-returned="<%= @projects.size %>" total-records-available="<%= @total_projects %>" record-offset="<%= params[:offset].present? ? params[:offset] : 0 %>"/>
+<iati-activities xmlns:interactions-ngoaidmap="http://ngoaidmap.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" interactions-ngoaidmap:records-returned="<%= @projects.size %>" interactions-ngoaidmap:total-records-available="<%= @total_projects %>" interactions-ngoaidmap:record-offset="<%= params[:offset].present? ? params[:offset] : 0 %>" generated-datetime="<%= Time.now.xmlschema %>" version="2.01" linked-data-default="http://ngoaidmap.org">
   <% @projects.each do |p| %>
     <%= render partial: '/api/v1/projects/activity', locals: {project: p} %>
   <% end %>
