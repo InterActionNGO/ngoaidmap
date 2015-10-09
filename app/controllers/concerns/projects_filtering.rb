@@ -7,7 +7,7 @@ module ProjectsFiltering
   end
   def get_projects
     timestamp = Project.order('updated_at desc').first.updated_at.to_s
-    string = timestamp + projects_params.inspect
+    string = timestamp + projects_params.inspect + Project.site_name
     map_data_digest = "map_data_#{Digest::SHA1.hexdigest(string)}"
     projects_digest = "projects_#{Digest::SHA1.hexdigest(string)}"
     projects_count_digest = "projects_count_#{Digest::SHA1.hexdigest(string)}"

@@ -59,13 +59,10 @@ class ApplicationController < ActionController::Base
 
       # If the request host isn't the main_site_host, it should be the host from a site
       if request.subdomain == 'www' || request.subdomain == '' || request.subdomain == 'v2'
-        @site = Site.find_by_name('global')
+        @site = Site.find_by_name('Haiti Aid Map')
       elsif !Site.find_by_url(request.host) || Site.find_by_url(request.host).status == false || Site.find_by_url(request.host).featured == false
         redirect_to "http://ngoaidmap.org" and return
       elsif @site = Site.published.where(:url => request.host).first
-            #unless @site = Site.find_by_name("global")
-          # raise ActiveRecord::RecordNotFound
-        # end
         @site
       else
         # Sessions controller doesn't depend on the host
@@ -90,6 +87,7 @@ class ApplicationController < ActionController::Base
       if @site && params[:theme_id]
         @site.theme = Theme.find(params[:theme_id])
       end
+      Project.site_name = @site.name
     end
 
     def render_404(exception = nil)

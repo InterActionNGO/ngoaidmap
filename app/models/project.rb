@@ -63,6 +63,7 @@ class Project < ActiveRecord::Base
   #                                                   RIGHT OUTER JOIN geolocations as g
   #                                                   ON g.g0 = geos.uid
   #                                                 ').where('g.adm_level=?', 0).uniq}, class_name: 'Geolocation'
+  class_attribute :site_name
 
   scope :active, -> {where("end_date > ? AND start_date < ?", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :inactive, -> {where("end_date < ? OR start_date > ?", Date.today.to_s(:db), Date.today.to_s(:db))}
@@ -72,6 +73,7 @@ class Project < ActiveRecord::Base
                           includes(:countries).
                           where('countries_projects.project_id IS NULL AND regions.id IS NOT NULL')}
   scope :organizations, -> (orgs){where(organizations: {id: orgs})}
+  scope :site, -> (site){joins(:sites).where(sites: {name: site})}
   scope :projects, -> (projects){where(projects: {id: projects})}
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){where(donors: {id: donors})}
@@ -91,6 +93,7 @@ class Project < ActiveRecord::Base
 
   def self.fetch_all(options = {}, from_api = true)
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
+    projects = projects.site(site_name)                                         if Project.site_name != 'Global'
     projects = projects.geolocation(options[:geolocation], options[:level])     if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries])                          if options[:countries]
