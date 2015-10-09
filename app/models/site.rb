@@ -57,9 +57,8 @@ class Site < ActiveRecord::Base
   #has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   #has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   belongs_to  :theme
-  belongs_to  :geographic_context_country, :class_name => 'Country'
-  belongs_to :geographic_context_region, :class_name => 'Region'
-  has_many :partners, :dependent => :destroy
+  belongs_to  :geographic_context_country, -> {where(adm_level: 0)}, :class_name => 'Geolocation'
+  belongs_to :geographic_context_region, :class_name => 'Geolocation'
   has_many :pages, :dependent => :destroy
   has_and_belongs_to_many :projects
   #has_many :cached_projects, :class_name => 'Project'#, :finder_sql => 'select projects.* from projects, projects_sites where projects_sites.site_id = #{id} and projects_sites.project_id = projects.id'
@@ -94,4 +93,9 @@ class Site < ActiveRecord::Base
 
   scope :published, -> {where(:status => true)}
   scope :draft,     -> {where(:status => false)}
+  def sites_for_footer
+    Site.published.select('id, name, aid_map_image_updated_at, aid_map_image_file_size, aid_map_image_content_type, aid_map_image_file_name, url, permalink, created_at').where('id <> ?', id).order("created_at desc").limit(3).all
+  end
+
 end
+
