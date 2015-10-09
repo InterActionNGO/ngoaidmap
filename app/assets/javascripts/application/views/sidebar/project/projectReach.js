@@ -20,8 +20,10 @@ define([
         return
       }
       this.project = project;
-      if (!!this.project.actual_project_reach && !!this.project.target_project_reach && this.project.project_reach_unit) {
+      if (!!this.project.actual_project_reach && !_.isNaN(this.project.actual_project_reach) && !!this.project.target_project_reach && !_.isNaN(this.project.target_project_reach) && this.project.project_reach_unit) {
         this.render();
+      }else {
+        this.$el.remove();
       }
     },
 
