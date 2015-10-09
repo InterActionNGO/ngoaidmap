@@ -22,7 +22,7 @@
       <narrative>InterAction’s NGO Aid Map</narrative>
     </owner-org>
   </other-identifier>
-  <other-identifier <% if project.primary_organization.organization_id.present? %> ref="<%= project.primary_organization.try(:organization_id) %>" <% end %> type="B9">
+  <other-identifier <% if project.organization_id.present? %> ref="<%= project.try(:organization_id) %>" <% end %> type="B9">
     <owner-org <% if project.primary_organization.iati_organizationid.present? %> ref="<%= project.primary_organization.try(:iati_organizationid) %>" <% end %> >
       <narrative><%= project.primary_organization.name %></narrative>
     </owner-org>
