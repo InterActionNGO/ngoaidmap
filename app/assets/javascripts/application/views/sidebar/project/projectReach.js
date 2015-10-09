@@ -26,7 +26,7 @@ define([
     },
 
     parseData: function(){
-      this.project.reach = (this.project.actual_project_reach/this.project.target_project_reach) + '%';
+      this.project.reach = (this.project.actual_project_reach/this.project.target_project_reach*100) + '%';
       this.project.actual_project_reach_string = utils.formatCurrency(this.project.actual_project_reach);
       this.project.target_project_reach_string = utils.formatCurrency(this.project.target_project_reach);
       return this.project;
