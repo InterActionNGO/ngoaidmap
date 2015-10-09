@@ -51,6 +51,16 @@ class ProjectSerializer < ActiveModel::Serializer
   has_many :geolocations, serializer: GeolocationPreviewSerializer
   has_many :donors, serializer: DonorPreviewSerializer
 
+  def geolocations
+    unless Project.site_name == 'global' || Site.find_by(name: Project.site_name).navigate_by_country
+      country_id = Site.find_by(name: Project.site_name).geographic_context_country_id
+      country_name = Geolocation.find(country_id).country_name
+      object.geolocations.where(country_name: country_name)
+    else
+      object.geolocations
+    end
+  end
+
   def organization
     object.primary_organization
   end

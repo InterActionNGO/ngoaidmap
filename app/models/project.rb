@@ -94,7 +94,12 @@ class Project < ActiveRecord::Base
   def self.fetch_all(options = {}, from_api = true)
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
     if Project.site_name != 'global'
+      site = Site.find_by(name: Project.site_name)
       projects = projects.site(site_name)
+      unless site.navigate_by_country
+        country_uid = Geolocation.find(site.geographic_context_country_id).uid
+        projects = projects.countries([country_uid])
+      end                                             if options[:geolocation]
     end
     projects = projects.geolocation(options[:geolocation], options[:level])     if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
