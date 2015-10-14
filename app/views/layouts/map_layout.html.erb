@@ -34,7 +34,7 @@
       var map_data = <%=@map_data%>;
       var map_type = '<%= @map_type || 'overview_map' %>';
       var theme = "<%=@site.theme_id%>";
-      var stylez = <%=raw @site.map_styles  %>
+      var stylez = <%= @site.map_styles.present?? raw(@site.map_styles) : false  %>
       var empty_layer = false;
       var kind = window.location.pathname.split('/')[1];
       var globalPage = <%= @site.featured?? true : false %>;

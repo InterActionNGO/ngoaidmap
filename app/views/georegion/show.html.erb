@@ -16,7 +16,7 @@
     var area_fill_color = "<%=@georegion_map_fill_color%>";
     var theme = <%=@site.theme_id%>;
     var kind = window.location.pathname.split('/')[1];
-    // var stylez = <%=raw @site.map_styles  %>;
+    var stylez = <%= @site.map_styles.present?? raw(@site.map_styles) : false  %>
     // var empty_layer = <%= @empty_layer %>;
     var globalPage = <%= @site.featured?? true : false %>;
     var page = "<%= params[:controller] %>";
