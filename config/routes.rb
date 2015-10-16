@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get 'iati/activities', to: 'api/v1/projects#index', format: 'xml'
   get 'iati/activities/:id', to: 'api/v1/projects#show', format: 'xml'
+  get 'iati/organizations/:organization_id', to: 'api/v1/projects#index', format: 'xml'
 
   mount Raddocs::App => "/docs"
 

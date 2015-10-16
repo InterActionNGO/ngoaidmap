@@ -100,8 +100,8 @@ class Project < ActiveRecord::Base
     projects = projects.text_query(options[:q])                                 if options[:q]
     projects = projects.starting_after(options[:starting_after])                if options[:starting_after]
     projects = projects.ending_before(options[:ending_before])                  if options[:ending_before]
-    projects = projects.offset(options[:offset])                                if options[:offset]
-    projects = projects.limit(options[:limit])                                  if options[:limit]
+    projects = projects.offset(options[:offset].to_i)                           if options[:offset]
+    projects = projects.limit(options[:limit].to_i)                             if options[:limit]
     projects = projects.active                                                  if options[:status] && options[:status] == 'active'
     projects = projects.inactive                                                if options[:status] && options[:status] == 'inactive'
     #projects = projects.group('projects.id', 'projects.name', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
