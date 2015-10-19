@@ -1,7 +1,12 @@
 <div class="mod-project-reach">
   <h3>Project reach</h3>
   <div class="timeline">
+    {{#if this.superavit}}
+    <p>+ {{this.superavit}}</p>
+    {{else}}
     <span class="timeline-status" style="width: {{this.reach}};"></span>
+    {{/if}}
+
   </div>
   <p>Unit: {{this.project_reach_unit}}</p>
   <p>Actual: {{this.actual_project_reach_string}}</p>

@@ -29,7 +29,9 @@ define([
 
     parseData: function(){
       var per = ~~this.project.actual_project_reach/~~this.project.target_project_reach*100;
+      var superavit = ~~this.project.actual_project_reach - ~~this.project.target_project_reach;
       this.project.reach = (per >= 100) ? '100%' : per + '%';
+      this.project.superavit = (superavit > 0) ? superavit : null;
       this.project.actual_project_reach_string = utils.formatCurrency(this.project.actual_project_reach);
       this.project.target_project_reach_string = utils.formatCurrency(this.project.target_project_reach);
       return this.project;
