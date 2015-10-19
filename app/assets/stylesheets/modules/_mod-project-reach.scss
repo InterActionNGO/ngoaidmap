@@ -7,6 +7,7 @@
     border: 1px solid $color-5;
     border-radius: 15px;
     margin: 5px 0;
+    overflow: hidden;
   }
   p {
     position: relative;
@@ -23,6 +24,7 @@
     border-bottom-left-radius: 15px;
     border-top-left-radius: 15px;
     background-color: $color-4;
+    z-index: -1;
   }
   .first_date, .second_date {
     font-size: 10px;
