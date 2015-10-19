@@ -77,6 +77,7 @@ define([
     },
 
     successBreadcrumbs: function(data) {
+      console.log(data);
       var breadcrumbs = _.map(data.meta.parents.reverse(), function(parent){
         return '<a class="breadcrumb-link" href="/location/'+parent.uid+'?level='+parent.adm_level+'">'+parent.name+'</a>';
       });

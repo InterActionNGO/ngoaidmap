@@ -195,7 +195,7 @@ define([
           name: sectorF.attributes.name,
           id: sectorF.id,
           url: (nofilter) ? '/sectors/'+sectorF.id : this.setUrl('sectors[]',sectorF.id),
-          class: sectorF.attributes.name.toLowerCase().replace(/\s/g, "-"),
+          class: sectorF.attributes.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", ""),
           count: sector.length
         }
       },this)), function(sector){

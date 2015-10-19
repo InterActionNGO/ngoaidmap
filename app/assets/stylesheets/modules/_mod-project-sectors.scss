@@ -87,7 +87,7 @@
     background-position: sprite-position($icons, icon-mining-and-extractive-resources, 4px, 5px);
   }
 
-  .non_food-relief-items-nf_is:before {
+  .non-food-relief-items-nfis:before {
     @include icons-sprite(icon-non-food-relief-items);
     background-position: sprite-position($icons, icon-non-food-relief-items, 4px, 5px);
   }
@@ -126,6 +126,112 @@
     @include icons-sprite(icon-water);
     background-position: sprite-position($icons, icon-water, 4px, 5px);
   }
+
+  .forestry:before {
+    @include icons-sprite(icon-forestry);
+    background-position: sprite-positin($icons, icon-forestry, 4px, 5px);
+  }
+
+  .fishing:before {
+    @include icons-sprite(icon-fishing);
+    background-position: sprite-positin($icons, icon-fishing, 4px, 5px);
+  }
+
+  .communications_technology:before {
+    @include icons-sprite(icon-communications);
+    background-position: sprite-positin($icons, icon-communications, 4px, 5px);
+  }
+
+  .disaster_prevention_and_preparedness:before {
+    @include icons-sprite(icon-disaster-management);
+    background-position: sprite-positin($icons, icon-disaster-management, 4px, 5px);
+  }
+
+  .economic_recovery_and_development:before {
+    @include icons-sprite(icon-economic_recovery);
+    background-position: sprite-positin($icons, icon-economic_recovery, 4px, 5px);
+  }
+
+  .food_aid:before {
+    @include icons-sprite(icon-food-aid);
+    background-position: sprite-positin($icons, icon-food-aid, 4px, 5px);
+  }
+
+  .human_rights_democracy_and_governance:before {
+    @include icons-sprite(icon-human_rights);
+    background-position: sprite-positin($icons, icon-human_rights, 4px, 5px);
+  }
+
+  .capacity_strengthening_for_csos_general:before {
+    // @include icons-sprite(icon-human_rights);
+    // background-position: sprite-positin($icons, icon-human_rights, 4px, 5px);
+  }
+
+  .humanitarian_aid:before {
+    @include icons-sprite(icon-humanitarian-aid);
+    background-position: sprite-positin($icons, icon-humanitarian-aid, 4px, 5px);
+  }
+
+  .mining_and_extractive_resources:before {
+    @include icons-sprite(icon-mining-and-extractive-resources);
+    background-position: sprite-positin($icons, icon-mining-and-extractive-resources, 4px, 5px);
+  }
+
+  .conflict_prevention_and_resolution_peace_and_security:before {
+    @include icons-sprite(icon-peace_security);
+    background-position: sprite-positin($icons, icon-peace_security, 4px, 5px);
+  }
+
+  .shelter_and_housing:before {
+    @include icons-sprite(icon-shelter);
+    background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
+  }
+
+  .social_services:before {
+    // @include icons-sprite(icon-shelter);
+    // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
+  }
+
+  .water_sanitation_and_hygiene:before {
+    // @include icons-sprite(icon-shelter);
+    // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
+  }
+
+  .refugee_resettlement:before {
+    @include icons-sprite(icon-refugee);
+    background-position: sprite-positin($icons, icon-refugee, 4px, 5px);
+  }
+
+  .gender:before {
+    @include icons-sprite(icon-gender);
+    background-position: sprite-positin($icons, icon-gender, 4px, 5px);
+  }
+
+  .animal_welfare:before {
+    @include icons-sprite(icon-animals);
+    background-position: sprite-positin($icons, icon-animals, 4px, 5px);
+  }
+
+  .transport_infrastructure:before {
+    @include icons-sprite(icon-transport);
+    background-position: sprite-positin($icons, icon-transport, 4px, 5px);
+  }
+
+  .construction:before {
+    @include icons-sprite(icon-construction);
+    background-position: sprite-positin($icons, icon-construction, 4px, 5px);
+  }
+
+  .debt_relief:before {
+    @include icons-sprite(icon-debt);
+    background-position: sprite-positin($icons, icon-debt, 4px, 5px);
+  }
+
+  .trade:before {
+    @include icons-sprite(icon-trade);
+    background-position: sprite-positin($icons, icon-trade, 4px, 5px);
+  }
+
 }
 
 .ui-tooltip {
