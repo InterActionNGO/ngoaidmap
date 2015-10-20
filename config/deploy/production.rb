@@ -1,3 +1,5 @@
+require 'capistrano/rvm'
+set :rvm_ruby_version, '2.2.1'
 ask :password, 'secret'
 
 role :app, %w{ubuntu@23.92.20.76}
