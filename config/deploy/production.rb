@@ -1,10 +1,10 @@
 ask :password, 'secret'
 
-role :app, %w{ubuntu@0.0.0.0}
-role :web, %w{ubuntu@0.0.0.0}
-role :db,  %w{ubuntu@0.0.0.0}
+role :app, %w{ubuntu@23.92.20.76}
+role :web, %w{ubuntu@23.92.20.76}
+role :db,  %w{ubuntu@23.92.20.76}
 
-server '0.0.0.0', user: 'ubuntu', roles: %w{web app}
+server '23.92.20.76', user: 'ubuntu', roles: %w{web app}
 
 set :ssh_options, {
   forward_agent: true,
