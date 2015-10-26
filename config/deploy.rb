@@ -26,7 +26,7 @@ set :rvm_type, :system
 set :linked_files, %w{.env}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/app/vendor}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/app/vendor}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/usr/local/rvm/gems/ruby-2.2.1@ngo-api/bin/bundler" }

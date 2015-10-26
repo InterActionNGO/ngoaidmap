@@ -255,7 +255,7 @@ class Project < ActiveRecord::Base
     if start_date && end_date && !active
       date_filter = "AND p.start_date <= '#{end_date}'::date AND p.end_date >= '#{start_date}'::date"
     elsif active == 'yes'
-      date_filter = "AND p.start_date <= '#{Time.now.to_date}'::date AND p.end_date >= '#{Time.now.to_date}'::date"
+      date_filter = "AND p.start_date <= '#{Time.now.to_date}'::date AND p.end_date > '#{Time.now.to_date}'::date"
     end
 
     form_query_filter = "AND lower(p.name) LIKE '%" + form_query + "%'" if params[:q]
