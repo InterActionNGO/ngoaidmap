@@ -284,7 +284,7 @@ class Project < ActiveRecord::Base
       sql = <<-SQL
         SELECT p.id, p.name, p.budget, p.start_date, p.end_date, o.id AS primary_organization, o.name AS organization_name,
         COUNT(DISTINCT d.id) AS donors_count,
-        COUNT(DISTINCT g.id) AS countries_count,
+        COUNT(DISTINCT c.id) AS countries_count,
         COUNT(DISTINCT s.id) AS sectors_count
           FROM projects p
                  INNER JOIN projects_sectors ps ON (p.id = ps.project_id)

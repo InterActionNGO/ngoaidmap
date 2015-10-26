@@ -27,7 +27,7 @@ module ProjectsFiltering
       $redis.expire projects_count_digest, expire_time
       @projects_count = projects_count
     end
-    @projects = Project.fetch_all(projects_params).page(params[:page]).per(10)
+    @projects = Project.fetch_all(projects_params).order('projects.created_at DESC').page(params[:page]).per(10)
   end
   private
   def projects_params
