@@ -39,7 +39,7 @@ define([
         return _.map(_.groupBy(_.flatten(_.map(this.projects, function(project){return project.relationships.donors.data})), function(donor){ return donor.id;}),function(donor,_donorKey){
           var donorF = _.findWhere(donors, { id: _donorKey });
           return {
-            name: donorF.attributes.name,
+            name: _.unescape(donorF.attributes.name),
             id: donorF.id,
             url: '/donors/'+donorF.id,
             count: donor.length,
