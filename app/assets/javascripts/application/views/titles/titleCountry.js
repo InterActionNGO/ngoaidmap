@@ -26,22 +26,30 @@ define([
     parseData: function(){
 
       this.sectors = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'sectors' });
+      this.donors = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'donors' });
 
       var countP = this.conexion.getProjects().length;
       var countS = this.sectors.length;
-      var projects = this.projectString(countP);
+      var countD = this.donors.length;
 
       return {
         name: this.$el.data('name'),
-        projects: this.projectString(countP,countS),
+        projects: this.projectString(countP,countS,countD),
       }
     },
 
-    projectString: function(count,sectorCount){
+    projectString: function(count,sectorCount,donorCount){
       var sector = (sectorCount == 1 && !!this.filters['sectors[]']) ? this.sectors[0].attributes.name : '';
+      var donor = (donorCount == 1 && !!this.filters['donors[]']) ? _.unescape(this.donors[0].attributes.name) : '';
       if (count == 1) {
+        if (!!donor) {
+          return count.toLocaleString() +' '+sector+' project donated by ' + donor;
+        }
         return count.toLocaleString() +' '+sector+' project';
       }else{
+        if (!!donor) {
+          return count.toLocaleString() +' '+sector+' projects donated by ' + donor;
+        }
         return count.toLocaleString() +' '+sector+' projects';
       }
     },

@@ -2,7 +2,7 @@
   <h3>Project budget</h3>
   $<span id="projectBudgetValue" class="font-small">{{this.budgetString}}</span>
   {{#if this.budget_currency}}
-  <span class="font-extrasmall">Converted from {{this.budget_currency}}</span>
+  {{!-- <span class="font-extrasmall">Converted from {{this.budget_currency}}</span> --}}
   {{/if}}
   {{!-- $<span id="projectBudgetValue"><%= number_with_precision(@project.budget, :precision => 0, :delimiter => ',') %></span> --}}
 </div>

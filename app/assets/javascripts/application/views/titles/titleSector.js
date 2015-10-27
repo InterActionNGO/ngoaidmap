@@ -25,10 +25,12 @@ define([
 
     parseData: function(){
       this.countries = this.conexion.getCountries();
+      this.donors = this.conexion.getDonors();
 
       var countP = this.conexion.getProjects().length;
       var countC = this.countries.length;
-      var projects = this.projectString(countP);
+      var donorsC = this.donors.length;
+      var projects = this.projectString(countP,donorsC);
       var countries = this.countryString(countC);
 
       return {
@@ -37,11 +39,18 @@ define([
       }
     },
 
-    projectString: function(count){
+    projectString: function(count, donorCount){
+      var donor = (donorCount == 1 && !!this.filters['donors[]']) ? _.unescape(this.donors[0].name) : '';
       if (count == 1) {
-        return count.toLocaleString() +' '+ this.$el.data('name') +' project';
+        if (!!donor) {
+          return count.toLocaleString() +' '+this.$el.data('name')+' project donated by ' + donor;
+        }
+        return count.toLocaleString() +' '+this.$el.data('name')+' project';
       }else{
-        return count.toLocaleString() +' '+ this.$el.data('name') +' projects';
+        if (!!donor) {
+          return count.toLocaleString() +' '+this.$el.data('name')+' projects donated by ' + donor;
+        }
+        return count.toLocaleString() +' '+this.$el.data('name')+' projects';
       }
     },
 
