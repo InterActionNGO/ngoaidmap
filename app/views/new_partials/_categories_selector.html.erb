@@ -18,10 +18,10 @@
                     <ul class="mod-categories-child sector-child submenu">
                       <% @sectors.each do |category| %>
                         <li>
-                          <a class="<%= category[0][1].underscore.parameterize %>" href="<%= sector_path(category[0][0]) %>">
-                              <%= category[0][1] %>
+                          <a class="<%= category.name.underscore.parameterize %>" href="<%= sector_path(category.id) %>">
+                              <%= category.name %>
                           </a>
-                          <span><%# unless @site.featured? %><%= category[1] %> projects<%# end %></span>
+                          <span><%# unless @site.featured? %><%= category.count_distinct_projects_id %> projects<%# end %></span>
                         </li>
                       <% end %>
                     </ul>

@@ -43,6 +43,7 @@ group :development do
   gem 'capistrano-bower'
   gem 'capistrano-bundler'
   gem 'brakeman', :require => false
+  gem 'rails_db'
 end
 group :development, :test do
   gem 'byebug'
