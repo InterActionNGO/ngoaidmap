@@ -4,7 +4,6 @@
 
         $icons-spacing: 10px;
         @import "icons/*.png";
-        @include all-icons-sprites;
 
 @import "settings",
         "mixins",

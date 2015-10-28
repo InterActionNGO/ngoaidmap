@@ -72,114 +72,223 @@
 
 
   // Icons
-  .health:before {
+  .health:after {
     @include icons-sprite(icon-health);
-    background-position: sprite-position($icons, icon-health, 4px, 5px);
+    // background-position: sprite-position($icons, icon-health, 4px, 5px);
   }
 
-  .agriculture:before {
+  .agriculture:after {
     @include icons-sprite(icon-agriculture);
-    background-position: sprite-position($icons, icon-agriculture, 4px, 5px);
+    // background-position: sprite-position($icons, icon-agriculture, 4px, 5px);
   }
 
-  .communications:before {
+  .communications:after {
     @include icons-sprite(icon-communications);
-    background-position: sprite-position($icons, icon-communications, 4px, 5px);
+    // background-position: sprite-position($icons, icon-communications, 4px, 5px);
   }
 
-  .disaster-management:before {
+  .disaster-management:after {
     @include icons-sprite(icon-disaster-management);
-    background-position: sprite-position($icons, icon-disaster-management, 4px, 5px);
+    // background-position: sprite-position($icons, icon-disaster-management, 4px, 5px);
   }
 
-  .early_recovery:before {
+  .early_recovery:after {
     @include icons-sprite(icon-early_recovery);
-    background-position: sprite-position($icons, icon-early_recovery, 4px, 5px);
+    // background-position: sprite-position($icons, icon-early_recovery, 4px, 5px);
   }
 
-  .economic-recovery-and-development:before {
+  .economic-recovery-and-development:after {
     @include icons-sprite(icon-economic_recovery);
-    background-position: sprite-position($icons, icon-economic_recovery, 4px, 5px);
+    // background-position: sprite-position($icons, icon-economic_recovery, 4px, 5px);
   }
 
-  .education:before {
+  .education:after {
     @include icons-sprite(icon-education);
-    background-position: sprite-position($icons, icon-education, 4px, 5px);
+    // background-position: sprite-position($icons, icon-education, 4px, 5px);
   }
 
-  .energy:before {
+  .energy:after {
     @include icons-sprite(icon-energy);
-    background-position: sprite-position($icons, icon-energy, 4px, 5px);
+    // background-position: sprite-position($icons, icon-energy, 4px, 5px);
   }
 
-  .environment:before {
+  .environment:after {
     @include icons-sprite(icon-environment);
-    background-position: sprite-position($icons, icon-environment, 4px, 5px);
+    // background-position: sprite-position($icons, icon-environment, 4px, 5px);
   }
 
-  .food-aid:before {
+  .food-aid:after {
     @include icons-sprite(icon-food-aid);
-    background-position: sprite-position($icons, icon-food-aid, 4px, 5px);
+    // background-position: sprite-position($icons, icon-food-aid, 4px, 5px);
   }
 
-  .human-rights-democracy-and-governance:before {
+  .human-rights-democracy-and-governance:after {
     @include icons-sprite(icon-human_rights);
-    background-position: sprite-position($icons, icon-human_rights, 4px, 5px);
+    // background-position: sprite-position($icons, icon-human_rights, 4px, 5px);
   }
 
-  .humanitarian-aid:before {
+  .humanitarian-aid:after {
     @include icons-sprite(icon-humanitarian-aid);
-    background-position: sprite-position($icons, icon-humanitarian-aid, 4px, 5px);
+    // background-position: sprite-position($icons, icon-humanitarian-aid, 4px, 5px);
   }
 
-  .logistics:before {
+  .logistics:after {
     @include icons-sprite(icon-logistics);
-    background-position: sprite-position($icons, icon-logistics, 4px, 5px);
+    // background-position: sprite-position($icons, icon-logistics, 4px, 5px);
   }
 
-  .mining-and-extractive-resources:before {
+  .mining-and-extractive-resources:after {
     @include icons-sprite(icon-mining-and-extractive-resources);
-    background-position: sprite-position($icons, icon-mining-and-extractive-resources, 4px, 5px);
+    // background-position: sprite-position($icons, icon-mining-and-extractive-resources, 4px, 5px);
   }
 
-  .non_food-relief-items-nf_is:before {
+  .non-food-relief-items-nfis:after {
     @include icons-sprite(icon-non-food-relief-items);
-    background-position: sprite-position($icons, icon-non-food-relief-items, 4px, 5px);
+    // background-position: sprite-position($icons, icon-non-food-relief-items, 4px, 5px);
+  }
+  .non_food-relief-items-nf_is:after {
+    @include icons-sprite(icon-non-food-relief-items);
+    // background-position: sprite-position($icons, icon-non-food-relief-items, 4px, 5px);
   }
 
-  .nutrition:before {
+  .nutrition:after {
     @include icons-sprite(icon-other);
-    background-position: sprite-position($icons, icon-other, 4px, 5px);
+    // background-position: sprite-position($icons, icon-other, 4px, 5px);
   }
 
-  .other:before {
+  .other:after {
     @include icons-sprite(icon-other);
-    background-position: sprite-position($icons, icon-other, 4px, 5px);
+    // background-position: sprite-position($icons, icon-other, 4px, 5px);
   }
 
-  .peace-and-security:before {
+  .peace-and-security:after {
     @include icons-sprite(icon-peace_security);
-    background-position: sprite-position($icons, icon-peace_security, 4px, 5px);
+    // background-position: sprite-position($icons, icon-peace_security, 4px, 5px);
   }
 
-  .protection:before {
+  .protection:after {
     @include icons-sprite(icon-protection);
-    background-position: sprite-position($icons, icon-protection, 4px, 5px);
+    // background-position: sprite-position($icons, icon-protection, 4px, 5px);
   }
 
-  .safety-nets:before {
+  .safety-nets:after {
     @include icons-sprite(icon-safety-nets);
-    background-position: sprite-position($icons, icon-safety-nets, 4px, 5px);
+    // background-position: sprite-position($icons, icon-safety-nets, 4px, 5px);
   }
 
-  .shelter-and-housing:before {
+  .shelter-and-housing:after {
     @include icons-sprite(icon-shelter);
-    background-position: sprite-position($icons, icon-shelter, 4px, 5px);
+    // background-position: sprite-position($icons, icon-shelter, 4px, 5px);
   }
 
-  .water-sanitation-and-hygiene:before {
+  .water-sanitation-and-hygiene:after {
     @include icons-sprite(icon-water);
-    background-position: sprite-position($icons, icon-water, 4px, 5px);
+    // background-position: sprite-position($icons, icon-water, 4px, 5px);
+  }
+
+  .forestry:after {
+    @include icons-sprite(icon-forestry);
+    // background-position: sprite-positin($icons, icon-forestry, 4px, 5px);
+  }
+
+  .fishing:after {
+    @include icons-sprite(icon-fishing);
+    // background-position: sprite-positin($icons, icon-fishing, 4px, 5px);
+  }
+
+  .communications_technology:after {
+    @include icons-sprite(icon-communications);
+    // background-position: sprite-positin($icons, icon-communications, 4px, 5px);
+  }
+
+  .disaster_prevention_and_preparedness:after {
+    @include icons-sprite(icon-disaster-management);
+    // background-position: sprite-positin($icons, icon-disaster-management, 4px, 5px);
+  }
+
+  .economic_recovery_and_development:after {
+    @include icons-sprite(icon-economic_recovery);
+    // background-position: sprite-positin($icons, icon-economic_recovery, 4px, 5px);
+  }
+
+  .food_aid:after {
+    @include icons-sprite(icon-food-aid);
+    // background-position: sprite-positin($icons, icon-food-aid, 4px, 5px);
+  }
+
+  .human_rights_democracy_and_governance:after {
+    @include icons-sprite(icon-human_rights);
+    // background-position: sprite-positin($icons, icon-human_rights, 4px, 5px);
+  }
+
+  .capacity_strengthening_for_csos_general:after {
+    // @include icons-sprite(icon-human_rights);
+    // background-position: sprite-positin($icons, icon-human_rights, 4px, 5px);
+  }
+
+  .humanitarian_aid:after {
+    @include icons-sprite(icon-humanitarian-aid);
+    // background-position: sprite-positin($icons, icon-humanitarian-aid, 4px, 5px);
+  }
+
+  .mining_and_extractive_resources:after {
+    @include icons-sprite(icon-mining-and-extractive-resources);
+    // background-position: sprite-positin($icons, icon-mining-and-extractive-resources, 4px, 5px);
+  }
+
+  .conflict_prevention_and_resolution_peace_and_security:after {
+    @include icons-sprite(icon-peace_security);
+    // background-position: sprite-positin($icons, icon-peace_security, 4px, 5px);
+  }
+
+  .shelter_and_housing:after {
+    @include icons-sprite(icon-shelter);
+    // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
+  }
+
+  .social_services:after {
+    // @include icons-sprite(icon-shelter);
+    // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
+  }
+
+  .water_sanitation_and_hygiene:after {
+    @include icons-sprite(icon-water);
+    // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
+  }
+
+  .refugee_resettlement:after {
+    @include icons-sprite(icon-refugee);
+    // background-position: sprite-positin($icons, icon-refugee, 4px, 5px);
+  }
+
+  .gender:after {
+    @include icons-sprite(icon-gender);
+    // background-position: sprite-positin($icons, icon-gender, 4px, 5px);
+  }
+
+  .animal_welfare:after {
+    @include icons-sprite(icon-animals);
+    // background-position: sprite-positin($icons, icon-animals, 4px, 5px);
+  }
+
+  .transport_infrastructure:after {
+    @include icons-sprite(icon-transport);
+    // background-position: sprite-positin($icons, icon-transport, 4px, 5px);
+  }
+
+  .construction:after {
+    @include icons-sprite(icon-construction);
+    // background-position: sprite-positin($icons, icon-construction, 4px, 5px);
+  }
+
+  .debt_relief:after {
+    @include icons-sprite(icon-debt);
+    // background-position: sprite-positin($icons, icon-debt, 4px, 5px);
+  }
+
+  .trade:after {
+    @include icons-sprite(icon-trade);
+    // background-position: sprite-positin($icons, icon-trade, 4px, 5px);
   }
 
 

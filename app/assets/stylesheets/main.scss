@@ -2,9 +2,8 @@
         "compass/utilities/sprites",
         "compass/reset";
 
-        $icons-spacing: 10px;
-        @import "icons/*.png";
-        @include all-icons-sprites;
+$icons-spacing: 10px;
+@import "icons/*.png";
 
 @import "settings",
         "mixins",

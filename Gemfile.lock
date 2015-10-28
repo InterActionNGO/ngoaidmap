@@ -373,7 +373,7 @@ DEPENDENCIES
   capistrano-rvm
   coffee-rails (~> 4.1.0)
   comma (~> 3.2.1)
-  compass-rails (>= 2.0.2)
+  compass-rails (>= 2.0.4)
   dalli
   database_cleaner
   dotenv-rails
