@@ -40,6 +40,7 @@ define([
         return false;
       }
       this.conexion = conexion;
+      this.filters = this.conexion.getFilters();
 
       this.$map = $('#map');
 
@@ -135,9 +136,15 @@ define([
           return location.count;
         });
       } else{
-        var markers = _.sortBy(this.conexion.getCountries(true), function(country){
-          return country.count;
-        });
+        if (this.filters['geolocation']) {
+          var markers = _.sortBy(this.conexion.getLocationsByGeolocation(1), function(location){
+            return location.count;
+          });
+        } else {
+          var markers = _.sortBy(this.conexion.getCountries(true), function(country){
+            return country.count;
+          });
+        }
       }
 
       return markers;
