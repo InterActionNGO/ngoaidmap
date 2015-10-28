@@ -142,12 +142,12 @@
     // background-position: sprite-positin($icons, icon-fishing, 4px, 5px);
   }
 
-  .communications_technology:before {
+  .communications-technology:before {
     @include icons-sprite(icon-communications);
     // background-position: sprite-positin($icons, icon-communications, 4px, 5px);
   }
 
-  .disaster_prevention_and_preparedness:before {
+  .disaster-prevention-and-preparedness:before {
     @include icons-sprite(icon-disaster-management);
     // background-position: sprite-positin($icons, icon-disaster-management, 4px, 5px);
   }
@@ -168,7 +168,7 @@
   }
 
   .capacity_strengthening_for_csos_general:before {
-    // @include icons-sprite(icon-human_rights);
+    @include icons-sprite(icon-gender);
     // background-position: sprite-positin($icons, icon-human_rights, 4px, 5px);
   }
 
@@ -182,7 +182,7 @@
     // background-position: sprite-positin($icons, icon-mining-and-extractive-resources, 4px, 5px);
   }
 
-  .conflict_prevention_and_resolution_peace_and_security:before {
+  .conflict-prevention-and-resolution-peace-and-security:before {
     @include icons-sprite(icon-peace_security);
     // background-position: sprite-positin($icons, icon-peace_security, 4px, 5px);
   }
@@ -192,8 +192,8 @@
     // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
   }
 
-  .social_services:before {
-    // @include icons-sprite(icon-shelter);
+  .social-services:before {
+    @include icons-sprite(icon-protection);
     // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
   }
 
