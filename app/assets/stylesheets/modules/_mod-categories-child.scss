@@ -33,7 +33,7 @@
       background-color: $color-4;
     }
     a:after {
-      @include before('', block, absolute, 5px, 5px, 30px, 30px);
+      @include before('', block, absolute, 4px, 4px, 30px, 30px);
     }
     span {
       padding-left: 40px;
