@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   #caches_action :show, :expires_in => 300, :cache_path => Proc.new { |c| c.params }
 
   def show
-    @project = Project.find(params[:id])
+    @project = Project.includes(:prime_awardee).find(params[:id])
     # id = if params[:id].sanitize_sql! =~ /^\d+$/
     #   params[:id].sanitize_sql!
     # else
