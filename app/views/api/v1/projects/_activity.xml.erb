@@ -12,10 +12,12 @@
   <participating-org <% if project.primary_organization.iati_organizationid.present? %> ref="<%= project.primary_organization.try(:iati_organizationid) %>" <% end %> role="4" <% if project.primary_organization.organization_type_code.present? %> type="<%= project.primary_organization.try(:organization_type_code) %>" <% end %> >
     <narrative><%= project.primary_organization.try(:name) %> </narrative>
   </participating-org>
-  <% project.funding_orgs.each do  |d| %>
-    <participating-org <% if d.iati_organizationid.present? %> ref="<%= d.iati_organizationid %>" <% end %> role="1" <% if d.organization_type_code.present? %> type="<%= d.organization_type_code %>" <% end %> >
+  <% if project.funding_orgs.any? %>
+    <% project.funding_orgs.each do  |d| %>
+      <participating-org <% if d.iati_organizationid.present? %> ref="<%= d.iati_organizationid %>" <% end %> role="1"   <% if d.organization_type_code.present? %> type="<%= d.organization_type_code %>" <% end %> >
       <narrative><%= d.name %> </narrative>
     </participating-org>
+    <% end %>
   <% end %>
   <other-identifier ref="<%= project.intervention_id %>" type="A1">
     <owner-org ref="US-EIN-13-3287064NAM">
@@ -54,52 +56,58 @@
     <email><%= project.contact_email %></email>
     <website><%= project.website %></website>
   </contact-info>
-  <% project.countries.each_with_index do |c,i| %>
-    <recipient-country code="<%= c.country_code %>" percentage="<%=
-    if project.countries.size > 1
-      then
-      if i+1 == project.countries.size
+  <% if project.countries.any? %>
+    <% project.countries.each_with_index do |c,i| %>
+      <recipient-country code="<%= c.country_code %>" percentage="<%=
+      if project.countries.size > 1
         then
-        (100.to_f/project.countries.size).ceil
-      else
-        (100.to_f/project.countries.size).floor
-      end
-    else
-      100
-      end %>" />
-  <% end %>
-  <% project.iati_locations.each do |l| %>
-      <location ref="<%= l.iati_uid %>">
-       <location-id vocabulary="<%= l.iati_provider %>" code="<%= l.iati_uid %>" />
-       <name>
-        <narrative><%= l.name %></narrative>
-      </name>
-      <description>
-        <narrative><%=l.name %>, <%= l.country_name %></narrative>
-      </description>
-      <administrative vocabulary="<%= l.iati_provider %>" level="<%= l.adm_level %>" code="<%= l.iati_uid %>" />
-       <point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
-        <pos><%= l.latitude %> <%= l.longitude %></pos>
-      </point>
-      <exactness code="2"/>
-      <location-class code="<%= l.adm_level == 1 ? 1 : '' %>"/>
-    </location>
-  <% end %>
-  <% project.sectors.each_with_index do |s, i| %>
-    <sector vocabulary="<%= s.sector_vocab_code %>" code="<%= s.oecd_dac_purpose_code.present? ? s.oecd_dac_purpose_code : s.id %>" percentage="<%=
-      if project.sectors.size > 1
-        then
-        if i+1 == project.sectors.size
+        if i+1 == project.countries.size
           then
-          (100.to_f/project.sectors.size).ceil
+          (100.to_f/project.countries.size).ceil
         else
-          (100.to_f/project.sectors.size).floor
+          (100.to_f/project.countries.size).floor
         end
       else
         100
-        end %>">
-        <narrative><%= s.oecd_dac_name.present? ? s.oecd_dac_name : s.name %></narrative>
-      </sector>
+        end %>" />
+    <% end %>
+  <% end %>
+  <% if project.iati_locations.any? %>
+    <% project.iati_locations.each do |l| %>
+        <location ref="<%= l.iati_uid %>">
+         <location-id vocabulary="<%= l.iati_provider %>" code="<%= l.iati_uid %>" />
+         <name>
+          <narrative><%= l.name %></narrative>
+        </name>
+        <description>
+          <narrative><%=l.name %>, <%= l.country_name %></narrative>
+        </description>
+        <administrative vocabulary="<%= l.iati_provider %>" level="<%= l.adm_level %>" code="<%= l.iati_uid %>" />
+         <point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+          <pos><%= l.latitude %> <%= l.longitude %></pos>
+        </point>
+        <exactness code="2"/>
+        <location-class code="<%= l.adm_level == 1 ? 1 : '' %>"/>
+      </location>
+    <% end %>
+  <% end %>
+  <% if project.sectors.any? %>
+    <% project.sectors.each_with_index do |s, i| %>
+      <sector vocabulary="<%= s.sector_vocab_code %>" code="<%= s.oecd_dac_purpose_code.present? ? s.oecd_dac_purpose_code : s.id %>" percentage="<%=
+        if project.sectors.size > 1
+          then
+          if i+1 == project.sectors.size
+            then
+            (100.to_f/project.sectors.size).ceil
+          else
+            (100.to_f/project.sectors.size).floor
+          end
+        else
+          100
+          end %>">
+          <narrative><%= s.oecd_dac_name.present? ? s.oecd_dac_name : s.name %></narrative>
+        </sector>
+    <% end %>
   <% end %>
   <% if project.budget.present? && project.budget.to_i != 0 %>
     <transaction>
