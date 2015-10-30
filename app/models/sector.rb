@@ -33,6 +33,18 @@ class Sector < ActiveRecord::Base
           GROUP BY id, name, count_distinct_projects_id
           ORDER BY name
       )
+      # sql = %Q(
+      #     SELECT DISTINCT COUNT(distinct(projects.id)) AS count_distinct_projects_id, sectors.id AS id, sectors.name AS name FROM "sectors"
+      #     LEFT JOIN "projects_sectors" ON "projects_sectors"."sector_id" = "sectors"."id"
+      #     LEFT JOIN "projects" ON "projects"."id" = "projects_sectors"."project_id"
+      #     WHERE (projects.end_date is null OR projects.end_date > now()) and (projects.start_date < now())
+      #       GROUP BY sectors.id, sectors.name
+      #       UNION
+      #       SELECT  0 AS count_distinct_projects_id, sectors.id AS id, sectors.name AS name
+      #       FROM "sectors"
+      #     GROUP BY id, name
+      #     ORDER BY name
+      #   )
       Sector.find_by_sql(sql)
     else
       Sector.eager_load(:projects).select('sectors.id', 'sectors.name').group('sectors.id', 'sectors.name').order('sectors.name').distinct.count('distinct(projects.id)')

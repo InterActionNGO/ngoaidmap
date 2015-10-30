@@ -15,15 +15,15 @@ define([
     template: Handlebars.compile(tpl),
 
     initialize: function() {
-      this.project = project;
+      this.prime_awardee = prime_awardee;
       if (!this.$el.length) {
         return
       }
-      (this.project && !!this.project.awardee_type) ? this.render() : this.$el.remove();
+      (!!this.prime_awardee) ? this.render() : this.$el.remove();
     },
 
     parseData: function(){
-      return this.project;
+      return this.prime_awardee;
     },
 
     render: function(){

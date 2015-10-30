@@ -211,24 +211,9 @@
     // background-position: sprite-positin($icons, icon-economic_recovery, 4px, 5px);
   }
 
-  .food_aid:after {
-    @include icons-sprite(icon-food-aid);
-    // background-position: sprite-positin($icons, icon-food-aid, 4px, 5px);
-  }
-
-  .human_rights_democracy_and_governance:after {
-    @include icons-sprite(icon-human_rights);
+  .capacity-strengthening-for-cs_os-general:after {
+    @include icons-sprite(icon-cso);
     // background-position: sprite-positin($icons, icon-human_rights, 4px, 5px);
-  }
-
-  .capacity-strengthening-for-csos-general:after {
-    @include icons-sprite(icon-gender);
-    // background-position: sprite-positin($icons, icon-human_rights, 4px, 5px);
-  }
-
-  .humanitarian_aid:after {
-    @include icons-sprite(icon-humanitarian-aid);
-    // background-position: sprite-positin($icons, icon-humanitarian-aid, 4px, 5px);
   }
 
   .mining_and_extractive_resources:after {
@@ -241,23 +226,13 @@
     // background-position: sprite-positin($icons, icon-peace_security, 4px, 5px);
   }
 
-  .shelter_and_housing:after {
-    @include icons-sprite(icon-shelter);
-    // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
-  }
-
   .social-services:after {
     @include icons-sprite(icon-protection);
     // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
   }
 
-  .water_sanitation_and_hygiene:after {
-    @include icons-sprite(icon-water);
-    // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
-  }
-
-  .refugee_resettlement:after {
-    @include icons-sprite(icon-refugee);
+  .refugee-resettlement:after {
+    @include icons-sprite(icon-shelter);
     // background-position: sprite-positin($icons, icon-refugee, 4px, 5px);
   }
 
@@ -266,12 +241,12 @@
     // background-position: sprite-positin($icons, icon-gender, 4px, 5px);
   }
 
-  .animal_welfare:after {
+  .animal-welfare:after {
     @include icons-sprite(icon-animals);
     // background-position: sprite-positin($icons, icon-animals, 4px, 5px);
   }
 
-  .transport_infrastructure:after {
+  .transport-infrastructure:after {
     @include icons-sprite(icon-transport);
     // background-position: sprite-positin($icons, icon-transport, 4px, 5px);
   }
@@ -281,8 +256,8 @@
     // background-position: sprite-positin($icons, icon-construction, 4px, 5px);
   }
 
-  .debt_relief:after {
-    @include icons-sprite(icon-debt);
+  .debt-relief:after {
+    @include icons-sprite(icon-debtrelief);
     // background-position: sprite-positin($icons, icon-debt, 4px, 5px);
   }
 

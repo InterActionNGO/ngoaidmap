@@ -24,6 +24,7 @@
     var globalPage = <%= @site.featured?? true : false %>;
     var page = "<%= params[:controller] %>";
     var project = <%= raw(@project.to_json) %>;
+    var prime_awardee = <%=raw(@project.prime_awardee.to_json) %>;
     var geolocation = <%= raw(@geolocation.to_json) %>;
     var organization = false;
     var donor = false;
@@ -127,6 +128,8 @@
 
           <% end %>
           <section id="project-locations"></section>
+          <section id="project-sectors"></section>
+
 
           <%= render 'new_partials/more_projects' %>
 
