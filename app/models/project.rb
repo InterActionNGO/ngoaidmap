@@ -177,7 +177,7 @@ class Project < ActiveRecord::Base
     if self.prime_awardee.present? && self.prime_awardee == self.primary_organization
       self.donors
     elsif self.prime_awardee.present?
-      self.prime_awardee
+      [self.prime_awardee]
     else
       self.donors
     end
