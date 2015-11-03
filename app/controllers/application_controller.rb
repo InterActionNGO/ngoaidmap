@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :set_site, :browser_is_ie6_or_lower?
+  after_action :allow_iframe
 
 
   def old_browser
@@ -18,6 +19,10 @@ class ApplicationController < ActionController::Base
 
   def get_sidebar_items
     @sectors_by_num = Sector.counting_projects
+  end
+
+  def allow_iframe
+    response.headers.except! 'X-Frame-Options' if params[:embed].present? && params[:embed] == 'true'
   end
 
 
