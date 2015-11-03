@@ -116,6 +116,24 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def map_projects(options={})
+    sql = %Q(
+      with gp as(
+      select geolocations.id as id, geolocations.uid as sub_id, geolocations.g0 as g, projects.id as p_id from geolocations
+        inner join geolocations_projects on geolocations.id = geolocations_projects.geolocation_id
+        inner join projects on projects.id = geolocations_projects.project_id
+        where projects.end_date > now() AND projects.start_date < now()),
+        regions as(
+          select geolocations.latitude as latitude, geolocations.longitude as longitude, geolocations.name as name, geolocations.uid as uid, geolocations.id as id from geolocations
+          where geolocations.adm_level=0
+        )
+        select regions.name, regions.latitude, regions.longitude, regions.uid, regions.id, count(distinct(gp.p_id)) as projects_count from regions
+        inner join gp on regions.uid = gp.g
+        group by regions.id, regions.name, regions.uid, regions.latitude, regions.longitude
+        order by projects_count DESC
+    )
+    projects = Project.find_by_sql(sql)
+  end
 
   def related(site, limit = 2)
     if result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(primary_organization_id: self.primary_organization_id).where(sites: {id: site.id}).active.uniq.limit(limit)
