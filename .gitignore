@@ -43,3 +43,4 @@ public/app/vendor/*
 !/public/files/.gitkeep
 /install
 /install/rails
+stdout

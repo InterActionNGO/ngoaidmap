@@ -11,7 +11,11 @@ module Api
           }
           format.xml {
             if projects = $redis.get(@iati_projects_digest)
-              render text: projects and return
+              if params[:download]=='yes'
+                send_data projects, filename: "iati_#{Time.now.in_time_zone}.xml", :type => 'text/xml; charset=utf-8'  and return
+              else
+                render text: projects and return
+              end
             else
               expire_time = ((Time.now + 1.day).beginning_of_day - Time.now).ceil
               @projects = Project.fetch_all(projects_params)
@@ -21,7 +25,11 @@ module Api
               end
               $redis.set(@iati_projects_digest, projects_xml)
               $redis.expire @iati_projects_digest, expire_time
-              @projects
+              if params[:download]=='yes'
+                send_data projects_xml, filename: "iati_#{Time.now.in_time_zone}.xml", :type => 'text/xml; charset=utf-8'  and return
+              else
+                @projects
+              end
             end
           }
         end
