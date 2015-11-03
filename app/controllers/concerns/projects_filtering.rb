@@ -17,7 +17,7 @@ module ProjectsFiltering
     else
       expire_time = ((Time.now + 1.day).beginning_of_day - Time.now).ceil
       results = Project.fetch_all(projects_params, false)
-      m = ActiveModel::Serializer::ArraySerializer.new(results[0], each_serializer: ProjectSerializer, meta: results[1])
+      m = ActiveModel::Serializer::ArraySerializer.new(results[0], each_serializer: InternalProjectSerializer, meta: results[1])
       map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'geolocations']).to_json
       @map_data = map_data
       $redis.set(map_data_digest, map_data)
