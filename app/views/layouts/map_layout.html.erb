@@ -40,12 +40,12 @@
       var kind = window.location.pathname.split('/')[1];
       var globalPage = <%= @site.featured?? true : false %>;
       var page = "<%= params[:controller] %>";
-      var adm_level = 0;
-      var geolocation = false;
-      var project = false;
-      var organization = false;
-      var donor = false;
-      var sector = false;
+      var adm_level = <%= @geolocation.present?? @geolocation.adm_level + 1 : 0 %>;
+      var geolocation = <%= @geolocation.present?? raw(@geolocation.to_json) : false %>;
+      var project = <%= @project.present?? raw(@project.to_json) : false %>;
+      var organization = <%= @organization.present?? raw(@organization.to_json) : false %>;
+      var donor = <%= @donor.present?? raw(@donor.to_json) : false %>;
+      var sector = <%= @sector.present?? raw(@sector.to_json) : false %>;
     </script>
     <%= javascript_include_tag "modernizr/modernizr.custom.js" %>
 

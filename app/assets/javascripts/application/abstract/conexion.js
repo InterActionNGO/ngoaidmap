@@ -251,13 +251,13 @@ define([
 
     setUrlFiltered: function(url){
       if (sector) {
-        return url+'?sectors[]='+sector.id;
+        return (!!MAP_EMBED) ? url+'?embed=true&sectors[]='+sector.id : url+'?sectors[]='+sector.id;
       } else if (organization) {
-        return url+'?organizations[]='+organization.id;
+        return (!!MAP_EMBED) ? url+'?embed=true&organizations[]='+organization.id : url+'?organizations[]='+organization.id;
       } else if (donor) {
-        return url+'?donors[]='+donor.id;
+        return (!!MAP_EMBED) ? url+'?embed=true&donors[]='+donor.id : url+'?donors[]='+donor.id;
       } else {
-        return url;
+        return (!!MAP_EMBED) ? url+'?embed=true' : url;
       }
 
     },
