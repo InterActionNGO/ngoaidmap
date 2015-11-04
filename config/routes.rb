@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       resources :sectors, only: [:index, :show]
       resources :countries, only: [:index, :show]
       resources :geolocations, only: [:index, :show]
+      namespace :private do
+        get 'map', to:'private#map'
+      end
     end
   end
 
