@@ -5,7 +5,8 @@ module Api
         before_action :set_digests
 
         def map
-          if map_data = $redis.get("map_#{@digest}")
+          #if map_data = $redis.get("map_#{@digest}")
+          if 1==0
             render json: JSON.load(map_data) and return
           else
             expire_time = ((Time.now + 1.day).beginning_of_day - Time.now).ceil

@@ -118,6 +118,10 @@ class Project < ActiveRecord::Base
 
   def self.get_projects_on_map(options={})
     sql_options = OpenStruct.new()
+    if options[:geolocation]
+      sql_options.g_level = Geolocation.find_by(uid: options[:geolocation]).adm_level
+      sql_options.geolocation = options[:geolocation]
+    end
     sql_options.level = options[:level].to_i || 0
     sql_options.join_strings = ''
     sql_options.join_strings += %Q( inner join projects_sites on projects_sites.project_id = projects.id)                           if options[:site]
@@ -127,7 +131,7 @@ class Project < ActiveRecord::Base
     sql_options.conditions += %Q( and projects.primary_organization_id in #{'(' + options[:organizations].join(',') + ')'} )        if options[:organizations]
     sql_options.conditions += %Q( and projects_sectors.sector_id in #{'(' + options[:sectors].join(',') + ')'} )                    if options[:sectors]
     sql_options.conditions += %Q( and donations.donor_id in #{'(' + options[:donors].join(',') + ')'} )                             if options[:donors]
-    sql_options.conditions += %Q( and geolocations.uid= '#{options[:geolocation] + "'"} )                                           if options[:geolocation]
+    #sql_options.conditions += %Q( and geolocations.g#{g_level}= '#{options[:geolocation] + "'"} )                           if options[:geolocation]
     sql_options.conditions += %Q( and geolocations.g0 in #{"('" + options[:countries].join("', '") + "')"} )                        if options[:countries]
     sql_options.conditions += %Q( and projects_sites.site_id=#{options[:site].to_i} )                                               if options[:site]
     sql_options.conditions += %Q( and projects.name ilike '%%#{options[:q]}%%' OR projects.description ilike '%%#{options[:q]}%%' ) if options[:q]
