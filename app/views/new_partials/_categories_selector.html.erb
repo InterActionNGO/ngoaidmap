@@ -21,7 +21,7 @@
                           <a class="<%= category.name.underscore.parameterize %>" href="<%= sector_path(category.id) %>">
                               <%= category.name %>
                           </a>
-                          <span><%= category.count_distinct_projects_id %> projects</span>
+                          <span><%= category.projects_count %> projects</span>
                         </li>
                       <% end %>
                     </ul>

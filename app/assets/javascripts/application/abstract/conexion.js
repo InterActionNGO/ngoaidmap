@@ -77,7 +77,7 @@ define([
             type: country.type,
             lat: country.latitude,
             lon: country.longitude,
-            url: (nofilter) ? '/location/' + country.uid : this.setUrl('geolocation',country.uid)
+            url: (nofilter) ? this.setUrlFiltered('/location/' + country.uid) : this.setUrl('geolocation',country.uid)
           }
         }
         return null;
@@ -190,7 +190,6 @@ define([
 
       var sectorsByProjects = _.sortBy(_.map(sectors, _.bind(function(sector, sectorKey){
         var sectorF = _.findWhere(this.included, {id: sectorKey, type:'sectors'});
-        console.log(sectorF.attributes.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", "").replace(/\//g, "-"));
         return{
           name: sectorF.attributes.name,
           id: sectorF.id,
@@ -205,15 +204,18 @@ define([
     },
 
     getSectorsByProjectsAll: function(data,sectorId) {
-      var sectorsByProjects = _.sortBy(_.map(data, function(v){
-        return {
-          name: v.attributes.name,
-          id: v.id,
-          url: '/sectors/'+v.id,
-          class: v.attributes.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", "").replace(/\//g, "-"),
-          count: v.attributes.projects_count
+      var sectorsByProjects = _.sortBy(_.compact(_.map(data, function(v){
+        if (!!v.id && !v.attributes) {
+          return {
+            name: v.attributes.name,
+            id: v.id,
+            url: '/sectors/'+v.id,
+            class: (!!v.attributes.name) ? v.attributes.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", "").replace(/\//g, "-") : null,
+            count: v.attributes.projects_count
+          }
         }
-      }), function(sector){
+        return null;
+      })), function(sector){
         return -sector.count;
       });
       sectorsByProjects = _.without(sectorsByProjects, _.findWhere(sectorsByProjects, {id: sectorId.toString() }));
@@ -244,6 +246,19 @@ define([
 
     setUrl: function(param_name, id){
       return (location.search) ? location.href+'&'+param_name+'='+id : location.href+'?'+param_name+'='+id;
+    },
+
+    setUrlFiltered: function(url){
+      if (sector) {
+        return url+'?sectors[]='+sector.id;
+      } else if (organization) {
+        return url+'?organizations[]='+organization.id;
+      } else if (donor) {
+        return url+'?donors[]='+donor.id;
+      } else {
+        return url;
+      }
+
     }
 
   });

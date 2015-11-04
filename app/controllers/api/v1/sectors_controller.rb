@@ -4,8 +4,8 @@ module Api
       def index
         if params[:include].present? && params[:include] == 'projects_count'
           @sectors = Sector.counting_projects(sector_params)
-          @sectors_hash = normalize_projects @sectors
-          render json: @sectors_hash, root: 'data',
+          #@sectors_hash = normalize_projects @sectors
+          render json: @sectors, root: 'data',
           meta: { total: @sectors.size },
           each_serializer: SectorWithProjectsCountSerializer
         else
