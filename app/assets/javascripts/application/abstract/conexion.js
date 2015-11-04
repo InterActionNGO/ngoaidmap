@@ -13,6 +13,7 @@ define([
         this.projects = this.data.data;
         this.included = this.data.included;
         this.regions = this.data.meta.regions;
+        this.filters = this.getFilters();
       }
     },
 
@@ -128,7 +129,7 @@ define([
         var location = _location;
         var uid = _.findWhere(this.included, { id: _locationKey }).attributes.uid;
         var locationF = _.findWhere(this.regions, { uid: uid , adm_level: adm_level });
-
+        var filters = this.serialize(this.filters);
         if (!!locationF && !!location) {
           return {
             count: location.length,
@@ -139,7 +140,7 @@ define([
             type: locationF.type,
             lat: locationF.latitude,
             lon: locationF.longitude,
-            url: '/location/' + locationF.uid + '?level='+adm_level
+            url: '/location/' + locationF.uid + '?level='+adm_level + '&' + filters
           }
         }
         return null;
@@ -259,7 +260,19 @@ define([
         return url;
       }
 
+    },
+
+    serialize: function(obj) {
+      var str = [];
+      for(var p in obj) {
+        var notAllowedFilters = ['level'];
+        if (obj.hasOwnProperty(p) && !_.contains(notAllowedFilters, p)) {
+          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        }
+      }
+      return str.join("&");
     }
+
 
   });
   return new Conexion();
