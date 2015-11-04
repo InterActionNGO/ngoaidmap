@@ -128,6 +128,7 @@ class Project < ActiveRecord::Base
     sql_options.conditions += %Q( and projects_sectors.sector_id in #{'(' + options[:sectors].join(',') + ')'} )             if options[:sectors]
     sql_options.conditions += %Q( and donations.donor_id in #{'(' + options[:donors].join(',') + ')'} )                      if options[:donors]
     sql_options.conditions += %Q( and geolocations.uid=#{options[:geolocations]} )                                           if options[:geolocations]
+    sql_options.conditions += %Q( and geolocations.g0 in #{"('" + options[:countries].join("', '") + "')"} )                     if options[:countries]
     sql_options.conditions += %Q( and projects_sites.site_id=#{options[:site].to_i} )                                        if options[:site]
     sql = SqlQuery.new(:get_projects_on_map, options: sql_options).sql
     projects = Project.find_by_sql(sql)
