@@ -251,13 +251,13 @@ define([
 
     setUrlFiltered: function(url){
       if (sector) {
-        return (!!MAP_EMBED) ? url+'?embed=true&sectors[]='+sector.id : url+'?sectors[]='+sector.id;
+        return url+'?sectors[]='+sector.id;
       } else if (organization) {
-        return (!!MAP_EMBED) ? url+'?embed=true&organizations[]='+organization.id : url+'?organizations[]='+organization.id;
+        return url+'?organizations[]='+organization.id;
       } else if (donor) {
-        return (!!MAP_EMBED) ? url+'?embed=true&donors[]='+donor.id : url+'?donors[]='+donor.id;
+        return url+'?donors[]='+donor.id;
       } else {
-        return (!!MAP_EMBED) ? url+'?embed=true' : url;
+        return url;
       }
 
     },
@@ -265,7 +265,7 @@ define([
     serialize: function(obj) {
       var str = [];
       for(var p in obj) {
-        var notAllowedFilters = ['level'];
+        var notAllowedFilters = ['level','embed'];
         if (obj.hasOwnProperty(p) && !_.contains(notAllowedFilters, p)) {
           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
         }
