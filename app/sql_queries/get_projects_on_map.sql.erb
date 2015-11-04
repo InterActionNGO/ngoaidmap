@@ -3,6 +3,7 @@ with gp as(
   from geolocations
   inner join geolocations_projects on geolocations.id = geolocations_projects.geolocation_id
   inner join projects on projects.id = geolocations_projects.project_id
+  <%= @options.join_strings %>
   where projects.end_date > now() AND projects.start_date <= now()
   <%= @options.conditions %>
   ),
