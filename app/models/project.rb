@@ -120,13 +120,15 @@ class Project < ActiveRecord::Base
     sql_options = OpenStruct.new()
     sql_options.level = options[:level] || 0
     sql_options.join_strings = ''
+    sql_options.join_strings += %Q( inner join projects_sites on projects_sites.project_id = projects.id)                    if options[:site]
     sql_options.join_strings += %Q( left outer join projects_sectors on projects_sectors.project_id = projects.id)           if options[:sectors]
     sql_options.join_strings += %Q( left outer join donations on donations.project_id = projects.id)                         if options[:donors]
     sql_options.conditions = ''
     sql_options.conditions += %Q( and projects.primary_organization_id in #{'(' + options[:organizations].join(',') + ')'} ) if options[:organizations]
     sql_options.conditions += %Q( and projects_sectors.sector_id in #{'(' + options[:sectors].join(',') + ')'} )             if options[:sectors]
     sql_options.conditions += %Q( and donations.donor_id in #{'(' + options[:donors].join(',') + ')'} )                      if options[:donors]
-    sql_options.conditions += %Q( and geolocations.uid=#{options[:geolocations]} )                                       if options[:geolocations]
+    sql_options.conditions += %Q( and geolocations.uid=#{options[:geolocations]} )                                           if options[:geolocations]
+    sql_options.conditions += %Q( and projects_sites.site_id=#{options[:site].to_i} )                                        if options[:site]
     sql = SqlQuery.new(:get_projects_on_map, options: sql_options).sql
     projects = Project.find_by_sql(sql)
   end
