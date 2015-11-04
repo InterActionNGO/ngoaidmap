@@ -116,22 +116,14 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def map_projects(options={})
-    sql = %Q(
-      with gp as(
-      select geolocations.id as id, geolocations.uid as sub_id, geolocations.g0 as g, projects.id as p_id from geolocations
-        inner join geolocations_projects on geolocations.id = geolocations_projects.geolocation_id
-        inner join projects on projects.id = geolocations_projects.project_id
-        where projects.end_date > now() AND projects.start_date < now()),
-        regions as(
-          select geolocations.latitude as latitude, geolocations.longitude as longitude, geolocations.name as name, geolocations.uid as uid, geolocations.id as id from geolocations
-          where geolocations.adm_level=0
-        )
-        select regions.name, regions.latitude, regions.longitude, regions.uid, regions.id, count(distinct(gp.p_id)) as projects_count from regions
-        inner join gp on regions.uid = gp.g
-        group by regions.id, regions.name, regions.uid, regions.latitude, regions.longitude
-        order by projects_count DESC
-    )
+  def self.get_projects_on_map(options={})
+    sql_options = OpenStruct.new()
+    sql_options.level = options[:level] || 0
+    #sql_options.join_strings = ''
+    #sql_otions.join_stings += %Q( inner join organizations on projects.primary_organization_id = organizations.id)
+    sql_options.conditions = ''
+    sql_options.conditions += %Q( and projects.primary_organization_id in #{options[:organizations]} ) if options[:organizations]
+    sql = SqlQuery.new(:get_projects_on_map, options: sql_options).sql
     projects = Project.find_by_sql(sql)
   end
 

@@ -30,7 +30,7 @@ gem 'redis-rails'
 gem 'redis-rack-cache'
 gem 'newrelic_rpm'
 gem "comma", "~> 3.2.1"
-#gem 'rd_searchlogic', :require => 'searchlogic', :git => 'git://github.com/railsdog/searchlogic.git'
+gem 'sql_query'
 group :development do
   gem 'foreman'
   gem 'puma'
