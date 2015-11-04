@@ -35,7 +35,11 @@ define([
 
     parseData: function(){
       var sectorsByProjects = this.conexion.getSectorsByProjectsAll(this.data,sector.id);
-      return { sectors: sectorsByProjects, all: true };
+      if (!!sectorsByProjects.length) {
+        return { sectors: sectorsByProjects, all: true };
+      } else {
+        this.$el.remove();
+      }
     },
 
     render: function(){
