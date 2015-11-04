@@ -71,7 +71,7 @@ define([
       var range = 5;
       var classname, diameter;
       var diametersCount = {
-        diameter: [20,26,34,42,26],
+        diameter: [20,26,34,42,50],
         bounds:{
           force_site: [5,10,18,30],
           overview_map: [25,50,90,130],
@@ -98,7 +98,6 @@ define([
           // }
 
           diameter = this.setDiameter(diametersCount.diameter, diametersCount.bounds['overview_map'],i);
-          console.log(this.markers[i]);
           new IOMMarker(this.markers[i], diameter, 'marker-bubble', this.map, 'overview_map');
 
           this.bounds.extend(new google.maps.LatLng(this.markers[i].lat, this.markers[i].lon));
@@ -160,7 +159,7 @@ define([
       } else if ((count >= bounds[2]) && (count < bounds[3])) {
         return diameters[3];
       } else {
-        return diameters[1];
+        return diameters[4];
       }
     },
 
