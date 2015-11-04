@@ -38,6 +38,7 @@
           <% else %>
           var map_center = [];
           <% end %>
+          var MAP_EMBED = false;
           var map_zoom = <%= @site.overview_map_zoom %> || 3;
           var chco = '<%= @overview_map_chco %>';
           var chf = '<%= @overview_map_chf %>';
