@@ -2,19 +2,39 @@
 
 define([
   'Class',
-  'underscore'
-  ], function(Class, _) {
+  'underscore',
+  'application/abstract/mapModel',
+  ], function(Class, _, mapModel) {
 
   var Conexion = Class.extend({
 
-    init: function(){
-      if (map_data) {
-        this.data = map_data;
-        this.projects = this.data.data;
-        this.included = this.data.included;
-        this.regions = this.data.meta.regions;
-        this.filters = this.getFilters();
+    params: {},
+
+    init: function(params){
+      this.setParams(params);
+      // if (map_data) {
+      //   this.data = map_data;
+      //   this.projects = this.data.data;
+      //   this.included = this.data.included;
+      //   this.regions = this.data.meta.regions;
+      //   this.filters = this.getFilters();
+      // }
+    },
+
+    setParams: function(params) {
+      this.params = {
+        id: params.id || null,
+        name: params.name || null,
+        filters: (!!params.filters) ? this.objetize(params.filters) : null,
+        apifilters: (!!params.filters) ? this.objetize((params.filters +'&'+params.name+'='+params.id)) : this.objetize(params.name+'='+params.id)
       }
+    },
+
+    getMapData: function(callback) {
+      this.mapModel = new mapModel();
+      this.mapModel.fetch({data:this.params.apifilters}).done(function(data){
+        callback(data);
+      });
     },
 
     getProjects: function(){
@@ -271,10 +291,14 @@ define([
         }
       }
       return str.join("&");
+    },
+
+    objetize: function(string) {
+      return JSON.parse('{"' + decodeURI(string).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
     }
 
 
   });
-  return new Conexion();
+  return Conexion;
 
 });

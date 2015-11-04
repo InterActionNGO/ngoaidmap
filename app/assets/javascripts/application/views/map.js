@@ -35,16 +35,10 @@ define([
       'click #zoomIn': 'zoomIn'
     },
 
-    initialize: function() {
-      if (this.$el.length === 0) {
-        return false;
-      }
-      this.conexion = conexion;
-      this.filters = this.conexion.getFilters();
+    initialize: function(options) {
+      this.conexion = options.conexion;
 
       this.$map = $('#map');
-
-      // old();
 
       this.initGlobalVars();
       this.initMap();
@@ -61,10 +55,10 @@ define([
     },
 
     initMap: function(){
-      if (map_type === 'project_map') {
-        this.mapOptions.zoom = map_zoom;
-        this.mapOptions.center = new google.maps.LatLng(map_center[0], map_center[1]);
-      }
+      // if (map_type === 'project_map') {
+      //   this.mapOptions.zoom = map_zoom;
+      //   this.mapOptions.center = new google.maps.LatLng(map_center[0], map_center[1]);
+      // }
 
       var idMap = (this.$map.length > 0) ? 'map' : 'small_map';
 
@@ -75,7 +69,7 @@ define([
 
     initMarkers: function(){
       var range = 5;
-      var classname;
+      var classname, diameter;
       var diametersCount = {
         diameter: [20,26,34,42,26],
         bounds:{
@@ -85,38 +79,43 @@ define([
         }
       };
 
-      this.markers = this.markerParser(map_data);
+      this.conexion.getMapData(_.bind(function(data){
+        this.markers = data.map_points;
+        // Markers
+        for (var i = 0; i < this.markers.length; i++) {
+          // if (document.URL.indexOf('force_site_id=3') >= 0) {
+          //   classname = 'marker-bubble';
+          //   diameter = this.setDiameter(diametersCount.diameter, diametersCount.bounds['force_site'],i);
+          // } else if (map_type === 'overview_map') {
+          //   classname = 'marker-bubble';
+          //   diameter = this.setDiameter(diametersCount.diameter, diametersCount.bounds['overview_map'],i);
+          // } else if (map_type === 'administrative_map') {
+          //   classname = 'marker-bubble';
+          //   diameter = this.setDiameter(diametersCount.diameter, diametersCount.bounds['administrative_map'],i);
+          // } else {
+          //   diameter = 34;
+          //   classname = 'marker-project-bubble';
+          // }
 
-      // Markers
-      for (var i = 0; i < this.markers.length; i++) {
-        if (document.URL.indexOf('force_site_id=3') >= 0) {
-          classname = 'marker-bubble';
-          this.setDiameter(diametersCount.diameter, diametersCount.bounds['force_site'],i);
-        } else if (map_type === 'overview_map') {
-          classname = 'marker-bubble';
-          this.setDiameter(diametersCount.diameter, diametersCount.bounds['overview_map'],i);
-        } else if (map_type === 'administrative_map') {
-          classname = 'marker-bubble';
-          this.setDiameter(diametersCount.diameter, diametersCount.bounds['administrative_map'],i);
-        } else {
-          this.diameter = 34;
-          classname = 'marker-project-bubble';
+          diameter = this.setDiameter(diametersCount.diameter, diametersCount.bounds['overview_map'],i);
+          console.log(this.markers[i]);
+          new IOMMarker(this.markers[i], diameter, 'marker-bubble', this.map, 'overview_map');
+
+          this.bounds.extend(new google.maps.LatLng(this.markers[i].lat, this.markers[i].lon));
         }
 
-        new IOMMarker(this.markers[i], this.diameter, classname, this.map);
-
-        this.bounds.extend(new google.maps.LatLng(this.markers[i].lat, this.markers[i].lon));
-      }
-
-      if (!globalPage || page !== 'sites') {
         this.map.fitBounds(this.bounds);
-      }
 
-      if (page === 'georegion' && this.markers.length === 1) {
-        setTimeout(_.bind(function() {
-          this.map.setZoom(8);
-        }, this), 300);
-      }
+
+        // if (page !== 'sites') {
+        // }
+
+        // if (page === 'georegion' && this.markers.length === 1) {
+        //   setTimeout(_.bind(function() {
+        //     this.map.setZoom(8);
+        //   }, this), 300);
+        // }
+      }, this ));
 
 
     },
@@ -153,15 +152,15 @@ define([
     setDiameter: function(diameters, bounds, i){
       var count = this.markers[i].count;
       if (count < bounds[0]) {
-        this.diameter = diameters[0];
+        return diameters[0];
       } else if ((count >= bounds[0]) && (count < bounds[1])) {
-        this.diameter = diameters[1];
+        return diameters[1];
       } else if ((count >= bounds[1]) && (count < bounds[2])) {
-        this.diameter = diameters[2];
+        return diameters[2];
       } else if ((count >= bounds[2]) && (count < bounds[3])) {
-        this.diameter = diameters[3];
+        return diameters[3];
       } else {
-        this.diameter = diameters[1];
+        return diameters[1];
       }
     },
 
