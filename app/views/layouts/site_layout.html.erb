@@ -33,30 +33,30 @@
     <% unless content_for?(:js_vars) %>
       <% if defined?(@map_data) %>
         <script>
-          <% if @site.overview_map_lat && @site.overview_map_lon %>
-          var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
-          <% else %>
-          var map_center = [];
-          <% end %>
-          var map_zoom = <%= @site.overview_map_zoom %> || 3;
-          var chco = '<%= @overview_map_chco %>';
-          var chf = '<%= @overview_map_chf %>';
-          var chld = '<%= @chld %>';
-          var chd = '<%= @chd %>';
-          var map_data = <%=raw(@map_data)%>;
-          var map_type = '<%= @filter_by_location.present?? "administrative_map" : "overview_map" %>';
-          var theme = "<%= @site.theme_id %>";
-          var kind = window.location.pathname.split('/')[1];
-          var stylez = <%= @site.map_styles.present?? raw(@site.map_styles) : false  %>
-          var empty_layer = <%= @empty_layer.present?? @empty_layer : false %>;
-          var globalPage = <%= @site.featured?? false : true %>;
-          var page = "<%= params[:controller] %>";
-          var adm_level = 0;
-          var geolocation = false;
-          var project = false;
-          var organization = false;
-          var donor = false;
-          var sector = false;
+          // <% if @site.overview_map_lat && @site.overview_map_lon %>
+          // var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
+          // <% else %>
+          // var map_center = [];
+          // <% end %>
+          // var map_zoom = <%= @site.overview_map_zoom %> || 3;
+          // var chco = '<%= @overview_map_chco %>';
+          // var chf = '<%= @overview_map_chf %>';
+          // var chld = '<%= @chld %>';
+          // var chd = '<%= @chd %>';
+          // var map_data = <%=raw(@map_data)%>;
+          // var map_type = '<%= @filter_by_location.present?? "administrative_map" : "overview_map" %>';
+          // var theme = "<%= @site.theme_id %>";
+          // var kind = window.location.pathname.split('/')[1];
+          // var stylez = <%= @site.map_styles.present?? raw(@site.map_styles) : false  %>
+          // var empty_layer = <%= @empty_layer.present?? @empty_layer : false %>;
+          // var globalPage = <%= @site.featured?? false : true %>;
+          // var page = "<%= params[:controller] %>";
+          // var adm_level = 0;
+          // var geolocation = false;
+          // var project = false;
+          // var organization = false;
+          // var donor = false;
+          // var sector = false;
         </script>
       <% end %>
     <% else %>

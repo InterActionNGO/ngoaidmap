@@ -3,6 +3,8 @@
 define([
   'backbone',
 
+  'application/abstract/conexion',
+
   'application/views/map',
   'application/views/filters',
   'application/views/menu-fixed',
@@ -49,7 +51,7 @@ define([
 
 
 
-], function(Backbone, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
+], function(Backbone, Conexion, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
   GalleryView, FilteredBubble, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOtherCountries,
   ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization, ProjectLocations, ProjectDonors, ProjectReach, ProjectSectors) {
@@ -57,63 +59,107 @@ define([
   var Router = Backbone.Router.extend({
 
     routes: {
-      '': 'lists',
-      'sectors/:id': 'lists',
-      'sectors/:id/*params': 'lists',
-      'organizations/:id': 'lists',
-      'organizations/:id/*params': 'lists',
-      'donors/:id': 'lists',
-      'donors/:id/*params': 'lists',
-      'location/:id': 'lists',
-      'location/:id/*params': 'lists',
+      '': 'home',
+      'sectors/:id': 'sectors',
+      'sectors/:id/*params': 'sectors',
+      'organizations/:id': 'organizations',
+      'organizations/:id/*params': 'organizations',
+      'donors/:id': 'donors',
+      'donors/:id/*params': 'donors',
+      'location/:id': 'locations',
+      'location/:id/*params': 'locations',
+
       'projects/:id': 'project',
       'projects/:id/*params': 'project',
-      'location/:region/:id': 'lists',
-      'location/:region/:id/*regions': 'lists',
       'search': 'search',
       'p/:page': 'page'
     },
 
     initialize: function() {
       var pushState = !!(window.history && window.history.pushState);
-
       Backbone.history.start({
         pushState: pushState
       });
     },
 
-    lists: function() {
-      new MapView();
-      new FiltersView();
-      new DownloadsView();
-      new EmbedMapView();
-      new LayerOverlayView();
-      new SidebarHighlights();
-      new SidebarSectors();
-      new SidebarSectorsAll();
-      new SidebarLocation();
-      new SidebarLocations();
-      new SidebarOrganizations();
-      new SidebarDonors();
-      new SidebarOtherCountries();
-
-      new FilteredBubble();
-
-      // Titles
-      new TitleSector();
-      new TitleDonor();
-      new TitleOrganization();
-      new TitleCountry();
-
-      // Organization sidebars
-      new SidebarOrganizationsInfoContact();
-      new SidebarOrganizationsDonationContact();
-      new SidebarOrganizationsMediaContact();
-      new SidebarOrganizationsFollowUs();
+    home: function() {
+      var params = {};
+      this.conexion = new Conexion(params);
+      this.initViews();
     },
 
-    project: function() {
-      this.lists();
+    sectors: function(id,filters) {
+      var params = {
+        id: id,
+        name: 'sectors[]',
+        filters: filters || ''
+      };
+      this.conexion = new Conexion(params);
+      this.initViews();
+    },
+
+    organizations: function(id,filters) {
+      var params = {
+        id: id,
+        name: 'organizations[]',
+        filters: filters || ''
+      };
+      this.conexion = new Conexion(params);
+      this.initViews();
+    },
+
+    donors: function(id,filters) {
+      var params = {
+        id: id,
+        name: 'donors[]',
+        filters: filters || ''
+      };
+      this.conexion = new Conexion(params);
+      this.initViews();
+    },
+
+    locations: function(id,filters) {
+      var params = {
+        id: id,
+        name: 'geolocation',
+        filters: filters || 'level=0'
+      };
+      this.conexion = new Conexion(params);
+      this.initViews();
+    },
+
+    initViews: function() {
+      new MapView({ conexion: this.conexion });
+      // new FiltersView({ conexion: this.conexion });
+      // new DownloadsView({ conexion: this.conexion });
+      // new EmbedMapView({ conexion: this.conexion });
+      // new LayerOverlayView({ conexion: this.conexion });
+      // new SidebarHighlights({ conexion: this.conexion });
+      // new SidebarSectors({ conexion: this.conexion });
+      // new SidebarSectorsAll({ conexion: this.conexion });
+      // new SidebarLocation({ conexion: this.conexion });
+      // new SidebarLocations({ conexion: this.conexion });
+      // new SidebarOrganizations({ conexion: this.conexion });
+      // new SidebarDonors({ conexion: this.conexion });
+      // new SidebarOtherCountries({ conexion: this.conexion });
+
+      // new FilteredBubble({ conexion: this.conexion });
+
+      // // Titles
+      // new TitleSector({ conexion: this.conexion });
+      // new TitleDonor({ conexion: this.conexion });
+      // new TitleOrganization({ conexion: this.conexion });
+      // new TitleCountry({ conexion: this.conexion });
+
+      // // Organization sidebars
+      // new SidebarOrganizationsInfoContact({ conexion: this.conexion });
+      // new SidebarOrganizationsDonationContact({ conexion: this.conexion });
+      // new SidebarOrganizationsMediaContact({ conexion: this.conexion });
+      // new SidebarOrganizationsFollowUs({ conexion: this.conexion });
+    },
+
+    initProjectViews: function() {
+      this.initViews();
 
       // Project Sidebar
       new ProjectOrganization();
