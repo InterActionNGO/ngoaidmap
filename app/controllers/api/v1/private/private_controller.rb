@@ -12,7 +12,7 @@ module Api
             expire_time = ((Time.now + 1.day).beginning_of_day - Time.now).ceil
             map_points = Project.get_projects_on_map(projects_params)
             total_projects = map_points.map{|p| p.projects_count}.reduce(:+)
-            map_data = ({"map_points" => map_points.as_json}.merge({meta: {total_projects: total_projects}})).to_json
+            map_data = {"map_points" => map_points.as_json}
             $redis.set("map_#{@digest}", map_data)
             $redis.expire "map_#{@digest}", expire_time
             render json: map_data
@@ -23,7 +23,7 @@ module Api
         private
 
         def projects_params
-          params.permit(:offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[])
+          params.permit(:offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[], projects:[])
         end
 
         def set_digests
