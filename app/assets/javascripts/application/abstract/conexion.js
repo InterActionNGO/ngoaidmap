@@ -10,34 +10,24 @@ define([
 
     params: {},
 
-    init: function(params){
-      this.setParams(params);
+    init: function(params,filters){
+      this.setParams(params,filters);
     },
 
-    setParams: function(params) {
+    setParams: function(params,filters) {
       this.params = {
         id: params.id || null,
         name: params.name || null,
-        filters: (!!params.filters) ? this.objetize(params.filters) : null,
-        apifilters: this.setApiFilters(params)
       }
-    },
-
-    setApiFilters: function(params) {
-      if(!!params.filters){
-        return (!!params.name && !!params.id) ? this.objetize(params.filters +'&'+params.name+'='+params.id) : null;
-      } else {
-        return (!!params.name && !!params.id) ? this.objetize(params.name+'='+params.id) : null;
-      }
+      this.filters = filters;
     },
 
     getMapData: function(callback) {
-      console.log(this.serialize(this.params.apifilters));
       this.mapModel = new mapModel({
-        filters: this.serialize(this.params.apifilters)
+        filters: this.serialize(this.filters)
       });
       this.mapModel.fetch({
-        data: this.params.apifilters
+        data: this.filters
       }).done(_.bind(function(data){
         callback(data);
       },this));
@@ -46,16 +36,9 @@ define([
     serialize: function(obj) {
       var str = [];
       for(var p in obj) {
-        var notAllowedFilters = ['geolocation'];
+        var notAllowedFilters = ['geolocation','level'];
         if (obj.hasOwnProperty(p) && !_.contains(notAllowedFilters, p)) {
-          switch(p){
-            case 'level':
-              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(parseInt(obj[p])+1));
-            break;
-            default:
-              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            break;
-          }
+          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
         }
       }
       return str.join("&");

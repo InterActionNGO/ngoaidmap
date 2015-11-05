@@ -17,15 +17,15 @@ define([
           name: p.name,
           lat: p.latitude,
           lon: p.longitude,
-          url: this.setUrl('/location/' + p.uid)
+          level: p.level,
+          url: this.setUrl('/location/' + p.uid, p.level)
         }
       }, this ));
       return data;
     },
 
-    setUrl: function(url) {
-      console.log(this.get('filters'));
-      return (!!this.get('filters')) ? url+'?'+this.get('filters') : url;
+    setUrl: function(url, level) {
+      return (!!this.get('filters')) ? url+'?level='+(level+1)+'&'+this.get('filters') : url+'?level='+(level+1);
     },
 
   });
