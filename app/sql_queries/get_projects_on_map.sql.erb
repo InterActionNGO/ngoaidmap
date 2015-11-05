@@ -10,7 +10,9 @@ with gp as(
 regions as(
   select geolocations.latitude as latitude, geolocations.longitude as longitude, geolocations.name as name, geolocations.uid as uid, geolocations.id as id
   from geolocations
-  where geolocations.adm_level=<%= quote @options.level %>
+  <% if @options.geolocation %>
+    where geolocations.g<%= @options.g_level %>=<%= quote @options.geolocation %>
+  <% end %>
   )
 select regions.name, regions.latitude, regions.longitude, regions.uid, regions.id, count(distinct(gp.p_id)) as projects_count from regions
 inner join gp on regions.uid = gp.g
