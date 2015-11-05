@@ -121,8 +121,8 @@ define([
     locations: function(id,filters) {
       var params = {
         id: id,
-        name: 'locations[]',
-        filters: filters || ''
+        name: 'geolocation',
+        filters: filters || 'level=0'
       };
       this.conexion = new Conexion(params);
       this.initViews();

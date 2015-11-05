@@ -32,11 +32,39 @@ define([
     },
 
     getMapData: function(callback) {
-      this.mapModel = new mapModel({ filters: this.serialize(this.params.apifilters) });
-      this.mapModel.fetch({data:this.params.apifilters}).done(_.bind(function(data){
+      console.log(this.serialize(this.params.apifilters));
+      this.mapModel = new mapModel({
+        filters: this.serialize(this.params.apifilters)
+      });
+      this.mapModel.fetch({
+        data: this.params.apifilters
+      }).done(_.bind(function(data){
         callback(data);
       },this));
     },
+
+    serialize: function(obj) {
+      var str = [];
+      for(var p in obj) {
+        var notAllowedFilters = ['geolocation'];
+        if (obj.hasOwnProperty(p) && !_.contains(notAllowedFilters, p)) {
+          switch(p){
+            case 'level':
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(parseInt(obj[p])+1));
+            break;
+            default:
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            break;
+          }
+        }
+      }
+      return str.join("&");
+    },
+
+    objetize: function(string) {
+      return JSON.parse('{"' + decodeURI(string).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+    }
+
 
     // getProjects: function(){
     //   return this.projects;
@@ -265,38 +293,6 @@ define([
     //   }
     //   return params;
     // },
-
-    setUrl: function(param_name, id){
-      return (location.search) ? location.href+'&'+param_name+'='+id : location.href+'?'+param_name+'='+id;
-    },
-
-    setUrlFiltered: function(url){
-      if (sector) {
-        return url+'?sectors[]='+sector.id;
-      } else if (organization) {
-        return url+'?organizations[]='+organization.id;
-      } else if (donor) {
-        return url+'?donors[]='+donor.id;
-      } else {
-        return url;
-      }
-
-    },
-
-    serialize: function(obj) {
-      var str = [];
-      for(var p in obj) {
-        var notAllowedFilters = ['level'];
-        if (obj.hasOwnProperty(p) && !_.contains(notAllowedFilters, p)) {
-          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-        }
-      }
-      return str.join("&");
-    },
-
-    objetize: function(string) {
-      return JSON.parse('{"' + decodeURI(string).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
-    }
 
 
   });
