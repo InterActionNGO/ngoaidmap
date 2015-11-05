@@ -16,40 +16,9 @@ class Sector < ActiveRecord::Base
     Project.active.joins([:sectors, :donors]).where(sectors: {id: self.id}).pluck('donors.id', 'donors.name').uniq
   end
   def self.counting_projects(options={})
-    if options && options[:status] == 'active'
-      sql=%Q(
-        WITH sp AS (
-          SELECT DISTINCT COUNT(distinct(projects.id)) AS sp_count_distinct_projects_id, sectors.id AS sp_sectors_id, sectors.name AS sp_sectors_name FROM "sectors"
-          LEFT JOIN "projects_sectors" ON "projects_sectors"."sector_id" = "sectors"."id"
-          LEFT JOIN "projects" ON "projects"."id" = "projects_sectors"."project_id"
-          WHERE (projects.end_date is null OR projects.end_date > now()) and (projects.start_date < now())
-            GROUP BY sectors.id, sectors.name
-            ), s as(
-            SELECT sectors.id AS s_sectors_id, sectors.name AS s_sectors_name FROM "sectors"
-            )
-          select s.s_sectors_id AS id, s.s_sectors_name AS name, coalesce(sp.sp_count_distinct_projects_id, 0) AS projects_count FROM s
-          LEFT JOIN sp ON sp.sp_sectors_id = s.s_sectors_id
-          GROUP BY id, name, projects_count
-          ORDER BY name
-      )
-      Sector.find_by_sql(sql)
-    else
-      sql=%Q(
-        WITH sp AS (
-          SELECT DISTINCT COUNT(distinct(projects.id)) AS sp_count_distinct_projects_id, sectors.id AS sp_sectors_id, sectors.name AS sp_sectors_name FROM "sectors"
-          LEFT JOIN "projects_sectors" ON "projects_sectors"."sector_id" = "sectors"."id"
-          LEFT JOIN "projects" ON "projects"."id" = "projects_sectors"."project_id"
-            GROUP BY sectors.id, sectors.name
-            ), s as(
-            SELECT sectors.id AS s_sectors_id, sectors.name AS s_sectors_name FROM "sectors"
-            )
-          select s.s_sectors_id AS id, s.s_sectors_name AS name, coalesce(sp.sp_count_distinct_projects_id, 0) AS projects_count FROM s
-          LEFT JOIN sp ON sp.sp_sectors_id = s.s_sectors_id
-          GROUP BY id, name, projects_count
-          ORDER BY name
-      )
-      Sector.find_by_sql(sql)
-    end
+    active = true if options && options[:status] == 'active'
+    sql = SqlQuery.new(:sectors_count, active: active).sql
+    Sector.find_by_sql(sql)
   end
   def self.fetch_all(options={})
     sectors = Sector.all

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :geolocations, only: [:index, :show]
       namespace :private do
         get 'map', to:'private#map'
+        get 'projects_count', to:'private#projects_count'
       end
     end
   end
