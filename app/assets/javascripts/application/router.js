@@ -84,48 +84,70 @@ define([
 
     home: function() {
       var params = {};
+      var filters = {};
       this.conexion = new Conexion(params);
       this.initViews();
     },
 
-    sectors: function(id,filters) {
+    sectors: function(_id,_filters) {
       var params = {
-        id: id,
-        name: 'sectors[]',
-        filters: filters || ''
+        'id': _id,
+        'name': 'sectors[]',
       };
-      this.conexion = new Conexion(params);
+      var filters = {
+        'sectors[]' : _id,
+      }
+      filters = _.extend({},filters,this.objetize(_filters));
+      this.conexion = new Conexion(params, filters);
       this.initViews();
     },
 
-    organizations: function(id,filters) {
+    organizations: function(_id,_filters) {
       var params = {
-        id: id,
-        name: 'organizations[]',
-        filters: filters || ''
+        'id': _id,
+        'name': 'organizations[]',
       };
-      this.conexion = new Conexion(params);
+      var filters = {
+        'organizations[]' : _id,
+      }
+      filters = _.extend({},filters,this.objetize(_filters));
+      this.conexion = new Conexion(params, filters);
       this.initViews();
     },
 
-    donors: function(id,filters) {
+    donors: function(_id,_filters) {
       var params = {
-        id: id,
-        name: 'donors[]',
-        filters: filters || ''
+        'id': _id,
+        'name': 'donors[]',
       };
-      this.conexion = new Conexion(params);
+      var filters = {
+        'donors[]' : _id,
+      }
+      filters = _.extend({},filters,this.objetize(_filters));
+      this.conexion = new Conexion(params, filters);
       this.initViews();
     },
 
-    locations: function(id,filters) {
+    locations: function(_id,_filters) {
       var params = {
-        id: id,
-        name: 'geolocation',
-        filters: filters || 'level=0'
+        'id': _id,
+        'name': 'geolocation',
       };
-      this.conexion = new Conexion(params);
+      var filters = {
+        'geolocation' : _id,
+        'level' : 1
+      };
+      filters = _.extend({},filters,this.objetize(_filters));
+      this.conexion = new Conexion(params, filters);
       this.initViews();
+    },
+
+    objetize: function(string) {
+      if (!!string) {
+        return JSON.parse('{"' + decodeURI(string).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+      } else {
+        return {};
+      }
     },
 
     initViews: function() {
