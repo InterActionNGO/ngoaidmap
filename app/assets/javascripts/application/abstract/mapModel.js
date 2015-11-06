@@ -9,6 +9,10 @@ define([
     url: '/api/private/map',
 
     parse: function(data) {
+      // Remove first item of array if there are more levels
+      if (data.map_points.length != 1 && !!this.get('filters') && !!this.get('filters').level && this.get('filters').level != data.map_points[0].level) {
+        data.map_points.shift();
+      }
       data.map_points = _.map(data.map_points, _.bind(function(p){
         return {
           count: p.projects_count,
