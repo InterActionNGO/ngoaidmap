@@ -18,14 +18,19 @@ define([
           lat: p.latitude,
           lon: p.longitude,
           level: p.level,
-          url: this.setUrl('/location/' + p.uid, p.level)
+          // url, level, hasChildren
+          url: this.setUrl('/location/' + p.uid, p.level, true)
         }
       }, this ));
       return data;
     },
 
-    setUrl: function(url, level) {
-      return (!!this.get('filters')) ? url+'?level='+(level+1)+'&'+this.get('filters') : url+'?level='+(level+1);
+    setUrl: function(url, level, hasChildren) {
+      if (hasChildren) {
+        return (!!this.get('filters')) ? url+'?level='+(level+1)+'&'+this.get('filters') : url+'?level='+(level+1);
+      } else {
+        return undefined;
+      }
     },
 
   });
