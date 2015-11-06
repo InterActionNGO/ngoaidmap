@@ -4,7 +4,9 @@ define([
   'Class',
   'underscore',
   'application/abstract/mapModel',
-  ], function(Class, _, mapModel) {
+  'application/abstract/projectCountModel',
+  'application/abstract/organizationCountModel',
+  ], function(Class, _, mapModel, projectCountModel, organizationCountModel) {
 
   var Conexion = Class.extend({
 
@@ -22,6 +24,7 @@ define([
       this.filters = filters;
     },
 
+    // MAP fetch data
     getMapData: function(callback) {
       this.mapModel = new mapModel({
         filters: this.serialize(this.filters)
@@ -33,6 +36,18 @@ define([
       },this));
     },
 
+    // MAP fetch highlights
+    getHighlightsData: function(callback) {
+      this.projectCountModel = new projectCountModel();
+      this.organizationCountModel = new organizationCountModel();
+
+      $.when(this.projectCountModel.fetch({ data: this.filters }),this.organizationCountModel.fetch({ data: this.filters })).done(function(){
+        callback(arguments);
+      }.bind(this));
+
+    },
+
+    // helpers
     serialize: function(obj) {
       var str = [];
       for(var p in obj) {

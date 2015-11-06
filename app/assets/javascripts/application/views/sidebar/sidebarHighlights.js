@@ -13,31 +13,27 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
+      this.conexion = options.conexion;
+      this.filters = this.$el.data('highlights');
 
-      this.data_to_render();
-
-      this.render();
+      this.conexion.getHighlightsData(_.bind(function(data){
+        this.data = _.reduce(_.map(data, function(m){return m[0];}), function(memo, num){
+          return _.extend({}, memo, num);
+        }, {});
+        this.render();
+      }, this ));
     },
 
     parseData: function(){
-      // console.log('We should check if data is correct. (8 projects - 22 countries)??? Bill & Melinda Gates Foundation (Donor)')
-      return {
-        projectsLength: this.conexion.getProjects().length.toLocaleString(),
-        organizationsLength: _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'organizations' }).length.toLocaleString(),
-        countriesLength: this.conexion.getCountries().length.toLocaleString(),
-        renderOrganizations: this.renderOrganizations,
-        renderCountries: this.renderCountries,
-      }
-    },
-
-    data_to_render: function(){
-      this.renderOrganizations = !!this.$el.data('renderorganizations');
-      this.renderCountries = !!this.$el.data('rendercountries');
+      return _.each(this.data, _.bind(function(v,k) {
+        if(!_.contains(this.filters, k)) {
+          delete this.data[k];
+        }
+      }, this ))
     },
 
     render: function(){

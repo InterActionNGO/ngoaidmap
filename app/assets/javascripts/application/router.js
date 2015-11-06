@@ -152,11 +152,11 @@ define([
 
     initViews: function() {
       new MapView({ conexion: this.conexion });
-      // new FiltersView({ conexion: this.conexion });
-      // new DownloadsView({ conexion: this.conexion });
-      // new EmbedMapView({ conexion: this.conexion });
-      // new LayerOverlayView({ conexion: this.conexion });
-      // new SidebarHighlights({ conexion: this.conexion });
+      new FiltersView({ conexion: this.conexion });
+      new DownloadsView({ conexion: this.conexion });
+      new EmbedMapView({ conexion: this.conexion });
+      new LayerOverlayView({ conexion: this.conexion });
+      new SidebarHighlights({ conexion: this.conexion });
       // new SidebarSectors({ conexion: this.conexion });
       // new SidebarSectorsAll({ conexion: this.conexion });
       // new SidebarLocation({ conexion: this.conexion });
