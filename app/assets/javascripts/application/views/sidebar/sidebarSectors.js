@@ -14,24 +14,23 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
-      this.filters = this.conexion.getFilters();
-      this.render();
-
+      this.conexion = options.conexion;
+      this.filtered = !!this.$el.data('nofilter');
+      this.conexion.getSectorsData(_.bind(function(response){
+        this.response = response;
+        this.render();
+      },this))
     },
 
     parseData: function(){
-      var sectorsByProjects = this.conexion.getSectorsByProjects(!!this.$el.data('nofilter'));
-      if (sectorsByProjects.length == 1 && !!this.filters['sectors[]']) {
-        this.$el.remove();
-        return
-      }
-
-      return { sectors: sectorsByProjects };
+      var sectors = _.sortBy(_.filter(this.response.data, function(s){
+        return s.count != 0;
+      }),'count');
+      return { sectors: sectors.reverse() };
     },
 
     setUrl: function(param_name, id){

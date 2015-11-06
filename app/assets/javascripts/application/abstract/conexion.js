@@ -6,7 +6,8 @@ define([
   'application/abstract/mapModel',
   'application/abstract/projectCountModel',
   'application/abstract/organizationCountModel',
-  ], function(Class, _, mapModel, projectCountModel, organizationCountModel) {
+  'application/abstract/sectorModel',
+  ], function(Class, _, mapModel, projectCountModel, organizationCountModel, sectorModel) {
 
   var Conexion = Class.extend({
 
@@ -44,6 +45,17 @@ define([
       $.when(this.projectCountModel.fetch({ data: this.filters }),this.organizationCountModel.fetch({ data: this.filters })).done(function(){
         callback(arguments);
       }.bind(this));
+
+    },
+
+    // MAP fetch sectors
+    getSectorsData: function(callback) {
+      this.sectorModel = new sectorModel();
+      this.sectorModel.fetch({
+        data: this.filters
+      }).done(_.bind(function(data){
+        callback(data);
+      },this));
 
     },
 

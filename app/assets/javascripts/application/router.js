@@ -157,7 +157,7 @@ define([
       new EmbedMapView({ conexion: this.conexion });
       new LayerOverlayView({ conexion: this.conexion });
       new SidebarHighlights({ conexion: this.conexion });
-      // new SidebarSectors({ conexion: this.conexion });
+      new SidebarSectors({ conexion: this.conexion });
       // new SidebarSectorsAll({ conexion: this.conexion });
       // new SidebarLocation({ conexion: this.conexion });
       // new SidebarLocations({ conexion: this.conexion });
