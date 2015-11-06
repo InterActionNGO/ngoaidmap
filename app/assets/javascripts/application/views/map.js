@@ -124,30 +124,6 @@ define([
       new LayersView(this.map);
     },
 
-    markerParser: function(data){
-      if (geolocation) {
-        var markers = _.sortBy(this.conexion.getLocationsByGeolocation(adm_level), function(location){
-          return location.count;
-        });
-      } else if(project) {
-        var markers = _.sortBy(this.conexion.getLocationsByProject(), function(location){
-          return location.count;
-        });
-      } else{
-        if (this.filters['geolocation']) {
-          var markers = _.sortBy(this.conexion.getLocationsByGeolocation(1), function(location){
-            return location.count;
-          });
-        } else {
-          var markers = _.sortBy(this.conexion.getCountries(true), function(country){
-            return country.count;
-          });
-        }
-      }
-
-      return markers;
-    },
-
     setDiameter: function(diameters, bounds, i){
       var count = this.markers[i].count;
       if (count < bounds[0]) {
