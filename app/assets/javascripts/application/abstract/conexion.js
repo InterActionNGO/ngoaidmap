@@ -28,7 +28,8 @@ define([
     // MAP fetch data
     getMapData: function(callback) {
       this.mapModel = new mapModel({
-        filters: this.serialize(this.filters)
+        filters: this.filters,
+        filtersString: this.serialize(this.filters)
       });
       this.mapModel.fetch({
         data: this.filters

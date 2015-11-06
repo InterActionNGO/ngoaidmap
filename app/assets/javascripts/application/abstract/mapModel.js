@@ -26,11 +26,10 @@ define([
     },
 
     setUrl: function(url, level, hasChildren) {
-      if (hasChildren) {
-        return (!!this.get('filters')) ? url+'?level='+(level+1)+'&'+this.get('filters') : url+'?level='+(level+1);
-      } else {
+      if (!!this.get('filters') && !!this.get('filters').level && this.get('filters').level != level) {
         return undefined;
       }
+      return (!!this.get('filtersString')) ? url+'?level='+(level+1)+'&'+this.get('filtersString') : url+'?level='+(level+1);
     },
 
   });
