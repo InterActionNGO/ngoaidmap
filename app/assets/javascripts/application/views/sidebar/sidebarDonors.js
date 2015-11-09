@@ -24,8 +24,8 @@ define([
         return
       }
       this.conexion = options.conexion;
+      this.params = this.conexion.getParams();
       this.conexion.getDonorsData(_.bind(function(data){
-        console.log(data);
         if (!!data.data.length) {
           this.data = data.data;
           this.render(false);
@@ -37,6 +37,7 @@ define([
 
     parseData: function(more){
       return {
+        name: this.setName(),
         donors: (more) ? this.data : this.data.slice(0,10),
         see_more: (this.data.length < 10) ? false : !more
       };
@@ -44,6 +45,17 @@ define([
 
     render: function(more){
       this.$el.html(this.template(this.parseData(!!more)));
+    },
+
+    setName: function() {
+      switch(this.params.name) {
+        case 'geolocation':
+          return 'Donors in this location';
+        break;
+        case 'sectors[]':
+          return 'Donors in this sector'
+        break;
+      }
     },
 
     // Events

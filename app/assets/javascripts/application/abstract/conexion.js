@@ -26,6 +26,14 @@ define([
       this.filters = filters;
     },
 
+    getParams: function() {
+      return this.params;
+    },
+
+    getFilters: function() {
+      return this.filters;
+    },
+
     // MAP fetch data
     getMapData: function(callback) {
       this.mapModel = new mapModel({
