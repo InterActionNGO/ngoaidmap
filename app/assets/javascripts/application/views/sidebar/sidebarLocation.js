@@ -13,12 +13,12 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
-      this.render();
+      this.conexion = options.conexion;
+      // this.render();
     },
 
     render: function(){

@@ -159,8 +159,9 @@ define([
       new SidebarHighlights({ conexion: this.conexion });
       new SidebarSectors({ conexion: this.conexion });
       new SidebarDonors({ conexion: this.conexion });
+      new SidebarLocation({ conexion: this.conexion });
       // new SidebarSectorsAll({ conexion: this.conexion });
-      // new SidebarLocation({ conexion: this.conexion });
+
       // new SidebarLocations({ conexion: this.conexion });
       // new SidebarOrganizations({ conexion: this.conexion });
 

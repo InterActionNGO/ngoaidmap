@@ -4,7 +4,7 @@ define([
   'backbone'
 ], function(Backbone) {
 
-  var MapModel = Backbone.Model.extend({
+  var MapCollection = Backbone.Model.extend({
 
     url: '/api/private/map',
 
@@ -37,6 +37,6 @@ define([
 
   });
 
-  return MapModel;
+  return MapCollection;
 
 });

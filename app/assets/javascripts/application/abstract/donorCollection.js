@@ -6,7 +6,7 @@ define([
 
   var DonorModel = Backbone.Model.extend({
 
-    url: '/api/donors?status=active',
+    url: '/api/donors',
 
     parse: function(response) {
       response.data = _.map(response.data, _.bind(function(p){

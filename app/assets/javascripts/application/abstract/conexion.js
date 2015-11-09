@@ -3,12 +3,12 @@
 define([
   'Class',
   'underscore',
-  'application/abstract/mapModel',
+  'application/abstract/mapCollection',
   'application/abstract/projectCountModel',
   'application/abstract/organizationCountModel',
-  'application/abstract/sectorModel',
-  'application/abstract/donorModel',
-  ], function(Class, _, mapModel, projectCountModel, organizationCountModel, sectorModel, donorModel) {
+  'application/abstract/sectorCollection',
+  'application/abstract/donorCollection',
+  ], function(Class, _, mapCollection, projectCountModel, organizationCountModel, sectorCollection, donorCollection) {
 
   var Conexion = Class.extend({
 
@@ -34,13 +34,15 @@ define([
       return this.filters;
     },
 
+    // GET COLLECTIONS
+
     // MAP fetch data
     getMapData: function(callback) {
-      this.mapModel = new mapModel({
+      this.mapCollection = new mapCollection({
         filters: this.filters,
         filtersString: this.serialize(this.filters)
       });
-      this.mapModel.fetch({
+      this.mapCollection.fetch({
         data: this.filters
       }).done(_.bind(function(data){
         callback(data);
@@ -60,8 +62,8 @@ define([
 
     // MAP fetch sectors
     getSectorsData: function(callback) {
-      this.sectorModel = new sectorModel();
-      this.sectorModel.fetch({
+      this.sectorCollection = new sectorCollection();
+      this.sectorCollection.fetch({
         data: this.filters
       }).done(_.bind(function(data){
         callback(data);
@@ -71,9 +73,9 @@ define([
 
     // MAP fetch sectors
     getDonorsData: function(callback) {
-      this.donorModel = new donorModel();
-      this.donorModel.fetch({
-        data: this.filters
+      this.donorCollection = new donorCollection();
+      this.donorCollection.fetch({
+        data: _.extend({},this.filters,{status: 'active'})
       }).done(_.bind(function(data){
         callback(data);
       },this));
