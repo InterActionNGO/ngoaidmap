@@ -6,7 +6,7 @@ define([
 
   var SectorCollection = Backbone.Model.extend({
 
-    url: '/api/sectors?include=projects_count',
+    url: '/api/sectors',
 
     parse: function(response) {
       response.data = _.map(response.data, _.bind(function(p){

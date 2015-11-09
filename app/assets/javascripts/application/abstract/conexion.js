@@ -70,11 +70,25 @@ define([
     getSectorsData: function(callback) {
       this.sectorCollection = new sectorCollection();
       this.sectorCollection.fetch({
-        data: this.filters
+        data: _.extend({},
+          this.filters,
+          { include: 'projects_count',status: 'active' }
+        ),
       }).done(_.bind(function(data){
         callback(data);
       },this));
 
+    },
+
+    getSectorsAllData: function(callback){
+      this.sectorCollection = new sectorCollection();
+      this.sectorCollection.fetch({
+        data: _.extend({},
+          { include: 'projects_count',status: 'active' }
+        ),
+      }).done(_.bind(function(data){
+        callback(data);
+      },this));
     },
 
     // MAP fetch sectors
