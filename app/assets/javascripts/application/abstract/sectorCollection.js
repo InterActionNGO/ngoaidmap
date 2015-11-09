@@ -4,7 +4,7 @@ define([
   'backbone'
 ], function(Backbone) {
 
-  var SectorModel = Backbone.Model.extend({
+  var SectorCollection = Backbone.Model.extend({
 
     url: '/api/sectors?include=projects_count',
 
@@ -29,6 +29,6 @@ define([
   });
 
 
-  return SectorModel;
+  return SectorCollection;
 
 });

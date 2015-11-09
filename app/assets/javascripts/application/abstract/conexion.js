@@ -3,12 +3,18 @@
 define([
   'Class',
   'underscore',
+  // Collections
   'application/abstract/mapCollection',
-  'application/abstract/projectCountModel',
-  'application/abstract/organizationCountModel',
   'application/abstract/sectorCollection',
   'application/abstract/donorCollection',
-  ], function(Class, _, mapCollection, projectCountModel, organizationCountModel, sectorCollection, donorCollection) {
+
+  // Models
+  'application/abstract/projectCountModel',
+  'application/abstract/organizationCountModel',
+  'application/abstract/geolocationModel',
+  ], function(Class, _,
+    mapCollection, sectorCollection, donorCollection,
+    projectCountModel, organizationCountModel, geolocationModel) {
 
   var Conexion = Class.extend({
 
@@ -75,6 +81,17 @@ define([
     getDonorsData: function(callback) {
       this.donorCollection = new donorCollection();
       this.donorCollection.fetch({
+        data: _.extend({},this.filters,{status: 'active'})
+      }).done(_.bind(function(data){
+        callback(data);
+      },this));
+
+    },
+
+    // MAP fetch locations
+    getGeolocationData: function(callback) {
+      this.geolocationModel = new geolocationModel({ uid: this.params.id });
+      this.geolocationModel.fetch({
         data: _.extend({},this.filters,{status: 'active'})
       }).done(_.bind(function(data){
         callback(data);

@@ -18,11 +18,14 @@ define([
         return
       }
       this.conexion = options.conexion;
-      // this.render();
+      this.conexion.getGeolocationData(_.bind(function(data){
+        this.data = data.data;
+        this.render();
+      }, this ));
     },
 
     render: function(){
-      this.$el.html(this.template(geolocation));
+      this.$el.html(this.template(this.data));
     },
 
   });

@@ -4,7 +4,7 @@ define([
   'backbone'
 ], function(Backbone) {
 
-  var DonorModel = Backbone.Model.extend({
+  var DonorCollection = Backbone.Model.extend({
 
     url: '/api/donors',
 
@@ -29,6 +29,6 @@ define([
   });
 
 
-  return DonorModel;
+  return DonorCollection;
 
 });
