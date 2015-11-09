@@ -22,14 +22,13 @@ define([
           lat: p.latitude,
           lon: p.longitude,
           level: p.level,
-          // url, level, hasChildren
-          url: this.setUrl('/location/' + p.uid, p.level, true)
+          url: this.setUrl('/location/' + p.uid, p.level)
         }
       }, this ));
       return data;
     },
 
-    setUrl: function(url, level, hasChildren) {
+    setUrl: function(url, level) {
       if (!!this.get('filters') && !!this.get('filters').level && this.get('filters').level != level) {
         return undefined;
       }
