@@ -8,6 +8,7 @@ define([
   'application/abstract/sectorCollection',
   'application/abstract/donorCollection',
   'application/abstract/countryCollection',
+  'application/abstract/organizationCollection',
 
   // Count Models
   'application/abstract/projectCountModel',
@@ -18,7 +19,7 @@ define([
   // Models
   'application/abstract/geolocationModel',
   ], function(Class, _,
-    mapCollection, sectorCollection, donorCollection, countryCollection,
+    mapCollection, sectorCollection, donorCollection, countryCollection, organizationCollection,
     projectCountModel, organizationCountModel, donorCountModel, countryCountModel,
     geolocationModel) {
 
@@ -104,7 +105,7 @@ define([
       },this));
     },
 
-    // Fetch SECTORS
+    // Fetch DONORS
     getDonorsData: function(callback) {
       this.donorCollection = new donorCollection();
       this.donorCollection.fetch({
@@ -115,22 +116,30 @@ define([
 
     },
 
-    // Fetch LOCATIONS
-    getGeolocationData: function(callback) {
-      this.geolocationModel = new geolocationModel({ uid: this.params.id });
-      this.geolocationModel.fetch({
-        data: _.extend({},this.filters,{status: 'active'})
+    // Fetch ORGANIZATIONS
+    getOrganizationsData: function(callback) {
+      this.organizationCollection = new organizationCollection();
+      this.organizationCollection.fetch({
+        data: _.extend({}, this.filters ,{status: 'active'})
       }).done(_.bind(function(data){
         callback(data);
       },this));
     },
 
-
-    // Fetch COUNTRIES
+    // Fetch LOCATIONS
     getCountriesData: function(callback) {
       this.countryCollection = new countryCollection();
       this.countryCollection.fetch({
         data: _.extend({}, this.filters ,{status: 'active'})
+      }).done(_.bind(function(data){
+        callback(data);
+      },this));
+    },
+
+    getGeolocationData: function(callback) {
+      this.geolocationModel = new geolocationModel({ uid: this.params.id });
+      this.geolocationModel.fetch({
+        data: _.extend({},this.filters,{status: 'active'})
       }).done(_.bind(function(data){
         callback(data);
       },this));

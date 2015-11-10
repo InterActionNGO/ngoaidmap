@@ -13,19 +13,21 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.data = map_data;
-      this.conexion = conexion;
-      this.render();
+      this.conexion = options.conexion;
+      this.conexion.getOrganizationsData(_.bind(function(response){
+        this.organizations = response.organizations_count;
+        this.render();
+      }, this ));
     },
 
     parseData: function(){
-      var organizationsByProjects = this.conexion.getOrganizationByProjects();
-      organizationsByProjects = _.map(organizationsByProjects.slice(0, 9), function(v){ v.name = _.unescape(v.name); return v;});
-      return { organizations: organizationsByProjects };
+      return {
+        organizations: this.organizations.slice(0, 9)
+      };
     },
 
     render: function(){

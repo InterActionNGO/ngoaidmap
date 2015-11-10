@@ -166,8 +166,7 @@ define([
       new SidebarLocation({ conexion: this.conexion });
       new SidebarLocations({ conexion: this.conexion });
       new SidebarOtherCountries({ conexion: this.conexion });
-
-      // new SidebarOrganizations({ conexion: this.conexion });
+      new SidebarOrganizations({ conexion: this.conexion });
 
 
       // new FilteredBubble({ conexion: this.conexion });
