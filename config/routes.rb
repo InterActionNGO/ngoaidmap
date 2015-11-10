@@ -26,6 +26,8 @@ Rails.application.routes.draw do
         get 'countries', to:'private#countries'
         get 'countries-count', to:'private#countries_count'
         get 'organizations/:organization_id', to:'private#organization'
+        get 'projects/:project_id', to:'private#project'
+        get 'donors/:donor_id', to:'private#donor'
       end
     end
   end
