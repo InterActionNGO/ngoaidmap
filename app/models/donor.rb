@@ -30,8 +30,9 @@ class Donor < ActiveRecord::Base
   #has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::DONOR_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   #has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::DONOR_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   has_many :donations, dependent: :destroy
-  has_many :donated_projects, -> {where("(projects.end_date is null or projects.end_date > now())")}, through: :donations, source: :project
-  has_many :all_donated_projects, through: :donations, source: :project
+  #has_many :donated_projects, -> {where("(projects.end_date is null or projects.end_date > now())")}, through: :donations, source: :project
+  #has_many :all_donated_projects, through: :donations, source: :project
+  has_many :projects, through: :donations, source: :project
   has_many :offices, dependent: :destroy
 
   has_attached_file :logo, styles: {
@@ -48,10 +49,10 @@ class Donor < ActiveRecord::Base
   scope :active, -> {joins([donations: :project]).where("projects.end_date is null or (projects.end_date > ? AND projects.start_date < ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :sectors, -> (sectors) {joins([donations: [project: :sectors]]).where(sectors: {id: sectors})}
   scope :site, -> (site) {joins([donations: [project: :sites]]).where(sites: {id: site})}
-  scope :geolocation, -> (geolocation,level=0){joins(projects: :geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
-  scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
-  scope :countries, -> (countries){joins(projects: :geolocations).where(geolocations: {country_uid: countries})}
-  scope :organizations, -> (orgs){joins(:projects).joins('join organizations on projects.primary_organization_id = organizations.id').where(organizations: {id: orgs})}
+  scope :geolocation, -> (geolocation,level=0){joins(donations: [project: :geolocations]).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
+  scope :projects, -> (projects){joins(donations: :project).where(projects: {id: projects})}
+  scope :countries, -> (countries){joins(donations: [project: :geolocations]).where(geolocations: {country_uid: countries})}
+  scope :organizations, -> (orgs){joins(donations: :project).joins('join organizations on projects.primary_organization_id = organizations.id').where(organizations: {id: orgs})}
   def self.fetch_all(options={})
     level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
     donors = Donor.all
