@@ -64,6 +64,7 @@ class Project < ActiveRecord::Base
                           includes(:countries).
                           where('countries_projects.project_id IS NULL AND regions.id IS NOT NULL')}
   scope :organizations, -> (orgs){where(organizations: {id: orgs})}
+  scope :site, -> (site){joins(:sites).where(sites: {id: site})}
   scope :projects, -> (projects){where(projects: {id: projects})}
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){where(donors: {id: donors})}
@@ -85,6 +86,7 @@ class Project < ActiveRecord::Base
     level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
 
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
+    projects = projects.site(options[:site])                                    if options[:site]
     projects = projects.geolocation(options[:geolocation], level)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries])                          if options[:countries]

@@ -31,6 +31,13 @@
 
 class Geolocation < ActiveRecord::Base
   has_and_belongs_to_many :projects
+  scope :active, -> {joins(:projects).where("projects.end_date is null or (projects.end_date > ? AND projects.start_date < ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
+  scope :sectors, -> (sectors) {joins(projects: :sectors).where(sectors: {id: sectors})}
+  scope :site, -> (site) {joins(projects: :sites).where(sites: {id: site})}
+  scope :countries, -> (countries) {where(geolocations: {country_uid: countries})}
+  scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
+  scope :donors, -> (donors){joins(projects: :donors).where(donors: {id: donors})}
+  scope :organizations, -> (orgs){joins(:projects).joins('join organizations on projects.primary_organization_id = organizations.id').where(organizations: {id: orgs})}
   def self.sum_projects(options='')
     where=''
     if options && options == 'active'
@@ -49,6 +56,17 @@ class Geolocation < ActiveRecord::Base
     }
     result = ActiveRecord::Base.connection.execute(query)
     result.map{|r| r}
+  end
+  def self.fetch_all(options={})
+    geolocations = Geolocation.all
+    geolocations = geolocations.site(options[:site])                                    if options[:site]
+    geolocations = geolocations.active                                                  if options[:status] && options[:status] == 'active'
+    geolocations = geolocations.projects(options[:projects])                            if options[:projects]
+    geolocations = geolocations.organizations(options[:organizations])                  if options[:organizations]
+    geolocations = geolocations.sectors(options[:sectors])                              if options[:sectors]
+    geolocations = geolocations.donors(options[:donors])                                if options[:donors]
+    geolocations = geolocations.countries(options[:countries])                            if options[:countries]
+    geolocations.uniq
   end
   def iati_uid
     uid = self.uid

@@ -89,6 +89,7 @@ class Organization < ActiveRecord::Base
   has_one :user
   scope :active, -> {joins(:projects).where("projects.end_date IS NULL OR (projects.end_date > ? AND projects.start_date <= ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :organizations, -> (orgs){where(organizations: {id: orgs})}
+  scope :site, -> (site){joins(projects: :sites).where(sites: {id: site})}
   scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
   scope :sectors, -> (sectors){joins(:projects).joins('
     INNER JOIN projects_sectors ON (projects.id = projects_sectors.project_id)
@@ -104,7 +105,8 @@ class Organization < ActiveRecord::Base
   def self.fetch_all(options={})
     level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
     organizations = Organization.all
-    organizations = organizations.active                                                  if options[:status] == 'active'
+    organizations = organizations.site(options[:site])                                    if options[:site]
+    organizations = organizations.active                                                  if options[:status] && options[:status] == 'active'
     organizations = organizations.geolocation(options[:geolocation], level)               if options[:geolocation]
     organizations = organizations.projects(options[:projects])                            if options[:projects]
     organizations = organizations.countries(options[:countries])                          if options[:countries]
