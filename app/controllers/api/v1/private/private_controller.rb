@@ -110,11 +110,26 @@ module Api
           render json: result
         end
 
+        def project
+          result = fetch_redis_cache do
+            query = Project.find(permitted_params[:project_id])
+            json = {"project" => query}.to_json
+          end
+          render json: result
+        end
+
+        def donor
+          result = fetch_redis_cache do
+            query = Donor.find(permitted_params[:donor_id])
+            json = {"donor" => query}.to_json
+          end
+          render json: result
+        end
 
         private
 
         def permitted_params
-          params.permit(:organization_id, :site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[], projects:[])
+          params.permit(:organization_id, :project_id, :donor_id, :site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[], projects:[])
         end
 
       end
