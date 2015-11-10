@@ -17,10 +17,11 @@ define([
         return
       }
       this.conexion = options.conexion;
-      this.filtered = !!this.conexion.getParams().name;
+      this.params = this.conexion.getParams();
+      this.filters = this.conexion.getFilters();
       this.locations = this.conexion.getCountriesData(_.bind(function(response){
         this.locations = _.sortBy(response.countries, 'count').reverse();
-        this.render();
+        (!!this.filters && ! !!this.filters['geolocation']) ? this.render() : this.$el.remove();
       }, this ));
     },
 
@@ -37,7 +38,7 @@ define([
         values: values.join(','),
         othersVisibility: othersVisibility,
         chartVisibility: chartVisibility,
-        filtered: this.filtered
+        filtered: !!this.params.name
       };
     },
 

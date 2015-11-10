@@ -19,18 +19,19 @@ define([
         return
       }
       this.conexion = options.conexion;
-      this.filtered = !!this.conexion.getParams().name;
+      this.params = this.conexion.getParams();
+      this.filters = this.conexion.getFilters();
       this.conexion.getSectorsData(_.bind(function(response){
-        this.response = response;
-        this.render();
+        this.response = response.sectors;
+        (!!this.filters && ! !!this.filters['sectors[]']) ? this.render() : this.$el.remove();
       },this))
     },
 
     parseData: function(){
-      var sectors = _.sortBy(_.filter(this.response.sectors, function(s){
+      var sectors = _.sortBy(_.filter(this.response, function(s){
         return s.count != 0;
       }),'count');
-      return { sectors: sectors.reverse(), filtered: this.filtered };
+      return { sectors: sectors.reverse(), filtered: !!this.params.name };
     },
 
     setUrl: function(param_name, id){

@@ -85,7 +85,7 @@ define([
     home: function() {
       var params = {};
       var filters = {};
-      this.conexion = new Conexion(params);
+      this.conexion = new Conexion(params,filters);
       this.initViews();
     },
 
