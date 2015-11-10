@@ -12,7 +12,7 @@ module Api
         render json: @organization, root: 'data', include: ['projects']
       end
       def organizations_params
-        params.permit(:status)
+        params.permit(:status, :site, :geolocation, organizations:[], sectors:[], donors:[], countries:[])
       end
     end
   end

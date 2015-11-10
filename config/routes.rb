@@ -15,7 +15,16 @@ Rails.application.routes.draw do
       namespace :private do
         get 'map', to:'private#map'
         get 'projects-count', to:'private#projects_count'
+        get 'organizations', to:'private#organizations'
         get 'organizations-count', to:'private#organizations_count'
+        get 'donors', to:'private#donors'
+        get 'donors-count', to:'private#donors_count'
+        get 'sectors', to:'private#sectors'
+        get 'sectors-count', to:'private#sectors_count'
+        get 'geolocations', to:'private#geolocations'
+        get 'geolocations-count', to:'private#geolocations_count'
+        get 'countries', to:'private#countries'
+        get 'countries-count', to:'private#countries_count'
       end
     end
   end
