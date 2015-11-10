@@ -72,8 +72,8 @@ module Api
 
         def sectors_count
           sectors_count = fetch_redis_cache do
-            query = Sector.active.fetch_all(permitted_params).group('sectors.id, sectors.name').count('projects.id')
-            sectors_count = {"sectors_counting_projects" => query.map{|q| {q[0] => q[1]} }}.to_json
+            query = Sector.active.fetch_all(permitted_params).select('sectors.id, sectors.name, count(distinct(projects.id))').group('sectors.id, sectors.name')
+            sectors_count = {"sectors_counting_projects" => query.map{|q| { 'id' => q.id, 'name' => q.name, 'count' => q.count} }}.to_json
           end
           render json: sectors_count
         end
