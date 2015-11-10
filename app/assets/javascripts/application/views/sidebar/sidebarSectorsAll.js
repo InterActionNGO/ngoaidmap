@@ -20,6 +20,7 @@ define([
         return
       }
       this.conexion = options.conexion;
+      this.params = this.conexion.getParams();
       this.conexion.getSectorsAllData(_.bind(function(response){
         this.response = response;
         this.render();
@@ -29,9 +30,9 @@ define([
     },
 
     parseData: function(){
-      var sectors = _.sortBy(_.filter(this.response.sectors, function(s){
-        return s.count != 0;
-      }),'count');
+      var sectors = _.sortBy(_.filter(this.response.sectors, _.bind(function(s){
+        return s.count != 0 && this.params.id != s.id;
+      }, this )),'count');
       return { sectors: sectors.reverse(), all: true };
     },
 
