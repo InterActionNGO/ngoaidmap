@@ -46,9 +46,7 @@ define([
       return this.filters;
     },
 
-    // GET COLLECTIONS
-
-    // MAP fetch data
+    // fetch MAP
     getMapData: function(callback) {
       this.mapCollection = new mapCollection({
         filters: this.filters,
@@ -61,7 +59,7 @@ define([
       },this));
     },
 
-    // MAP fetch highlights
+    // Fetch HIGHLIGHTS
     getHighlightsData: function(callback) {
       this.projectCountModel = new projectCountModel();
       this.organizationCountModel = new organizationCountModel();
@@ -81,7 +79,7 @@ define([
 
     },
 
-    // MAP fetch sectors
+    // Fetch SECTORS
     getSectorsData: function(callback) {
       this.sectorCollection = new sectorCollection();
       this.sectorCollection.fetch({
@@ -106,7 +104,7 @@ define([
       },this));
     },
 
-    // MAP fetch sectors
+    // Fetch SECTORS
     getDonorsData: function(callback) {
       this.donorCollection = new donorCollection();
       this.donorCollection.fetch({
@@ -117,7 +115,7 @@ define([
 
     },
 
-    // MAP fetch locations
+    // Fetch LOCATIONS
     getGeolocationData: function(callback) {
       this.geolocationModel = new geolocationModel({ uid: this.params.id });
       this.geolocationModel.fetch({
@@ -127,10 +125,22 @@ define([
       },this));
     },
 
-    getOtherCountriesData: function(callback) {
-      this.countryCollection = new countryCollection({ uid: this.params.id });
+
+    // Fetch COUNTRIES
+    getCountriesData: function(callback) {
+      this.countryCollection = new countryCollection();
       this.countryCollection.fetch({
-        data: _.extend({},{summing: 'projects', status: 'active'})
+        data: _.extend({}, this.filters ,{status: 'active'})
+      }).done(_.bind(function(data){
+        callback(data);
+      },this));
+    },
+
+    // Fetch other COUNTRIES
+    getOtherCountriesData: function(callback) {
+      this.countryCollection = new countryCollection();
+      this.countryCollection.fetch({
+        data: _.extend({},{status: 'active'})
       }).done(_.bind(function(data){
         callback(data);
       },this));

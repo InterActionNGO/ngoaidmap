@@ -3,9 +3,8 @@
 define([
   'backbone',
   'handlebars',
-  'application/abstract/conexion',
   'text!application/templates/sidebar/sidebarLocations.handlebars'
-  ], function(Backbone, handlebars, conexion, tpl) {
+  ], function(Backbone, handlebars, tpl) {
 
   var SidebarLocations = Backbone.View.extend({
 
@@ -13,33 +12,37 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
-      this.locations = this.conexion.getLocationsByCountry(!!this.$el.data('nofilter'));
-      this.render();
+      this.conexion = options.conexion;
+      this.filtered = !!this.conexion.getParams().name;
+      this.locations = this.conexion.getCountriesData(_.bind(function(response){
+        this.locations = _.sortBy(response.countries, 'count').reverse();
+        this.render();
+      }, this ));
     },
 
     parseData: function(){
-
       var locationsTop3 = this.locations.slice(0,3);
       var otherLocations = _.reduce(this.locations.slice(3), function(memo, location){ return memo + location.count; }, 0);
       var values = _.map(locationsTop3, function(location){ return location.count });
       var othersVisibility = (this.locations.length > 3) ? true : false;
       var chartVisibility = (this.locations.length > 1) ? true : false;
+
       return {
         locations: locationsTop3,
         other: otherLocations,
         values: values.join(','),
         othersVisibility: othersVisibility,
-        chartVisibility: chartVisibility
+        chartVisibility: chartVisibility,
+        filtered: this.filtered
       };
     },
 
     render: function(){
-      (this.locations.length == 1) ? this.$el.remove() : this.$el.html(this.template(this.parseData()));
+      (this.locations.length <= 1) ? this.$el.remove() : this.$el.html(this.template(this.parseData()));
     },
 
   });

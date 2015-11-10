@@ -3,7 +3,11 @@
   <ul id="clustersView">
     {{#each sectors}}
       <li>
-        <a class="{{this.class}} icon_statistics" title="{{this.name}}" href="{{this.url}}" data-value="{{this.count}}"><span class="aller">{{this.count}}</span></a>
+        {{#if ../filtered}}
+          <a class="{{this.class}} icon_statistics" title="{{this.name}}" href="{{this.urlfiltered}}" data-value="{{this.count}}"><span class="aller">{{this.count}}</span></a>
+        {{else}}
+          <a class="{{this.class}} icon_statistics" title="{{this.name}}" href="{{this.url}}" data-value="{{this.count}}"><span class="aller">{{this.count}}</span></a>
+        {{/if}}
       </li>
     {{/each}}
   </ul>

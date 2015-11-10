@@ -21,8 +21,7 @@ define([
       }
       this.conexion = options.conexion;
       this.conexion.getOtherCountriesData(_.bind(function(response){
-        this.response = response.countries;
-        console.log(this.response);
+        this.response = _.sortBy(response.countries, 'count').reverse();
         this.render();
       },this))
     },

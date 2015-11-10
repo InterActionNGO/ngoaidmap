@@ -9,7 +9,17 @@ define([
     url: '/api/private/countries',
 
     parse: function(response) {
-      return response.data;
+      response.countries = _.map(response.countries, _.bind(function(p){
+        return {
+          name: _.unescape(p.name),
+          id: p.uid,
+          url: '/location/'+p.uid,
+          urlfiltered: this.setUrl('geolocation',p.uid),
+          class: p.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", "").replace(/\//g, "-"),
+          count: p.projects_count
+        }
+      }, this ));
+      return response;
     },
 
     setUrl: function(param_name, id){

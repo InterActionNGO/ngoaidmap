@@ -19,7 +19,7 @@ define([
         return
       }
       this.conexion = options.conexion;
-      this.filtered = !!this.$el.data('nofilter');
+      this.filtered = !!this.conexion.getParams().name;
       this.conexion.getSectorsData(_.bind(function(response){
         this.response = response;
         this.render();
@@ -30,7 +30,7 @@ define([
       var sectors = _.sortBy(_.filter(this.response.sectors, function(s){
         return s.count != 0;
       }),'count');
-      return { sectors: sectors.reverse() };
+      return { sectors: sectors.reverse(), filtered: this.filtered };
     },
 
     setUrl: function(param_name, id){
