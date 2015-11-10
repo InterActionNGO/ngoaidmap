@@ -112,8 +112,8 @@ module Api
 
         def project
           result = fetch_redis_cache do
-            query = Project.find(permitted_params[:project_id])
-            json = {"project" => query}.to_json
+            query = Project.includes(:prime_awardee).find(permitted_params[:project_id])
+            json = {"project" => query, 'prime_awardee' => {'name' => query.prime_awardee.try(:name)}}.to_json
           end
           render json: result
         end
