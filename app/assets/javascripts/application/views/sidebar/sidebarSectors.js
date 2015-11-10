@@ -27,7 +27,7 @@ define([
     },
 
     parseData: function(){
-      var sectors = _.sortBy(_.filter(this.response.data, function(s){
+      var sectors = _.sortBy(_.filter(this.response.sectors_counting_projects, function(s){
         return s.count != 0;
       }),'count');
       return { sectors: sectors.reverse() };

@@ -6,7 +6,7 @@ define([
 
   var GeolocationModel = Backbone.Model.extend({
 
-    url: '/api/geolocations/',
+    url: '/api/private/geolocations/',
 
     initialize: function() {
       this.url += this.get('uid');

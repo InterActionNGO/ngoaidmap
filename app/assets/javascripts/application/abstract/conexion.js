@@ -9,13 +9,18 @@ define([
   'application/abstract/donorCollection',
   'application/abstract/countryCollection',
 
-  // Models
+  // Count Models
   'application/abstract/projectCountModel',
   'application/abstract/organizationCountModel',
+  'application/abstract/donorCountModel',
+  'application/abstract/countryCountModel',
+
+  // Models
   'application/abstract/geolocationModel',
   ], function(Class, _,
     mapCollection, sectorCollection, donorCollection, countryCollection,
-    projectCountModel, organizationCountModel, geolocationModel) {
+    projectCountModel, organizationCountModel, donorCountModel, countryCountModel,
+    geolocationModel) {
 
   var Conexion = Class.extend({
 
@@ -60,10 +65,19 @@ define([
     getHighlightsData: function(callback) {
       this.projectCountModel = new projectCountModel();
       this.organizationCountModel = new organizationCountModel();
+      this.countryCountModel = new countryCountModel();
+      this.donorCountModel = new donorCountModel();
 
-      $.when(this.projectCountModel.fetch({ data: this.filters }),this.organizationCountModel.fetch({ data: this.filters })).done(function(){
-        callback(arguments);
-      }.bind(this));
+
+      $.when(
+          this.projectCountModel.fetch({ data: this.filters }),
+          this.organizationCountModel.fetch({ data: this.filters }),
+          this.countryCountModel.fetch({ data: this.filters }),
+          this.donorCountModel.fetch({ data: this.filters })
+
+        ).done(function(){
+          callback(arguments);
+        }.bind(this));
 
     },
 

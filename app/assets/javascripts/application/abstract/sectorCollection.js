@@ -6,20 +6,20 @@ define([
 
   var SectorCollection = Backbone.Model.extend({
 
-    url: '/api/sectors',
+    url: '/api/private/sectors-count',
 
     parse: function(response) {
-      response.data = _.map(response.data, _.bind(function(p){
+      response.sectors_counting_projects = _.map(response.sectors_counting_projects, _.bind(function(p){
         return {
-          name: p.attributes.name,
+          name: p.name,
           id: p.id,
           url: '/sectors/'+p.id,
           urlfiltered: this.setUrl('sectors[]',p.id),
-          class: p.attributes.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", "").replace(/\//g, "-"),
-          count: p.attributes.projects_count
+          class: p.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", "").replace(/\//g, "-"),
+          count: p.projects_count
         }
       }, this ));
-      return response.data;
+      return response.sectors_counting_projects;
     },
 
     setUrl: function(param_name, id){

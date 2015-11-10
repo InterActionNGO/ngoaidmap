@@ -6,7 +6,7 @@ define([
 
   var DonorCollection = Backbone.Model.extend({
 
-    url: '/api/donors',
+    url: '/api/private/donors',
 
     parse: function(response) {
       response.data = _.map(response.data, _.bind(function(p){

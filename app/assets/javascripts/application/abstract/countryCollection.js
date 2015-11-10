@@ -6,7 +6,7 @@ define([
 
   var CountryCollection = Backbone.Model.extend({
 
-    url: '/api/countries',
+    url: '/api/private/countries',
 
     parse: function(response) {
       return response.data;
