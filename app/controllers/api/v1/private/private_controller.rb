@@ -80,24 +80,24 @@ module Api
 
         def donors_count
           donors_count = fetch_redis_cache do
-            query = Donor.active.fetch_all(permitted_params).group('donors.id, donors.name').count('projects.id')
-            donors_count = {"donor_counts" => query.map{|q| {q[0] => q[1]} }}.to_json
+            query = Donor.active.fetch_all(permitted_params).select('donors.id, donors.name, count(distinct(projects.id))').group('donors.id, donors.name')
+            donors_count = {"donors_counting_projects" => query.map{|q| { 'id' => q.id, 'name' => q.name, 'projects_count' => q.count} }}.to_json
           end
           render json: donors_count
         end
 
         def geolocations_count
           geolocations_count = fetch_redis_cache do
-            query = Geolocation.active.fetch_all(permitted_params).group('geolocations.id, geolocations.name').count('projects.id')
-            geolocations_count = {"geolocations_count" => query.map{|q| {q[0] => q[1]} }}.to_json
+            query = Geolocation.active.fetch_all(permitted_params).select('geolocations.uid, geolocations.name, count(distinct(projects.id))').group('geolocations.id, geolocations.name')
+            geolocations_count = {"geolocations_counting_projects" => query.map{|q| { 'uid' => q.uid, 'name' => q.name, 'projects_count' => q.count} }}.to_json
           end
           render json: geolocations_count
         end
 
         def countries_count
           countries_count = fetch_redis_cache do
-            query = Geolocation.active.fetch_all(permitted_params).group('geolocations.country_uid, geolocations.country_name').count('projects.id')
-            countries_count = {"countries_count" => query.map{|q| {q[0] => q[1]} }}.to_json
+            query = Geolocation.active.fetch_all(permitted_params).select('geolocations.country_uid, geolocations.country_name, count(distinct(projects.id))').group('geolocations.country_uid, geolocations.country_name')
+            countries_count = {"countries_counting_projects" => query.map{|q| { 'uid' => q.country_uid, 'name' => q.country_name, 'projects_count' => q.count} }}.to_json
           end
           render json: countries_count
         end
