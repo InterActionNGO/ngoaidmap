@@ -3,9 +3,9 @@
 define([
   'backbone',
   'handlebars',
-  'application/abstract/conexion',
+  'application/abstract/utils',
   'text!application/templates/sidebar/sidebarHighlights.handlebars'
-  ], function(Backbone, handlebars, conexion, tpl) {
+  ], function(Backbone, handlebars, utils, tpl) {
 
   var SidebarHighlights = Backbone.View.extend({
 
@@ -30,6 +30,7 @@ define([
 
     parseData: function(){
       return _.each(this.data, _.bind(function(v,k) {
+        this.data[k] = utils.formatCurrency(this.data[k]);
         if(!_.contains(this.filters, k)) {
           delete this.data[k];
         }

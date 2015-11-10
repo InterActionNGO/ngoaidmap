@@ -13,16 +13,19 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
-      this.render();
+      this.conexion = options.conexion;
+      this.conexion.getGeolocationData(_.bind(function(data){
+        this.data = data.data;
+        this.render();
+      }, this ));
     },
 
     render: function(){
-      this.$el.html(this.template(geolocation));
+      this.$el.html(this.template(this.data));
     },
 
   });
