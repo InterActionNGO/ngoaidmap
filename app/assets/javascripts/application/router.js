@@ -168,6 +168,11 @@ define([
       new SidebarOtherCountries({ conexion: this.conexion });
       new SidebarOrganizations({ conexion: this.conexion });
 
+      // Organization sidebars
+      new SidebarOrganizationsInfoContact({ conexion: this.conexion });
+      new SidebarOrganizationsDonationContact({ conexion: this.conexion });
+      new SidebarOrganizationsMediaContact({ conexion: this.conexion });
+      new SidebarOrganizationsFollowUs({ conexion: this.conexion });
 
       // new FilteredBubble({ conexion: this.conexion });
 
@@ -177,11 +182,6 @@ define([
       // new TitleOrganization({ conexion: this.conexion });
       // new TitleCountry({ conexion: this.conexion });
 
-      // // Organization sidebars
-      // new SidebarOrganizationsInfoContact({ conexion: this.conexion });
-      // new SidebarOrganizationsDonationContact({ conexion: this.conexion });
-      // new SidebarOrganizationsMediaContact({ conexion: this.conexion });
-      // new SidebarOrganizationsFollowUs({ conexion: this.conexion });
     },
 
     initProjectViews: function() {

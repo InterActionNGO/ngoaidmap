@@ -6,7 +6,7 @@ define([
 
   var OrganizationModel = Backbone.Model.extend({
 
-    url: '/api/organizations/',
+    url: '/api/private/organizations/',
 
     initialize: function() {
       this.url += this.get('id');

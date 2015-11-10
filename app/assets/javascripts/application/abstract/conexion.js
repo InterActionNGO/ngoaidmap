@@ -18,10 +18,11 @@ define([
 
   // Models
   'application/abstract/geolocationModel',
+  'application/abstract/organizationModel',
   ], function(Class, _,
     mapCollection, sectorCollection, donorCollection, countryCollection, organizationCollection,
     projectCountModel, organizationCountModel, donorCountModel, countryCountModel,
-    geolocationModel) {
+    geolocationModel, organizationModel) {
 
   var Conexion = Class.extend({
 
@@ -86,7 +87,7 @@ define([
       this.sectorCollection.fetch({
         data: _.extend({},
           this.filters,
-          { include: 'projects_count',status: 'active' }
+          { include: 'projects_count' }
         ),
       }).done(_.bind(function(data){
         callback(data);
@@ -98,7 +99,7 @@ define([
       this.sectorCollection = new sectorCollection();
       this.sectorCollection.fetch({
         data: _.extend({},
-          { include: 'projects_count',status: 'active' }
+          { include: 'projects_count', }
         ),
       }).done(_.bind(function(data){
         callback(data);
@@ -109,7 +110,7 @@ define([
     getDonorsData: function(callback) {
       this.donorCollection = new donorCollection();
       this.donorCollection.fetch({
-        data: _.extend({},this.filters,{status: 'active'})
+        data: _.extend({},this.filters,{})
       }).done(_.bind(function(data){
         callback(data);
       },this));
@@ -120,7 +121,16 @@ define([
     getOrganizationsData: function(callback) {
       this.organizationCollection = new organizationCollection();
       this.organizationCollection.fetch({
-        data: _.extend({}, this.filters ,{status: 'active'})
+        data: _.extend({}, this.filters ,{})
+      }).done(_.bind(function(data){
+        callback(data);
+      },this));
+    },
+
+    getOrganizationData: function(callback) {
+      this.organizationModel = new organizationModel({ id: this.params.id });
+      this.organizationModel.fetch({
+        data: _.extend({}, this.filters ,{})
       }).done(_.bind(function(data){
         callback(data);
       },this));
@@ -130,7 +140,7 @@ define([
     getCountriesData: function(callback) {
       this.countryCollection = new countryCollection();
       this.countryCollection.fetch({
-        data: _.extend({}, this.filters ,{status: 'active'})
+        data: _.extend({}, this.filters ,{})
       }).done(_.bind(function(data){
         callback(data);
       },this));
@@ -139,7 +149,7 @@ define([
     getGeolocationData: function(callback) {
       this.geolocationModel = new geolocationModel({ uid: this.params.id });
       this.geolocationModel.fetch({
-        data: _.extend({},this.filters,{status: 'active'})
+        data: _.extend({},this.filters,{})
       }).done(_.bind(function(data){
         callback(data);
       },this));
@@ -149,7 +159,7 @@ define([
     getOtherCountriesData: function(callback) {
       this.countryCollection = new countryCollection();
       this.countryCollection.fetch({
-        data: _.extend({},{status: 'active'})
+        data: _.extend({},{})
       }).done(_.bind(function(data){
         callback(data);
       },this));
