@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         get 'geolocations-count', to:'private#geolocations_count'
         get 'countries', to:'private#countries'
         get 'countries-count', to:'private#countries_count'
+        get 'organizations/:organization_id', to:'private#organization'
       end
     end
   end

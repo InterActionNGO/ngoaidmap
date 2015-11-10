@@ -102,11 +102,19 @@ module Api
           render json: result
         end
 
+        def organization
+          result = fetch_redis_cache do
+            query = Organization.find(permitted_params[:organization_id])
+            json = {"organization" => query}.to_json
+          end
+          render json: result
+        end
+
 
         private
 
         def permitted_params
-          params.permit(:site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[], projects:[])
+          params.permit(:organization_id, :site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[], projects:[])
         end
 
       end
