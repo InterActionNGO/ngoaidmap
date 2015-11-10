@@ -15,13 +15,14 @@ define([
   'application/abstract/organizationCountModel',
   'application/abstract/donorCountModel',
   'application/abstract/countryCountModel',
+  'application/abstract/sectorCountModel',
 
   // Models
   'application/abstract/geolocationModel',
   'application/abstract/organizationModel',
   ], function(Class, _,
     mapCollection, sectorCollection, donorCollection, countryCollection, organizationCollection,
-    projectCountModel, organizationCountModel, donorCountModel, countryCountModel,
+    projectCountModel, organizationCountModel, donorCountModel, countryCountModel, sectorCountModel,
     geolocationModel, organizationModel) {
 
   var Conexion = Class.extend({
@@ -67,14 +68,14 @@ define([
       this.organizationCountModel = new organizationCountModel();
       this.countryCountModel = new countryCountModel();
       this.donorCountModel = new donorCountModel();
-
+      this.sectorCountModel = new sectorCountModel();
 
       $.when(
           this.projectCountModel.fetch({ data: this.filters }),
           this.organizationCountModel.fetch({ data: this.filters }),
           this.countryCountModel.fetch({ data: this.filters }),
-          this.donorCountModel.fetch({ data: this.filters })
-
+          this.donorCountModel.fetch({ data: this.filters }),
+          this.sectorCountModel.fetch({ data: this.filters })
         ).done(function(){
           callback(arguments);
         }.bind(this));
