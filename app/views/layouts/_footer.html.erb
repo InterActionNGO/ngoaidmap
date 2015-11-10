@@ -9,14 +9,16 @@
           </div>
 
           <ul>
-            <%# @site.featured_sites.each do |s|  %>
-                <li class="featured-project">
-                  <a href="http://<%#= s.url %>" target"_self" >
-                    <img src="<%#= s.aid_map_image.url %>" alt="" width="200" height="115">
-                    <p><%#= s.name %></p>
-                  </a>
-                </li>
-            <%# end %>
+            <% if @site.featured_sites.any? %>
+              <% @site.featured_sites.each do |s|  %>
+                  <li class="featured-project">
+                    <a href="http://<%= s.url %>" target"_self" >
+                      <img src="<%= s.aid_map_image.url %>" alt="" width="200" height="115">
+                      <p><%= s.name %></p>
+                    </a>
+                  </li>
+              <% end %>
+            <% end %>
           </ul>
 
         </div>

@@ -94,4 +94,7 @@ class Site < ActiveRecord::Base
 
   scope :published, -> {where(:status => true)}
   scope :draft,     -> {where(:status => false)}
+  def featured_sites
+    Site.where(featured: true).where.not(id: self.id)
+  end
 end

@@ -1,7 +1,9 @@
+<% cache ['projects_list', @projects, params], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
 <div class="articles-list">
   <% unless @projects.empty? %>
     <ul>
       <% @projects.each do |project| %>
+      <% cache ['project', project], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
         <li>
           <article class="mod-index-item">
             <h2><a href="<%= project_path(project['id']) %>"><%= truncate(project['name'], :length=>60) %></a></h2>
@@ -12,6 +14,7 @@
           </article>
         </li>
       <% end %>
+    <% end %>
     </ul>
   <% else %>
     <ul>
@@ -26,3 +29,4 @@
 <div class="mod-pagination">
   <%= paginate(@projects, total_pages: @total_pages, remote: true) %>
 </div>
+<% end %>
