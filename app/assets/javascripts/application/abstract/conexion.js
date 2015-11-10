@@ -7,13 +7,14 @@ define([
   'application/abstract/mapCollection',
   'application/abstract/sectorCollection',
   'application/abstract/donorCollection',
+  'application/abstract/countryCollection',
 
   // Models
   'application/abstract/projectCountModel',
   'application/abstract/organizationCountModel',
   'application/abstract/geolocationModel',
   ], function(Class, _,
-    mapCollection, sectorCollection, donorCollection,
+    mapCollection, sectorCollection, donorCollection, countryCollection,
     projectCountModel, organizationCountModel, geolocationModel) {
 
   var Conexion = Class.extend({
@@ -110,7 +111,15 @@ define([
       }).done(_.bind(function(data){
         callback(data);
       },this));
+    },
 
+    getOtherCountriesData: function(callback) {
+      this.countryCollection = new countryCollection({ uid: this.params.id });
+      this.countryCollection.fetch({
+        data: _.extend({},{summing: 'projects', status: 'active'})
+      }).done(_.bind(function(data){
+        callback(data);
+      },this));
     },
 
     // helpers
