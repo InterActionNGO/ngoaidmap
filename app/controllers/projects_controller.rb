@@ -8,5 +8,8 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.includes(:prime_awardee).find(params[:id])
   end
+  def resource
+    Project
+  end
 
 end

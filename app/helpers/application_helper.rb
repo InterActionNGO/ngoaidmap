@@ -1,15 +1,15 @@
 module ApplicationHelper
 
   def download_link(text, type)
-    #if action_name == 'show'
-    #  if controller.resource == Geolocation
-    #    name = "#{controller.resource.find_by(uid: params[:ids]).name.underscore}_projects"
-    #  else
-    #    name = "#{controller.resource.find(params[:id]).name.parameterize}_projects"
-    #  end
-    #else
-    #  name = "#{@site.id}_projects"
-    #end
+    if action_name == 'show'
+      if controller.resource == Geolocation
+        name = "#{controller.resource.find_by(uid: params[:ids]).name.underscore}_projects"
+      else
+        name = "#{controller.resource.find(params[:id]).name.parameterize}_projects"
+      end
+    else
+      name = "#{@site.id}_projects"
+    end
     params_string = params.except(:action, :controller,:id, :ids).merge(:name => name).to_query
     link_to text, "/downloads?doc=#{type}&#{params_string}", :class => type
   end
