@@ -29,7 +29,7 @@ Rails.application.routes.draw do
         get 'projects/:project_id', to:'private#project'
         get 'donors/:donor_id', to:'private#donor'
         get 'sectors/:sector_id', to:'private#sector'
-        get 'geolocations/:geolocations_id', to:'private#geolocation'
+        get 'geolocations/:geolocation_id', to:'private#geolocation'
         get 'countries/:country_id', to:'private#country'
       end
     end
