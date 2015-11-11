@@ -103,17 +103,10 @@ define([
           this.bounds.extend(new google.maps.LatLng(this.markers[i].lat, this.markers[i].lon));
         }
 
-        this.map.fitBounds(this.bounds);
-
-
-        // if (page !== 'sites') {
-        // }
-
-        // if (page === 'georegion' && this.markers.length === 1) {
-        //   setTimeout(_.bind(function() {
-        //     this.map.setZoom(8);
-        //   }, this), 300);
-        // }
+        if (!!this.markers.length) {
+          // Be sure that we have data to render
+          this.map.fitBounds(this.bounds);
+        }
       }, this ));
 
 

@@ -22,7 +22,7 @@ define([
       this.conexion = options.conexion;
       this.conexion.getDonorsData(_.bind(function(response){
         this.donors = response.donors;
-        this.render()
+        (!!this.donors.length) ? this.render() : this.$el.remove();
       },this))
     },
 
