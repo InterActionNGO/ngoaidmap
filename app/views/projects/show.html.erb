@@ -74,9 +74,8 @@
         <div class="mod-downloads mod-info">
           <h3>Export data</h3>
           <ul>
-            <li><%= link_to 'CSV', project_path(@project, :csv), :class => 'csv' %></li>
-            <li><%= link_to 'XLS', project_path(@project, :xls), :class => 'xls' %></li>
-            <li><%= link_to 'KML', project_path(@project, :kml), :class => 'kml' %></li>
+            <li><%= download_link('CSV','csv') %></li>
+            <li><%= download_link('KML','kml') %></li>
           </ul>
         </div>
 
