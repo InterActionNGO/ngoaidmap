@@ -126,10 +126,34 @@ module Api
           render json: result
         end
 
+        def sector
+          result = fetch_redis_cache do
+            query = Sector.find(permitted_params[:sector_id])
+            json = {"sector" => query}.to_json
+          end
+          render json: result
+        end
+
+        def geolocation
+          result = fetch_redis_cache do
+            query = Geolocation.find_by(uid: permitted_params[:geolocation_id])
+            json = {"geolocation" => query}.to_json
+          end
+          render json: result
+        end
+
+        def country
+          result = fetch_redis_cache do
+            query = Geolocation.where(adm_level: 0).find_by(uid: permitted_params[:geolocation_id])
+            json = {"country" => query}.to_json
+          end
+          render json: result
+        end
+
         private
 
         def permitted_params
-          params.permit(:organization_id, :project_id, :donor_id, :site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[], projects:[])
+          params.permit(:geolocation_id, :sector_id, :country_id, :organization_id, :project_id, :donor_id, :site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[], projects:[])
         end
 
       end
