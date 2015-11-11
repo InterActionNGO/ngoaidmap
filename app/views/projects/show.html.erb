@@ -115,11 +115,10 @@
                 <p> <%= raw(@project.activities) %> </p>
               <%end%>
               <%unless @project.additional_information.blank? %>
-                <h3 class="<%= (@project.activities.blank?)? 'first':''%>">Additional information</h3>
+                <H2 class="<%= (@project.activities.blank?)? 'first':''%>">Additional information</H2>
                 <p> <%= raw(@project.additional_information) %> </p>
               <%end%>
               </section>
-
               <section>
               <%unless @project.cross_cutting_issues.blank? %>
                 <h2 class="<%= (@project.activities.blank? && @project.additional_information.blank?)? 'first':''%>">Cross-cutting issues</h2>
