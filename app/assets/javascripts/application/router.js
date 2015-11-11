@@ -179,9 +179,9 @@ define([
 
       // // Titles
       new TitleSector({ conexion: this.conexion });
-      // new TitleDonor({ conexion: this.conexion });
+      new TitleDonor({ conexion: this.conexion });
       new TitleOrganization({ conexion: this.conexion });
-      // new TitleCountry({ conexion: this.conexion });
+      new TitleCountry({ conexion: this.conexion });
 
     },
 

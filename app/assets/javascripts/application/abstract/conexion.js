@@ -87,8 +87,6 @@ define([
     // Fetch TITLES
     getTitleData: function(callback) {
       _.map(this.filters, _.bind(function(v,k){
-        console.log(k);
-        console.log(v);
         switch (k) {
           case 'sectors[]':
             this.sectorModel = new sectorModel({ id: v });

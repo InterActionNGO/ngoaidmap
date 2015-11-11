@@ -4,9 +4,8 @@ define([
   'jquery',
   'backbone',
   'handlebars',
-  'application/abstract/conexion',
   'text!application/templates/titles/titleOrganization.handlebars'
-  ], function(jquery, Backbone, handlebars, conexion, tpl) {
+  ], function(jquery, Backbone, handlebars, tpl) {
 
   var TitleDonor = Backbone.View.extend({
 
