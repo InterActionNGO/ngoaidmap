@@ -26,8 +26,8 @@ define([
       this.conexion = options.conexion;
       this.params = this.conexion.getParams();
       this.conexion.getDonorsData(_.bind(function(data){
-        if (!!data.data.length) {
-          this.data = data.data;
+        if (!!data.donors.length) {
+          this.data = data.donors;
           this.render(false);
         } else {
           this.$el.remove()

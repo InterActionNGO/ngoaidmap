@@ -18,9 +18,9 @@ define([
       if (!this.$el.length) {
         return
       }
-      // we need to fix this. It would be great if we can retrieve it from the project call
-      // this.prime_awardee = (!!prime_awardee) ? prime_awardee : null;
-      // (!!this.prime_awardee) ? this.render() : this.$el.remove();
+      this.project = options.project;
+      this.awardee = options.awardee;
+      (!!this.prime_awardee && !!this.prime_awardee.name) ? this.render() : this.$el.remove();
     },
 
     parseData: function(){

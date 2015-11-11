@@ -200,12 +200,12 @@ define([
       this.projectModel = new projectModel({id:_id});
       this.projectModel.fetch().done(_.bind(function(_project){
         this.initViews();
-        this.initProjectViews(_project.project);
+        this.initProjectViews(_project.project, _project.prime_awardee);
       },this))
 
     },
 
-    initProjectViews: function(_project) {
+    initProjectViews: function(_project, _awardee) {
       this.initViews();
 
       // Project Sidebar
@@ -215,7 +215,7 @@ define([
       new ProjectPeopleReached({ project: _project, conexion: this.conexion });
       new ProjectContact({ project: _project, conexion: this.conexion });
       new ProjectWebsite({ project: _project, conexion: this.conexion });
-      new ProjectAwardee({ project: _project, conexion: this.conexion });
+      new ProjectAwardee({ project: _project, awardee: _awardee, conexion: this.conexion });
       new ProjectTarget({ project: _project, conexion: this.conexion });
       new ProjectPartnerOrganizations({ project: _project, conexion: this.conexion });
       new ProjectImplementingOrganization({ project: _project, conexion: this.conexion });
