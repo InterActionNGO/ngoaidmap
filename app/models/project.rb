@@ -138,7 +138,7 @@ class Project < ActiveRecord::Base
   end
 
   comma do
-    primary_organization 'primary_organization' do |primary_organization| primary_organization.name end
+    primary_organization 'organization' do |primary_organization| primary_organization.name end
     intervention_id 'interaction_intervention_id'
     organization_id 'org_intervention_id'
     tags 'project_tags' do |s| s.map{ |se| se.name }.join('|') end
@@ -151,12 +151,16 @@ class Project < ActiveRecord::Base
     sectors 'sectors' do |s| s.map{ |se| se.name }.join('|') end
     cross_cutting_issues
     budget 'budget_numeric'
-    partner_organizations 'international_partners'
-    #local_partners
-    awardee_type 'prime_awardee'
-    estimated_people_reached
+    budget_currency
+    budget_value_date
+    implementing_organization 'international partners'
+    partner_organizations 'local_partners'
+    prime_awardee 'prime_awardee' do |prime_awardee| prime_awardee.try(:name) end
+    target_project_reach
+    actual_project_reach
+    project_reach_unit
     target 'target_groups'
-    verbatim_location 'location'
+    geolocations 'location' do |g| readable_region_paths(g) end
     contact_person 'project_contact_person'
     contact_position 'project_contact_position'
     contact_email 'project_contact_email'
@@ -166,6 +170,12 @@ class Project < ActiveRecord::Base
     date_updated
     activity_status 'status'
     donors 'donors' do |s| s.map{ |se| se.name }.join('|') end
+  end
+
+  def readable_region_paths(r=nil)
+    geolocations = r || self.geolocations
+    geolocations = geolocations.map{ |g| g.name }.join('|')
+    geolocations
   end
 
   def self.to_excel(options = {})
