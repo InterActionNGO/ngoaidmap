@@ -20,16 +20,20 @@ define([
       this.conexion = options.conexion;
       this.params = this.conexion.getParams();
       this.filters = this.conexion.getFilters();
-      this.conexion.getHighlightsData(_.bind(function(data){
+      this.conexion.getTitleData(_.bind(function(data){
         this.data = _.reduce(_.map(data, function(m){return m[0];}), function(memo, num){
           return _.extend({}, memo, num);
         }, {});
-        console.log(this.data);
+        this.render();
       },this))
     },
 
     parseData: function(){
-
+      console.log(this.data);
+      return {
+        name: this.projectString(),
+        country: this.countryString()
+      }
       // this.countries = this.conexion.getCountries();
       // this.donors = this.conexion.getDonors();
 
@@ -46,23 +50,26 @@ define([
     },
 
     projectString: function(count, donorCount){
-      var donor = (donorCount == 1 && !!this.filters['donors[]']) ? _.unescape(this.donors[0].name) : '';
-      if (count == 1) {
-        if (!!donor) {
-          return count.toLocaleString() +' '+this.$el.data('name')+' project donated by ' + donor;
-        }
-        return count.toLocaleString() +' '+this.$el.data('name')+' project';
-      }else{
-        if (!!donor) {
-          return count.toLocaleString() +' '+this.$el.data('name')+' projects donated by ' + donor;
-        }
-        return count.toLocaleString() +' '+this.$el.data('name')+' projects';
-      }
+      // var donor = (donorCount == 1 && !!this.filters['donors[]']) ? _.unescape(this.donors[0].name) : '';
+      // if (count == 1) {
+      //   if (!!donor) {
+      //     return count.toLocaleString() +' '+this.$el.data('name')+' project donated by ' + donor;
+      //   }
+      //   return count.toLocaleString() +' '+this.$el.data('name')+' project';
+      // }else{
+      //   if (!!donor) {
+      //     return count.toLocaleString() +' '+this.$el.data('name')+' projects donated by ' + donor;
+      //   }
+      //   return count.toLocaleString() +' '+this.$el.data('name')+' projects';
+      // }
     },
 
-    countryString: function(count){
-      if (count == 1 && !!this.filters.geolocation) {
-        return this.countries[0].name
+    countryString: function(){
+      var count = this.data.countries_count;
+      if (count == 1 && !!this.filters['geolocation']) {
+        console.log(this.filters['geolocation']);
+        // return this.countries[0].name
+        return count.toLocaleString() +' countries'
       }else{
         return count.toLocaleString() +' countries'
       }

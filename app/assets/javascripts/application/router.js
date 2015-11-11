@@ -178,9 +178,9 @@ define([
       // new FilteredBubble({ conexion: this.conexion });
 
       // // Titles
-      // new TitleSector({ conexion: this.conexion });
+      new TitleSector({ conexion: this.conexion });
       // new TitleDonor({ conexion: this.conexion });
-      // new TitleOrganization({ conexion: this.conexion });
+      new TitleOrganization({ conexion: this.conexion });
       // new TitleCountry({ conexion: this.conexion });
 
     },

@@ -14,46 +14,40 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
+      this.conexion = options.conexion;
       this.filters = this.conexion.getFilters();
-      this.render();
+      this.params = this.conexion.getParams();
+      this.filters = this.conexion.getFilters();
+      this.conexion.getTitleData(_.bind(function(data){
+        this.data = _.reduce(_.compact(_.map(data, function(m){return (!!m) ? m[0]: null;})), function(memo, num){
+          return _.extend({}, memo, num);
+        }, {});
+        this.render();
+      },this))
     },
 
     parseData: function(){
-
-      this.countries = this.conexion.getCountries();
-      this.sectors = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'sectors' });
-
-
-      var countP = this.conexion.getProjects().length;
-      var countC = this.countries.length;
-      var countS = this.sectors.length;
-      var projects = this.projectString(countP);
-
       return {
         name: this.$el.data('name'),
-        projects: this.projectString(countP,countS),
-        country: this.countryString(countC),
+        projects: this.projectString(),
+        country: this.countryString(),
       }
     },
 
-    projectString: function(count,sectorCount){
-      var sector = (sectorCount == 1 && !!this.filters['sectors[]']) ? this.sectors[0].attributes.name : '';
-      if (count == 1) {
-        return count.toLocaleString() +' '+sector+' project';
-      }else{
-        return count.toLocaleString() +' '+sector+' projects';
-      }
+    projectString: function(){
+      var projects = (this.data.projects_count > 1) ? 'projects' : 'project';
+      var sector = (!!this.data.sector) ? this.data.sector.name : '';
+      var count = this.data.projects_count.toLocaleString();
+      return count +' '+sector+' '+projects;
     },
 
     countryString: function(count){
-      return (count == 1 && !!this.filters.geolocation) ? this.countries[0].name : null;
+      return (!!this.data.geolocation) ? this.data.geolocation.name : null;
     },
-
 
     render: function(){
       this.$el.html(this.template(this.parseData()));
