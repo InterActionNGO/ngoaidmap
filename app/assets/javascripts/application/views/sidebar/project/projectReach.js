@@ -15,11 +15,11 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.project = project;
+      this.project = options.project;
       if (!!this.project.actual_project_reach && !_.isNaN(~~this.project.actual_project_reach) && !!this.project.target_project_reach && !_.isNaN(~~this.project.target_project_reach) && this.project.project_reach_unit) {
         this.render();
       }else {

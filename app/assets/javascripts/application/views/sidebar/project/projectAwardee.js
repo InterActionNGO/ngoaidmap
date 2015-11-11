@@ -14,12 +14,13 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
-      this.prime_awardee = prime_awardee;
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      (!!this.prime_awardee) ? this.render() : this.$el.remove();
+      // we need to fix this. It would be great if we can retrieve it from the project call
+      // this.prime_awardee = (!!prime_awardee) ? prime_awardee : null;
+      // (!!this.prime_awardee) ? this.render() : this.$el.remove();
     },
 
     parseData: function(){

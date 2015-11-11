@@ -14,19 +14,20 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
-      this.project = project;
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
-      this.render();
+      this.project = options.project;
+      this.conexion = options.conexion;
+      this.conexion.getDonorsData(_.bind(function(response){
+        this.donors = response.donors;
+        this.render()
+      },this))
     },
 
     parseData: function(){
-      var donors = this.conexion.getDonors();
-      (!donors.length) ? this.$el.remove() : null;
-      return { donors: donors };
+      return { donors: this.donors };
     },
 
     render: function(){

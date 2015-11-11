@@ -4,31 +4,32 @@
 
 <% content_for :js_vars do %>
   <script>
-    <% if @site.overview_map_lat && @site.overview_map_lon %>
-    var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
-    <% else %>
-    var map_center = [];
-    <% end %>
-    var map_zoom = <%= @site.overview_map_zoom %>;
-    var chco = '<%= @overview_map_chco %>';
-    var chf = '<%= @overview_map_chf %>';
-    var chld = '<%= @chld %>';
-    var chd = '<%= @chd %>';
-    var map_data = <%=raw(@map_data)%>;
-    var map_type = 'project_map';
-    var theme = "<%= @site.theme_id %>";
-    var kind = window.location.pathname.split('/')[1];
-    var stylez = '<%=raw @site.map_styles  %>';
-    var empty_layer = <%= @empty_layer.present?? @empty_layer : false %>;
-    var video_players = [];
-    var globalPage = <%= @site.featured?? true : false %>;
-    var page = "<%= params[:controller] %>";
-    var project = <%= raw(@project.to_json) %>;
-    var prime_awardee = <%=raw(@project.prime_awardee.to_json) %>;
-    var geolocation = <%= raw(@geolocation.to_json) %>;
-    var organization = false;
-    var donor = false;
-    var sector = false;
+    // <% if @site.overview_map_lat && @site.overview_map_lon %>
+    // var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
+    // <% else %>
+    // var map_center = [];
+    // <% end %>
+    // var map_zoom = <%= @site.overview_map_zoom %>;
+    // var chco = '<%= @overview_map_chco %>';
+    // var chf = '<%= @overview_map_chf %>';
+    // var chld = '<%= @chld %>';
+    // var chd = '<%= @chd %>';
+    // var map_data = <%=raw(@map_data)%>;
+    // var map_type = 'project_map';
+    // var theme = "<%= @site.theme_id %>";
+    // var kind = window.location.pathname.split('/')[1];
+    // var stylez = '<%=raw @site.map_styles  %>';
+    // var empty_layer = <%= @empty_layer.present?? @empty_layer : false %>;
+    // var video_players = [];
+    // var globalPage = <%= @site.featured?? true : false %>;
+    // var page = "<%= params[:controller] %>";
+    // var project = <%= raw(@project.to_json) %>;
+    // var prime_awardee = <%=raw(@project.prime_awardee.to_json) %>;
+    // console.log(prime_awardee);
+    // var geolocation = <%= raw(@geolocation.to_json) %>;
+    // var organization = false;
+    // var donor = false;
+    // var sector = false;
 
   </script>
 <% end %>

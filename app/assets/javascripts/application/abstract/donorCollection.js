@@ -9,17 +9,16 @@ define([
     url: '/api/private/donors',
 
     parse: function(response) {
-      response.data = _.map(response.data, _.bind(function(p){
+      response.donors = _.map(response.donors, _.bind(function(p){
         return {
-          name: _.unescape(p.attributes.name),
+          name: _.unescape(p.name),
           id: p.id,
           url: '/donors/'+p.id,
           urlfiltered: this.setUrl('donors[]',p.id),
-          class: p.attributes.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", "").replace(/\//g, "-"),
-          count: p.attributes.projects_count
+          count: p.projects_count
         }
       }, this ));
-      return response.data;
+      return response.donors;
     },
 
     setUrl: function(param_name, id){

@@ -14,14 +14,16 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
-      this.project = project;
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
-      this.sectors = this.conexion.getSectorsByProjects();
-      (!!this.sectors.length) ? this.render() : this.$el.remove();
+      this.project = options.project;
+      this.conexion = options.conexion;
+      this.conexion.getSectorsData(_.bind(function(response){
+        this.sectors = response.sectors;
+        (!!this.sectors && !!this.sectors.length) ? this.render() : this.$el.remove();
+      },this))
     },
 
     parseData: function(){

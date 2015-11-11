@@ -34,6 +34,7 @@ define([
   'application/views/sidebar/sidebarOtherCountries',
 
   //Project
+  'application/abstract/projectModel',
   'application/views/sidebar/project/projectOrganization',
   'application/views/sidebar/project/projectTimeline',
   'application/views/sidebar/project/projectBudget',
@@ -54,7 +55,7 @@ define([
 ], function(Backbone, Conexion, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
   GalleryView, FilteredBubble, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOtherCountries,
-  ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization, ProjectLocations, ProjectDonors, ProjectReach, ProjectSectors) {
+  projectModel, ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization, ProjectLocations, ProjectDonors, ProjectReach, ProjectSectors) {
 
   var Router = Backbone.Router.extend({
 
@@ -184,24 +185,44 @@ define([
 
     },
 
-    initProjectViews: function() {
+    project: function(_id,_filters) {
+      var params = {
+        'id': _id,
+        'name': 'projects[]',
+      };
+      var filters = {
+        'projects[]' : _id,
+      }
+      filters = _.extend({},filters,this.objetize(_filters));
+      this.conexion = new Conexion(params,filters);
+
+      // Project Model FETCH
+      this.projectModel = new projectModel({id:_id});
+      this.projectModel.fetch().done(_.bind(function(_project){
+        this.initViews();
+        this.initProjectViews(_project.project);
+      },this))
+
+    },
+
+    initProjectViews: function(_project) {
       this.initViews();
 
       // Project Sidebar
-      new ProjectOrganization();
-      new ProjectTimeline();
-      new ProjectBudget();
-      new ProjectPeopleReached();
-      new ProjectContact();
-      new ProjectWebsite();
-      new ProjectAwardee();
-      new ProjectTarget();
-      new ProjectPartnerOrganizations();
-      new ProjectImplementingOrganization();
-      new ProjectLocations();
-      new ProjectDonors();
-      new ProjectReach();
-      new ProjectSectors();
+      new ProjectOrganization({ project: _project, conexion: this.conexion });
+      new ProjectTimeline({ project: _project, conexion: this.conexion });
+      new ProjectBudget({ project: _project, conexion: this.conexion });
+      new ProjectPeopleReached({ project: _project, conexion: this.conexion });
+      new ProjectContact({ project: _project, conexion: this.conexion });
+      new ProjectWebsite({ project: _project, conexion: this.conexion });
+      new ProjectAwardee({ project: _project, conexion: this.conexion });
+      new ProjectTarget({ project: _project, conexion: this.conexion });
+      new ProjectPartnerOrganizations({ project: _project, conexion: this.conexion });
+      new ProjectImplementingOrganization({ project: _project, conexion: this.conexion });
+      new ProjectLocations({ project: _project, conexion: this.conexion });
+      new ProjectDonors({ project: _project, conexion: this.conexion });
+      new ProjectReach({ project: _project, conexion: this.conexion });
+      new ProjectSectors({ project: _project, conexion: this.conexion });
 
       new GalleryView();
     },
