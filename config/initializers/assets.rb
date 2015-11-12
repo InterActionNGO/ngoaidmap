@@ -3,7 +3,7 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 
-config.assets.paths << File.join(Rails.root, 'lib', 'assets')
+Rails.application.config.assets.paths << File.join(Rails.root, 'lib', 'assets')
     config.assets.paths << File.join(Rails.root, 'public', 'app', 'vendor')
 
 
