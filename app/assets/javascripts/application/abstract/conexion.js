@@ -23,10 +23,11 @@ define([
   'application/abstract/organizationModel',
   'application/abstract/sectorModel',
   'application/abstract/donorModel',
+  'application/abstract/breadcrumbModel',
   ], function(Class, _,
     mapCollection, sectorCollection, donorCollection, countryCollection, organizationCollection, geolocationCollection,
     projectCountModel, organizationCountModel, donorCountModel, countryCountModel, sectorCountModel,
-    geolocationModel, organizationModel, sectorModel, donorModel) {
+    geolocationModel, organizationModel, sectorModel, donorModel, breadcrumbModel) {
 
   var Conexion = Class.extend({
 
@@ -118,6 +119,47 @@ define([
           (this.organizationModel) ? this.organizationModel.fetch() : null,
           (this.donorModel) ? this.donorModel.fetch() : null,
           (this.geolocationModel) ? this.geolocationModel.fetch() : null
+        ).done(function(){
+          callback(arguments);
+        }.bind(this));
+    },
+
+    // Fetch Map Bubble
+    getBreadcrumbData: function(callback) {
+      _.map(this.filters, _.bind(function(v,k){
+        switch (k) {
+          case 'sectors[]':
+            this.sectorModel = new sectorModel({ id: v });
+          break;
+          case 'organizations[]':
+            this.organizationModel = new organizationModel({ id: v });
+          break;
+          case 'donors[]':
+            this.donorModel = new donorModel({ id: v });
+          break;
+          case 'geolocation':
+            this.geolocationModel = new geolocationModel({ uid: v });
+            this.breadcrumbModel = new breadcrumbModel({ uid: v });
+          break;
+        }
+      }, this ));
+      this.projectCountModel = new projectCountModel();
+      this.organizationCountModel = new organizationCountModel();
+      this.countryCountModel = new countryCountModel();
+      this.donorCountModel = new donorCountModel();
+      this.sectorCountModel = new sectorCountModel();
+
+      $.when(
+          this.projectCountModel.fetch({ data: this.filters }),
+          this.organizationCountModel.fetch({ data: this.filters }),
+          this.countryCountModel.fetch({ data: this.filters }),
+          this.donorCountModel.fetch({ data: this.filters }),
+          this.sectorCountModel.fetch({ data: this.filters }),
+          (this.sectorModel) ? this.sectorModel.fetch() : null,
+          (this.organizationModel) ? this.organizationModel.fetch() : null,
+          (this.donorModel) ? this.donorModel.fetch() : null,
+          (this.geolocationModel) ? this.geolocationModel.fetch() : null,
+          (this.breadcrumbModel) ? this.breadcrumbModel.fetch({ data: {get_parents:'true', status: 'active' }}) : null
         ).done(function(){
           callback(arguments);
         }.bind(this));

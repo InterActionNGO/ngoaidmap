@@ -175,7 +175,7 @@ define([
       new SidebarOrganizationsMediaContact({ conexion: this.conexion });
       new SidebarOrganizationsFollowUs({ conexion: this.conexion });
 
-      // new FilteredBubble({ conexion: this.conexion });
+      new FilteredBubble({ conexion: this.conexion });
 
       // // Titles
       new TitleSector({ conexion: this.conexion });

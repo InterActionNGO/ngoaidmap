@@ -19,48 +19,45 @@ define([
       'click .breadcrumb-link' : 'navigateTo'
     },
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
+      this.conexion = options.conexion;
       this.filters = this.conexion.getFilters();
-      if (geolocation) {
-        service.execute('breadcrumbs', _.bind(this.successBreadcrumbs, this ), _.bind(this.errorBreadcrumbs, this ));
-      }else{
+
+      this.conexion.getBreadcrumbData(_.bind(function(data){
+        this.data = _.reduce(_.compact(_.map(data, function(m){return (!!m) ? m[0]: null;})), function(memo, num){
+          return _.extend({}, memo, num);
+        }, {});
         this.render();
-      }
+      },this))
     },
 
     parseData: function(){
-      this.count = this.conexion.getProjects().length;
-      this.countries = this.conexion.getCountries();
-      this.organizations = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'organizations' });
-      this.sectors = _.filter(this.conexion.getIncluded(), function(include){ return include.type == 'sectors' });
-
       return {
         name: this.getName(),
-        breadcrumbs: this.breadcrumbs,
-        projects_string: (this.conexion.getProjects().length == 1) ? 'project' : 'projects',
-        count: this.conexion.getProjects().length,
-        countVisibiblity: ! !!project,
-        sector: (this.filters['sectors[]']) ? this.sectors[0].attributes.name : '',
-        country: (this.filters['geolocation']) ? this.countries[0].name : '',
-        organization: (this.filters['organizations[]']) ? this.organizations[0].attributes.name : '',
+        breadcrumbs: this.getBreadcrumbs(),
+        projects_string: (this.data.projects_count == 1) ? 'project' : 'projects',
+        count: this.data.projects_count,
+        countVisibiblity: ! !!this.filters['projects[]'],
+        sector: (this.filters['sectors[]']) ? _.unescape(this.data.sector.name) : '',
+        country: (this.filters['geolocation']) ? _.unescape(this.data.geolocation.name) : '',
+        organization: (this.filters['organizations[]']) ? _.unescape(this.data.organization.name) : '',
       }
     },
 
     getName: function() {
-      if (organization) {
-        return organization.name;
-      } else if(donor) {
-        return donor.name;
-      } else if(geolocation) {
-        return geolocation.name;
-      } else if (sector) {
-        return sector.name;
-      } else if(project) {
-        return project.name;
+      if (this.data.organization) {
+        return _.unescape(this.data.organization.name);
+      } else if(this.data.donor) {
+        return _.unescape(this.data.donor.name);
+      } else if(this.data.geolocation) {
+        return _.unescape(this.data.geolocation.name);
+      } else if (this.data.sector) {
+        return _.unescape(this.data.sector.name);
+      } else if(this.data.project) {
+        return _.unescape(this.data.project.name);
       } else{
         this.$el.remove();
       }
@@ -76,14 +73,13 @@ define([
       window.location = href;
     },
 
-    successBreadcrumbs: function(data) {
-      if (!!data.meta) {
-        var breadcrumbs = _.map(data.meta.parents.reverse(), function(parent){
-          return '<a class="breadcrumb-link" href="/location/'+parent.uid+'?level='+parent.adm_level+'">'+parent.name+'</a>';
+    getBreadcrumbs: function() {
+      if (!!this.data.meta) {
+        var breadcrumbs = _.map(this.data.meta.parents.reverse(), function(parent){
+          return '<a class="breadcrumb-link" href="/location/'+parent.uid+'?level='+(parent.adm_level+1)+'">'+parent.name+'</a>';
         });
-        this.breadcrumbs = breadcrumbs.join(', ');
-        this.render();
-      }
+        return breadcrumbs.join(', ');
+      } return null;
     },
 
     errorBreadcrumbs: function() {
