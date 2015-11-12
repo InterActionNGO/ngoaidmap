@@ -4,9 +4,7 @@
 Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.paths << File.join(Rails.root, 'lib', 'assets')
-    config.assets.paths << File.join(Rails.root, 'public', 'app', 'vendor')
-
-
+Rails.application.config.assets.paths << File.join(Rails.root, 'public', 'app', 'vendor')
 
 # Require JS configuration
 Rails.application.config.requirejs.logical_asset_filter += [/\.handlebars$/]
