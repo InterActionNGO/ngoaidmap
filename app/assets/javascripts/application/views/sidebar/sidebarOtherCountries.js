@@ -21,14 +21,19 @@ define([
       }
       this.conexion = options.conexion;
       this.conexion.getOtherCountriesData(_.bind(function(response){
-        this.response = _.sortBy(response.countries, 'count').reverse();
+        this.data = _.reduce(_.compact(_.map(response, function(m){return (!!m) ? m[0]: null;})), function(memo, num){
+          return _.extend({}, memo, num);
+        }, {});
+        this.countries = _.reject(_.sortBy(this.data.countries, 'count').reverse(), _.bind(function(c){
+          return c.id == this.data.geolocation.uid;
+        }, this ));
         this.render();
       },this))
     },
 
     parseData: function(){
       return {
-        countries : this.response.slice(0,5)
+        countries : this.countries.slice(0,5)
       }
     },
 

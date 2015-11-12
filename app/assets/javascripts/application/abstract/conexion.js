@@ -210,11 +210,14 @@ define([
     // Fetch other COUNTRIES
     getOtherCountriesData: function(callback) {
       this.countryCollection = new countryCollection();
-      this.countryCollection.fetch({
-        data: _.extend({},{})
-      }).done(_.bind(function(data){
-        callback(data);
-      },this));
+      this.geolocationModel = new geolocationModel({ uid: this.params.id });
+      $.when(
+          this.countryCollection.fetch(),
+          this.geolocationModel.fetch()
+        ).done(function(){
+          callback(arguments);
+        }.bind(this));
+
     },
 
     // helpers
