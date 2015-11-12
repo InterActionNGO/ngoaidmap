@@ -12,48 +12,31 @@
 class Sector < ActiveRecord::Base
   has_and_belongs_to_many :projects
   scope :active, -> {joins(:projects).where("projects.end_date > ? AND projects.start_date < ?", Date.today.to_s(:db), Date.today.to_s(:db)).uniq}
+  scope :organizations, -> (orgs){joins(:projects).joins('join organizations on projects.primary_organization_id = organizations.id').where(organizations: {id: orgs})}
+  scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
+  scope :sectors, -> (sectors){where(sectors: {id: sectors})}
+  scope :donors, -> (donors){joins(projects: :donors).where(donors: {id: donors})}
+  scope :site, -> (site){joins(projects: :sites).where(sites: {id: site})}
+  scope :geolocation, -> (geolocation,level=0){joins(projects: :geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
+  scope :countries, -> (countries){joins(projects: :geolocations).where(geolocations: {country_uid: countries})}
   def donors
     Project.active.joins([:sectors, :donors]).where(sectors: {id: self.id}).pluck('donors.id', 'donors.name').uniq
   end
   def self.counting_projects(options={})
-    if options && options[:status] == 'active'
-      sql=%Q(
-        WITH sp AS (
-          SELECT DISTINCT COUNT(distinct(projects.id)) AS sp_count_distinct_projects_id, sectors.id AS sp_sectors_id, sectors.name AS sp_sectors_name FROM "sectors"
-          LEFT JOIN "projects_sectors" ON "projects_sectors"."sector_id" = "sectors"."id"
-          LEFT JOIN "projects" ON "projects"."id" = "projects_sectors"."project_id"
-          WHERE (projects.end_date is null OR projects.end_date > now()) and (projects.start_date < now())
-            GROUP BY sectors.id, sectors.name
-            ), s as(
-            SELECT sectors.id AS s_sectors_id, sectors.name AS s_sectors_name FROM "sectors"
-            )
-          select s.s_sectors_id AS id, s.s_sectors_name AS name, coalesce(sp.sp_count_distinct_projects_id, 0) AS projects_count FROM s
-          LEFT JOIN sp ON sp.sp_sectors_id = s.s_sectors_id
-          GROUP BY id, name, projects_count
-          ORDER BY name
-      )
-      Sector.find_by_sql(sql)
-    else
-      sql=%Q(
-        WITH sp AS (
-          SELECT DISTINCT COUNT(distinct(projects.id)) AS sp_count_distinct_projects_id, sectors.id AS sp_sectors_id, sectors.name AS sp_sectors_name FROM "sectors"
-          LEFT JOIN "projects_sectors" ON "projects_sectors"."sector_id" = "sectors"."id"
-          LEFT JOIN "projects" ON "projects"."id" = "projects_sectors"."project_id"
-            GROUP BY sectors.id, sectors.name
-            ), s as(
-            SELECT sectors.id AS s_sectors_id, sectors.name AS s_sectors_name FROM "sectors"
-            )
-          select s.s_sectors_id AS id, s.s_sectors_name AS name, coalesce(sp.sp_count_distinct_projects_id, 0) AS projects_count FROM s
-          LEFT JOIN sp ON sp.sp_sectors_id = s.s_sectors_id
-          GROUP BY id, name, projects_count
-          ORDER BY name
-      )
-      Sector.find_by_sql(sql)
-    end
+    active = true if options && options[:status] == 'active'
+    sql = SqlQuery.new(:sectors_count, active: active).sql
+    Sector.find_by_sql(sql)
   end
   def self.fetch_all(options={})
+    level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
     sectors = Sector.all
-    sectors = sectors.active if options && options[:status] && options[:status] == 'active'
-    sectors
+    sectors = sectors.site(options[:site])                                    if options[:site]
+    sectors = sectors.active                                                  if options[:status] && options[:status] == 'active'
+    sectors = sectors.geolocation(options[:geolocation], level)               if options[:geolocation]
+    sectors = sectors.sectors(options[:projects])                             if options[:projects]
+    sectors = sectors.countries(options[:countries])                          if options[:countries]
+    sectors = sectors.organizations(options[:organizations])                  if options[:organizations]
+    sectors = sectors.donors(options[:donors])                                if options[:donors]
+    sectors.uniq
   end
 end

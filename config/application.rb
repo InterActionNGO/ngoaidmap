@@ -20,29 +20,13 @@ module NgoFront
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.assets.paths << File.join(Rails.root, 'lib', 'assets')
-    config.assets.paths << File.join(Rails.root, 'public', 'app', 'vendor')
-
-    config.generators.assets = false
-
-    # via https://github.com/sstephenson/sprockets/issues/347#issuecomment-25543201
-
+    # via https://github.com/sstephenson/sprockets/issues/347#issuecomment-2554320
     # We don't want the default of everything that isn't js or css, because it pulls too many things in
-    config.assets.precompile.shift
-
+    # config.assets.precompile.shift
     config.assets.initialize_on_precompile = true
 
-    # Explicitly register the extensions we are interested in compiling
-    config.assets.precompile.push(Proc.new do |path|
-      File.extname(path).in? [
-        '.html', '.erb', '.haml', '.handlebars',  # Templates
-        '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
-        '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
-      ]
-    end)
-
-    # RequireJs
-    config.requirejs.logical_asset_filter += [/\.handlebars$/]
+    # Setup scaffold
+    config.generators.assets = false
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true

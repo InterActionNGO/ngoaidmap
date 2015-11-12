@@ -6,27 +6,27 @@ module ProjectsFiltering
     before_action :get_projects,  only: [:home, :show]
   end
   def get_projects
-    timestamp = Project.order('updated_at desc').first.updated_at.to_s
-    string = timestamp + projects_params.inspect
-    map_data_digest = "map_data_#{Digest::SHA1.hexdigest(string)}"
-    projects_digest = "projects_#{Digest::SHA1.hexdigest(string)}"
-    projects_count_digest = "projects_count_#{Digest::SHA1.hexdigest(string)}"
-    if map_data = $redis.get(map_data_digest)
-      @map_data = map_data
-      @projects_count = JSON.load $redis.get(projects_count_digest)
-    else
-      expire_time = ((Time.now + 1.day).beginning_of_day - Time.now).ceil
-      results = Project.fetch_all(projects_params, false)
-      m = ActiveModel::Serializer::ArraySerializer.new(results[0], each_serializer: ProjectSerializer, meta: results[1])
-      map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'geolocations']).to_json
-      @map_data = map_data
-      $redis.set(map_data_digest, map_data)
-      $redis.expire map_data_digest, expire_time
-      projects_count = results[0].uniq.length.to_f
-      $redis.set(projects_count_digest, projects_count)
-      $redis.expire projects_count_digest, expire_time
-      @projects_count = projects_count
-    end
+    # timestamp = Project.order('updated_at desc').first.updated_at.to_s
+    # string = timestamp + projects_params.inspect
+    # map_data_digest = "map_data_#{Digest::SHA1.hexdigest(string)}"
+    # projects_digest = "projects_#{Digest::SHA1.hexdigest(string)}"
+    # projects_count_digest = "projects_count_#{Digest::SHA1.hexdigest(string)}"
+    # if map_data = $redis.get(map_data_digest)
+    #   @map_data = map_data
+    #   @projects_count = JSON.load $redis.get(projects_count_digest)
+    # else
+    #   expire_time = ((Time.now + 1.day).beginning_of_day - Time.now).ceil
+    #   results = Project.fetch_all(projects_params, false)
+    #   m = ActiveModel::Serializer::ArraySerializer.new(results[0], each_serializer: ProjectSerializer, meta: results[1])
+    #   map_data = ActiveModel::Serializer::Adapter::JsonApi.new(m, include: ['organization', 'sectors', 'donors', 'geolocations']).to_json
+    #   @map_data = map_data
+    #   $redis.set(map_data_digest, map_data)
+    #   $redis.expire map_data_digest, expire_time
+    #   projects_count = results[0].uniq.length.to_f
+    #   $redis.set(projects_count_digest, projects_count)
+    #   $redis.expire projects_count_digest, expire_time
+    #   @projects_count = projects_count
+    # end
     @projects = Project.fetch_all(projects_params).order('projects.created_at DESC').page(params[:page]).per(10)
   end
   private

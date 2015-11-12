@@ -6,7 +6,7 @@ define([
 
   var global_index = 10;
 
-  var IOMMarker = function(info, diameter, classname, map) {
+  var IOMMarker = function(info, diameter, classname, map, map_type) {
 
     var isRegion = !!(!info.total_in_region && info.code === null && info.region_name);
     // this.latlng_ = new google.maps.LatLng(info.lat,info.lon);
@@ -17,6 +17,7 @@ define([
     //this.image = image;
 
     this.map_ = map;
+    this.map_type = map_type;
     this.name = info.name || info.region_name;
     this.countryName = info.country_name;
     this.diameter = diameter;
@@ -88,7 +89,7 @@ define([
 
       //Marker address
       if (this.count) {
-        if (map_type === 'overview_map' || map_type === 'administrative_map') {
+        if (this.map_type === 'overview_map' || this.map_type === 'administrative_map') {
           var hidden_div = document.createElement('div');
           hidden_div.className = 'map-tooltip';
           hidden_div.style.bottom = this.diameter + 4 + 'px';
@@ -117,7 +118,7 @@ define([
           google.maps.event.addDomListener(div, 'mouseout', function() {
             $(this).children('div').hide();
           });
-        } else if (map_type === 'project_map') {
+        } else if (this.map_type === 'project_map') {
           var _hidden_div = document.createElement('div');
           _hidden_div.className = 'map-tooltip';
           _hidden_div.style.bottom = this.diameter + 4 + 'px';

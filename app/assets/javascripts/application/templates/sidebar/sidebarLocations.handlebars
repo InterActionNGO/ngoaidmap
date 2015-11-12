@@ -3,7 +3,14 @@
   <div class="mod-project-locations">
     <ul class="chart">
       {{#each locations}}
-        <li class="pos{{@index}}"><a href="{{this.url}}">{{this.name}}</a> - {{this.count}}</li>
+        <li class="pos{{@index}}">
+          {{#if ../filtered}}
+            <a href="{{this.urlfiltered}}">{{this.name}}</a> - {{this.count}}
+          {{else}}
+            <a href="{{this.url}}">{{this.name}}</a> - {{this.count}}
+          {{/if}}
+
+        </li>
       {{/each}}
       {{#if othersVisibility}}
         <li class="pos3">Others - {{this.other}}</li>

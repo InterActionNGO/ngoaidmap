@@ -12,56 +12,12 @@
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
     <![endif]-->
-    <% if Rails.env.production? %>
-      <%= stylesheet_link_tag "jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", :media => 'all' %>
-      <%= stylesheet_link_tag "/app/vendor/chachi-slider/chachi-slider.css", :media => 'all' %>
-      <%= stylesheet_link_tag "/app/vendor/select2/select2.css", :media => 'all' %>
-      <%= stylesheet_link_tag "main.css", :media => 'all' %>
-    <% else %>
-      <%= stylesheet_link_tag "jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", :media => 'all' %>
-      <%= stylesheet_link_tag "/app/vendor/chachi-slider/chachi-slider.css", :media => 'all' %>
-      <%= stylesheet_link_tag "/app/vendor/select2/select2.css", :media => 'all' %>
-      <%= stylesheet_link_tag "main", :media => "all" %>
-      <%#= stylesheet_link_tag "lib/jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", "vendor/chachi-slider/chachi-slider.css", "vendor/select2/select2.css", "main.css", :media => 'all' %>
-    <% end %>
+    <%= stylesheet_link_tag "main.css", :media => 'all' %>
 
     <% if Rails.env.development? %>
       <link rel="icon" type="image/png" href="/app/images/favicon-dev.png">
     <% else %>
       <link rel="icon" type="image/png" href="/dist/images/favicon.png">
-    <% end %>
-    <% unless content_for?(:js_vars) %>
-      <% if defined?(@map_data) %>
-        <script>
-          <% if @site.overview_map_lat && @site.overview_map_lon %>
-          var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
-          <% else %>
-          var map_center = [];
-          <% end %>
-          var MAP_EMBED = false;
-          var map_zoom = <%= @site.overview_map_zoom %> || 3;
-          var chco = '<%= @overview_map_chco %>';
-          var chf = '<%= @overview_map_chf %>';
-          var chld = '<%= @chld %>';
-          var chd = '<%= @chd %>';
-          var map_data = <%=raw(@map_data)%>;
-          var map_type = '<%= @filter_by_location.present?? "administrative_map" : "overview_map" %>';
-          var theme = "<%= @site.theme_id %>";
-          var kind = window.location.pathname.split('/')[1];
-          var stylez = <%= @site.map_styles.present?? raw(@site.map_styles) : false  %>
-          var empty_layer = <%= @empty_layer.present?? @empty_layer : false %>;
-          var globalPage = <%= @site.featured?? false : true %>;
-          var page = "<%= params[:controller] %>";
-          var adm_level = 0;
-          var geolocation = false;
-          var project = false;
-          var organization = false;
-          var donor = false;
-          var sector = false;
-        </script>
-      <% end %>
-    <% else %>
-      <%= yield :js_vars %>
     <% end %>
     <%= javascript_include_tag "modernizr/modernizr.custom.js" %>
 

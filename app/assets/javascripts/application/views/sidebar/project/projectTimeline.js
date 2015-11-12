@@ -14,11 +14,11 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.project = project;
+      this.project = options.project;
       this.render();
     },
 

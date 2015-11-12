@@ -15,32 +15,25 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
-      service.execute('countries-all', _.bind(this.successSidebar, this ), _.bind(this.errorSidebar, this ));
-
-    },
-
-    successSidebar: function(data){
-      this.data = data.data;
-      this.render();
-    },
-
-    errorSidebar: function(){
-      this.$el.remove();
+      this.conexion = options.conexion;
+      this.conexion.getOtherCountriesData(_.bind(function(response){
+        this.data = _.reduce(_.compact(_.map(response, function(m){return (!!m) ? m[0]: null;})), function(memo, num){
+          return _.extend({}, memo, num);
+        }, {});
+        this.countries = _.reject(_.sortBy(this.data.countries, 'count').reverse(), _.bind(function(c){
+          return c.id == this.data.geolocation.uid;
+        }, this ));
+        this.render();
+      },this))
     },
 
     parseData: function(){
-      for (var i = 0, countries = []; i < 6; i++) {
-        if (this.data[i].id != geolocation.uid) {
-          countries.push(this.data[i]);
-        }
-      }
       return {
-        countries : countries.slice(0,5)
+        countries : this.countries.slice(0,5)
       }
     },
 

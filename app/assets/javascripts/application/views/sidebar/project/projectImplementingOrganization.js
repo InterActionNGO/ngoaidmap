@@ -14,8 +14,8 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
-      this.project = project;
+    initialize: function(options) {
+      this.project = options.project;
       if (!this.$el.length) {
         return
       }

@@ -17,11 +17,11 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.project = project;
+      this.project = options.project;
       if (this.project && this.project.primary_organization_id) {
         this.model = new projectOrganizationModel({ id: this.project.primary_organization_id });
         this.model.fetch().done(_.bind(function(organization){

@@ -1,0 +1,30 @@
+with gp as(
+  <% if @options.level > 0 %>
+  select  geolocations.g<%= quote (@options.level-1) %> as g_parent, geolocations.g<%= quote @options.level %> as g, projects.id as p_id
+  <% else %>
+  select geolocations.g<%= quote @options.level %> as g, projects.id as p_id
+  <% end %>
+  from geolocations
+  inner join geolocations_projects on geolocations.id = geolocations_projects.geolocation_id
+  inner join projects on projects.id = geolocations_projects.project_id
+  <%= @options.join_strings %>
+  where 1=1 
+  <%= @options.conditions %>
+  ),
+regions as(
+  select geolocations.adm_level as level, geolocations.latitude as latitude, geolocations.longitude as longitude, geolocations.name as name, geolocations.uid as uid, geolocations.id as id
+  from geolocations
+  <% if @options.geolocation %>
+    where geolocations.g<%= @options.g_level %>=<%= quote @options.geolocation %>
+  <% end %>
+  )
+select regions.name, regions.latitude, regions.longitude, regions.uid, regions.id, regions.level, count(distinct(gp.p_id)) as projects_count from regions
+inner join gp on regions.uid = gp.g
+group by regions.id, regions.name, regions.uid, regions.latitude, regions.longitude, regions.level
+<% if @options.level > 0 %>
+union
+select regions.name, regions.latitude, regions.longitude, regions.uid, regions.id, regions.level, count(distinct(gp.p_id)) as projects_count from regions
+inner join gp on regions.uid = gp.g_parent
+group by regions.id, regions.name, regions.uid, regions.latitude, regions.longitude, regions.level
+<% end %>
+order by projects_count DESC

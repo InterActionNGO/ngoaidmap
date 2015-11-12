@@ -2,38 +2,6 @@
 
 <%= render 'new_partials/categories_selector' %>
 
-<% content_for :js_vars do %>
-  <script>
-    <% if @site.overview_map_lat && @site.overview_map_lon %>
-    var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
-    <% else %>
-    var map_center = [];
-    <% end %>
-    var MAP_EMBED = false;
-    var map_zoom = <%= @site.overview_map_zoom %>;
-    var chco = '<%= @overview_map_chco %>';
-    var chf = '<%= @overview_map_chf %>';
-    var chld = '<%= @chld %>';
-    var chd = '<%= @chd %>';
-    var map_data = <%=raw(@map_data)%>;
-    var map_type = 'project_map';
-    var theme = "<%= @site.theme_id %>";
-    var kind = window.location.pathname.split('/')[1];
-    var stylez = '<%=raw @site.map_styles  %>';
-    var empty_layer = <%= @empty_layer.present?? @empty_layer : false %>;
-    var video_players = [];
-    var globalPage = <%= @site.featured?? true : false %>;
-    var page = "<%= params[:controller] %>";
-    var project = <%= raw(@project.to_json) %>;
-    var prime_awardee = <%=raw(@project.prime_awardee.to_json) %>;
-    var geolocation = <%= raw(@geolocation.to_json) %>;
-    var organization = false;
-    var donor = false;
-    var sector = false;
-
-  </script>
-<% end %>
-
 <div class="main-content">
   <div class="row">
     <div class="grid-4">
@@ -74,9 +42,8 @@
         <div class="mod-downloads mod-info">
           <h3>Export data</h3>
           <ul>
-            <li><%= link_to 'CSV', project_path(@project, :csv), :class => 'csv' %></li>
-            <li><%= link_to 'XLS', project_path(@project, :xls), :class => 'xls' %></li>
-            <li><%= link_to 'KML', project_path(@project, :kml), :class => 'kml' %></li>
+            <li><%= download_link('CSV','csv') %></li>
+            <li><%= download_link('KML','kml') %></li>
           </ul>
         </div>
 
@@ -115,11 +82,10 @@
                 <p> <%= raw(@project.activities) %> </p>
               <%end%>
               <%unless @project.additional_information.blank? %>
-                <h3 class="<%= (@project.activities.blank?)? 'first':''%>">Additional information</h3>
+                <H2 class="<%= (@project.activities.blank?)? 'first':''%>">Additional information</H2>
                 <p> <%= raw(@project.additional_information) %> </p>
               <%end%>
               </section>
-
               <section>
               <%unless @project.cross_cutting_issues.blank? %>
                 <h2 class="<%= (@project.activities.blank? && @project.additional_information.blank?)? 'first':''%>">Cross-cutting issues</h2>

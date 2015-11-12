@@ -49,22 +49,14 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :clusters
   has_and_belongs_to_many :sectors
   has_and_belongs_to_many :regions
-  #has_and_belongs_to_many :countries
   has_and_belongs_to_many :tags
   has_and_belongs_to_many :geolocations
   has_many :resources, -> {where(element_type: 0)}, :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, -> {where(element_type: 0).order('position ASC')}, :foreign_key => :element_id, :dependent => :destroy
   has_many :donations, :dependent => :destroy
   has_many :donors, :through => :donations
-  has_and_belongs_to_many :sites #, :class_name => 'Site', :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
-  # has_and_belongs_to_many :countries,  -> {joins('
-  #                                                   RIGHT OUTER JOIN geolocations AS geos
-  #                                                   on geolocations_projects.geolocation_id = geos.id
-  #                                                   RIGHT OUTER JOIN geolocations as g
-  #                                                   ON g.g0 = geos.uid
-  #                                                 ').where('g.adm_level=?', 0).uniq}, class_name: 'Geolocation'
-
-  scope :active, -> {where("end_date > ? AND start_date < ?", Date.today.to_s(:db), Date.today.to_s(:db))}
+  has_and_belongs_to_many :sites
+  scope :active, -> {where("end_date > ? AND start_date <= ?", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :inactive, -> {where("end_date < ? OR start_date > ?", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :closed, -> {where("end_date < ?", Date.today.to_s(:db))}
   scope :with_no_country, -> {select('projects.*').
@@ -72,6 +64,7 @@ class Project < ActiveRecord::Base
                           includes(:countries).
                           where('countries_projects.project_id IS NULL AND regions.id IS NOT NULL')}
   scope :organizations, -> (orgs){where(organizations: {id: orgs})}
+  scope :site, -> (site){joins(:sites).where(sites: {id: site})}
   scope :projects, -> (projects){where(projects: {id: projects})}
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){where(donors: {id: donors})}
@@ -90,8 +83,11 @@ class Project < ActiveRecord::Base
   end
 
   def self.fetch_all(options = {}, from_api = true)
+    level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
+
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
-    projects = projects.geolocation(options[:geolocation], options[:level])     if options[:geolocation]
+    projects = projects.site(options[:site])                                    if options[:site]
+    projects = projects.geolocation(options[:geolocation], level)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries])                          if options[:countries]
     projects = projects.organizations(options[:organizations])                  if options[:organizations]
@@ -104,7 +100,6 @@ class Project < ActiveRecord::Base
     projects = projects.limit(options[:limit].to_i)                             if options[:limit]
     projects = projects.active                                                  if options[:status] && options[:status] == 'active'
     projects = projects.inactive                                                if options[:status] && options[:status] == 'inactive'
-    #projects = projects.group('projects.id', 'projects.name', 'geolocations.id', 'geolocations.country_uid', 'sectors.id', 'donors.id', 'organizations.id', 'geolocations.g0', 'geolocations.g1', 'geolocations.g2', 'geolocations.g3', 'geolocations.g4')
     projects = projects.uniq
     if from_api
       projects
@@ -116,6 +111,30 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def self.get_projects_on_map(options={})
+    sql_options_struct = Struct.new(:level, :join_strings, :conditions, :geolocation, :g_level)
+    sql_options = sql_options_struct.new
+    if options[:geolocation]
+      sql_options.g_level = Geolocation.find_by(uid: options[:geolocation]).adm_level
+      sql_options.geolocation = options[:geolocation]
+    end
+    sql_options.level = options[:level].to_i || 0
+    sql_options.join_strings = ''
+    sql_options.join_strings += %Q( inner join projects_sites on projects_sites.project_id = projects.id)                           if options[:site]
+    sql_options.join_strings += %Q( left outer join projects_sectors on projects_sectors.project_id = projects.id)                  if options[:sectors]
+    sql_options.join_strings += %Q( left outer join donations on donations.project_id = projects.id)                                if options[:donors]
+    sql_options.conditions = ''
+    sql_options.conditions += %Q( and projects.end_date > now() AND projects.start_date <= now() )                                        unless options[:projects]
+    sql_options.conditions += %Q( and projects.primary_organization_id in #{'(' + options[:organizations].join(',') + ')'} )        if options[:organizations]
+    sql_options.conditions += %Q( and projects_sectors.sector_id in #{'(' + options[:sectors].join(',') + ')'} )                    if options[:sectors]
+    sql_options.conditions += %Q( and donations.donor_id in #{'(' + options[:donors].join(',') + ')'} )                             if options[:donors]
+    sql_options.conditions += %Q( and geolocations.g0 in #{"('" + options[:countries].join("', '") + "')"} )                        if options[:countries]
+    sql_options.conditions += %Q( and projects.id in #{"('" + options[:projects].join("', '") + "')"} )                             if options[:projects]
+    sql_options.conditions += %Q( and projects_sites.site_id=#{options[:site].to_i} )                                               if options[:site]
+    sql_options.conditions += %Q( and projects.name ilike '%%#{options[:q]}%%' OR projects.description ilike '%%#{options[:q]}%%' ) if options[:q]
+    sql = SqlQuery.new(:get_projects_on_map, options: sql_options).sql
+    projects = Project.find_by_sql(sql)
+  end
 
   def related(site, limit = 2)
     if result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(primary_organization_id: self.primary_organization_id).where(sites: {id: site.id}).active.uniq.limit(limit)

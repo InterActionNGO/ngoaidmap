@@ -1,4 +1,4 @@
-
+<% cache ['categories_selector', @site], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
   <section class="categories-selector">
     <div class="row">
       <div class="grid-14">
@@ -100,3 +100,4 @@
 
     </div>
   </section>
+<% end %>

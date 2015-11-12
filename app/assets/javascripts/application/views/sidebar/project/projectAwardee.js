@@ -14,12 +14,13 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
-      this.prime_awardee = prime_awardee;
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      (!!this.prime_awardee) ? this.render() : this.$el.remove();
+      this.project = options.project;
+      this.awardee = options.awardee;
+      (!!this.prime_awardee && !!this.prime_awardee.name) ? this.render() : this.$el.remove();
     },
 
     parseData: function(){

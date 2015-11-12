@@ -15,31 +15,29 @@ define([
 
     template: Handlebars.compile(tpl),
 
-    initialize: function() {
+    initialize: function(options) {
       if (!this.$el.length) {
         return
       }
-      this.conexion = conexion;
-      service.execute('sectors-all', _.bind(this.successSidebar, this ), _.bind(this.errorSidebar, this ));
+      this.conexion = options.conexion;
+      this.params = this.conexion.getParams();
+      this.conexion.getSectorsAllData(_.bind(function(response){
+        this.response = response;
+        this.render();
+      },this))
 
-    },
 
-    successSidebar: function(data){
-      this.data = data.data;
-      this.render();
-    },
-
-    errorSidebar: function(){
-      this.$el.remove();
     },
 
     parseData: function(){
-      var sectorsByProjects = this.conexion.getSectorsByProjectsAll(this.data,sector.id);
-      if (!!sectorsByProjects.length) {
-        return { sectors: sectorsByProjects, all: true };
-      } else {
-        this.$el.remove();
-      }
+      var sectors = _.sortBy(_.filter(this.response.sectors, _.bind(function(s){
+        return s.count != 0 && this.params.id != s.id;
+      }, this )),'count');
+      return { sectors: sectors.reverse(), all: true };
+    },
+
+    setUrl: function(param_name, id){
+      return (location.search) ? location.href+'&'+param_name+'='+id : location.href+'?'+param_name+'='+id;
     },
 
     render: function(){
@@ -75,7 +73,6 @@ define([
         }
       }
     }
-
   });
 
   return SidebarSectors;

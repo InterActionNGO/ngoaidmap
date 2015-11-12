@@ -51,13 +51,18 @@ module Api
         if request.fullpath.include?('organizations') && params[:organization_id].present?
           params.merge!(organizations: [params[:organization_id]])
         end
-        params.permit(:offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[])
+        params.permit(:site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[])
       end
 
       def set_digests
-        timestamp = Project.fetch_all(projects_params).order('projects.updated_at desc').first.updated_at.to_s
-        string = timestamp + projects_params.inspect
-        @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
+        begin
+          timestamp = Project.fetch_all(projects_params).order('projects.updated_at desc').first.updated_at.to_s
+          string = timestamp + projects_params.inspect
+          @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
+        rescue Exception => e
+          string = '0' + projects_params.inspect
+          @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
+        end
       end
 
       def unscoped_count

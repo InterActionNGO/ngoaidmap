@@ -87,13 +87,32 @@ class Organization < ActiveRecord::Base
   has_many :sites, foreign_key: :project_context_organization_id
   has_many :donations, through: :projects
   has_one :user
-  scope :active, -> {joins(:projects).where("projects.end_date IS NULL OR (projects.end_date > ? AND projects.start_date < ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
+  scope :active, -> {joins(:projects).where("projects.end_date IS NULL OR (projects.end_date > ? AND projects.start_date <= ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
+  scope :organizations, -> (orgs){where(organizations: {id: orgs})}
+  scope :site, -> (site){joins(projects: :sites).where(sites: {id: site})}
+  scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
+  scope :sectors, -> (sectors){joins(:projects).joins('
+    INNER JOIN projects_sectors ON (projects.id = projects_sectors.project_id)
+    LEFT OUTER JOIN sectors ON (sectors.id = projects_sectors.sector_id)').where(sectors: {id: sectors})}
+  scope :donors, -> (donors){joins(:projects).joins('
+    LEFT OUTER JOIN donations ON (projects.id = donations.project_id)
+    LEFT OUTER JOIN donors ON (donors.id = donations.donor_id)').where(donors: {id: donors})}
+  scope :geolocation, -> (geolocation,level=0){joins(projects: :geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
+  scope :countries, -> (countries){joins(projects: :geolocations).where(geolocations: {country_uid: countries})}
   def projects_count
     self.projects.active.size
   end
   def self.fetch_all(options={})
+    level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
     organizations = Organization.all
-    organizations = organizations.active if options && options[:status] = 'active'
+    organizations = organizations.site(options[:site])                                    if options[:site]
+    organizations = organizations.active                                                  if options[:status] && options[:status] == 'active'
+    organizations = organizations.geolocation(options[:geolocation], level)               if options[:geolocation]
+    organizations = organizations.projects(options[:projects])                            if options[:projects]
+    organizations = organizations.countries(options[:countries])                          if options[:countries]
+    organizations = organizations.organizations(options[:organizations])                  if options[:organizations]
+    organizations = organizations.sectors(options[:sectors])                              if options[:sectors]
+    organizations = organizations.donors(options[:donors])                                if options[:donors]
     organizations
   end
 
