@@ -37,6 +37,7 @@ class Geolocation < ActiveRecord::Base
   scope :countries, -> (countries) {where(geolocations: {country_uid: countries})}
   scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
   scope :donors, -> (donors){joins(projects: :donors).where(donors: {id: donors})}
+  scope :geolocation, -> (geolocation){where(geolocations: {uid: geolocation})}
   scope :organizations, -> (orgs){joins(:projects).joins('join organizations on projects.primary_organization_id = organizations.id').where(organizations: {id: orgs})}
   def self.sum_projects(options='')
     where=''
@@ -65,7 +66,8 @@ class Geolocation < ActiveRecord::Base
     geolocations = geolocations.organizations(options[:organizations])                  if options[:organizations]
     geolocations = geolocations.sectors(options[:sectors])                              if options[:sectors]
     geolocations = geolocations.donors(options[:donors])                                if options[:donors]
-    geolocations = geolocations.countries(options[:countries])                            if options[:countries]
+    geolocations = geolocations.countries(options[:countries])                          if options[:countries]
+    geolocations = geolocations.geolocation(options[:geolocation])                      if options[:geolocation]
     geolocations.uniq
   end
   def iati_uid

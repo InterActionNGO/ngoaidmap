@@ -124,6 +124,7 @@ class Project < ActiveRecord::Base
     sql_options.join_strings += %Q( left outer join projects_sectors on projects_sectors.project_id = projects.id)                  if options[:sectors]
     sql_options.join_strings += %Q( left outer join donations on donations.project_id = projects.id)                                if options[:donors]
     sql_options.conditions = ''
+    sql_options.conditions += %Q( and projects.end_date > now() AND projects.start_date <= now() )                                        unless options[:projects]
     sql_options.conditions += %Q( and projects.primary_organization_id in #{'(' + options[:organizations].join(',') + ')'} )        if options[:organizations]
     sql_options.conditions += %Q( and projects_sectors.sector_id in #{'(' + options[:sectors].join(',') + ')'} )                    if options[:sectors]
     sql_options.conditions += %Q( and donations.donor_id in #{'(' + options[:donors].join(',') + ')'} )                             if options[:donors]

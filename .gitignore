@@ -38,6 +38,7 @@ bower_components/
 public/.tmp/
 public/dist/
 public/app/vendor/*
+public/assets
 
 /public/files/*
 !/public/files/.gitkeep
