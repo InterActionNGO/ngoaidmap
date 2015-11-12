@@ -2,7 +2,7 @@ modules:
   - name: "application"
   - name: "report"
 
-wrap: false
+wrap: true
 
 paths:
   jquery: "jquery/dist/jquery"
