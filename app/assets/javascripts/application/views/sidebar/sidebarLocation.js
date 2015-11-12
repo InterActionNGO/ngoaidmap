@@ -19,7 +19,8 @@ define([
       }
       this.conexion = options.conexion;
       this.conexion.getGeolocationData(_.bind(function(data){
-        this.data = data.data;
+        this.data = data.geolocation;
+        console.log(this.data);
         this.render();
       }, this ));
     },
