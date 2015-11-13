@@ -179,7 +179,7 @@ class Project < ActiveRecord::Base
     actual_project_reach
     project_reach_unit
     target 'target_groups'
-    geolocations 'location' do |geo| geo.map{ |g| g.readable_path }.join('|') end
+    geolocations 'location' do |geo| geo.map{ |g| g.try(:readable_path) }.join('|') end
     contact_person 'project_contact_person'
     contact_position 'project_contact_position'
     contact_email 'project_contact_email'
