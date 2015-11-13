@@ -33,7 +33,7 @@ class Sector < ActiveRecord::Base
     sectors = sectors.site(options[:site])                                    if options[:site]
     sectors = sectors.active                                                  if options[:status] && options[:status] == 'active'
     sectors = sectors.geolocation(options[:geolocation], level)               if options[:geolocation]
-    sectors = sectors.sectors(options[:projects])                             if options[:projects]
+    sectors = sectors.projects(options[:projects])                            if options[:projects]
     sectors = sectors.countries(options[:countries])                          if options[:countries]
     sectors = sectors.organizations(options[:organizations])                  if options[:organizations]
     sectors = sectors.donors(options[:donors])                                if options[:donors]
