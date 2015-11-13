@@ -25,14 +25,19 @@ define([
       }
       this.conexion = options.conexion;
       this.params = this.conexion.getParams();
-      this.conexion.getDonorsData(_.bind(function(data){
-        if (!!data.donors.length) {
-          this.data = data.donors;
-          this.render(false);
-        } else {
-          this.$el.remove()
-        }
-      }, this ));
+      this.filters = this.conexion.getFilters();
+      if (! !!this.filters['donors[]']) {
+        this.conexion.getDonorsData(_.bind(function(data){
+          if (!!data.donors.length) {
+            this.data = data.donors;
+            this.render(false);
+          } else {
+            this.$el.remove()
+          }
+        }, this ));
+      } else {
+        this.$el.remove()
+      }
     },
 
     parseData: function(more){

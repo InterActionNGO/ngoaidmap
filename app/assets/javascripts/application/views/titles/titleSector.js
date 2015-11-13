@@ -31,7 +31,8 @@ define([
     parseData: function(){
       return {
         name: this.projectString(),
-        country: this.countryString()
+        country: this.countryString(),
+        donor: (!!this.data.donor) ? this.data.donor.name : null
       }
     },
 

@@ -46,7 +46,7 @@
                 <div class="mod-go-up-menu menu">
                   <ul class="mod-categories-child donors-child">
                     <% @donors.each do |donor| %>
-                      <li><a href="<%= donor_path(donor[0]) %>"><%= donor[1] %></a></li>
+                      <li><a href="<%= donor_path(donor[0]) %>"><%= donor[1].html_safe %></a></li>
                     <% end %>
                   </ul>
                   <input type="text" class="mod-categories-search" placeholder="Search Donor">
