@@ -5,7 +5,7 @@ module ApiCache
     before_action :set_expire_time
   end
   def fetch_redis_cache(&block)
-    if response = $redis.get("#{@digest}") 
+    if response = $redis.get("#{@digest}")
       response = JSON.load(response)
     else
       response = block.call
