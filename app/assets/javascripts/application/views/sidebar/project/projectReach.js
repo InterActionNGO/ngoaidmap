@@ -7,7 +7,7 @@ define([
   'application/abstract/conexion',
   'application/abstract/utils',
   'text!application/templates/sidebar/project/projectReach.handlebars'
-  ], function(Backbone, handlebars, moment, conexion, utils, tpl) {
+  ], function(Backbone, Handlebars, moment, conexion, utils, tpl) {
 
   var ProjectReach = Backbone.View.extend({
 

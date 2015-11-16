@@ -6,7 +6,7 @@ define([
   'application/abstract/conexion',
   'application/abstract/utils',
   'text!application/templates/sidebar/project/projectAwardee.handlebars'
-  ], function(Backbone, handlebars, conexion, utils, tpl) {
+  ], function(Backbone, Handlebars, conexion, utils, tpl) {
 
   var ProjectAwardee = Backbone.View.extend({
 

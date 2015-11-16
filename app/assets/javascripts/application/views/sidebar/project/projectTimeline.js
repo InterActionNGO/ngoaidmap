@@ -6,7 +6,7 @@ define([
   'moment',
   'application/abstract/conexion',
   'text!application/templates/sidebar/project/projectTimeline.handlebars'
-  ], function(Backbone, handlebars, moment, conexion, tpl) {
+  ], function(Backbone, Handlebars, moment, conexion, tpl) {
 
   var ProjectTimeline = Backbone.View.extend({
 

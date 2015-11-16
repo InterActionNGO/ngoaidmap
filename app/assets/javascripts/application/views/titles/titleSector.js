@@ -5,7 +5,7 @@ define([
   'backbone',
   'handlebars',
   'text!application/templates/titles/titleSector.handlebars'
-  ], function(jquery, Backbone, handlebars, tpl) {
+  ], function(jquery, Backbone, Handlebars, tpl) {
 
   var TitleSector = Backbone.View.extend({
 
