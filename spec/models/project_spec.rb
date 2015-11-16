@@ -46,7 +46,7 @@
 require 'rails_helper'
 #ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
 describe Project do
-  describe "scoping and associations" do
+  describe "map representation" do
     before :each do
       @c = FactoryGirl.create(:geolocation, name: 'country', g0: 'g0', uid: 'g0', adm_level: 0)
       @r1 = FactoryGirl.create(:geolocation, name: 'region1', g0: 'g0', g1: 'g1', uid: 'g1', adm_level: 1)
