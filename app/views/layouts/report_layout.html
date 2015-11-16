@@ -12,10 +12,6 @@
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
     <![endif]-->
-    <%= stylesheet_link_tag "jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css", :media => 'all' %>
-    <%= stylesheet_link_tag "/app/vendor/chachi-slider/chachi-slider.css", :media => 'all' %>
-    <%= stylesheet_link_tag "/app/vendor/select2/select2.css", :media => 'all' %>
-    <%= stylesheet_link_tag "/app/vendor/leaflet.markercluster/dist/MarkerCluster.css", :media => 'all' %>
     <%= stylesheet_link_tag "report.css", :media => "all" %>
 
     <% if Rails.env.development? %>
@@ -24,7 +20,9 @@
       <link rel="icon" type="image/png" href="/dist/images/favicon.png">
     <% end %>
 
+    <!--[if lte IE 9]>
     <%= javascript_include_tag "modernizr/modernizr.custom.js" %>
+    <![endif]-->
     <%= csrf_meta_tag %>
   </head>
   <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %> <%= "section-" + @page.top_parent.permalink if @page.present? %> <%= "linos-" + @page.permalink if @page.present? %>">
