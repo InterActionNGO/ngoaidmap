@@ -59,23 +59,23 @@ describe Project do
     end
     it 'should be shown on map on level 0' do
       map_points = Project.get_projects_on_map(level: 0)
-      expect map_points.map{|m| m.name} == ['country']
+      expect(map_points.map{|m| m.name}).to match_array(['country'])
     end
     it 'should be shown on map on level 1' do
-      map_points = Project.get_projects_on_map(level: 0)
-      expect map_points.map{|m| m.name} == ['country', 'region1']
+      map_points = Project.get_projects_on_map(level: 1)
+      expect(map_points.map{|m| m.name}).to match_array(['country', 'region1'])
     end
     it 'should be shown on map on level 2' do
-      map_points = Project.get_projects_on_map(level: 0)
-      expect map_points.map{|m| m.name} == ['region1', 'region2']
+      map_points = Project.get_projects_on_map(level: 2)
+      expect(map_points.map{|m| m.name}).to match_array(['region1', 'region2'])
     end
     it 'should be shown on map on level 3' do
-      map_points = Project.get_projects_on_map(level: 0)
-      expect map_points.map{|m| m.name} == ['region2', 'region3']
+      map_points = Project.get_projects_on_map(level: 3)
+      expect(map_points.map{|m| m.name}).to match_array(['region2', 'region3'])
     end
     it 'should be shown on map on level 4' do
-      map_points = Project.get_projects_on_map(level: 0)
-      expect map_points.map{|m| m.name} == ['region3']
+      map_points = Project.get_projects_on_map(level: 4)
+      expect(map_points.map{|m| m.name}).to match_array(['region3'])
     end
   end
 end
