@@ -43,18 +43,40 @@
 #  geographical_scope                      :string(255)      default("regional")
 #
 
-class ProjectSerializer < ActiveModel::Serializer
-  #cache key: "project_#{object.id}", expires_in: 3.hours
-  attributes :type, :id, :name, :description
-  has_one :organization, serializer: OrganizationPreviewSerializer
-  has_many :sectors, serializer: SectorPreviewSerializer
-  has_many :geolocations, serializer: GeolocationPreviewSerializer
-  has_many :donors, serializer: DonorPreviewSerializer
-
-  def organization
-    object.primary_organization
-  end
-  def type
-    'projects'
+require 'rails_helper'
+#ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
+describe Project do
+  describe "scoping and associations" do
+    before :each do
+      @c = FactoryGirl.create(:geolocation, name: 'country', g0: 'g0', uid: 'g0', adm_level: 0)
+      @r1 = FactoryGirl.create(:geolocation, name: 'region1', g0: 'g0', g1: 'g1', uid: 'g1', adm_level: 1)
+      @r2 = FactoryGirl.create(:geolocation, name: 'region2', g0: 'g0', g1: 'g1', g2: 'g2', uid: 'g2', adm_level: 2)
+      @r3 = FactoryGirl.create(:geolocation, name: 'region3', g0: 'g0', g1: 'g1', g2: 'g2', g3: 'g3', uid: 'g3', adm_level: 3)
+      @project = FactoryGirl.create(:project)
+      @project.geolocations = [@r3]
+      @project.save
+      @project.reload
+    end
+    it 'should be shown on map on level 0' do
+      map_points = Project.get_projects_on_map(level: 0)
+      expect map_points.map{|m| m.name} == ['country']
+    end
+    it 'should be shown on map on level 1' do
+      map_points = Project.get_projects_on_map(level: 0)
+      expect map_points.map{|m| m.name} == ['country', 'region1']
+    end
+    it 'should be shown on map on level 2' do
+      map_points = Project.get_projects_on_map(level: 0)
+      expect map_points.map{|m| m.name} == ['region1', 'region2']
+    end
+    it 'should be shown on map on level 3' do
+      map_points = Project.get_projects_on_map(level: 0)
+      expect map_points.map{|m| m.name} == ['region2', 'region3']
+    end
+    it 'should be shown on map on level 4' do
+      map_points = Project.get_projects_on_map(level: 0)
+      expect map_points.map{|m| m.name} == ['region3']
+    end
   end
 end
+
