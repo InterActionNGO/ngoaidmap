@@ -17,35 +17,7 @@
     <% end %>
 
     <script type="text/javascript">
-      <% if @overview_map_bbox %>
-      var bbox = <%=raw(@overview_map_bbox.to_json)%>;
-      <% end %>
       var MAP_EMBED = true;
-      <% if @site.overview_map_lat && @site.overview_map_lon %>
-      var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
-      <% else %>
-      var map_center = [];
-      <% end %>
-      var map_zoom = <%= @site.overview_map_zoom %> || 5;
-      var chco = "<%=@overview_map_chco%>";
-      var chf = "<%=@overview_map_chf%>";
-      var chld = "<%=@chld%>";
-      var chd = "<%=@chd%>";
-      var marker_source = "<%=@georegion_map_marker_source%>";
-      var map_data = <%= raw(@map_data) %>;
-      var map_type = '<%= @map_type || 'overview_map' %>';
-      var theme = "<%=@site.theme_id%>";
-      var stylez = <%= @site.map_styles.present?? raw(@site.map_styles) : false  %>
-      var empty_layer = false;
-      var kind = window.location.pathname.split('/')[1];
-      var globalPage = <%= @site.featured?? true : false %>;
-      var page = "<%= params[:controller] %>";
-      var adm_level = <%= @geolocation.present?? @geolocation.adm_level + 1 : 0 %>;
-      var geolocation = <%= @geolocation.present?? raw(@geolocation.to_json) : false %>;
-      var project = <%= @project.present?? raw(@project.to_json) : false %>;
-      var organization = <%= @organization.present?? raw(@organization.to_json) : false %>;
-      var donor = <%= @donor.present?? raw(@donor.to_json) : false %>;
-      var sector = <%= @sector.present?? raw(@sector.to_json) : false %>;
     </script>
     <%= javascript_include_tag "modernizr/modernizr.custom.js" %>
 

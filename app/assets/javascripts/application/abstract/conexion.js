@@ -266,7 +266,7 @@ define([
     serialize: function(obj) {
       var str = [];
       for(var p in obj) {
-        var notAllowedFilters = ['geolocation','level', 'page', 'status'];
+        var notAllowedFilters = ['geolocation','level', 'page', 'status', 'embed'];
         if (obj.hasOwnProperty(p) && !_.contains(notAllowedFilters, p)) {
           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
         }
