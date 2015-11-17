@@ -39,13 +39,13 @@ define([
 
     projectString: function(){
       var projects = (this.data.projects_count > 1) ? 'projects' : 'project';
-      var sector = (!!this.data.sector) ? this.data.sector.name : '';
+      var sector = (!!this.data.sector) ? _.unescape(this.data.sector.name) : '';
       var count = this.data.projects_count.toLocaleString();
       return count +' '+sector+' '+projects;
     },
 
     countryString: function(count){
-      return (!!this.data.geolocation) ? this.data.geolocation.name : null;
+      return (!!this.data.geolocation) ? _.unescape(this.data.geolocation.name) : null;
     },
 
     render: function(){

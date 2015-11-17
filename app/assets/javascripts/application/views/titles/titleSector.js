@@ -32,19 +32,19 @@ define([
       return {
         name: this.projectString(),
         country: this.countryString(),
-        donor: (!!this.data.donor) ? this.data.donor.name : null
+        donor: (!!this.data.donor) ? _.unescape(this.data.donor.name) : null
       }
     },
 
     projectString: function(){
       var projects = (this.data.projects_count > 1) ? 'projects' : 'project';
-      var sector = (!!this.data.sector) ? this.data.sector.name : '';
+      var sector = (!!this.data.sector) ? _.unescape(this.data.sector.name) : '';
       var count = this.data.projects_count.toLocaleString();
       return count +' '+sector+' '+projects;
     },
 
     countryString: function(count){
-      return (!!this.data.geolocation) ? this.data.geolocation.name : this.data.countries_count + ' countries';
+      return (!!this.data.geolocation) ? _.unescape(this.data.geolocation.name) : this.data.countries_count + ' countries';
     },
 
     render: function(){
