@@ -88,9 +88,9 @@ module ProjectsHelper
     sectors = project.sectors.uniq.map{|s| s.name}
     sectors_ids = project.sectors.uniq.map{|s| s.id}
     if sectors.size == 1
-      "#{link_to sectors.first.indefinitize.capitalize, sector_path(sectors_ids.first), :title => sectors.first} project"
+      "#{link_to sectors.first.indefinitize.capitalize, sector_path(sectors_ids.first), :title => sectors.first} #{if project.geographical_scope == 'global' then  'global' end} project"
     else
-      "A project from #{pluralize(sectors.size, 'different sectors')}"
+      "A #{if project.geographical_scope == 'global' then  'global' end} project from #{pluralize(sectors.size, 'different sectors')}"
     end
   end
 
@@ -126,12 +126,12 @@ module ProjectsHelper
         "in #{pluralize(countries.size, 'country', 'countries')}"
       end
     else
-      return if project['regions'].nil? || project['regions_ids'].nil?
-      regions     = project['regions'].split('|').reject{|r| r.blank?}
-      regions_ids = project['regions_ids'].delete('{}').split(',')
+      return if project.geolocations.where('adm_level > 0').size == 0
+      regions     = project.geolocations.plck(:name).split('|').reject{|r| r.blank?}
+      regions_ids = project.geolocations.pluck(:uid).split(',')
 
       if regions.size == 1
-        "in #{link_to(regions.first, "/regions/#{regions_ids.first}", :title => regions.first)}"
+        "in #{link_to(regions.first, "/location/#{regions_ids.first}", :title => regions.first)}"
       else
         "in #{pluralize(regions.size, 'place')}"
       end
