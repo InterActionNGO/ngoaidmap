@@ -77,18 +77,11 @@ Rails.application.routes.draw do
   resources :organizations, :only => [:index, :show]
 
   # Global Site projects export links for downloading
-  get '/sites/download/(:id).csv', :to => 'sites#downloads', :format => :csv
-  get '/sites/download/(:id).xls', :to => 'sites#downloads', :format => :xls
-  get '/sites/download/(:id).kml', :to => 'sites#downloads', :format => :kml
 
   get '/downloads', to: 'downloads#index', as: 'download'
 
   get 'regions/:id' => 'georegion#old_regions'
-  # HACK!! route globbing doesn't work well when trying to get the request format in Rails <=3.0.7
-  # get 'location/*ids.csv', to: 'georegion#show', :as => 'location_csv', :format => 'csv'
-  # get 'location/*ids.xls' , to: 'georegion#show', :as => 'location_xls', :format => 'xls'
-  # get 'location/*ids.kml' , to: 'georegion#show', :as => 'location_kml', :format => 'kml'
-  # End HACK!!
+
   get 'location/:ids' , to: 'georegion#show', :as => 'location'
 
   # clusters and sector work through the same controller and view
@@ -100,7 +93,7 @@ Rails.application.routes.draw do
   # search
   get '/search', to: 'search#index', :as => :search
   # list of regions of each level
-  get '/geo/regions/1/:id/json' , to: 'georegion#list_regions1_from_country', :format => :json
-  get '/geo/regions/2/:id/json' , to: 'georegion#list_regions2_from_country', :format => :json
-  get '/geo/regions/3/:id/json' => 'georegion#list_regions3_from_country', :format => :json
+  # get '/geo/regions/1/:id/json' , to: 'georegion#list_regions1_from_country', :format => :json
+  # get '/geo/regions/2/:id/json' , to: 'georegion#list_regions2_from_country', :format => :json
+  # get '/geo/regions/3/:id/json' => 'georegion#list_regions3_from_country', :format => :json
 end

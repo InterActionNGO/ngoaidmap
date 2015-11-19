@@ -9,6 +9,16 @@
   <description type="1">
    <narrative><%= strip_tags(project.description) %></narrative>
   </description>
+  <% if project.target %>
+    <target-groups type="3">
+     <narrative><%= strip_tags(project.target) %></narrative>
+    </target-groups>
+  <% end %>
+  <% if project.activities %>
+    <activities type="4">
+     <narrative><%= strip_tags(project.activities) %></narrative>
+    </activities>
+  <% end %>
   <participating-org <% if project.primary_organization.iati_organizationid.present? %> ref="<%= project.primary_organization.try(:iati_organizationid) %>" <% end %> role="4" <% if project.primary_organization.organization_type_code.present? %> type="<%= project.primary_organization.try(:organization_type_code) %>" <% end %> >
     <narrative><%= project.primary_organization.try(:name) %> </narrative>
   </participating-org>
