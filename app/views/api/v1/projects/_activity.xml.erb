@@ -64,7 +64,7 @@
     <narrative><%= project.contact_position %></narrative>
   </job-title>
     <email><%= project.contact_email %></email>
-    <website><%= project.website %></website>
+    <website><%= project.primary_organization.try(:website) %></website>
   </contact-info>
   <% if project.countries.any? %>
     <% project.countries.each_with_index do |c,i| %>
