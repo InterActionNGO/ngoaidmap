@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound,   :with => :render_404
     rescue_from ActionController::RoutingError, :with => :render_404
     rescue_from NotFound,                       :with => :render_404
+    rescue_from ActionView::MissingTemplate,    :with => :render_404
+    rescue_from ActionController::UnknownFormat,:with => :render_404
     rescue_from BrowserIsIE6OrLower,            :with => :old_browser
   end
 
