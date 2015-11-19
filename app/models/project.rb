@@ -164,20 +164,20 @@ class Project < ActiveRecord::Base
     name 'project_name'
     description 'project_description'
     activities
-    additional_information
-    start_date
-    end_date
+    additional_information 'additional_information'
+    start_date 'start_date'
+    end_date 'end_date'
     sectors 'sectors' do |s| s.map{ |se| se.name }.join('|') end
-    cross_cutting_issues
+    cross_cutting_issues 'cross_cutting_issues'
     budget 'budget_numeric'
-    budget_currency
-    budget_value_date
+    budget_currency 'budget_currency'
+    budget_value_date 'budget_value_date'
     implementing_organization 'international partners'
     partner_organizations 'local_partners'
     prime_awardee 'prime_awardee' do |prime_awardee| prime_awardee.try(:name) end
-    target_project_reach
-    actual_project_reach
-    project_reach_unit
+    target_project_reach 'target_project_reach'
+    actual_project_reach 'actual_project_reach'
+    project_reach_unit 'project_reach_unit'
     target 'target_groups'
     geolocations 'location' do |geo| geo.map{ |g| g.try(:readable_path) }.join('|') end
     contact_person 'project_contact_person'
@@ -185,8 +185,8 @@ class Project < ActiveRecord::Base
     contact_email 'project_contact_email'
     contact_phone_number 'project_contact_phone_number'
     website 'project_website'
-    date_provided
-    date_updated
+    date_provided 'date_provided'
+    date_updated 'date_updated'
     activity_status 'status'
     donors 'donors' do |s| s.map{ |se| se.name }.join('|') end
   end
