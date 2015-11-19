@@ -71,7 +71,7 @@ class SearchController < ApplicationController
     #          order by created_at DESC
     #          limit #{limit} offset #{limit * (@current_page - 1)}"
 
-    @projects = Project.fetch_all(projects_params).order('projects.name ASC').page(params[:page]).per(10)
+    @projects = Project.active.fetch_all(projects_params).order('projects.name ASC').page(params[:page]).per(10)
 
     #sql_count = "select count(*) as count from projects p
     #                 INNER JOIN projects_sectors ps ON (p.id = ps.project_id)

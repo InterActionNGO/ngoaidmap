@@ -5,7 +5,7 @@ define([
   'handlebars',
   'application/abstract/conexion',
   'text!application/templates/sidebar/project/projectOrganization.handlebars'
-  ], function(Backbone, handlebars, conexion, tpl) {
+  ], function(Backbone, Handlebars, conexion, tpl) {
 
   var projectOrganizationModel = Backbone.Model.extend({
     urlRoot: '/api/organizations/'

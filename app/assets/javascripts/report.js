@@ -1,7 +1,6 @@
 require([
   'underscore',
   '_string',
-  'handlebars',
   'highcharts',
 
   'report/views/spin',
@@ -26,7 +25,7 @@ require([
   'report/views/countries-list',
   'report/views/sectors-list'
 ], function(
-  _, _string, Handlebars, Highcharts,
+  _, _string, Highcharts,
   SpinView, FiltersFormView, IntroView,
   TitleView, FiltersView, SummaryView, BudgetsView, TimelineChartsView, ActionsView, LimitationsView,
   DonorsSnapshotView, OrganizationsSnapshotView, CountriesSnapshotView, SectorsSnapshotView,
@@ -37,30 +36,6 @@ require([
   Number.prototype.toCommas = function() {
     return _.str.numberFormat(this, 0);
   };
-
-  // Handlebars
-  Handlebars.registerHelper('commas', function(context) {
-    if (!context) {
-      return '0';
-    }
-    if (typeof context !== 'number') {
-      return context;
-    }
-    return context.toCommas();
-  });
-
-  Handlebars.registerHelper('starray', function(context) {
-    context = _.str.toSentence(context);
-    context = context.replace(/\%26/g, '&');
-    return context;
-  });
-
-  Handlebars.registerHelper('if_eq', function(context, options) {
-    if (context === options.hash.compare) {
-      return options.fn(this);
-    }
-    return options.inverse(this);
-  });
 
   // Highcharts
   (function(H) {

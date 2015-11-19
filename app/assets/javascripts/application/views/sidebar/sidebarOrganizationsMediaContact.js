@@ -5,7 +5,7 @@ define([
   'handlebars',
   'application/views/sidebar/sidebarOrganizationsClass',
   'text!application/templates/sidebar/sidebarOrganizationsMediaContact.handlebars'
-  ], function(Backbone, handlebars, SidebarOrganizationsClass, tpl) {
+  ], function(Backbone, Handlebars, SidebarOrganizationsClass, tpl) {
 
   var sidebarOrganizationsMediaContact = SidebarOrganizationsClass.extend({
 

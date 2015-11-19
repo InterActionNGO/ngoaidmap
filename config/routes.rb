@@ -76,8 +76,6 @@ Rails.application.routes.draw do
   resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
 
-  # Global Site projects export links for downloading
-
   get '/downloads', to: 'downloads#index', as: 'download'
 
   get 'regions/:id' => 'georegion#old_regions'

@@ -8,7 +8,7 @@ development:
   password:
 
 test:
-  adapter: postgis
+  adapter: postgresql
   #template: template_postgis
   encoding: unicode
   database: iom_test

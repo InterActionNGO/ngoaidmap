@@ -5,7 +5,7 @@ define([
   'handlebars',
   'application/views/sidebar/sidebarOrganizationsClass',
   'text!application/templates/sidebar/sidebarOrganizationsInfoContact.handlebars'
-  ], function(Backbone, handlebars, SidebarOrganizationsClass, tpl) {
+  ], function(Backbone, Handlebars, SidebarOrganizationsClass, tpl) {
 
   var sidebarOrganizationsInfoContact = SidebarOrganizationsClass.extend({
 

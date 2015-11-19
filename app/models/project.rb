@@ -36,8 +36,8 @@
 #  organization_id                         :string(255)
 #  budget_currency                         :string(255)
 #  budget_value_date                       :date
-#  target_project_reach                    :integer
-#  actual_project_reach                    :integer
+#  target_project_reach                    :float
+#  actual_project_reach                    :float
 #  project_reach_unit                      :string(255)
 #  prime_awardee_id                        :integer
 #  geographical_scope                      :string(255)      default("regional")

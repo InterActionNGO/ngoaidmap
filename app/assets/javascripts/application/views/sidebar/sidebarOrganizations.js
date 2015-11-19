@@ -5,7 +5,7 @@ define([
   'handlebars',
   'application/abstract/conexion',
   'text!application/templates/sidebar/sidebarOrganizations.handlebars'
-  ], function(Backbone, handlebars, conexion, tpl) {
+  ], function(Backbone, Handlebars, conexion, tpl) {
 
   var SidebarOrganizations = Backbone.View.extend({
 

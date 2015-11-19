@@ -12,7 +12,8 @@ paths:
   backbone: "backbone/backbone"
   Class: "Class.js/Class"
   select2: "select2/select2"
-  handlebars: "handlebars/handlebars"
+  handlebarsLib: "handlebars/handlebars"
+  handlebars: "lib/handlebars"
   highcharts: "highcharts-release/highcharts"
   spin: "spinjs/spin"
   moment: "moment/moment"
@@ -78,6 +79,9 @@ shim:
 
   amplify:
     exports: "amplify"
+
+  handlebarsLib:
+    exports: "Handlebars"
 
   handlebars:
     exports: "Handlebars"

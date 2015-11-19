@@ -7,7 +7,7 @@ define([
   'application/abstract/conexion',
   'application/services/sidebarService',
   'text!application/templates/filteredBubble.handlebars'
-  ], function(jquery, Backbone, handlebars, conexion, service, tpl) {
+  ], function(jquery, Backbone, Handlebars, conexion, service, tpl) {
 
   var FilteredBubble = Backbone.View.extend({
 
