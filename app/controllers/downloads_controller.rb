@@ -4,7 +4,7 @@ class DownloadsController < ApplicationController
     name = params[:name]
     respond_to do |format|
       format.csv {
-      send_data Project.fetch_all(projects_params).to_comma,
+      send_data Project.fetch_all(projects_params).includes(:geolocations, :donors, :sectors).to_comma,
         :type        => 'application/vnd.ms-excel',
         :disposition => "attachment; filename=#{name}.csv"
       }

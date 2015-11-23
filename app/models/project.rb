@@ -167,7 +167,7 @@ class Project < ActiveRecord::Base
     additional_information 'additional_information'
     start_date 'start_date'
     end_date 'end_date'
-    sectors 'sectors' do |s| s.map{ |se| se.name }.join('|') end
+    sectors_for_export 'sectors'
     cross_cutting_issues 'cross_cutting_issues'
     budget 'budget_numeric'
     budget_currency 'budget_currency'
@@ -179,7 +179,7 @@ class Project < ActiveRecord::Base
     actual_project_reach 'actual_project_reach'
     project_reach_unit 'project_reach_unit'
     target 'target_groups'
-    geolocations 'location' do |geo| geo.map{ |g| g.try(:readable_path) }.join('|') end
+    geolocations_for_export 'location'
     contact_person 'project_contact_person'
     contact_position 'project_contact_position'
     contact_email 'project_contact_email'
@@ -187,12 +187,40 @@ class Project < ActiveRecord::Base
     website 'project_website'
     date_provided 'date_provided'
     date_updated 'date_updated'
-    activity_status 'status'
-    donors 'donors' do |s| s.map{ |se| se.name }.join('|') end
+    activity_status_for_export 'status'
+    donors_for_export 'donors'
   end
 
   def self.to_excel(options = {})
     all.to_xls(headers: self.export_headers(options[:headers_options]))
+  end
+
+  def activity_status_for_export
+    if self.start_date > Time.now.in_time_zone || self.end_date < Time.now.in_time_zone
+      'closed'
+    else
+      'active'
+    end
+  end
+
+  def sectors_for_export
+    if self.sectors
+      Sector.joins(:projects).where(projects: {id: self.id}).map{ |se| se.name }.join('|')
+    end
+  end
+
+  def donors_for_export
+    if self.donors
+      Donor.joins(:projects).where(projects: {id: self.id}).map{ |se| se.name }.join('|')
+    end
+  end
+
+  def geolocations_for_export
+    if self.geolocations
+      geos = Geolocation.joins(:projects).where(projects: {id: self.id})
+      geos = geos.map{ |g| g.try(:readable_path) }.join('|')
+      geos
+    end
   end
 
   ############################################## IATI ##############################################
