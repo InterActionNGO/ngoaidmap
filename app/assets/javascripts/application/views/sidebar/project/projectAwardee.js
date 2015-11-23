@@ -19,7 +19,7 @@ define([
         return
       }
       this.project = options.project;
-      this.awardee = options.awardee;
+      this.prime_awardee = options.awardee;
       (!!this.prime_awardee && !!this.prime_awardee.name) ? this.render() : this.$el.remove();
     },
 
