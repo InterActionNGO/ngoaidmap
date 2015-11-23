@@ -88,7 +88,7 @@ module ProjectsHelper
     sectors = project.sectors.uniq.map{|s| s.name}
     sectors_ids = project.sectors.uniq.map{|s| s.id}
     if sectors.size == 1
-      "#{link_to sectors.first.indefinitize.capitalize, sector_path(sectors_ids.first), :title => sectors.first} #{if project.geographical_scope == 'global' then  'global' end} project"
+      " #{if project.geographical_scope == 'global' then  'global' end}  #{link_to sectors.first.indefinitize.capitalize, sector_path(sectors_ids.first), :title => sectors.first} project"
     else
       "A #{if project.geographical_scope == 'global' then  'global' end} project from #{pluralize(sectors.size, 'different sectors')}"
     end
