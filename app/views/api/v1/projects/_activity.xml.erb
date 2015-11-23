@@ -1,4 +1,4 @@
-<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.xmlschema %>" <% if project.active? %> linked-data-uri="http://ngoaidmap.org/projects/<%= project.id %>" <% end %> >
+<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.xmlschema %>" linked-data-uri="http://ngoaidmap.org/projects/<%= project.id %>" >
   <iati-identifier>US-EIN-13-3287064NAM-<%= project.intervention_id %></iati-identifier>
   <reporting-org ref="US-EIN-13-3287064NAM" type="22" secondary-reporter="1">
   <narrative>InterAction’s NGO Aid Map</narrative>
@@ -10,14 +10,14 @@
    <narrative><%= strip_tags(project.description) %></narrative>
   </description>
   <% if project.target %>
-    <target-groups type="3">
+    <description type="3">
      <narrative><%= strip_tags(project.target) %></narrative>
-    </target-groups>
+    </description>
   <% end %>
   <% if project.activities %>
-    <activities type="4">
+    <description type="4">
      <narrative><%= strip_tags(project.activities) %></narrative>
-    </activities>
+    </description>
   <% end %>
   <participating-org <% if project.primary_organization.iati_organizationid.present? %> ref="<%= project.primary_organization.try(:iati_organizationid) %>" <% end %> role="4" <% if project.primary_organization.organization_type_code.present? %> type="<%= project.primary_organization.try(:organization_type_code) %>" <% end %> >
     <narrative><%= project.primary_organization.try(:name) %> </narrative>
@@ -27,6 +27,13 @@
       <participating-org <% if d.iati_organizationid.present? %> ref="<%= d.iati_organizationid %>" <% end %> role="1"   <% if d.organization_type_code.present? %> type="<%= d.organization_type_code %>" <% end %> >
       <narrative><%= d.name %> </narrative>
     </participating-org>
+    <% end %>
+  <% end %>
+  <% if project.geographical_scope && (project.geographical_scope == 'national' || project.geographical_scope == 'global') %>
+    <% if project.geographical_scope == 'national' %>
+      <activity-scope code="4" />
+    <% else %>
+      <activity-scope code="1" />
     <% end %>
   <% end %>
   <other-identifier ref="<%= project.intervention_id %>" type="A1">
@@ -142,5 +149,25 @@
       </title>
       <category code="A12" />
     </document-link>
+  <% end %>
+  <% if project.target_project_reach && project.actual_project_reach && project.project_reach_unit %>
+  <result type="1" aggregation-status="2">
+     <title>
+      <narrative>Project Reach</narrative>
+     </title>
+     <indicator measure="1">
+       <title>
+        <narrative>Project Reach <%= project.project_reach_unit %></narrative>
+       </title>
+       <period>
+        <period-start iso-date="<%= project.start_date %>" />
+        <period-end iso-date="<%= project.end_date %>" />
+        <target value="<%= project.target_project_reach %>">
+        </target>
+        <actual value="<%= project.actual_project_reach %>">
+        </actual>
+       </period>
+     </indicator>
+  </result>
   <% end %>
 </iati-activity>
