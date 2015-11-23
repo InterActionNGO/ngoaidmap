@@ -17,11 +17,8 @@
       <ul class="submenu">
         <% @site.pages_by_parent('data').each do |page| %>
           <% if page.published %>
-            <li class="submenu-item"><a href="/p/<%= page.permalink %>"><%= page.title%></a></li>
+            <li class="submenu-item"><a href="/p/<%= page.permalink %>"><%= page.title %></a></li>
           <% end %>
-        <% end %>
-        <% if @site.name == "global" %>
-          <li class="submenu-item"><a href="/p/analysis">Metrics or Analysis</a></li>
         <% end %>
       </ul>
       <% end %>
