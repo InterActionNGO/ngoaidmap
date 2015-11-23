@@ -8,7 +8,7 @@ class GeoregionController < ApplicationController
 
   def show
     @geolocation = Geolocation.find_by(uid: params[:ids])
-  #   raise NotFound if params[:ids].blank?
+    raise NotFound if params[:ids].blank? || @geolocation.blank?
 
   #   ids = params[:ids]
   #   raise NotFound unless ids =~ /([\d|\/]+)/
