@@ -45,7 +45,7 @@ module Api
 
 
       def projects_params
-        if (request.fullpath.include?('iati') && !request.fullpath.include?('organizations')) && ((!params[:limit].present? && !params[:organizations].present? && !params[:sectors].present? && !params[:donors].present? && !params[:countries].present?) or params[:limit].to_i > 100)
+        if (!request.fullpath.include?('organizations')) && ((!params[:limit].present? && !params[:organizations].present? && !params[:sectors].present? && !params[:donors].present? && !params[:countries].present?) or params[:limit].to_i > 100)
           params.merge!(limit: '100')
         end
         if request.fullpath.include?('organizations') && params[:organization_id].present?

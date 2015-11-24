@@ -7,6 +7,8 @@
 #  oecd_dac_name         :string(255)
 #  sector_vocab_code     :string(255)
 #  oecd_dac_purpose_code :string(255)
+#  created_at            :datetime
+#  updated_at            :datetime
 #
 
 class Sector < ActiveRecord::Base
