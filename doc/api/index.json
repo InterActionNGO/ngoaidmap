@@ -119,6 +119,11 @@
           "groups": "all"
         },
         {
+          "description": "Getting a list of projects by text search on name or description",
+          "link": "projects/getting_a_list_of_projects_by_text_search_on_name_or_description.json",
+          "groups": "all"
+        },
+        {
           "description": "Getting a list of projects with a limit",
           "link": "projects/getting_a_list_of_projects_with_a_limit.json",
           "groups": "all"

@@ -5,7 +5,7 @@ Parameters:
   * id - A donor's id
 
 Request:
-  GET /api/donors/2
+  GET /api/donors/1
   Accept: application/json; application/vnd.ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
@@ -14,16 +14,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 402
+  Content-Length: 304
   Content-Type: application/json; charset=utf-8
-  ETag: W/"6c33369f3e641f9abd0fb292ff9923af"
+  ETag: W/"76010dab73b2835132dc441388192c18"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: d2cc427c-0cc6-48e9-ad64-b95297f5bf62
-  X-Runtime: 0.032624
+  X-Request-Id: ed6c3b00-6362-48bd-9447-dffd78dfd5f9
+  X-Runtime: 0.030115
   X-XSS-Protection: 1; mode=block
 
-  {"data":{"id":"2","type":"donor","attributes":{"name":"Red Cross","description":null,"website":null,"twitter":null,"facebook":null,"contact_person_name":null,"contact_company":null,"contact_person_position":null,"contact_email":null,"contact_phone_number":null,"site_specific_information":null,"logo":"/logos/medium/missing.png"},"relationships":{"donated_projects":{"data":[]},"offices":{"data":[]}}}}
+  {"data":{"id":"1","type":"donor","attributes":{"name":"Red Cross","record_created_at":"2015-11-24T12:36:30.747Z","record_updated_at":"2015-11-24T12:36:30.747Z","iati_organization_id":null,"iati_organization_type":null,"iati_organization_type_code":null},"relationships":{"donated_projects":{"data":[]}}}}
 
 
 Getting a list of donors
@@ -44,16 +44,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 90
+  Content-Length: 30
   Content-Type: application/json; charset=utf-8
-  ETag: W/"99bba54659ba53668436daac4696fa86"
+  ETag: W/"f568a592ce103b72b1f1f1183751e5ba"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 6fe28e29-0762-458b-9fd5-566c5ea68553
-  X-Runtime: 0.013202
+  X-Request-Id: ae769e22-1664-4487-bda1-8da2419a3833
+  X-Runtime: 0.012934
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"1","type":"donors","attributes":{"name":"Red Cross"}}],"meta":{"total":1}}
+  {"data":[],"meta":{"total":0}}
 
 
 Getting a list of donors for a particular sector
@@ -75,15 +75,15 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 98
+  Content-Length: 30
   Content-Type: application/json; charset=utf-8
-  ETag: W/"1fa25f21adac1eb26acd37264cb7e99e"
+  ETag: W/"f568a592ce103b72b1f1f1183751e5ba"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 91375c94-10e6-452e-9422-d0cd353a29ce
-  X-Runtime: 0.011573
+  X-Request-Id: 789fce32-00a9-4357-bc0f-6e6e78a2dcac
+  X-Runtime: 0.012773
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"5","type":"donors","attributes":{"name":"donor_with_sector"}}],"meta":{"total":1}}
+  {"data":[],"meta":{"total":0}}
 
 

@@ -17,16 +17,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 289
+  Content-Length: 424
   Content-Type: application/json; charset=utf-8
-  ETag: W/"3a22d89ad7cf9d1714009355115a3894"
+  ETag: W/"0c33254a5ee27b12e5bfe8251164740f"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 81cf6ae5-84d2-499e-a12e-04460b067f87
-  X-Runtime: 0.013518
+  X-Request-Id: a10fc9d1-fd83-41a1-959e-34723cade105
+  X-Runtime: 0.016638
   X-XSS-Protection: 1; mode=block
 
-  {"data":{"id":"10","type":"geolocations","attributes":{"uid":"gn00001","name":"geo","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}}}
+  {"data":{"id":"7","type":"geolocations","attributes":{"vocab_id":"gn00001","name":"geo","center_latitude":null,"center_longitude":null,"country_iso2_code":null,"country_name":null,"country_vocab_id":null,"data_provider":"Geonames","admin_level":0,"adm0_relation_vocab_id":null,"adm1_relation_vocab_id":null,"adm2_relation_vocab_id":null,"adm3_relation_vocab_id":null,"adm4_relation_vocab_id":null,"custom_geo_source":null}}}
 
 
 Getting a list of geolocations
@@ -51,15 +51,15 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 2016
+  Content-Length: 1719
   Content-Type: application/json; charset=utf-8
-  ETag: W/"ff608d3d0fb7e87fd7e5f9bb851b7e54"
+  ETag: W/"946eedea0d2d2f4a5e999a2852684fa8"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 3deb7a67-de84-4af8-ad2e-5b2ce039e8c4
-  X-Runtime: 0.013689
+  X-Request-Id: ace7a498-246b-4aff-b4c9-10417d89788f
+  X-Runtime: 0.013421
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"1","type":"geolocations","attributes":{"uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"2","type":"geolocations","attributes":{"uid":"111","name":"Madrid","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":1,"g0":"000","g1":"111","g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"3","type":"geolocations","attributes":{"uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"11","type":"geolocations","attributes":{"uid":"gn00001","name":"geo","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"12","type":"geolocations","attributes":{"uid":"gn{p}","name":"geolocation 0","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"gn","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"13","type":"geolocations","attributes":{"uid":"gn{p}","name":"geolocation 1","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"gn","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"14","type":"geolocations","attributes":{"uid":"gn{p}","name":"geolocation 2","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"gn","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}}],"meta":{"total":7}}
+  {"data":[{"id":"8","type":"geolocations","attributes":{"vocab_id":"gn00001","name":"geo","center_latitude":null,"center_longitude":null,"country_iso2_code":null,"country_name":null,"country_vocab_id":null,"data_provider":"Geonames","admin_level":0,"adm0_relation_vocab_id":null,"adm1_relation_vocab_id":null,"adm2_relation_vocab_id":null,"adm3_relation_vocab_id":null,"adm4_relation_vocab_id":null,"custom_geo_source":null}},{"id":"9","type":"geolocations","attributes":{"vocab_id":"gn{p}","name":"geolocation 0","center_latitude":null,"center_longitude":null,"country_iso2_code":null,"country_name":null,"country_vocab_id":"gn","data_provider":"Geonames","admin_level":0,"adm0_relation_vocab_id":null,"adm1_relation_vocab_id":null,"adm2_relation_vocab_id":null,"adm3_relation_vocab_id":null,"adm4_relation_vocab_id":null,"custom_geo_source":null}},{"id":"10","type":"geolocations","attributes":{"vocab_id":"gn{p}","name":"geolocation 1","center_latitude":null,"center_longitude":null,"country_iso2_code":null,"country_name":null,"country_vocab_id":"gn","data_provider":"Geonames","admin_level":0,"adm0_relation_vocab_id":null,"adm1_relation_vocab_id":null,"adm2_relation_vocab_id":null,"adm3_relation_vocab_id":null,"adm4_relation_vocab_id":null,"custom_geo_source":null}},{"id":"11","type":"geolocations","attributes":{"vocab_id":"gn{p}","name":"geolocation 2","center_latitude":null,"center_longitude":null,"country_iso2_code":null,"country_name":null,"country_vocab_id":"gn","data_provider":"Geonames","admin_level":0,"adm0_relation_vocab_id":null,"adm1_relation_vocab_id":null,"adm2_relation_vocab_id":null,"adm3_relation_vocab_id":null,"adm4_relation_vocab_id":null,"custom_geo_source":null}}],"meta":{"total":4}}
 
 

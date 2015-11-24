@@ -34,17 +34,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":{\"id\":\"10\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn00001\",\"name\":\"geo\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":null,\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}}}",
+      "response_body": "{\"data\":{\"id\":\"7\",\"type\":\"geolocations\",\"attributes\":{\"vocab_id\":\"gn00001\",\"name\":\"geo\",\"center_latitude\":null,\"center_longitude\":null,\"country_iso2_code\":null,\"country_name\":null,\"country_vocab_id\":null,\"data_provider\":\"Geonames\",\"admin_level\":0,\"adm0_relation_vocab_id\":null,\"adm1_relation_vocab_id\":null,\"adm2_relation_vocab_id\":null,\"adm3_relation_vocab_id\":null,\"adm4_relation_vocab_id\":null,\"custom_geo_source\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"3a22d89ad7cf9d1714009355115a3894\"",
+        "ETag": "W/\"0c33254a5ee27b12e5bfe8251164740f\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "81cf6ae5-84d2-499e-a12e-04460b067f87",
-        "X-Runtime": "0.013518",
-        "Content-Length": "289"
+        "X-Request-Id": "a10fc9d1-fd83-41a1-959e-34723cade105",
+        "X-Runtime": "0.016638",
+        "Content-Length": "424"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/geolocations/gn00001?get_parents=false\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

@@ -6,7 +6,7 @@ resource 'Projects' do
   header 'Host', 'http://ngoaidmap.org'
 
   get "/api/projects" do
-    let!(:projects) do
+    let(:projects) do
       3.times do |p|
         FactoryGirl.create(:project, name: "project#{p}")
       end
@@ -22,7 +22,7 @@ resource 'Projects' do
   get "/api/projects?offset=:offset" do
     parameter :offset, "Integer. An integer number representing the number of projects from where to start the collection"
     let(:offset) {7}
-    let!(:projects) do
+    let(:projects) do
       10.times do |p|
         FactoryGirl.create(:project, name: "project#{p}")
       end
@@ -38,7 +38,7 @@ resource 'Projects' do
   get "/api/projects?limit=:limit" do
     parameter :limit, "Integer. An integer number representing the maximum number of projects"
     let(:limit) {3}
-    let!(:projects) do
+    let(:projects) do
       10.times do |p|
         FactoryGirl.create(:project, name: "project#{p}")
       end
@@ -54,7 +54,7 @@ resource 'Projects' do
   get "/api/projects?status=:status" do
     parameter :status, "String. should be 'active' for active projects or 'inactive' for inactive projects"
     let(:status) {'active'}
-    let!(:projects) do
+    let(:projects) do
       3.times do |p|
         FactoryGirl.create(:project, name: "project#{p}", end_date: Time.now + 10.years, start_date: 1.year.ago)
       end
@@ -74,12 +74,11 @@ resource 'Projects' do
 
   get "/api/projects?organizations[]=:organization" do
     parameter :organizations, "Array. Organization ids"
-    p = FactoryGirl.create(:project, name: "project_with_organization")
-    s = FactoryGirl.create(:organization)
-    p.primary_organization_id = s.id
-    p.save!
+    let(:project) do
+      FactoryGirl.create(:project, name: "project_with_organization", primary_organization: FactoryGirl.create(:organization))
+    end
     let(:organization) do
-      s.id
+      project.primary_organization_id
     end
 
     example_request "Getting a list of projects by implementing organization" do
@@ -91,11 +90,17 @@ resource 'Projects' do
 
   get "/api/projects?donors[]=:donor" do
     parameter :donors, "Array. Donor ids"
-    p = FactoryGirl.create(:project, name: "project_with_donor")
-    d = FactoryGirl.create(:donor)
-    p.donors=[d]
+    let(:project) do
+      FactoryGirl.create(:project, name: "project_with_donor")
+    end
+    let(:donor_object) do
+      FactoryGirl.create(:donor)
+    end
+    let(:donors) do
+      project.donors=[donor_object]
+    end
     let(:donor) do
-      d.id
+      donor_object.id
     end
 
     example_request "Getting a list of projects by donors" do
@@ -106,12 +111,18 @@ resource 'Projects' do
   end
 
   get "/api/projects?sectors[]=:sector" do
-    parameter :sector, "Array. Sector ids"
-    p = FactoryGirl.create(:project, name: "project_with_sector")
-    s = FactoryGirl.create(:sector)
-    p.sectors=[s]
+    parameter :sectors, "Array. Sector ids"
+    let(:sector_object) do
+      FactoryGirl.create(:sector)
+    end
+    let(:project) do
+      FactoryGirl.create(:project, name: "project_with_sector")
+    end
+    let(:sectors) do
+      project.sectors=[sector_object]
+    end
     let(:sector) do
-      s.id
+      sector_object.id
     end
 
     example_request "Getting a list of projects by sectors" do
@@ -123,13 +134,15 @@ resource 'Projects' do
 
   get "/api/projects?countries[]=:country" do
     parameter :countries, "Array. Country uids"
-    p = FactoryGirl.create(:project, name: "project_with_country")
-    c = FactoryGirl.create(:geolocation, name: 'India', adm_level: 0, uid: 'ggg', country_uid: 'ggg')
-    p.geolocations=[c]
-    let(:country) do
-      c.uid
+    let(:country_object) do
+      FactoryGirl.create(:geolocation, name: 'India', adm_level: 0, uid: 'ggg', country_uid: 'ggg')
     end
-
+    let!(:project) do
+      FactoryGirl.create(:project, name: "project_with_country", geolocations: [country_object])
+    end
+    let(:country) do
+      country_object.uid
+    end
     example_request "Getting a list of projects by countries" do
       expect(status).to eq(200)
       results = JSON.parse(response_body)['data'].map{|r| r['attributes']['name']}
@@ -137,16 +150,16 @@ resource 'Projects' do
     end
   end
 
-  get "/api/projects?geolocation=:geolocation&level=:level" do
+  get "/api/projects?geolocation=:geolocation" do
     parameter :geolocation, "Geolocation uid"
-    parameter :level, "Admin level"
-    p = FactoryGirl.create(:project, name: "project_with_geolocation")
-    g1 = FactoryGirl.create(:geolocation, name: 'Madrid', adm_level: 1, uid: '111', g0: '000', g1: '111')
-    g = FactoryGirl.create(:geolocation, name: 'Spain', adm_level: 0, uid: '000', g0: '000')
-    p.geolocations=[g]
-    let(:level) { 0 }
+    let(:geolocation_object) do
+      FactoryGirl.create(:geolocation, name: 'Spain', adm_level: 0, uid: '000', g0: '000')
+    end
+    let!(:project) do
+      FactoryGirl.create(:project, name: "project_with_geolocation", geolocations: [geolocation_object])
+    end
     let(:geolocation) do
-      g.uid
+      geolocation_object.uid
     end
 
     example_request "Getting a list of projects by geolocation" do
@@ -156,12 +169,11 @@ resource 'Projects' do
     end
   end
 
-  let!(:project) do
-    create(:project)
-  end
-
   get "/api/projects/:id" do
     parameter :id, "A project's id"
+    let(:project) do
+      create(:project)
+    end
     let(:id) { project.id }
     let(:name) { project.name }
 
@@ -173,9 +185,11 @@ resource 'Projects' do
     end
   end
 
-    get "/api/projects?q=:q" do
+  get "/api/projects?q=:q" do
     parameter :q, "String. Text to search"
-    p = FactoryGirl.create(:project, name: "project", description:'lore ipsum text to find')
+    let!(:project) do
+      FactoryGirl.create(:project, name: "project", description:'lore ipsum text to find')
+    end
     let(:q){'text to find'}
 
     example_request "Getting a list of projects by text search on name or description" do

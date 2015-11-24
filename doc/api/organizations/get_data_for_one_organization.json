@@ -16,7 +16,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/organizations/6",
+      "request_path": "/api/organizations/4",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
@@ -29,20 +29,20 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":{\"id\":\"6\",\"type\":\"organizations\",\"attributes\":{\"name\":\"One Organization\",\"description\":null,\"sectors\":[],\"logo\":\"/logos/medium/missing.png\"},\"relationships\":{\"projects\":{\"data\":[]}}}}",
+      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"organizations\",\"attributes\":{\"name\":\"One Organization\",\"description\":null,\"logo\":\"/logos/medium/missing.png\",\"twitter\":null,\"facebook\":null,\"website\":null,\"hq_street_address\":null,\"contact_email\":null,\"contact_phone_number\":null,\"donation_street_address\":null,\"donation_zip_code\":null,\"donation_city\":null,\"donation_state\":null,\"donation_phone_number\":null,\"donation_website\":null,\"record_created_at\":\"2015-11-24T12:36:30.938Z\",\"record_updated_at\":\"2015-11-24T12:36:30.938Z\",\"contact_name\":null,\"contact_position\":null,\"hq_zip_code\":null,\"hq_city\":null,\"hq_state\":null,\"hq_country\":null,\"donation_country\":null,\"media_contact_name\":null,\"media_contact_position\":null,\"media_contact_phone_number\":null,\"media_contact_email\":null,\"interaction_member\":false,\"iati_organization_type\":null,\"iati_organization_type_code\":null,\"iati_organization_id\":null,\"publishing_to_iati\":false,\"interaction_membership_status\":\"active\",\"organization_letter_code\":null},\"relationships\":{\"projects\":{\"data\":[]}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"b2c3324bae1d3e29a2ce9638fca0044d\"",
+        "ETag": "W/\"71d3f3046b6ff77a7dc89be1684e2fd5\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "6f2af3db-e7a3-47c6-98a2-26f7a24d92ce",
-        "X-Runtime": "0.047593",
-        "Content-Length": "191"
+        "X-Request-Id": "66c56199-f3b0-4e4b-859e-fb5cec6079f2",
+        "X-Runtime": "0.057898",
+        "Content-Length": "1017"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/organizations/6\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/organizations/4\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

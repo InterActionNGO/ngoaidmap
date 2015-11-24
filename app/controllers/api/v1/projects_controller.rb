@@ -7,7 +7,7 @@ module Api
         respond_to do |format|
           format.json {
             @projects = Project.fetch_all(projects_params)
-            render json: @projects, root: 'data', include: ['organization', 'sectors', 'donors']
+            render json: @projects, root: 'data', include: ['geolocations', 'reporting_organization', 'sectors', 'donors', 'prime_awardee']
           }
           format.xml {
             if projects = $redis.get(@iati_projects_digest)
@@ -38,7 +38,7 @@ module Api
       def show
         @project = Project.find(params[:id])
         respond_to do |format|
-          format.json {render json: @project, root: 'data', include: ['organization', 'sectors', 'donors']}
+          format.json {render json: @project, root: 'data', include: ['geolocations', 'reporting_organization', 'sectors', 'donors', 'prime_awardee']}
           format.xml {@project}
         end
       end

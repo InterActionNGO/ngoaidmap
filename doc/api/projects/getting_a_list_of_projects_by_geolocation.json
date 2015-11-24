@@ -1,17 +1,13 @@
 {
   "resource": "Projects",
   "http_method": "GET",
-  "route": "/api/projects?geolocation=:geolocation&level=:level",
+  "route": "/api/projects?geolocation=:geolocation",
   "description": "Getting a list of projects by geolocation",
   "explanation": null,
   "parameters": [
     {
       "name": "geolocation",
       "description": "Geolocation uid"
-    },
-    {
-      "name": "level",
-      "description": "Admin level"
     }
   ],
   "response_fields": [
@@ -20,7 +16,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/projects?geolocation=000&level=0",
+      "request_path": "/api/projects?geolocation=000",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
@@ -29,26 +25,25 @@
         "Cookie": ""
       },
       "request_query_parameters": {
-        "geolocation": "000",
-        "level": "0"
+        "geolocation": "000"
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"8\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_geolocation\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[{\"type\":\"geolocations\",\"id\":\"3\"}]},\"donors\":{\"data\":[]}}}]}",
+      "response_body": "{\"data\":[{\"id\":\"9\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_geolocation\",\"description\":null,\"international_partners\":null,\"local_partners\":null,\"cross_cutting_issues\":null,\"start_date\":\"2015-11-17\",\"end_date\":\"2015-12-01\",\"budget\":null,\"target_groups\":null,\"contact_person\":null,\"contact_email\":null,\"contact_phone_number\":null,\"record_created_at\":\"2015-11-24T12:36:32.442Z\",\"record_updated_at\":\"2015-11-24T12:36:32.442Z\",\"activities\":null,\"interaction_project_id\":null,\"additional_information\":null,\"contact_position\":null,\"project_website\":null,\"budget_currency\":null,\"budget_value_date\":null,\"target_project_reach_value\":null,\"actual_project_reach_value\":null,\"project_reach_unit\":null},\"relationships\":{\"reporting_organization\":{\"data\":null},\"prime_awardee\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[{\"type\":\"geolocations\",\"id\":\"13\"}]},\"donors\":{\"data\":[]}}}],\"included\":[{\"id\":\"13\",\"type\":\"geolocations\",\"attributes\":{\"vocab_id\":\"000\",\"name\":\"Spain\",\"center_latitude\":null,\"center_longitude\":null,\"country_iso2_code\":null,\"country_name\":null,\"country_vocab_id\":null,\"data_provider\":\"Geonames\",\"admin_level\":0,\"adm0_relation_vocab_id\":\"000\",\"adm1_relation_vocab_id\":null,\"adm2_relation_vocab_id\":null,\"adm3_relation_vocab_id\":null,\"adm4_relation_vocab_id\":null,\"custom_geo_source\":null}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"89e33882dc3d94d057a9d9becbd9eab5\"",
+        "ETag": "W/\"8244e25299ce6b25db22044cc2a58889\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "288d08cd-a971-4f5b-9028-db7640ef77a7",
-        "X-Runtime": "0.030343",
-        "Content-Length": "256"
+        "X-Request-Id": "b9f3c4c2-5a75-40a3-b18e-099e723f287a",
+        "X-Runtime": "0.205885",
+        "Content-Length": "1323"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/projects?geolocation=000&level=0\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?geolocation=000\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

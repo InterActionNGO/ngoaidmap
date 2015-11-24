@@ -16,7 +16,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/projects?donors[]=1",
+      "request_path": "/api/projects?donors[]=5?donors[]=%23%3CDonor%3A0x007fda8ada5d60%3E",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
@@ -26,26 +26,26 @@
       },
       "request_query_parameters": {
         "donors": [
-          "1"
+          "5?donors[]=#<Donor:0x007fda8ada5d60>"
         ]
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"5\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_donor\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[{\"type\":\"donors\",\"id\":\"1\"}]}}}],\"included\":[{\"id\":\"1\",\"type\":\"donors\",\"attributes\":{\"name\":\"Red Cross\"}}]}",
+      "response_body": "{\"data\":[{\"id\":\"6\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_donor\",\"description\":null,\"international_partners\":null,\"local_partners\":null,\"cross_cutting_issues\":null,\"start_date\":\"2015-11-17\",\"end_date\":\"2015-12-01\",\"budget\":null,\"target_groups\":null,\"contact_person\":null,\"contact_email\":null,\"contact_phone_number\":null,\"record_created_at\":\"2015-11-24T12:36:31.743Z\",\"record_updated_at\":\"2015-11-24T12:36:31.743Z\",\"activities\":null,\"interaction_project_id\":null,\"additional_information\":null,\"contact_position\":null,\"project_website\":null,\"budget_currency\":null,\"budget_value_date\":null,\"target_project_reach_value\":null,\"actual_project_reach_value\":null,\"project_reach_unit\":null},\"relationships\":{\"reporting_organization\":{\"data\":null},\"prime_awardee\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[{\"type\":\"donor\",\"id\":\"5\"}]}}}],\"included\":[{\"id\":\"5\",\"type\":\"donor\",\"attributes\":{\"name\":\"Red Cross\",\"record_created_at\":\"2015-11-24T12:36:31.739Z\",\"record_updated_at\":\"2015-11-24T12:36:31.739Z\",\"iati_organization_id\":null,\"iati_organization_type\":null,\"iati_organization_type_code\":null}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"b8dc23b3ef3c7faaa4c4b927e1986c7b\"",
+        "ETag": "W/\"b4bdd345d3cd093c3761f3a4ce9687ec\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "1331cd7f-3414-447b-9ef7-d3f258b8dbcb",
-        "X-Runtime": "0.044306",
-        "Content-Length": "318"
+        "X-Request-Id": "dcb70766-e17b-4a90-b6ce-2111aa5f8c31",
+        "X-Runtime": "0.211385",
+        "Content-Length": "1140"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/projects?donors[]=1\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?donors[]=5?donors[]=%23%3CDonor%3A0x007fda8ada5d60%3E\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

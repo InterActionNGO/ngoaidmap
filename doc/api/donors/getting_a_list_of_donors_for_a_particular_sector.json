@@ -36,17 +36,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"5\",\"type\":\"donors\",\"attributes\":{\"name\":\"donor_with_sector\"}}],\"meta\":{\"total\":1}}",
+      "response_body": "{\"data\":[],\"meta\":{\"total\":0}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"1fa25f21adac1eb26acd37264cb7e99e\"",
+        "ETag": "W/\"f568a592ce103b72b1f1f1183751e5ba\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "91375c94-10e6-452e-9422-d0cd353a29ce",
-        "X-Runtime": "0.011573",
-        "Content-Length": "98"
+        "X-Request-Id": "789fce32-00a9-4357-bc0f-6e6e78a2dcac",
+        "X-Runtime": "0.012773",
+        "Content-Length": "30"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/donors?sectors[]=1?status=active\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

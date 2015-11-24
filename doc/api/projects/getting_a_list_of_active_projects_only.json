@@ -7,7 +7,7 @@
   "parameters": [
     {
       "name": "status",
-      "description": "String. should be 'active'"
+      "description": "String. should be 'active' for active projects or 'inactive' for inactive projects"
     }
   ],
   "response_fields": [
@@ -30,17 +30,17 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_in_different_countries\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}},{\"id\":\"2\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_organization\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[{\"type\":\"sectors\",\"id\":\"1\"}]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}},{\"id\":\"4\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_organization\",\"description\":null},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"2\"}},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}},{\"id\":\"5\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_donor\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[{\"type\":\"donors\",\"id\":\"1\"}]}}},{\"id\":\"6\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_sector\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[{\"type\":\"sectors\",\"id\":\"2\"}]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}},{\"id\":\"7\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_country\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[{\"type\":\"geolocations\",\"id\":\"1\"}]},\"donors\":{\"data\":[]}}},{\"id\":\"8\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_geolocation\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[{\"type\":\"geolocations\",\"id\":\"3\"}]},\"donors\":{\"data\":[]}}},{\"id\":\"39\",\"type\":\"projects\",\"attributes\":{\"name\":\"project0\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}},{\"id\":\"40\",\"type\":\"projects\",\"attributes\":{\"name\":\"project1\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}},{\"id\":\"41\",\"type\":\"projects\",\"attributes\":{\"name\":\"project2\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}}],\"included\":[{\"id\":\"1\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\"}},{\"id\":\"2\",\"type\":\"organizations\",\"attributes\":{\"name\":\"One Organization\"}},{\"id\":\"1\",\"type\":\"donors\",\"attributes\":{\"name\":\"Red Cross\"}},{\"id\":\"2\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\"}}]}",
+      "response_body": "{\"data\":[]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"bc47b961343b412d941d493407c045cb\"",
+        "ETag": "W/\"e0234245cb00aa260ccfa99a9a0b235e\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "3b28cacd-dfa4-4dc8-91ee-c2794cdc46b4",
-        "X-Runtime": "0.056652",
-        "Content-Length": "2548"
+        "X-Request-Id": "0f176417-4bad-4abc-b32f-20bdb84daf6b",
+        "X-Runtime": "0.113000",
+        "Content-Length": "11"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/projects?status=active\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

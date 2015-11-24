@@ -35,17 +35,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\",\"projects_count\":1}},{\"id\":\"2\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\",\"projects_count\":1}}],\"meta\":{\"total\":2}}",
+      "response_body": "{\"data\":[{\"id\":\"3\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Sector\",\"projects_count\":0}},{\"id\":\"4\",\"type\":\"sectors\",\"attributes\":{\"name\":\"sector 0\",\"projects_count\":0}},{\"id\":\"5\",\"type\":\"sectors\",\"attributes\":{\"name\":\"sector 1\",\"projects_count\":0}},{\"id\":\"6\",\"type\":\"sectors\",\"attributes\":{\"name\":\"sector 2\",\"projects_count\":0}}],\"meta\":{\"total\":4}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"1b8e42bd68eb3fa17d209e2e27f071e6\"",
+        "ETag": "W/\"457118d8692611fb2f0ae2a90c0f475f\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "977c54ae-3e73-409e-b39f-d3700a56383f",
-        "X-Runtime": "0.009164",
-        "Content-Length": "195"
+        "X-Request-Id": "34e2e62f-6496-4bc9-ae08-4aa16eea84b3",
+        "X-Runtime": "0.007406",
+        "Content-Length": "347"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/sectors?include=projects_count&status=inactive\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

@@ -30,17 +30,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"donors\",\"attributes\":{\"name\":\"Red Cross\"}}],\"meta\":{\"total\":1}}",
+      "response_body": "{\"data\":[],\"meta\":{\"total\":0}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"99bba54659ba53668436daac4696fa86\"",
+        "ETag": "W/\"f568a592ce103b72b1f1f1183751e5ba\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "6fe28e29-0762-458b-9fd5-566c5ea68553",
-        "X-Runtime": "0.013202",
-        "Content-Length": "90"
+        "X-Request-Id": "ae769e22-1664-4487-bda1-8da2419a3833",
+        "X-Runtime": "0.012934",
+        "Content-Length": "30"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/donors?status=active\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

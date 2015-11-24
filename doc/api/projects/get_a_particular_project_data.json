@@ -16,7 +16,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/projects/47",
+      "request_path": "/api/projects/10",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
@@ -29,20 +29,20 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":{\"id\":\"47\",\"type\":\"projects\",\"attributes\":{\"name\":\"One Project\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}}}",
+      "response_body": "{\"data\":{\"id\":\"10\",\"type\":\"projects\",\"attributes\":{\"name\":\"One Project\",\"description\":null,\"international_partners\":null,\"local_partners\":null,\"cross_cutting_issues\":null,\"start_date\":\"2015-11-17\",\"end_date\":\"2015-12-01\",\"budget\":null,\"target_groups\":null,\"contact_person\":null,\"contact_email\":null,\"contact_phone_number\":null,\"record_created_at\":\"2015-11-24T12:36:32.659Z\",\"record_updated_at\":\"2015-11-24T12:36:32.659Z\",\"activities\":null,\"interaction_project_id\":null,\"additional_information\":null,\"contact_position\":null,\"project_website\":null,\"budget_currency\":null,\"budget_value_date\":null,\"target_project_reach_value\":null,\"actual_project_reach_value\":null,\"project_reach_unit\":null},\"relationships\":{\"reporting_organization\":{\"data\":null},\"prime_awardee\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"704c9ad2790ee8d2a69cbc6e13b7bed6\"",
+        "ETag": "W/\"5b1d1c58398dbbd6f1c97b991773f268\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "d7c572a6-c696-4298-b19a-ded2a3dfa3e9",
-        "X-Runtime": "0.010609",
-        "Content-Length": "210"
+        "X-Request-Id": "6bf16d43-de66-429e-b611-58b56fba1963",
+        "X-Runtime": "0.012624",
+        "Content-Length": "847"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/projects/47\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects/10\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

@@ -26,20 +26,32 @@
 #
 
 class DonorSerializer < ActiveModel::Serializer
-  attributes :type, :id, :name, :description, :website, :twitter, :facebook,
-    :contact_person_name, :contact_company, :contact_person_position,
-    :contact_email, :contact_phone_number, :site_specific_information,
-    :logo
-
+  cache key: "main_api_donor", expires_in: 3.hours
+  attributes :type, :id, :name, :record_created_at, :record_updated_at, :iati_organization_id, :iati_organization_type, :iati_organization_type_code
   has_many :donated_projects
-  has_many :offices
+
+  def donated_projects
+    object.projects
+  end
 
   def type
     'donor'
   end
 
-  def logo
-    object.logo(:medium)
+  def record_created_at
+    object.created_at
+  end
+  def record_updated_at
+    object.updated_at
+  end
+  def iati_organization_id
+    object.iati_organizationid
+  end
+  def iati_organization_type
+    object.organization_type
+  end
+  def iati_organization_type_code
+    object.organization_type_code
   end
 
 end
