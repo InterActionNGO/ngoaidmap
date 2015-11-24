@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022125317) do
+ActiveRecord::Schema.define(version: 20151124164356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
- # enable_extension "postgis"
+  enable_extension "postgis"
   enable_extension "btree_gist"
 
   create_table "changes_history_records", force: :cascade do |t|
@@ -45,6 +45,63 @@ ActiveRecord::Schema.define(version: 20151022125317) do
     t.string   "who_email",        limit: 255
     t.string   "who_organization", limit: 255
   end
+
+  create_table "clusters", force: :cascade do |t|
+    t.string "name", limit: 255
+  end
+
+  create_table "clusters_projects", id: false, force: :cascade do |t|
+    t.integer "cluster_id"
+    t.integer "project_id"
+  end
+
+  add_index "clusters_projects", ["cluster_id"], name: "index_clusters_projects_on_cluster_id", using: :btree
+  add_index "clusters_projects", ["project_id"], name: "index_clusters_projects_on_project_id", using: :btree
+
+# Could not dump table "countries" because of following StandardError
+#   Unknown type 'geometry' for column 'the_geom'
+
+  create_table "countries_projects", id: false, force: :cascade do |t|
+    t.integer "country_id", null: false
+    t.integer "project_id", null: false
+  end
+
+  add_index "countries_projects", ["country_id"], name: "index_countries_projects_on_country_id", using: :btree
+  add_index "countries_projects", ["project_id"], name: "index_countries_projects_on_project_id", using: :btree
+
+  create_table "data_denormalization", id: false, force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "project_name",        limit: 2000
+    t.text     "project_description"
+    t.integer  "organization_id"
+    t.string   "organization_name",   limit: 2000
+    t.date     "end_date"
+    t.text     "regions"
+    t.integer  "regions_ids",                      array: true
+    t.text     "countries"
+    t.integer  "countries_ids",                    array: true
+    t.text     "sectors"
+    t.integer  "sector_ids",                       array: true
+    t.text     "clusters"
+    t.integer  "cluster_ids",                      array: true
+    t.integer  "donors_ids",                       array: true
+    t.boolean  "is_active"
+    t.integer  "site_id"
+    t.datetime "created_at"
+    t.date     "start_date"
+  end
+
+  add_index "data_denormalization", ["cluster_ids"], name: "data_denormalization_cluster_idsx", using: :gist
+  add_index "data_denormalization", ["countries_ids"], name: "data_denormalization_countries_idsx", using: :gist
+  add_index "data_denormalization", ["donors_ids"], name: "data_denormalization_donors_idsx", using: :gist
+  add_index "data_denormalization", ["is_active"], name: "data_denormalization_is_activex", using: :btree
+  add_index "data_denormalization", ["organization_id"], name: "data_denormalization_organization_idx", using: :btree
+  add_index "data_denormalization", ["organization_name"], name: "data_denormalization_organization_namex", using: :btree
+  add_index "data_denormalization", ["project_id"], name: "data_denormalization_project_idx", using: :btree
+  add_index "data_denormalization", ["project_name"], name: "data_denormalization_project_name_idx", using: :btree
+  add_index "data_denormalization", ["regions_ids"], name: "data_denormalization_regions_idsx", using: :gist
+  add_index "data_denormalization", ["sector_ids"], name: "data_denormalization_sector_idsx", using: :gist
+  add_index "data_denormalization", ["site_id"], name: "data_denormalization_site_idx", using: :btree
 
   create_table "data_export", id: false, force: :cascade do |t|
     t.integer "project_id"
@@ -328,6 +385,8 @@ ActiveRecord::Schema.define(version: 20151022125317) do
     t.string   "media_contact_email",             limit: 255
   end
 
+  add_index "organizations2", ["name"], name: "index_organizations2_on_name", using: :btree
+
   create_table "organizations_projects", id: false, force: :cascade do |t|
     t.integer "organization_id"
     t.integer "project_id"
@@ -367,51 +426,16 @@ ActiveRecord::Schema.define(version: 20151022125317) do
 
   add_index "partners", ["site_id"], name: "index_partners_on_site_id", using: :btree
 
-  create_table "projects", :force => true do |t|
-    t.string   "name",                                    :limit => 2000
-    t.text     "description"
-    t.integer  "primary_organization_id"
-    t.text     "implementing_organization"
-    t.text     "partner_organizations"
-    t.text     "cross_cutting_issues"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.float    "budget"
-    t.text     "target"
-    t.integer  "estimated_people_reached",                :limit => 8
-    t.string   "contact_person"
-    t.string   "contact_email"
-    t.string   "contact_phone_number"
-    t.text     "site_specific_information"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "activities"
-    t.string   "intervention_id"
-    t.text     "additional_information"
-    t.string   "awardee_type"
-    t.date     "date_provided"
-    t.date     "date_updated"
-    t.string   "contact_position"
-    t.string   "website"
-    t.text     "verbatim_location"
-    t.text     "calculation_of_number_of_people_reached"
-    t.text     "project_needs"
-    t.text     "idprefugee_camp"
-    t.string   "organization_id"
-    t.string   "budget_currency"
-    t.date     "budget_value_date"
-    t.float    "target_project_reach"
-    t.float    "actual_project_reach"
-    t.string   "project_reach_unit"
-    t.integer  "prime_awardee_id"
-    t.string   "geographical_scope",                                      :default => "regional"
+# Could not dump table "projects" because of following StandardError
+#   Unknown type 'geometry' for column 'the_geom'
+
+  create_table "projects_regions", id: false, force: :cascade do |t|
+    t.integer "region_id"
+    t.integer "project_id"
   end
 
-  add_index "projects", ["end_date"], :name => "index_projects_on_end_date"
-  add_index "projects", ["name"], :name => "index_projects_on_name"
-  add_index "projects", ["primary_organization_id"], :name => "index_projects_on_primary_organization_id"
-  add_index "projects", ["prime_awardee_id"], :name => "index_projects_on_prime_awardee_id"
-
+  add_index "projects_regions", ["project_id"], name: "index_projects_regions_on_project_id", using: :btree
+  add_index "projects_regions", ["region_id"], name: "index_projects_regions_on_region_id", using: :btree
 
   create_table "projects_sectors", id: false, force: :cascade do |t|
     t.integer "sector_id"
@@ -460,10 +484,12 @@ ActiveRecord::Schema.define(version: 20151022125317) do
   add_index "resources", ["element_type", "element_id"], name: "index_resources_on_element_type_and_element_id", using: :btree
 
   create_table "sectors", force: :cascade do |t|
-    t.string "name",                  limit: 255
-    t.string "oecd_dac_name",         limit: 255
-    t.string "sector_vocab_code",     limit: 255
-    t.string "oecd_dac_purpose_code", limit: 255
+    t.string   "name",                  limit: 255
+    t.string   "oecd_dac_name",         limit: 255
+    t.string   "sector_vocab_code",     limit: 255
+    t.string   "oecd_dac_purpose_code", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -526,4 +552,5 @@ ActiveRecord::Schema.define(version: 20151022125317) do
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
+  add_foreign_key "projects_regions", "regions", name: "region_id_fk"
 end

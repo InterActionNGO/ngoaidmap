@@ -1,6 +1,6 @@
 class CountryPreviewSerializer < ActiveModel::Serializer
   cache key: "main_api_country_preview", expires_in: 3.hours
-  attributes :id, :vocab_id, :name, :center_latitude, :center_longitude, :country_iso2_code, :country_name, :country_vocab_id, :data_provider, :admin_level, :adm0_relation_vocab_id, :adm1_relation_vocab_id, :adm2_relation_vocab_id, :adm3_relation_vocab_id, :adm4_relation_vocab_id, :custom_geo_source
+  attributes :id, :vocab_id, :name, :center_latitude, :center_longitude, :country_iso2_code, :country_name, :country_vocab_id, :data_provider, :admin_level, :adm0_relation_vocab_id, :adm1_relation_vocab_id, :adm2_relation_vocab_id, :adm3_relation_vocab_id, :adm4_relation_vocab_id, :custom_geo_source, :record_updated_at, :record_created_at
   def vocab_id
     object.uid
   end
@@ -36,5 +36,11 @@ class CountryPreviewSerializer < ActiveModel::Serializer
   end
   def adm4_relation_vocab_id
     object.g4
+  end
+  def record_updated_at
+    object.updated_at
+  end
+  def record_created_at
+    object.created_at
   end
 end
