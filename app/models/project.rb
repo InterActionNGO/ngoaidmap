@@ -163,7 +163,7 @@ class Project < ActiveRecord::Base
     tags 'project_tags' do |s| s.map{ |se| se.name }.join('|') end
     name 'project_name'
     description 'project_description'
-    activities
+    activities 'activities'
     additional_information 'additional_information'
     start_date 'start_date'
     end_date 'end_date'
