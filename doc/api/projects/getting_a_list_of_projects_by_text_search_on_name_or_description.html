@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Donors API</title>
+    <title>Projects API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Donors API</h1>
+      <h1>Projects API</h1>
 
       <div class="article">
-        <h2>Getting a list of donors</h2>
-        <h3>GET /api/donors</h3>
+        <h2>Getting a list of projects by text search on name or description</h2>
+        <h3>GET /api/projects?q=:q</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -123,10 +123,10 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">status</span>
+                    <span class="name">q</span>
                 </td>
                 <td>
-                  <span class="description">Optional, string. Should be &#39;active&#39; to filter active projects only.</span>
+                  <span class="description">String. Text to search</span>
                 </td>
               </tr>
             </tbody>
@@ -137,21 +137,21 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Accept: application/json; application/vnd.ngoaidmap-api-v1+json
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/donors?status=active</pre>
+          <pre class="request route highlight">GET /api/projects?q=text to find</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">status: active</pre>
+            <pre class="request query_parameters highlight">q: text to find</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/donors?status=active&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?q=text to find&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
-	-H &quot;Content-Type: application/vnd.api+json&quot; \
+	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
 	-H &quot;Cookie: &quot;</pre>
 
@@ -161,15 +161,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;f568a592ce103b72b1f1f1183751e5ba&quot;
+ETag: W/&quot;753537a00392e9966ecb79d5c5163561&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: ae769e22-1664-4487-bda1-8da2419a3833
-X-Runtime: 0.012934
-Content-Length: 30</pre>
+X-Request-Id: 5811a75a-d9b5-4f5c-bfbb-ada4b0de9b6d
+X-Runtime: 0.199003
+Content-Length: 866</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[],&quot;meta&quot;:{&quot;total&quot;:0}}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;11&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project&quot;,&quot;description&quot;:&quot;lore ipsum text to find&quot;,&quot;international_partners&quot;:null,&quot;local_partners&quot;:null,&quot;cross_cutting_issues&quot;:null,&quot;start_date&quot;:&quot;2015-11-17&quot;,&quot;end_date&quot;:&quot;2015-12-01&quot;,&quot;budget&quot;:null,&quot;target_groups&quot;:null,&quot;contact_person&quot;:null,&quot;contact_email&quot;:null,&quot;contact_phone_number&quot;:null,&quot;record_created_at&quot;:&quot;2015-11-24T12:36:32.680Z&quot;,&quot;record_updated_at&quot;:&quot;2015-11-24T12:36:32.680Z&quot;,&quot;activities&quot;:null,&quot;interaction_project_id&quot;:null,&quot;additional_information&quot;:null,&quot;contact_position&quot;:null,&quot;project_website&quot;:null,&quot;budget_currency&quot;:null,&quot;budget_value_date&quot;:null,&quot;target_project_reach_value&quot;:null,&quot;actual_project_reach_value&quot;:null,&quot;project_reach_unit&quot;:null},&quot;relationships&quot;:{&quot;reporting_organization&quot;:{&quot;data&quot;:null},&quot;prime_awardee&quot;:{&quot;data&quot;:null},&quot;sectors&quot;:{&quot;data&quot;:[]},&quot;geolocations&quot;:{&quot;data&quot;:[]},&quot;donors&quot;:{&quot;data&quot;:[]}}}]}</pre>
       </div>
     </div>
   </body>

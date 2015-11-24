@@ -1,0 +1,49 @@
+{
+  "resource": "Projects",
+  "http_method": "GET",
+  "route": "/api/projects?q=:q",
+  "description": "Getting a list of projects by text search on name or description",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "q",
+      "description": "String. Text to search"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/projects?q=text to find",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
+        "Content-Type": "application/json",
+        "Host": "http://ngoaidmap.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "q": "text to find"
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"id\":\"11\",\"type\":\"projects\",\"attributes\":{\"name\":\"project\",\"description\":\"lore ipsum text to find\",\"international_partners\":null,\"local_partners\":null,\"cross_cutting_issues\":null,\"start_date\":\"2015-11-17\",\"end_date\":\"2015-12-01\",\"budget\":null,\"target_groups\":null,\"contact_person\":null,\"contact_email\":null,\"contact_phone_number\":null,\"record_created_at\":\"2015-11-24T12:36:32.680Z\",\"record_updated_at\":\"2015-11-24T12:36:32.680Z\",\"activities\":null,\"interaction_project_id\":null,\"additional_information\":null,\"contact_position\":null,\"project_website\":null,\"budget_currency\":null,\"budget_value_date\":null,\"target_project_reach_value\":null,\"actual_project_reach_value\":null,\"project_reach_unit\":null},\"relationships\":{\"reporting_organization\":{\"data\":null},\"prime_awardee\":{\"data\":null},\"sectors\":{\"data\":[]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}}]}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"753537a00392e9966ecb79d5c5163561\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "5811a75a-d9b5-4f5c-bfbb-ada4b0de9b6d",
+        "X-Runtime": "0.199003",
+        "Content-Length": "866"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?q=text to find\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

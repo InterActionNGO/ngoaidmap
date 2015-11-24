@@ -14,16 +14,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 292
+  Content-Length: 428
   Content-Type: application/json; charset=utf-8
-  ETag: W/"bd10311374abe6be156cebb2e1ea2b70"
+  ETag: W/"7185e1640eff57722cd0c231b1307f9b"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 96b70ae0-94a0-46ef-80ca-bcd7c3953267
-  X-Runtime: 0.070797
+  X-Request-Id: 69db810f-fbbb-421b-a52c-ea10180b91d3
+  X-Runtime: 0.080488
   X-XSS-Protection: 1; mode=block
 
-  {"data":{"id":"4","type":"geolocations","attributes":{"uid":"gn00001","name":"country","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}}}
+  {"data":{"id":"1","type":"geolocations","attributes":{"vocab_id":"gn00001","name":"country","center_latitude":null,"center_longitude":null,"country_iso2_code":null,"country_name":null,"country_vocab_id":null,"data_provider":"Geonames","admin_level":0,"adm0_relation_vocab_id":null,"adm1_relation_vocab_id":null,"adm2_relation_vocab_id":null,"adm3_relation_vocab_id":null,"adm4_relation_vocab_id":null,"custom_geo_source":null}}}
 
 
 Getting a list of countries
@@ -39,16 +39,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 1723
+  Content-Length: 1709
   Content-Type: application/json; charset=utf-8
-  ETag: W/"4698932a09b41b242931b9d108a1443c"
+  ETag: W/"8d8b215ddbacdd4b20d39db09d448873"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 1ce42562-7ea0-451d-bf63-842ab280a46d
-  X-Runtime: 0.018205
+  X-Request-Id: fe9e3498-549f-4a4a-a988-f5ac3df223bc
+  X-Runtime: 0.018076
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"1","type":"geolocations","attributes":{"uid":"ggg","name":"India","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"ggg","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"3","type":"geolocations","attributes":{"uid":"000","name":"Spain","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":"000","g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"5","type":"geolocations","attributes":{"uid":"gn00001","name":"country","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":null,"provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"6","type":"geolocations","attributes":{"uid":"gn{p}","name":"country 0","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"gn","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"7","type":"geolocations","attributes":{"uid":"gn{p}","name":"country 1","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"gn","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}},{"id":"8","type":"geolocations","attributes":{"uid":"gn{p}","name":"country 2","latitude":null,"longitude":null,"country_code":null,"country_name":null,"country_uid":"gn","provider":"Geonames","adm_level":0,"g0":null,"g1":null,"g2":null,"g3":null,"g4":null,"custom_geo_source":null}}],"meta":{"total":6}}
+  {"data":[{"id":"2","type":"geolocations","attributes":{"vocab_id":"gn00001","name":"country","center_latitude":null,"center_longitude":null,"country_iso2_code":null,"country_name":null,"country_vocab_id":null,"data_provider":"Geonames","admin_level":0,"adm0_relation_vocab_id":null,"adm1_relation_vocab_id":null,"adm2_relation_vocab_id":null,"adm3_relation_vocab_id":null,"adm4_relation_vocab_id":null,"custom_geo_source":null}},{"id":"3","type":"geolocations","attributes":{"vocab_id":"gn{p}","name":"country 0","center_latitude":null,"center_longitude":null,"country_iso2_code":null,"country_name":null,"country_vocab_id":"gn","data_provider":"Geonames","admin_level":0,"adm0_relation_vocab_id":null,"adm1_relation_vocab_id":null,"adm2_relation_vocab_id":null,"adm3_relation_vocab_id":null,"adm4_relation_vocab_id":null,"custom_geo_source":null}},{"id":"4","type":"geolocations","attributes":{"vocab_id":"gn{p}","name":"country 1","center_latitude":null,"center_longitude":null,"country_iso2_code":null,"country_name":null,"country_vocab_id":"gn","data_provider":"Geonames","admin_level":0,"adm0_relation_vocab_id":null,"adm1_relation_vocab_id":null,"adm2_relation_vocab_id":null,"adm3_relation_vocab_id":null,"adm4_relation_vocab_id":null,"custom_geo_source":null}},{"id":"5","type":"geolocations","attributes":{"vocab_id":"gn{p}","name":"country 2","center_latitude":null,"center_longitude":null,"country_iso2_code":null,"country_name":null,"country_vocab_id":"gn","data_provider":"Geonames","admin_level":0,"adm0_relation_vocab_id":null,"adm1_relation_vocab_id":null,"adm2_relation_vocab_id":null,"adm3_relation_vocab_id":null,"adm4_relation_vocab_id":null,"custom_geo_source":null}}],"meta":{"total":4}}
 
 
 Getting a list of countries summing projects
@@ -71,15 +71,15 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 212
+  Content-Length: 30
   Content-Type: application/json; charset=utf-8
-  ETag: W/"59d09eb388334732493fa8a6c45fbb9d"
+  ETag: W/"f568a592ce103b72b1f1f1183751e5ba"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: a88d25e0-2980-4ffe-a1d5-83a1a66f589c
-  X-Runtime: 0.008905
+  X-Request-Id: 57ad3022-8cb1-49f1-8850-63261a0c9db1
+  X-Runtime: 0.007281
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"","type":"Geolocations","attributes":{"name":null,"uid":"000","total_projects":"1"}},{"id":"","type":"Geolocations","attributes":{"name":null,"uid":null,"total_projects":"1"}}],"meta":{"total":2}}
+  {"data":[],"meta":{"total":0}}
 
 

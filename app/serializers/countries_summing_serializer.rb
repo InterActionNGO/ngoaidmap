@@ -1,4 +1,5 @@
 class CountriesSummingSerializer < ActiveModel::Serializer
+  cache key: "main_api_country_summing", expires_in: 3.hours
   attributes :type, :name, :uid, :total_projects
   def id
   end

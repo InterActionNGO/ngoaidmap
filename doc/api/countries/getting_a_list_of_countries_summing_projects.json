@@ -35,17 +35,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"\",\"type\":\"Geolocations\",\"attributes\":{\"name\":null,\"uid\":\"000\",\"total_projects\":\"1\"}},{\"id\":\"\",\"type\":\"Geolocations\",\"attributes\":{\"name\":null,\"uid\":null,\"total_projects\":\"1\"}}],\"meta\":{\"total\":2}}",
+      "response_body": "{\"data\":[],\"meta\":{\"total\":0}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"59d09eb388334732493fa8a6c45fbb9d\"",
+        "ETag": "W/\"f568a592ce103b72b1f1f1183751e5ba\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "a88d25e0-2980-4ffe-a1d5-83a1a66f589c",
-        "X-Runtime": "0.008905",
-        "Content-Length": "212"
+        "X-Request-Id": "57ad3022-8cb1-49f1-8850-63261a0c9db1",
+        "X-Runtime": "0.007281",
+        "Content-Length": "30"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/countries?summing=projects&status=active\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

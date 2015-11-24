@@ -5,7 +5,7 @@ Parameters:
   * id - An organization's id
 
 Request:
-  GET /api/organizations/6
+  GET /api/organizations/4
   Accept: application/json; application/vnd.ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
@@ -14,16 +14,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 191
+  Content-Length: 1017
   Content-Type: application/json; charset=utf-8
-  ETag: W/"b2c3324bae1d3e29a2ce9638fca0044d"
+  ETag: W/"71d3f3046b6ff77a7dc89be1684e2fd5"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 6f2af3db-e7a3-47c6-98a2-26f7a24d92ce
-  X-Runtime: 0.047593
+  X-Request-Id: 66c56199-f3b0-4e4b-859e-fb5cec6079f2
+  X-Runtime: 0.057898
   X-XSS-Protection: 1; mode=block
 
-  {"data":{"id":"6","type":"organizations","attributes":{"name":"One Organization","description":null,"sectors":[],"logo":"/logos/medium/missing.png"},"relationships":{"projects":{"data":[]}}}}
+  {"data":{"id":"4","type":"organizations","attributes":{"name":"One Organization","description":null,"logo":"/logos/medium/missing.png","twitter":null,"facebook":null,"website":null,"hq_street_address":null,"contact_email":null,"contact_phone_number":null,"donation_street_address":null,"donation_zip_code":null,"donation_city":null,"donation_state":null,"donation_phone_number":null,"donation_website":null,"record_created_at":"2015-11-24T12:36:30.938Z","record_updated_at":"2015-11-24T12:36:30.938Z","contact_name":null,"contact_position":null,"hq_zip_code":null,"hq_city":null,"hq_state":null,"hq_country":null,"donation_country":null,"media_contact_name":null,"media_contact_position":null,"media_contact_phone_number":null,"media_contact_email":null,"interaction_member":false,"iati_organization_type":null,"iati_organization_type_code":null,"iati_organization_id":null,"publishing_to_iati":false,"interaction_membership_status":"active","organization_letter_code":null},"relationships":{"projects":{"data":[]}}}}
 
 
 Getting a list of organizations
@@ -39,16 +39,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 104
+  Content-Length: 3892
   Content-Type: application/json; charset=utf-8
-  ETag: W/"092500e3fa808951dd5d20def399d6e7"
+  ETag: W/"bb98c10041ac9b1da3d358419d6c1717"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 509022f8-23a8-4543-b653-eb2293f5f2cf
-  X-Runtime: 0.011292
+  X-Request-Id: 5ef63978-46d5-40b5-8d67-9f1d28d51b28
+  X-Runtime: 0.014821
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"2","type":"organizations","attributes":{"name":"One Organization"}}],"meta":{"total":1}}
+  {"data":[{"id":"6","type":"organizations","attributes":{"name":"One Organization","description":null,"logo":"/logos/medium/missing.png","twitter":null,"facebook":null,"website":null,"hq_street_address":null,"contact_email":null,"contact_phone_number":null,"donation_street_address":null,"donation_zip_code":null,"donation_city":null,"donation_state":null,"donation_phone_number":null,"donation_website":null,"record_created_at":"2015-11-24T12:36:31.022Z","record_updated_at":"2015-11-24T12:36:31.022Z","contact_name":null,"contact_position":null,"hq_zip_code":null,"hq_city":null,"hq_state":null,"hq_country":null,"donation_country":null,"media_contact_name":null,"media_contact_position":null,"media_contact_phone_number":null,"media_contact_email":null,"interaction_member":false,"iati_organization_type":null,"iati_organization_type_code":null,"iati_organization_id":null,"publishing_to_iati":false,"interaction_membership_status":"active","organization_letter_code":null}},{"id":"7","type":"organizations","attributes":{"name":"organization0","description":null,"logo":"/logos/medium/missing.png","twitter":null,"facebook":null,"website":null,"hq_street_address":null,"contact_email":null,"contact_phone_number":null,"donation_street_address":null,"donation_zip_code":null,"donation_city":null,"donation_state":null,"donation_phone_number":null,"donation_website":null,"record_created_at":"2015-11-24T12:36:31.026Z","record_updated_at":"2015-11-24T12:36:31.026Z","contact_name":null,"contact_position":null,"hq_zip_code":null,"hq_city":null,"hq_state":null,"hq_country":null,"donation_country":null,"media_contact_name":null,"media_contact_position":null,"media_contact_phone_number":null,"media_contact_email":null,"interaction_member":false,"iati_organization_type":null,"iati_organization_type_code":null,"iati_organization_id":null,"publishing_to_iati":false,"interaction_membership_status":"active","organization_letter_code":null}},{"id":"8","type":"organizations","attributes":{"name":"organization1","description":null,"logo":"/logos/medium/missing.png","twitter":null,"facebook":null,"website":null,"hq_street_address":null,"contact_email":null,"contact_phone_number":null,"donation_street_address":null,"donation_zip_code":null,"donation_city":null,"donation_state":null,"donation_phone_number":null,"donation_website":null,"record_created_at":"2015-11-24T12:36:31.029Z","record_updated_at":"2015-11-24T12:36:31.029Z","contact_name":null,"contact_position":null,"hq_zip_code":null,"hq_city":null,"hq_state":null,"hq_country":null,"donation_country":null,"media_contact_name":null,"media_contact_position":null,"media_contact_phone_number":null,"media_contact_email":null,"interaction_member":false,"iati_organization_type":null,"iati_organization_type_code":null,"iati_organization_id":null,"publishing_to_iati":false,"interaction_membership_status":"active","organization_letter_code":null}},{"id":"9","type":"organizations","attributes":{"name":"organization2","description":null,"logo":"/logos/medium/missing.png","twitter":null,"facebook":null,"website":null,"hq_street_address":null,"contact_email":null,"contact_phone_number":null,"donation_street_address":null,"donation_zip_code":null,"donation_city":null,"donation_state":null,"donation_phone_number":null,"donation_website":null,"record_created_at":"2015-11-24T12:36:31.032Z","record_updated_at":"2015-11-24T12:36:31.032Z","contact_name":null,"contact_position":null,"hq_zip_code":null,"hq_city":null,"hq_state":null,"hq_country":null,"donation_country":null,"media_contact_name":null,"media_contact_position":null,"media_contact_phone_number":null,"media_contact_email":null,"interaction_member":false,"iati_organization_type":null,"iati_organization_type_code":null,"iati_organization_id":null,"publishing_to_iati":false,"interaction_membership_status":"active","organization_letter_code":null}}],"meta":{"total":4}}
 
 
 Getting a list of active organizations only
@@ -69,15 +69,15 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 344
+  Content-Length: 2948
   Content-Type: application/json; charset=utf-8
-  ETag: W/"4ff06df49c111e21f198c33d2efab87e"
+  ETag: W/"e4761f066bf0f33936ae2d53857d169f"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 0b21814a-bc5e-48aa-a89a-0d97013e8159
-  X-Runtime: 0.008646
+  X-Request-Id: 24460fa0-f4f2-49c3-9c38-fb5fdada34fd
+  X-Runtime: 0.013264
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"2","type":"organizations","attributes":{"name":"One Organization"}},{"id":"13","type":"organizations","attributes":{"name":"active_organization0"}},{"id":"14","type":"organizations","attributes":{"name":"active_organization1"}},{"id":"15","type":"organizations","attributes":{"name":"active_organization2"}}],"meta":{"total":4}}
+  {"data":[{"id":"11","type":"organizations","attributes":{"name":"active_organization0","description":null,"logo":"/logos/medium/missing.png","twitter":null,"facebook":null,"website":null,"hq_street_address":null,"contact_email":null,"contact_phone_number":null,"donation_street_address":null,"donation_zip_code":null,"donation_city":null,"donation_state":null,"donation_phone_number":null,"donation_website":null,"record_created_at":"2015-11-24T12:36:31.060Z","record_updated_at":"2015-11-24T12:36:31.060Z","contact_name":null,"contact_position":null,"hq_zip_code":null,"hq_city":null,"hq_state":null,"hq_country":null,"donation_country":null,"media_contact_name":null,"media_contact_position":null,"media_contact_phone_number":null,"media_contact_email":null,"interaction_member":false,"iati_organization_type":null,"iati_organization_type_code":null,"iati_organization_id":null,"publishing_to_iati":false,"interaction_membership_status":"active","organization_letter_code":null}},{"id":"12","type":"organizations","attributes":{"name":"active_organization1","description":null,"logo":"/logos/medium/missing.png","twitter":null,"facebook":null,"website":null,"hq_street_address":null,"contact_email":null,"contact_phone_number":null,"donation_street_address":null,"donation_zip_code":null,"donation_city":null,"donation_state":null,"donation_phone_number":null,"donation_website":null,"record_created_at":"2015-11-24T12:36:31.069Z","record_updated_at":"2015-11-24T12:36:31.069Z","contact_name":null,"contact_position":null,"hq_zip_code":null,"hq_city":null,"hq_state":null,"hq_country":null,"donation_country":null,"media_contact_name":null,"media_contact_position":null,"media_contact_phone_number":null,"media_contact_email":null,"interaction_member":false,"iati_organization_type":null,"iati_organization_type_code":null,"iati_organization_id":null,"publishing_to_iati":false,"interaction_membership_status":"active","organization_letter_code":null}},{"id":"13","type":"organizations","attributes":{"name":"active_organization2","description":null,"logo":"/logos/medium/missing.png","twitter":null,"facebook":null,"website":null,"hq_street_address":null,"contact_email":null,"contact_phone_number":null,"donation_street_address":null,"donation_zip_code":null,"donation_city":null,"donation_state":null,"donation_phone_number":null,"donation_website":null,"record_created_at":"2015-11-24T12:36:31.076Z","record_updated_at":"2015-11-24T12:36:31.076Z","contact_name":null,"contact_position":null,"hq_zip_code":null,"hq_city":null,"hq_state":null,"hq_country":null,"donation_country":null,"media_contact_name":null,"media_contact_position":null,"media_contact_phone_number":null,"media_contact_email":null,"interaction_member":false,"iati_organization_type":null,"iati_organization_type_code":null,"iati_organization_id":null,"publishing_to_iati":false,"interaction_membership_status":"active","organization_letter_code":null}}],"meta":{"total":3}}
 
 

@@ -110,7 +110,7 @@ table th, table td {
 
       <div class="article">
         <h2>Getting a list of projects by geolocation</h2>
-        <h3>GET /api/projects?geolocation=:geolocation&amp;level=:level</h3>
+        <h3>GET /api/projects?geolocation=:geolocation</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -129,14 +129,6 @@ table th, table td {
                   <span class="description">Geolocation uid</span>
                 </td>
               </tr>
-              <tr>
-                <td>
-                    <span class="name">level</span>
-                </td>
-                <td>
-                  <span class="description">Admin level</span>
-                </td>
-              </tr>
             </tbody>
           </table>
 
@@ -150,15 +142,14 @@ Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/projects?geolocation=000&amp;level=0</pre>
+          <pre class="request route highlight">GET /api/projects?geolocation=000</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">geolocation: 000
-level: 0</pre>
+            <pre class="request query_parameters highlight">geolocation: 000</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?geolocation=000&amp;level=0&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?geolocation=000&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
@@ -170,15 +161,15 @@ level: 0</pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;89e33882dc3d94d057a9d9becbd9eab5&quot;
+ETag: W/&quot;8244e25299ce6b25db22044cc2a58889&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 288d08cd-a971-4f5b-9028-db7640ef77a7
-X-Runtime: 0.030343
-Content-Length: 256</pre>
+X-Request-Id: b9f3c4c2-5a75-40a3-b18e-099e723f287a
+X-Runtime: 0.205885
+Content-Length: 1323</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;8&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_geolocation&quot;,&quot;description&quot;:null},&quot;relationships&quot;:{&quot;organization&quot;:{&quot;data&quot;:null},&quot;sectors&quot;:{&quot;data&quot;:[]},&quot;geolocations&quot;:{&quot;data&quot;:[{&quot;type&quot;:&quot;geolocations&quot;,&quot;id&quot;:&quot;3&quot;}]},&quot;donors&quot;:{&quot;data&quot;:[]}}}]}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;9&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_geolocation&quot;,&quot;description&quot;:null,&quot;international_partners&quot;:null,&quot;local_partners&quot;:null,&quot;cross_cutting_issues&quot;:null,&quot;start_date&quot;:&quot;2015-11-17&quot;,&quot;end_date&quot;:&quot;2015-12-01&quot;,&quot;budget&quot;:null,&quot;target_groups&quot;:null,&quot;contact_person&quot;:null,&quot;contact_email&quot;:null,&quot;contact_phone_number&quot;:null,&quot;record_created_at&quot;:&quot;2015-11-24T12:36:32.442Z&quot;,&quot;record_updated_at&quot;:&quot;2015-11-24T12:36:32.442Z&quot;,&quot;activities&quot;:null,&quot;interaction_project_id&quot;:null,&quot;additional_information&quot;:null,&quot;contact_position&quot;:null,&quot;project_website&quot;:null,&quot;budget_currency&quot;:null,&quot;budget_value_date&quot;:null,&quot;target_project_reach_value&quot;:null,&quot;actual_project_reach_value&quot;:null,&quot;project_reach_unit&quot;:null},&quot;relationships&quot;:{&quot;reporting_organization&quot;:{&quot;data&quot;:null},&quot;prime_awardee&quot;:{&quot;data&quot;:null},&quot;sectors&quot;:{&quot;data&quot;:[]},&quot;geolocations&quot;:{&quot;data&quot;:[{&quot;type&quot;:&quot;geolocations&quot;,&quot;id&quot;:&quot;13&quot;}]},&quot;donors&quot;:{&quot;data&quot;:[]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;13&quot;,&quot;type&quot;:&quot;geolocations&quot;,&quot;attributes&quot;:{&quot;vocab_id&quot;:&quot;000&quot;,&quot;name&quot;:&quot;Spain&quot;,&quot;center_latitude&quot;:null,&quot;center_longitude&quot;:null,&quot;country_iso2_code&quot;:null,&quot;country_name&quot;:null,&quot;country_vocab_id&quot;:null,&quot;data_provider&quot;:&quot;Geonames&quot;,&quot;admin_level&quot;:0,&quot;adm0_relation_vocab_id&quot;:&quot;000&quot;,&quot;adm1_relation_vocab_id&quot;:null,&quot;adm2_relation_vocab_id&quot;:null,&quot;adm3_relation_vocab_id&quot;:null,&quot;adm4_relation_vocab_id&quot;:null,&quot;custom_geo_source&quot;:null}}]}</pre>
       </div>
     </div>
   </body>

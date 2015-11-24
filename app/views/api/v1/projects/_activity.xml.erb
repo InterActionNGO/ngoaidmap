@@ -9,12 +9,12 @@
   <description type="1">
    <narrative><%= strip_tags(project.description) %></narrative>
   </description>
-  <% if project.target %>
+  <% if project.target.present? %>
     <description type="3">
      <narrative><%= strip_tags(project.target) %></narrative>
     </description>
   <% end %>
-  <% if project.activities %>
+  <% if project.activities.present? %>
     <description type="4">
      <narrative><%= strip_tags(project.activities) %></narrative>
     </description>

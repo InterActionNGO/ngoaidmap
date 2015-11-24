@@ -57,6 +57,7 @@ group :development, :test do
   gem 'json_spec'
   gem 'bullet'
   gem 'web-console', '~> 2.0'
+  gem 'pry'
 end
 group :test do
   gem 'factory_girl_rails', '~> 4.0'

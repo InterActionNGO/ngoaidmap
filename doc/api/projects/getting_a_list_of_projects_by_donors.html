@@ -142,14 +142,14 @@ Host: http://ngoaidmap.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/projects?donors[]=1</pre>
+          <pre class="request route highlight">GET /api/projects?donors[]=5?donors[]=%23%3CDonor%3A0x007fda8ada5d60%3E</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">donors: [&quot;1&quot;]</pre>
+            <pre class="request query_parameters highlight">donors: [&quot;5?donors[]=#&lt;Donor:0x007fda8ada5d60&gt;&quot;]</pre>
 
 
             <h4>cURL</h4>
-            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?donors[]=1&quot; -X GET \
+            <pre class="request curl">curl &quot;http://api.ngoaidmap.org/api/projects?donors[]=5?donors[]=%23%3CDonor%3A0x007fda8ada5d60%3E&quot; -X GET \
 	-H &quot;Accept: application/json; application/vnd.ngoaidmap-api-v1+json&quot; \
 	-H &quot;Content-Type: application/json&quot; \
 	-H &quot;Host: http://ngoaidmap.org&quot; \
@@ -161,15 +161,15 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;b8dc23b3ef3c7faaa4c4b927e1986c7b&quot;
+ETag: W/&quot;b4bdd345d3cd093c3761f3a4ce9687ec&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 1331cd7f-3414-447b-9ef7-d3f258b8dbcb
-X-Runtime: 0.044306
-Content-Length: 318</pre>
+X-Request-Id: dcb70766-e17b-4a90-b6ce-2111aa5f8c31
+X-Runtime: 0.211385
+Content-Length: 1140</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;5&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_donor&quot;,&quot;description&quot;:null},&quot;relationships&quot;:{&quot;organization&quot;:{&quot;data&quot;:null},&quot;sectors&quot;:{&quot;data&quot;:[]},&quot;geolocations&quot;:{&quot;data&quot;:[]},&quot;donors&quot;:{&quot;data&quot;:[{&quot;type&quot;:&quot;donors&quot;,&quot;id&quot;:&quot;1&quot;}]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;type&quot;:&quot;donors&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;Red Cross&quot;}}]}</pre>
+              <pre class="response body">{&quot;data&quot;:[{&quot;id&quot;:&quot;6&quot;,&quot;type&quot;:&quot;projects&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;project_with_donor&quot;,&quot;description&quot;:null,&quot;international_partners&quot;:null,&quot;local_partners&quot;:null,&quot;cross_cutting_issues&quot;:null,&quot;start_date&quot;:&quot;2015-11-17&quot;,&quot;end_date&quot;:&quot;2015-12-01&quot;,&quot;budget&quot;:null,&quot;target_groups&quot;:null,&quot;contact_person&quot;:null,&quot;contact_email&quot;:null,&quot;contact_phone_number&quot;:null,&quot;record_created_at&quot;:&quot;2015-11-24T12:36:31.743Z&quot;,&quot;record_updated_at&quot;:&quot;2015-11-24T12:36:31.743Z&quot;,&quot;activities&quot;:null,&quot;interaction_project_id&quot;:null,&quot;additional_information&quot;:null,&quot;contact_position&quot;:null,&quot;project_website&quot;:null,&quot;budget_currency&quot;:null,&quot;budget_value_date&quot;:null,&quot;target_project_reach_value&quot;:null,&quot;actual_project_reach_value&quot;:null,&quot;project_reach_unit&quot;:null},&quot;relationships&quot;:{&quot;reporting_organization&quot;:{&quot;data&quot;:null},&quot;prime_awardee&quot;:{&quot;data&quot;:null},&quot;sectors&quot;:{&quot;data&quot;:[]},&quot;geolocations&quot;:{&quot;data&quot;:[]},&quot;donors&quot;:{&quot;data&quot;:[{&quot;type&quot;:&quot;donor&quot;,&quot;id&quot;:&quot;5&quot;}]}}}],&quot;included&quot;:[{&quot;id&quot;:&quot;5&quot;,&quot;type&quot;:&quot;donor&quot;,&quot;attributes&quot;:{&quot;name&quot;:&quot;Red Cross&quot;,&quot;record_created_at&quot;:&quot;2015-11-24T12:36:31.739Z&quot;,&quot;record_updated_at&quot;:&quot;2015-11-24T12:36:31.739Z&quot;,&quot;iati_organization_id&quot;:null,&quot;iati_organization_type&quot;:null,&quot;iati_organization_type_code&quot;:null}}]}</pre>
       </div>
     </div>
   </body>

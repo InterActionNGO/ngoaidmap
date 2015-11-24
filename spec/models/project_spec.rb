@@ -45,6 +45,7 @@
 
 require 'rails_helper'
 #ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
+
 describe Project do
   describe "map representation" do
     before :each do

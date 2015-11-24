@@ -29,17 +29,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"geolocations\",\"attributes\":{\"uid\":\"gn00001\",\"name\":\"country\",\"latitude\":null,\"longitude\":null,\"country_code\":null,\"country_name\":null,\"country_uid\":null,\"provider\":\"Geonames\",\"adm_level\":0,\"g0\":null,\"g1\":null,\"g2\":null,\"g3\":null,\"g4\":null,\"custom_geo_source\":null}}}",
+      "response_body": "{\"data\":{\"id\":\"1\",\"type\":\"geolocations\",\"attributes\":{\"vocab_id\":\"gn00001\",\"name\":\"country\",\"center_latitude\":null,\"center_longitude\":null,\"country_iso2_code\":null,\"country_name\":null,\"country_vocab_id\":null,\"data_provider\":\"Geonames\",\"admin_level\":0,\"adm0_relation_vocab_id\":null,\"adm1_relation_vocab_id\":null,\"adm2_relation_vocab_id\":null,\"adm3_relation_vocab_id\":null,\"adm4_relation_vocab_id\":null,\"custom_geo_source\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"bd10311374abe6be156cebb2e1ea2b70\"",
+        "ETag": "W/\"7185e1640eff57722cd0c231b1307f9b\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "96b70ae0-94a0-46ef-80ca-bcd7c3953267",
-        "X-Runtime": "0.070797",
-        "Content-Length": "292"
+        "X-Request-Id": "69db810f-fbbb-421b-a52c-ea10180b91d3",
+        "X-Runtime": "0.080488",
+        "Content-Length": "428"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"http://api.ngoaidmap.org/api/countries/gn00001\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/vnd.api+json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""

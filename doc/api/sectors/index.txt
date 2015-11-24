@@ -5,7 +5,7 @@ Parameters:
   * id - A sector id
 
 Request:
-  GET /api/sectors/3?focus=true
+  GET /api/sectors/2?focus=true
   Accept: application/json; application/vnd.ngoaidmap-api-v1+json
   Content-Type: application/vnd.api+json
   Cookie: 
@@ -16,16 +16,16 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 120
+  Content-Length: 108
   Content-Type: application/json; charset=utf-8
-  ETag: W/"1045225587b261f742dbb231b24f7667"
+  ETag: W/"a5befc5e69c76be76699b30bd98295ae"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 6084473f-a196-4816-a5e2-8f2ea197f0cd
-  X-Runtime: 0.039040
+  X-Request-Id: e121a141-45fb-4701-b85f-518516f121f9
+  X-Runtime: 0.036937
   X-XSS-Protection: 1; mode=block
 
-  {"data":{"id":"3","type":"sectors","attributes":{"name":"Sector","donors":[]},"relationships":{"projects":{"data":[]}}}}
+  {"data":{"id":"2","type":"sectors","attributes":{"name":"Sector"},"relationships":{"projects":{"data":[]}}}}
 
 
 Getting a list of sectors
@@ -48,13 +48,13 @@ Request:
 Response:
   Status: 200 OK
   Cache-Control: max-age=0, private, must-revalidate
-  Content-Length: 195
+  Content-Length: 347
   Content-Type: application/json; charset=utf-8
-  ETag: W/"1b8e42bd68eb3fa17d209e2e27f071e6"
+  ETag: W/"457118d8692611fb2f0ae2a90c0f475f"
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  X-Request-Id: 977c54ae-3e73-409e-b39f-d3700a56383f
-  X-Runtime: 0.009164
+  X-Request-Id: 34e2e62f-6496-4bc9-ae08-4aa16eea84b3
+  X-Runtime: 0.007406
   X-XSS-Protection: 1; mode=block
 
-  {"data":[{"id":"1","type":"sectors","attributes":{"name":"Agriculture","projects_count":1}},{"id":"2","type":"sectors","attributes":{"name":"Agriculture","projects_count":1}}],"meta":{"total":2}}
+  {"data":[{"id":"3","type":"sectors","attributes":{"name":"Sector","projects_count":0}},{"id":"4","type":"sectors","attributes":{"name":"sector 0","projects_count":0}},{"id":"5","type":"sectors","attributes":{"name":"sector 1","projects_count":0}},{"id":"6","type":"sectors","attributes":{"name":"sector 2","projects_count":0}}],"meta":{"total":4}}

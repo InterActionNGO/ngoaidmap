@@ -6,7 +6,7 @@
   "explanation": null,
   "parameters": [
     {
-      "name": "sector",
+      "name": "sectors",
       "description": "Array. Sector ids"
     }
   ],
@@ -16,7 +16,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/projects?sectors[]=2",
+      "request_path": "/api/projects?sectors[]=1?sectors[]=%23%3CSector%3A0x007fda85b8f9b8%3E",
       "request_body": null,
       "request_headers": {
         "Accept": "application/json; application/vnd.ngoaidmap-api-v1+json",
@@ -26,26 +26,26 @@
       },
       "request_query_parameters": {
         "sectors": [
-          "2"
+          "1?sectors[]=#<Sector:0x007fda85b8f9b8>"
         ]
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"6\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_sector\",\"description\":null},\"relationships\":{\"organization\":{\"data\":null},\"sectors\":{\"data\":[{\"type\":\"sectors\",\"id\":\"2\"}]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}}],\"included\":[{\"id\":\"2\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\"}}]}",
+      "response_body": "{\"data\":[{\"id\":\"7\",\"type\":\"projects\",\"attributes\":{\"name\":\"project_with_sector\",\"description\":null,\"international_partners\":null,\"local_partners\":null,\"cross_cutting_issues\":null,\"start_date\":\"2015-11-17\",\"end_date\":\"2015-12-01\",\"budget\":null,\"target_groups\":null,\"contact_person\":null,\"contact_email\":null,\"contact_phone_number\":null,\"record_created_at\":\"2015-11-24T12:36:31.974Z\",\"record_updated_at\":\"2015-11-24T12:36:31.974Z\",\"activities\":null,\"interaction_project_id\":null,\"additional_information\":null,\"contact_position\":null,\"project_website\":null,\"budget_currency\":null,\"budget_value_date\":null,\"target_project_reach_value\":null,\"actual_project_reach_value\":null,\"project_reach_unit\":null},\"relationships\":{\"reporting_organization\":{\"data\":null},\"prime_awardee\":{\"data\":null},\"sectors\":{\"data\":[{\"type\":\"sectors\",\"id\":\"1\"}]},\"geolocations\":{\"data\":[]},\"donors\":{\"data\":[]}}}],\"included\":[{\"id\":\"1\",\"type\":\"sectors\",\"attributes\":{\"name\":\"Agriculture\"}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"5338044da23c6fe32b6413832ef129ea\"",
+        "ETag": "W/\"710530cc9e0fd0230868c68c39b00140\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "66937cdc-9286-42e8-8391-73bb26ab9b1d",
-        "X-Runtime": "0.029778",
-        "Content-Length": "323"
+        "X-Request-Id": "5f968a45-04b6-4c83-a18b-ca4c27749630",
+        "X-Runtime": "0.202368",
+        "Content-Length": "960"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.ngoaidmap.org/api/projects?sectors[]=2\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://api.ngoaidmap.org/api/projects?sectors[]=1?sectors[]=%23%3CSector%3A0x007fda85b8f9b8%3E\" -X GET \\\n\t-H \"Accept: application/json; application/vnd.ngoaidmap-api-v1+json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: http://ngoaidmap.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }
