@@ -19,7 +19,7 @@ define([
       if (!this.$el.length) {
         return
       }
-      (this.project && !!this.project.contact_email && !!this.project.contact_person && !!this.project.contact_phone_number) ? this.render() : this.$el.remove();
+      (this.project && (!!this.project.contact_email || !!this.project.contact_person || !!this.project.contact_phone_number)) ? this.render() : this.$el.remove();
     },
 
     parseData: function(){
