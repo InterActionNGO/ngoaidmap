@@ -236,7 +236,20 @@ define([
       this.geolocationCollection.fetch({
         data: _.extend({},this.filters,{})
       }).done(_.bind(function(data){
-        callback(data);
+        var uids = _.pluck(data.geolocations, 'uid');
+        var promises = [];
+        _.each(uids, function(v){
+          var deferred = $.Deferred();
+          var model = new breadcrumbModel({ uid: v });
+          promises.push(deferred.promise());
+          model.fetch({ data: {get_parents:'true', status: 'active' }}).done(function(data){
+            deferred.resolve(data);
+          });
+        });
+
+        $.when.apply(null, promises).done(function(){
+            callback(arguments);
+          }.bind(this));
       },this));
     },
 

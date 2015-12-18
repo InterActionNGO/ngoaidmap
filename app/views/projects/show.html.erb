@@ -97,9 +97,26 @@
             </section>
             <%end%>
           <% end %>
-          <section id="project-locations"></section>
-          <section id="project-sectors"></section>
-
+          <% unless @project.geolocations.empty? %>
+          <section>
+            <h2>Locations</h2>
+            <ul>
+              <% @project.geolocations.each do |geolocation| %>
+                <li><%= geolocation.readable_path %></li>
+              <% end %>
+            </ul>
+          </section>
+          <% end %>
+          <% unless @project.sectors.empty? %>
+          <section>
+            <h2>Sectors</h2>
+            <ul>
+              <% @project.sectors.each do |sector| %>
+                <li><%= sector.name %></li>
+              <% end %>
+            </ul>
+          </section>
+          <% end %>
 
           <%= render 'new_partials/more_projects' %>
 

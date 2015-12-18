@@ -12,9 +12,9 @@ define([
       response.geolocations = _.map(response.geolocations, _.bind(function(p){
         return {
           name: p.name,
-          id: p.id,
-          url: '/organizations/'+p.id,
-          urlfiltered: this.setUrl('organizations[]',p.id),
+          uid: p.uid,
+          url: '/location/'+p.uid,
+          urlfiltered: this.setUrl('geolocations[]',p.uid),
           class: p.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", "").replace(/\//g, "-"),
           count: p.projects_count
         }
