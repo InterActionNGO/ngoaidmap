@@ -34,11 +34,13 @@
       <narrative>InterAction’s NGO Aid Map</narrative>
     </owner-org>
   </other-identifier>
-  <other-identifier <% if project.organization_id.present? %> ref="<%= project.try(:organization_id) %>" <% end %> type="B9">
+  <% if project.organization_id.present? %>
+  <other-identifier ref="<%= project.try(:organization_id) %>" type="B9">
     <owner-org <% if project.primary_organization.iati_organizationid.present? %> ref="<%= project.primary_organization.try(:iati_organizationid) %>" <% end %> >
       <narrative><%= project.primary_organization.name %></narrative>
     </owner-org>
   </other-identifier>
+  <% end %>
   <% if project.active? %>
     <activity-status code="<%= project.activity_status %>" />
     <activity-date iso-date="<%= project.start_date.strftime("%Y-%m-%d") %>" type="1">
@@ -150,24 +152,26 @@
       <category code="A12" />
     </document-link>
   <% end %>
-  <% if project.target_project_reach && project.actual_project_reach && project.project_reach_unit %>
   <result type="1" aggregation-status="0">
      <title>
       <narrative>Project Reach</narrative>
      </title>
      <indicator measure="1">
        <title>
-        <narrative>Project Reach <%= project.project_reach_unit %></narrative>
+        <narrative>Project Reach <%= project.project_reach_unit if project.project_reach_unit %></narrative>
        </title>
        <period>
         <period-start iso-date="<%= project.start_date %>" />
         <period-end iso-date="<%= project.end_date %>" />
-        <target value="<%= project.target_project_reach %>">
-        </target>
-        <actual value="<%= project.actual_project_reach %>">
-        </actual>
+        <% if project.target_project_reach %>
+          <target value="<%= project.target_project_reach %>">
+          </target>
+        <% end %>
+        <% if project.actual_project_reach %>
+          <actual value="<%= project.actual_project_reach %>">
+          </actual>
+        <% end %>
        </period>
      </indicator>
   </result>
-  <% end %>
 </iati-activity>

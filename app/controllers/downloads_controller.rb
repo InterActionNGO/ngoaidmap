@@ -4,9 +4,15 @@ class DownloadsController < ApplicationController
     name = params[:name]
     respond_to do |format|
       format.csv {
-      send_data Project.fetch_all(projects_params).includes(:geolocations, :donors, :sectors).to_comma,
-        :type        => 'application/vnd.ms-excel',
-        :disposition => "attachment; filename=#{name}.csv"
+        if params[:v] && params[:v] == 'full'
+          send_data Project.fetch_all(projects_params).includes(:geolocations, :donors, :sectors).to_comma,
+            :type        => 'application/vnd.ms-excel',
+            :disposition => "attachment; filename=#{name}.csv"
+        else
+          send_data Project.fetch_all(projects_params).includes(:geolocations, :donors, :sectors).to_comma(:style => :brief),
+            :type        => 'application/vnd.ms-excel',
+            :disposition => "attachment; filename=#{name}.csv"
+        end
       }
       format.xls {
         send_data Project.fetch_all(projects_params).to_xls,
