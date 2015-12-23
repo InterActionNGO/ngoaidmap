@@ -12,9 +12,9 @@
 #
 
 class SectorSerializer < ActiveModel::Serializer
-  cache key: "main_api_donor", expires_in: 3.hours
+  cache key: "main_api_sector", expires_in: 3.hours
   attributes :type, :id, :name
-  has_many :projects, serializer: ProjectWithoutSectorsSerializer
+  has_many :projects
   def type
     'sectors'
   end
