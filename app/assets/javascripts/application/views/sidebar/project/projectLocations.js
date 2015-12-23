@@ -20,18 +20,38 @@ define([
       }
       this.project = options.project;
       this.conexion = options.conexion;
+
       this.conexion.getGeolocationsData(_.bind(function(response){
-        this.geolocations = response.geolocations;
-        (!!this.geolocations && !!this.geolocations.length) ? this.render() : this.$el.remove();
+        if (!!response.length) {
+          this.data = response;
+          this.render();
+        } else {
+          this.$el.remove();
+        }
+
       },this))
     },
 
     parseData: function(){
       var data = {
-        name: (this.geolocations.length == 1) ? 'Location' : 'Locations',
-        locations: _.sortBy(this.geolocations, 'name'),
+        name: (this.data.length == 1) ? 'Location' : 'Locations',
+        locations: this.getLocations(),
       }
       return data;
+    },
+
+    getLocations: function() {
+      return _.map(this.data, _.bind(function(location){
+        if (!!location.meta && !!location.meta.parents.length) {
+          return {
+            name: location.data.attributes.name + ', ' +_.map(location.meta.parents.reverse(), function(parent) {
+              return parent.name;
+            }).join(', ')
+          }
+        } else {
+          return { name: location.data.attributes.name }
+        }
+      }, this ));
     },
 
     render: function(){

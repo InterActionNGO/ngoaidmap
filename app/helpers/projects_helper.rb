@@ -120,7 +120,9 @@ module ProjectsHelper
       return if project.countries.nil?
       countries     = project.countries.map{|c| c.name}
       countries_ids =  project.countries.map{|c| c.uid}
-      if countries.size == 1
+      if project.geographical_scope == 'global'
+        ""
+      elsif countries.size == 1
         "in #{link_to(countries.first, location_path(:ids => [countries_ids.first]), :title => countries.first)}"
       else
         "in #{pluralize(countries.size, 'country', 'countries')}"

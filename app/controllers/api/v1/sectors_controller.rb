@@ -25,8 +25,8 @@ module Api
           meta: { total: @donors.size },
           each_serializer: DonorFromSectorSerializer
         else
-        @sector = Sector.eager_load([projects:[:donors, :primary_organization]]).find(params[:id])
-          render json: @sector, root: 'data', include: ['projects']
+        @sector = Sector.eager_load([:projects]).find(params[:id])
+          render json: @sector, root: 'data'
         end
       end
       def sector_params
