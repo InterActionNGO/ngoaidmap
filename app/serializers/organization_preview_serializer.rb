@@ -1,6 +1,6 @@
 class OrganizationPreviewSerializer < ActiveModel::Serializer
   cache key: "main_api_organization_preview", expires_in: 3.hours
-  attributes :type, :id, :name, :description, :logo, :twitter, :facebook, :website, :hq_street_address, :contact_email, :contact_phone_number, :donation_street_address, :donation_zip_code, :donation_city, :donation_state, :donation_phone_number, :donation_website, :record_created_at, :record_updated_at, :contact_name, :contact_position, :hq_zip_code, :hq_city, :hq_state, :hq_country, :donation_country, :media_contact_name, :media_contact_position, :media_contact_phone_number, :media_contact_email, :interaction_member, :iati_organization_type, :iati_organization_type_code, :iati_organization_id, :publishing_to_iati, :interaction_membership_status, :organization_letter_code
+  attributes :type, :id, :name, :description, :logo, :twitter, :facebook, :website, :hq_street_address, :contact_email, :contact_phone_number, :donation_street_address, :donation_zip_code, :donation_city, :donation_state, :donation_phone_number, :donation_website, :record_created_at, :record_updated_at, :contact_name, :contact_position, :hq_zip_code, :hq_city, :hq_state, :hq_country, :donation_country, :media_contact_name, :media_contact_position, :media_contact_phone_number, :media_contact_email, :iati_organization_type, :iati_organization_type_code, :iati_organization_id, :publishing_to_iati, :interaction_membership_status, :organization_letter_code
   def type
     'organizations'
   end
