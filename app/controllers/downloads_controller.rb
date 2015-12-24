@@ -35,6 +35,6 @@ class DownloadsController < ApplicationController
   end
   private
   def projects_params
-    params.permit(:level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, organizations:[], countries:[], donors:[], sectors:[], projects:[])
+    params.permit(:level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, :site, organizations:[], countries:[], donors:[], sectors:[], projects:[])
   end
 end
