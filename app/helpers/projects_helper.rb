@@ -45,6 +45,8 @@ module ProjectsHelper
       raw("#{clusters_sectors} #{organization}")
     when 'donors'
       raw("#{clusters_sectors} #{place} #{organization}")
+    else
+      raw("#{clusters_sectors} #{place} #{organization}")
     end
   end
 
