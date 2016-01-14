@@ -11,12 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124164356) do
+ActiveRecord::Schema.define(version: 20160114163212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
-  enable_extension "btree_gist"
 
   create_table "changes_history_records", force: :cascade do |t|
     t.integer  "user_id"
@@ -207,13 +206,6 @@ ActiveRecord::Schema.define(version: 20151124164356) do
   add_index "geolocations", ["admin2"], name: "index_geolocations_on_admin2", using: :btree
   add_index "geolocations", ["admin3"], name: "index_geolocations_on_admin3", using: :btree
   add_index "geolocations", ["admin4"], name: "index_geolocations_on_admin4", using: :btree
-  add_index "geolocations", ["country_name"], name: "index_geolocations_on_country_name", using: :btree
-  add_index "geolocations", ["country_uid"], name: "index_geolocations_on_country_uid", using: :btree
-  add_index "geolocations", ["g0"], name: "index_geolocations_on_g0", using: :btree
-  add_index "geolocations", ["g1"], name: "index_geolocations_on_g1", using: :btree
-  add_index "geolocations", ["g2"], name: "index_geolocations_on_g2", using: :btree
-  add_index "geolocations", ["g3"], name: "index_geolocations_on_g3", using: :btree
-  add_index "geolocations", ["g4"], name: "index_geolocations_on_g4", using: :btree
   add_index "geolocations", ["uid"], name: "index_geolocations_on_uid", using: :btree
 
   create_table "geolocations_projects", id: false, force: :cascade do |t|
@@ -486,8 +478,10 @@ ActiveRecord::Schema.define(version: 20151124164356) do
   create_table "sectors", force: :cascade do |t|
     t.string   "name",                  limit: 255
     t.string   "oecd_dac_name",         limit: 255
-    t.string   "sector_vocab_code",     limit: 255
     t.string   "oecd_dac_purpose_code", limit: 255
+    t.string   "oec_dac_name",          limit: 255
+    t.string   "sector_vocab_code",     limit: 255
+    t.string   "oec_dac_purpose_code",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end

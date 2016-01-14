@@ -181,9 +181,12 @@ define([
     },
 
     getSectorsAllData: function(callback){
+      var filters = (!site_obj.navigate_by_country) ? this.filters : {};
+
       this.sectorCollection = new sectorCollection();
       this.sectorCollection.fetch({
         data: _.extend({},
+          filters,
           { include: 'projects_count', }
         ),
       }).done(_.bind(function(data){

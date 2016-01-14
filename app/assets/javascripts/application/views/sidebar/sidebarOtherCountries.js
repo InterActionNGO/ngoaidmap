@@ -16,7 +16,7 @@ define([
     template: Handlebars.compile(tpl),
 
     initialize: function(options) {
-      if (!this.$el.length) {
+      if (!this.$el.length || site_obj.id == 1) {
         return
       }
       this.conexion = options.conexion;
