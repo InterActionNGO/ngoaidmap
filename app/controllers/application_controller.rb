@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
 
       # If the request host isn't the main_site_host, it should be the host from a site
       if request.subdomain == 'www' || request.subdomain == '' || request.subdomain == 'v2'
-        @site = Site.find_by_name('Haiti Aid Map')
+        @site = Site.find_by_name('global')
       elsif !Site.find_by_url(request.host) || Site.find_by_url(request.host).status == false || Site.find_by_url(request.host).featured == false
         redirect_to "http://ngoaidmap.org" and return
       elsif @site = Site.published.where(:url => request.host).first
