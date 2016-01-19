@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<iati-activities xmlns:interactions-ngoaidmap="http://ngoaidmap.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" interactions-ngoaidmap:records-returned="<%= @projects_size %>" interactions-ngoaidmap:total-records-available="<%= @total_projects.present? ? @total_projects : @projects_size %>" interactions-ngoaidmap:record-offset="<%= params[:offset].present? ? params[:offset] : 0 %>" generated-datetime="<%= Time.now.xmlschema %>" version="2.01" linked-data-default="http://ngoaidmap.org">
+<iati-activities xmlns:interactions-ngoaidmap="https://www.ngoaidmap.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" interactions-ngoaidmap:records-returned="<%= @projects_size %>" interactions-ngoaidmap:total-records-available="<%= @total_projects.present? ? @total_projects : @projects_size %>" interactions-ngoaidmap:record-offset="<%= params[:offset].present? ? params[:offset] : 0 %>" generated-datetime="<%= Time.now.xmlschema %>" version="2.01" linked-data-default="https://www.ngoaidmap.org">
   <% @projects.each do |p| %>
     <%= render partial: '/api/v1/projects/activity', locals: {project: p} %>
   <% end %>
