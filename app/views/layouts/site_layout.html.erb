@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=980px">
     <meta name="google-site-verification" content="r4LPeTYNAKGuj7MPrkGpDgZ2ZXaKpVqn-nV7ixs5-sQ">
 
-    <%= stylesheet_link_tag "https://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css", :media => 'all' %>
+    <%= stylesheet_link_tag "https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css", "embed.css" %>
+
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="https://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
     <![endif]-->
@@ -33,7 +34,7 @@
     <%= render 'new_partials/embed_map' %>
 
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyA2xfzq0KmJZIlGIpxXK1CjXa6enzmPGlM&sensor=false" %>
-    <%= javascript_include_tag "https://libs.cartocdn.com/cartodb.js/v3/cartodb.js" %>
+    <%= javascript_include_tag "https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js" %>
     <%#= requirejs_include_tag "main" %>
     <%= requirejs_include_tag "application" %>
 
