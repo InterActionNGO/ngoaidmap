@@ -12,6 +12,7 @@ define([
       type: 'cartodb',
       cartodb_logo: true,
       legends: false,
+      https: true,
       sublayers: [{
         sql: 'SELECT * from ne_10m_admin_0_countries',
         cartocss: '#ne_10m_admin_0_countries{}'
