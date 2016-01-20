@@ -158,17 +158,17 @@
      </title>
      <indicator measure="1">
        <title>
-        <narrative>Project Reach <%= project.project_reach_unit if project.project_reach_unit %></narrative>
+        <narrative>Project Reach <%= "(#{project.project_reach_unit})" if project.project_reach_unit %></narrative>
        </title>
        <period>
         <period-start iso-date="<%= project.start_date %>" />
         <period-end iso-date="<%= project.end_date %>" />
         <% if project.target_project_reach %>
-          <target value="<%= project.target_project_reach %>">
+          <target value="<%= trim(project.target_project_reach) %>">
           </target>
         <% end %>
         <% if project.actual_project_reach %>
-          <actual value="<%= project.actual_project_reach %>">
+          <actual value="<%= trim(project.actual_project_reach) %>">
           </actual>
         <% end %>
        </period>
