@@ -76,16 +76,30 @@ define([
       'p/:page': 'page'
     },
 
+    defaultFilters: {
+
+    },
+
     initialize: function() {
+      if (!site_obj.navigate_by_country) {
+        this.defaultFilters = {
+          'geolocation' : site_obj.geographic_context_country_id,
+          'level' : 1
+        }
+      }
       var pushState = !!(window.history && window.history.pushState);
       Backbone.history.start({
         pushState: pushState
       });
+
+
     },
 
     home: function() {
       var params = {};
-      var filters = {};
+      var filters = _.extend(this.defaultFilters,{
+        'site' : site_obj.id,
+      });
       this.conexion = new Conexion(params,filters);
       this.initViews();
     },
@@ -95,9 +109,10 @@ define([
         'id': _id,
         'name': 'sectors[]',
       };
-      var filters = {
+      var filters = _.extend(this.defaultFilters,{
         'sectors[]' : _id,
-      }
+        'site' : site_obj.id,
+      });
       filters = _.extend({},filters,this.objetize(_filters));
       this.conexion = new Conexion(params, filters);
       this.initViews();
@@ -108,9 +123,10 @@ define([
         'id': _id,
         'name': 'organizations[]',
       };
-      var filters = {
+      var filters = _.extend(this.defaultFilters,{
         'organizations[]' : _id,
-      }
+        'site' : site_obj.id,
+      });
       filters = _.extend({},filters,this.objetize(_filters));
       this.conexion = new Conexion(params, filters);
       this.initViews();
@@ -121,9 +137,10 @@ define([
         'id': _id,
         'name': 'donors[]',
       };
-      var filters = {
+      var filters = _.extend(this.defaultFilters,{
         'donors[]' : _id,
-      }
+        'site' : site_obj.id,
+      });
       filters = _.extend({},filters,this.objetize(_filters));
       this.conexion = new Conexion(params, filters);
       this.initViews();
@@ -134,10 +151,10 @@ define([
         'id': _id,
         'name': 'geolocation',
       };
-      var filters = {
+      var filters = _.extend({'level' : 1},this.defaultFilters,{
         'geolocation' : _id,
-        'level' : 1
-      };
+        'site' : site_obj.id,
+      });
       filters = _.extend({},filters,this.objetize(_filters));
       this.conexion = new Conexion(params, filters);
       this.initViews();
@@ -190,9 +207,10 @@ define([
         'id': _id,
         'name': 'projects[]',
       };
-      var filters = {
+      var filters = _.extend(this.defaultFilters,{
         'projects[]' : _id,
-      }
+        'site' : site_obj.id,
+      });
       filters = _.extend({},filters,this.objetize(_filters));
       this.conexion = new Conexion(params,filters);
 

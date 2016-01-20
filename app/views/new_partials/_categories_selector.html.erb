@@ -53,7 +53,7 @@
                 </div>
               </li>
 
-            <% if true#@site.navigate_by == :country %>
+            <% if @site.navigate_by_country %>
               <li class="countries">
                 <span class="father">Countries</span>
                 <div class="mod-go-up-menu menu">
@@ -70,9 +70,9 @@
                 <span class="father">Regions</span>
                 <div class="mod-go-up-menu menu">
                   <ul class="mod-categories-child regions-child">
-                    <%# @site.regions_select.each do |region| %>
-                      <li><%# link_to(region.name, location_path(:ids => region)) %></li>
-                    <%# end %>
+                    <% @site.regions_select.each do |region| %>
+                      <li><%= link_to(region.name, location_path(region.uid, level: region.adm_level + 1, site: @site.id)) %></li>
+                    <% end %>
                   </ul>
                   <input type="text" class="mod-categories-search" placeholder="Search Region">
                 </div>

@@ -766,7 +766,6 @@ $(function() {
         $('#donation_office_attributes_donor_id').val(ui.item.element_id);
       },
       refresh: function(){
-        console.log('entra')
         this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
         $('span#donor_name_input').addClass('active');
       }
