@@ -2,7 +2,7 @@ lock '3.4.0'
 
 set :application, 'ngo-v2'
 set :repo_url, 'git@github.com:Vizzuality/ngoaidmap.git'
-
+ set :branch, 'feature/https'
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 # Default deploy_to directory is /var/www/my_app
