@@ -12,7 +12,7 @@
             <% if @site.featured_sites.any? %>
               <% @site.featured_sites.each do |s|  %>
                   <li class="featured-project">
-                    <a href="http://<%= s.url %>" target"_self" >
+                    <a href="https://<%= s.url %>" target"_self" >
                       <img src="<%= s.aid_map_image.url %>" alt="" width="200" height="115">
                       <p><%= s.name %></p>
                     </a>
@@ -33,7 +33,7 @@
           <%= render 'new_partials/main_menu' %>
         </div>
         <div class="grid-4">
-          <a href="http://<%= Settings.main_site_host %>">
+          <a href="https://<%= Settings.main_site_host %>">
             <%= image_tag "footer_ngo.svg", :alt  => "interaction aid map logo", :class  => "aid-map-logo", :width => '170', :height => '80' %>
           </a>
         </div>

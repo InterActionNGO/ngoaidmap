@@ -1,4 +1,4 @@
-<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.xmlschema %>" linked-data-uri="http://ngoaidmap.org/projects/<%= project.id %>" >
+<iati-activity xml:lang="en" last-updated-datetime="<%= project.updated_at.xmlschema %>" linked-data-uri="https://www.ngoaidmap.org/projects/<%= project.id %>" >
   <iati-identifier>US-EIN-13-3287064NAM-<%= project.intervention_id %></iati-identifier>
   <reporting-org ref="US-EIN-13-3287064NAM" type="22" secondary-reporter="1">
   <narrative>InterAction’s NGO Aid Map</narrative>
@@ -158,17 +158,17 @@
      </title>
      <indicator measure="1">
        <title>
-        <narrative>Project Reach <%= project.project_reach_unit if project.project_reach_unit %></narrative>
+        <narrative>Project Reach <%= "(#{project.project_reach_unit})" if project.project_reach_unit %></narrative>
        </title>
        <period>
         <period-start iso-date="<%= project.start_date %>" />
         <period-end iso-date="<%= project.end_date %>" />
         <% if project.target_project_reach %>
-          <target value="<%= project.target_project_reach %>">
+          <target value="<%= trim(project.target_project_reach) %>">
           </target>
         <% end %>
         <% if project.actual_project_reach %>
-          <actual value="<%= project.actual_project_reach %>">
+          <actual value="<%= trim(project.actual_project_reach) %>">
           </actual>
         <% end %>
        </period>

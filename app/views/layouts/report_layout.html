@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=980px">
     <meta name="google-site-verification" content="r4LPeTYNAKGuj7MPrkGpDgZ2ZXaKpVqn-nV7ixs5-sQ">
 
-    <%= stylesheet_link_tag "http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css", :media => 'all' %>
+    <%= stylesheet_link_tag "https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css", :media => 'all' %>
     <!--[if lte IE 8]>
-      <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
+      <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.ie.css" />
     <![endif]-->
     <%= stylesheet_link_tag "report.css", :media => "all" %>
 
@@ -32,7 +32,7 @@
 
     <%= render 'layouts/footer' %>
 
-    <%= javascript_include_tag "http://libs.cartocdn.com/cartodb.js/v3/cartodb.js" %>
+    <%= javascript_include_tag "https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js" %>
 
     <%= requirejs_include_tag "report" %>
 
