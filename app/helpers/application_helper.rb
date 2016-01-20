@@ -182,7 +182,7 @@ HTML
     lis << content_tag(:li, "Others - #{values.last}", :class => 'pos3') if projects.count > 3
 
     ul    = content_tag :ul, raw(lis), :class => 'chart'
-    chart = image_tag "http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:#{values.join(',')}&chds=0,#{max_value}&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00", :class => 'pie_chart'
+    chart = image_tag "https://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:#{values.join(',')}&chds=0,#{max_value}&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00", :class => 'pie_chart'
     [ul, chart]
   end
 
@@ -199,8 +199,8 @@ HTML
     end
     lis << content_tag(:li, "Others - #{values.last}", :class => 'pos3') if organizations.count > 3
     ul    = content_tag :ul, raw(lis), :class => 'chart'
-    url = "http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:#{values.join(',')}&chds=0,#{max_value}&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00"
-    chart = image_tag "http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:#{values.join(',')}&chds=0,#{max_value}&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00", :class => 'pie_chart'
+    url = "https://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:#{values.join(',')}&chds=0,#{max_value}&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00"
+    chart = image_tag "https://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:#{values.join(',')}&chds=0,#{max_value}&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00", :class => 'pie_chart'
     [ul, chart]
   end
 
@@ -219,7 +219,7 @@ HTML
   #   end
   #   lis << content_tag(:li, "Others - #{values.last}", :class => 'pos3') if organizations.count > 9
   #   ul    = content_tag :ul, raw(lis), :class => 'chart chart-bars'
-  #   # chart = image_tag "http://chart.apis.google.com/chart?cht=bvs&chs=203x120&chd=t:#{values.join(",")}&chxt=y&chxr=0,0,#{max_value}&chco=#{colors.join("|")}&chds=0,10&chds=0,#{max_value}", :class => 'pie_chart pie_chart_bars'
+  #   # chart = image_tag "https://chart.apis.google.com/chart?cht=bvs&chs=203x120&chd=t:#{values.join(",")}&chxt=y&chxr=0,0,#{max_value}&chco=#{colors.join("|")}&chds=0,10&chds=0,#{max_value}", :class => 'pie_chart pie_chart_bars'
   #   [ul]
   # end
 
@@ -244,8 +244,8 @@ HTML
   #   sectors.each do |sector|
   #     colors << colors_values[sector]
   #   end
-  #   # url = "http://chart.apis.google.com/chart?cht=bvs&chs=240x120&chd=t:#{count.join(",")}&chxt=x,x&chds=0,10&chxl=0:|#{sectors.join("|")}&chco=#{colors.join("|")}"
-  #   url = "http://chart.apis.google.com/chart?cht=bvs&chs=240x120&chd=t:#{count.join(",")}&chxt=y&chxr=0,0,#{count.max}&chds=0,10&chco=#{colors.join("|")}&chds=0,#{count.max}"
+  #   # url = "https://chart.apis.google.com/chart?cht=bvs&chs=240x120&chd=t:#{count.join(",")}&chxt=x,x&chds=0,10&chxl=0:|#{sectors.join("|")}&chco=#{colors.join("|")}"
+  #   url = "https://chart.apis.google.com/chart?cht=bvs&chs=240x120&chd=t:#{count.join(",")}&chxt=y&chxr=0,0,#{count.max}&chds=0,10&chco=#{colors.join("|")}&chds=0,#{count.max}"
   #   chart = image_tag url, :class => 'pie_chart'
   # end
 
