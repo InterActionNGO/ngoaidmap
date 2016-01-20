@@ -9,7 +9,7 @@
           <li>
             <article class="other-project">
               <div class="image">
-                <img src="http://maps.google.com/maps/api/staticmap?size=90x70&maptype=roadmap&style=feature:all|element:labels|visibility:off&path=fillcolor:0x00000090|color:0x00000001&sensor=false&center=<%=r.geolocations.first.latitude%>,<%=r.geolocations.first.longitude%>&zoom=6" title="<%= r.name %>" />
+                <img src="https://maps.google.com/maps/api/staticmap?size=90x70&maptype=roadmap&style=feature:all|element:labels|visibility:off&path=fillcolor:0x00000090|color:0x00000001&sensor=false&center=<%=r.geolocations.first.latitude%>,<%=r.geolocations.first.longitude%>&zoom=6" title="<%= r.name %>" />
                 <%= image_tag("marker_1.png", class: "marker", alt: r.name, title: r.name) %>
               </div>
             <div class="info">
