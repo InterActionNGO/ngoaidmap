@@ -12,7 +12,6 @@ define([
       type: 'cartodb',
       cartodb_logo: true,
       legends: false,
-      https: true,
       sublayers: [{
         sql: 'SELECT * from ne_10m_admin_0_countries',
         cartocss: '#ne_10m_admin_0_countries{}'
@@ -57,7 +56,7 @@ define([
 
     createLayer: function(){
       // Cartodb
-      cartodb.createLayer(this.map, this.cartodbOptions)
+      cartodb.createLayer(this.map, this.cartodbOptions, {https: true})
         .addTo(this.map, this.map.overlayMapTypes.length)
         .on('done', _.bind(function(layer) {
           this.currentLayer = layer;
