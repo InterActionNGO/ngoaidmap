@@ -86,7 +86,7 @@ class Project < ActiveRecord::Base
     level = Geolocation.find_by(uid: options[:geolocation]).try(:adm_level) || 0 if options[:geolocation]
 
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
-    projects = projects.site(options[:site])                                    if options[:site]
+    projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 12
     projects = projects.geolocation(options[:geolocation], level)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries])                          if options[:countries]
@@ -120,7 +120,7 @@ class Project < ActiveRecord::Base
     end
     sql_options.level = options[:level].to_i || 0
     sql_options.join_strings = ''
-    sql_options.join_strings += %Q( inner join projects_sites on projects_sites.project_id = projects.id)                           if options[:site]
+    sql_options.join_strings += %Q( inner join projects_sites on projects_sites.project_id = projects.id)                           if options[:site] && options[:site].to_i != 12
     sql_options.join_strings += %Q( left outer join projects_sectors on projects_sectors.project_id = projects.id)                  if options[:sectors]
     sql_options.join_strings += %Q( left outer join donations on donations.project_id = projects.id)                                if options[:donors]
     sql_options.conditions = ''
@@ -130,7 +130,7 @@ class Project < ActiveRecord::Base
     sql_options.conditions += %Q( and donations.donor_id in #{'(' + options[:donors].join(',') + ')'} )                             if options[:donors]
     sql_options.conditions += %Q( and geolocations.g0 in #{"('" + options[:countries].join("', '") + "')"} )                        if options[:countries]
     sql_options.conditions += %Q( and projects.id in #{"('" + options[:projects].join("', '") + "')"} )                             if options[:projects]
-    sql_options.conditions += %Q( and projects_sites.site_id=#{options[:site].to_i} )                                               if options[:site]
+    sql_options.conditions += %Q( and projects_sites.site_id=#{options[:site].to_i} )                                               if options[:site] && options[:site].to_i != 12
     sql_options.conditions += %Q( and projects.name ilike '%%#{options[:q]}%%' OR projects.description ilike '%%#{options[:q]}%%' ) if options[:q]
     sql = SqlQuery.new(:get_projects_on_map, options: sql_options).sql
     projects = Project.find_by_sql(sql)
