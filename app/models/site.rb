@@ -97,6 +97,9 @@ class Site < ActiveRecord::Base
   def featured_sites
     Site.where(featured: true).where.not(id: self.id)
   end
+  def regions_select
+    Geolocation.where(country_uid: self.geographic_context_country_id).where('adm_level > 0').select(:name, :uid, :adm_level).uniq.order('name ASC')
+  end
   def pages_by_parent(parent_permalink)
     unless parent_page = self.pages.where(:permalink => parent_permalink, :published => true).first
       []

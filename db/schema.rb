@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124164356) do
+ActiveRecord::Schema.define(version: 20160114163212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -331,7 +331,7 @@ ActiveRecord::Schema.define(version: 20151124164356) do
     t.integer  "organization_type_code"
     t.string   "iati_organizationid",             limit: 255
     t.boolean  "publishing_to_iati",                          default: false
-    t.string   "membership_status",               limit: 255, default: "active"
+    t.string   "membership_status",               limit: 255, default: "Non Member"
   end
 
   add_index "organizations", ["name"], name: "index_organizations_on_name", using: :btree

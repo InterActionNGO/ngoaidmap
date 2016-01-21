@@ -22,6 +22,10 @@
     <% end %>
     <%= javascript_include_tag "modernizr/modernizr.custom.js" %>
 
+    <script type="text/javascript">
+      var site_obj = <%= raw(@site.to_json) %>;
+    </script>
+
     <%= csrf_meta_tag %>
   </head>
   <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %> <%= "section-" + @page.top_parent.permalink if @page.present? %> <%= "linos-" + @page.permalink if @page.present? %>">

@@ -32,7 +32,8 @@ define([
       if (!!this.get('filters') && !!this.get('filters').level && this.get('filters').level != level) {
         return undefined;
       }
-      return (!!this.get('filtersString')) ? url+'?level='+(level+1)+'&'+this.get('filtersString') : url+'?level='+(level+1);
+      var url = (!!this.get('filtersString')) ? url+'?level='+(level+1)+'&'+this.get('filtersString') : url+'?level='+(level+1);
+      return url;
     },
 
   });
