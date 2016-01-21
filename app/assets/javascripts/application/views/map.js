@@ -83,20 +83,6 @@ define([
         this.markers = data.map_points;
         // Markers
         for (var i = 0; i < this.markers.length; i++) {
-          // if (document.URL.indexOf('force_site_id=3') >= 0) {
-          //   classname = 'marker-bubble';
-          //   diameter = this.setDiameter(diametersCount.diameter, diametersCount.bounds['force_site'],i);
-          // } else if (map_type === 'overview_map') {
-          //   classname = 'marker-bubble';
-          //   diameter = this.setDiameter(diametersCount.diameter, diametersCount.bounds['overview_map'],i);
-          // } else if (map_type === 'administrative_map') {
-          //   classname = 'marker-bubble';
-          //   diameter = this.setDiameter(diametersCount.diameter, diametersCount.bounds['administrative_map'],i);
-          // } else {
-          //   diameter = 34;
-          //   classname = 'marker-project-bubble';
-          // }
-
           diameter = this.setDiameter(diametersCount.diameter, diametersCount.bounds['overview_map'],i);
           new IOMMarker(this.markers[i], diameter, 'marker-bubble', this.map, 'overview_map');
 

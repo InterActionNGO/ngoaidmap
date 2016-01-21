@@ -131,7 +131,7 @@ module ProjectsHelper
       end
     else
       return if project.geolocations.where('adm_level > 0').size == 0
-      regions     = project.geolocations.plck(:name).split('|').reject{|r| r.blank?}
+      regions     = project.geolocations.pluck(:name).split('|').reject{|r| r.blank?}
       regions_ids = project.geolocations.pluck(:uid).split(',')
 
       if regions.size == 1
