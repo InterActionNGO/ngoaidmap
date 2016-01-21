@@ -86,7 +86,7 @@ class Project < ActiveRecord::Base
     level = Geolocation.find_by(uid: options[:geolocation]).try(:adm_level) || 0 if options[:geolocation]
 
     projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
-    projects = projects.site(options[:site])                                    if options[:site]
+    projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 1
     projects = projects.geolocation(options[:geolocation], level)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries])                          if options[:countries]
