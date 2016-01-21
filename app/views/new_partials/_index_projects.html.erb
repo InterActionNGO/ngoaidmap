@@ -1,4 +1,4 @@
-<% cache ['projects_list', @projects, params], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
+<% cache ['projects_list', @site, @projects, params], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
 <div class="articles-list">
   <% unless @projects.empty? %>
     <ul>
