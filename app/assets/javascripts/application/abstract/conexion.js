@@ -224,6 +224,11 @@ define([
       },this));
     },
 
+    getOrganizationResources: function(callback) {
+      var data = organization_resources;
+      callback(data);
+    },
+
     // Fetch LOCATIONS
     getCountriesData: function(callback) {
       this.countryCollection = new countryCollection();

@@ -21,10 +21,14 @@
         <div id="sidebar-organization-donationcontact" class="mod-info"></div>
         <div id="sidebar-organization-mediacontact" class="mod-info"></div>
         <div id="sidebar-organization-followus" class="mod-info"></div>
+        <div id="sidebar-organization-resources" class="mod-info"></div>
 
 
 
-        <script> var organization = <%= raw(@organization.to_json) %>;</script>
+        <script>
+          var organization = <%= raw(@organization.to_json) %>;
+          var organization_resources = <%= raw(@organization.resources.to_json) %>;
+        </script>
       </aside>
     </div>
 

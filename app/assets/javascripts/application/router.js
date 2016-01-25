@@ -31,6 +31,7 @@ define([
   'application/views/sidebar/sidebarOrganizationsDonationContact',
   'application/views/sidebar/sidebarOrganizationsMediaContact',
   'application/views/sidebar/sidebarOrganizationsFollowUs',
+  'application/views/sidebar/sidebarOrganizationsResources',
   'application/views/sidebar/sidebarOtherCountries',
 
   //Project
@@ -54,7 +55,7 @@ define([
 
 ], function(Backbone, Conexion, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
   GalleryView, FilteredBubble, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
-  SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOtherCountries,
+  SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOrganizationsResources, SidebarOtherCountries,
   projectModel, ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization, ProjectLocations, ProjectDonors, ProjectReach, ProjectSectors) {
 
   var Router = Backbone.Router.extend({
@@ -191,6 +192,7 @@ define([
       new SidebarOrganizationsDonationContact({ conexion: this.conexion });
       new SidebarOrganizationsMediaContact({ conexion: this.conexion });
       new SidebarOrganizationsFollowUs({ conexion: this.conexion });
+      new SidebarOrganizationsResources({ conexion: this.conexion });
 
       new FilteredBubble({ conexion: this.conexion });
 
