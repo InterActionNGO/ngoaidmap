@@ -171,12 +171,12 @@
   }
 
   .social-services:before {
-    @include icons-sprite(icon-protection);
+    @include icons-sprite(icon-social-services);
     // background-position: sprite-positin($icons, icon-shelter, 4px, 5px);
   }
 
   .refugee-resettlement:before {
-    @include icons-sprite(icon-shelter);
+    @include icons-sprite(icon-refugee-resettlement);
     // background-position: sprite-positin($icons, icon-refugee, 4px, 5px);
   }
 
