@@ -34,10 +34,6 @@ define([
       return { sectors: sectors.reverse(), filtered: !!this.params.name };
     },
 
-    setUrl: function(param_name, id){
-      return (location.search) ? location.href+'&'+param_name+'='+id : location.href+'?'+param_name+'='+id;
-    },
-
     render: function(){
       this.$el.html(this.template(this.parseData()));
       this.initCluster();
