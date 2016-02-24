@@ -13,7 +13,7 @@ define([
         return {
           name: _.unescape(p.name),
           id: p.uid,
-          url: '/location/'+p.uid,
+          url: '/location/'+p.uid+'?level=1',
           urlfiltered: this.setUrl({'geolocation': p.uid, 'level': 1 }),
           class: p.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", "").replace(/\//g, "-"),
           count: p.projects_count
