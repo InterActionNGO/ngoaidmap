@@ -86,7 +86,7 @@
   <% end %>
   <% if project.iati_locations.any? %>
     <% project.iati_locations.each do |l| %>
-        <location ref="<%= l.iati_uid %>">
+        <location ref="<%= l.uid %>">
          <location-id vocabulary="<%= l.iati_provider %>" code="<%= l.iati_uid %>" />
          <name>
           <narrative><%= l.name %></narrative>

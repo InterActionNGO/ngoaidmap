@@ -131,8 +131,8 @@ module ProjectsHelper
       end
     else
       return if project.geolocations.where('adm_level > 0').size == 0
-      regions     = project.geolocations.pluck(:name).split('|').reject{|r| r.blank?}
-      regions_ids = project.geolocations.pluck(:uid).split(',')
+      regions     = project.geolocations.pluck(:name).split('|').reject{|r| r.blank?}.flatten
+      regions_ids = project.geolocations.pluck(:uid).split(',').flatten
 
       if regions.size == 1
         "in #{link_to(regions.first, "/location/#{regions_ids.first}", :title => regions.first)}"
