@@ -13,7 +13,7 @@ define([
         return {
           name: _.unescape(p.name),
           id: p.uid,
-          url: '/location/'+p.uid,
+          url: '/location/'+p.uid+'?level=1',
           urlfiltered: this.setUrl({'geolocation': p.uid, 'level': 1 }),
           class: p.name.toLowerCase().replace(/\s/g, "-").replace("(", "").replace(")", "").replace(/\//g, "-"),
           count: p.projects_count
@@ -23,11 +23,15 @@ define([
     },
 
     setUrl: function(obj){
-      var srt = this.serialize(obj);
-      return (location.search) ? location.href+'&'+srt : location.href+'?'+srt;
+      var href = location.origin + location.pathname;
+      var search = this.getParams();
+      var serialize = this.getParams(obj);
+
+      return (search) ? href+'?'+search+'&'+serialize : href+'?'+serialize;
     },
 
-    serialize: function(obj) {
+    getParams: function(_obj) {
+      var obj = (!!_obj) ? _obj : this.objetize(location.search.substring(1));
       var str = [];
       for(var p in obj) {
         var notAllowedFilters = ['page', 'status'];
@@ -37,6 +41,12 @@ define([
       }
       return str.join("&");
     },
+
+    objetize: function(string) {
+      return (!!string) ? JSON.parse('{"' + decodeURI(string).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}') : {};
+    },
+
+
 
 
 

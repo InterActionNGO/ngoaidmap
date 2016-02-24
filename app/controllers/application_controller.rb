@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
         @site = Site.find(params[:force_site_id]) if params[:force_site_id]
         @site = Site.where('LOWER(name) = ?', params[:force_site_name].downcase).first if params[:force_site_name]
 
-        self.default_url_options = {:force_site_id => @site.id} if @site
+        # self.default_url_options = {:force_site_id => @site.id} if @site
         return
       end
 
@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
           else
             # If a project is a draft, the host of the project is the main_site_host
             # and the site is guessed by the site_id attribute
-            self.default_url_options = {:site_id => @site.id}
+            # self.default_url_options = {:site_id => @site.id}
           end
         end
       end

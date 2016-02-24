@@ -22,8 +22,28 @@ define([
     },
 
     setUrl: function(param_name, id){
-      return (location.search) ? location.href+'&'+param_name+'='+id : location.href+'?'+param_name+'='+id;
+      var href = location.origin + location.pathname;
+      var search = this.getParams();
+
+      return (search) ? href+'?'+search+'&'+param_name+'='+id : href+'?'+param_name+'='+id;
     },
+
+    getParams: function() {
+      var obj = this.objetize(location.search.substring(1));
+      var str = [];
+      for(var p in obj) {
+        var notAllowedFilters = ['page', 'status'];
+        if (obj.hasOwnProperty(p) && !_.contains(notAllowedFilters, p)) {
+          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        }
+      }
+      return str.join("&");
+    },
+
+    objetize: function(string) {
+      return (!!string) ? JSON.parse('{"' + decodeURI(string).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}') : {};
+    }
+
 
   });
 

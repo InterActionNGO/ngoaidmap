@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20160114163212) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
-  enable_extension "btree_gist"
 
   create_table "changes_history_records", force: :cascade do |t|
     t.integer  "user_id"
@@ -326,12 +325,12 @@ ActiveRecord::Schema.define(version: 20160114163212) do
     t.string   "main_data_contact_state",         limit: 255
     t.string   "main_data_contact_country",       limit: 255
     t.string   "organization_id",                 limit: 255
-    t.boolean  "interaction_member",                          default: false
     t.string   "organization_type",               limit: 255
     t.integer  "organization_type_code"
     t.string   "iati_organizationid",             limit: 255
     t.boolean  "publishing_to_iati",                          default: false
     t.string   "membership_status",               limit: 255, default: "Non Member"
+    t.boolean  "interaction_member",                          default: false
   end
 
   add_index "organizations", ["name"], name: "index_organizations_on_name", using: :btree
