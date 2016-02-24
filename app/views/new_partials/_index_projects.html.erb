@@ -3,7 +3,7 @@
   <% unless @projects.empty? %>
     <ul>
       <% @projects.each do |project| %>
-      <% cache ['project', project, @site], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
+      <% cache ['project', project, @site, controller_name], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
         <li>
           <article class="mod-index-item">
             <h2><a href="<%= project_path(project['id']) %>"><%= truncate(project['name'], :length=>60) %></a></h2>
