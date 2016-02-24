@@ -74,6 +74,10 @@ class Project < ActiveRecord::Base
   scope :starting_after, -> (date){where "start_date > ?", date}
   scope :ending_before, -> (date){where "end_date < ?", date}
 
+  def self.custom_fields
+    (columns.map{ |c| c.name }).map{ |c| "#{self.table_name}.#{c}" }
+  end
+
   def active?
     self.end_date > Date.today
   end
