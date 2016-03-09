@@ -167,7 +167,7 @@ class Site < ActiveRecord::Base
     end
     projects
   end
-   def set_cached_projects
+  def set_cached_projects
     remove_cached_projects
 
     #Insert into the relation all the sites that belong to the site.

@@ -31,6 +31,7 @@ gem 'redis-rack-cache'
 gem 'newrelic_rpm'
 gem "comma", "~> 3.2.1"
 gem 'sql_query'
+gem 'whenever', :require => false
 group :development do
   gem 'foreman'
   gem 'puma'
