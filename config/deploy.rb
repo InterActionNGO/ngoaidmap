@@ -1,5 +1,5 @@
 lock '3.4.0'
-
+require 'whenever/capistrano'
 set :application, 'ngo-v2'
 set :repo_url, 'git@github.com:Vizzuality/ngoaidmap.git'
 set :branch, ENV['BRANCH'] || "master"
@@ -28,6 +28,8 @@ set :linked_files, %w{.env}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/app/vendor}
 
 set :whenever_identifier, ->{ "update_sites" }
+set :whenever_environment, defer { stage }
+set :whenever_command, 'bundle exec whenever'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/usr/local/rvm/gems/ruby-2.2.1@ngo-api/bin/bundler" }
