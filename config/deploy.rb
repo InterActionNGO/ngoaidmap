@@ -27,6 +27,8 @@ set :linked_files, %w{.env}
 # Default value for linked_dirs is []
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/app/vendor}
 
+set :whenever_identifier, ->{ "update_sites" }
+
 # Default value for default_env is {}
 # set :default_env, { path: "/usr/local/rvm/gems/ruby-2.2.1@ngo-api/bin/bundler" }
 # set :default_env, { rvm_bin_path: '/usr/local/rvm/bin/rvm' }
