@@ -45,3 +45,5 @@ public/assets
 /install
 /install/rails
 stdout
+
+config/database.yml
