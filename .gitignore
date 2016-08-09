@@ -33,6 +33,9 @@
 # Textmate project files
 /*.tmproj
 
+# Bower Files
+/node_modules/bower
+
 .env
 bower_components/
 public/.tmp/
