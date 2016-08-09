@@ -32,6 +32,7 @@ gem 'newrelic_rpm'
 gem "comma", "~> 3.2.1"
 gem 'sql_query'
 gem 'whenever', :require => false
+
 group :development do
   gem 'foreman'
   gem 'puma'
@@ -47,22 +48,25 @@ group :development do
   gem 'brakeman', :require => false
   gem 'rails_db'
 end
+
 group :development, :test do
   gem 'byebug'
   gem 'spring'
   gem 'awesome_print'
   gem 'hirb'
   gem 'faker'
-  gem 'spring-commands-rspec'
-  gem 'rspec_api_documentation'
-  gem 'json_spec'
   gem 'bullet'
-  gem 'web-console', '~> 2.0'
-  gem 'pry'
+  gem 'pry-rails'
+  gem 'factory_girl_rails', '~> 4.7.0'
+  gem 'rspec-rails', '~> 3.5.1'
 end
+
 group :test do
-  gem 'factory_girl_rails', '~> 4.0'
-  gem 'rspec-rails'
   gem 'database_cleaner'
+  gem 'capybara', '~> 2.7.1'
+  gem 'shoulda-matchers'
+  gem 'rspec-html-matchers'
+  gem 'launchy', require: false
+  gem 'selenium-webdriver'
 end
 

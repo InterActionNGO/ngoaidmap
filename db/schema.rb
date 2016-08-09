@@ -25,7 +25,9 @@ ActiveRecord::Schema.define(version: 20160114163212) do
     t.datetime "updated_at"
     t.integer  "what_id"
     t.string   "what_type"
-    t.boolean  "reviewed",   default: false
+    t.boolean  "reviewed",         default: false
+    t.string   "who_email"
+    t.string   "who_organization"
   end
 
   add_index "changes_history_records", ["user_id", "what_type", "when"], name: "index_changes_history_records_on_user_id_and_what_type_and_when", using: :btree
@@ -131,7 +133,7 @@ ActiveRecord::Schema.define(version: 20160114163212) do
   add_index "donors", ["name"], name: "index_donors_on_name", using: :btree
 
   create_table "geolocations", force: :cascade do |t|
-    t.integer  "uid"
+    t.string   "uid"
     t.string   "name"
     t.float    "latitude"
     t.float    "longitude"
@@ -139,7 +141,7 @@ ActiveRecord::Schema.define(version: 20160114163212) do
     t.string   "fcode"
     t.string   "country_code"
     t.string   "country_name"
-    t.integer  "country_uid"
+    t.string   "country_uid"
     t.string   "cc2"
     t.string   "g1"
     t.string   "g2"
@@ -151,10 +153,12 @@ ActiveRecord::Schema.define(version: 20160114163212) do
     t.string   "string"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.string   "g0"
   end
 
   add_index "geolocations", ["country_name"], name: "index_geolocations_on_country_name", using: :btree
   add_index "geolocations", ["country_uid"], name: "index_geolocations_on_country_uid", using: :btree
+  add_index "geolocations", ["g0"], name: "index_geolocations_on_g0", using: :btree
   add_index "geolocations", ["g1"], name: "index_geolocations_on_g1", using: :btree
   add_index "geolocations", ["g2"], name: "index_geolocations_on_g2", using: :btree
   add_index "geolocations", ["g3"], name: "index_geolocations_on_g3", using: :btree
@@ -547,6 +551,7 @@ ActiveRecord::Schema.define(version: 20160114163212) do
     t.string   "remember_token",                         limit: 40
     t.datetime "remember_token_expires_at"
     t.integer  "organization_id"
+    t.string   "role"
     t.boolean  "blocked",                                            default: false
     t.string   "site_id"
     t.text     "description"

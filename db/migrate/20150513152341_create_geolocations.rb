@@ -1,7 +1,7 @@
 class CreateGeolocations < ActiveRecord::Migration
   def self.up
     create_table :geolocations do |t|
-      t.integer :uid
+      t.string :uid
       t.string :name
       t.float :latitude
       t.float :longitude
@@ -9,7 +9,7 @@ class CreateGeolocations < ActiveRecord::Migration
       t.string :fcode
       t.string :country_code
       t.string :country_name
-      t.integer :country_uid
+      t.string :country_uid
       t.string :cc2
       t.string :g1
       t.string :g2
