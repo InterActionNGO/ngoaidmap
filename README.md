@@ -6,7 +6,7 @@
 2. [Rails Version](#rails-version)
 3. [Install System Dependencies](#install-system-dependencies)
 4. [Install the App](#install-the-app)
-5. [Front-End Build Tools](#front-end-build-tools)
+5. [Assets](#assets)
 6. [Running Tests](#running-tests)
 7. [Deploying](#deploying)
 
@@ -160,9 +160,9 @@ If you ever need to access the Rails console while working, start that with:
   bundle exec rails c
 ```
 
+### Assets
+Work with assets in the `/app/assets` directory. The Rails pipeline will compile the assets as you work in development mode.
 
-### Front-End Build Tools
-TBD
 
 ### Running Tests
 TBD
