@@ -134,6 +134,10 @@ We'll use `rake` to setup the database. This dependency should have been install
 We'll use Bower to manage our Grunt and asset build tool dependencies. However, first we need to install Bower with npm. As of this writing, we are using Bower version 1.7.9. The current version is recorded in `package.json`.
 
 ```
+  # If using nvm, npm commands are not available 
+  # until you install nvm
+  nvm install
+
   npm install bower@"1.7.9"
 ```
 
