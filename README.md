@@ -41,7 +41,7 @@ Ensure you have [Homebrew](http://brew.sh/) installed on your machine. We'll use
   brew install rbenv
   rbenv init
 ```
-It is recommended that you double-check the [installation instructions](https://github.com/rbenv/rbenv#homebrew-on-mac-os-x) for installing rbenv with Homebrew. Theres is also a git alternative to installing rbenv.
+It is recommended that you double-check the [installation instructions](https://github.com/rbenv/rbenv#homebrew-on-mac-os-x) for installing rbenv with Homebrew. There is a git alternative to installing rbenv as well.
 
 #### Install NVM:
 It is recommended that you use [NVM](https://github.com/creationix/nvm) to install and manage your [Node](http://nodejs.org/) and corresponding npm versions. There is no Homebrew option for installing NVM.
@@ -55,7 +55,7 @@ Install NVM per the directions in the [linked repo](https://github.com/creationi
 To get started, clone this repo:
 
 ```
-  git clone git@github.com:vigetlabs/bozzuto.git
+  git clone git@github.com:InterActionNGO/ngoaidmap.git
 ```
 
 #### Ruby
