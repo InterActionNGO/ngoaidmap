@@ -33,8 +33,9 @@
 # Textmate project files
 /*.tmproj
 
-# Node modules
+# Node modules and NPM
 /node_modules
+npm-debug.log
 
 .env
 bower_components/

@@ -131,19 +131,21 @@ We'll use `rake` to setup the database. This dependency should have been install
 ```
 
 #### Install NPM dependencies
-We'll use NPM and Bower our Grunt and asset build tool dependencies. All dependency versions are locked to one version and recorded in `package.json`.
+We'll use NPM to install Bower and other npm dependencies. All dependency versions are locked to one version and recorded in `package.json`.
 
 ```
   # If using nvm, npm commands are not available 
   # until you install nvm
   nvm install
+
   npm install
 ```
 
-NPM should have installed everything we need (including Bower), but just in case, let's make sure all Bower dependencies are installed:
+NPM should have installed everything we need (including Bower). Now that Bower is installed, use it to install further vendor files:
 ```
   npm run bower install
 ```
+These vendor files will install at the directory `/public/app/vendor`.
 
 
 #### Run the app

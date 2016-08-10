@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "grunt test",
+    "grunt": "grunt",
     "bower": "bower"
   },
   "repository": {
@@ -21,20 +22,6 @@
   },
   "homepage": "https://github.com/simbiotica/iom",
   "devDependencies": {
-    "bower": "1.7.9",
-    "grunt": "0.4.4",
-    "grunt-contrib-clean": "0.5.0",
-    "grunt-contrib-compass": "0.7.2",
-    "grunt-contrib-copy": "0.5.0",
-    "grunt-contrib-cssmin": "0.9.0",
-    "grunt-contrib-imagemin": "0.7.0",
-    "grunt-contrib-jshint": "0.10.0",
-    "grunt-contrib-requirejs": "0.4.4",
-    "grunt-contrib-uglify": "0.4.0",
-    "grunt-contrib-watch": "0.6.1",
-    "grunt-svgmin": "0.4.0",
-    "jshint-stylish": "0.1.5",
-    "load-grunt-tasks": "0.4.0",
-    "time-grunt": "0.3.1"
+    "bower": "1.7.9"
   }
 }
