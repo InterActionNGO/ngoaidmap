@@ -130,23 +130,20 @@ We'll use `rake` to setup the database. This dependency should have been install
   bundle exec rake db:seed
 ```
 
-#### Install Bower and Grunt Dependencies
-We'll use Bower to manage our Grunt and asset build tool dependencies. However, first we need to install Bower with npm. As of this writing, we are using Bower version 1.7.9. The current version is recorded in `package.json`.
+#### Install NPM dependencies
+We'll use NPM and Bower our Grunt and asset build tool dependencies. All dependency versions are locked to one version and recorded in `package.json`.
 
 ```
   # If using nvm, npm commands are not available 
   # until you install nvm
   nvm install
-
-  npm install bower@"1.7.9"
+  npm install
 ```
 
-Then install Bower dependencies:
+NPM should have installed everything we need (including Bower), but just in case, let's make sure all Bower dependencies are installed:
 ```
   npm run bower install
 ```
-
-**NOTE:**  In this repository, node modules and dependencies are currently checked into the repository in the `node_modules` directory, so you may get some git diffs after installing your local setup.
 
 
 #### Run the app
