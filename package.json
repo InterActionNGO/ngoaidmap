@@ -10,8 +10,6 @@
     "node": "5.11.0"
   },
   "scripts": {
-    "test": "grunt test",
-    "grunt": "grunt",
     "bower": "bower"
   },
   "bugs": {
