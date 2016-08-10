@@ -1,26 +1,23 @@
 {
-  "name": "iom",
+  "name": "ngoaidmap",
   "version": "2.0.0",
-  "description": "A webapp",
-  "main": "Gruntfile.js",
-  "directories": {
-    "test": "test"
+  "description": "Aid map which showcases NGO Projects and NGO global activity.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/InterActionNGO/ngoaidmap.git"
+  },
+  "engines": {
+    "node": "5.11.0"
   },
   "scripts": {
     "test": "grunt test",
     "grunt": "grunt",
     "bower": "bower"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/simbiotica/iom.git"
-  },
-  "author": "Simbiotica <http://simbiotica.es>",
-  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/simbiotica/iom/issues"
+    "url": "https://github.com/InterActionNGO/ngoaidmap/issues"
   },
-  "homepage": "https://github.com/simbiotica/iom",
+  "homepage": "https://github.com/InterActionNGO/ngoaidmap",
   "devDependencies": {
     "bower": "1.7.9"
   }
