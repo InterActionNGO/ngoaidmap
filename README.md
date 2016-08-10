@@ -78,7 +78,7 @@ Then run install to fetch the dependencies:
 #### PostgreSQL
 Start PostgreSQL:
 ```
-  brew services start postgreql
+  brew services start postgresql
 ```
 
 Later, you may need to restart or stop PostgreSQL:
