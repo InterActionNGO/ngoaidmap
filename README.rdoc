@@ -1,9 +1,0 @@
-== NGO FRONT APP + API
-
-* Ruby 2.2.1
-
-* Rails 4.2.1
-
-* PostgreSQL
-
-Fill .env.sample and rename to .env
