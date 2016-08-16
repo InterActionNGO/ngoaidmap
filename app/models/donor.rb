@@ -32,7 +32,7 @@ class Donor < ActiveRecord::Base
   has_many :donations, dependent: :destroy
   has_many :donated_projects, -> {where("(projects.end_date is null or projects.end_date > now())")}, through: :donations, source: :project
   #has_many :all_donated_projects, through: :donations, source: :project
-  has_many :projects, through: :donations, source: :project
+  has_many :projects, through: :donations
   has_many :offices, dependent: :destroy
 
   has_attached_file :logo, styles: {

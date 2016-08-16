@@ -13,6 +13,7 @@
 
 class Sector < ActiveRecord::Base
   has_and_belongs_to_many :projects
+
   scope :active, -> {joins(:projects).where("projects.end_date > ? AND projects.start_date < ?", Date.today.to_s(:db), Date.today.to_s(:db)).uniq}
   scope :organizations, -> (orgs){joins(:projects).joins('join organizations on projects.primary_organization_id = organizations.id').where(organizations: {id: orgs})}
   scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
@@ -21,14 +22,13 @@ class Sector < ActiveRecord::Base
   scope :site, -> (site){joins(projects: :sites).where(sites: {id: site})}
   scope :geolocation, -> (geolocation,level=0){joins(projects: :geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){joins(projects: :geolocations).where(geolocations: {country_uid: countries})}
-  def donors
-    Project.active.joins([:sectors, :donors]).where(sectors: {id: self.id}).pluck('donors.id', 'donors.name').uniq
-  end
+
   def self.counting_projects(options={})
     active = true if options && options[:status] == 'active'
     sql = SqlQuery.new(:sectors_count, active: active).sql
     Sector.find_by_sql(sql)
   end
+
   def self.fetch_all(options={})
     level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
     sectors = Sector.all
@@ -41,4 +41,9 @@ class Sector < ActiveRecord::Base
     sectors = sectors.donors(options[:donors])                                if options[:donors]
     sectors.uniq
   end
+
+  def donors
+    Project.active.joins([:sectors, :donors]).where(sectors: {id: self.id}).pluck('donors.id', 'donors.name').uniq
+  end
+
 end

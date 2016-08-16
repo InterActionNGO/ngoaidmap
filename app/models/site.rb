@@ -68,7 +68,7 @@ class Site < ActiveRecord::Base
   has_many :stats, :dependent => :destroy
 
   has_many :site_layers
-  has_many :layer, :through => :site_layers
+  has_many :layers, :through => :site_layers
 
   has_attached_file :logo, :styles => {
                                       :small => {
@@ -96,12 +96,15 @@ class Site < ActiveRecord::Base
 
   scope :published, -> {where(:status => true)}
   scope :draft,     -> {where(:status => false)}
+
   def featured_sites
     Site.where(featured: true).where.not(id: self.id)
   end
+
   def regions_select
     Geolocation.where(country_uid: self.geographic_context_country_id).where('adm_level > 0').select(:name, :uid, :adm_level).uniq.order('name ASC')
   end
+
   def pages_by_parent(parent_permalink)
     unless parent_page = self.pages.where(:permalink => parent_permalink, :published => true).first
       []
@@ -109,6 +112,7 @@ class Site < ActiveRecord::Base
       self.pages.where(:parent_id => parent_page.id).to_a
     end
   end
+
   def projects_sql(options = {})
     default_options = { :limit => 10, :offset => 0 }
     options = default_options.merge(options)
@@ -167,6 +171,7 @@ class Site < ActiveRecord::Base
     end
     projects
   end
+
   def set_cached_projects
     remove_cached_projects
 
@@ -177,6 +182,7 @@ class Site < ActiveRecord::Base
     #Rails.cache.clear
     $redis.flushall
   end
+
   def remove_cached_projects
     ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = #{self.id}")
   end

@@ -71,6 +71,10 @@ class Organization < ActiveRecord::Base
   has_many :media_resources, -> {where(element_type: 1).order('position ASC')}, :foreign_key => :element_id, :dependent => :destroy
   has_many :projects, foreign_key: :primary_organization_id
   has_many :awarded_projects, foreign_key: :prime_awardee_id, class_name: 'Project'
+  has_many :sites, foreign_key: :project_context_organization_id
+  has_many :donations, through: :projects
+
+  has_one :user
 
   has_attached_file :logo, styles: {
                                       small: {
@@ -84,9 +88,7 @@ class Organization < ActiveRecord::Base
                                     },
                             url: "/system/:attachment/:id/:style.:extension"
 
-  has_many :sites, foreign_key: :project_context_organization_id
-  has_many :donations, through: :projects
-  has_one :user
+
   scope :active, -> {joins(:projects).where("projects.end_date IS NULL OR (projects.end_date > ? AND projects.start_date <= ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :organizations, -> (orgs){where(organizations: {id: orgs})}
   scope :site, -> (site){joins(projects: :sites).where(sites: {id: site})}
@@ -99,9 +101,7 @@ class Organization < ActiveRecord::Base
     LEFT OUTER JOIN donors ON (donors.id = donations.donor_id)').where(donors: {id: donors})}
   scope :geolocation, -> (geolocation,level=0){joins(projects: :geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){joins(projects: :geolocations).where(geolocations: {country_uid: countries})}
-  def projects_count
-    self.projects.active.size
-  end
+
   def self.fetch_all(options={})
     level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
     organizations = Organization.all
@@ -114,6 +114,10 @@ class Organization < ActiveRecord::Base
     organizations = organizations.sectors(options[:sectors])                              if options[:sectors]
     organizations = organizations.donors(options[:donors])                                if options[:donors]
     organizations
+  end
+
+  def projects_count
+    self.projects.active.size
   end
 
   # IATI

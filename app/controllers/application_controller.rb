@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
           # 'ngoaidmap.dev'
           'localhost'
         when 'test'
-          'example.com'
+          'ngoaidmap.test'
         when 'staging'
           Settings.main_site_host
         when 'production'

@@ -50,7 +50,7 @@ unless Settings.any?
   Settings.create({
     data: {
       "geoiq_parameter_2"=>"",
-      "main_site_host"=>"ngoaidmap.test",
+      "main_site_host"=>"localhost:3000",
       "default_email"=>"",
       "default_contact_name"=>"",
       "geoiq_parameter_1"=>""

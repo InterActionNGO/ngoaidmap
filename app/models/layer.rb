@@ -18,5 +18,6 @@
 
 class Layer < ActiveRecord::Base
   has_many  :site_layers
-  has_many  :site, through: :site_layers
+  has_many  :sites, through: :site_layers
+
 end

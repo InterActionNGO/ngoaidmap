@@ -14,9 +14,6 @@
 
 class Resource < ActiveRecord::Base
 
-  #acts_as_resource
-  belongs_to :project
-
   serialize :site_specific_information
 
   def sites_ids=(value)

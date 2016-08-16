@@ -56,6 +56,7 @@ class Project < ActiveRecord::Base
   has_many :donations, :dependent => :destroy
   has_many :donors, :through => :donations
   has_and_belongs_to_many :sites
+
   scope :active, -> {where("end_date > ? AND start_date <= ?", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :inactive, -> {where("end_date < ? OR start_date > ?", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :closed, -> {where("end_date < ?", Date.today.to_s(:db))}
@@ -73,18 +74,6 @@ class Project < ActiveRecord::Base
   scope :text_query, -> (q){where('projects.name ilike ? OR projects.description ilike ?', "%%#{q}%%", "%%#{q}%%")}
   scope :starting_after, -> (date){where "start_date > ?", date}
   scope :ending_before, -> (date){where "end_date < ?", date}
-
-  def self.custom_fields
-    (columns.map{ |c| c.name }).map{ |c| "#{self.table_name}.#{c}" }
-  end
-
-  def active?
-    self.end_date > Date.today
-  end
-
-  def countries
-    Geolocation.where(uid: self.geolocations.pluck(:country_uid)).uniq
-  end
 
   def self.fetch_all(options = {}, from_api = true)
     level = Geolocation.find_by(uid: options[:geolocation]).try(:adm_level) || 0 if options[:geolocation]
@@ -140,16 +129,6 @@ class Project < ActiveRecord::Base
     projects = Project.find_by_sql(sql)
   end
 
-  def related(site, limit = 2)
-    if result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(primary_organization_id: self.primary_organization_id).where(sites: {id: site.id}).active.uniq.limit(limit)
-      result
-    elsif result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(sites: {id: site.id}).active.uniq.limit(limit)
-      result
-    else
-      result = Project.where.not(id: self.id).uniq.limit(limit)
-    end
-  end
-
   def self.export_headers(options = {})
     options = {show_private_fields: false}.merge(options || {})
 
@@ -157,6 +136,28 @@ class Project < ActiveRecord::Base
       %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups location verbatim_location idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status donors)
     else
       %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups location project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status donors)
+    end
+  end
+
+  def self.custom_fields
+    (columns.map{ |c| c.name }).map{ |c| "#{self.table_name}.#{c}" }
+  end
+
+  def active?
+    self.end_date > Date.today
+  end
+
+  def countries
+    Geolocation.where(uid: self.geolocations.pluck(:country_uid)).uniq
+  end
+
+  def related(site, limit = 2)
+    if result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(primary_organization_id: self.primary_organization_id).where(sites: {id: site.id}).active.uniq.limit(limit)
+      result
+    elsif result = Project.where.not(id: self.id).joins(:geolocations, :primary_organization, :sites).where(sites: {id: site.id}).active.uniq.limit(limit)
+      result
+    else
+      result = Project.where.not(id: self.id).uniq.limit(limit)
     end
   end
 
@@ -195,6 +196,7 @@ class Project < ActiveRecord::Base
     activity_status_for_export 'status'
     donors_for_export 'donors'
   end
+
   comma do
     primary_organization 'organization' do |primary_organization| primary_organization.name end
     intervention_id 'interaction_intervention_id'
