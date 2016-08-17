@@ -50,7 +50,6 @@ Rails.application.routes.draw do
   get 'profile/country/:id', :to => 'reports#country_profile', :as => 'report_country_profile'
   get 'profile/sector/:id', :to => 'reports#sector_profile', :as => 'report_sector_profile'
   get 'profile/donor/:id', :to => 'reports#donor_profile', :as => 'report_donor_profile'
-  get 'home2' , to: 'sites#home'
   get 'about', to: 'sites#about'
   get 'about-interaction', to: 'sites#about_interaction'
   get 'about-data' , to: 'sites#about_data'
@@ -60,7 +59,6 @@ Rails.application.routes.draw do
   get 'make-your-own-map' , to: 'sites#make_your_own_map'
   get 'faq', to: 'sites#faq'
   get 'contact', to: 'sites#contact'
-  get 'explore' , to: 'sites#explore'
 
   # Session
   resource :session, :only => [:new, :create, :destroy]
