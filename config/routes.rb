@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   get 'profile/country/:id', :to => 'reports#country_profile', :as => 'report_country_profile'
   get 'profile/sector/:id', :to => 'reports#sector_profile', :as => 'report_sector_profile'
   get 'profile/donor/:id', :to => 'reports#donor_profile', :as => 'report_donor_profile'
+  
+
   get 'about', to: 'sites#about'
   get 'about-interaction', to: 'sites#about_interaction'
   get 'about-data' , to: 'sites#about_data'
@@ -71,7 +73,7 @@ Rails.application.routes.draw do
   # resources :reports
   resources :donors,        :only => [:index, :show]
   resources :offices,       :only => [:show]
-  resources :projects,      :only => [:index, :show]
+  resources :projects,      :only => [:show]
   resources :organizations, :only => [:index, :show]
 
   get '/downloads', to: 'downloads#index', as: 'download'

@@ -18,20 +18,6 @@ class ReportsController < ApplicationController
     params[:id] = 'report'
 	end
 
-	# def report
-	# 	@data = Project.report(params)
-	# 	respond_to do |format|
-	# 		format.html
- #      format.json { render :json => @data }
-	# 	end
-	# end
-
-  # def filter_by_indicator
-  #   indicator = params[:indicator_name]
-  #   operator = params[:operator]
-  #   value = params[:indicator_value]
-  # end
-
   def list
     @table = Project.get_list(params)
     respond_to do |format|
