@@ -18,7 +18,7 @@ class Sector < ActiveRecord::Base
   scope :organizations, -> (orgs){joins(:projects).joins('join organizations on projects.primary_organization_id = organizations.id').where(organizations: {id: orgs})}
   scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
-  scope :donors, -> (donors){joins(projects: :donors).where(donors: {id: donors})}
+  scope :donors, -> (donors){joins(projects: :donations).where(donations: {donor_id: donors})}
   scope :site, -> (site){joins(projects: :sites).where(sites: {id: site})}
   scope :geolocation, -> (geolocation,level=0){joins(projects: :geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){joins(projects: :geolocations).where(geolocations: {country_uid: countries})}
@@ -43,7 +43,7 @@ class Sector < ActiveRecord::Base
   end
 
   def donors
-    Project.active.joins([:sectors, :donors]).where(sectors: {id: self.id}).pluck('donors.id', 'donors.name').uniq
+    Project.active.joins([:sectors, :donors]).where(sectors: {id: self.id}).pluck('organizations.id', 'organizations.name').uniq
   end
 
 end

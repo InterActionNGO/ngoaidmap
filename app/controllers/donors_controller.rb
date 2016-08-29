@@ -7,9 +7,9 @@ class DonorsController < ApplicationController
   layout :sites_layout
 
   def show
-    @donor = Donor.find(params[:id])
+    @donor = Organization.with_donations.find(params[:id])
   end
   def resource
-    Donor
+    Organization
   end
 end

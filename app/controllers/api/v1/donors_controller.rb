@@ -2,14 +2,14 @@ module Api
   module V1
     class DonorsController < ApiController
       def index
-        @donors = Donor.fetch_all(donor_params)
+        @donors = Organization.fetch_all_donors(donor_params)
         render json: @donors, root: 'data',
         meta: { total: @donors.size },
-        each_serializer: DonorPreviewSerializer
+        each_serializer: OrganizationPreviewSerializer
       end
       def show
-        @donor = Donor.find(params[:id])
-        render json: @donor, include: ['donated_projects', 'offices']
+        @donor = Organization.with_donations.find(params[:id])
+        render json: @donor, include: ['all_donated_projects', 'offices']
       end
 
       def donor_params

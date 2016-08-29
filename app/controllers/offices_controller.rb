@@ -4,7 +4,7 @@ class OfficesController < ApplicationController
 
   def show
     @office = Office.find(params[:id])
-    @donor = @office.donor
+    @organization = @office.organization
 
 
     @projects = @office.projects.all

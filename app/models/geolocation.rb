@@ -36,7 +36,7 @@ class Geolocation < ActiveRecord::Base
   scope :site, -> (site) {joins(projects: :sites).where(sites: {id: site})}
   scope :countries, -> (countries) {where(geolocations: {country_uid: countries})}
   scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
-  scope :donors, -> (donors){joins(projects: :donors).where(donors: {id: donors})}
+  scope :donors, -> (donors){joins(projects: :donations).where(donations: {donor_id: donors})}
   scope :geolocation, -> (geolocation){where(geolocations: {uid: geolocation})}
   scope :organizations, -> (orgs){joins(:projects).joins('join organizations on projects.primary_organization_id = organizations.id').where(organizations: {id: orgs})}
   def self.sum_projects(options='')

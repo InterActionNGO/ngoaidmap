@@ -5,7 +5,7 @@ namespace :iom do
       filename = File.expand_path(File.join(Rails.root, 'db', 'import', "new_awardees.csv"))
       CSV.foreach(filename, :headers => false, :col_sep => ';') do |aw|
         a = acronimize(aw[0])
-        organization = Organization.create!(name: aw[0], interaction_member: true, organization_id: a)
+        organization = Organization.create!(name: aw[0], organization_id: a)
         puts a
       end
       puts 'organizations created.'

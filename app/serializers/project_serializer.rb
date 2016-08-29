@@ -50,7 +50,7 @@ class ProjectSerializer < ActiveModel::Serializer
   has_one :prime_awardee, serializer: OrganizationPreviewSerializer
   has_many :sectors, serializer: SectorPreviewSerializer
   has_many :geolocations, serializer: GeolocationPreviewSerializer
-  has_many :donors, serializer: DonorPreviewSerializer
+  has_many :donors, serializer: OrganizationPreviewSerializer
 
   def type
     'projects'

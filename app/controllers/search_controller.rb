@@ -32,7 +32,7 @@ class SearchController < ApplicationController
     end
 
     if params[:donors].present?
-      @filtered_donors = Donor.find_by_sql("select d.id, d.name from donors as d where d.id in (#{params[:donors].join(",")})")
+      @filtered_donors = Organization.with_donations.find(params[:donors])
       filtered_donors_where = "where d.id not in (#{params[:donors].join(",")})"
     end
 
@@ -126,14 +126,14 @@ class SearchController < ApplicationController
 
         sql = <<-SQL
           SELECT DISTINCT d.id, d.name
-          FROM donors AS d
+          FROM organizations AS d
           INNER JOIN projects AS p ON (p.end_date is NULL OR p.end_date > now()) #{q_filter}
           INNER JOIN projects_sites AS ps ON ps.project_id = p.id AND ps.site_id = #{@site.id}
           INNER JOIN donations AS dn ON dn.donor_id = d.id AND dn.project_id = p.id
           #{filtered_donors_where}
           ORDER BY d.name
         SQL
-        @donors = Donor.find_by_sql(sql)
+        @donors = Organization.find_by_sql(sql)
 
       end
       format.js do

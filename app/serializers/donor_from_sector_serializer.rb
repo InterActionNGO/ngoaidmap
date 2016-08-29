@@ -8,6 +8,6 @@ class DonorFromSectorSerializer < ActiveModel::Serializer
     object[:name]
   end
   def type
-    'donors'
+    'organizations'
   end
 end

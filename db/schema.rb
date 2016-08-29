@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114163212) do
+ActiveRecord::Schema.define(version: 20160822165723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,31 +107,6 @@ ActiveRecord::Schema.define(version: 20160114163212) do
   add_index "donations", ["donor_id"], name: "index_donations_on_donor_id", using: :btree
   add_index "donations", ["project_id"], name: "index_donations_on_project_id", using: :btree
 
-  create_table "donors", force: :cascade do |t|
-    t.string   "name",                      limit: 2000
-    t.text     "description"
-    t.string   "website"
-    t.string   "twitter"
-    t.string   "facebook"
-    t.string   "contact_person_name"
-    t.string   "contact_company"
-    t.string   "contact_person_position"
-    t.string   "contact_email"
-    t.string   "contact_phone_number"
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
-    t.integer  "logo_file_size"
-    t.datetime "logo_updated_at"
-    t.text     "site_specific_information"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "iati_organizationid"
-    t.string   "organization_type"
-    t.integer  "organization_type_code"
-  end
-
-  add_index "donors", ["name"], name: "index_donors_on_name", using: :btree
-
   create_table "geolocations", force: :cascade do |t|
     t.string   "uid"
     t.string   "name"
@@ -214,7 +189,7 @@ ActiveRecord::Schema.define(version: 20160114163212) do
   add_index "media_resources", ["element_type", "element_id"], name: "index_media_resources_on_element_type_and_element_id", using: :btree
 
   create_table "offices", force: :cascade do |t|
-    t.integer  "donor_id"
+    t.integer  "organization_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -225,7 +200,6 @@ ActiveRecord::Schema.define(version: 20160114163212) do
     t.text     "description"
     t.float    "budget"
     t.string   "website"
-    t.integer  "national_staff"
     t.string   "twitter"
     t.string   "facebook"
     t.string   "hq_address"
@@ -244,7 +218,6 @@ ActiveRecord::Schema.define(version: 20160114163212) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
-    t.string   "international_staff"
     t.string   "contact_name"
     t.string   "contact_position"
     t.string   "contact_zip"
@@ -252,17 +225,6 @@ ActiveRecord::Schema.define(version: 20160114163212) do
     t.string   "contact_state"
     t.string   "contact_country"
     t.string   "donation_country"
-    t.integer  "estimated_people_reached"
-    t.float    "private_funding"
-    t.float    "usg_funding"
-    t.float    "other_funding"
-    t.float    "private_funding_spent"
-    t.float    "usg_funding_spent"
-    t.float    "other_funding_spent"
-    t.float    "spent_funding_on_relief"
-    t.float    "spent_funding_on_reconstruction"
-    t.integer  "percen_relief"
-    t.integer  "percen_reconstruction"
     t.string   "media_contact_name"
     t.string   "media_contact_position"
     t.string   "media_contact_phone_number"
@@ -279,9 +241,9 @@ ActiveRecord::Schema.define(version: 20160114163212) do
     t.string   "organization_type"
     t.integer  "organization_type_code"
     t.string   "iati_organizationid"
-    t.boolean  "publishing_to_iati",              default: false
-    t.string   "membership_status",               default: "Non Member"
-    t.boolean  "interaction_member",              default: false
+    t.boolean  "publishing_to_iati",             default: false
+    t.string   "membership_status",              default: "Non Member"
+    t.integer  "old_donor_id"
   end
 
   add_index "organizations", ["name"], name: "index_organizations_on_name", using: :btree

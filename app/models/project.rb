@@ -68,7 +68,7 @@ class Project < ActiveRecord::Base
   scope :site, -> (site){joins(:sites).where(sites: {id: site})}
   scope :projects, -> (projects){where(projects: {id: projects})}
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
-  scope :donors, -> (donors){where(donors: {id: donors})}
+  scope :donors, -> (donors){joins(:donations).where(donations: {donor_id: donors})}
   scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
   scope :text_query, -> (q){where('projects.name ilike ? OR projects.description ilike ?', "%%#{q}%%", "%%#{q}%%")}
@@ -255,7 +255,7 @@ class Project < ActiveRecord::Base
 
   def donors_for_export
     if self.donors
-      Donor.joins(:projects).where(projects: {id: self.id}).map{ |se| se.name }.join('|')
+      donors.map{ |org| org.name }.join('|')
     end
   end
 
@@ -385,7 +385,7 @@ class Project < ActiveRecord::Base
                  INNER JOIN projects_sectors ps ON (p.id = ps.project_id)
                  LEFT OUTER JOIN sectors s ON (s.id = ps.sector_id)
                  LEFT OUTER JOIN donations dt ON (p.id = dt.project_id)
-                 LEFT OUTER JOIN donors d ON (d.id = dt.donor_id)
+                 LEFT OUTER JOIN organizations d ON (d.id = dt.donor_id)
                  INNER JOIN organizations o ON (p.primary_organization_id = o.id)
                  INNER JOIN geolocations_projects gp ON (p.id = gp.project_id)
                  INNER JOIN geolocations g ON (g.id = gp.geolocation_id)
@@ -410,7 +410,7 @@ class Project < ActiveRecord::Base
                  INNER JOIN projects_sectors ps ON (p.id = ps.project_id)
                  LEFT OUTER JOIN sectors s ON (s.id = ps.sector_id)
                  LEFT OUTER JOIN donations dt ON (p.id = dt.project_id)
-                 LEFT OUTER JOIN donors d ON (d.id = dt.donor_id)
+                 LEFT OUTER JOIN organizations d ON (d.id = dt.donor_id)
                  INNER JOIN organizations o ON (p.primary_organization_id = o.id)
                  INNER JOIN geolocations_projects gp ON (p.id = gp.project_id)
                  INNER JOIN geolocations g ON (g.id = gp.geolocation_id)

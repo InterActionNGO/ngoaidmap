@@ -3,14 +3,14 @@
 # Table name: offices
 #
 #  id         :integer          not null, primary key
-#  donor_id   :integer
+#  organization_id   :integer
 #  name       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class Office < ActiveRecord::Base
-  belongs_to :donor
+  belongs_to :organization
   has_many :donations
   has_many :projects, through: :donations
 end

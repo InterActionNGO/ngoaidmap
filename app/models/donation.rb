@@ -12,6 +12,6 @@
 
 class Donation < ActiveRecord::Base
   belongs_to :project
-  belongs_to :donor
+  belongs_to :donor, class_name: 'Organization'
   belongs_to :office
 end

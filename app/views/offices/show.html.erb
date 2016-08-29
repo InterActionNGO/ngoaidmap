@@ -4,9 +4,9 @@
       <div class="left" id="relative_content">
         <div class="outer_head">
           <div class="head">
-            <%= link_to "Office of #{@donor.name}", donor_path(@donor) %>
+            <%= link_to "Office of #{@organization.name}", organization_path(@organization) %>
             <h1><%= @office.name.html_safe %></h1>
-            <p>Funding <%= pluralize(@donor.donated_projects_count(@site), 'project', 'projects') %></p>
+            <p>Funding <%= pluralize(@organization.donors.site(@site).count, 'project', 'projects') %></p>
           </div>
         </div>
         <div class="results_list" id="projects">
@@ -19,7 +19,7 @@
         <div class="block border statistics">
           <h2>PROJECT <%= @site.word_for_cluster_sector %></h2>
           <ul class="statistics_list">
-            <% @donor.projects_sectors_or_clusters(@site)[0...3].each do |category,count| %>
+            <% @organization.projects_sectors_or_clusters(@site)[0...3].each do |category,count| %>
               <li>
                 <div class="tooltip">
                   <span class="body_tooltip">
@@ -27,12 +27,12 @@
                   </span>
                   <span class="bottom_tooltip"></span>
                 </div>
-                <a class="<%= category.css_class %> icon_statistics" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @donor.projects_sectors_or_clusters(@site)[0...3].map{|e| e.last}.max) %>px"><%= count %></span></a>
+                <a class="<%= category.css_class %> icon_statistics" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @organization.projects_sectors_or_clusters(@site)[0...3].map{|e| e.last}.max) %>px"><%= count %></span></a>
               </li>
             <% end %>
           </ul>
-          <% unless @donor.projects_sectors_or_clusters(@site).size < 4%>
-              <p class="other">and <%= pluralize(@donor.projects_sectors_or_clusters(@site).size - 3,"more #{@site.word_for_cluster_sector.singularize}", "more #{@site.word_for_cluster_sector.pluralize}") %></p>
+          <% unless @organization.projects_sectors_or_clusters(@site).size < 4%>
+              <p class="other">and <%= pluralize(@organization.projects_sectors_or_clusters(@site).size - 3,"more #{@site.word_for_cluster_sector.singularize}", "more #{@site.word_for_cluster_sector.pluralize}") %></p>
           <% end %>
         </div>
 
@@ -40,28 +40,28 @@
         <div class="block border statistics">
           <h2>PROJECT LOCATIONS</h2>
           <% if @site.navigate_by_country? %>
-            <%= raw(projects_by_location(@site, @donor.projects_countries(@site))) %>
+            <%= raw(projects_by_location(@site, @organization.projects_countries(@site))) %>
           <% else %>
-            <%= raw(projects_by_location(@site, @donor.projects_regions(@site))) %>
+            <%= raw(projects_by_location(@site, @organization.projects_regions(@site))) %>
           <% end %>
         </div>
 
-        <% unless @donor.resources.empty? %>
+        <% unless @organization.resources.empty? %>
         <div class="block border">
           <h2>Additional information</h2>
           <ul>
-            <% @donor.resources.each do |resource| %>
+            <% @organization.resources.each do |resource| %>
             <li><%= link_to(resource.title, resource.url, :rel => 'nofollow', :target => '_blank') %></li>
             <% end %>
           </ul>
         </div>
         <% end %>
 
-        <% unless (@donor.contact_person_name.blank?)&&(@donor.contact_person_position.blank?)&&(@donor.contact_company.blank?)&&(@donor.contact_phone_number.blank?)&&(@donor.contact_email.blank?) %>
+        <% unless (@organization.contact_name.blank?)&&(@organization.contact_position.blank?)&&(@organization.contact_phone_number.blank?)&&(@organization.contact_email.blank?) %>
         <div class="block border last">
           <h2>Contact information</h2>
-          <p><strong><%= @donor.contact_person_name %></strong><br/><%= @donor.contact_person_position %><br/><%= @donor.contact_company %></p>
-          <p><%= @donor.contact_phone_number %><br/><%= link_to(@donor.contact_email, "mailto:#{@donor.contact_email}") %></p>
+          <p><strong><%= @organization.contact_name %></strong><br/><%= @organization.contact_position %></p>
+          <p><%= @organization.contact_phone_number %><br/><%= link_to(@organization.contact_email, "mailto:#{@organization.contact_email}") %></p>
         </div>
         <% end %>
 

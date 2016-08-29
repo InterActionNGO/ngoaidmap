@@ -78,7 +78,6 @@ RSpec.shared_context "setup_global_site" do
       description:                     "Save the Children invests in childhood – every day, in times of crisis and for our future. In the United States and around the world, we are dedicated to ensuring every child has the best chance for success. Our pioneering programs give children a healthy start, the opportunity to learn and protection from harm. Our advocacy efforts provide a voice for children who cannot speak for themselves. As the leading expert on children, we inspire and achieve lasting impact for millions of the world’s most vulnerable girls and boys. By transforming children’s lives now, we change the course of their future and ours.",
       budget:                          87173102.0,
       website:                         "http://www.savethechildren.org",
-      national_staff:                  0,
       twitter:                         "https://twitter.com/SavetheChildren",
       facebook:                        "https://www.facebook.com/savethechildren",
       hq_address:                      "899 North Capitol Street, NE, Suite 900",
@@ -95,14 +94,6 @@ RSpec.shared_context "setup_global_site" do
       contact_zip:                     "20002",
       contact_city:                    "Washington",
       contact_state:                   "District of Columbia",
-      estimated_people_reached:        1,
-      private_funding_spent:           37712734.0,
-      usg_funding_spent:               8374366.0,
-      other_funding_spent:             nil,
-      spent_funding_on_relief:         100.0,
-      spent_funding_on_reconstruction: 0.0,
-      percen_relief:                   100,
-      percen_reconstruction:           0,
       media_contact_name:              " Francine Uenuma",
       media_contact_position:          " Director, Media Relations ＆ Communications",
       media_contact_phone_number:      " 202-640-6810",
@@ -160,7 +151,7 @@ RSpec.shared_context "setup_global_site" do
     })
   end
 
-  let!(:wfp_donor) { create(:donor, name: "World Food Program (WFP)") }
+  let!(:wfp_donor) { create(:organization, name: "World Food Program (WFP)") }
 
   let!(:project1_donation) { create(:donation, project: project1, donor: wfp_donor)}
   let!(:project2_donation) { create(:donation, project: project2, donor: wfp_donor)}
