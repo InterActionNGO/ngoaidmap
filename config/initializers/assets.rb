@@ -35,5 +35,13 @@ Rails.application.config.assets.precompile += %w( embed.css )
 Rails.application.config.assets.precompile += %w( modernizr/modernizr.custom.js )
 Rails.application.config.assets.precompile += %w( jquery-ui/css/no-theme/jquery-ui-1.10.4.custom.css )
 
+Rails.application.config.assets.precompile += %w( backoffice.css )
+Rails.application.config.assets.precompile += %w( backoffice/jscroll.css )
+Rails.application.config.assets.precompile += %w( backoffice/chosen.css )
+Rails.application.config.assets.precompile += %w( backoffice/plugins/fineuploader-3.3.0.css )
+Rails.application.config.assets.precompile += %w( backoffice/jquery-ui-1.7.2.custom.css )
+Rails.application.config.assets.precompile += %w( backoffice/layout.css )
+Rails.application.config.assets.precompile += %w( backoffice/smbtc-layout.css )
+
 Rails.application.config.assets.precompile += %w( application.js )
 Rails.application.config.assets.precompile += %w( report.js )

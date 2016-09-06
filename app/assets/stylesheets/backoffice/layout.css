@@ -55,12 +55,6 @@ input[type="text"], textarea {
   src: local("☺"), url("/app/fonts/akzidenz/12_akzidenz_grotesk_roman___05003-webfont.woff") format("woff"), url("/app/fonts/akzidenz/12_akzidenz_grotesk_roman___05003-webfont.ttf") format("truetype"), url("/app/fonts/akzidenz/12_akzidenz_grotesk_roman___05003-webfont.svg") format("svg");
   font-weight: normal;
   font-style: normal; }
-@font-face {
-  font-family: "Museo Sans";
-  src: url("/app/fonts/museosans_500-webfont.eot");
-  src: local("☺"), url("/app/fonts/museosans_500-webfont.woff") format("woff"), url("/app/fonts/museosans_500-webfont.ttf") format("truetype"), url("/app/fonts/museosans_500-webfont.svg#webfontX97tj7j1") format("svg");
-  font-weight: normal;
-  font-style: normal; }
 
 .hidden {
   display: none; }

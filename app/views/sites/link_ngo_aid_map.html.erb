@@ -9,13 +9,22 @@
       <div class="body">
 <p>We encourage you to share your work through NGO Aid Map. InterAction has created buttons which you can use to link to your organization’s page on Haiti Aid Map and/or Food Security Aid Map through your own website.  </p>
 <p>
-  <a class="button" href="/images/sites/home/ngo_button.gif"><img src="/images/sites/home/ngo_button.gif"/></a><br/>
-  <a class="button" href="/images/sites/home/haiti_button.gif"><img src="/images/sites/home/haiti_button.gif"/></a><br/>
-  <a class="button" href="/images/sites/home/food_button.gif"><img src="/images/sites/home/food_button.gif"/></a><br>
+  <a href="<%= image_path 'sites/home/ngo_button.gif' %>" target="_blank">
+    <%= image_tag "sites/home/ngo_button.gif", :alt  => "Interaction's NGO Aid Map Badge" %>
+  </a>
+  <br/>
+  <a href="<%= image_path 'sites/home/haiti_button.gif' %>" target="_blank">
+    <%= image_tag "sites/home/haiti_button.gif", :alt  => "Interaction's Haiti Aid Map Badge" %>
+  </a>
+  <br/>
+  <a href="<%= image_path 'sites/home/food_button.gif' %>" target="_blank">
+    <%= image_tag "sites/home/food_button.gif", :alt  => "Interaction's Food Security Aid Map Badge" %>
+  </a>
+  <br>
 </p>
 <h3>Instructions</h3>
   <ul>
-    <li> Right click on an image above and copy image location</li>
+    <li>Click on an image above to open it in a new tab. Copy this URL.</li>
     <li>Place image on your website</li>
     <li>Hyperlink image to your organization's page on Haiti Aid Map or Food Security Aid Map</li>
   </ul>
