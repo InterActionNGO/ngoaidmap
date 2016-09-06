@@ -62,16 +62,9 @@ Rails.application.routes.draw do
   get 'faq', to: 'sites#faq'
   get 'contact', to: 'sites#contact'
 
-  # Session
-  resource :session, :only => [:new, :create, :destroy]
-  get 'login' , to: 'sessions#new', :as => :login
-  get 'logout' , to: 'sessions#destroy', :as => :logout
-
-  resource :passwords
-
   # Front urls
   # resources :reports
-  resources :donors,        :only => [:index, :show]
+  resources :donors,        :only => [:show]
   resources :offices,       :only => [:show]
   resources :projects,      :only => [:show]
   resources :organizations, :only => [:index, :show]

@@ -53,6 +53,16 @@ iframe {
   margin: 20px auto;
 }
 
+code {
+  display: block;
+  padding: 20px;
+  font-size: 14px;
+  font-weight: normal;
+  font-family: $font-family;
+  color: $color-3;
+  border: 1px solid $color-4;
+}
+
 sup {
   font-size: .83em;
   vertical-align: super;
@@ -133,4 +143,53 @@ input {
   border: none;
   color: $color-5;
   font-size: 14px;
+}
+
+
+
+/*********************************************************************************************/
+/**************************************Accessibilty********************************************/
+/*********************************************************************************************/
+
+@mixin screen-reader {
+  border: 0; 
+  clip: rect(0 0 0 0); 
+  height: 1px;
+  margin: -1px; 
+  overflow: hidden; 
+  padding: 0; 
+  position: absolute;
+  width: 1px;
+}
+
+@mixin show-screen-reader {
+  clip: auto; 
+  height: auto;
+  margin: 0; 
+  overflow: visible; 
+  padding: 0; 
+  position: static; 
+  width: auto;
+}
+
+.screen-reader {
+  @include screen-reader;
+}
+
+.skip-link {
+  @include screen-reader;
+
+  &:focus {
+    @include show-screen-reader;
+
+    background-color: black;
+    color: white;
+    display: block;
+    font-size: 18px;
+    font-weight: normal;
+    left: 0;
+    padding: 5px 10px;
+    position: absolute;
+    top: 0;
+  }
 }

@@ -1,10 +1,16 @@
 <div id="embedMapView" class="mod-overlay">
   <div class="mod-overlay-content">
     <div class="text">
-      <a class="mod-overlay-close" href="#">x</a>
+      <button class="mod-overlay-close">
+        <span class="screen-reader">Close</span>
+        <span aria-hidden="true">x</span>
+      </button>
       <h2>Embed this map</h2>
       <p>Copy this code and paste it in your HTML page for embedding the map.</p>
-      <textarea><iframe src="<%= url_with_embed_param %>" frameborder="0" width="600" height="400"></iframe></textarea>
+
+      <code>
+        &lt;iframe src="<%= url_with_embed_param %>" frameborder="0" width="600" height="400"&gt;&lt;/iframe&gt;
+      </code>
     </div>
   </div>
 </div>

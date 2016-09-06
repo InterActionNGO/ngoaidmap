@@ -29,17 +29,19 @@
     <%= csrf_meta_tag %>
   </head>
   <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %> <%= "section-" + @page.top_parent.permalink if @page.present? %> <%= "linos-" + @page.permalink if @page.present? %>">
-    <%= render 'layouts/header' %>
 
-    <%= yield %>
+    <%= render 'partials/header' %>
 
-    <%= render 'layouts/footer' %>
+    <main id="main-content">
+      <%= yield %>
+    </main>
+
+    <%= render 'partials/footer' %>
 
     <%= render 'new_partials/embed_map' %>
 
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyA2xfzq0KmJZIlGIpxXK1CjXa6enzmPGlM" %>
     <%= javascript_include_tag "https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js" %>
-    <%#= requirejs_include_tag "main" %>
     <%= requirejs_include_tag "application" %>
 
     <% if Rails.env.production? %>
