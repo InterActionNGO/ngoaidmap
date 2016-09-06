@@ -32,9 +32,9 @@
 
   <footer class="mod-footer">
     <div class="row">
-      <div class="mod-footer-top">
+      <nav class="mod-footer-top">
         <div class="grid-6 offset-5">
-          <%= render 'new_partials/main_menu' %>
+          <%= render 'partials/main_menu' %>
         </div>
         <div class="grid-4">
           <a href="https://<%= Settings.main_site_host %>">
@@ -43,10 +43,10 @@
         </div>
         <div class="grid-2">
           <a href="http://www.interaction.org/" target="_blank">
-            <%= image_tag "footer_interaction.svg", :alt  => "Inter Action", :class  => "aid-map-logo", :width => '95', :height => '105' %>
+            <%= image_tag "footer_interaction.svg", :alt  => "An initiative by Inter Action", :class  => "aid-map-logo", :width => '95', :height => '105' %>
           </a>
         </div>
-      </div>
+      </nav>
     </div>
 
     <div class="mod-footer-bottom">
