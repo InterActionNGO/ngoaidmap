@@ -14,6 +14,10 @@ RSpec.describe Project, type: :model do
   it { should have_many(:media_resources).with_foreign_key(:element_id).dependent(:destroy) }
   it { should have_many(:donations).dependent(:destroy) }
   it { should have_many(:donors).through(:donations) }
+  it { should have_many(:partnerships).dependent(:destroy) }
+  it { should have_many(:partners).through(:partnerships) }
+  it { should have_many(:implementer_partnerships).dependent(:destroy) }
+  it { should have_many(:implementers).through(:implementer_partnerships) }
   it { should have_and_belong_to_many(:sites) }
 
 end

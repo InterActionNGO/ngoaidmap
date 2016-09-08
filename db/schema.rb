@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822165723) do
+ActiveRecord::Schema.define(version: 20160908201141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,13 @@ ActiveRecord::Schema.define(version: 20160822165723) do
   add_index "geolocations_projects", ["geolocation_id", "project_id"], name: "index_geolocations_projects_on_geolocation_id_and_project_id", using: :btree
   add_index "geolocations_projects", ["project_id"], name: "index_geolocations_projects_on_project_id", using: :btree
 
+  create_table "implementer_partnerships", force: :cascade do |t|
+    t.integer  "project_id",     null: false
+    t.integer  "implementer_id", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "layer_styles", force: :cascade do |t|
     t.string "title"
     t.string "name"
@@ -244,6 +251,7 @@ ActiveRecord::Schema.define(version: 20160822165723) do
     t.boolean  "publishing_to_iati",             default: false
     t.string   "membership_status",              default: "Non Member"
     t.integer  "old_donor_id"
+    t.boolean  "international"
   end
 
   add_index "organizations", ["name"], name: "index_organizations_on_name", using: :btree
@@ -286,6 +294,13 @@ ActiveRecord::Schema.define(version: 20160822165723) do
   end
 
   add_index "partners", ["site_id"], name: "index_partners_on_site_id", using: :btree
+
+  create_table "partnerships", force: :cascade do |t|
+    t.integer  "partner_id", null: false
+    t.integer  "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",                                    limit: 2000
