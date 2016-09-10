@@ -1,6 +1,6 @@
 <% cache ['categories_selector', @site], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
   <section class="categories-selector">
-    <div class="row">
+    <div class="long-row">
       <div class="grid-14">
         <div class="mod-categories-selector" id="filtersView">
           <nav>
@@ -81,9 +81,13 @@
 
             <li class="mod-form search">
               <%= form_tag(search_path, :method => :get) do %>
-                <%= text_field_tag :q, params[:q], :placeholder=>'SEARCH'%>
+                <%= text_field_tag :q, params[:q], :placeholder=>'SEARCH PROJECTS'%>
                 <input type="submit" value="">
               <% end %>
+            </li>
+
+            <li class="run-reports">
+              <%= link_to "Run Reports", report_index_path, :class => 'father' %>
             </li>
 
             </ul>

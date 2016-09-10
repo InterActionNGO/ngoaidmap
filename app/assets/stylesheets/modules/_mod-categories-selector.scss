@@ -55,11 +55,9 @@
     padding:0;
   }
   .search {
-    float: right;
     height: 25px;
     width: 170px;
     margin-top: 3px;
-    margin-right: 0;
     border-bottom: 2px solid $color-4;
     input#q {
       background-color: $color-0;
@@ -68,6 +66,10 @@
     input[type="submit"] {
       height: 25px;
     }
+  }
+  .run-reports {
+    margin-right: 0px;
+    float: right;
   }
 
 

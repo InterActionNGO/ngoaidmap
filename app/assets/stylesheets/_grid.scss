@@ -17,6 +17,13 @@ $grid-gutter-width: 1%;
   @include clearfix();
 }
 
+.long-row {
+  display: block;
+  max-width: 1120px;
+  margin: 0 auto;
+  @include clearfix();
+}
+
 .grid {
   position: relative;
   display: block;
