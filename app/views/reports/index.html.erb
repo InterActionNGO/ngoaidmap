@@ -54,6 +54,17 @@
                   <%# hidden_field_tag 'donor_include', 'include' %>
               </li>
 
+              <li>
+                <label>Project Budget Min</label>
+                <%= text_field_tag :budget_min, params[:budget_min] %>
+              </li>
+
+
+              <li>
+                <label>Project Budget Max</label>
+                <%= text_field_tag :budget_max, params[:budget_max] %>
+              </li>
+
               <li class="comboselect date" id="startDateSelector">
                 <label>Projects Active Between</label>
                 <div class="select_date">

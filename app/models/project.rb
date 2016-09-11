@@ -334,6 +334,12 @@ class Project < ActiveRecord::Base
  def self.get_list(params={})
     start_date = Date.parse(params[:start_date]['day']+"-"+params[:start_date]['month']+"-"+params[:start_date]['year']) if params[:start_date]
     end_date = Date.parse(params[:end_date]['day']+"-"+params[:end_date]['month']+"-"+params[:end_date]['year']) if params[:end_date]
+    budget_min = if params[:budget_min].present?
+      Float(params[:budget_min]) rescue nil
+    end
+    budget_max = if params[:budget_max].present?
+      Float(params[:budget_max]) rescue nil
+    end
     countries = params[:country] if params[:country]
     donors = params[:donor] if params[:donor]
     sectors = params[:sector] if params[:sector]
@@ -355,6 +361,14 @@ class Project < ActiveRecord::Base
       date_filter = "AND p.start_date <= '#{end_date}'::date AND p.end_date >= '#{start_date}'::date"
     elsif active == 'yes'
       date_filter = "AND p.start_date <= '#{Time.now.to_date}'::date AND p.end_date > '#{Time.now.to_date}'::date"
+    end
+
+    budget_filter = if budget_min && budget_max
+      sanitize_conditions(["AND p.budget <= ? AND p.budget >= ?", budget_max, budget_min])
+    elsif budget_min
+      sanitize_conditions(["AND p.budget >= ?", budget_min])
+    elsif budget_max
+      sanitize_conditions(["AND p.budget <= ?", budget_max])
     end
 
     form_query_filter = "AND lower(p.name) LIKE '%" + form_query + "%'" if params[:q]
@@ -395,7 +409,7 @@ class Project < ActiveRecord::Base
                  INNER JOIN geolocations g ON (g.id = gp.geolocation_id)
                  INNER JOIN geolocations c ON (g.country_uid = c.uid)
           WHERE true
-         #{date_filter} #{form_query_filter} #{donors_filter} #{sectors_filter} #{countries_filter} #{organizations_filter}
+         #{date_filter} #{form_query_filter} #{donors_filter} #{sectors_filter} #{countries_filter} #{organizations_filter} #{budget_filter}
           AND c.adm_level = 0
           GROUP BY p.id, p.name, o.id, o.name, p.budget, p.start_date, p.end_date
           ORDER BY p.name
@@ -420,7 +434,7 @@ class Project < ActiveRecord::Base
                  INNER JOIN geolocations g ON (g.id = gp.geolocation_id)
                  INNER JOIN geolocations c ON (g.country_uid = c.uid)
           WHERE true
-         #{date_filter} #{form_query_filter} #{donors_filter} #{sectors_filter} #{countries_filter} #{organizations_filter}
+         #{date_filter} #{form_query_filter} #{donors_filter} #{sectors_filter} #{countries_filter} #{organizations_filter} #{budget_filter}
           AND c.adm_level = 0
           GROUP BY #{the_model}.name, #{the_model}.id
           ORDER BY projects_count DESC

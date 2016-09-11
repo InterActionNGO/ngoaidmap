@@ -1,4 +1,15 @@
 .mod-report-filter {
+  ul.combo_search_select > li {
+    width: 100%;
+    margin-bottom: 10px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+  }
+
   .comboselect {
     width: 100%;
     margin-bottom: 20px;
