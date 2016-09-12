@@ -30,6 +30,14 @@ define([
         model.donors = params['donor[]'];
       }
 
+      if (params.budget_min) {
+        model.budget_min = params.budget_min;
+      }
+
+      if (params.budget_max) {
+        model.budget_max = params.budget_max;
+      }
+
       if (params.q) {
         model.term = params.q;
       }

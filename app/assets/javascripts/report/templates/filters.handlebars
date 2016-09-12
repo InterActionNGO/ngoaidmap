@@ -18,6 +18,19 @@
 {{#if filters.term}}
   <p><strong>Search term</strong>: {{filters.term}}</p>
 {{/if}}
+
+{{#if filters.budget_min}}
+  {{#if filters.budget_max}}
+    <p><strong>Budget Between</strong>: ${{filters.budget_min}} <strong>and</strong> ${{filters.budget_max}}</p>
+  {{else}}
+    <p><strong>Budget</strong>: <strong>Above</strong> ${{filters.budget_min}}</p>
+  {{/if}}
+{{else}}
+  {{#if filters.budget_max}}
+    <p><strong>Budget</strong>: <strong>Below</strong> ${{filters.budget_max}}</p>
+  {{/if}}
+{{/if}}
+
 {{!-- <p><strong>From</strong>: {{filters.startDate}} / <strong>To</strong>: {{filters.endDate}}</p> --}}
 <p><strong>Projects active between</strong>: {{filters.startDate}} <strong>and</strong>: {{filters.endDate}}</p>
   <p><strong>Important</strong>: Please read the section on limitations of this data below <sup><a href="#limitations1">1</a></sup></p>
