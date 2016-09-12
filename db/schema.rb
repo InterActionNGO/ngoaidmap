@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908201141) do
+ActiveRecord::Schema.define(version: 20160912025133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -334,13 +334,14 @@ ActiveRecord::Schema.define(version: 20160908201141) do
     t.text     "project_needs"
     t.text     "idprefugee_camp"
     t.string   "organization_id"
-    t.string   "budget_currency",                                                                  default: "USD"
+    t.string   "budget_currency",                                                                                           default: "USD"
     t.date     "budget_value_date"
     t.float    "target_project_reach"
     t.float    "actual_project_reach"
     t.string   "project_reach_unit"
     t.integer  "prime_awardee_id"
-    t.string   "geographical_scope",                                                               default: "regional"
+    t.string   "geographical_scope",                                                                                        default: "regional"
+    t.decimal  "budget_usd",                                                                       precision: 13, scale: 2
   end
 
   add_index "projects", ["end_date"], name: "index_projects_on_end_date", using: :btree
