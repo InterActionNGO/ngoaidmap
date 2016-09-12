@@ -52,4 +52,13 @@ class MediaResource < ActiveRecord::Base
   def is_a_video?
     video_url?
   end
+
+  def image_url
+    if external_image_url?
+      external_image_url
+    elsif picture?
+      picture.url(:medium)
+    end
+  end
+
 end

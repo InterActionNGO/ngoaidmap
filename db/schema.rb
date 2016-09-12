@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160912025133) do
+ActiveRecord::Schema.define(version: 20160912084512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 20160912025133) do
     t.string   "video_thumb_content_type"
     t.integer  "video_thumb_file_size"
     t.datetime "video_thumb_updated_at"
+    t.string   "external_image_url"
   end
 
   add_index "media_resources", ["element_type", "element_id"], name: "index_media_resources_on_element_type_and_element_id", using: :btree
