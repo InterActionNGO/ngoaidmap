@@ -131,6 +131,7 @@ define([
       filters = _.extend({},filters,this.objetize(_filters));
       this.conexion = new Conexion(params, filters);
       this.initViews();
+      new GalleryView();
     },
 
     donors: function(_id,_filters) {
