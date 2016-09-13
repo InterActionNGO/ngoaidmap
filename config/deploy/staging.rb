@@ -11,6 +11,7 @@ role :web, %w{deploy@198.199.86.239}
 role :db,  %w{deploy@198.199.86.239}
 
 set :ssh_options, {:forward_agent => true}
+set :linked_files, %w{.env config/database.yml}
 
 set :bower_bin, '/usr/local/nvm/versions/node/v4.3.1/bin/bower'
 
