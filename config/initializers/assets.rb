@@ -8,8 +8,8 @@ Rails.application.config.assets.paths << File.join(Rails.root, 'lib', 'assets')
 Rails.application.config.assets.paths << File.join(Rails.root, 'public', 'app', 'vendor')
 
 # Require JS configuration
-Rails.application.config.requirejs.logical_asset_filter += [/\.handlebars$/]
-Rails.application.config.requirejs.logical_asset_filter += [/\.svg$/]
+Rails.application.config.requirejs.logical_path_patterns += [/\.handlebars$/]
+Rails.application.config.requirejs.logical_path_patterns += [/\.svg$/]
 
 # Precompile additional assets
 # Explicitly register the extensions we are interested in compiling
