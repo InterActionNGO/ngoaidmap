@@ -40,11 +40,13 @@ group :development do
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'annotate', '~> 2.6.5'
-  gem 'capistrano', '~> 3.6.0'
+  gem 'capistrano', '~> 3.4.0'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bower'
   gem 'capistrano-bundler'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-npm'
   gem 'brakeman', :require => false
   gem 'rails_db'
 end

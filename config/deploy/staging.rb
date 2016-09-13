@@ -1,16 +1,20 @@
-ask :password, 'secret'
+set :deploy_to, -> { "/var/www/#{fetch :application}/#{fetch :rails_env}" }
 
-role :app, %w{ubuntu@66.228.36.71}
-role :web, %w{ubuntu@66.228.36.71}
-role :db,  %w{ubuntu@66.228.36.71}
+set :application, 'ngoaidmap'
+set :user, "deploy"
 
-server '66.228.36.71', user: 'ubuntu', roles: %w{web app}
+set :rbenv_type, :system
+set :rbenv_ruby, '2.3.1'
 
-set :ssh_options, {
-  forward_agent: true,
-  auth_methods: %w(password),
-  password: fetch(:password)
-}
+role :app, %w{deploy@198.199.86.239}
+role :web, %w{deploy@198.199.86.239}
+role :db,  %w{deploy@198.199.86.239}
 
-set :rails_env, "production"
-set :branch, 'develop'
+set :ssh_options, {:forward_agent => true}
+
+set :bower_bin, '/usr/local/nvm/versions/node/v4.3.1/bin/bower'
+
+server '198.199.86.239', user: 'deploy', roles: [:web, :db, :app]
+
+set :rails_env, "staging"
+set :branch, 'master'

@@ -1,6 +1,6 @@
-lock '3.4.0'
+lock '3.4.1'
 set :application, 'ngo-v2'
-set :repo_url, 'git@github.com:Vizzuality/ngoaidmap.git'
+set :repo_url, 'git@github.com:InterActionNGO/ngoaidmap.git'
 set :branch, ENV['BRANCH'] || "master"
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -37,9 +37,6 @@ set :whenever_identifier, ->{ "update_sites" }
 # set the locations that we will look for changed assets to determine whether to precompile
 set :assets_dependencies, %w(app/assets lib/asset/usr/local/rvm/bin/rvm's vendor/assets Gemfile.lock config/routes.rb)
 
-set :bower_flags, '--config.interactive=false'
-set :bower_roles, :web
-set :bower_target_path, "#{release_path}/public/app/vendor"
 set :bower_bin, '/usr/bin/bower'
 
 desc 'Restart application'
