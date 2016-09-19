@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160912084512) do
+ActiveRecord::Schema.define(version: 20160919043100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,10 +249,18 @@ ActiveRecord::Schema.define(version: 20160912084512) do
     t.string   "organization_type"
     t.integer  "organization_type_code"
     t.string   "iati_organizationid"
-    t.boolean  "publishing_to_iati",             default: false
-    t.string   "membership_status",              default: "Non Member"
+    t.boolean  "publishing_to_iati",                                      default: false
+    t.string   "membership_status",                                       default: "Non Member"
     t.integer  "old_donor_id"
     t.boolean  "international"
+    t.string   "acronym"
+    t.date     "membership_add_date"
+    t.date     "membership_drop_date"
+    t.string   "budget_currency"
+    t.decimal  "budget_usd",                     precision: 13, scale: 2
+    t.date     "budget_fiscal_year"
+    t.string   "hq_address2"
+    t.string   "donation_address2"
   end
 
   add_index "organizations", ["name"], name: "index_organizations_on_name", using: :btree
