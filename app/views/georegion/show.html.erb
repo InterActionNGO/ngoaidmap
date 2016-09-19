@@ -1,45 +1,31 @@
-<% content_for :js_vars do %>
-  <script>
-
-  </script>
-<% end %>
-
-<%= render 'new_partials/map' %>
-
-<%= render 'new_partials/categories_selector' %>
+<%= render 'partials/map' %>
+<%= render 'partials/categories_selector' %>
 
 <div class="main-content">
   <div class="row">
-    <div class="grid-4">
-      <aside class="layout-sidebar">
+    <section class="layout-content grid-12 offset-1" id="content">
 
-        <div id="sidebar-highlights" class="mod-highlighted-results mod-info" data-highlights="[&#34;projects_count&#34;]"></div>
+      <header>
+        <h1 id="title-country" data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="section-title"><%= @geolocation.name %></h1>
+      </header>
 
-        <div id="sidebar-location" class="location mod-info"></div>
+      <%= render :partial => 'partials/downloads' %>
+      <%= render "partials/index_projects" %>
 
-        <div id="sidebar-sectors" class="project-sectors mod-info"></div>
+    </section>
 
-        <div id="sidebar-donors" class="project-donors mod-info"></div>
+    <aside class="layout-sidebar grid-4">
 
-        <div id="sidebar-other-countries" class="mod-info"></div>
+      <div id="sidebar-highlights" class="mod-highlighted-results mod-info" data-highlights="[&#34;projects_count&#34;]"></div>
 
-      </aside>
-    </div>
+      <div id="sidebar-location" class="location mod-info"></div>
 
-    <div class="grid-12 offset-1">
-      <section class="layout-content" id="content">
+      <div id="sidebar-sectors" class="project-sectors mod-info"></div>
 
-        <header>
-          <h1 id="title-country" data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="section-title"><%= @geolocation.name %></h1>
-          <%#= content_tag :p, @area.wiki_description if @area.wiki_description %>
-          <%#= content_tag :p, raw("Description provided by Wikipedia #{content_tag(:a, 'Read full article', :href => @area.wiki_url)}"), :class => 'provided' if @area.wiki_url %>
-        </header>
+      <div id="sidebar-donors" class="project-donors mod-info"></div>
 
-        <%= render :partial => 'new_partials/downloads' %>
+      <div id="sidebar-other-countries" class="mod-info"></div>
 
-        <%= render "new_partials/index_projects" %>
-
-      </section>
-    </div>
+    </aside>
   </div>
 </div>

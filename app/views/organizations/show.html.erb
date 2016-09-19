@@ -1,67 +1,61 @@
-<%= render 'new_partials/map' %>
-
-<%= render 'new_partials/categories_selector' %>
+<%= render 'partials/map' %>
+<%= render 'partials/categories_selector' %>
 
 <div class="main-content">
   <div class="row">
-    <div class="grid-4">
-      <aside class="layout-sidebar">
+    <section class="layout-content grid-12 offset-1">
 
-        <!-- Highlighted results -->
-        <div id="sidebar-highlights" class="mod-highlighted-results mod-info" data-highlights="[&#34;projects_count&#34;]"></div>
+      <header>
+        <h1 id="title-organization" data-id="<%= @organization.id %>" data-name="<%= @organization.name.html_safe %>" class="section-title"><%= @organization.name %></h1>
+        <%= simple_format(@organization.description) if @organization.description.present? %>
+      </header>
 
-        <!-- Sectors by projects -->
-        <div id="sidebar-sectors" class="project-sectors mod-info"></div>
+      <% unless @organization.media_resources.empty? %>
+        <section>
+          <h2>Related Resources</h2>
 
-        <!-- Projects locations -->
-        <div id="sidebar-locations" class="mod-info"></div>
-
-        <!-- Organization Sidebar -->
-        <div id="sidebar-organization-resources" class="mod-info"></div>
-        <div id="sidebar-organization-infocontact" class="mod-info"></div>
-        <div id="sidebar-organization-donationcontact" class="mod-info"></div>
-        <div id="sidebar-organization-mediacontact" class="mod-info"></div>
-        <div id="sidebar-organization-followus" class="mod-info"></div>
-
-
-
-        <script>
-          var organization = <%= raw(@organization.to_json) %>;
-          var organization_resources = <%= raw(@organization.resources.to_json) %>;
-        </script>
-      </aside>
-    </div>
-
-    <div class="grid-12 offset-1">
-      <section class="layout-content">
-
-        <header>
-          <h1 id="title-organization" data-id="<%= @organization.id %>" data-name="<%= @organization.name.html_safe %>" class="section-title"><%= @organization.name %></h1>
-          <%= simple_format(@organization.description) if @organization.description.present? %>
-        </header>
-
-        <% unless @organization.media_resources.empty? %>
-          <section>
-            <h2>Related Resources</h2>
-
-            <div class="mod-gallery chachi-slider">
-              <% @organization.media_resources.each do |media_resource| %>
-                <% if media_resource.is_a_video? %>
-                  <% image_tag(media_resource.video_thumb.url(:medium), :alt => media_resource.caption, :video_id => media_resource.id, :class => "chachi-item") %>
-                  <div class="chachi-item"><%= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
-                <% else %>
-                  <%= image_tag(media_resource.image_url, :alt=> media_resource.caption, :class => "chachi-item") %>
-                <% end %>
+          <div class="mod-gallery chachi-slider">
+            <% @organization.media_resources.each do |media_resource| %>
+              <% if media_resource.is_a_video? %>
+                <% image_tag(media_resource.video_thumb.url(:medium), :alt => media_resource.caption, :video_id => media_resource.id, :class => "chachi-item") %>
+                <div class="chachi-item"><%= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
+              <% else %>
+                <%= image_tag(media_resource.image_url, :alt=> media_resource.caption, :class => "chachi-item") %>
               <% end %>
-            </div>
-          </section>
-        <% end %>
+            <% end %>
+          </div>
+        </section>
+      <% end %>
 
-        <%= render :partial => 'new_partials/downloads' %>
+      <%= render :partial => 'partials/downloads' %>
+      <%= render "partials/index_projects" %>
 
-        <%= render "new_partials/index_projects" %>
+    </section>
 
-      </section>
-    </div>
+    <aside class="layout-sidebar grid-4">
+
+      <!-- Highlighted results -->
+      <div id="sidebar-highlights" class="mod-highlighted-results mod-info" data-highlights="[&#34;projects_count&#34;]"></div>
+
+      <!-- Sectors by projects -->
+      <div id="sidebar-sectors" class="project-sectors mod-info"></div>
+
+      <!-- Projects locations -->
+      <div id="sidebar-locations" class="mod-info"></div>
+
+      <!-- Organization Sidebar -->
+      <div id="sidebar-organization-resources" class="mod-info"></div>
+      <div id="sidebar-organization-infocontact" class="mod-info"></div>
+      <div id="sidebar-organization-donationcontact" class="mod-info"></div>
+      <div id="sidebar-organization-mediacontact" class="mod-info"></div>
+      <div id="sidebar-organization-followus" class="mod-info"></div>
+
+
+
+      <script>
+        var organization = <%= raw(@organization.to_json) %>;
+        var organization_resources = <%= raw(@organization.resources.to_json) %>;
+      </script>
+    </aside>
   </div>
 </div>

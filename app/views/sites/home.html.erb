@@ -1,13 +1,26 @@
 <% cache("#{@site.id}/home/map") do %>
-  <%= render 'new_partials/map' %>
+  <%= render 'partials/map' %>
 <% end %>
-
-<%= render 'new_partials/categories_selector' %>
+<%= render 'partials/categories_selector' %>
 
 <div class="main-content">
   <div class="row">
-    <div class="grid-4">
-      <aside class="layout-sidebar">
+    <section class="layout-content grid-12 offset-1">
+
+      <header>
+        <h1 class="section-title">All projects</h1>
+      </header>
+
+      <%= render :partial => 'partials/downloads', :locals => {
+          :csv_path => "/sites/download/#{@site.id}.csv",
+          :xls_path => "/sites/download/#{@site.id}.xls",
+          :kml_path => "/sites/download/#{@site.id}.kml"
+      } %>
+      <%= render "partials/index_projects" %>
+
+    </section>
+
+    <aside class="layout-sidebar grid-4">
 
         <!-- Highlighted results -->
         <div id="sidebar-highlights" class="mod-highlighted-results mod-info" data-highlights="[&#34;projects_count&#34;,&#34;organizations_count&#34;]"></div>
@@ -22,24 +35,5 @@
         <div id="sidebar-organizations" class="mod-info"></div>
 
       </aside>
-    </div>
-
-    <div class="grid-12 offset-1">
-      <section class="layout-content">
-
-        <header>
-          <h1 class="section-title">All projects</h1>
-        </header>
-
-        <%= render :partial => 'new_partials/downloads', :locals => {
-            :csv_path => "/sites/download/#{@site.id}.csv",
-            :xls_path => "/sites/download/#{@site.id}.xls",
-            :kml_path => "/sites/download/#{@site.id}.kml"
-        } %>
-
-        <%= render "new_partials/index_projects" %>
-
-      </section>
-    </div>
   </div>
 </div>

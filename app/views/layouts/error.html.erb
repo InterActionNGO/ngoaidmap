@@ -8,13 +8,13 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <%= render 'layouts/header' %>
+    <%= render 'partials/header' %>
 
     <div class="main-content">
       <%= yield %>
     </div>
 
-    <%= render 'layouts/footer' %>
+    <%= render 'partials/footer' %>
 
     <%= javascript_include_tag "../vendor/requirejs/require", "main" %>
 

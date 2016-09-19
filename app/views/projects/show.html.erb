@@ -1,132 +1,124 @@
-<%= render 'new_partials/map' %>
-
-<%= render 'new_partials/categories_selector' %>
+<%= render 'partials/map' %>
+<%= render 'partials/categories_selector' %>
 
 <div class="main-content">
   <div class="row">
-    <div class="grid-4">
-      <aside class="layout-sidebar">
-        <div id="project-organization" class="mod-info mod-reporting-organisation"></div>
+    <section class="layout-content grid-12 offset-1" id="content">
+      <article class="mod-content-article">
+        <h1><%= @project.name %></h1>
 
-        <div id="project-timeline" class="mod-info"></div>
-
-        <div id="project-budget" class="mod-info"></div>
-
-        <div id="project-donors" class="mod-info"></div>
-
-        <div id="project-awardee" class="mod-info"></div>
-
-        <div id="project-implementingorganization" class="mod-info"></div>
-
-        <div id="project-partnerorganizations" class="mod-info"></div>
-
-        <div id="project-reach" class="mod-info"></div>
-
-        <div id="project-target" class="mod-info"></div>
-
-        <div id="project-contact" class="mod-info"></div>
-
-        <div id="project-website" class="mod-info"></div>
-
-        <% unless @project.resources.empty? %>
-          <div class="mod-info">
-            <h3>Additional resources</h3>
-            <ul>
-              <% @project.resources.each do |resource| %>
-                <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
-              <% end %>
-            </ul>
-          </div>
+        <% unless @project.description.blank? %>
+          <section>
+            <%= anglo(simple_format(@project.description)) %>
+          </section>
         <% end %>
 
-        <div class="mod-downloads mod-info">
-          <h3>Export data</h3>
+        <% if @project.activities || @project.additional_information || @project.cross_cutting_issues%>
+          <%unless @project.activities.blank? %>
+          <section>
+            <h2>Activities</h2>
+            <p> <%= raw(@project.activities) %> </p>
+          </section>
+          <%end%>
+
+          <%unless @project.additional_information.blank? %>
+          <section>
+            <h2 class="<%= (@project.activities.blank?)? 'first':''%>">Additional information</h2>
+            <p> <%= raw(@project.additional_information) %> </p>
+          </section>
+          <%end%>
+
+          <%unless @project.cross_cutting_issues.blank? %>
+          <section>
+            <h2 class="<%= (@project.activities.blank? && @project.additional_information.blank?)? 'first':''%>">Cross-cutting issues</h2>
+            <p> <%= raw(@project.cross_cutting_issues) %> </p>
+          </section>
+          <%end%>
+        <% end %>
+        <% unless @project.geolocations.empty? %>
+        <section>
+          <h2>Locations</h2>
           <ul>
-            <li><%= download_link('CSV','csv') %></li>
-            <li><%= download_link('KML','kml') %></li>
+            <% @project.geolocations.each do |geolocation| %>
+              <li><%= geolocation.readable_path %></li>
+            <% end %>
+          </ul>
+        </section>
+        <% end %>
+        <% unless @project.sectors.empty? %>
+        <section>
+          <h2>Sectors</h2>
+          <ul>
+            <% @project.sectors.each do |sector| %>
+              <li><%= sector.name %></li>
+            <% end %>
+          </ul>
+        </section>
+        <% end %>
+
+        <% unless @project.media_resources.empty? %>
+          <section>
+            <h2>Related Resources</h2>
+
+            <div class="mod-gallery chachi-slider">
+              <% @project.media_resources.each do |media_resource| %>
+                <% if media_resource.is_a_video? %>
+                  <% image_tag(media_resource.video_thumb.url(:medium), :alt => media_resource.caption, :video_id => media_resource.id, :class => "chachi-item") %>
+                  <div class="chachi-item"><%= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
+                <% else %>
+                  <%= image_tag(media_resource.image_url, :alt=> media_resource.caption, :class => "chachi-item") %>
+                <% end %>
+              <% end %>
+            </div>
+          </section>
+        <% end %>
+
+        <%= render 'partials/more_projects' %>
+      </article>
+    </section>
+
+    <aside class="layout-sidebar grid-4">
+      <div id="project-organization" class="mod-info mod-reporting-organisation"></div>
+
+      <div id="project-timeline" class="mod-info"></div>
+
+      <div id="project-budget" class="mod-info"></div>
+
+      <div id="project-donors" class="mod-info"></div>
+
+      <div id="project-awardee" class="mod-info"></div>
+
+      <div id="project-implementingorganization" class="mod-info"></div>
+
+      <div id="project-partnerorganizations" class="mod-info"></div>
+
+      <div id="project-reach" class="mod-info"></div>
+
+      <div id="project-target" class="mod-info"></div>
+
+      <div id="project-contact" class="mod-info"></div>
+
+      <div id="project-website" class="mod-info"></div>
+
+      <% unless @project.resources.empty? %>
+        <div class="mod-info">
+          <h3>Additional resources</h3>
+          <ul>
+            <% @project.resources.each do |resource| %>
+              <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
+            <% end %>
           </ul>
         </div>
+      <% end %>
 
-      </aside>
-    </div>
+      <div class="mod-downloads mod-info">
+        <h3>Export data</h3>
+        <ul>
+          <li><%= download_link('CSV','csv') %></li>
+          <li><%= download_link('KML','kml') %></li>
+        </ul>
+      </div>
 
-    <div class="grid-12 offset-1">
-      <section class="layout-content" id="content">
-
-        <article class="mod-content-article">
-          <h1><%= @project.name %></h1>
-
-          <% unless @project.description.blank? %>
-            <section>
-              <%= anglo(simple_format(@project.description)) %>
-            </section>
-          <% end %>
-
-          <% if @project.activities || @project.additional_information || @project.cross_cutting_issues%>
-            <%unless @project.activities.blank? %>
-            <section>
-              <h2>Activities</h2>
-              <p> <%= raw(@project.activities) %> </p>
-            </section>
-            <%end%>
-
-            <%unless @project.additional_information.blank? %>
-            <section>
-              <h2 class="<%= (@project.activities.blank?)? 'first':''%>">Additional information</h2>
-              <p> <%= raw(@project.additional_information) %> </p>
-            </section>
-            <%end%>
-
-            <%unless @project.cross_cutting_issues.blank? %>
-            <section>
-              <h2 class="<%= (@project.activities.blank? && @project.additional_information.blank?)? 'first':''%>">Cross-cutting issues</h2>
-              <p> <%= raw(@project.cross_cutting_issues) %> </p>
-            </section>
-            <%end%>
-          <% end %>
-          <% unless @project.geolocations.empty? %>
-          <section>
-            <h2>Locations</h2>
-            <ul>
-              <% @project.geolocations.each do |geolocation| %>
-                <li><%= geolocation.readable_path %></li>
-              <% end %>
-            </ul>
-          </section>
-          <% end %>
-          <% unless @project.sectors.empty? %>
-          <section>
-            <h2>Sectors</h2>
-            <ul>
-              <% @project.sectors.each do |sector| %>
-                <li><%= sector.name %></li>
-              <% end %>
-            </ul>
-          </section>
-          <% end %>
-
-          <% unless @project.media_resources.empty? %>
-            <section>
-              <h2>Related Resources</h2>
-
-              <div class="mod-gallery chachi-slider">
-                <% @project.media_resources.each do |media_resource| %>
-                  <% if media_resource.is_a_video? %>
-                    <% image_tag(media_resource.video_thumb.url(:medium), :alt => media_resource.caption, :video_id => media_resource.id, :class => "chachi-item") %>
-                    <div class="chachi-item"><%= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
-                  <% else %>
-                    <%= image_tag(media_resource.image_url, :alt=> media_resource.caption, :class => "chachi-item") %>
-                  <% end %>
-                <% end %>
-              </div>
-            </section>
-          <% end %>
-
-          <%= render 'new_partials/more_projects' %>
-
-        </div>
-      </article>
-
-    </section>
+    </aside>
   </div>
 </div>

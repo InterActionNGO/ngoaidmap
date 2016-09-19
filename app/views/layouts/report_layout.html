@@ -26,11 +26,11 @@
     <%= csrf_meta_tag %>
   </head>
   <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %> <%= "section-" + @page.top_parent.permalink if @page.present? %> <%= "linos-" + @page.permalink if @page.present? %>">
-    <%= render 'layouts/header' %>
+    <%= render 'partials/header' %>
 
     <%= yield %>
 
-    <%= render 'layouts/footer' %>
+    <%= render 'partials/footer' %>
 
     <%= javascript_include_tag "https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js" %>
 
