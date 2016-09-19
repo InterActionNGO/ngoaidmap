@@ -45,6 +45,7 @@
 }
 
 .layout-content {
+  float: right;
   margin-bottom: 30px;
   header { margin-bottom: 25px;}
   min-height: 400px;
@@ -57,6 +58,7 @@
   }
 }
 .layout-sidebar {
+  float: left;
   position: relative;
   margin-bottom: 30px;
 }

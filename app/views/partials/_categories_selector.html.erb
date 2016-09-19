@@ -6,14 +6,20 @@
           <nav>
             <ul>
               <% if false #@site.cluster %>
-                <li class="menu-item sector"><span class="father"><a href="<%= cluster_path(@site.cluster) %>"><%= @site.word_for_cluster_sector.upcase.singularize %></a></span></li>
+                <li class="menu-item sector">
+                  <span class="father">
+                    <a href="<%= cluster_path(@site.cluster) %>"><%= @site.word_for_cluster_sector.upcase.singularize %></a>
+                  </span>
+                </li>
               <% elsif false #@site.sector %>
                 <li class="menu-item sector">
-                  <span class="father"><a href="<% sector_path(@site.sector) %>"><% @site.word_for_cluster_sector.upcase.singularize %>Sectors</a></span>
+                  <span class="father">
+                    <a href="<% sector_path(@site.sector) %>"><% @site.word_for_cluster_sector.upcase.singularize %>Sectors</a>
+                  </span>
                 </li>
               <% else %>
                 <li class="menu-item sector" id="sector_option">
-                  <span class="father">SECTOR</span>
+                  <button class="father">SECTOR</button>
                   <div class="mod-go-up-menu menu">
                     <ul class="mod-categories-child sector-child submenu">
                       <% @sectors.each do |category| %>
@@ -30,7 +36,7 @@
               <% end %>
 
               <li class="organizations">
-                <span class="father">Organizations</span>
+                <button class="father">Organizations</button>
                 <div class="mod-go-up-menu menu">
                   <ul class="mod-categories-child organizations-child">
                     <% @organizations.each do |organization| %>
@@ -42,7 +48,7 @@
               </li>
 
               <li class="donors">
-                <span class="father">Donors</span>
+                <button class="father">Donors</button>
                 <div class="mod-go-up-menu menu">
                   <ul class="mod-categories-child donors-child">
                     <% @donors.each do |donor| %>
@@ -55,7 +61,7 @@
 
             <% if @site.navigate_by_country %>
               <li class="countries">
-                <span class="father">Countries</span>
+                <button class="father">Countries</button>
                 <div class="mod-go-up-menu menu">
                   <ul class="mod-categories-child countries-child">
                     <% @countries.each do |country| %>
@@ -67,7 +73,7 @@
               </li>
             <% else %>
               <li class="regions">
-                <span class="father">Regions</span>
+                <button class="father">Regions</button>
                 <div class="mod-go-up-menu menu">
                   <ul class="mod-categories-child regions-child">
                     <% @site.regions_select.each do |region| %>
@@ -104,4 +110,23 @@
 
     </div>
   </section>
+
+  <script type="text/javascript">
+    var buttons = document.querySelectorAll('.categories-selector button.father');
+    for (var i=0, len=buttons.length; i<len; i++) {
+      var button = buttons[i];
+
+      button.addEventListener('click', function(e) {
+        var target   = e.currentTarget;
+        var menu     = target.parentElement.querySelector('.menu');
+        console.log(menu);
+        var hasClass = menu.classList.contains('-show');
+        if (hasClass) {
+          menu.classList.remove('-show');
+        } else {
+          menu.classList.add('-show');
+        }
+      });
+    }
+  </script>
 <% end %>

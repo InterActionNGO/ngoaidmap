@@ -1,40 +1,35 @@
-<%= render 'new_partials/map' %>
-<%= render 'new_partials/categories_selector' %>
+<%= render 'partials/map' %>
+<%= render 'partials/categories_selector' %>
 
 <div class="main-content">
   <div class="row">
-    <div class="grid-4">
-      <aside class="layout-sidebar">
+    <section class="layout-content grid-12 offset-1">
 
-        <!-- Highlighted results -->
-        <div id="sidebar-highlights" class="mod-highlighted-results mod-info" data-highlights="[&#34;projects_count&#34;]"></div>
+      <header>
+        <h1 id="title-sector" class="section-title" data-id="<%= @sector.id %>" data-name="<%= @sector.name.html_safe %>"><%= @sector.name.html_safe %></h1>
+      </header>
 
-        <!-- Projects locations -->
-        <div id="sidebar-locations" class="mod-info"></div>
+      <%= render :partial => 'partials/downloads' %>
+      <%= render "partials/index_projects" %>
 
-        <!-- Sectors by projects -->
-        <div id="sidebar-sectors-all" class="project-sectors mod-info"></div>
+    </section>
 
-        <!-- Sectors by projects -->
-        <div id="sidebar-donors" class="project-donors mod-info"></div>
+    <aside class="layout-sidebar grid-4">
+
+      <!-- Highlighted results -->
+      <div id="sidebar-highlights" class="mod-highlighted-results mod-info" data-highlights="[&#34;projects_count&#34;]"></div>
+
+      <!-- Projects locations -->
+      <div id="sidebar-locations" class="mod-info"></div>
+
+      <!-- Sectors by projects -->
+      <div id="sidebar-sectors-all" class="project-sectors mod-info"></div>
+
+      <!-- Sectors by projects -->
+      <div id="sidebar-donors" class="project-donors mod-info"></div>
 
 
-        <script> var sector = <%= raw(@sector.to_json) %>;</script>
-      </aside>
-    </div>
-
-    <div class="grid-12 offset-1">
-      <section class="layout-content">
-
-        <header>
-          <h1 id="title-sector" class="section-title" data-id="<%= @sector.id %>" data-name="<%= @sector.name.html_safe %>"><%= @sector.name.html_safe %></h1>
-        </header>
-
-        <%= render :partial => 'new_partials/downloads' %>
-
-        <%= render "new_partials/index_projects" %>
-
-      </section>
-    </div>
+      <script> var sector = <%= raw(@sector.to_json) %>;</script>
+    </aside>
   </div>
 </div>

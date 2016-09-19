@@ -27,16 +27,28 @@
     margin-right: 2%;
 
     .father {
+      border: 3px solid transparent;
       display: block;
-      padding: 9px 23px;
+      padding: 9px 17px;
       font-weight: lighter;
+      font-size: inherit;
       @include border-radius(20px);
+      text-transform: uppercase;
+
+      &:focus {
+        border-color: gray;
+      }
     }
     &.search { padding: 0;}
     .no-touch &:hover, &.is-touched {
       color: $color-0;
-      .mod-go-up-menu { display: block;}
-      .mod-drop-down-menu { display: block;}
+    }
+    .no-touch &:hover .mod-go-up-menu,
+    &.is-touched .mod-go-up-menu,
+    .no-touch &:hover .mod-drop-down-menu,
+    &.is-touched .mod-drop-down-menu,
+    .mod-go-up-menu.-show {
+        display: block;
     }
     li {
       padding: 0;
@@ -283,6 +295,10 @@
     }
     .clusters_sectors-page & .father {
       background-color: rgba($color-2, .3);
+
+      &:focus {
+        border-color: $color-2;
+      }
     }
   }
   .organizations {
@@ -297,6 +313,10 @@
     }
     .organizations-page & .father {
       background-color: rgba($color-6, .3);
+
+      &:focus {
+        border-color: $color-6;
+      }
     }
   }
   .donors {
@@ -311,6 +331,10 @@
     }
     .donors-page & .father {
       background-color: rgba($color-7, .3);
+
+      &:focus {
+        border-color: $color-7;
+      }
     }
   }
   .countries, .regions {
@@ -325,6 +349,10 @@
     }
     .georegion-page & .father {
       background-color: rgba($color-8, .3);
+
+      &:focus {
+        border-color: $color-8;
+      }
     }
   }
 }

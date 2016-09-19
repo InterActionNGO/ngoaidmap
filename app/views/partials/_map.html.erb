@@ -1,11 +1,11 @@
 <% cache ['main_map', @site, params], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
-<section class="mod-map" id="mapView">
+<section class="mod-map" id="mapView" aria-hidden="true">
 
   <div class="row">
     <div class="grid-17">
       <div class="mod-map-controls">
 
-        <div class="control-navbar<% if @site.featured? %> featured-control-navbar<% end %>">
+        <nav class="control-navbar<% if @site.featured? %> featured-control-navbar<% end %>">
           <% if SiteLayer.where({:site_id => @site.id}).length >= 1 %>
             <div class="selector menu-item" id="layerSelector">
               <ul>
@@ -48,16 +48,13 @@
           <a href="#zoom-in" class="zoom-in" id="zoomIn">+</a>
         </div>
 
-      </div> <!-- controls -->
+      </nav> <!-- controls -->
     </div>
   </div>
 
-
   <div id="map"></div>
-
   <div id="legendWrapper"></div>
-
-  <%= render 'new_partials/filtered_categories' %>
+  <%= render 'partials/filtered_categories' %>
 
 </section>
 
@@ -65,7 +62,7 @@
   <div id="Overlay<%= sl.layer.id %>" class="mod-overlay layer-overlay">
     <div class="mod-overlay-content">
       <div class="text">
-        <a class="mod-overlay-close" href="#">x</a>
+        <button class="mod-overlay-close">x</button>
         <h2><%= sl.layer.long_title %></h2>
         <%= sl.layer.description.html_safe %>
         <%= sl.layer.credits.html_safe %>

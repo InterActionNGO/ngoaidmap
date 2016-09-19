@@ -1,12 +1,16 @@
 <% cache ['projects_list', @site, @projects, params], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
 <div class="articles-list">
+  <h2 class="screen-reader">Projects</h2>
+
   <% unless @projects.empty? %>
     <ul>
       <% @projects.each do |project| %>
       <% cache ['project', project, @site, controller_name], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
         <li>
           <article class="mod-index-item">
-            <h2><a href="<%= project_path(project['id']) %>"><%= truncate(project['name'], :length=>60) %></a></h2>
+            <h3>
+              <a href="<%= project_path(project['id']) %>"><%= truncate(project['name'], :length=>60) %></a>
+            </h3>
             <span ><%= subtitle(project, @site) %></span>
             <p>
               <%= html_truncate(project['description'], 175, :omission => "... <a href=\"#{project_path(project['id'])}\" class=\"learn_more\">Learn more</a>").html_safe %>
@@ -17,16 +21,12 @@
     <% end %>
     </ul>
   <% else %>
-    <ul>
-      <li>
-        <article class="mod-index-item">
-          <p class="no_results">No projects were found for this organization/donor/country</p>
-        </article>
-      </li>
-    </ul>
+    <article class="mod-index-item">
+      <p class="no_results">No projects were found for this organization/donor/country</p>
+    </article>
   <% end %>
 </div>
-<div class="mod-pagination">
+<nav class="mod-pagination">
   <%= paginate(@projects, total_pages: @total_pages, remote: true) %>
-</div>
+</nav>
 <% end %>
