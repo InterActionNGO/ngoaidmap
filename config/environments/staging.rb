@@ -30,6 +30,8 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :dalli_store
+  config.action_controller.perform_caching = false
+  config.cache_store = :null_store
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
