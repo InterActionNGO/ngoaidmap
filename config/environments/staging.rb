@@ -29,7 +29,7 @@ Rails.application.configure do
   config.assets.css_compressor = :sass
 
   # Use a different cache store in production.
-  config.cache_store = :dalli_store
+  # config.cache_store = :dalli_store
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
