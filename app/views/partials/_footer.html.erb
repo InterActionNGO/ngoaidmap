@@ -38,9 +38,9 @@
         </div>
         <div class="grid-4">
           <%- if Rails.env.production? -%>
-            <a href="https://<%= Settings.main_site_host %>">
+            <a href="https://<%= Settings.main_site_host %>" class="aid-map-logo">
           <%- else -%>
-            <a href="/">
+            <a href="/" class="aid-map-logo">
           <%- end -%>
             <%= image_tag "footer_ngo.svg", :alt  => "NGO Aid Map Home", :class  => "aid-map-logo", :width => '170', :height => '80' %>
           </a>

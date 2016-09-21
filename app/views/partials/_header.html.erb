@@ -14,6 +14,11 @@
   <nav class="row">
     <div class="grid-4">
       <a href="https://<%= Settings.main_site_host %>" class="aid-map-logo">
+      <%- if Rails.env.production? -%>
+        <a href="https://<%= Settings.main_site_host %>" class="aid-map-logo">
+      <%- else -%>
+        <a href="/" class="aid-map-logo">
+      <%- end -%>
         <%= image_tag "aid-map-logo.png", :alt  => "NGO Aid Map Home", :height => '90', :width => '185' %>
       </a>
     </div>
