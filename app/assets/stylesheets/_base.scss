@@ -79,7 +79,8 @@ a {
 /*********************************************************************************************/
 /******************************************TITLES*********************************************/
 /*********************************************************************************************/
-.h1 {
+.h1,
+h1 {
   margin-bottom: 25px;
   font-size: 48px;
   font-weight: lighter;
@@ -88,7 +89,8 @@ a {
   .section-about & { color: $color-8;}
   .linos-history & { display: none;}
 }
-.h2 {
+.h2,
+h2 {
   margin-bottom: 10px;
   font-size: 36px;
   font-weight: lighter;
@@ -97,7 +99,8 @@ a {
   .section-data & { color: $color-1;}
   .section-about & { color: $color-8;}
 }
-.h3 {
+.h3,
+h3 {
   margin-bottom: 20px;
   font-size: 15px;
   text-transform: uppercase;
