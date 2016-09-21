@@ -37,7 +37,7 @@
           <%= render 'partials/main_menu' %>
         </div>
         <div class="grid-4">
-          <%- if Rails.env.production -%>
+          <%- if Rails.env.production? -%>
             <a href="https://<%= Settings.main_site_host %>">
           <%- else -%>
             <a href="/">
