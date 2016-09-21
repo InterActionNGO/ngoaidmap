@@ -40,6 +40,12 @@
         border-color: gray;
       }
     }
+
+    .reports-button.father {
+      height: 33px;
+      padding: 7px 16px;
+    }
+
     &.search { padding: 0;}
     .no-touch &:hover, &.is-touched {
       color: $color-0;
