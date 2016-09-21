@@ -32,10 +32,10 @@ define([
 
     checkStringWidth: function() {
       var len = this.$textarea.val().length;
-      var w = 275;
+      var w = 295;
 
       if (len === 0 || len < 15) {
-        w = 275;
+        w = 295;
       } else {
         w = '90%';
       }
