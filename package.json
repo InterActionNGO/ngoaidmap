@@ -10,7 +10,7 @@
     "node": "5.11.0"
   },
   "scripts": {
-    "bower": "bower"
+    "bower": "bower install"
   },
   "bugs": {
     "url": "https://github.com/InterActionNGO/ngoaidmap/issues"

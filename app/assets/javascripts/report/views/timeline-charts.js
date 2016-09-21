@@ -6,7 +6,7 @@ define([
   'backbone',
   'highcharts',
   'moment',
-  'momentRange',
+  'moment-range',
   'report/models/report',
   'report/models/filter'
 ], function($, _, Backbone, highcharts, moment, momentRange, ReportModel, FilterModel) {
@@ -83,6 +83,9 @@ define([
     setCharts: function() {
       var active = FilterModel.instance.get('active');
       var today = new Date(moment().utc()).getTime();
+
+      console.log(momentRange);
+
       var dateRange = moment().range(
         moment(FilterModel.instance.get('startDate')),
         moment(FilterModel.instance.get('endDate'))
