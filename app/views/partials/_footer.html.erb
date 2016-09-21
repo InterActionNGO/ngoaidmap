@@ -37,7 +37,11 @@
           <%= render 'partials/main_menu' %>
         </div>
         <div class="grid-4">
-          <a href="https://<%= Settings.main_site_host %>">
+          <%- if Rails.env.production -%>
+            <a href="https://<%= Settings.main_site_host %>">
+          <%- else -%>
+            <a href="/">
+          <%-  -%>
             <%= image_tag "footer_ngo.svg", :alt  => "NGO Aid Map Home", :class  => "aid-map-logo", :width => '170', :height => '80' %>
           </a>
         </div>
