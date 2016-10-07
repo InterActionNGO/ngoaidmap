@@ -10,9 +10,12 @@
         <%= simple_format(@organization.description) if @organization.description.present? %>
       </header>
 
+      <%= render :partial => 'partials/downloads' %>
+      <%= render "partials/index_projects" %>
+
       <% unless @organization.media_resources.empty? %>
         <section>
-          <h2>Related Resources</h2>
+          <h2 class="screen-reader">Related Resources</h2>
 
           <div class="mod-gallery chachi-slider">
             <% @organization.media_resources.each do |media_resource| %>
@@ -26,9 +29,6 @@
           </div>
         </section>
       <% end %>
-
-      <%= render :partial => 'partials/downloads' %>
-      <%= render "partials/index_projects" %>
 
     </section>
 
