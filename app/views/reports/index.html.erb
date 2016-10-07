@@ -37,14 +37,16 @@
               </li>
 
               <li>
-                <label for="budget_min">Project Budget Min</label>
-                <%= text_field_tag :budget_min, params[:budget_min] %>
+                <label for="budget_min">Project Budget Min (USD)</label>
+                $
+                <%= text_field_tag :budget_min, params[:budget_min], :style => "width: 83%" %>
               </li>
 
 
               <li>
-                <label for="budget_max">Project Budget Max</label>
-                <%= text_field_tag :budget_max, params[:budget_max] %>
+                <label for="budget_max">Project Budget Max  (USD)</label>
+                $
+                <%= text_field_tag :budget_max, params[:budget_max], :style => "width: 83%" %>
               </li>
 
               <li class="comboselect date" id="startDateSelector">
