@@ -19,7 +19,7 @@ define([
       if (!this.$el.length) {
         return
       }
-      (this.project && !!this.project.partner_organizations && this.project.partner_organizations != 'N/A') ? this.render() : this.$el.remove();
+      (this.project && this.project.partner_organizations) ? this.render() : this.$el.remove();
     },
 
     parseData: function(){
