@@ -57,8 +57,6 @@ class Project < ActiveRecord::Base
   has_many :donors, :through => :donations
   has_many :partnerships, :dependent => :destroy
   has_many :partners, through: :partnerships
-  has_many :implementer_partnerships, :dependent => :destroy
-  has_many :implementers, through: :implementer_partnerships
   has_and_belongs_to_many :sites
 
   scope :active, -> {where("end_date > ? AND start_date <= ?", Date.today.to_s(:db), Date.today.to_s(:db))}
