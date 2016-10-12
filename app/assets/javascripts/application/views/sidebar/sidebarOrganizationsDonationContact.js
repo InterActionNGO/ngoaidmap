@@ -23,11 +23,13 @@ define([
       return {
         donation_website: (this.organization.donation_website) ? this.organization.donation_website : '',
         donation_address: (this.organization.donation_address) ? this.organization.donation_address : '',
+        donation_address2: (this.organization.donation_address2) ? this.organization.donation_address2 : '',
         donation_country: (this.organization.donation_country) ? this.organization.donation_country : '',
         donation_phone_number: (this.organization.donation_phone_number) ? this.organization.donation_phone_number : '',
         city: (this.organization.city) ? this.organization.city : '',
         zip_code: (this.organization.zip_code) ? this.organization.zip_code : '',
-        state: (this.organization.state) ? this.organization.state : ''
+        state: (this.organization.state) ? this.organization.state : '',
+        donation_country: (this.organization.donation_country) ? this.organization.donation_country : ''
       };
     }
   });

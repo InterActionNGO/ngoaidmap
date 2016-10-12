@@ -5,10 +5,139 @@
   <div class="row">
     <section class="layout-content grid-12 offset-1">
 
-      <header>
+      <header class="mod-index-item">
         <h1 id="title-organization" data-id="<%= @organization.id %>" data-name="<%= @organization.name.html_safe %>" class="section-title"><%= @organization.name %></h1>
+        <% if @organization.acronym %>
+          <p style="margin-bottom: 30px">
+            <strong>Acronym(s):</strong> <%= @organization.acronym %>
+          </p>
+        <% end %>
+
         <%= simple_format(@organization.description) if @organization.description.present? %>
       </header>
+
+      <div class="mod-organization-details is-clearfix">
+        <% if @organization.logo %>
+          <div class="logo">
+            <%= image_tag @organization.logo.url(:medium), :alt=>"" %>
+          </div>
+        <% end %>
+
+        <table class="organization-details">
+          <% if @organization.budget %>
+            <tr>
+              <th>
+                Annual Budget
+              </th>
+              <td>
+                <%= number_with_precision(@organization.budget, :precision => 0, :delimiter => ',') %>
+                <% if @organization.budget_currency %>
+                  (<%= @organization.budget_currency %>)
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+
+          <% if @organization.budget_fiscal_year %>
+            <tr>
+              <th>
+                Fiscal Year (end date)
+              </th>
+              <td>
+                <%= @organization.budget_fiscal_year.strftime("%B %d, %Y") %>
+              </td>
+            </tr>
+          <% end %>
+
+          <% if @organization.website %>
+            <tr>
+              <th>
+                Website
+              </th>
+              <td>
+                <a href="<%= @organization.website %>"><%= @organization.website %></a>
+              </td>
+            </tr>
+          <% end %>
+
+          <% if @organization.twitter %>
+            <tr>
+              <th>
+                Twitter
+              </th>
+              <td>
+                <a href="<%= @organization.twitter %>"><%= @organization.twitter %></a>
+              </td>
+            </tr>
+          <% end %>
+
+          <% if @organization.facebook %>
+            <tr>
+              <th>
+                Facebook
+              </th>
+              <td>
+                <a href="<%= @organization.facebook %>"><%= @organization.facebook %></a>
+              </td>
+            </tr>
+          <% end %>
+
+          <% if @organization.hq_address %>
+            <tr>
+              <th>
+                Primary Address
+              </th>
+              <td>
+                <p><%= @organization.hq_address %></p>
+                <% if @organization.hq_address2 %>
+                  <p><%= @organization.hq_address2 %></p>
+                <% end %>
+                <% if @organization.contact_city && @organization.contact_state %>
+                <p><%= @organization.contact_city %>, <%= @organization.contact_state %> <%= @organization.contact_zip %></p>
+                <% end %>
+                <% if @organization.contact_country %>
+                  <p><%= @organization.contact_country %></p>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+
+          <% if @organization.donation_address || @organization.donation_phone_number ||  @organization.donation_website %>
+            <tr>
+              <th>
+                Donations
+              </th>
+              <td>
+                <% if @organization.donation_address %>
+                  <p><%= @organization.donation_address %></p>
+                  <% if @organization.donation_address2 %>
+                    <p><%= @organization.donation_address2 %></p>
+                  <% end %>
+                  <% if @organization.city && @organization.state %>
+                  <p><%= @organization.city %>, <%= @organization.state %> <%= @organization.zip_code %></p>
+                  <% end %>
+                  <% if @organization.donation_country %>
+                    <p><%= @organization.donation_country %></p>
+                  <% end %>
+                <% end %>
+
+                <% if @organization.donation_phone_number %>
+                  <p>
+                    <%= @organization.donation_phone_number %>
+                  </p>
+                <% end %>
+
+                <% if @organization.donation_website %>
+                  <p>
+                    <a href="<%= @organization.donation_website %>"><%= @organization.donation_website %></a>
+                  </p>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          
+        </table>
+      </div>
 
       <%= render :partial => 'partials/downloads' %>
       <%= render "partials/index_projects" %>
