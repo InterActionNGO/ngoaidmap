@@ -80,7 +80,7 @@ class Project < ActiveRecord::Base
   def self.fetch_all(options = {}, from_api = true)
     level = Geolocation.find_by(uid: options[:geolocation]).try(:adm_level) || 0 if options[:geolocation]
 
-    projects = Project.includes([:primary_organization]).eager_load(:geolocations, :sectors, :donors).references(:organizations)
+    projects = Project.includes([:primary_organization, :geolocations, :sectors, :donors]).references(:organizations)
     projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 12
     projects = projects.geolocation(options[:geolocation], level)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
