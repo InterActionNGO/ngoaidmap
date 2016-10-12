@@ -1,0 +1,48 @@
+.mod-organization-details {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid $color-4;
+
+  a {
+    display: inline-block;
+    color: $color-2;
+
+    &:hover {
+      color: lighten($color-2, 10%);
+      text-decoration: underline;
+    }
+  }
+
+  table {
+    width: 100%;
+  }
+
+  tr {
+    border-bottom: 1px solid #dddddd;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  th,
+  td {
+    padding:8px 0;
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: normal;
+    padding-right: 15px;
+  }
+
+  .logo {
+    float: left;
+    margin: 0px 30px 15px 0;
+    max-width: 150px;
+
+    & + table {
+      width: calc(100% - 180px);
+    }
+  }
+}
