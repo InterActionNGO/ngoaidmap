@@ -16,14 +16,15 @@ define([
 
     initialize: function(options) {
       this.project = options.project;
+      this.partners = options.partners;
       if (!this.$el.length) {
         return
       }
-      (this.project && this.project.partner_organizations) ? this.render() : this.$el.remove();
+      (this.project && (this.partners.local.length > 0 || this.partners.international.length > 0)) ? this.render() : this.$el.remove();
     },
 
     parseData: function(){
-      return this.project;
+      return {partners: this.partners};
     },
 
     render: function(){

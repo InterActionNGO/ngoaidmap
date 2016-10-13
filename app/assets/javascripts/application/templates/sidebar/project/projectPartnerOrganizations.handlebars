@@ -1,23 +1,23 @@
-{{#if this.partner_organizations.local.length }}
+{{#if partners.local }}
   <h3 class="margin">Local Partners</h3>
   <ul>
-    {{#each this.partner_organizations.local }}
-      <li style="margin-bottom: 0;"><p>{{ this }}</p></li>
+    {{#each partners.local }}
+      <li style="margin-bottom: 0;"><p>{{ name }}</p></li>
     {{/each}}
   </ul>
 {{/if}}
 
-{{#if this.partner_organizations.local.length }}
-  {{#if this.partner_organizations.international.length }}
+{{#if partners.local }}
+  {{#if partners.international }}
     <div style="padding-top: 30px;"></div>
   {{/if}}
 {{/if}}
 
-{{#if this.partner_organizations.international.length }}
+{{#if partners.international }}
   <h3 class="margin">International Partners</h3>
   <ul>
-    {{#each this.partner_organizations.international }}
-      <li style="margin-bottom: 0;"><p>{{ this }}</p></li>
+    {{#each partners.international }}
+      <li style="margin-bottom: 0;"><p>{{ name }}</p></li>
     {{/each}}
   </ul>
 {{/if}}

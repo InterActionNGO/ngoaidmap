@@ -90,6 +90,9 @@ class Organization < ActiveRecord::Base
   scope :geolocation, -> (geolocation,level=0){joins(projects: :geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){joins(projects: :geolocations).where(geolocations: {country_uid: countries})}
 
+  scope :international, ->{ where(international: true) }
+  scope :local,         ->{ where(international: [false, nil]) }
+
   scope :with_donations, -> { joins(:donations_made) }
   scope :active_donated_projects, -> {joins(donations_made: :project).where("projects.end_date IS NULL OR (projects.end_date > ? AND projects.start_date <= ?)", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :donated_projects_site, -> (site){joins(donations_made: {project: :sites}).where(sites: {id: site})}
