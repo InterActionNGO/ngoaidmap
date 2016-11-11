@@ -13,6 +13,10 @@ define([
 
     template: Handlebars.compile(tpl),
 
+    events: {
+      'click #see-more-organizations' : 'toggleOrganizations'
+    },
+
     initialize: function(options) {
       if (!this.$el.length) {
         return
@@ -20,20 +24,26 @@ define([
       this.conexion = options.conexion;
       this.conexion.getOrganizationsData(_.bind(function(response){
         this.organizations = response.organizations_count;
-        this.render();
+        this.render(false);
       }, this ));
     },
 
-    parseData: function(){
+    parseData: function(more){
       return {
-        organizations: this.organizations.slice(0, 9)
+        organizations: (more) ? this.organizations : this.organizations.slice(0,5),
+        see_more: (this.organizations.length < 10) ? false : !more
       };
     },
 
-    render: function(){
-      this.$el.html(this.template(this.parseData()));
+    render: function(more){
+      this.$el.html(this.template(this.parseData(!!more)));
     },
 
+    // Events
+    toggleOrganizations: function(e){
+      e && e.preventDefault();
+      this.render(true);
+    }
   });
 
   return SidebarOrganizations;

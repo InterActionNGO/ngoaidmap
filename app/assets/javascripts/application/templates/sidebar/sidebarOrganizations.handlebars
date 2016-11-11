@@ -1,8 +1,13 @@
 <div class="affiliated-organizations">
   <div class="mod-affiliated-organizations" >
-    <h3>Some organizations</h3>
-    {{#each organizations}}
-      <li><a href="{{this.url}}">{{this.name}}</a>{{this.count}} Projects</li>
-    {{/each}}
+    <h3>Reporting organizations</h3>
+    <ul>
+      {{#each organizations}}
+        <li><a href="{{this.url}}">{{this.name}}</a>{{this.count}} Projects</li>
+      {{/each}}
+      {{#if see_more}}
+        <li><a id="see-more-organizations" href="#">See more organizations</a></li>
+      {{/if}}
+    </ul>
   </div>
 </div>
