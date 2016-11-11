@@ -31,7 +31,7 @@ define([
     parseData: function(more){
       return {
         organizations: (more) ? this.organizations : this.organizations.slice(0,5),
-        see_more: (this.organizations.length < 10) ? false : !more
+        see_more: (this.organizations.length < 5) ? false : !more
       };
     },
 

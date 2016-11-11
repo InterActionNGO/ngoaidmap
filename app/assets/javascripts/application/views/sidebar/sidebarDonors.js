@@ -43,8 +43,8 @@ define([
     parseData: function(more){
       return {
         name: this.setName(),
-        donors: (more) ? this.data : this.data.slice(0,10),
-        see_more: (this.data.length < 10) ? false : !more
+        donors: (more) ? this.data : this.data.slice(0,5),
+        see_more: (this.data.length < 5) ? false : !more
       };
     },
 
