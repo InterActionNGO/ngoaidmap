@@ -23,11 +23,11 @@
   {{#if filters.budget_max}}
     <p><strong>Budget Between</strong>: ${{filters.budget_min}} <strong>and</strong> ${{filters.budget_max}}</p>
   {{else}}
-    <p><strong>Budget</strong>: <strong>Above</strong> ${{filters.budget_min}}</p>
+    <p><strong>Budget</strong>: <strong>At or Above</strong> ${{filters.budget_min}}</p>
   {{/if}}
 {{else}}
   {{#if filters.budget_max}}
-    <p><strong>Budget</strong>: <strong>Below</strong> ${{filters.budget_max}}</p>
+    <p><strong>Budget</strong>: <strong>At or Below</strong> ${{filters.budget_max}}</p>
   {{/if}}
 {{/if}}
 
