@@ -7,7 +7,7 @@
     "url": "https://github.com/InterActionNGO/ngoaidmap.git"
   },
   "engines": {
-    "node": "5.11.0"
+    "node": "0.10.29"
   },
   "scripts": {
     "bower": "bower install"
