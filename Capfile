@@ -14,7 +14,8 @@ require 'capistrano/deploy'
 #   https://github.com/capistrano/bundler
 #   https://github.com/capistrano/rails
 #
-require 'capistrano/rbenv'
+# require 'capistrano/rvm' # needed for production only
+require 'capistrano/rbenv' # needed for staging only
 require 'capistrano/npm'
 require 'capistrano/bundler'
 require 'capistrano/bower'
