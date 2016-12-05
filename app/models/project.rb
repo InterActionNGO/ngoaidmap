@@ -179,8 +179,8 @@ class Project < ActiveRecord::Base
     budget 'budget_numeric'
     budget_currency 'budget_currency'
     budget_value_date 'budget_value_date'
-    partners 'international partners' do |partners| partners.international.map(&:name).join(', ') end
-    partners 'local_partners' do |partners| partners.local.map(&:name).join(', ') end
+    partners 'international partners' do |partners| partners.international.map(&:name).join('|') end
+    partners 'local_partners' do |partners| partners.local.map(&:name).join('|') end
     prime_awardee 'prime_awardee' do |prime_awardee| prime_awardee.try(:name) end
     target_project_reach 'target_project_reach'
     actual_project_reach 'actual_project_reach'
@@ -215,8 +215,8 @@ class Project < ActiveRecord::Base
     budget 'budget_numeric'
     budget_currency 'budget_currency'
     budget_value_date 'budget_value_date'
-    partners 'international partners' do |partners| partners.international.map(&:name).join(', ') end
-    partners 'local_partners' do |partners| partners.local.map(&:name).join(', ') end
+    partners 'international partners' do |partners| partners.international.map(&:name).join('|') end
+    partners 'local_partners' do |partners| partners.local.map(&:name).join('|') end
     prime_awardee 'prime_awardee' do |prime_awardee| prime_awardee.try(:name) end
     target_project_reach 'target_project_reach'
     actual_project_reach 'actual_project_reach'
