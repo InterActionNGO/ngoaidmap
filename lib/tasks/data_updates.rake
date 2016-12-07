@@ -38,11 +38,11 @@ namespace :iom do
   desc "Add New Partners"
   task :add_partners => :environment do
 
-    puts "Importing db/import/new-partners-to-add-viget.csv ..."
+    puts "Importing db/import/new-partner-relations-post-deploy-viget-2016-12-06.csv ..."
 
     Partnership.transaction do
       read_options = { :headers => true, :return_headers => false }
-      read_file    = File.expand_path("db/import/new-partners-to-add-viget.csv")
+      read_file    = File.expand_path("db/import/new-partner-relations-post-deploy-viget-2016-12-06.csv")
 
       CSV.foreach(read_file, read_options) do |row|
         begin
@@ -52,10 +52,10 @@ namespace :iom do
           )
 
           if !partner.persisted?
-            puts "#{row.to_hash.inspect} not saved"
+            puts "#{row.to_hash.inspect} not saved with errors #{partner.errors.full_messages}"
           end
-        rescue
-          puts "#{row.to_hash.inspect} not saved"
+        rescue => e
+          puts "#{row.to_hash.inspect} not saved because of error #{e.inspect} at #{e.backtrace[0]}"
         end
       end
     end
