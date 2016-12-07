@@ -5,7 +5,7 @@
   <li class="menu-item about">
     <a href="/p/about" class="index-item about <% if @page.present? %><%= "active" if (@page.permalink == 'about' || @page.top_parent.permalink == 'about') %><% end %>">About</a>
 
-    <% cache ['main_menu_submenus', @site] do %>
+    <% cache ['main_menu_submenus_about', @site] do %>
       <ul class="submenu">
         <% @site.pages_by_parent('about').each do |page| %>
           <% if page.published %>
@@ -18,7 +18,7 @@
   <li class="menu-item data">
     <a href="/p/data" class="index-item data <% if @page.present? %><%= "active" if (@page.permalink == 'data' || @page.top_parent.permalink == 'data') %><% end %>">data</a>
 
-    <% cache ['main_menu_submenus', @site] do %>
+    <% cache ['main_menu_submenus_data', @site] do %>
       <ul class="submenu">
         <% @site.pages_by_parent('data').each do |page| %>
           <% if page.published %>
