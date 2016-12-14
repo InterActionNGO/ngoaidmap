@@ -36,7 +36,7 @@ define([
 
     calculeBudgets: function() {
       var result;
-      var budgets = _.sortBy(_.compact(_.pluck(ReportModel.instance.get('projects'), 'budget')));
+      var budgets = _.sortBy(_.compact(_.pluck(ReportModel.instance.get('projects'), 'budgetUSD')));
       var budgetsLength = _.size(budgets);
 
       if (budgetsLength > 0) {

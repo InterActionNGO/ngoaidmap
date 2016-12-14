@@ -16,7 +16,7 @@ define([
 
       data.projects = _.map(data.projects, function(project) {
         var result = project.project;
-        result.budget = Number(result.budget) || 0;
+        result.budget_usd = Number(result.budget_usd) || 0;
         result.the_geom = result.the_geom.geometries;
         return result;
       });
@@ -65,7 +65,7 @@ define([
         });
       }
 
-      var budgets = _.sortBy(_.compact(_.pluck(data.projects, 'budget')));
+      var budgets = _.sortBy(_.compact(_.pluck(data.projects, 'budget_usd')));
       var budgetsLength = _.size(budgets);
 
       if (budgetsLength > 0) {

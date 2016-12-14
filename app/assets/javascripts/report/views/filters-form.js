@@ -121,7 +121,7 @@ define([
     calculeBudgets: function(projectsByOrganization) {
       return _.map(projectsByOrganization, _.bind(function(projects, key){
         var result;
-        var budgets = _.sortBy(_.compact(_.pluck(projects, 'budget')));
+        var budgets = _.sortBy(_.compact(_.pluck(projects, 'budgetUSD')));
         var budgetsLength = _.size(budgets);
 
         if (budgetsLength > 0) {

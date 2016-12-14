@@ -19,6 +19,7 @@ define([
           id: Number(project.id),
           name: project.name,
           budget: Number(project.budget),
+          budgetUSD: Number(project.budget_usd),
           organizationId: Number(project.primary_organization),
           organizationName: project.organization_name,
           donorsCount: Number(project.donors_count),

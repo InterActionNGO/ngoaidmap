@@ -362,11 +362,11 @@ class Project < ActiveRecord::Base
     end
 
     budget_filter = if budget_min && budget_max
-      sanitize_conditions(["AND p.budget <= ? AND p.budget >= ?", budget_max, budget_min])
+      sanitize_conditions(["AND p.budget_usd <= ? AND p.budget_usd >= ?", budget_max.to_d, budget_min.to_d])
     elsif budget_min
-      sanitize_conditions(["AND p.budget >= ?", budget_min])
+      sanitize_conditions(["AND p.budget_usd >= ?", budget_min.to_d])
     elsif budget_max
-      sanitize_conditions(["AND p.budget <= ?", budget_max])
+      sanitize_conditions(["AND p.budget_usd <= ?", budget_max.to_d])
     end
 
     form_query_filter = "AND lower(p.name) LIKE '%" + form_query + "%'" if params[:q]
@@ -389,11 +389,11 @@ class Project < ActiveRecord::Base
     end
 
     if the_model == 'o'
-      budget_line = ", SUM(p.budget) AS budget"
+      budget_line = ", SUM(p.budget_usd) AS budget_usd"
     end
     if the_model == 'p'
       sql = <<-SQL
-        SELECT p.id, p.name, p.budget, p.start_date, p.end_date, o.id AS primary_organization, o.name AS organization_name,
+        SELECT p.id, p.name, p.budget_usd, p.start_date, p.end_date, o.id AS primary_organization, o.name AS organization_name,
         COUNT(DISTINCT d.id) AS donors_count,
         COUNT(DISTINCT c.id) AS countries_count,
         COUNT(DISTINCT s.id) AS sectors_count
@@ -409,7 +409,7 @@ class Project < ActiveRecord::Base
           WHERE true
          #{date_filter} #{form_query_filter} #{donors_filter} #{sectors_filter} #{countries_filter} #{organizations_filter} #{budget_filter}
           AND c.adm_level = 0
-          GROUP BY p.id, p.name, o.id, o.name, p.budget, p.start_date, p.end_date
+          GROUP BY p.id, p.name, o.id, o.name, p.budget_usd, p.start_date, p.end_date
           ORDER BY p.name
           LIMIT #{the_limit}
       SQL
