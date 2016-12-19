@@ -102,40 +102,6 @@
             </tr>
           <% end %>
 
-          <% if @organization.donation_address? || @organization.donation_phone_number? ||  @organization.donation_website? %>
-            <tr>
-              <th>
-                Donations
-              </th>
-              <td>
-                <% if @organization.donation_address? %>
-                  <p><%= @organization.donation_address %></p>
-                  <% if @organization.donation_address2? %>
-                    <p><%= @organization.donation_address2 %></p>
-                  <% end %>
-                  <% if @organization.city? && @organization.state? %>
-                  <p><%= @organization.city %>, <%= @organization.state %> <%= @organization.zip_code %></p>
-                  <% end %>
-                  <% if @organization.donation_country? %>
-                    <p><%= @organization.donation_country %></p>
-                  <% end %>
-                <% end %>
-
-                <% if @organization.donation_phone_number? %>
-                  <p>
-                    <%= @organization.donation_phone_number %>
-                  </p>
-                <% end %>
-
-                <% if @organization.donation_website? %>
-                  <p>
-                    <a href="<%= @organization.donation_website %>"><%= @organization.donation_website %></a>
-                  </p>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-          
         </table>
       </div>
 
