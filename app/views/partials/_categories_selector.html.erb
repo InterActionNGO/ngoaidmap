@@ -119,7 +119,13 @@
       button.addEventListener('click', function(e) {
         var target   = e.currentTarget;
         var menu     = target.parentElement.querySelector('.menu');
+        var menus    = target.parentElement.parentElement.querySelectorAll('.menu');
         var hasClass = menu.classList.contains('-show');
+
+        for (var i=0, len=menus.length; i < len; i++) {
+          menus[i].classList.remove('-show');
+        }
+
         if (hasClass) {
           menu.classList.remove('-show');
         } else {
