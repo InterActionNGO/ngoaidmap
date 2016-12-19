@@ -15,20 +15,29 @@ define([
     template: Handlebars.compile(tpl),
 
     initialize: function(options) {
-      this.project = options.project;
+      this.project  = options.project;
+      this.partners = this.project.implementing_organization;
       if (!this.$el.length) {
         return
       }
-      (this.project && !!this.project.implementing_organization) ? this.render() : this.$el.remove();
+      (this.project && !!this.partners) ? this.render() : this.$el.remove();
     },
 
     parseData: function(){
-      return this.project;
+      this.partners = this.listifyPartners();
+      return {partners: this.partners};
     },
 
     render: function(){
       this.$el.html(this.template(this.parseData()));
     },
+
+    listifyPartners: function() {
+      if (typeof this.partners === 'string') {
+        return this.partners.split(', ');
+      }
+      return this.partners;
+    }
 
   });
 

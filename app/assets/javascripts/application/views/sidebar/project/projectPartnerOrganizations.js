@@ -15,7 +15,7 @@ define([
     template: Handlebars.compile(tpl),
 
     initialize: function(options) {
-      this.project = options.project;
+      this.project  = options.project;
       this.partners = options.partners;
       if (!this.$el.length) {
         return
@@ -29,7 +29,7 @@ define([
 
     render: function(){
       this.$el.html(this.template(this.parseData()));
-    },
+    }
 
   });
 
