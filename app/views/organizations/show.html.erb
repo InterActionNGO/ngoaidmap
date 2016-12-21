@@ -30,9 +30,18 @@
                 Annual Budget
               </th>
               <td>
-                <%= number_with_precision(@organization.budget, :precision => 0, :delimiter => ',') %>
-                <% if @organization.budget_currency %>
-                  (<%= @organization.budget_currency %>)
+                <%- if @organization.budget_usd? -%>
+                  <%= number_to_currency(@organization.budget_usd, precision: 0) %>
+                  <%- if @organization.budget_currency? -%>
+                    (Converted from <%= @organization.budget_currency %>)
+                  <%- end -%>
+                <%- else -%>
+                  <% if @organization.budget_currency? %>
+                    <%= number_with_precision(@organization.budget, :precision => 0, :delimiter => ',') %>
+                    (<%= @organization.budget_currency %>)
+                  <%- else -%>
+                    <%= number_to_currency(@organization.budget, precision: 0) %>
+                  <% end %>
                 <% end %>
               </td>
             </tr>
