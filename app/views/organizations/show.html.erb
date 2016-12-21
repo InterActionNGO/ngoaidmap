@@ -64,7 +64,7 @@
                 Website
               </th>
               <td>
-                <a href="<%= @organization.website %>"><%= @organization.website %></a>
+                <a href="<%= @organization.website %>"><%= URI.unescape(@organization.website) %></a>
               </td>
             </tr>
           <% end %>
@@ -75,7 +75,7 @@
                 Twitter
               </th>
               <td>
-                <a href="<%= @organization.twitter %>"><%= @organization.twitter %></a>
+                <a href="<%= @organization.twitter %>"><%= URI.unescape(@organization.twitter) %></a>
               </td>
             </tr>
           <% end %>
@@ -86,7 +86,7 @@
                 Facebook
               </th>
               <td>
-                <a href="<%= @organization.facebook %>"><%= @organization.facebook %></a>
+                <a href="<%= @organization.facebook %>"><%= URI.unescape(@organization.facebook) %></a>
               </td>
             </tr>
           <% end %>
