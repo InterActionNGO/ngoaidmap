@@ -45,7 +45,6 @@ define([
   'application/views/sidebar/project/projectAwardee',
   'application/views/sidebar/project/projectTarget',
   'application/views/sidebar/project/projectPartnerOrganizations',
-  'application/views/sidebar/project/projectImplementingOrganization',
   'application/views/sidebar/project/projectLocations',
   'application/views/sidebar/project/projectDonors',
   'application/views/sidebar/project/projectReach',
@@ -56,7 +55,7 @@ define([
 ], function(Backbone, Conexion, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
   GalleryView, FilteredBubble, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOrganizationsResources, SidebarOtherCountries,
-  projectModel, ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectImplementingOrganization, ProjectLocations, ProjectDonors, ProjectReach, ProjectSectors) {
+  projectModel, ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectLocations, ProjectDonors, ProjectReach, ProjectSectors) {
 
   var Router = Backbone.Router.extend({
 
@@ -239,7 +238,6 @@ define([
       new ProjectAwardee({ project: _project, awardee: _awardee, conexion: this.conexion });
       new ProjectTarget({ project: _project, conexion: this.conexion });
       new ProjectPartnerOrganizations({ project: _project, partners: _partners, conexion: this.conexion });
-      new ProjectImplementingOrganization({ project: _project, conexion: this.conexion });
       new ProjectLocations({ project: _project, conexion: this.conexion });
       new ProjectDonors({ project: _project, conexion: this.conexion });
       new ProjectReach({ project: _project, conexion: this.conexion });
