@@ -13,12 +13,12 @@
 
 ### Ruby Version
 
-Ruby version is specified in both the `Gemfile` and `.ruby-version`. As of this writing, the Ruby version used is 2.2.1.
+Ruby version is specified in both the `Gemfile` and `.ruby-version`. As of this writing, the Ruby version used is 2.3.1.
 
 
 ### Rails Version
 
-Rails version is specified in the `Gemfile`. As of this writing, the Rails version used is 4.2.1.
+Rails version is specified in the `Gemfile`. As of this writing, the Rails version used is 4.2.7.1
 
 
 ### Install System Dependencies
@@ -36,7 +36,7 @@ Ensure you have [Homebrew](http://brew.sh/) installed on your machine. We'll use
   brew install redis
 ```
 
-#### Install rbenv:
+#### Install rbenv (or any ruby version manager):
 ```
   brew install rbenv
   rbenv init
@@ -44,9 +44,13 @@ Ensure you have [Homebrew](http://brew.sh/) installed on your machine. We'll use
 It is recommended that you double-check the [installation instructions](https://github.com/rbenv/rbenv#homebrew-on-mac-os-x) for installing rbenv with Homebrew. There is a git alternative to installing rbenv as well.
 
 #### Install NVM:
-It is recommended that you use [NVM](https://github.com/creationix/nvm) to install and manage your [Node](http://nodejs.org/) and corresponding npm versions. There is no Homebrew option for installing NVM.
+It is recommended that you use [NVM](https://github.com/creationix/nvm) to install and manage your [Node](http://nodejs.org/) and corresponding npm versions.
 
-Install NVM per the directions in the [linked repo](https://github.com/creationix/nvm). The node version is documented in `.nvmrc`.  As of this writing, the Node version has been set to 5.11.0.
+```
+  brew install nvm
+```
+
+The node version is documented in `.nvmrc`.  As of this writing, the Node version has been set to 0.10.29.
 
 
 ### Install the App
@@ -59,9 +63,9 @@ To get started, clone this repo:
 ```
 
 #### Ruby
-Install Ruby `2.2.1` with rbenv:
+Install Ruby `2.3.1` with rbenv:
 ```
-  rbenv install 2.2.1
+  rbenv install 2.3.1
 ```
 
 #### Bundler
