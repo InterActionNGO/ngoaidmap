@@ -132,6 +132,15 @@
           menu.classList.add('-show');
         }
       });
+
+      button.addEventListener('mouseleave', function(e) {
+        var target   = e.currentTarget;
+        var menus    = target.parentElement.parentElement.querySelectorAll('.menu');
+
+        for (var i=0, len=menus.length; i < len; i++) {
+          menus[i].classList.remove('-show');
+        }
+      });
     }
   </script>
 <% end %>
