@@ -75,6 +75,13 @@
     <email><%= project.contact_email %></email>
     <website><%= project.primary_organization.try(:website) %></website>
   </contact-info>
+  <% if project.geographical_scope && (project.geographical_scope == 'national' || project.geographical_scope == 'global') %>
+    <% if project.geographical_scope == 'national' %>
+      <activity-scope code="4" />
+    <% else %>
+      <activity-scope code="1" />
+    <% end %>
+  <% end %>
   <% if project.countries.any? %>
     <% project.countries.each_with_index do |c,i| %>
       <recipient-country code="<%= c.country_code %>" percentage="<%=
@@ -108,13 +115,6 @@
         <exactness code="2"/>
         <location-class code="<%= l.adm_level == 1 ? 1 : '' %>"/>
       </location>
-    <% end %>
-  <% end %>
-  <% if project.geographical_scope && (project.geographical_scope == 'national' || project.geographical_scope == 'global') %>
-    <% if project.geographical_scope == 'national' %>
-      <activity-scope code="4" />
-    <% else %>
-      <activity-scope code="1" />
     <% end %>
   <% end %>
   <% if project.sectors.any? %>
