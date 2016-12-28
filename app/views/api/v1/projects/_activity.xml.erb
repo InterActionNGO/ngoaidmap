@@ -29,6 +29,13 @@
     </participating-org>
     <% end %>
   <% end %>
+  <% if project.partners.any? %>
+    <% project.partners.each do |p| %>
+        <participating-org <% if p.iati_organizationid.present? %> ref="<%= p.iati_organizationid %>" <% end %>role="4" <% if p.organization_type_code.present? %>type="<%= p.organization_type_code %>"<% end %>>
+            <narrative><%= p.name %></narrative>
+        </participating-org>
+    <% end %>
+  <% end %>
   <other-identifier ref="<%= project.intervention_id %>" type="A1">
     <owner-org ref="US-EIN-13-3287064NAM">
       <narrative>InterAction’s NGO Aid Map</narrative>
