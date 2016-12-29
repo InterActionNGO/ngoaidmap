@@ -75,7 +75,7 @@
     <email><%= project.contact_email %></email>
     <website><%= project.primary_organization.try(:website) %></website>
   </contact-info>
-  <% if project.geographical_scope && (project.geographical_scope == 'national' || project.geographical_scope == 'global') %>
+  <% if project.geographical_scope? && %w(national global).include?(project.geographical_scope) %>
     <% if project.geographical_scope == 'national' %>
       <activity-scope code="4" />
     <% else %>
