@@ -46,13 +46,15 @@ after :deploy, :restart do
   end
 end
 
-# after :restart, :clear_cache do
-#   on roles(:web), in: :groups, limit: 3, wait: 10 do
-#     within release_path do
-#       execute :rake, 'memcached:flush RAILS_ENV=production'
-#     end
-#   end
-# end
+after :restart, :clear_cache do
+  on roles(:web), in: :groups, wait: 5 do
+    within current_path do
+      with rails_env: fetch(:rails_env) do
+        execute :rails, "runner", '"puts Redis::Namespace.new(\'ngo_aidmap\', redis: Redis.new).flushall"'
+      end
+    end
+  end
+end
 
  # after :failed, :rollback
 
