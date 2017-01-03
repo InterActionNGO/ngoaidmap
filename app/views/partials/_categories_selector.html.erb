@@ -115,6 +115,7 @@
     var buttons = document.querySelectorAll('.categories-selector button.father');
     for (var i=0, len=buttons.length; i<len; i++) {
       var button = buttons[i];
+      var parent = button.parentElement;
 
       button.addEventListener('click', function(e) {
         var target   = e.currentTarget;
@@ -133,9 +134,9 @@
         }
       });
 
-      button.addEventListener('mouseleave', function(e) {
-        var target   = e.currentTarget;
-        var menus    = target.parentElement.parentElement.querySelectorAll('.menu');
+      parent.addEventListener('mouseleave', function(e) {
+        var target = e.currentTarget;
+        var menus  = target.parentElement.querySelectorAll('.menu');
 
         for (var i=0, len=menus.length; i < len; i++) {
           menus[i].classList.remove('-show');
