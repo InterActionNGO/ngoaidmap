@@ -51,3 +51,4 @@ public/assets
 stdout
 
 config/database.yml
+db/import/*
