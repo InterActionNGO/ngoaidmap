@@ -33,6 +33,7 @@ gem 'newrelic_rpm'
 gem "comma", "~> 3.2.1"
 gem 'sql_query'
 gem 'whenever', :require => false
+gem 'builder', '>= 3.2'
 
 group :development do
   gem 'foreman'
