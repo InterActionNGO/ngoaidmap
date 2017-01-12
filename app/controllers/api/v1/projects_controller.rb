@@ -1,7 +1,7 @@
 module Api
   module V1
     class ProjectsController < ApiController
-        helper IatiActivityHelper
+      helper IatiActivityHelper
       before_action :set_digests, only: 'index'
       before_action :unscoped_count, only: 'index'
       def index
