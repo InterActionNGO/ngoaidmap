@@ -137,10 +137,12 @@
       parent.addEventListener('mouseleave', function(e) {
         var target = e.currentTarget;
         var menus  = target.parentElement.querySelectorAll('.menu');
+        var button = target.querySelector('button.father');
 
         for (var i=0, len=menus.length; i < len; i++) {
           menus[i].classList.remove('-show');
         }
+        button.blur();
       });
     }
   </script>
