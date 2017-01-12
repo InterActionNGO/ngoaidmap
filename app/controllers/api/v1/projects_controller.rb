@@ -1,6 +1,7 @@
 module Api
   module V1
     class ProjectsController < ApiController
+        helper IatiActivityHelper
       before_action :set_digests, only: 'index'
       before_action :unscoped_count, only: 'index'
       def index
@@ -20,7 +21,7 @@ module Api
               expire_time = ((Time.now + 1.day).beginning_of_day - Time.now).ceil
               @projects = Project.fetch_all(projects_params)
               @projects_size = @projects.size
-              projects_xml = render_to_string(:template => 'api/v1/projects/index.xml.erb', :layout => false) do
+              projects_xml = render_to_string(:template => 'api/v1/projects/index.xml.builder') do
                 @projects
               end
               $redis.set(@iati_projects_digest, projects_xml)
