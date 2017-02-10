@@ -7,7 +7,12 @@ module Api
         respond_to do |format|
           format.json {
             @projects = Project.fetch_all(projects_params)
-            render json: @projects, root: 'data', meta: {total_projects: @projects.size}, include: ['geolocations', 'reporting_organization', 'sectors', 'donors', 'prime_awardee']
+            render json: @projects,
+                meta: {
+                    total_projects: Project.count,
+                    returned_projects: @projects.count,
+                    current_offset: projects_params[:offset].to_i
+                }, include: [:donors, :prime_awardee, :geolocations, :sectors, :tags, :reporting_organization]
           }
           format.xml {
             if projects = $redis.get(@iati_projects_digest)
