@@ -9,8 +9,8 @@ module Api
             @projects = Project.fetch_all(projects_params)
             render json: @projects,
                 meta: {
-                    total_projects: Project.count,
-                    returned_projects: @projects.count,
+                    total_records: Project.count,
+                    returned_records: @projects.count,
                     current_offset: projects_params[:offset].to_i
                 }, include: [:donors, :prime_awardee, :geolocations, :sectors, :tags, :reporting_organization]
           }
