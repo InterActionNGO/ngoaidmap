@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :sectors, only: [:index, :show]
       resources :countries, only: [:index, :show]
       resources :geolocations, only: [:index, :show]
+      resources :tags, only: [:index, :show]
       namespace :private do
         get 'map', to:'private#map'
         get 'projects-count', to:'private#projects_count'
