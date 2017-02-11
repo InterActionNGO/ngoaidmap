@@ -9,10 +9,11 @@ module Api
             @projects = Project.fetch_all(projects_params)
             render json: @projects,
                 meta: {
-                    total_records: Project.count,
+                    total_records: @total_projects,
                     returned_records: @projects.count,
                     current_offset: projects_params[:offset].to_i
-                }, include: [:donors, :prime_awardee, :geolocations, :sectors, :tags, :reporting_organization]
+                },
+                include: [:donors, :prime_awardee, :geolocations, :sectors, :tags, :reporting_organization]
           }
           format.xml {
             if projects = $redis.get(@iati_projects_digest)
@@ -71,7 +72,7 @@ module Api
       end
 
       def unscoped_count
-        if request.format == 'xml' && !$redis.get(@iati_projects_digest)
+        if (request.format == 'xml' && !$redis.get(@iati_projects_digest)) || request.format == 'json'
           no_limit_params = projects_params.dup
           no_limit_params.delete(:offset)
           no_limit_params.delete(:limit)
