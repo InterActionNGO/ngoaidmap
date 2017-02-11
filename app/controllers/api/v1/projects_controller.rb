@@ -61,13 +61,15 @@ module Api
       end
 
       def set_digests
-        begin
-          timestamp = Project.fetch_all(projects_params).order('projects.updated_at desc').first.updated_at.to_s
-          string = timestamp + projects_params.inspect
-          @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
-        rescue Exception => e
-          string = '0' + projects_params.inspect
-          @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
+        if params[:format].eql?('xml')
+            begin
+            timestamp = Project.fetch_all(projects_params).order('projects.updated_at desc').first.updated_at.to_s
+            string = timestamp + projects_params.inspect
+            @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
+            rescue Exception => e
+            string = '0' + projects_params.inspect
+            @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
+            end
         end
       end
 
