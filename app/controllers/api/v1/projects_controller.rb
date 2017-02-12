@@ -60,7 +60,7 @@ module Api
         if request.fullpath.include?('organizations') && params[:organization_id].present?
           params.merge!(organizations: [params[:organization_id]])
         end
-        params.permit(:site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[], tags:[])
+        params.permit(:site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, :updated_since_days, organizations:[], sectors:[], donors:[], countries:[], tags:[])
       end
 
       def set_digests
