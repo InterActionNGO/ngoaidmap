@@ -6,8 +6,14 @@ module Api
       def index
         respond_to do |format|
           format.json {
-            @projects = Project.fetch_all(projects_params)
-            render json: @projects, root: 'data', meta: {total_projects: @projects.size}, include: ['geolocations', 'reporting_organization', 'sectors', 'donors', 'prime_awardee']
+            @projects = Project.fetch_all(projects_params).order(:id)
+            render json: @projects,
+                meta: {
+                    records_available: @total_projects,
+                    records_returned: @projects.count,
+                    current_offset: projects_params[:offset].to_i
+                },
+                include: [:donors, :prime_awardee, :geolocations, :sectors, :tags, :reporting_organization]
           }
           format.xml {
             if projects = $redis.get(@iati_projects_digest)
@@ -18,7 +24,7 @@ module Api
               end
             else
               expire_time = ((Time.now + 1.day).beginning_of_day - Time.now).ceil
-              @projects = Project.fetch_all(projects_params)
+              @projects = Project.fetch_all(projects_params).order(:id)
               @projects_size = @projects.size
               projects_xml = render_to_string(:template => 'api/v1/projects/index.xml.erb', :layout => false) do
                 @projects
@@ -38,35 +44,40 @@ module Api
       def show
         @project = Project.find(params[:id])
         respond_to do |format|
-          format.json {render json: @project, root: 'data', include: ['geolocations', 'reporting_organization', 'sectors', 'donors', 'prime_awardee']}
+          format.json {
+              render json: @project,
+                include: [:donors, :prime_awardee, :geolocations, :sectors, :tags, :reporting_organization]
+          }
           format.xml {@project}
         end
       end
 
 
       def projects_params
-        if (!request.fullpath.include?('organizations')) && ((!params[:limit].present? && !params[:organizations].present? && !params[:sectors].present? && !params[:donors].present? && !params[:countries].present?) or params[:limit].to_i > 100)
-          params.merge!(limit: '100')
-        end
+        # Limit all requests to 100 results, except for iati xml  
+        params.merge!(limit: '100') unless params[:format].eql?('xml') && request.fullpath.include?('organizations')
+        
         if request.fullpath.include?('organizations') && params[:organization_id].present?
           params.merge!(organizations: [params[:organization_id]])
         end
-        params.permit(:site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[])
+        params.permit(:site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, :updated_since_days, organizations:[], sectors:[], donors:[], countries:[], tags:[])
       end
 
       def set_digests
-        begin
-          timestamp = Project.fetch_all(projects_params).order('projects.updated_at desc').first.updated_at.to_s
-          string = timestamp + projects_params.inspect
-          @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
-        rescue Exception => e
-          string = '0' + projects_params.inspect
-          @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
+        if params[:format].eql?('xml')
+            begin
+            timestamp = Project.fetch_all(projects_params).order('projects.updated_at desc').first.updated_at.to_s
+            string = timestamp + projects_params.inspect
+            @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
+            rescue Exception => e
+            string = '0' + projects_params.inspect
+            @iati_projects_digest = "iati_projects_#{Digest::SHA1.hexdigest(string)}"
+            end
         end
       end
 
       def unscoped_count
-        if request.format == 'xml' && !$redis.get(@iati_projects_digest)
+        if (request.format == 'xml' && !$redis.get(@iati_projects_digest)) || request.format == 'json'
           no_limit_params = projects_params.dup
           no_limit_params.delete(:offset)
           no_limit_params.delete(:limit)

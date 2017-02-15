@@ -76,11 +76,13 @@ class Project < ActiveRecord::Base
   scope :text_query, -> (q){where('projects.name ilike ? OR projects.description ilike ?', "%%#{q}%%", "%%#{q}%%")}
   scope :starting_after, -> (date){where "start_date > ?", date}
   scope :ending_before, -> (date){where "end_date < ?", date}
+  scope :tags, -> (tags){where(tags: {id: tags})}
+  scope :updated_since_days, -> (days){where "projects.updated_at >= (current_date - ?)", days.to_i}
 
   def self.fetch_all(options = {}, from_api = true)
     level = Geolocation.find_by(uid: options[:geolocation]).try(:adm_level) || 0 if options[:geolocation]
 
-    projects = Project.includes([:primary_organization, :geolocations, :sectors, :donors]).references(:organizations)
+    projects = Project.includes([:primary_organization, :geolocations, :sectors, :donors, :tags, :partners, :prime_awardee]).references(:organizations)
     projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 12
     projects = projects.geolocation(options[:geolocation], level)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
@@ -95,6 +97,8 @@ class Project < ActiveRecord::Base
     projects = projects.limit(options[:limit].to_i)                             if options[:limit]
     projects = projects.active                                                  if options[:status] && options[:status] == 'active'
     projects = projects.inactive                                                if options[:status] && options[:status] == 'inactive'
+    projects = projects.tags(options[:tags]) if options[:tags]
+    projects = projects.updated_since_days(options[:updated_since_days]) if options[:updated_since_days]
     projects = projects.uniq
     if from_api
       projects
