@@ -77,7 +77,7 @@ class Project < ActiveRecord::Base
   scope :starting_after, -> (date){where "start_date > ?", date}
   scope :ending_before, -> (date){where "end_date < ?", date}
   scope :tags, -> (tags){where(tags: {id: tags})}
-  scope :updated_since_days, -> (days){where "projects.updated_at >= (current_date - ?)", days.to_i}
+  scope :updated_since, -> (timestamp){where "projects.updated_at > timestamp with time zone ?", timestamp }
 
   def self.fetch_all(options = {}, from_api = true)
     level = Geolocation.find_by(uid: options[:geolocation]).try(:adm_level) || 0 if options[:geolocation]
@@ -98,7 +98,7 @@ class Project < ActiveRecord::Base
     projects = projects.active                                                  if options[:status] && options[:status] == 'active'
     projects = projects.inactive                                                if options[:status] && options[:status] == 'inactive'
     projects = projects.tags(options[:tags]) if options[:tags]
-    projects = projects.updated_since_days(options[:updated_since_days]) if options[:updated_since_days]
+    projects = projects.updated_since(options[:updated_since]) if options[:updated_since]
     projects = projects.uniq
     if from_api
       projects
