@@ -4,7 +4,7 @@ vars ||= iati_vars_for(p)
 x.tag!('iati-activity', {
     'xml:lang': 'en',
     'last-updated-datetime': p.updated_at.xmlschema,
-    'humanitarian': vars.humanitarian[:flag],
+    'humanitarian': vars.humanitarian,
     'linked-data-uri': "https://ngoaidmap.org/projects/#{p.id.to_s}"
 }) do
     x.tag!('iati-identifier', [vars.interaction_ref, p.intervention_id].join('-'))
@@ -78,10 +78,6 @@ x.tag!('iati-activity', {
     
     vars.sectors.each do |s|
         x.sector(s[:attrs]) { x.narrative(s[:narrative]) }
-    end
-    
-    vars.humanitarian[:scope].each do |s|
-        x.tag!('humanitarian-scope', s[:attrs]) { x.narrative(s[:narrative]) }
     end
     
     vars.transaction.each do |t|

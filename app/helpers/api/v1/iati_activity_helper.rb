@@ -12,26 +12,7 @@ module Api::V1::IatiActivityHelper
         end
         
         def humanitarian
-            tags = {
-                ebola: 'Ebola',
-                syria_refugees: 'Syrian Refugee Crisis',
-                nepal_earthquake: 'Nepal Earthquake',
-                hurricane_matthew: 'Hurricane Matthew',
-                typhoon_haiyan: 'Typhoon Haiyan (Yolanda)'
-            }
-            h = {
-                flag: @project.sectors.any? { |s| s.id == 18 } ? 1 : 0,
-                scope: []
-            }
-            @project.tags.each do |t|
-                if tags.keys.include?(t.name.to_sym)
-                    h[:scope].push({
-                        attrs: { type: 1, vocabulary: 99, code: t.name },
-                        narrative: tags[t.name.to_sym]
-                    })
-                end
-            end
-            h
+            @project.sectors.any? { |s| s.id == 18 } ? 1 : 0
         end
         
         def interaction_ref
