@@ -273,64 +273,6 @@ class Project < ActiveRecord::Base
     end
   end
 
-  ############################################## IATI ##############################################
-  def funding_orgs
-    if self.prime_awardee.present? && self.prime_awardee == self.primary_organization
-      self.donors
-    elsif self.prime_awardee.present?
-      [self.prime_awardee]
-    else
-      self.donors
-    end
-  end
-
-  def provider_org
-    if self.funding_orgs.size == 1
-      self.funding_orgs.first
-    else
-      OpenStruct.new(id: '', name: '')
-    end
-  end
-
-  def activity_status
-    if self.start_date > Time.now.in_time_zone
-      1
-    elsif self.end_date > Time.now.in_time_zone
-      2
-    else
-      3
-    end
-  end
-
-  def activity_scope_code
-    geos = self.geolocations
-    if geos.present?
-      if geos.length == 1
-        activity_scope_code = case geos.first.adm_level
-                                when 0
-                                  4 # Not clear if covers whole country, blank
-                                when 1
-                                  6
-                                when 2
-                                  7
-                                else
-                                  0 # blank
-                                end
-      elsif geos.pluck(:country_code).uniq.length > 1
-         activity_scope_code = 3
-      else
-        activity_scope_code = 5
-      end
-    else
-      activity_scope_code = 5
-    end
-    activity_scope_code
-  end
-
-  def iati_locations
-    self.geolocations.where('adm_level > 0').uniq
-  end
-
   ############################################## REPORTS ##############################################
 
  def self.get_list(params={})
