@@ -18,7 +18,7 @@ module Api
           }
           format.xml {
             if projects = $redis.get(@iati_projects_digest)
-              if params[:download]=='yes'
+              if params[:download]=='true'
                 send_data projects, filename: "iati_#{Time.now.in_time_zone}.xml", :type => 'text/xml; charset=utf-8'  and return
               else
                 render text: projects and return
@@ -26,13 +26,13 @@ module Api
             else
               expire_time = ((Time.now + 1.day).beginning_of_day - Time.now).ceil
               @projects = Project.fetch_all(projects_params).order(:id)
-              @projects_size = @projects.size
+              @reported_by_member = params[:reported_by_member] == 'true' ? true : false
               projects_xml = render_to_string(:template => 'api/v1/projects/index.xml.builder') do
                 @projects
               end
               $redis.set(@iati_projects_digest, projects_xml)
               $redis.expire @iati_projects_digest, expire_time
-              if params[:download]=='yes'
+              if params[:download]=='true'
                 send_data projects_xml, filename: "iati_#{Time.now.in_time_zone}.xml", :type => 'text/xml; charset=utf-8'  and return
               else
                 @projects
@@ -61,7 +61,7 @@ module Api
         if request.fullpath.include?('organizations') && params[:organization_id].present?
           params.merge!(organizations: [params[:organization_id]])
         end
-        params.permit(:site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, :updated_since, organizations:[], sectors:[], donors:[], countries:[], tags:[])
+        params.permit(:site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, :updated_since, :reported_by_member, organizations:[], sectors:[], donors:[], countries:[], tags:[])
       end
 
       def set_digests

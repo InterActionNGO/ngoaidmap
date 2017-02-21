@@ -11,6 +11,24 @@ module Api::V1::IatiActivityHelper
             @view, @project = view, project
         end
         
+        def reporting_org
+            if @view.instance_variable_get('@reported_by_member')
+                {
+                    ref: @project.primary_organization.iati_organizationid,
+                    type: @project.primary_organization.organization_type_code,
+                    secondary: 0,
+                    narrative: @project.primary_organization.name
+                }
+            else
+                {
+                    ref: interaction_ref,
+                    type: 21,
+                    secondary: 1,
+                    narrative: 'InterAction\'s NGO Aid Map'
+                }
+            end
+        end
+        
         def humanitarian
             @project.sectors.any? { |s| s.id == 18 } ? 1 : 0
         end

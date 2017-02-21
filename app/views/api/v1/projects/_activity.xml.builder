@@ -1,6 +1,7 @@
 # IATI vars calculated in iati_activity_helper.rb
 vars ||= iati_vars_for(p)
 
+
 x.tag!('iati-activity', {
     'xml:lang': 'en',
     'last-updated-datetime': p.updated_at.xmlschema,
@@ -9,10 +10,10 @@ x.tag!('iati-activity', {
 }) do
     x.tag!('iati-identifier', [vars.interaction_ref, p.intervention_id].join('-'))
     x.tag!('reporting-org', {
-        'ref': vars.interaction_ref,
-        'type': 21,
-        'secondary-reporter': 1
-    }) { x.narrative("InterAction's NGO Aid Map") }
+        'ref': vars.reporting_org[:ref],
+        'type': vars.reporting_org[:type],
+        'secondary-reporter': vars.reporting_org[:secondary]
+    }) { x.narrative(vars.reporting_org[:narrative]) }
     x.title { x.narrative(p.name) }
     
     vars.description.each do |d|
