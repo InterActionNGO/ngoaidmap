@@ -9,7 +9,7 @@
 
         <% unless @project.description.blank? %>
           <section>
-            <%= anglo(simple_format(@project.description)) %>
+            <p class="preserve-lines"> <%= @project.description %> </p>
           </section>
         <% end %>
 
@@ -30,29 +30,27 @@
           </section>
         <% end %>
 
+        <%unless @project.activities.blank? %>
+        <section>
+          <h2>Activities</h2>
+          <p class="preserve-lines"> <%= @project.activities %> </p>
+        </section>
+        <%end%>
 
-        <% if @project.activities || @project.additional_information || @project.cross_cutting_issues%>
-          <%unless @project.activities.blank? %>
-          <section>
-            <h2>Activities</h2>
-            <p> <%= raw(@project.activities) %> </p>
-          </section>
-          <%end%>
+        <%unless @project.additional_information.blank? %>
+        <section>
+          <h2 class="<%= (@project.activities.blank?)? 'first':''%>">Additional information</h2>
+          <p class="preserve-lines"> <%= @project.additional_information %> </p>
+        </section>
+        <%end%>
 
-          <%unless @project.additional_information.blank? %>
-          <section>
-            <h2 class="<%= (@project.activities.blank?)? 'first':''%>">Additional information</h2>
-            <p> <%= raw(@project.additional_information) %> </p>
-          </section>
-          <%end%>
+        <%unless @project.cross_cutting_issues.blank? %>
+        <section>
+          <h2 class="<%= (@project.activities.blank? && @project.additional_information.blank?)? 'first':''%>">Cross-cutting issues</h2>
+          <p> <%= @project.cross_cutting_issues %> </p>
+        </section>
+        <%end%>
 
-          <%unless @project.cross_cutting_issues.blank? %>
-          <section>
-            <h2 class="<%= (@project.activities.blank? && @project.additional_information.blank?)? 'first':''%>">Cross-cutting issues</h2>
-            <p> <%= raw(@project.cross_cutting_issues) %> </p>
-          </section>
-          <%end%>
-        <% end %>
         <% unless @project.geolocations.empty? %>
         <section>
           <h2>Locations</h2>
@@ -63,6 +61,7 @@
           </ul>
         </section>
         <% end %>
+
         <% unless @project.sectors.empty? %>
         <section>
           <h2>Sectors</h2>
