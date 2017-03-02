@@ -56,6 +56,9 @@
     background: rgba($color-7, .3) image-url("disclaimer-alert.svg") no-repeat 10px 50%;
     background-size: 45px 52px;
   }
+  .preserve-lines {
+    white-space: pre-line;
+  }
 }
 .layout-sidebar {
   float: left;

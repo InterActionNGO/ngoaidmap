@@ -9,7 +9,7 @@
 
         <% unless @project.description.blank? %>
           <section>
-            <p class="preserve-lines"> <%= @project.description %> </p>
+            <p class="preserve-lines"> <%= sanitize @project.description, tags: %w(strong em a li), attributes: %w(href) %> </p>
           </section>
         <% end %>
 
@@ -33,14 +33,14 @@
         <%unless @project.activities.blank? %>
         <section>
           <h2>Activities</h2>
-          <p class="preserve-lines"> <%= @project.activities %> </p>
+          <p class="preserve-lines"> <%= sanitize @project.activities, tags: %w(strong em a li), attributes: %w(href) %> </p>
         </section>
         <%end%>
 
         <%unless @project.additional_information.blank? %>
         <section>
           <h2 class="<%= (@project.activities.blank?)? 'first':''%>">Additional information</h2>
-          <p class="preserve-lines"> <%= @project.additional_information %> </p>
+          <p class="preserve-lines"> <%= sanitize @project.additional_information, tags: %w(strong em a li), attributes: %w(href) %> </p>
         </section>
         <%end%>
 
