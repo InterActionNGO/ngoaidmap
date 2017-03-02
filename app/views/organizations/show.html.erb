@@ -13,7 +13,7 @@
           </p>
         <% end %>
 
-        <%= simple_format(@organization.description) if @organization.description.present? %>
+        <%= content_tag(:p, sanitize(@organization.description, {tags: %w(strong em a li), attributes: %w(href)}), :class => 'preserve-lines') if @organization.description.present? %>
       </header>
 
       <div class="mod-organization-details is-clearfix">
