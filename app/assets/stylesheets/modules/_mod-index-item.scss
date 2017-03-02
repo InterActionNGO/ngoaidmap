@@ -29,3 +29,14 @@
 .articles-list li:last-child .mod-index-item {
   border-bottom: none;
 }
+.sorted-by-notice {
+  text-align: center;
+  color: $grey;
+  font-size: 12px;
+  border-bottom: 2px solid $light-grey;
+  margin: -5px 0 1em 0;
+  padding-bottom: 0.5em;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: right;
+}
