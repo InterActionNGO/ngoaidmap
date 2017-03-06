@@ -10,11 +10,17 @@
         <li>
           <article class="mod-index-item">
             <h3>
+              <% if project.created_at >= 1.week.ago %>
+                <span class="snippet-label" title="Added on <%= project.created_at.strftime('%B %e, %Y') %>">New</span>
+              <% end %>
               <a href="<%= project_path(project['id']) %>"><%= truncate(project['name'], :length=>60) %></a>
             </h3>
             <span ><%= subtitle(project, @site) %></span>
             <p>
               <%= html_truncate(project['description'], 175, :omission => "... <a href=\"#{project_path(project['id'])}\" class=\"learn_more\">Learn more</a>").html_safe %>
+            </p>
+            <p class="snippet-project-updated">
+              <span class="snippet-project-updated">Last updated <%=project.updated_at.strftime('%B %e, %Y')%></span>
             </p>
           </article>
         </li>

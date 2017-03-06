@@ -17,15 +17,28 @@
     color: $color-5;
     line-height: 1.5em;
   }
-  p { line-height: 1.5em;}
+  p {
+    line-height: 1.5em;
+  }
   span a {
     @include link-states($color-2, inline-block);
   }
   .learn_more {
     @include link-states($color-1, inline-block);
   }
+  .snippet-label {
+    background: $color-8;
+    margin-right: 5px;
+    padding: 0.15em 0.5em;
+    box-shadow: 0px 5px 7px -4px #777;
+    color: $color-0;
+  }
+  .snippet-project-updated {
+    font-style: italic;
+    font-size: 14px;
+    margin-top: 3px;
+  }
 }
-
 .articles-list li:last-child .mod-index-item {
   border-bottom: none;
 }
