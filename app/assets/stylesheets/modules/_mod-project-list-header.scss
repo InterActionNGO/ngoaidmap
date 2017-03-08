@@ -1,38 +1,97 @@
 .mod-project-list-header {
+  h1 {
+    &.header-light {
+      font-weight: normal;
+      font-size: 32px;
+      color: $color-10;
+      margin-bottom: 1em;
+    }
+  }
   .project-filter-list {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    li:first-child {
-      width: 100%;
+    li {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: left;
+      align-items: center;
+      padding: 1em 0;
+      box-shadow: 0 0 2px -1px;
+      margin-bottom: 0.5em;
+      border-radius: 40px;
+    }
+    h2:only-child {
+      margin-bottom: 0;
+    }
+    //display: flex;
+    //justify-content: space-between;
+    //flex-wrap: wrap;
+    //li:first-child {
+    //  width: 100%;
+    //}
+  }
+  .close-x {
+    margin: 0 1.5em;
+    font-size: 1.2em;
+    color: #ccc;
+    font-family: arial;
+    transition: color 0.25s;
+    &:hover {
+      font-weight: bold;
+      color: $color-5;
+      cursor: pointer;
+      & ~ .country {
+        color: $color-8a;
+      }
+      & ~ .organization {
+        color: $color-6a;
+      }
+      & ~ .donor {
+        color: $color-7a;
+      }
+      & ~ .sector {
+        color: $color-2a;
+      }
+      & ~ .value-wrapper {
+        color: $color-10;
+      }
     }
   }
   .project-filter-list-item-heading {
     text-transform: uppercase;
     font-weight: bold;
     color: $color-5;
+    margin: 0 2em;
+    flex-basis: 110px;
+    text-align: right;
   }
   .project-filter-list-item-value {
 
   }
   .project-filter-list-item-description {
-    margin-top: -20px;
+    margin-top: -10px;
     font-weight: bold;
+  }
+  .value-wrapper {
+    flex-grow: 1;
+    transition: color 0.25s;
   }
   .country {
     color: $color-8;
-    border-bottom: 5px solid $color-8a;
+    transition: color 0.25s;
+    //border-bottom: 5px solid $color-8a;
   }
   .organization {
     color: $color-6;
-    border-bottom: 5px solid $color-6a;
+    transition: color 0.25s;
+    //border-bottom: 5px solid $color-6a;
   }
   .sector {
     color: $color-2;
-    border-bottom: 5px solid $color-2a;
+    transition: color 0.25s;
+    //border-bottom: 5px solid $color-2a;
   }
   .donor {
     color: $color-7;
-    border-bottom: 5px solid $color-7a;
+    transition: color 0.25s;
+    //border-bottom: 5px solid $color-7a;
   }
 }
