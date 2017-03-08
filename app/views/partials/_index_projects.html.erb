@@ -1,7 +1,15 @@
 <% cache ['projects_list', @site, @projects, params], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
 <div class="articles-list">
   <h2 class="screen-reader">Projects</h2>
-  <p class="sorted-by-notice">ordered by most recently <%= params[:controller].eql?('organizations') ? 'updated' : 'added'%></p>
+
+  <div class="project-list-download-order-wrapper">
+    <%= render :partial => 'partials/downloads', :locals => {
+        :csv_path => "/sites/download/#{@site.id}.csv",
+        :xls_path => "/sites/download/#{@site.id}.xls",
+        :kml_path => "/sites/download/#{@site.id}.kml"
+    } %>
+    <p class="sorted-by-notice">ordered by most recently <%= params[:controller].eql?('organizations') ? 'updated' : 'added'%></p>
+  </div>
 
   <% unless @projects.empty? %>
     <ul>

@@ -11,7 +11,6 @@
 
       <p class="disclaimer"><%= params[:organization_id] ? "In some cases, this organization may be sub-recipient (rather than a direct recipient) of this donor's funding." : "The projects presented here are voluntarily provided by InterAction members and are not intended to be a complete representation of this donor’s activities." %> </p>
 
-      <%= render :partial => 'partials/downloads' %>
       <%= render "partials/index_projects" %>
 
     </section>

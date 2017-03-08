@@ -11,11 +11,6 @@
         <h1 class="section-title">All projects</h1>
       </header>
 
-      <%= render :partial => 'partials/downloads', :locals => {
-          :csv_path => "/sites/download/#{@site.id}.csv",
-          :xls_path => "/sites/download/#{@site.id}.xls",
-          :kml_path => "/sites/download/#{@site.id}.kml"
-      } %>
       <%= render "partials/index_projects" %>
 
     </section>
