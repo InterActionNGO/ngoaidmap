@@ -5,8 +5,15 @@
   <div class="row">
     <section class="layout-content grid-12 offset-1">
 
-      <header>
-        <h1 id="title-donor" class="section-title" data-id="<%= @donor.id %>" data-name="<%= @donor.name.html_safe %>"><%= @donor.name.html_safe %></h1>
+      <header class="mod-project-list-header">
+        <!--<h1 id="title-donor" class="section-title" data-id="<%= @donor.id %>" data-name="<%= @donor.name.html_safe %>"><%= @donor.name.html_safe %></h1>-->
+        <ul class="project-filter-list">
+          <li>
+            <p class="project-filter-list-item-heading donor">Donor</p>
+            <h1 data-id="<%= @donor.id %>" data-name="<%= @donor.name.html_safe %>" class="project-filter-list-item-value"><%= @donor.name %></h1>
+
+          </li>
+        </ul>
       </header>
 
       <p class="disclaimer"><%= params[:organization_id] ? "In some cases, this organization may be sub-recipient (rather than a direct recipient) of this donor's funding." : "The projects presented here are voluntarily provided by InterAction members and are not intended to be a complete representation of this donor’s activities." %> </p>

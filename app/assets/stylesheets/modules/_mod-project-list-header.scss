@@ -1,0 +1,38 @@
+.mod-project-list-header {
+  .project-filter-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    li:first-child {
+      width: 100%;
+    }
+  }
+  .project-filter-list-item-heading {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $color-5;
+  }
+  .project-filter-list-item-value {
+
+  }
+  .project-filter-list-item-description {
+    margin-top: -20px;
+    font-weight: bold;
+  }
+  .country {
+    color: $color-8;
+    border-bottom: 5px solid $color-8a;
+  }
+  .organization {
+    color: $color-6;
+    border-bottom: 5px solid $color-6a;
+  }
+  .sector {
+    color: $color-2;
+    border-bottom: 5px solid $color-2a;
+  }
+  .donor {
+    color: $color-7;
+    border-bottom: 5px solid $color-7a;
+  }
+}

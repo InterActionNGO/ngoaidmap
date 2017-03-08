@@ -5,8 +5,17 @@
   <div class="row">
     <section class="layout-content grid-12 offset-1" id="content">
 
-      <header>
-        <h1 id="title-country" data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="section-title"><%= @geolocation.name %></h1>
+      <header class="mod-project-list-header">
+        <!--<h1 id="title-country" data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="section-title"><%= @geolocation.name %></h1>-->
+        <ul class="project-filter-list">
+          <li>
+            <p class="project-filter-list-item-heading country"><%= @geolocation.adm_level >= 1 ? 'Location' : 'Country' %></p>
+            <h1 data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="project-filter-list-item-value"><%= @geolocation.name %></h1>
+            <% if @geolocation.adm_level >= 1 %>
+              <p class="project-filter-list-item-description"><%= location_projects_subtitle %></p>
+            <% end %>
+          </li>
+        </ul>
       </header>
 
       <%= render "partials/index_projects" %>
