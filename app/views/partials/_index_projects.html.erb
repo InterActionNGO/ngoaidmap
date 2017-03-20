@@ -1,5 +1,5 @@
 <% cache ['projects_list', @site, @projects, params], expires_in: ((Time.now + 1.day).beginning_of_day - Time.now).ceil do %>
-<div class="articles-list">
+<div id="project_list" class="articles-list">
   <h2 class="screen-reader">Projects</h2>
 
   <div class="project-list-download-order-wrapper">

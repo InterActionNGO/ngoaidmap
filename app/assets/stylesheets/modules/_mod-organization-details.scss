@@ -1,8 +1,14 @@
 .mod-organization-details {
-  padding-bottom: 30px;
   margin-bottom: 30px;
-  border-bottom: 2px solid $color-4;
-
+  //background: $color-4;
+  //padding: 2em;
+  //box-shadow: 0 0 3px -1px;
+  h2 {
+    color: $color-0;
+    margin-bottom: 5px;
+    padding: 16px 32px;
+    background: $color-1;
+  }
   a {
     display: inline-block;
     color: $color-2;
@@ -43,6 +49,13 @@
 
     & + table {
       width: calc(100% - 180px);
+    }
+  }
+  .details-wrapper {
+    padding: 2em;
+    box-shadow: 0 0px 5px rgba(21, 109, 141, 0.3);
+    p {
+      margin-bottom: 1em;
     }
   }
 }

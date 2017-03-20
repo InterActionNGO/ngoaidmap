@@ -9,21 +9,24 @@
       <header class="mod-project-list-header">
         <!--<h1 id="title-organization" data-id="<%= @organization.id %>" data-name="<%= @organization.name.html_safe %>" class="section-title"><%= @organization.name %></h1>-->
         <h1 class="header-light">Filtered Projects</h1>
+        <div class="skip-to-projects">
+          <a href="#project_list">Skip to Projects List</a>
+        </div>
         <!--<h1 class="header-light"><%= params.to_s %></h1>-->
         <ul class="project-filter-list">
           <li>
-            <span class="close-x">X</span>
+            <span class="close-x" title="Remove">X</span>
             <div class="value-wrapper">
-              <h2 data-id="<%= @organization.id %>" data-name="<%= @organization.name.html_safe %>" class="project-filter-list-item-value"><%= @organization.name %></h2>
+              <h4 data-id="<%= @organization.id %>" data-name="<%= @organization.name.html_safe %>" class="project-filter-list-item-value"><%= @organization.name %></h4>
             </div>
             <span class="project-filter-list-item-heading organization">Reporting Organization</span>
 
           </li>
           <% if @geolocation = Geolocation.find_by(:uid => params[:geolocation]) || nil %>
               <li>
-                <span class="close-x">X</span>
+                <span class="close-x" title="Remove">X</span>
                 <div class="value-wrapper">
-                  <h2 data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="project-filter-list-item-value"><%= @geolocation.name %></h2>
+                  <h4 data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="project-filter-list-item-value"><%= @geolocation.name %></h4>
                   <% if @geolocation.adm_level >= 1 %>
                       <p class="project-filter-list-item-description"><%= location_projects_subtitle %></p>
                   <% end %>
@@ -32,11 +35,11 @@
               </li>
           <% end %>
 
-          <% if @sector = Sector.find(params[:sectors].first.to_i) || nil %>
+          <% if params[:sectors] && @sector = Sector.find(params[:sectors].first.to_i) || nil %>
               <li>
-                <span class="close-x">X</span>
+                <span class="close-x" title="Remove">X</span>
                 <div class="value-wrapper">
-                  <h2 data-id="<%= @sector.id %>" data-name="<%= @sector.name.html_safe %>" class="project-filter-list-item-value"><%= @sector.name %></h2>
+                  <h4 data-id="<%= @sector.id %>" data-name="<%= @sector.name.html_safe %>" class="project-filter-list-item-value"><%= @sector.name %></h4>
                 </div>
                 <span class="project-filter-list-item-heading sector">Sector</span>
               </li>
@@ -44,111 +47,113 @@
         </ul>
       </header>
 
-        <% if @organization.acronym? %>
-          <p style="margin-bottom: 30px">
-            <strong>Acronym(s):</strong> <%= @organization.acronym %>
-          </p>
-        <% end %>
-
-        <%= content_tag(:p, sanitize(@organization.description, {tags: %w(strong em a li), attributes: %w(href)}), :class => 'preserve-lines') if @organization.description.present? %>
-
-
       <div class="mod-organization-details is-clearfix">
-        <% if @organization.logo? %>
-          <div class="logo">
-            <%= image_tag @organization.logo.url(:medium), :alt=>"" %>
-          </div>
-        <% end %>
+        <h2><%= @organization.name %></h2>
+        <div class="details-wrapper">
 
-        <table class="organization-details">
-          <% if @organization.budget? %>
-            <tr>
-              <th>
-                Annual Budget
-              </th>
-              <td>
-                <%- if @organization.budget_usd? -%>
-                  <%= number_to_currency(@organization.budget_usd, precision: 0) %>
-                  <%- if @organization.budget_currency? && @organization.budget_currency != 'USD'  -%>
-                    (Converted from <%= @organization.budget_currency %>)
-                  <%- end -%>
-                <%- else -%>
-                  <% if @organization.budget_currency? %>
-                    <%= number_with_precision(@organization.budget, :precision => 0, :delimiter => ',') %>
-                    (<%= @organization.budget_currency %>)
-                  <%- else -%>
-                    <%= number_to_currency(@organization.budget, precision: 0) %>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
+          <%= content_tag(:p, sanitize(@organization.description, {tags: %w(strong em a li), attributes: %w(href)}), :class => 'preserve-lines') if @organization.description.present? %>
+
+          <% if @organization.acronym? %>
+              <p>Acronym: <%= @organization.acronym %></p>
           <% end %>
 
-          <% if @organization.budget_fiscal_year? %>
-            <tr>
-              <th>
-                Fiscal Year (end date)
-              </th>
-              <td>
-                <%= @organization.budget_fiscal_year.strftime("%B %d, %Y") %>
-              </td>
-            </tr>
+          <% if @organization.logo? %>
+              <div class="logo">
+                <%= image_tag @organization.logo.url(:medium), :alt=>"" %>
+              </div>
           <% end %>
 
-          <% if @organization.website? %>
-            <tr>
-              <th>
-                Website
-              </th>
-              <td>
-                <a href="<%= @organization.website %>"><%= URI.unescape(@organization.website) %></a>
-              </td>
-            </tr>
-          <% end %>
+          <table class="organization-details">
+            <% if @organization.budget? %>
+                <tr>
+                  <th>
+                    Annual Budget
+                  </th>
+                  <td>
+                    <%- if @organization.budget_usd? -%>
+                        <%= number_to_currency(@organization.budget_usd, precision: 0) %>
+                        <%- if @organization.budget_currency? && @organization.budget_currency != 'USD'  -%>
+                            (Converted from <%= @organization.budget_currency %>)
+                        <%- end -%>
+                    <%- else -%>
+                        <% if @organization.budget_currency? %>
+                            <%= number_with_precision(@organization.budget, :precision => 0, :delimiter => ',') %>
+                            (<%= @organization.budget_currency %>)
+                        <%- else -%>
+                            <%= number_to_currency(@organization.budget, precision: 0) %>
+                        <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
 
-          <% if @organization.twitter? %>
-            <tr>
-              <th>
-                Twitter
-              </th>
-              <td>
-                <a href="<%= @organization.twitter %>"><%= URI.unescape(@organization.twitter) %></a>
-              </td>
-            </tr>
-          <% end %>
+            <% if @organization.budget_fiscal_year? %>
+                <tr>
+                  <th>
+                    Fiscal Year (end date)
+                  </th>
+                  <td>
+                    <%= @organization.budget_fiscal_year.strftime("%B %d, %Y") %>
+                  </td>
+                </tr>
+            <% end %>
 
-          <% if @organization.facebook? %>
-            <tr>
-              <th>
-                Facebook
-              </th>
-              <td>
-                <a href="<%= @organization.facebook %>"><%= URI.unescape(@organization.facebook) %></a>
-              </td>
-            </tr>
-          <% end %>
+            <% if @organization.website? %>
+                <tr>
+                  <th>
+                    Website
+                  </th>
+                  <td>
+                    <a href="<%= @organization.website %>"><%= URI.unescape(@organization.website) %></a>
+                  </td>
+                </tr>
+            <% end %>
 
-          <% if @organization.hq_address? %>
-            <tr>
-              <th>
-                Primary Address
-              </th>
-              <td>
-                <p><%= @organization.hq_address %></p>
-                <% if @organization.hq_address2? %>
-                  <p><%= @organization.hq_address2 %></p>
-                <% end %>
-                <% if @organization.contact_city? && @organization.contact_state? %>
-                <p><%= @organization.contact_city %>, <%= @organization.contact_state %> <%= @organization.contact_zip %></p>
-                <% end %>
-                <% if @organization.contact_country? %>
-                  <p><%= @organization.contact_country %></p>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
+            <% if @organization.twitter? %>
+                <tr>
+                  <th>
+                    Twitter
+                  </th>
+                  <td>
+                    <a href="<%= @organization.twitter %>"><%= URI.unescape(@organization.twitter) %></a>
+                  </td>
+                </tr>
+            <% end %>
 
-        </table>
+            <% if @organization.facebook? %>
+                <tr>
+                  <th>
+                    Facebook
+                  </th>
+                  <td>
+                    <a href="<%= @organization.facebook %>"><%= URI.unescape(@organization.facebook) %></a>
+                  </td>
+                </tr>
+            <% end %>
+
+            <% if @organization.hq_address? %>
+                <tr>
+                  <th>
+                    Primary Address
+                  </th>
+                  <td>
+                    <p><%= @organization.hq_address %></p>
+                    <% if @organization.hq_address2? %>
+                        <p><%= @organization.hq_address2 %></p>
+                    <% end %>
+                    <% if @organization.contact_city? && @organization.contact_state? %>
+                        <p><%= @organization.contact_city %>, <%= @organization.contact_state %> <%= @organization.contact_zip %></p>
+                    <% end %>
+                    <% if @organization.contact_country? %>
+                        <p><%= @organization.contact_country %></p>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+
+          </table>
+        </div>
+
       </div>
 
       <%= render "partials/index_projects" %>

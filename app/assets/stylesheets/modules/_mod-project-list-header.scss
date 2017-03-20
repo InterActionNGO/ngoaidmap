@@ -2,9 +2,23 @@
   h1 {
     &.header-light {
       font-weight: normal;
-      font-size: 32px;
-      color: $color-10;
-      margin-bottom: 1em;
+      font-size: 24px;
+      color: $color-5;
+    }
+  }
+  h4 {
+    font-weight: bold;
+  }
+  .skip-to-projects {
+    margin-top: -20px;
+    margin-bottom: 20px;
+    a {
+      color: $color-2;
+      font-size: 14px;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
     }
   }
   .project-filter-list {
@@ -13,10 +27,9 @@
       flex-direction: row-reverse;
       justify-content: left;
       align-items: center;
-      padding: 1em 0;
-      box-shadow: 0 0 2px -1px;
-      margin-bottom: 0.5em;
+      padding: 14px 0;
       border-radius: 40px;
+      border-top: 1px solid $color-4;
     }
     h2:only-child {
       margin-bottom: 0;
@@ -38,19 +51,20 @@
       font-weight: bold;
       color: $color-5;
       cursor: pointer;
-      & ~ .country {
-        color: $color-8a;
-      }
-      & ~ .organization {
-        color: $color-6a;
-      }
-      & ~ .donor {
-        color: $color-7a;
-      }
-      & ~ .sector {
-        color: $color-2a;
-      }
-      & ~ .value-wrapper {
+      //& ~ .country {
+      //  color: $color-8a;
+      //}
+      //& ~ .organization {
+      //  color: $color-6a;
+      //}
+      //& ~ .donor {
+      //  color: $color-7a;
+      //}
+      //& ~ .sector {
+      //  color: $color-2a;
+      //}
+      & ~ .value-wrapper,
+      & ~ .project-filter-list-item-heading {
         color: $color-10;
       }
     }
@@ -61,7 +75,9 @@
     color: $color-5;
     margin: 0 2em;
     flex-basis: 110px;
+    flex-shrink: 0;
     text-align: right;
+    font-size: 14px;
   }
   .project-filter-list-item-value {
 
