@@ -18,7 +18,9 @@
       text-decoration: underline;
     }
   }
-
+    p {
+        margin-bottom: 1em;
+    }
   table {
     width: 100%;
   }
@@ -54,8 +56,6 @@
   .details-wrapper {
     padding: 2em;
     box-shadow: 0 0px 5px rgba(21, 109, 141, 0.3);
-    p {
-      margin-bottom: 1em;
-    }
+    
   }
 }

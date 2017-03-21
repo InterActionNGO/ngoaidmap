@@ -329,6 +329,54 @@ HTML
     i == f ? i : f
   end
 
+  def url_has_compound_filter
+    query_filters = ['sectors','geolocation','donors']
+    query_filters.each do |f|
+       return true if request.query_parameters.include?(f) 
+    end
+    false
+  end
+  
+  def filter_remover (param)
+      
+      # removing a query parameter (non-controller)
+      if request.query_parameters.include?(param)
+          
+        request.query_parameters.clone.keep_if do |key, value|
+            if param.eql?('geolocation')
+                # geolocation uses an additional 'level' param
+                ![param, 'level'].include?(key)
+            else
+                key != param
+            end
+        end
+        
+      else 
+        keys = request.query_parameters.keys
+        q = request.query_parameters.clone
+        # Controller priority order
+        controllers = ['organizations', 'geolocation', 'donors', 'sectors']
+        # Remove current controller
+        controllers.delete(param)
+        # Assign a GET parameter as new controller based on priority
+        controllers.keep_if do |c|
+            keys.include?(c)
+        end
+        # Sites is default controller
+        controller = controllers.size ? controllers.first : 'sites'
+        # Remove old controller and new controller from GET params
+        q.delete_if { |key,val| [param,controller].include?(key) }
+        # Sector has a special controller name
+        controller = 'clusters_sectors' if controller.eql?('sectors')
+        controller = 'georegion' if controller.eql?('geolocation')
+        # Update the id given to the new controller
+        id = params[controllers.first].is_a?(Array) ? params[controllers.first].first : params[controllers.first]
+        action = id ? 'show' : 'index'
+        # Send new route options
+        q.merge({controller: controller, ids: id, action: action})
+        
+      end
+  end
 
 end
 

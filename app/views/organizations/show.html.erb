@@ -5,51 +5,13 @@
   <div class="row">
     <section class="layout-content grid-12 offset-1">
 
-      <!--<header class="mod-index-item">-->
-      <header class="mod-project-list-header">
-        <!--<h1 id="title-organization" data-id="<%= @organization.id %>" data-name="<%= @organization.name.html_safe %>" class="section-title"><%= @organization.name %></h1>-->
-        <h1 class="header-light">Filtered Projects</h1>
-        <div class="skip-to-projects">
-          <a href="#project_list">Skip to Projects List</a>
-        </div>
-        <!--<h1 class="header-light"><%= params.to_s %></h1>-->
-        <ul class="project-filter-list">
-          <li>
-            <span class="close-x" title="Remove">X</span>
-            <div class="value-wrapper">
-              <h4 data-id="<%= @organization.id %>" data-name="<%= @organization.name.html_safe %>" class="project-filter-list-item-value"><%= @organization.name %></h4>
-            </div>
-            <span class="project-filter-list-item-heading organization">Reporting Organization</span>
-
-          </li>
-          <% if @geolocation = Geolocation.find_by(:uid => params[:geolocation]) || nil %>
-              <li>
-                <span class="close-x" title="Remove">X</span>
-                <div class="value-wrapper">
-                  <h4 data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="project-filter-list-item-value"><%= @geolocation.name %></h4>
-                  <% if @geolocation.adm_level >= 1 %>
-                      <p class="project-filter-list-item-description"><%= location_projects_subtitle %></p>
-                  <% end %>
-                </div>
-                <span class="project-filter-list-item-heading country"><%= @geolocation.adm_level >= 1 ? 'Location' : 'Country' %></span>
-              </li>
-          <% end %>
-
-          <% if params[:sectors] && @sector = Sector.find(params[:sectors].first.to_i) || nil %>
-              <li>
-                <span class="close-x" title="Remove">X</span>
-                <div class="value-wrapper">
-                  <h4 data-id="<%= @sector.id %>" data-name="<%= @sector.name.html_safe %>" class="project-filter-list-item-value"><%= @sector.name %></h4>
-                </div>
-                <span class="project-filter-list-item-heading sector">Sector</span>
-              </li>
-          <% end %>
-        </ul>
-      </header>
-
+      <%= render 'partials/project_list_header', type: 'Reporting Organization', title: @organization.name, css_class: 'organization' %>
+      
       <div class="mod-organization-details is-clearfix">
-        <h2><%= @organization.name %></h2>
-        <div class="details-wrapper">
+        <% if url_has_compound_filter %>
+            <h2><%= @organization.name %></h2>
+        <% end %>
+        <div class="<%= 'details-wrapper' if url_has_compound_filter %>">
 
           <%= content_tag(:p, sanitize(@organization.description, {tags: %w(strong em a li), attributes: %w(href)}), :class => 'preserve-lines') if @organization.description.present? %>
 

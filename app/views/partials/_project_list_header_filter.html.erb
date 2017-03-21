@@ -1,0 +1,12 @@
+<li>
+    <%= link_to 'X', filter_remover(param), class: 'close-x', title: 'Remove' %>
+<!--     <a class="close-x" title="Remove">X</span> -->
+    
+    <div class="value-wrapper">
+        <span data-id="<%= model.id %>" data-name="<%= model.name.html_safe %>" class="project-filter-list-item-value">
+            <%= model.name %>
+            <%= " (#{location_projects_subtitle})" if model.respond_to?(:adm_level) && model.adm_level >= 1 %>
+        </span>
+    </div>
+    <span class="project-filter-list-item-heading"><%= label %></span>
+</li>

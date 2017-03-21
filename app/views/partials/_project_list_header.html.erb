@@ -1,0 +1,36 @@
+<header class="mod-project-list-header">
+
+  <% if !url_has_compound_filter %>
+  
+    <div class="title-type <%= css_class %>"><%= type %></div>
+    <h1><%= title %></h1>
+    
+  <% else %>
+  
+    <h1 class="header-light">Projects</h1>
+    
+    <div class="skip-to-projects">
+        <a href="#project_list">Skip to Projects List</a>
+    </div>
+    
+    <div class="filter-heading">Current Filters</div>
+
+    <ul class="project-filter-list">
+        <% if params[:organizations] && @organization = Organization.find(params[:organizations].first) || nil %>
+            <%= render 'partials/project_list_header_filter', model: @organization, label: 'Reporting Organization', param: 'organizations' %>
+        <% end %>
+        
+        <% if params[:geolocation] && @geolocation = Geolocation.find_by(:uid => params[:geolocation]) || nil %>
+            <%= render 'partials/project_list_header_filter', model: @geolocation, label: @geolocation.adm_level >= 1 ? 'Location' : 'Country', param: 'geolocation' %>
+        <% end %>
+        
+        <% if params[:donors] && @donor = Donor.find(params[:donors].first) || nil %>
+            <%= render 'partials/project_list_header_filter', model: @donor, label: 'Donor', param: 'donors' %>
+        <% end %>
+        
+        <% if params[:sectors] && @sector = Sector.find(params[:sectors].first) || nil %>
+            <%= render 'partials/project_list_header_filter', model: @sector, label: 'Sector', param: 'sectors' %>
+        <% end %>
+    </ul>
+  <% end %>
+</header>
