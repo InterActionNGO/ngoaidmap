@@ -24,7 +24,7 @@
             <%= render 'partials/project_list_header_filter', model: @geolocation, label: @geolocation.adm_level >= 1 ? 'Location' : 'Country', param: 'geolocation' %>
         <% end %>
         
-        <% if params[:donors] && @donor = Donor.find(params[:donors].first) || nil %>
+        <% if params[:donors] && @donor = Organization.with_donations.find(params[:donors].first) || nil %>
             <%= render 'partials/project_list_header_filter', model: @donor, label: 'Donor', param: 'donors' %>
         <% end %>
         

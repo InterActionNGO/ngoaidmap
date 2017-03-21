@@ -5,16 +5,8 @@
   <div class="row">
     <section class="layout-content grid-12 offset-1">
 
-      <header class="mod-project-list-header">
+       <%= render 'partials/project_list_header', type: 'Sector', title: @sector.name, css_class: 'sector' %>
         <!--<h1 id="title-sector" class="section-title" data-id="<%= @sector.id %>" data-name="<%= @sector.name.html_safe %>"><%= @sector.name.html_safe %></h1>-->
-        <ul class="project-filter-list">
-          <li>
-            <p class="project-filter-list-item-heading sector">Sector</p>
-            <h1 data-id="<%= @sector.id %>" data-name="<%= @sector.name.html_safe %>" class="project-filter-list-item-value"><%= @sector.name %></h1>
-
-          </li>
-        </ul>
-      </header>
 
       <%= render "partials/index_projects" %>
 
