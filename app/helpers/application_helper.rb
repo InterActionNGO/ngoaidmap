@@ -365,7 +365,9 @@ HTML
         # Sites is default controller
         controller = controllers.size ? controllers.first : 'sites'
         # Remove old controller and new controller from GET params
-        q.delete_if { |key,val| [param,controller].include?(key) }
+        q.delete_if do |key,val|
+            [param,controller].include?(key) || (['site','level'].include?(key) && controller != 'geolocation')
+        end
         # Sector has a special controller name
         controller = 'clusters_sectors' if controller.eql?('sectors')
         controller = 'georegion' if controller.eql?('geolocation')
@@ -373,7 +375,8 @@ HTML
         id = params[controllers.first].is_a?(Array) ? params[controllers.first].first : params[controllers.first]
         action = id ? 'show' : 'index'
         # Send new route options
-        q.merge({controller: controller, ids: id, action: action})
+        id_hash = controller.eql?('georegion') ? {ids: id} : {id: id}
+        q.merge({controller: controller, action: action}).merge(id_hash)
         
       end
   end

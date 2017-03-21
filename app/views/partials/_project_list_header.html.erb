@@ -4,6 +4,9 @@
   
     <div class="title-type <%= css_class %>"><%= type %></div>
     <h1><%= title %></h1>
+    <% if controller_name.eql?('georegion') && @geolocation.adm_level >= 1 %>
+        <p class="project-filter-list-item-description"><%= location_projects_subtitle %></p>
+    <% end %>
     
   <% else %>
   

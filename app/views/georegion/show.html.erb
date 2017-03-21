@@ -4,25 +4,10 @@
 <div class="main-content">
   <div class="row">
     <section class="layout-content grid-12 offset-1" id="content">
-
-      <header class="mod-project-list-header">
+    
+      <%= render 'partials/project_list_header', type: @geolocation.adm_level >= 1 ? 'Location' : 'Country', title: @geolocation.name, css_class: 'country' %>
+      
         <!--<h1 id="title-country" data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="section-title"><%= @geolocation.name %></h1>-->
-        <!--<h1 class="header-light">Filtered Projects</h1>-->
-        <h1 class="header-light"><%= params.to_s %></h1>
-        <ul class="project-filter-list">
-          <li>
-            <span class="close-x">X</span>
-            <span class="project-filter-list-item-heading country"><%= @geolocation.adm_level >= 1 ? 'Location' : 'Country' %></span>
-            <div class="value-wrapper">
-              <h2 data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="project-filter-list-item-value"><%= @geolocation.name %></h2>
-              <% if @geolocation.adm_level >= 1 %>
-                  <p class="project-filter-list-item-description"><%= location_projects_subtitle %></p>
-              <% end %>
-            </div>
-
-          </li>
-        </ul>
-      </header>
 
       <%= render "partials/index_projects" %>
 
