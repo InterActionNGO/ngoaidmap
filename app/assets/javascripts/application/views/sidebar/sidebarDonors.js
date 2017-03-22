@@ -42,7 +42,7 @@ define([
 
     parseData: function(more){
       return {
-        name: this.setName(),
+//         name: this.setName(),
         donors: (more) ? this.data : this.data.slice(0,5),
         see_more: (this.data.length < 5) ? false : !more
       };
@@ -52,16 +52,16 @@ define([
       this.$el.html(this.template(this.parseData(!!more)));
     },
 
-    setName: function() {
-      switch(this.params.name) {
-        case 'geolocation':
-          return 'Donors in this location';
-        break;
-        case 'sectors[]':
-          return 'Donors in this sector'
-        break;
-      }
-    },
+//     setName: function() {
+//       switch(this.params.name) {
+//         case 'geolocation':
+//           return 'Donors in this location';
+//         break;
+//         case 'sectors[]':
+//           return 'Donors in this sector'
+//         break;
+//       }
+//     },
 
     // Events
     toggleDonors: function(e){

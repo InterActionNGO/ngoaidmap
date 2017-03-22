@@ -45,7 +45,9 @@ define([
     getUrlContext: function() {
       var url = window.location;
       var path_array = window.location.pathname.split( '/' );
-      var context = '?';
+//       var context = '?';
+      var current_params = window.location.search;
+      var context = current_params.length ? current_params + '&' : '?';
 
       if (path_array[1] === 'location') {
         context += 'geolocation=';
@@ -60,9 +62,12 @@ define([
     },
 
     parseData: function(more){
+      var show_toggler = (this.organizations.length <= 5) ? false : true;
       return {
         organizations: (more) ? this.organizations : this.organizations.slice(0,5),
-        see_more: (this.organizations.length < 5) ? false : !more
+        show_toggler: show_toggler,
+        toggle_class: show_toggler && more ? 'expanded' : '',
+        toggle_text: show_toggler && more ? 'Show less' : 'Show more'
       };
     },
 
@@ -73,7 +78,7 @@ define([
     // Events
     toggleOrganizations: function(e){
       e && e.preventDefault();
-      this.render(true);
+      this.render(!$(e.target).hasClass('expanded'));
     }
   });
 

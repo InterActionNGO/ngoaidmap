@@ -1,12 +1,12 @@
 <div class="affiliated-organizations">
   <div class="mod-affiliated-organizations" >
-    <h3>Reporting organizations</h3>
+    <h3>Filter by Reporting Organization</h3>
     <ul>
       {{#each organizations}}
         <li><a href="{{this.url}}">{{this.name}}</a>{{this.count}} Projects</li>
       {{/each}}
-      {{#if see_more}}
-        <li><a id="see-more-organizations" href="#">See more organizations</a></li>
+      {{#if show_toggler}}
+        <li><a id="see-more-organizations" href="#" class="{{toggle_class}}">{{toggle_text}}</a></li>
       {{/if}}
     </ul>
   </div>
