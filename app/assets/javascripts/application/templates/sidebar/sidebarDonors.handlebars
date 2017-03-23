@@ -1,11 +1,13 @@
 <div class="donors-in-this-country">
   <h3>Filter by Donor</h3>
-  <ul>
-    {{#each donors}}
-      <li><a href="{{this.urlfiltered}}">{{this.name}}</a></li>
-    {{/each}}
-    {{#if see_more}}
-      <li><a id="see-more-donors" href="#">See more donors</a></li>
-    {{/if}}
-  </ul>
+  <div class="mod-donors">
+    <ul>
+        {{#each donors}}
+        <li><a href="{{this.urlfiltered}}">{{this.name}}</a> ({{this.count}})</li>
+        {{/each}}
+        {{#if show_toggler}}
+        <li><a id="see-more-donors" href="#" class="{{toggle_class}}">{{toggle_text}}</a></li>
+        {{/if}}
+    </ul>
+  </div>
 </div>

@@ -32,7 +32,7 @@ module Api
 
         def organizations
           result = fetch_redis_cache do
-            query = Organization.active.fetch_all(permitted_params).select('organizations.id, organizations.name, count(distinct(projects.id))').group('organizations.id, organizations.name').order('count DESC')
+            query = Organization.active.fetch_all(permitted_params).select('organizations.id, organizations.name, count(distinct(projects.id))').group('organizations.id, organizations.name').order('name, count DESC')
             json = {"organizations_count" => query.map{|q| { 'id' => q.id, 'name' => q.name, 'projects_count' => q.count} }}.to_json
           end
           render json: result
@@ -56,7 +56,7 @@ module Api
 
         def donors_count
           result = fetch_redis_cache do
-            query = Organization.fetch_all_donors(permitted_params).count('distinct(organizations.id)')
+            query = Organization.fetch_all_donors(permitted_params.merge({status:'active'})).count('distinct(organizations.id)')
             json = {"donors_count" => query}.to_json
           end
           render json: result
@@ -64,7 +64,7 @@ module Api
 
         def donors
           result = fetch_redis_cache do
-            query = Organization.fetch_all_donors(permitted_params).select('organizations.id, organizations.name, count(distinct(projects.id))').group('organizations.id, organizations.name')
+            query = Organization.fetch_all_donors(permitted_params.merge({status:'active'})).select('organizations.id, organizations.name, count(distinct(projects.id))').group('organizations.id, organizations.name').order('name, count DESC')
             json = {"donors" => query.map{|q| { 'id' => q.id, 'name' => q.name, 'projects_count' => q.count} }}.to_json
           end
           render json: result

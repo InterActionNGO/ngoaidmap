@@ -99,7 +99,7 @@ class Organization < ActiveRecord::Base
   scope :donation_geolocation, -> (geolocation,level=0){joins(donations_made: {project: :geolocations}).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :donation_projects, -> (projects){joins(donations_made: :project).where(projects: {id: projects})}
   scope :donation_countries, -> (countries){joins(donations_made: {project: :geolocations}).where(geolocations: {country_uid: countries})}
-  scope :donation_organizations, -> (orgs){joins(donations_made: :project).joins('join organizations o2 on projects.primary_organization_id = organizations.id').where(o2: {id: orgs})}
+  scope :donation_organizations, -> (orgs){joins(donations_made: :project).joins('join organizations o2 on projects.primary_organization_id = o2.id').where(o2: {id: orgs})}
   scope :donation_donors, -> (donors){joins(:donations_made).where(donations: {donor_id: donors})}
   scope :donation_sectors, -> (sectors){joins(donations_made: :project).joins('
     INNER JOIN projects_sectors ON (projects.id = projects_sectors.project_id)
@@ -121,7 +121,7 @@ class Organization < ActiveRecord::Base
 
   def self.fetch_all_donors(options={})
     level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
-    organizations = Organization.with_donations.uniq
+    organizations = Organization.with_donations
     organizations = organizations.donated_projects_site(options[:site])                   if options[:site]
     organizations = organizations.active_donated_projects                                 if options[:status] && options[:status] == 'active'
     organizations = organizations.donation_geolocation(options[:geolocation], level)      if options[:geolocation]

@@ -32,19 +32,22 @@ define([
             this.data = data.donors;
             this.render(false);
           } else {
-            this.$el.remove()
+            this.$el.remove();
           }
         }, this ));
       } else {
-        this.$el.remove()
+        this.$el.remove();
       }
     },
 
     parseData: function(more){
+      var show_toggler = (this.data.length <= 5) ? false : true;
       return {
 //         name: this.setName(),
         donors: (more) ? this.data : this.data.slice(0,5),
-        see_more: (this.data.length < 5) ? false : !more
+        show_toggler: show_toggler,
+        toggle_class: show_toggler && more ? 'expanded' : '',
+        toggle_text: show_toggler && more ? 'Show less' : 'Show more'
       };
     },
 
@@ -66,7 +69,7 @@ define([
     // Events
     toggleDonors: function(e){
       e && e.preventDefault();
-      this.render(true);
+      this.render(!$(e.target).hasClass('expanded'));
     },
 
   });

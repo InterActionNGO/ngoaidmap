@@ -3,7 +3,7 @@
     <h3>Filter by Reporting Organization</h3>
     <ul>
       {{#each organizations}}
-        <li><a href="{{this.url}}">{{this.name}}</a>{{this.count}} Projects</li>
+        <li><a href="{{this.url}}">{{this.name}}</a> ({{this.count}})</li>
       {{/each}}
       {{#if show_toggler}}
         <li><a id="see-more-organizations" href="#" class="{{toggle_class}}">{{toggle_text}}</a></li>

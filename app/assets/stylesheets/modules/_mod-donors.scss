@@ -1,6 +1,5 @@
 .mod-donors {
-  li {
-    margin-bottom: 15px;
-    &:last-child { margin-bottom: 0;}
+  a {
+      display: inline;
   }
 }

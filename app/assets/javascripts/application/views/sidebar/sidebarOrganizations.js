@@ -56,6 +56,9 @@ define([
       } else if (path_array[1] === 'sectors') {
         context += 'sectors[]=';
         context += path_array[2];
+      } else if (path_array[1] === 'donors') {
+        context += 'donors[]=';
+        context += path_array[2];
       }
 
       return context;
