@@ -24,13 +24,13 @@ require([
     });
   };
 
-  function sectionTitle() {
-    var $title = $('.mod-content-article').find('h1');
-
-    if ($title.text().length > 50) {
-      $title.css('font-size', '36px');
-    }
-  }
+//   function sectionTitle() {
+//     var $title = $('.mod-content-article').find('h1');
+// 
+//     if ($title.text().length > 50) {
+//       $title.css('font-size', '36px');
+//     }
+//   }
 
   function addClassToBody() {
     var newClass, position;
@@ -50,7 +50,7 @@ require([
 
   $('.btn-go-to-projects').on('click', goTo);
 
-  sectionTitle();
+//   sectionTitle();
   addClassToBody();
   $('.menu-item').noHandleChildren();
 

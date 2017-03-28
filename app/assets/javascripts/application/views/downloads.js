@@ -10,7 +10,7 @@ define(['backbone'], function(Backbone) {
       'click #embedMapBtn': 'showOverlay'
     },
 
-    showOverlay: function(e) {
+    showOverlay: function(e) { 
       Backbone.Events.trigger('embed:show');
       e.preventDefault();
     }
