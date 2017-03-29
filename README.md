@@ -186,3 +186,6 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details. The full license text may be found in the project's [LICENSE](LICENSE) file or at http://www.gnu.org/licenses/.
+
+### Credits
+[![Browserstack](/images/browserstack.svg)('http://browserstack.com/')]
