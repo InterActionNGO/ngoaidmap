@@ -1,5 +1,6 @@
 .mod-follow-us {
   aside & {
+      
     li {
       float: left;
       margin-right: 16px;
@@ -23,9 +24,18 @@
   }
 
   .mod-header & {
+    display: flex;
+    h2 {
+      align-self: center; 
+      margin: 0 0.5em;
+      color: $color-3;
+    }
+    ul { display: flex }
     li {
       float: left;
       margin-right: 10px;
+      margin-bottom: 0;
+      align-self: center;
       &:last-child {
         margin-right: 0;
         margin-left: 3px;
@@ -47,6 +57,38 @@
     .email {
       @include icons-sprite(icon-email-lt);
       &:hover { @include icons-sprite(icon-email-lt-color);}
+    }
+  }
+  .float-l {
+     float: left;   
+  }
+  .newsletter-signup-container {
+     background: #fff;
+     border-radius: 25px;
+     box-shadow: 0 0 3px -1px $color-3;
+  }
+  .input-email {
+     padding: 0.5em 1em;
+    border-radius: 25px;
+    color: $color-5;  
+    width: 175px;
+  }
+  .button {
+      padding: 0.5em 1em;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    height: auto;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background: none;
+    box-shadow: 0 0 3px -2px;
+    color: $color-5;
+    width: auto;
+    &:hover, &:focus {
+      box-shadow: 0 0 3px -1px;
+      background: $color-2a;
+      color: $color-2;
     }
   }
 }
