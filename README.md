@@ -188,4 +188,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details. The full license text may be found in the project's [LICENSE](LICENSE) file or at http://www.gnu.org/licenses/.
 
 ### Credits
-[![Browserstack](/images/browserstack.svg)('http://browserstack.com/')]
+[![Browserstack](/images/browserstack.svg)](http://browserstack.com/)
