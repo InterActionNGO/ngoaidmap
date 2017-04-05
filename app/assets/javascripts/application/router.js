@@ -9,6 +9,7 @@ define([
   'application/views/filters',
   'application/views/menu-fixed',
   'application/views/downloads',
+  'application/views/filterSummary',
   'application/views/embed-map',
   'application/views/search',
   'application/views/layer-overlay',
@@ -52,7 +53,7 @@ define([
 
 
 
-], function(Backbone, Conexion, MapView, FiltersView, MenuFixedView, DownloadsView, EmbedMapView, SearchView, LayerOverlayView,
+], function(Backbone, Conexion, MapView, FiltersView, MenuFixedView, DownloadsView, FilterSummaryView, EmbedMapView, SearchView, LayerOverlayView,
   GalleryView, FilteredBubble, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOrganizationsResources, SidebarOtherCountries,
   projectModel, ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectLocations, ProjectDonors, ProjectReach, ProjectSectors) {
@@ -173,6 +174,7 @@ define([
       // General views
       new FiltersView({ conexion: this.conexion });
       new DownloadsView({ conexion: this.conexion });
+      new FilterSummaryView({ conexion: this.conexion });
       // Map Views
       new MapView({ conexion: this.conexion });
       new EmbedMapView({ conexion: this.conexion });

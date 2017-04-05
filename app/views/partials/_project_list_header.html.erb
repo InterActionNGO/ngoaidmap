@@ -18,7 +18,7 @@
     
     <div class="filter-heading">Current Filters</div>
 
-    <ul class="project-filter-list">
+    <ul id="filter_summary" class="project-filter-list">
         <% if params[:organizations] && @organization = Organization.find(params[:organizations].first) || nil %>
             <%= render 'partials/project_list_header_filter', model: @organization, label: 'Reporting Organization', param: 'organizations' %>
         <% end %>
