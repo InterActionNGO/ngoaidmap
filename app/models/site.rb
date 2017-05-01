@@ -63,6 +63,7 @@ class Site < ActiveRecord::Base
   belongs_to :geographic_context_region, :class_name => 'Region'
   has_many :partners, :dependent => :destroy
   has_many :pages, :dependent => :destroy
+  has_and_belongs_to_many :tags
   has_and_belongs_to_many :projects
   #has_many :cached_projects, :class_name => 'Project'#, :finder_sql => 'select projects.* from projects, projects_sites where projects_sites.site_id = #{id} and projects_sites.project_id = projects.id'
   has_many :stats, :dependent => :destroy
