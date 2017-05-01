@@ -4,7 +4,7 @@ namespace :iom do
     Tag.transaction do
       Tag.find_each do |tag|
         puts "Updating count for tag: #{tag}"
-        tag.count = tag.projects.unique.size
+        tag.count = tag.projects.uniq.size
         tag.save!
       end
       puts 'Finished \*o*/'
