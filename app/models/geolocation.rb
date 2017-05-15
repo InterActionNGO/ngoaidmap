@@ -87,7 +87,8 @@ class Geolocation < ActiveRecord::Base
       ''
     end
   end
-  def readable_path
-    [self.g0, self.g1, self.g2, self.g3, self.g4].compact.map{|g| Geolocation.find_by(uid: g).try(:name)}.join('>')
-  end
+#   def readable_path
+#     [self.g0, self.g1, self.g2, self.g3, self.g4].compact.map{|g| Geolocation.find_by(uid: g).try(:name)}.join('>')
+#   end
+  
 end

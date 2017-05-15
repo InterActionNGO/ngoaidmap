@@ -82,7 +82,9 @@ class Project < ActiveRecord::Base
   def self.fetch_all(options = {}, from_api = true)
     level = Geolocation.find_by(uid: options[:geolocation]).try(:adm_level) || 0 if options[:geolocation]
 
-    projects = Project.includes([:primary_organization, :geolocations, :sectors, :donors, :tags, :partners, :prime_awardee]).references(:organizations)
+    #projects = Project.includes([:primary_organization, :geolocations, :sectors, :donors, :tags, :partners, :prime_awardee]).references(:organizations)
+    # it's faster to use includes as needed downstream rather rather than clogging up this widely-used method
+    projects = self.includes(:primary_organization)
     projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 12
     projects = projects.geolocation(options[:geolocation], level)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
@@ -178,7 +180,7 @@ class Project < ActiveRecord::Base
     additional_information 'additional_information'
     start_date 'start_date'
     end_date 'end_date'
-    sectors_for_export 'sectors'
+    sectors 'sectors' do |s| s.map(&:name).join('|') end
     cross_cutting_issues 'cross_cutting_issues'
     budget 'budget_numeric'
     budget_currency 'budget_currency'
@@ -191,7 +193,7 @@ class Project < ActiveRecord::Base
     project_reach_unit 'project_reach_unit'
     target 'target_groups'
     geographical_scope 'geographic_scope'
-    geolocations_for_export 'location'
+    geolocations 'location' do |g| g.map(&:readable_path).join('|') end
     contact_person 'project_contact_person'
     contact_position 'project_contact_position'
     contact_email 'project_contact_email'
@@ -200,7 +202,7 @@ class Project < ActiveRecord::Base
     date_provided 'date_provided'
     date_updated 'date_updated'
     activity_status_for_export 'status'
-    donors_for_export 'donors'
+    donors 'donors' do |donor| donor.map(&:name).join('|') end
   end
 
   comma do
