@@ -93,7 +93,7 @@ class Project < ActiveRecord::Base
     projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 12
     projects = projects.geolocation(options[:geolocation], level).includes(:geolocations)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
-    projects = projects.countries(options[:countries])                          if options[:countries]
+    projects = projects.countries(options[:countries]).includes(:geolocations)                          if options[:countries]
     projects = projects.organizations(options[:organizations])                  if options[:organizations]
     projects = projects.sectors(options[:sectors]).includes(:sectors)                              if options[:sectors]
     projects = projects.donors(options[:donors]).includes(:donors)                                if options[:donors]
