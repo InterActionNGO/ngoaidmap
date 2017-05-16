@@ -84,14 +84,14 @@ class Project < ActiveRecord::Base
 
     #projects = Project.includes([:primary_organization, :geolocations, :sectors, :donors, :tags, :partners, :prime_awardee]).references(:organizations)
     # it's faster to use includes as needed downstream rather rather than clogging up this widely-used method
-    projects = self.includes(:primary_organization)
+    projects = self.includes(:primary_organization).references(:organizations)
     projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 12
-    projects = projects.geolocation(options[:geolocation], level)               if options[:geolocation]
+    projects = projects.geolocation(options[:geolocation], level).includes(:geolocations)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries])                          if options[:countries]
     projects = projects.organizations(options[:organizations])                  if options[:organizations]
-    projects = projects.sectors(options[:sectors])                              if options[:sectors]
-    projects = projects.donors(options[:donors])                                if options[:donors]
+    projects = projects.sectors(options[:sectors]).includes(:sectors)                              if options[:sectors]
+    projects = projects.donors(options[:donors]).includes(:donors)                                if options[:donors]
     projects = projects.text_query(options[:q])                                 if options[:q]
     projects = projects.starting_after(options[:starting_after])                if options[:starting_after]
     projects = projects.ending_before(options[:ending_before])                  if options[:ending_before]
