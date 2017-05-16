@@ -57,6 +57,8 @@ class Project < ActiveRecord::Base
   has_many :donors, :through => :donations
   has_many :partnerships, :dependent => :destroy
   has_many :partners, through: :partnerships
+  has_many :international_partners, -> { where('organizations.international = true') }, through: :partnerships, :source => :partner
+  has_many :local_partners, -> { where('organizations.international = false') }, through: :partnerships, :source => :partner
   has_and_belongs_to_many :sites
 
   scope :active, -> {where("end_date > ? AND start_date <= ?", Date.today.to_s(:db), Date.today.to_s(:db))}
@@ -78,6 +80,9 @@ class Project < ActiveRecord::Base
   scope :ending_before, -> (date){where "end_date < ?", date}
   scope :tags, -> (tags){where(tags: {id: tags})}
   scope :updated_since, -> (timestamp){where "projects.updated_at > timestamp with time zone ?", timestamp }
+  scope :with_partners, -> { joins(:partners).uniq }
+  scope :with_international_partners, -> { with_partners.where('organizations.international = true') }
+  scope :with_local_partners, -> { with_partners.where('organizations.international = false') }
 
   def self.fetch_all(options = {}, from_api = true)
     level = Geolocation.find_by(uid: options[:geolocation]).try(:adm_level) || 0 if options[:geolocation]
@@ -185,8 +190,8 @@ class Project < ActiveRecord::Base
     budget 'budget_numeric'
     budget_currency 'budget_currency'
     budget_value_date 'budget_value_date'
-    partners 'international partners' do |partners| partners.international.map(&:name).join('|') end
-    partners 'local_partners' do |partners| partners.local.map(&:name).join('|') end
+    international_partners 'international_partners' do |p| p.map(&:name).join('|') end
+    local_partners 'local_partners' do |p| p.map(&:name).join('|') end
     prime_awardee 'prime_awardee' do |prime_awardee| prime_awardee.try(:name) end
     target_project_reach 'target_project_reach'
     actual_project_reach 'actual_project_reach'
