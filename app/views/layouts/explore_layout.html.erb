@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><% unless CGI.unescapeHTML(title).empty? %><%= CGI.unescapeHTML(title) %><% else %>Welcome<% end %> · NGO Aid Map</title>
+    <meta name="content" content="NGO Aid Map is an InterAction initiative that collects information on the work of NGOs and makes it accessible.">
+    <meta name="viewport" content="width=980px">
+    <meta name="google-site-verification" content="r4LPeTYNAKGuj7MPrkGpDgZ2ZXaKpVqn-nV7ixs5-sQ">
+
+    <%= stylesheet_link_tag "main.css", :media => 'all' %>
+
+    <% if Rails.env.development? %>
+      <link rel="icon" type="image/png" href="/favicon-dev.png">
+    <% else %>
+      <link rel="icon" type="image/png" href="/favicon.png">
+    <% end %>
+    <%= javascript_include_tag "modernizr/modernizr.custom.js" %>
+    <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" %>
+    <script type="text/javascript">
+      var site_obj = <%= raw(@site.to_json) %>;
+    </script>
+
+    <%= csrf_meta_tag %>
+  </head>
+  <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %> <%= "section-" + @page.top_parent.permalink if @page.present? %> <%= "linos-" + @page.permalink if @page.present? %>">
+
+    <%= render 'partials/header' %>
+
+    <main id="main-content">
+      <h2 class="screen-reader">Main Content</h2>
+      <%= yield %>
+    </main>
+
+    <%= render 'partials/footer' %>
+
+    <%= requirejs_include_tag "application" %>
+
+    <% if Rails.env.production? %>
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '<%= @site.google_analytics_id %>']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script>
+    <% end %>
+
+    <%= render 'shared/feedback' %>
+  </body>
+</html>

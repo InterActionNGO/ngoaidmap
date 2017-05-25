@@ -9,8 +9,6 @@
     <meta name="google-site-verification" content="r4LPeTYNAKGuj7MPrkGpDgZ2ZXaKpVqn-nV7ixs5-sQ">
 
     <%= stylesheet_link_tag "https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css", "embed.css" %>
-    
-    <%= stylesheet_link_tag href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" %>
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.ie.css" />
     <![endif]-->
@@ -23,7 +21,6 @@
     <% end %>
     <%= javascript_include_tag "modernizr/modernizr.custom.js" %>
     <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" %>
-    <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" %>
     <script type="text/javascript">
       var site_obj = <%= raw(@site.to_json) %>;
     </script>
