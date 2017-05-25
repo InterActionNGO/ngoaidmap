@@ -1,0 +1,141 @@
+.mod-explore {
+/*     background: $color-3; */
+    nav {
+        margin-bottom: 3em;
+        margin-top: 2em;
+    }
+    h1 {
+        color: $color-10;
+    }
+    h2 {
+        color: $color-1;
+        background: darken($color-3, 10%);
+        padding: 0.75em 1em;
+        margin: 0;
+        border-radius: 2px;
+        font-weight: normal;
+    }
+    h3 {
+        color: $color-5;
+    }
+    hr {
+        border-color: $color-2;
+        border-top-width: 1px;
+        margin-top: 0.75em;
+    }
+    section {
+        @include clearfix();
+        margin-bottom: 2em;
+    }
+    .menu-item {
+        font-size: 15px;
+        text-transform: uppercase;
+        display: inline-block;
+        color: $color-5;
+        padding: 5px 15px;
+        margin-bottom: 0;
+        &:hover {
+            color: $color-2;
+            cursor: pointer;
+        }
+        &.first {
+            padding-left: 0;
+        }
+        &.last {
+            padding-right: 0;
+        }
+        &.active {
+            color: $color-2;
+            font-weight: bold;
+            font-size: 1.15em;
+        }
+    }
+    .explore-section {
+       min-height: 300px;
+       background: darken($color-3, 10%);
+        padding: 1.5em 1em;
+        margin-bottom: 1em;
+        box-shadow: 0 0 2px -2px $color-0;
+    }
+    .explore-section-item {
+        box-shadow: 0 0 5px -3px $color-0;
+        border-radius: 3px;
+        &:hover {
+            box-shadow: 0 0 8px -3px $color-0;
+        }
+    }
+    .full-height {
+        height: 100%;
+    }
+    .bottom-gap {
+        margin-bottom: 2em;
+    }
+    &.activity {
+        .organizations {
+            .explore-section-item {
+                height: 300px;
+                background: $white;
+                padding: 1em;
+                box-sizing: border-box;
+            }
+        }
+    }
+    .explore-date {
+        color: $color-5;
+        text-align: center;
+        margin-bottom: 1.5em;
+        font-size: 14px;
+        font-style: italic;
+    }
+    .sectors {
+        .explore-section {
+            min-height: 450px;
+        }
+    }
+    .sector-link {
+        padding: 1em 0;
+        transition: background 0.2s;
+        height: 200px;
+        margin: 1px;
+        &:hover {
+            background: darken($color-3, 5%);
+            text-decoration: none;
+            box-shadow: 0 0 3px -1px lighten($color-1, 25%);
+        }
+    }
+    .sector-icon {
+        background: $color-5;
+        border: 5px solid $color-1;
+        border-radius: 25px;
+        box-shadow: 0 0 3px 2px;
+/*         display: inline-block; */
+    }
+    .sector-title {
+        font-size: 26px;
+        text-align: center;
+        margin: 0.5em 0;
+        color: $color-4;
+        line-height: 1.2em;
+    }
+    .country-title {
+        @extend .sector-title;
+        
+    }
+    .explore-map {
+        text-align: center;
+        svg {
+            height: 100px;
+        }
+    }
+      /* Bootstrap Carousel overrides */
+    .carousel-control {
+        width: auto;
+        background: none;
+        margin: -15px;
+    }
+    .carousel-inner {
+        /*background: darken($color-3, 10%);
+        padding: 1.5em 1em;
+        margin: 1em 0;*/
+    }
+}

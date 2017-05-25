@@ -1,0 +1,8 @@
+<% date = vars[:item].max.strftime('%B %d, %Y') %>
+<a class="grid-8 country-link" target="_blank" href="<%= location_url(Geolocation.where(:country_name => vars[:item].country_name, :adm_level => 0).take.uid) %>">
+    <div class="explore-map">
+       <%= File.read("#{Rails.root}/app/assets/images/bangladeshLow.svg").html_safe %>
+        <p class="country-title"><%= vars[:item].country_name%></p>
+    </div>
+    <p class="explore-date"><%= date %></p>
+</a>

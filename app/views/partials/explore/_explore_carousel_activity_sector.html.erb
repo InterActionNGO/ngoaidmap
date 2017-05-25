@@ -1,0 +1,10 @@
+<% date = vars[:item].max.strftime('%B %d, %Y') %>
+<a class="grid-8 sector-link" target="_blank" href="<%= sector_url(vars[:item].id) %>">
+<!--     <div class="explore-section-item grid-5" style="background: url('icons/icon_agriculture.png') no-repeat center center #fff; background-size: 90%;"> -->
+    <div>
+        <%= image_tag('icons/icon-agriculture', size: 25, class: 'sector-icon') %>
+        <p class="sector-title"><%= vars[:item].name%></p>
+    </div>
+    <p class="explore-date"><%= date %></p>
+    <!--</div>-->
+</a>

@@ -1,0 +1,9 @@
+<% date = vars[:item].max.strftime('%B %d, %Y') %>
+<a target="_blank" href="<%= organization_url(vars[:item].id) %>">
+    <div class="explore-section-item grid-5" style="background: url('<%= vars[:item].reload.try(:logo).try(:url) %>') no-repeat center center #fff; background-size: 90%;">
+    <p class="explore-date"><%= date %></p>
+    </div>
+</a>
+<% unless vars[:count].eql?(3) %>
+    <div class="grid-1">&nbsp;</div>
+<% end %>
