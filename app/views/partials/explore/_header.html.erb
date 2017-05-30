@@ -3,10 +3,10 @@
 	<nav class="section-nav">
 	    <ul>
 		<a href="/explore/stories">
-                    <li class="menu-item <%= "active" if params[:action].eql?('stories') %>">Stories</li>
+                    <li class="menu-item <%= "active" if action_name.eql?('stories') %>">Stories</li>
                 </a>
                 <a href="/explore/data">
-                    <li class="menu-item <%= "active" if params[:action].eql?('data') %>">Data</li>
+                    <li class="menu-item <%= "active" if action_name.eql?('data') %>">Data</li>
                 </a>
 	    </ul>
 	</nav>
