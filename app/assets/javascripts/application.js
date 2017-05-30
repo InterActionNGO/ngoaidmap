@@ -1,6 +1,6 @@
 require([
-  'jquery',
-  'bootstrap',
+  'jquery.min',
+  'bootstrap.min',
   'application/router',
   'chachiSlider'
 ], function($, Router) {
