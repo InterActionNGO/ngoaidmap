@@ -30,14 +30,14 @@
   </head>
   <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %> <%= "section-" + @page.top_parent.permalink if @page.present? %> <%= "linos-" + @page.permalink if @page.present? %>">
 
-    <%= render 'partials/header' %>
+    <%= render 'partials/header_bootstrap' %>
 
     <main id="main-content">
       <h2 class="screen-reader">Main Content</h2>
       <%= yield %>
     </main>
 
-    <%= render 'partials/footer' %>
+    <!--<%= render 'partials/footer' %>
 
     <%= requirejs_include_tag "application" %>
 
@@ -55,6 +55,6 @@
       </script>
     <% end %>
 
-    <%= render 'shared/feedback' %>
+    <%= render 'shared/feedback' %>-->
   </body>
 </html>

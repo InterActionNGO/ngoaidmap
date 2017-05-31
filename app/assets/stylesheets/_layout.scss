@@ -1,7 +1,8 @@
 /*********************************************************************************************/
 /******************************************HEADER*********************************************/
 /*********************************************************************************************/
-.mod-header {
+.mod-header,
+.mod-header-bootstrap {
   height: 154px;
   position: relative;
   z-index: 100;
@@ -12,12 +13,14 @@
     border-bottom: 1px solid $color-10;
     background-color: $color-4;
   }
-  .mod-info {
+  .mod-info,
+  .mod-info-bootstrap {
     float: right;
     margin: 0;
     padding: 0;
   }
-  .mod-follow-us {
+  .mod-follow-us,
+  .mod-follow-us-bootstrap {
     float: right;
   }
 }

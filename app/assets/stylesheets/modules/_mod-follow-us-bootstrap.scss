@@ -1,0 +1,108 @@
+.mod-follow-us-bootstrap {
+  aside & {
+      
+    li {
+      float: left;
+      margin-right: 16px;
+    }
+    a {
+      display: block;
+      height: 43px;
+      width: 43px;
+    }
+
+    .website {
+      word-break: break-all;
+      width: 100%;
+    }
+
+    .twitter { @include icons-sprite(twitter);}
+    .facebook { @include icons-sprite(facebook);}
+    .google { @include icons-sprite(google);}
+    .linkedin { @include icons-sprite(linkedin);}
+    .email { @include icons-sprite(email); margin-top: 2px;}
+  }
+
+  .mod-header-bootstrap & {
+    h2 {
+      margin: 0 0.5em;
+      color: $color-3;
+    }
+    ul { 
+        float: left;
+        
+    }
+    li {
+      float: left;
+      margin-right: 10px;
+      margin-bottom: 0;
+      position: relative;
+      top: 0.25em;
+      &:last-child {
+        margin-right: 0;
+        margin-left: 3px;
+      }
+    }
+    a {
+      width: 21px;
+      height: 21px;
+      float: right;
+    }
+    .twitter {
+      @include icons-sprite(icon-tw-lt);
+      &:hover { @include icons-sprite(icon-tw-lt-color);}
+    }
+    .facebook {
+      @include icons-sprite(icon-fb-lt);
+      &:hover { @include icons-sprite(icon-fb-lt-color);}
+    }
+    .email {
+      @include icons-sprite(icon-email-lt);
+      &:hover { @include icons-sprite(icon-email-lt-color);}
+    }
+  }
+  .float-l {
+     float: left;   
+  }
+  .newsletter-signup-container {
+     background: #fff;
+     border-radius: 25px;
+     box-shadow: 0 0 3px -1px $color-3;
+     .button {
+       text-transform: lowercase;
+       font-weight: bold;
+     }
+  }
+  .input-email {
+     padding: 0.5em 1em;
+    border-radius: 25px;
+    color: $color-5;  
+    width: 175px;
+  }
+  .button {
+      padding: 0.5em 1em;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    height: auto;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background: none;
+    box-shadow: 0 0 3px -2px;
+    color: $color-5;
+    width: auto;
+    &:hover, &:focus {
+      box-shadow: 0 0 3px -1px;
+      background: $color-2a;
+      color: $color-2;
+    }
+  }
+}
+
+.organization-logo {
+  max-width: 200px;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+  margin: 0 0 15px 0;
+}
