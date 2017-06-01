@@ -30,7 +30,9 @@
     .index-item {
       position: relative;
       padding: 5px 15px;
-      margin-bottom: 1em;
+      @media (max-width: 991px) {
+          margin-bottom: 1em;
+      }
       &.active {
         border-radius: 15px;
       }
@@ -62,10 +64,17 @@
     @include menu-item($color-3);
   }
   .about {
-    @include drop-down-menu($color-8);
+/*     @include menu-item($color-8); */
+    @media (max-width: 991px) {
+        @include menu-item($color-8);
+    }
+    @media (min-width: 992px) {
+        @include drop-down-menu($color-8);
+    }
   }
   .data {
-    @include drop-down-menu($color-1);
+/*     @include drop-down-menu($color-1); */
+    @include menu-item($color-1);
   }
   .access {
     @include menu-item($color-2);
