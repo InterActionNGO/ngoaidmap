@@ -1,31 +1,37 @@
-<div class="follow-us mod-info-bootstrap">
-  <div class="mod-follow-us-bootstrap">
-  <h2 class="h3">Follow us</h2>
-    <ul>
-      <li><%= link_to(' ',"https://twitter.com/NGOAidMap", :class=>"twitter", :target=>"_blank") %></li>
-      <li><%= link_to(' ',"https://www.facebook.com/NGOAidMap", :class=>"facebook", :target=>"_blank") %></li>
-      <li><a class="email" href="mailto:​mappinginfo@interaction.org"></a></li>
-      
-      
-      <!-- Begin MailChimp Signup Form -->
-        <div id="mc_embed_signup" class="newsletter-signup-container float-l">
-        <form action="//ngoaidmap.us13.list-manage.com/subscribe/post?u=6d5ed05865aabe91ece49d998&amp;id=ed6231d60b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-            <div id="mc_embed_signup_scroll">
-                
-                <input type="email" value="" name="EMAIL" class="input-email float-l" id="mce-EMAIL" placeholder="email address" required>
-                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                    <input type="text" name="b_6d5ed05865aabe91ece49d998_ed6231d60b" tabindex="-1" value="">
+<div class="follow-us-container mod-follow-us-bootstrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-5">
+                <div class="col-md-5 col-md-offset-0 col-xs-6 col-xs-offset-3 header-social-links">
+                    <div class="col-md-6 col-xs-6 no-pad follow-us-item">
+                        <div class="follow-us-text">Follow us</div>
+                    </div>
+                    <div class="col-md-6 col-xs-6 no-pad display-table">
+                        <div class="follow-us-item"><%= link_to(' ',"https://twitter.com/NGOAidMap", :class=>"twitter", :target=>"_blank") %></div>
+                        <div class="follow-us-item"><%= link_to(' ',"https://www.facebook.com/NGOAidMap", :class=>"facebook", :target=>"_blank") %></div>
+                        <div class="follow-us-item"><a class="email" href="mailto:​mappinginfo@interaction.org"></a></div>
+                    </div>
                 </div>
-<!--                 <div class="float-l"> -->
-                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button float-l">
-<!--                 </div> -->
+                
+                <!-- Begin MailChimp Signup Form -->
+                <div class="col-md-7 no-pad-right">
+                    <div id="mc_embed_signup" class="newsletter-signup-container pull-right">
+                        <form action="//ngoaidmap.us13.list-manage.com/subscribe/post?u=6d5ed05865aabe91ece49d998&amp;id=ed6231d60b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div id="mc_embed_signup_scroll">
+                                
+                                <input type="email" value="" name="EMAIL" class="input-email float-l form-control" id="mce-EMAIL" placeholder="email address" required>
+                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                    <input type="text" name="b_6d5ed05865aabe91ece49d998_ed6231d60b" tabindex="-1" value="">
+                                </div>
+                                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button pull-right btn">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--End mc_embed_signup-->
+                
             </div>
-        </form>
         </div>
-
-        <!--End mc_embed_signup-->
-      
-    </ul>
-  </div>
+    </div>
 </div>

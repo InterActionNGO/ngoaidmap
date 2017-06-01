@@ -3,11 +3,11 @@
 /*********************************************************************************************/
 .mod-header,
 .mod-header-bootstrap {
-  height: 154px;
+/*   height: 154px; */
   position: relative;
   z-index: 100;
   .follow-us-container {
-    width: 100%;
+    /*width: 100%;*/
     padding: 7px 0;
     //height: 20px;
     border-bottom: 1px solid $color-10;
@@ -19,8 +19,7 @@
     margin: 0;
     padding: 0;
   }
-  .mod-follow-us,
-  .mod-follow-us-bootstrap {
+  .mod-follow-us {
     float: right;
   }
 }

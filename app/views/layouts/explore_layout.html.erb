@@ -8,7 +8,7 @@
     <meta name="content" content="NGO Aid Map is an InterAction initiative that collects information on the work of NGOs and makes it accessible.">
     <meta name="google-site-verification" content="r4LPeTYNAKGuj7MPrkGpDgZ2ZXaKpVqn-nV7ixs5-sQ">
 
-    <%= stylesheet_link_tag "main.css", :media => 'all' %>
+    <%= stylesheet_link_tag "main-bootstrap.css", :media => 'all' %>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -21,14 +21,14 @@
     <% else %>
       <link rel="icon" type="image/png" href="/favicon.png">
     <% end %>
-    <%= javascript_include_tag "modernizr/modernizr.custom.js" %>
-    <script type="text/javascript">
+<!--     <%= javascript_include_tag "modernizr/modernizr.custom.js" %> -->
+    <!--<script type="text/javascript">
       var site_obj = <%= raw(@site.to_json) %>;
-    </script>
+    </script>-->
 
     <%= csrf_meta_tag %>
   </head>
-  <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %> <%= "section-" + @page.top_parent.permalink if @page.present? %> <%= "linos-" + @page.permalink if @page.present? %>">
+  <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %><%= " section-" + @page.top_parent.permalink if @page.present? %><%= " linos-" + @page.permalink if @page.present? %>">
 
     <%= render 'partials/header_bootstrap' %>
 

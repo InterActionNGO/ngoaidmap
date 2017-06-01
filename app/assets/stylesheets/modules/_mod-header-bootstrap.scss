@@ -14,18 +14,23 @@
   }
   .menu {
     display: block;
-    margin-top: 42px;
+/*     margin-top: 42px; */
     text-align: right;
     @include clearfix;
+    @media (min-width: 992px) {
+        margin-top: 42px;
+    }
   }
   .menu-item {
-    display: inline-block;
-    margin: 0 1%;
+/*     display: inline-block; */
+/*     margin: 0 1%; */
+    margin-top: 1em;
     text-align: center;
     text-transform: uppercase;
     .index-item {
       position: relative;
       padding: 5px 15px;
+      margin-bottom: 1em;
       &.active {
         border-radius: 15px;
       }
@@ -34,6 +39,7 @@
   .interaction-logo {
     float: right;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
   .submenu {
     display: none;

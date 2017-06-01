@@ -13,10 +13,11 @@ $icons-spacing: 10px;
 @import "settings",
         "mixins",
         /*"base",*/
+        "base-bootstrap",
         /*"grid",*/
         "layout",
         "states",
-        "modules/mod-info",
+/*         "modules/mod-info", */
         "modules/mod-info-bootstrap",
         "modules/mod-form",
         "modules/mod-sites-info",
@@ -24,7 +25,7 @@ $icons-spacing: 10px;
         "modules/mod-categories-selector",
         "modules/mod-categories-child",
         "modules/mod-downloads",
-        "modules/mod-header",
+/*         "modules/mod-header", */
 	"modules/mod-header-bootstrap",
         "modules/mod-featured-projects",
         "modules/mod-footer",
@@ -35,7 +36,7 @@ $icons-spacing: 10px;
         "modules/mod-project-sectors",
         "modules/mod-content-article",
         "modules/mod-contact-info",
-        "modules/mod-follow-us",
+/*         "modules/mod-follow-us", */
         "modules/mod-follow-us-bootstrap",
         "modules/mod-map-controls",
         "modules/mod-more-projects",

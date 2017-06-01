@@ -1,35 +1,37 @@
 <header class="mod-header-bootstrap">
-  <h1 class="screen-reader"><% unless CGI.unescapeHTML(title).empty? %><%= CGI.unescapeHTML(title) %><% else %>Welcome<% end %> · NGO Aid Map</h1>
+    <h1 class="screen-reader"><% unless CGI.unescapeHTML(title).empty? %><%= CGI.unescapeHTML(title) %><% else %>Welcome<% end %> · NGO Aid Map</h1>
 
-  <a class="skip-link" href="#main-content">Skip to Content</a>
+    <a class="skip-link" href="#main-content">Skip to Content</a>
 
-  <div class="follow-us-container">
-    <div class="row">
-        <%= render 'partials/follow_us_bootstrap' %>
-    </div>
-  </div>
+    <%= render 'partials/follow_us_bootstrap' %>
+  
+    <nav class="container">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-0 col-xs-5 col-xs-offset-0">
+                <%- if Rails.env.production? -%>
+                    <a href="https://<%= Settings.main_site_host %>" class="aid-map-logo">
+                <%- else -%>
+                    <a href="/" class="aid-map-logo">
+                <%- end -%>
+                    <%= image_tag "aid-map-logo.png", :alt  => "NGO Aid Map Home", :height => '95', :width => '185' %>
+                </a>
+            </div>
+            <div class="hidden-md hidden-lg col-xs-4 col-xs-offset-3 col-sm-3 col-sm-offset-6">
+                <a href="http://www.interaction.org/" target="_blank" class="interaction-logo">
+                    <%= image_tag "interaction-logo.png" , :alt  => "Inter Action", :width => '132', :height => '85' %>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-12 hidden-md hidden-lg mobile-menu-spacer">&nbsp;</div>
+            <div class="col-md-5 col-md-offset-0 col-xs-12">
+                <%= render 'partials/main_menu_bootstrap' %>
+            </div>
 
-  <nav class="row">
-    <div class="grid-4">
-      <a href="https://<%= Settings.main_site_host %>" class="aid-map-logo">
-      <%- if Rails.env.production? -%>
-        <a href="https://<%= Settings.main_site_host %>" class="aid-map-logo">
-      <%- else -%>
-        <a href="/" class="aid-map-logo">
-      <%- end -%>
-        <%= image_tag "aid-map-logo.png", :alt  => "NGO Aid Map Home", :height => '90', :width => '185' %>
-      </a>
-    </div>
-
-    <div class="grid-10">
-    	<%= render 'partials/main_menu' %>
-    </div>
-
-    <div class="grid-3">
-      <a href="http://www.interaction.org/" target="_blank" class="interaction-logo">
-        <%= image_tag "interaction-logo.png" , :alt  => "Inter Action", :width => '132', :height => '85' %>
-      </a>
-    </div>
-  </nav>
+            <div class="col-md-2 col-md-offset-0 col-xs-4 col-xs-offset-4 hidden-sm hidden-xs">
+                <a href="http://www.interaction.org/" target="_blank" class="interaction-logo">
+                    <%= image_tag "interaction-logo.png" , :alt  => "Inter Action", :width => '132', :height => '85' %>
+                </a>
+            </div>
+        </div>
+    </nav>
 </header>
 
