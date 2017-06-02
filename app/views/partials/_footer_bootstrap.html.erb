@@ -20,49 +20,50 @@
                 <% end %>
                 <% end %>
             </ul>
-
-<!--             </div> -->
-<!--         </div> -->
         </div>
     </div>
 
-  <footer class="mod-footer">
-    <div class="row">
-      <nav class="mod-footer-top">
-        <div class="grid-6 offset-5">
-          <%= render 'partials/main_menu' %>
+    <footer class="mod-footer-bootstrap">
+        <div class="container-fluid">
+            <div class="container">
+                <nav class="mod-footer-top-bootstrap row">
+                
+                    <div class="col-md-3 col-md-offset-3 col-sm-2 col-xs-12">
+                        <%= render 'partials/main_menu_bootstrap' %>
+                    </div>
+                    
+                    <div class="col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-6 col-xs-6">
+                        <%- if Rails.env.production? -%>
+                            <a href="https://<%= Settings.main_site_host %>" class="logo">
+                        <%- else -%>
+                            <a href="/" class="logo">
+                        <%- end -%>
+                        <%= image_tag "footer_ngo.svg", :alt  => "NGO Aid Map Home", :class  => "img-responsive" %>
+                        </a>
+                    </div>
+                    
+                    <div class="col-md-2 col-md-offset-1 col-sm-2 col-xs-6">
+                        <a href="http://www.interaction.org/" class="logo" target="_blank">
+                            <%= image_tag "footer_interaction.svg", :alt  => "An initiative by Inter Action", :class => 'img-responsive' %>
+                        </a>
+                    </div>
+                </nav>
+            </div>
         </div>
-        <div class="grid-4">
-          <%- if Rails.env.production? -%>
-            <a href="https://<%= Settings.main_site_host %>" class="aid-map-logo">
-          <%- else -%>
-            <a href="/" class="aid-map-logo">
-          <%- end -%>
-            <%= image_tag "footer_ngo.svg", :alt  => "NGO Aid Map Home", :class  => "aid-map-logo", :width => '170', :height => '80' %>
-          </a>
-        </div>
-        <div class="grid-2">
-          <a href="http://www.interaction.org/" target="_blank">
-            <%= image_tag "footer_interaction.svg", :alt  => "An initiative by Inter Action", :class  => "aid-map-logo", :width => '95', :height => '105' %>
-          </a>
-        </div>
-      </nav>
-    </div>
 
-    <div class="mod-footer-bottom">
-      <div class="row">
-        <div class="grid-7">
-          <div class="address">
-            <p>1400 16th Street, NW. Suite 210 Washington, DC 20036</p>
-          </div>
+        <div class="mod-footer-bottom-bootstrap container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p>1400 16th Street, NW. Suite 210 Washington, DC 20036</p>
+                    </div>
+                    
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="signature">Copyrighted by <a href="http://www.interaction.org/" target="_blank">InterAction</a> &copy; <%= Time.now.year %></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="grid-7 offset-3">
-          <div class="signature">
-            <p>Copyrighted by <a href="http://www.interaction.org/" target="_blank">InterAction</a> &copy; <%= Time.now.year %></p>
-          </div>
-        </div>
-  		</div>
-  	</div>
 
-  </footer>
+    </footer>
 <% end %>

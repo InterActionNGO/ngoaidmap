@@ -14,10 +14,9 @@
   }
   .menu {
     display: block;
-/*     margin-top: 42px; */
     text-align: right;
     @include clearfix;
-    @media (min-width: 992px) {
+    @media (min-width: $screen-md-min) {
         margin-top: 42px;
     }
   }
@@ -30,7 +29,7 @@
     .index-item {
       position: relative;
       padding: 5px 15px;
-      @media (max-width: 991px) {
+      @media (max-width: $screen-sm-max) {
           margin-bottom: 1em;
       }
       &.active {
