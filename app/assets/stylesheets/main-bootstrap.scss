@@ -1,7 +1,9 @@
-//= require bootstrap.min
+
 //= require chachi-slider/chachi-slider
 //= require jquery-ui/css/no-theme/jquery-ui-1.10.4.custom
 //= require select2/select2
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 @import "compass/css3",
         "compass/utilities/sprites",
@@ -27,7 +29,8 @@ $icons-spacing: 10px;
         "modules/mod-downloads",
 /*         "modules/mod-header", */
 	"modules/mod-header-bootstrap",
-        "modules/mod-featured-projects",
+/*         "modules/mod-featured-projects", */
+        "modules/mod-featured-projects-bootstrap",
         "modules/mod-footer",
         "modules/mod-index-item",
         "modules/mod-map",

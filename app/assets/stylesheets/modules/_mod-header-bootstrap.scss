@@ -53,6 +53,7 @@
     .submenu-item {
       float: none;
       text-align: left;
+      white-space: nowrap;
     }
     a {
       text-transform: none;
@@ -64,17 +65,20 @@
     @include menu-item($color-3);
   }
   .about {
-/*     @include menu-item($color-8); */
-    @media (max-width: 991px) {
+    @media (max-width: $screen-md-max) {
         @include menu-item($color-8);
     }
-    @media (min-width: 992px) {
+    @media (min-width: $screen-md-min) {
         @include drop-down-menu($color-8);
     }
   }
   .data {
-/*     @include drop-down-menu($color-1); */
-    @include menu-item($color-1);
+    @media (max-width: $screen-md-max) {
+        @include menu-item($color-1);
+    }
+    @media (min-width: $screen-md-min) {
+        @include drop-down-menu($color-1);
+    }
   }
   .access {
     @include menu-item($color-2);

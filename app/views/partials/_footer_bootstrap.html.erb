@@ -1,0 +1,68 @@
+<% cache("#{@site.id}/footer") do %>
+    <div class="mod-featured-projects-bootstrap container">
+        <div class="row">
+            <div class="col-md-3 col-xs-12">
+                <h2>Featured maps</h2>
+            </div>
+
+            <ul class="col-md-9">
+                <% if @site.featured_sites.any? %>
+                <% @site.featured_sites.each do |s|  %>
+                    <li class="col-md-3 col-xs-12">
+                        <a href="https://<%= s.url %>">
+                        <img
+                            src="<%= s.aid_map_image.url %>"
+                            alt=""
+                            class="img-responsive">
+                        <p><%= s.name %></p>
+                        </a>
+                    </li>
+                <% end %>
+                <% end %>
+            </ul>
+
+<!--             </div> -->
+<!--         </div> -->
+        </div>
+    </div>
+
+  <footer class="mod-footer">
+    <div class="row">
+      <nav class="mod-footer-top">
+        <div class="grid-6 offset-5">
+          <%= render 'partials/main_menu' %>
+        </div>
+        <div class="grid-4">
+          <%- if Rails.env.production? -%>
+            <a href="https://<%= Settings.main_site_host %>" class="aid-map-logo">
+          <%- else -%>
+            <a href="/" class="aid-map-logo">
+          <%- end -%>
+            <%= image_tag "footer_ngo.svg", :alt  => "NGO Aid Map Home", :class  => "aid-map-logo", :width => '170', :height => '80' %>
+          </a>
+        </div>
+        <div class="grid-2">
+          <a href="http://www.interaction.org/" target="_blank">
+            <%= image_tag "footer_interaction.svg", :alt  => "An initiative by Inter Action", :class  => "aid-map-logo", :width => '95', :height => '105' %>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="mod-footer-bottom">
+      <div class="row">
+        <div class="grid-7">
+          <div class="address">
+            <p>1400 16th Street, NW. Suite 210 Washington, DC 20036</p>
+          </div>
+        </div>
+        <div class="grid-7 offset-3">
+          <div class="signature">
+            <p>Copyrighted by <a href="http://www.interaction.org/" target="_blank">InterAction</a> &copy; <%= Time.now.year %></p>
+          </div>
+        </div>
+  		</div>
+  	</div>
+
+  </footer>
+<% end %>

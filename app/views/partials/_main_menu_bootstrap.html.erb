@@ -19,7 +19,7 @@
     <a href="/p/data" class="index-item data <% if @page.present? %><%= "active" if (@page.permalink == 'data' || @page.top_parent.permalink == 'data') %><% end %>">data</a>
 
     <% cache ['main_menu_submenus_data', @site] do %>
-      <ul class="submenu">
+      <ul class="submenu hidden-sm">
         <% @site.pages_by_parent('data').each do |page| %>
           <% if page.published %>
             <li class="submenu-item"><a href="/p/<%= page.permalink %>"><%= page.title %></a></li>

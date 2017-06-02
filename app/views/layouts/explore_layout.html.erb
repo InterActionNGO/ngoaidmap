@@ -21,13 +21,17 @@
     <% else %>
       <link rel="icon" type="image/png" href="/favicon.png">
     <% end %>
-<!--     <%= javascript_include_tag "modernizr/modernizr.custom.js" %> -->
-    <!--<script type="text/javascript">
+    
+    <%= javascript_include_tag "modernizr/modernizr.custom.js" %>
+    
+    <script type="text/javascript">
       var site_obj = <%= raw(@site.to_json) %>;
-    </script>-->
+    </script>
 
     <%= csrf_meta_tag %>
+    
   </head>
+  
   <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %><%= " section-" + @page.top_parent.permalink if @page.present? %><%= " linos-" + @page.permalink if @page.present? %>">
 
     <%= render 'partials/header_bootstrap' %>
@@ -37,7 +41,7 @@
       <%= yield %>
     </main>
 
-    <!--<%= render 'partials/footer' %>
+    <%= render 'partials/footer_bootstrap' %>
 
     <%= requirejs_include_tag "application" %>
 
@@ -55,6 +59,6 @@
       </script>
     <% end %>
 
-    <%= render 'shared/feedback' %>-->
+<!--     <%= render 'shared/feedback' %> -->
   </body>
 </html>
