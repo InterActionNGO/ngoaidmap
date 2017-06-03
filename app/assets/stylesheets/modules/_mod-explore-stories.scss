@@ -1,0 +1,55 @@
+.mod-explore-stories {
+    p {
+        line-height: 1.4;
+        margin-bottom: 0.6em;
+    }
+    hr {
+        position: relative;
+        margin: 2em;
+        &.gradient-line {
+            border-color: transparent;
+        }
+        &.gradient-line:before {
+            content: '';
+            background-image: linear-gradient(to right, $color-9 0%, rgba($color-0, 0.5) 50%, $color-9 100%);
+            padding: 1px 0;
+            width: 100%;
+            position: absolute;
+        }
+    }
+    label {
+        display: block;
+    }
+    input[type=text],
+    textarea {
+        margin-bottom: 1.5em;
+        font-size: 1em;
+        background: rgba($color-0,0.4);
+        border: none;
+        box-sizing: border-box;
+        border-bottom: 0px solid $color-7a;
+        color: #444;
+        font-weight: bold;
+        transition: border 0.25s;
+        &::placeholder {
+            color: rgba($color-0,0.7);
+        }
+        &:focus {
+            border-bottom: 3px solid $color-7a
+        }
+    }
+    .stories-left {
+/*         background: lighten($color-1, 50%); */
+        min-height: 300px;
+    }
+    .stories-right {
+        background: $color-9;
+        min-height: 650px;
+        margin-top: 5px;
+        padding: 50px;
+    }
+    .instructions {
+        color: rgba($color-0, 0.6);
+        font-size: 1.5em;
+    }
+}
