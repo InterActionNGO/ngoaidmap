@@ -1,4 +1,24 @@
 .mod-explore-stories {
+    /* Bootstrap overrides */
+    .btn-primary {
+        position: relative;
+        background: none;
+        border: 3px solid;
+        color: rgba($color-0, 0.7);
+        font-weight: bold;
+        transition: all 0.25s;
+        outline: none;
+        &:hover,
+        &:focus,
+        &:active {
+            color: rgba($color-0, 0.9);
+            box-shadow: 0 0 8px -1px $color-6a;
+            border: 3px solid;
+            outline: none;
+        }
+    }
+    /* End overrides */
+    
     p {
         line-height: 1.4;
         margin-bottom: 0.6em;
@@ -18,28 +38,92 @@
         }
     }
     label {
-        display: block;
+/*         display: block; */
+        margin-bottom: 0.5em;
+        font-size: 1em;
+        color: rgba($color-0,0.7);
+        font-weight: bold;
+    }
+    input[type=file] {
+        color: $color-0;
     }
     input[type=text],
+    input[type=email],
     textarea {
         margin-bottom: 1.5em;
         font-size: 1em;
-        background: rgba($color-0,0.4);
-        border: none;
+        border: 1px solid rgba($color-0, 0.3);
+        background: darken($color-9, 5%);
         box-sizing: border-box;
-        border-bottom: 0px solid $color-7a;
-        color: #444;
-        font-weight: bold;
+        color: rgba($color-0,0.7);
         transition: border 0.25s;
+        width: 100%;
         &::placeholder {
             color: rgba($color-0,0.7);
         }
         &:focus {
-            border-bottom: 3px solid $color-7a
+            border: 3px solid darken($color-9, 5%);
+            box-shadow: none;
+            &::placeholder {
+                font-weight: bold;
+            }
+        }
+    }
+    input[type=submit] {
+        background: lighten($color-2, 10%);
+        &:active {
+            background-image: linear-gradient(to bottom, lighten($color-2, 10%), $color-2);
+        }
+    }
+    .upload-wrapper {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 1.5em;
+        .upload-btn {
+            &:active {
+                background: none;
+            }
+        }
+        .upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 1em;
+            opacity: 0;
+            cursor: pointer;
+            filter: alpha(opacity=0);
+            &:focus,
+            &:active{
+                color: rgba($color-0, 0.9);
+                box-shadow: 0 0 8px -1px $color-6a;
+                background: none;
+            }
+            &:active {
+                border: 3px solid;
+                outline: none;
+            }
+        }
+        .filename {
+            border: none;
+            margin-left: 1em;
+            color: rgba($color-0, 0.4);
+            max-width: 250px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            background: none;
+            font-style: italic;
+            &::placeholder {
+                color: rgba($color-00, 0.4);
+                font-style: italic;
+            }
         }
     }
     .stories-left {
-/*         background: lighten($color-1, 50%); */
         min-height: 300px;
     }
     .stories-right {

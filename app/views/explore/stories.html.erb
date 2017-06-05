@@ -11,26 +11,44 @@
                 <p class="instructions">Have a good story about how NGO Aid Map has benefited you or your organization? Or just want to share some positive vibes about the map?</p>
                 <p class="instructions">Let our community know by filling out the form below. Make it pop with a picture or your logo!</p>
                 <hr class="gradient-line">
-                <%= form_tag do %>
-                    <div class="col-md-6 form-group">
-                        <%= label_tag :story, 'What would you like to share?', :class=>'sr-only' %>
-                        <%= text_area_tag :story,nil, :class => 'form-control', :placeholder => 'What would you like to share?', :required => true, :autofocus=>true, :maxlength => 2500, :spellcheck => true, :rows => 7 %>
+                <%= form_tag :action => :add_story, :multipart => true do %>
+                
+                    <div class="col-md-12">
+                        <%= label_tag :picture, 'Add a Picture', :class => 'sr-only'%>
+                        <div class="upload-wrapper text-center">
+                            <div class="upload-btn btn btn-primary">
+                                <span>Upload a Picture</span>
+                                <%= file_field_tag :picture, :class => 'upload' %>
+                            </div>
+                            <!--<%= text_field_tag :picture_filename, nil, :placeholder => 'No File Chosen', :disabled => true, :class => 'filename' %>-->
+                            <span class="filename" id="picture_filename">No File Chosen</span>
+                        </div>
                     </div>
                     
-                    <div class="col-md-6 form-group">
-                        <%= label_tag :name, 'Your Name', :class=> 'sr-only' %>
-                        <%= text_field_tag :name,nil, {:class => 'form-control', :placeholder => 'Your Name'} %>
-                        
-                        <%= label_tag :email, 'Your Email', :class=>'sr-only' %>
-                        <%= text_field_tag :email,nil, {:class => 'form-control', :placeholder => 'Email'} %>
-                        
+                    <div class="col-md-10 col-md-offset-1">
+                        <%= label_tag :story, 'What would you like to share?', :class=>'sr-only' %>
+                        <%= text_area_tag :story,nil, :class => 'form-control', :placeholder => 'What would you like to share?', :required => true, :autofocus=>true, :maxlength => 2500, :spellcheck => true, :rows => 4 %>
+                    </div>
+                    
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-inline text-center">
+                            <div class="col-md-6">
+                                <%= label_tag :name, 'Your Name', :class=> 'sr-only' %>
+                                <%= text_field_tag :name,nil, {:class => 'form-control', :placeholder => 'Name'} %>
+                            </div>
+                            <div class="col-md-6">
+                                <%= label_tag :email, 'Your Email', :class=>'sr-only' %>
+                                <%= email_field_tag :email,nil, {:class => 'form-control', :placeholder => 'Email'} %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-3">
                         <%= label_tag :organization, 'Your Organization', :class=>'sr-only' %>
-                        <%= text_field_tag :organization,nil, {:class => 'form-control', :placeholder => 'Your Organization'} %>
-                        
+                        <%= text_field_tag :organization,nil, {:class => 'form-control', :placeholder => 'Organization'} %>
                     </div>
                     
                     <div class="col-md-12 text-center">
-                        <%= submit_tag 'Share It'%>
+                        <%= submit_tag 'Share It', :class => 'btn btn-primary btn-lg'%>
                     </div>
                 <% end %>
             </div>
@@ -38,3 +56,8 @@
     </div>
         
 </div>
+<script type="text/javascript">
+    document.getElementById("picture").onchange = function () {
+        document.getElementById("picture_filename").innerHTML = this.value;
+    };
+</script>
