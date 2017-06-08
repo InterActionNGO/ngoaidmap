@@ -56,8 +56,7 @@ Rails.application.routes.draw do
   get 'explore', to: 'explore#stories'
   get 'explore/stories'
   get 'explore/data'
-  resources :stories
-#   post 'explore/add_story', to: 'explore#add_story'
+  resources :stories, :only => [:show, :create]
   
   # These are old, can delete?
   get 'about', to: 'sites#about'
