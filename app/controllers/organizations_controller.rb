@@ -33,9 +33,4 @@ class OrganizationsController < ApplicationController
   def resource
     Organization
   end
-
-  private
-  def filter_by_category_valid?
-    @filter_by_category.present? && @filter_by_category.to_i > 0
-  end
 end

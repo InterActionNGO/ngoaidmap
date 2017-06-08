@@ -37,12 +37,13 @@ module ProjectsFiltering
   end
   private
   def projects_params
-    params.permit(:page, :level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, :site, organizations:[], countries:[], donors:[], sectors:[], projects:[])
+    params.permit(:page, :level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, :site, organizations:[], countries:[], donors:[], sectors:[], projects:[], partners: [])
   end
   def merge_params
     params.merge!({site: @site.id}) if @site.id != 12
     params.merge!({projects: [params[:id]]}) if controller_name == 'projects'
     params.merge!({organizations: [params[:id]]}) if controller_name == 'organizations'
+    params.merge!({partners: [params[:id]]}) if controller_name == 'partners'
     params.merge!({donors: [params[:id]]}) if controller_name == 'donors'
     params.merge!({sectors: [params[:id]]}) if controller_name == 'clusters_sectors'
     params.merge!({geolocation: params[:ids]}) if controller_name == 'georegion'

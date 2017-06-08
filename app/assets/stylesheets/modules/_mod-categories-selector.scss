@@ -68,6 +68,10 @@
     .mod-go-up-menu {
       z-index: 100;
     }
+    &.last {
+      margin-right: 0px;
+      float: right;
+    }
   }
   .fedex-logo {
     float: right;
@@ -85,10 +89,6 @@
     input[type="submit"] {
       height: 25px;
     }
-  }
-  .run-reports {
-    margin-right: 0px;
-    float: right;
   }
 
 

@@ -64,6 +64,8 @@ class Organization < ActiveRecord::Base
   has_many :offices, dependent: :destroy
   has_many :all_donated_projects, -> { uniq }, through: :donations_made, source: :project
   has_many :users
+  has_many :partnerships, foreign_key: :partner_id, dependent: :destroy
+  has_many :partner_projects, through: :partnerships, source: :project
 
   has_attached_file :logo, styles: {
                                       small: {

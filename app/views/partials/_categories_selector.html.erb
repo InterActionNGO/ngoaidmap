@@ -59,43 +59,50 @@
                 </div>
               </li>
 
-            <% if @site.navigate_by_country %>
-              <li class="countries">
-                <button class="father">Countries</button>
-                <div class="mod-go-up-menu menu">
-                  <ul class="mod-categories-child countries-child">
-                    <% @countries.each do |country| %>
-                      <li><%= link_to(country[1], location_path(:ids => country[0],level: 1)) %></li>
-                    <% end %>
-                  </ul>
-                  <input type="text" class="mod-categories-search" placeholder="Search Country">
-                </div>
-              </li>
-            <% else %>
-              <li class="regions">
-                <button class="father">Regions</button>
-                <div class="mod-go-up-menu menu">
-                  <ul class="mod-categories-child regions-child">
-                    <% @site.regions_select.each do |region| %>
-                      <li><%= link_to(region.name, location_path(region.uid, level: region.adm_level + 1, site: @site.id)) %></li>
-                    <% end %>
-                  </ul>
-                  <input type="text" class="mod-categories-search" placeholder="Search Region">
-                </div>
-              </li>
-            <% end %>
-
-            <li class="mod-form search">
-              <%= form_tag(search_path, :method => :get) do %>
-                <%= text_field_tag :q, params[:q], :placeholder=>'SEARCH PROJECTS'%>
-                <input type="submit" value="">
+              <% if @site.navigate_by_country %>
+                <li class="countries">
+                  <button class="father">Countries</button>
+                  <div class="mod-go-up-menu menu">
+                    <ul class="mod-categories-child countries-child">
+                      <% @countries.each do |country| %>
+                        <li><%= link_to(country[1], location_path(:ids => country[0],level: 1)) %></li>
+                      <% end %>
+                    </ul>
+                    <input type="text" class="mod-categories-search" placeholder="Search Country">
+                  </div>
+                </li>
+              <% else %>
+                <li class="regions">
+                  <button class="father">Regions</button>
+                  <div class="mod-go-up-menu menu">
+                    <ul class="mod-categories-child regions-child">
+                      <% @site.regions_select.each do |region| %>
+                        <li><%= link_to(region.name, location_path(region.uid, level: region.adm_level + 1, site: @site.id)) %></li>
+                      <% end %>
+                    </ul>
+                    <input type="text" class="mod-categories-search" placeholder="Search Region">
+                  </div>
+                </li>
               <% end %>
-            </li>
 
-            <li class="run-reports">
-              <%= link_to "Run Reports", report_index_path, :class => 'button father reports-button' %>
-            </li>
+              <li class="partners">
+                <button class="father">Partners</button>
+                <div class="mod-go-up-menu menu">
+                  <ul class="mod-categories-child partners-child">
+                    <% @partners.each do |partner| %>
+                      <li><a href="<%= partner_path(partner[0]) %>"><%= partner[1] %></a></li>
+                    <% end %>
+                  </ul>
+                  <input type="text" class="mod-categories-search" placeholder="Search Partner">
+                </div>
+              </li>
 
+              <li class="mod-form search last">
+                <%= form_tag(search_path, :method => :get) do %>
+                  <%= text_field_tag :q, params[:q], :placeholder=>'SEARCH PROJECTS'%>
+                  <input type="submit" value="">
+                <% end %>
+              </li>
             </ul>
           </nav>
         </div>
