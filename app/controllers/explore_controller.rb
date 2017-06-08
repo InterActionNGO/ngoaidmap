@@ -4,6 +4,7 @@ class ExploreController < ApplicationController
     end
 
     def stories
+        @story = Story.new
     end
 
     def data
@@ -14,6 +15,6 @@ class ExploreController < ApplicationController
         @countries = Geolocation.joins(:projects).select('distinct geolocations.country_name, max(projects.created_at) as max').group(:country_name).limit(25).order('max desc').all
     end
     
-    def add_story
-    end
+    private
+    
 end

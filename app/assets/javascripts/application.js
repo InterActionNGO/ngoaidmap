@@ -1,5 +1,7 @@
 require([
   'jquery.min',
+  'jquery_ujs',
+  'jquery.remotipart',
   'bootstrap-sprockets',
   'application/router',
   'chachiSlider'

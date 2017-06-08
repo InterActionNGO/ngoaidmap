@@ -1,0 +1,68 @@
+var message, cssClass;
+var form = $("#new_story");
+
+<% if @story.errors.size > 0 %>
+
+    // Clear any existings error messages
+    clear_errors(form);
+    
+    <% @story.errors.messages.each do |attr, errors| %>
+        
+        // Display field errors
+        var input = form.find('input, textarea').filter(function () {
+            var name = $(this).attr('name');
+            if (name) {
+                return name.match(new RegExp('story\\[' + '<%= attr %>' + '\\]'));
+            }
+        });
+        input.closest('.form-group').addClass('has-error');
+        var list = "";
+        <% errors.each do |e| %>
+            list += '<%= e %>' + '<br>';
+        <% end %>
+        input.closest('.form-group').find('span.help-block').remove();
+        input.closest('.form-group').find('.form-control').first().after('<span class="help-block">' + list + '</span>');
+        
+        
+    <% end %>
+    
+    message = 'Whoops! Error.';
+    cssClass = 'submit-error';
+    
+<% else %>
+
+    message = 'Got It. Thanks!';
+    cssClass = 'submit-success';
+    
+    // Clear out any error blocks
+    clear_errors(form);
+    
+    // Reset the form fields
+    form.find(':input')
+        .not(':button, :submit, :reset, :hidden')
+        .val('');
+    
+<% end %>
+
+var original_submit_text = $("#story_submit").attr("value");
+
+// Notify user whether submit was successful
+$("#story_submit").attr('value', message).addClass(cssClass);
+
+// Reset the submit button after a delay
+ setTimeout(function () {
+     $("#story_submit").attr('value', original_submit_text).removeClass(cssClass);
+ }, 2500);
+ 
+function clear_errors (form) {
+    form.find('.form-group').removeClass('has-error');
+    form.find('span.help-block').remove();
+}
+
+
+ 
+ 
+ 
+ 
+ 
+ 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424151703) do
+ActiveRecord::Schema.define(version: 20170605180034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,16 +179,17 @@ ActiveRecord::Schema.define(version: 20170424151703) do
     t.string   "admin2"
     t.string   "admin3"
     t.string   "admin4"
-    t.string   "provider",          default: "Geonames"
+    t.string   "provider",                      default: "Geonames"
     t.integer  "adm_level"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.string   "g0"
     t.string   "g1"
     t.string   "g2"
     t.string   "g3"
     t.string   "g4"
     t.string   "custom_geo_source"
+    t.string   "readable_path",     limit: 255
   end
 
   add_index "geolocations", ["country_code"], name: "index_geolocations_on_country_code", using: :btree
@@ -207,6 +208,15 @@ ActiveRecord::Schema.define(version: 20170424151703) do
 
   add_index "geolocations_projects", ["geolocation_id", "project_id"], name: "index_geolocations_projects_on_geolocation_id_and_project_id", using: :btree
   add_index "geolocations_projects", ["project_id"], name: "index_geolocations_projects_on_project_id", using: :btree
+
+  create_table "identifiers", force: :cascade do |t|
+    t.string   "identifier",        limit: 255, null: false
+    t.integer  "assigner_org_id",               null: false
+    t.integer  "identifiable_id"
+    t.string   "identifiable_type", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "layer_styles", force: :cascade do |t|
     t.string "title", limit: 255
@@ -627,6 +637,26 @@ ActiveRecord::Schema.define(version: 20170424151703) do
   end
 
   add_index "stats", ["site_id"], name: "index_stats_on_site_id", using: :btree
+
+  create_table "stories", force: :cascade do |t|
+    t.string   "name"
+    t.text     "story",                               null: false
+    t.string   "organization"
+    t.string   "email"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.boolean  "published",           default: false, null: false
+    t.boolean  "reviewed",            default: false, null: false
+    t.integer  "last_reviewed_by_id"
+    t.datetime "last_reviewed_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "stories", ["email"], name: "index_stories_on_email", using: :btree
+  add_index "stories", ["name"], name: "index_stories_on_name", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name",        limit: 255
