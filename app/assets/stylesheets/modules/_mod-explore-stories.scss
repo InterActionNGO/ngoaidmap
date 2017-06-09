@@ -127,7 +127,9 @@
         }
     }
     .stories-left {
-        min-height: 300px;
+        min-height: 900px;
+        margin-top: 5px;
+        padding: 50px;
     }
     .stories-right {
         min-height: 650px;
@@ -141,5 +143,15 @@
         background: lighten($color-9, 40%);
         padding: 3em 1em;
         margin-top: 2em;
+    }
+    .image-wrapper {
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 30px;
+        &:before {
+            padding-top: 100%;
+            content: '';
+            float: left;
+        }
     }
 }

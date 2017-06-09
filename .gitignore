@@ -43,6 +43,7 @@ public/.tmp/
 public/dist/
 public/app/vendor/*
 public/assets
+public/system
 
 /public/files/*
 !/public/files/.gitkeep
