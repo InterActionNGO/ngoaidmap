@@ -3,15 +3,25 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 col-xs-12 stories-left">
+            <div class="col-md-7 col-xs-12 stories-left">
                 <% Story.limit(27).each do |story| %>
-                    <div class="col-md-4">
-                    <div class="image-wrapper" style="background-image: url(<%= story.image.url %>)"></div>
+                    <div class="col-md-4 image-column no-pad">
+                        <% if story.image.file? %>
+                            <div class="image-wrapper" style="background-image: url(<%= story.image.url(:medium) %>)"></div>
+                        <% else %>
+                            <div class="image-wrapper no-image">
+                                <div class="story-text-wrapper-outer">
+                                    <div class="story-text-wrapper-inner">
+                                        <p class="story-text"><%= story.try(:story).truncate(200, :separator => /\s/) %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
                     </div>
                 <% end %>
             </div>
             
-            <div class="col-md-6 col-xs-12 stories-right">
+            <div class="col-md-5 col-xs-12 stories-right">
                 <h2>Share Your NGO Aid Map Story</h2>
                 <p class="instructions">Have a good story about how NGO Aid Map has benefited you or your organization? Or just want to share some positive vibes about the map?</p>
                 <p class="instructions">Let our community know by filling out the form below. Make it pop with a picture or your logo!</p>

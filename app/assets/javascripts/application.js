@@ -1,5 +1,5 @@
 require([
-  'jquery.min',
+  'jquery',
   'jquery_ujs',
   'jquery.remotipart',
   'bootstrap-sprockets',

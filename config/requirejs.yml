@@ -5,7 +5,7 @@ modules:
 wrap: true
 
 paths:
-  jquery: "jquery/dist/jquery"
+  jquery: "jquery/dist/jquery.min"
   underscore: "underscore/underscore"
   _string: "underscore.string/dist/underscore.string.min"
   amplify: "amplify/lib/amplify"
@@ -90,6 +90,20 @@ shim:
     deps:
       - "jquery"
     exports: "Highcharts"
+
+  jquery_ujs:
+    deps:
+      - "jquery"
+    exports: "$"
+
+  bootstrap-sprockets:
+    deps:
+      - "jquery"
+
+  jquery.remotipart:
+    deps:
+      - "jquery"
+    exports: "$"
 
 
 
