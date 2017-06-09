@@ -66,6 +66,8 @@ define([
       'sectors/:id/*params': 'sectors',
       'organizations/:id': 'organizations',
       'organizations/:id/*params': 'organizations',
+      'partners/:id': 'organizations',
+      'partners/:id/*params': 'organizations',
       'donors/:id': 'donors',
       'donors/:id/*params': 'donors',
       'location/:id': 'locations',
