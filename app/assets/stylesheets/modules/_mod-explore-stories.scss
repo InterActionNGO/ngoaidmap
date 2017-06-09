@@ -83,6 +83,12 @@ $repeat: 12;
             background-image: linear-gradient(to bottom, lighten($color-2, 10%), $color-2);
         }
     }
+    .row.story {
+        /*background-image: url('ia_photo_2009.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;*/
+    }
     .upload-wrapper {
         position: relative;
         overflow: hidden;
