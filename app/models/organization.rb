@@ -101,6 +101,7 @@ class Organization < ActiveRecord::Base
   scope :donation_projects, -> (projects){joins(donations_made: :project).where(projects: {id: projects})}
   scope :donation_countries, -> (countries){joins(donations_made: {project: :geolocations}).where(geolocations: {country_uid: countries})}
   scope :donation_organizations, -> (orgs){joins(donations_made: :project).joins('join organizations o2 on projects.primary_organization_id = o2.id').where(o2: {id: orgs})}
+  scope :donation_partners, -> (partners){joins(donations_made: :project).joins('join partnerships on partnerships.project_id = projects.id join organizations as partners on partnerships.partner_id = partners.id').where(partners: {id: partners})}
   scope :donation_donors, -> (donors){joins(:donations_made).where(donations: {donor_id: donors})}
   scope :donation_sectors, -> (sectors){joins(donations_made: :project).joins('
     INNER JOIN projects_sectors ON (projects.id = projects_sectors.project_id)
@@ -123,14 +124,15 @@ class Organization < ActiveRecord::Base
   def self.fetch_all_donors(options={})
     level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
     organizations = Organization.with_donations
-    organizations = organizations.donated_projects_site(options[:site])                   if options[:site]
-    organizations = organizations.active_donated_projects                                 if options[:status] && options[:status] == 'active'
-    organizations = organizations.donation_geolocation(options[:geolocation], level)      if options[:geolocation]
-    organizations = organizations.donation_projects(options[:projects])                   if options[:projects]
-    organizations = organizations.donation_countries(options[:countries])                 if options[:countries]
-    organizations = organizations.donation_organizations(options[:organizations])         if options[:organizations]
-    organizations = organizations.donation_sectors(options[:sectors])                     if options[:sectors]
-    organizations = organizations.donation_donors(options[:donors])                       if options[:donors]
+    organizations = organizations.donated_projects_site(options[:site])              if options[:site]
+    organizations = organizations.active_donated_projects                            if options[:status] && options[:status] == 'active'
+    organizations = organizations.donation_geolocation(options[:geolocation], level) if options[:geolocation]
+    organizations = organizations.donation_projects(options[:projects])              if options[:projects]
+    organizations = organizations.donation_countries(options[:countries])            if options[:countries]
+    organizations = organizations.donation_organizations(options[:organizations])    if options[:organizations]
+    organizations = organizations.donation_partners(options[:partners])              if options[:partners]
+    organizations = organizations.donation_sectors(options[:sectors])                if options[:sectors]
+    organizations = organizations.donation_donors(options[:donors])                  if options[:donors]
     organizations
   end
 

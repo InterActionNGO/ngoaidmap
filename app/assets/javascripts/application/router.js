@@ -139,10 +139,10 @@ define([
     partners: function(_id,_filters) {
       var params = {
         'id': _id,
-        'name': 'organizations[]',
+        'name': 'partners[]',
       };
       var filters = _.extend(this.defaultFilters,{
-        'organizations[]' : _id
+        'partners[]' : _id
       });
       filters = _.extend({},filters,this.objetize(_filters));
       this.conexion = new Conexion(params, filters);

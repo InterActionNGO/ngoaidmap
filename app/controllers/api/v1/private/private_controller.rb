@@ -160,7 +160,7 @@ module Api
         private
 
         def permitted_params
-          params.permit(:geolocation_id, :sector_id, :country_id, :organization_id, :project_id, :donor_id, :site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[], projects:[])
+          params.permit(:geolocation_id, :sector_id, :country_id, :organization_id, :project_id, :donor_id, :site, :offset, :limit, :status, :geolocation, :starting_after, :ending_before, :q, :level, organizations:[], sectors:[], donors:[], countries:[], projects:[], partners:[])
         end
 
       end

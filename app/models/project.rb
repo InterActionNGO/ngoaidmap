@@ -128,12 +128,14 @@ class Project < ActiveRecord::Base
     end
     sql_options.level = options[:level].to_i || 0
     sql_options.join_strings = ''
-    sql_options.join_strings += %Q( inner join projects_sites on projects_sites.project_id = projects.id)                           if options[:site] && options[:site].to_i != 12
-    sql_options.join_strings += %Q( left outer join projects_sectors on projects_sectors.project_id = projects.id)                  if options[:sectors]
-    sql_options.join_strings += %Q( left outer join donations on donations.project_id = projects.id)                                if options[:donors]
+    sql_options.join_strings += %Q( inner join projects_sites on projects_sites.project_id = projects.id)                                                                           if options[:site] && options[:site].to_i != 12
+    sql_options.join_strings += %Q( inner join partnerships on partnerships.project_id = projects.id inner join organizations as partners on partners.id = partnerships.partner_id) if options[:partners]
+    sql_options.join_strings += %Q( left outer join projects_sectors on projects_sectors.project_id = projects.id)                                                                  if options[:sectors]
+    sql_options.join_strings += %Q( left outer join donations on donations.project_id = projects.id)                                                                                if options[:donors]
     sql_options.conditions = ''
-    sql_options.conditions += %Q( and projects.end_date > now() AND projects.start_date <= now() )                                        unless options[:projects]
+    sql_options.conditions += %Q( and projects.end_date > now() AND projects.start_date <= now() )                                  unless options[:projects]
     sql_options.conditions += %Q( and projects.primary_organization_id in #{'(' + options[:organizations].join(',') + ')'} )        if options[:organizations]
+    sql_options.conditions += %Q( and partners.id in #{'(' + options[:partners].join(',') + ')'} )                                  if options[:partners]
     sql_options.conditions += %Q( and projects_sectors.sector_id in #{'(' + options[:sectors].join(',') + ')'} )                    if options[:sectors]
     sql_options.conditions += %Q( and donations.donor_id in #{'(' + options[:donors].join(',') + ')'} )                             if options[:donors]
     sql_options.conditions += %Q( and geolocations.g0 in #{"('" + options[:countries].join("', '") + "')"} )                        if options[:countries]

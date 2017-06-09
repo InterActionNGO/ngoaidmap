@@ -16,6 +16,7 @@ class Sector < ActiveRecord::Base
 
   scope :active, -> {joins(:projects).where("projects.end_date > ? AND projects.start_date < ?", Date.today.to_s(:db), Date.today.to_s(:db)).uniq}
   scope :organizations, -> (orgs){joins(:projects).joins('join organizations on projects.primary_organization_id = organizations.id').where(organizations: {id: orgs})}
+  scope :partners, -> (partners){joins(:projects).joins('join partnerships on projects.id = partnerships.project_id join organizations ON organizations.id = partnerships.partner_id').where(organizations: {id: partners})}
   scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){joins(projects: :donations).where(donations: {donor_id: donors})}
@@ -32,13 +33,14 @@ class Sector < ActiveRecord::Base
   def self.fetch_all(options={})
     level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
     sectors = Sector.all
-    sectors = sectors.site(options[:site])                                    if options[:site]
-    sectors = sectors.active                                                  if options[:status] && options[:status] == 'active'
-    sectors = sectors.geolocation(options[:geolocation], level)               if options[:geolocation]
-    sectors = sectors.projects(options[:projects])                            if options[:projects]
-    sectors = sectors.countries(options[:countries])                          if options[:countries]
-    sectors = sectors.organizations(options[:organizations])                  if options[:organizations]
-    sectors = sectors.donors(options[:donors])                                if options[:donors]
+    sectors = sectors.site(options[:site])                      if options[:site]
+    sectors = sectors.active                                    if options[:status] && options[:status] == 'active'
+    sectors = sectors.geolocation(options[:geolocation], level) if options[:geolocation]
+    sectors = sectors.projects(options[:projects])              if options[:projects]
+    sectors = sectors.countries(options[:countries])            if options[:countries]
+    sectors = sectors.organizations(options[:organizations])    if options[:organizations]
+    sectors = sectors.partners(options[:partners])              if options[:partners]
+    sectors = sectors.donors(options[:donors])                  if options[:donors]
     sectors.uniq
   end
 
