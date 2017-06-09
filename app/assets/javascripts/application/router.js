@@ -66,8 +66,8 @@ define([
       'sectors/:id/*params': 'sectors',
       'organizations/:id': 'organizations',
       'organizations/:id/*params': 'organizations',
-      'partners/:id': 'organizations',
-      'partners/:id/*params': 'organizations',
+      'partners/:id': 'partners',
+      'partners/:id/*params': 'partners',
       'donors/:id': 'donors',
       'donors/:id/*params': 'donors',
       'location/:id': 'locations',
@@ -129,6 +129,20 @@ define([
       var filters = _.extend(this.defaultFilters,{
         'organizations[]' : _id,
         'site' : site_obj.id,
+      });
+      filters = _.extend({},filters,this.objetize(_filters));
+      this.conexion = new Conexion(params, filters);
+      this.initViews();
+      new GalleryView();
+    },
+
+    partners: function(_id,_filters) {
+      var params = {
+        'id': _id,
+        'name': 'organizations[]',
+      };
+      var filters = _.extend(this.defaultFilters,{
+        'organizations[]' : _id
       });
       filters = _.extend({},filters,this.objetize(_filters));
       this.conexion = new Conexion(params, filters);
