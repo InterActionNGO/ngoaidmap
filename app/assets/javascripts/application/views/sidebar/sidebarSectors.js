@@ -22,7 +22,6 @@ define([
       this.params = this.conexion.getParams();
       this.filters = this.conexion.getFilters();
       this.conexion.getSectorsData(_.bind(function(response){
-        console.log(response)
         this.response = response.sectors;
         if (!!this.filters && !this.filters['sectors[]'] && !!this.response.length) {
           this.render();
