@@ -1,8 +1,8 @@
 <ul class="menu">
-  <li class="menu-item explore col-md-3 col-xs-6">
+  <li class="menu-item explore col-md-3 col-xs-6 no-pad">
     <a href="/explore" class="index-item explore <%= if controller_name == 'explore' then 'active' end %>">Explore</a>
   </li>
-  <li class="menu-item about col-md-3 col-xs-6">
+  <li class="menu-item about col-md-3 col-xs-6 no-pad">
     <a href="/p/about" class="index-item about <% if @page.present? %><%= "active" if (@page.permalink == 'about' || @page.top_parent.permalink == 'about') %><% end %>">About</a>
 
     <% cache ['main_menu_submenus_about', @site] do %>
@@ -15,7 +15,7 @@
       </ul>
     <% end %>
   </li>
-  <li class="menu-item data col-md-2 col-xs-6">
+  <li class="menu-item data col-md-2 col-xs-6 no-pad">
     <a href="/p/data" class="index-item data <% if @page.present? %><%= "active" if (@page.permalink == 'data' || @page.top_parent.permalink == 'data') %><% end %>">data</a>
 
     <% cache ['main_menu_submenus_data', @site] do %>
@@ -28,7 +28,7 @@
       </ul>
     <% end %>
   </li>
-  <li class="menu-item access col-md-4 col-xs-6">
+  <li class="menu-item access col-md-4 col-xs-6 no-pad">
     <a href="http://office.ngoaidmap.org/admin/" class="index-item access <%= if action_name == 'access' then 'active' end %>">Member Access</a>
   </li>
 </ul>

@@ -11,6 +11,7 @@
   .aid-map-logo {
     float: left;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
   .menu {
     display: block;
@@ -81,6 +82,12 @@
   }
   .access {
     @include menu-item($color-2);
+  }
+  .menu-shift {
+      @media (min-width: $screen-md-min) {
+        position: relative;
+        right: -3em;
+      }
   }
 }
 
