@@ -56,6 +56,9 @@ $repeat: 12;
     h2 {
         color: inherit;
     }
+    hr {
+        margin: 2em 0;
+    }
     p {
         line-height: 1.4;
         margin-bottom: 0.6em;
@@ -136,15 +139,23 @@ $repeat: 12;
 /*             line-height: 34px; */
         }
     }
+    .story-header-text{
+        margin: 7em 1em;
+        text-align: center;
+        line-height: 1.6;
+        h2 {
+            font-weight: normal;
+        }
+    }
     .stories-left {
         min-height: 900px;
-        margin-top: 5px;
-        padding: 50px;
+        /*margin-top: 5px;
+        padding: 50px;*/
     }
     .stories-right {
         min-height: 650px;
         margin-top: 5px;
-        padding: 50px;
+/*         padding: 50px; */
     }
     .instructions {
         font-size: 1.5em;
@@ -161,20 +172,34 @@ $repeat: 12;
         height: auto;
         max-width: 100%;
 /*         display: inline-block; */
-        float: left;
+/*         float: left; */
         background-repeat: no-repeat;
-        background-size: cover;
+/*         background-size: cover; */
         background-position: center;
-        position: relative;
+/*         position: relative; */
         box-shadow: 0 0 15px -5px;
-        &:before {
+        /*&:before {
             padding-top: 100%;
             content: '';
             float: left;
-        }
+        }*/
        /* &.no-image {
             background-color: adjust-hue(lighten($color-6,30%), 30%);
         }*/
+    }
+    .story-owner {
+        margin: 1em 0;
+    }
+    .story-owner-name {
+        font-weight: bold;
+        color: $color-5;
+    }
+    .story-owner-org {
+        color: $color-5;
+    }
+    .story-image {
+        box-shadow: 0 0 15px -5px;
+        margin: 3em 0;
     }
     @for $i from 1 through $repeat {
         .image-column:nth-child(#{$i}) {
@@ -193,11 +218,15 @@ $repeat: 12;
         height: 100%;
     }
     .story-text {
-        padding: 1.5em;
+        /*padding: 1.5em;
         color: rgba($color-0, 0.7);
         display: table-cell;
         vertical-align: middle;
         text-align: center;
-        color: #444;
+        color: #444;*/
+        font-size: 1.3em;
+        color: darken($color-5, 5%);
+        margin-bottom: 1em;
+        
     }
 }
