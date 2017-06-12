@@ -19,8 +19,11 @@
                 </li>
               <% else %>
                 <li class="menu-item sector" id="sector_option">
-                  <button class="father">SECTORS</button>
-                  <div class="mod-go-up-menu menu">
+                  <button aria-controls="sectors-menu" class="father">
+                    Sectors
+                  </button>
+
+                  <div id="sectors-menu" class="mod-go-up-menu menu">
                     <ul class="mod-categories-child sector-child submenu">
                       <% @sectors.each do |category| %>
                         <li>
@@ -36,33 +39,59 @@
               <% end %>
 
               <li class="organizations">
-                <button class="father">Organizations</button>
-                <div class="mod-go-up-menu menu">
-                  <ul class="mod-categories-child organizations-child">
-                    <% @organizations.each do |organization| %>
-                      <li><a href="<%= organization_path(organization[0]) %>"><%= organization[1] %></a></li>
-                    <% end %>
-                  </ul>
-                  <input type="text" class="mod-categories-search" placeholder="Search Organization">
-                </div>
-              </li>
+                <button aria-controls="organizations-menu" class="father">
+                  Organizations
+                </button>
 
-              <li class="donors">
-                <button class="father">Donors</button>
-                <div class="mod-go-up-menu menu">
-                  <ul class="mod-categories-child donors-child">
-                    <% @donors.each do |donor| %>
-                      <li><a href="<%= donor_path(donor[0]) %>"><%= donor[1].html_safe %></a></li>
-                    <% end %>
-                  </ul>
-                  <input type="text" class="mod-categories-search" placeholder="Search Donor">
+                <div id="organizations-menu" class="menu">
+
+                  <button aria-controls="reporting-orgs-menu">
+                    Reporting Organizations
+                  </button>
+                  <button aria-controls="partner-orgs-menu">
+                    Partners
+                  </button>
+                  <button aria-controls="donor-orgs-menu">
+                    Donors
+                  </button>
+
+                  <div id="reporting-orgs-menu" class="mod-go-up-menu">
+                    <ul class="mod-categories-child organizations-child">
+                      <% @organizations.each do |organization| %>
+                        <li><a href="<%= organization_path(organization[0]) %>"><%= organization[1] %></a></li>
+                      <% end %>
+                    </ul>
+                    <input type="text" class="mod-categories-search" placeholder="Search Organization">
+                  </div>
+
+                  <div id="partner-orgs-menu" class="mod-go-up-menu">
+                    <ul class="mod-categories-child partners-child">
+                      <% @partners.each do |partner| %>
+                        <li><a href="<%= partner_path(partner[0]) %>"><%= partner[1] %></a></li>
+                      <% end %>
+                    </ul>
+                    <input type="text" class="mod-categories-search" placeholder="Search Partner">
+                  </div>
+
+                  <div id="donor-orgs-menu" class="mod-go-up-menu">
+                    <ul class="mod-categories-child donors-child">
+                      <% @donors.each do |donor| %>
+                        <li><a href="<%= donor_path(donor[0]) %>"><%= donor[1].html_safe %></a></li>
+                      <% end %>
+                    </ul>
+                    <input type="text" class="mod-categories-search" placeholder="Search Donor">
+                  </div>
+
                 </div>
               </li>
 
               <% if @site.navigate_by_country %>
                 <li class="countries">
-                  <button class="father">Countries</button>
-                  <div class="mod-go-up-menu menu">
+                  <button class="father" aria-controls="countries-menu">
+                    Countries
+                  </button>
+
+                  <div id="countries-menu" class="mod-go-up-menu menu">
                     <ul class="mod-categories-child countries-child">
                       <% @countries.each do |country| %>
                         <li><%= link_to(country[1], location_path(:ids => country[0],level: 1)) %></li>
@@ -73,8 +102,11 @@
                 </li>
               <% else %>
                 <li class="regions">
-                  <button class="father">Regions</button>
-                  <div class="mod-go-up-menu menu">
+                  <button class="father" aria-controls="regions-menu">
+                    Regions
+                  </button>
+
+                  <div id="regions-menu" class="mod-go-up-menu menu">
                     <ul class="mod-categories-child regions-child">
                       <% @site.regions_select.each do |region| %>
                         <li><%= link_to(region.name, location_path(region.uid, level: region.adm_level + 1, site: @site.id)) %></li>
@@ -85,23 +117,15 @@
                 </li>
               <% end %>
 
-              <li class="partners">
-                <button class="father">Partners</button>
-                <div class="mod-go-up-menu menu">
-                  <ul class="mod-categories-child partners-child">
-                    <% @partners.each do |partner| %>
-                      <li><a href="<%= partner_path(partner[0]) %>"><%= partner[1] %></a></li>
-                    <% end %>
-                  </ul>
-                  <input type="text" class="mod-categories-search" placeholder="Search Partner">
-                </div>
-              </li>
-
-              <li class="mod-form search last">
+              <li class="mod-form search">
                 <%= form_tag(search_path, :method => :get) do %>
                   <%= text_field_tag :q, params[:q], :placeholder=>'SEARCH PROJECTS'%>
                   <input type="submit" value="">
                 <% end %>
+              </li>
+
+              <li class="run-reports">
+                <%= link_to "Run Reports", report_index_path, :class => 'button father reports-button' %>
               </li>
             </ul>
           </nav>
