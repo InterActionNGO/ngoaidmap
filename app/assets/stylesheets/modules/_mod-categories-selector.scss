@@ -41,8 +41,14 @@
       }
     }
 
+    .reports-button.father {
+      height: 33px;
+      padding: 7px 16px;
+    }
+
     .sub-father {
       box-sizing: border-box;
+      color: #8e5387;
       display: block;
       margin: 5px 0;
       padding: 5px 16px;
@@ -53,23 +59,45 @@
       width: 100%;
 
       &:first-child {
-        margin-top: 10px;
+        margin-top: 15px;
       }
 
+      &:hover,
       &:focus {
-        background-color: #dddddd;
+        background-color: #eeeeee;
       }
 
       &:after {
-        content: ">";
+        content: " ›";
         display: inline;
+        font-size: 1.5em;
+        line-height: 1;
+        position: relative;
+        top: -2px;
+        vertical-align: middle;
       }
     }
 
-    .reports-button.father {
-      height: 33px;
-      padding: 7px 16px;
+    .back-button {
+      background-color: #eeeeee;
+      display: block;
+      padding: 10px 20px 5px;
+      position: relative;
+      text-align: left;
+      width: 100%;
+      z-index: 100;
+
+      &:before {
+        content: "‹ ";
+        display: inline;
+        font-size: 1.5em;
+        line-height: 1;
+        position: relative;
+        top: -1px;
+        vertical-align: middle;
+      }
     }
+
 
     &.search { padding: 0;}
     .no-touch &:hover, &.is-touched {
@@ -103,6 +131,10 @@
     .menu .mod-go-up-menu {
       top: 0;
       z-index: 101;
+
+      &:before {
+        display: none;
+      }
     }
   }
   .fedex-logo {

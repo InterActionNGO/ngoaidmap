@@ -46,11 +46,12 @@
   @include categorie-selector-child($color-2);
   li:hover { background:none;}
 }
-.organizations-child {
-  @include categorie-selector-child($color-6);
-}
+.organizations-child,
+.partners-child,
 .donors-child {
-  @include categorie-selector-child($color-7);
+  @include categorie-selector-child($color-6);
+  padding-top: 40px;
+  height: 265px;
 }
 .countries-child {
    @include categorie-selector-child($color-8);

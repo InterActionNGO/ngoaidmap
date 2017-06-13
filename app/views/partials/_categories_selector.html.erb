@@ -56,6 +56,9 @@
                   </button>
 
                   <div id="reporting-orgs-menu" class="mod-go-up-menu">
+                    <button aria-controls="reporting-orgs-menu" class="back-button">
+                      Back
+                    </button>
                     <ul class="mod-categories-child organizations-child">
                       <% @organizations.each do |organization| %>
                         <li><a href="<%= organization_path(organization[0]) %>"><%= organization[1] %></a></li>
@@ -65,6 +68,9 @@
                   </div>
 
                   <div id="partner-orgs-menu" class="mod-go-up-menu">
+                    <button aria-controls="partner-orgs-menu" class="back-button">
+                      Back
+                    </button>
                     <ul class="mod-categories-child partners-child">
                       <% @partners.each do |partner| %>
                         <li><a href="<%= partner_path(partner[0]) %>"><%= partner[1] %></a></li>
@@ -74,6 +80,9 @@
                   </div>
 
                   <div id="donor-orgs-menu" class="mod-go-up-menu">
+                    <button aria-controls="donor-orgs-menu" class="back-button">
+                      Back
+                    </button>
                     <ul class="mod-categories-child donors-child">
                       <% @donors.each do |donor| %>
                         <li><a href="<%= donor_path(donor[0]) %>"><%= donor[1].html_safe %></a></li>
@@ -179,14 +188,24 @@
 
     var subButtons = document.querySelectorAll('button.sub-father');
     for (var i=0, len=subButtons.length; i<len; i++) {
-      var button   = subButtons[i];
+      var button = subButtons[i];
 
       button.addEventListener('click', function(e) {
         var target = e.currentTarget;
         var menuId = target.getAttribute('aria-controls');
         var menu   = document.getElementById(menuId);
-
         menu.classList.add('-show');
+      });
+    }
+
+    var backButtons = document.querySelectorAll('button.back-button');
+    for (var i=0, len=backButtons.length; i<len; i++) {
+      var button = backButtons[i];
+
+      button.addEventListener('click', function(e) {
+        var target = e.currentTarget;
+        var menu   = target.parentElement;
+        menu.classList.remove('-show');
       });
     }
   </script>
