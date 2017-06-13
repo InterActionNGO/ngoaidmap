@@ -27,12 +27,12 @@ var form = $("#new_story");
     <% end %>
     
     message = 'Whoops! Error.';
-    cssClass = 'submit-error';
+    cssClass = 'bg-danger';
     
 <% else %>
 
     message = 'Got It. Thanks!';
-    cssClass = 'submit-success';
+    cssClass = 'bg-success';
     
     // Clear out any error blocks
     clear_errors(form);
@@ -47,11 +47,11 @@ var form = $("#new_story");
 var original_submit_text = $("#story_submit").attr("value");
 
 // Notify user whether submit was successful
-$("#story_submit").attr('value', message).addClass(cssClass);
+$("#form_messages").html(message).addClass(cssClass).removeClass('hidden');
 
 // Reset the submit button after a delay
  setTimeout(function () {
-     $("#story_submit").attr('value', original_submit_text).removeClass(cssClass);
+     $("#form_messages").empty().removeClass(cssClass).addClass('hidden');
  }, 2500);
  
 function clear_errors (form) {
