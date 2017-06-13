@@ -41,6 +41,31 @@
       }
     }
 
+    .sub-father {
+      box-sizing: border-box;
+      display: block;
+      margin: 5px 0;
+      padding: 5px 16px;
+      font-weight: lighter;
+      font-size: inherit;
+      text-align: left;
+      text-transform: uppercase;
+      width: 100%;
+
+      &:first-child {
+        margin-top: 10px;
+      }
+
+      &:focus {
+        background-color: #dddddd;
+      }
+
+      &:after {
+        content: ">";
+        display: inline;
+      }
+    }
+
     .reports-button.father {
       height: 33px;
       padding: 7px 16px;
@@ -50,10 +75,11 @@
     .no-touch &:hover, &.is-touched {
       color: $color-0;
     }
-    .no-touch &:hover .mod-go-up-menu,
-    &.is-touched .mod-go-up-menu,
-    .no-touch &:hover .mod-drop-down-menu,
-    &.is-touched .mod-drop-down-menu,
+    .no-touch &:hover .menu,
+    &.is-touched .menu,
+    .no-touch &:hover .menu,
+    &.is-touched .menu,
+    .menu.-show,
     .mod-go-up-menu.-show {
         display: block;
     }
@@ -71,6 +97,12 @@
     &.last {
       margin-right: 0px;
       float: right;
+    }
+
+    // if inside menu and not the menu itself, be bottom-aligned and on top
+    .menu .mod-go-up-menu {
+      top: 0;
+      z-index: 101;
     }
   }
   .fedex-logo {
