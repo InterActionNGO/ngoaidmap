@@ -46,6 +46,10 @@
       padding: 7px 16px;
     }
 
+    &:hover .father {
+      color: white;
+    }
+
     .sub-father {
       box-sizing: border-box;
       color: #8e5387;
@@ -152,7 +156,7 @@
   }
   .search {
     height: 25px;
-    width: 170px;
+    width: 195px;
     margin-top: 4px;
     border-bottom: 2px solid $color-4;
     input#q {
@@ -161,6 +165,12 @@
     }
     input[type="submit"] {
       height: 25px;
+    }
+
+    @media screen and (min-width: 1130px) {
+      margin-left: 20px;
+      margin-right: 40px;
+      width: 265px;
     }
   }
 
