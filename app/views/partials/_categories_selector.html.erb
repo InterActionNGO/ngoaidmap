@@ -45,15 +45,17 @@
 
                 <div id="organizations-menu" class="menu mod-go-up-menu">
 
-                  <button aria-controls="reporting-orgs-menu" class="sub-father">
-                    Reporting Organizations
-                  </button>
-                  <button aria-controls="partner-orgs-menu" class="sub-father">
-                    Partners
-                  </button>
-                  <button aria-controls="donor-orgs-menu" class="sub-father">
-                    Donors
-                  </button>
+                  <div class="sub-menu">
+                    <button aria-controls="reporting-orgs-menu" class="sub-father">
+                      Reporting Organizations
+                    </button>
+                    <button aria-controls="partner-orgs-menu" class="sub-father">
+                      Partners
+                    </button>
+                    <button aria-controls="donor-orgs-menu" class="sub-father">
+                      Donors
+                    </button>
+                  </div>
 
                   <div id="reporting-orgs-menu" class="mod-go-up-menu">
                     <button aria-controls="reporting-orgs-menu" class="back-button">
@@ -187,6 +189,7 @@
     }
 
     var subButtons = document.querySelectorAll('button.sub-father');
+    var subMenu    = document.querySelectorAll('.sub-menu');
     for (var i=0, len=subButtons.length; i<len; i++) {
       var button = subButtons[i];
 
@@ -195,6 +198,7 @@
         var menuId = target.getAttribute('aria-controls');
         var menu   = document.getElementById(menuId);
         menu.classList.add('-show');
+        subMenu.classList.add('-hide');
       });
     }
 
@@ -206,6 +210,7 @@
         var target = e.currentTarget;
         var menu   = target.parentElement;
         menu.classList.remove('-show');
+        subMenu.classList.remove('-hide');
       });
     }
   </script>

@@ -87,6 +87,11 @@
       width: 100%;
       z-index: 100;
 
+      &:hover,
+      &:focus {
+        background-color: #dddddd;
+      }
+
       &:before {
         content: "‹ ";
         display: inline;
@@ -96,6 +101,10 @@
         top: -1px;
         vertical-align: middle;
       }
+    }
+
+    .sub-menu.-hide {
+      display: none;
     }
 
 
