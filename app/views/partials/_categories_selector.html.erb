@@ -49,8 +49,11 @@
                     <button aria-controls="reporting-orgs-menu" class="sub-father">
                       Reporting Organizations
                     </button>
-                    <button aria-controls="partner-orgs-menu" class="sub-father">
-                      Partners
+                    <button aria-controls="local-partner-orgs-menu" class="sub-father">
+                      Local Partners
+                    </button>
+                    <button aria-controls="international-partner-orgs-menu" class="sub-father">
+                      International Partners
                     </button>
                     <button aria-controls="donor-orgs-menu" class="sub-father">
                       Donors
@@ -69,12 +72,24 @@
                     <input type="text" class="mod-categories-search" placeholder="Search Organization">
                   </div>
 
-                  <div id="partner-orgs-menu" class="mod-go-up-menu">
-                    <button aria-controls="partner-orgs-menu" class="back-button">
+                  <div id="local-partner-orgs-menu" class="mod-go-up-menu">
+                    <button aria-controls="local-partner-orgs-menu" class="back-button">
                       Back
                     </button>
                     <ul class="mod-categories-child partners-child">
-                      <% @partners.each do |partner| %>
+                      <% @local_partners.each do |partner| %>
+                        <li><a href="<%= partner_path(partner[0]) %>"><%= partner[1] %></a></li>
+                      <% end %>
+                    </ul>
+                    <input type="text" class="mod-categories-search" placeholder="Search Partner">
+                  </div>
+
+                  <div id="international-partner-orgs-menu" class="mod-go-up-menu">
+                    <button aria-controls="international-partner-orgs-menu" class="back-button">
+                      Back
+                    </button>
+                    <ul class="mod-categories-child partners-child">
+                      <% @international_partners.each do |partner| %>
                         <li><a href="<%= partner_path(partner[0]) %>"><%= partner[1] %></a></li>
                       <% end %>
                     </ul>
