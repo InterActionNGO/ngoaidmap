@@ -9,7 +9,7 @@
         <div class="row">
             <div class="stories-left">
                 <div class="col-md-6 col-md-offset-3">
-                    <% Story.limit(6).each do |story| %>
+                    <% Story.where_published(true).limit(20).each do |story| %>
                         <p class="story-text">
                             <%=story.try(:story) %>
                         </p>

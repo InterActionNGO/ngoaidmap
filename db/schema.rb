@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605180034) do
+ActiveRecord::Schema.define(version: 20170505203012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -637,26 +637,6 @@ ActiveRecord::Schema.define(version: 20170605180034) do
   end
 
   add_index "stats", ["site_id"], name: "index_stats_on_site_id", using: :btree
-
-  create_table "stories", force: :cascade do |t|
-    t.string   "name"
-    t.text     "story",                               null: false
-    t.string   "organization"
-    t.string   "email"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.boolean  "published",           default: false, null: false
-    t.boolean  "reviewed",            default: false, null: false
-    t.integer  "last_reviewed_by_id"
-    t.datetime "last_reviewed_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
-
-  add_index "stories", ["email"], name: "index_stories_on_email", using: :btree
-  add_index "stories", ["name"], name: "index_stories_on_name", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name",        limit: 255
