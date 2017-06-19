@@ -52,7 +52,8 @@
         color: inherit;
         transition: border 0.25s;
         width: 100%;
-        &::placeholder {
+        &::placeholder,
+        &.chzn-select {
                 color: $color-5;
         }
         &:focus {
@@ -66,6 +67,12 @@
         &:not(&.has-error) {
             border-color: transparent;
         }
+        option {
+            text-transform: capitalize;
+            font: inherit;
+            padding: 0.5em;
+            font-weight: bold;
+        }
     }
     /* End overrides */
     
@@ -73,7 +80,8 @@
         color: inherit;
     }
     hr {
-        margin: 2em 0;
+        margin: 3em 0;
+        border-top_width: 3px;
     }
     p {
         line-height: 1.4;
@@ -94,7 +102,6 @@
     .upload-wrapper {
         position: relative;
         overflow: hidden;
-        margin-bottom: 1.5em;
         text-align: left;
         .upload-btn {
             position: absolute;
@@ -141,9 +148,11 @@
         h2 {
             font-weight: normal;
         }
+        a.btn {
+            margin: 3em 0 0 0;
+        }
     }
     .stories-left {
-        min-height: 900px;
     }
     .stories-right {
         min-height: 650px;
@@ -151,6 +160,7 @@
     }
     .instructions {
         font-size: 1.5em;
+        text-align: center;
     }
     .story-form {
         background: lighten($color-9, 40%);
@@ -168,13 +178,32 @@
         color: $color-5;
     }
     .story-image {
-        box-shadow: 0 0 15px -5px;
+/*         box-shadow: 0 0 15px -5px; */
+        max-height: 400px;
         margin: 3em 0;
+    }
+    .story-content-wrapper {
+        margin-left: 180px;
     }
     .story-text {
         font-size: 1.3em;
-        color: darken($color-5, 5%);
+        color: $color-3; //darken($color-5, 5%);
         margin-bottom: 1em;
-        
+    }
+    .avatar-wrapper {
+        float: left;
+    }
+    .avatar {
+        margin-right: 30px;
+        height: 150px;
+        border-radius: 6px;
+    }
+    .avatar-label {
+        text-align: center;
+        margin-right: 2em;
+        margin-top: 1em;
+        color: $color-9; //#ccc;
+        font-weight: bold;
+        text-transform: uppercase;
     }
 }

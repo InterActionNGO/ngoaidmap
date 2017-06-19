@@ -10,7 +10,7 @@ class StoriesController < ApplicationController
     
     private
     def story_params
-        params.require(:story).permit(:story,:image,:email,:name,:organization)
+        params.require(:story).permit(:story,:image,:email,:name,:organization,:user_profession)
     end
     
 end
