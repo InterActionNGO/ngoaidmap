@@ -5,6 +5,7 @@ class ExploreController < ApplicationController
 
     def stories
         @story = Story.new
+        @stories = Story.where_published(true).page(permit_params[:page]).per(20)
     end
 
     def data
@@ -16,5 +17,7 @@ class ExploreController < ApplicationController
     end
     
     private
-    
+    def permit_params
+	params.permit(:page)
+    end
 end
