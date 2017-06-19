@@ -49,11 +49,14 @@
                     <button aria-controls="reporting-orgs-menu" class="sub-father">
                       Reporting Organizations
                     </button>
-                    <button aria-controls="local-partner-orgs-menu" class="sub-father">
-                      Local Partners
+                    <button aria-controls="all-partners-orgs-menu" class="sub-father">
+                      Partners - All
                     </button>
-                    <button aria-controls="international-partner-orgs-menu" class="sub-father">
-                      International Partners
+                    <button aria-controls="local-partners-orgs-menu" class="sub-father">
+                      Partners - Local
+                    </button>
+                    <button aria-controls="international-partners-orgs-menu" class="sub-father">
+                      Partners - International
                     </button>
                     <button aria-controls="donor-orgs-menu" class="sub-father">
                       Donors
@@ -72,8 +75,20 @@
                     <input type="text" class="mod-categories-search" placeholder="Search Organization">
                   </div>
 
-                  <div id="local-partner-orgs-menu" class="mod-go-up-menu">
-                    <button aria-controls="local-partner-orgs-menu" class="back-button">
+                  <div id="all-partners-orgs-menu" class="mod-go-up-menu">
+                    <button aria-controls="all-partners-orgs-menu" class="back-button">
+                      Back
+                    </button>
+                    <ul class="mod-categories-child partners-child">
+                      <% @partners.each do |partner| %>
+                        <li><a href="<%= partner_path(partner[0]) %>"><%= partner[1] %></a></li>
+                      <% end %>
+                    </ul>
+                    <input type="text" class="mod-categories-search" placeholder="Search Partner">
+                  </div>
+
+                  <div id="local-partners-orgs-menu" class="mod-go-up-menu">
+                    <button aria-controls="local-partners-orgs-menu" class="back-button">
                       Back
                     </button>
                     <ul class="mod-categories-child partners-child">
@@ -84,8 +99,8 @@
                     <input type="text" class="mod-categories-search" placeholder="Search Partner">
                   </div>
 
-                  <div id="international-partner-orgs-menu" class="mod-go-up-menu">
-                    <button aria-controls="international-partner-orgs-menu" class="back-button">
+                  <div id="international-partners-orgs-menu" class="mod-go-up-menu">
+                    <button aria-controls="international-partners-orgs-menu" class="back-button">
                       Back
                     </button>
                     <ul class="mod-categories-child partners-child">
