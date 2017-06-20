@@ -1,7 +1,7 @@
 module StoriesHelper
     
     def user_profession(story)
-       if story.user_profession.nil?
+       if [nil,'other'].include?(story.user_profession)
            ""
        elsif story.user_profession.eql?("donor")
            "Donor / Investor"

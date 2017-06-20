@@ -24,6 +24,7 @@ paths:
   liveupdate: "liveupdate/jquery.liveupdate"
   jqueryui: "jquery-ui/js/jquery-ui-1.10.4.custom"
   chachiSlider: "chachi-slider/jquery.chachi-slider"
+  bootstrap: "bootstrap.min"
 
 
 shim:
@@ -96,7 +97,7 @@ shim:
       - "jquery"
     exports: "$"
 
-  bootstrap-sprockets:
+  bootstrap:
     deps:
       - "jquery"
 
