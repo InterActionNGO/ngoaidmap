@@ -9,7 +9,8 @@
         <div class="row">
             <div class="col-xs-12 stories-left">
                 <div class="col-md-6 col-md-offset-3">
-                    <% @stories.each do |story| %>
+                
+                    <% @stories.order('created_at desc').each do |story| %>
                         <div class="row">
                             <div class="col-sm-3 avatar-wrapper">
                                 <%= image_tag 'avatar.svg', :class => 'avatar' %>
@@ -40,6 +41,7 @@
                         </div>
                         <hr>
                     <% end %>
+                    
                 </div>
             </div>
             
