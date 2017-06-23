@@ -1,9 +1,9 @@
 {
   "name": "iom",
   "version": "2.0.0",
-  "homepage": "https://github.com/simbiotica/iom",
+  "homepage": "https://github.com/interactionngo/ngoaidmap",
   "authors": [
-    "Simbiotica <http://simbiotica.es>"
+    "InterAction"
   ],
   "description": "A webapp",
   "license": "ISC",
@@ -31,6 +31,7 @@
     "moment-range": "1.0.2",
     "leaflet.markercluster": "0.4.0",
     "Class.js": "1.0.0",
-    "amplify": "1.1.2"
+    "amplify": "1.1.2",
+    "bootstrap-sass": "3.3.7"
   }
 }

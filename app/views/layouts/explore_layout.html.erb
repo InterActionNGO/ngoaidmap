@@ -43,7 +43,7 @@
 
     <%= render 'partials/footer_bootstrap' %>
 
-    <%= requirejs_include_tag "application" %>
+    <%= javascript_include_tag "explore" %>
 
     <% if Rails.env.production? %>
       <script type="text/javascript">

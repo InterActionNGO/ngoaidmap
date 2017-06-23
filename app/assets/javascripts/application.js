@@ -1,9 +1,6 @@
 require([
   'jquery',
-//   'bootstrap',
   'application/router',
-  'jquery_ujs',
-  'jquery.remotipart',
   'chachiSlider'
 ], function($, Router) {
   // Extensions

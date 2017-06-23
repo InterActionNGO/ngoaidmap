@@ -2,7 +2,6 @@
 //= require chachi-slider/chachi-slider
 //= require jquery-ui/css/no-theme/jquery-ui-1.10.4.custom
 //= require select2/select2
-@import "bootstrap-sprockets";
 @import "bootstrap";
 
 @import "compass/css3",
@@ -14,52 +13,17 @@ $icons-spacing: 10px;
 
 @import "settings",
         "mixins",
-        /*"base",*/
         "base-bootstrap",
-        /*"grid",*/
         "layout",
         "states",
-/*         "modules/mod-info", */
         "modules/mod-info-bootstrap",
-        "modules/mod-form",
-        "modules/mod-sites-info",
         "modules/mod-hero",
-        "modules/mod-categories-selector",
-        "modules/mod-categories-child",
-        "modules/mod-downloads",
-/*         "modules/mod-header", */
 	"modules/mod-header-bootstrap",
-/*         "modules/mod-featured-projects", */
         "modules/mod-featured-projects-bootstrap",
-        /*"modules/mod-footer",*/
         "modules/mod-footer-bootstrap",
-        "modules/mod-index-item",
-        "modules/mod-map",
         "modules/mod-pagination",
-        "modules/mod-project-locations",
-        "modules/mod-project-sectors",
-        "modules/mod-content-article",
-        "modules/mod-contact-info",
-/*         "modules/mod-follow-us", */
         "modules/mod-follow-us-bootstrap",
-        "modules/mod-map-controls",
-        "modules/mod-more-projects",
         "modules/mod-feedback",
-        "modules/mod-filtered-categories",
-        "modules/mod-search",
-        "modules/mod-drop-down-menu",
-        "modules/mod-go-up-menu",
-        "modules/mod-affiliated-organizations",
-        "modules/mod-reporting-organisation",
-        "modules/mod-donors",
-        "modules/mod-gallery",
-        "modules/mod-project-list-header",
-        "modules/mod-project-timeline",
-        "modules/mod-project-reach",
-        "modules/mod-people-reached",
-        "modules/mod-highlighted-results",
-        "modules/mod-overlay",
-        "modules/mod-organization-details",
 	"modules/mod-explore",
         "modules/mod-explore-stories";
 
