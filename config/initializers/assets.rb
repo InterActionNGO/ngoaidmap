@@ -6,7 +6,6 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.paths << File.join(Rails.root, 'app', 'assets', 'fonts')
 Rails.application.config.assets.paths << File.join(Rails.root, 'lib', 'assets')
 Rails.application.config.assets.paths << File.join(Rails.root, 'public', 'app', 'vendor')
-Rails.application.config.assets.paths << File.join(Rails.root, 'vendor')
 
 # Require JS configuration
 Rails.application.config.requirejs.logical_path_patterns += [/\.handlebars$/]
@@ -46,4 +45,4 @@ Rails.application.config.assets.precompile += %w( backoffice/layout.css )
 Rails.application.config.assets.precompile += %w( backoffice/smbtc-layout.css )
 
 Rails.application.config.assets.precompile += %w( application.js )
-Rails.application.config.assets.precompile += %w( report.js )
+Rails.application.config.assets.precompile += %w( report.js explore.js)
