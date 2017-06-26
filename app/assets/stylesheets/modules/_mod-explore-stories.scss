@@ -196,7 +196,9 @@
         margin-bottom: 1.5em;
     }
     .avatar {
-        height: 150px;
+        @media (min-width: $screen-sm-min) {
+            width: 100%;
+        }
     }
     .avatar-label {
         text-align: center;

@@ -16,6 +16,11 @@
    inkscape:version="0.91 r13725"
    viewBox="0 0 64 64"
    sodipodi:docname="avatar.svg">
+    <defs>
+        <clipPath id="avatar-clipped">
+            <rect width="64" height="64" x="0" y="0"></rect>
+        </clipPath>
+    </defs>
   <defs
      id="defs3362" />
   <sodipodi:namedview
@@ -59,13 +64,14 @@
        id="path3368"
        cx="32"
        cy="23.772726"
-       r="12.375546" />
+       r="12.375546"/>
     <ellipse
        style="fill:#989898;fill-rule:evenodd;stroke:#989898;stroke-width:1.27700531px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
        id="path3373"
        cx="31.999998"
        cy="68.590912"
        rx="23.361496"
-       ry="23.361498" />
+       ry="23.361498"
+        clip-path="url(#avatar-clipped)" />
   </g>
 </svg>
