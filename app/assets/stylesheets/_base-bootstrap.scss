@@ -3,6 +3,7 @@ body {
   color: $color-3;
   text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+  font-size: 16px;
   &.embed-page {
     min-width: 0;
   }
