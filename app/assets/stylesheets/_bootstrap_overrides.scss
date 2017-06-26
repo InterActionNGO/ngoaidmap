@@ -1,0 +1,30 @@
+/***************************************/
+/*   Bootstrap variable customizations */
+/***************************************/
+$brand-primary: $color-1;
+$brand-success: adjust-hue($color-8, 15%);
+$brand-info: $color-9;
+$brand-warning: lighten($color-7, 5%);
+$brand-danger: adjust-hue(darken(red, 20%), 15%);
+
+$link-color: $color-2;
+$font-family-sans-serif: $font-family;
+$btn-default-color: $color-2;
+$btn-default-border: $color-2;
+
+$state-success-text: rgba($color-0, 0.7);
+$state-success-bg: $brand-success;
+$state-info-text: rgba($color-0, 0.7);
+$state-info-bg: $brand-info;
+$state-warning-text: rgba($color-0, 0.7);
+$state-warning-bg: $brand-warning;
+$state-danger-text: rgba($color-0, 0.7);
+$state-danger-bg: $brand-danger;
+
+$screen-md: 1156px;
+$screen-md-min: $screen-md;
+$screen-sm-max: ($screen-md - 1);
+
+/***************************************/
+/*    End bootstrap customizations     */
+/***************************************/

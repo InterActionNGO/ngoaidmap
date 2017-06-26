@@ -2,7 +2,6 @@
 //= require chachi-slider/chachi-slider
 //= require jquery-ui/css/no-theme/jquery-ui-1.10.4.custom
 //= require select2/select2
-@import "bootstrap-sass/assets/stylesheets/_bootstrap";
 
 @import "compass/css3",
         "compass/utilities/sprites",
@@ -13,6 +12,8 @@ $icons-spacing: 10px;
 
 @import "settings",
         "mixins",
+	"bootstrap_overrides",
+	"bootstrap-sass/assets/stylesheets/_bootstrap",
         "base-bootstrap",
         "layout",
         "states",
