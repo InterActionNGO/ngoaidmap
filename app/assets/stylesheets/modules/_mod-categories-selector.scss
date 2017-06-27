@@ -124,6 +124,12 @@
     .mod-go-up-menu.-show {
         display: block;
     }
+    
+    &.run-reports {
+      margin-right: 0;
+      float: right;
+    }
+    
     li {
       padding: 0;
       cursor: default;
