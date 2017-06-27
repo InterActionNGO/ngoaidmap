@@ -1,0 +1,109 @@
+<div class="mod-organization-details is-clearfix">
+    <% if url_has_compound_filter %>
+        <h2><%= organization.name %></h2>
+    <% end %>
+    <div class="<%= 'details-wrapper' if url_has_compound_filter %>">
+
+        <%= content_tag(:p, sanitize(organization.description, {tags: %w(strong em a li), attributes: %w(href)}), :class => 'preserve-lines') if organization.description.present? %>
+
+        <% if organization.acronym? %>
+            <p>Acronym: <%= organization.acronym %></p>
+        <% end %>
+
+        <% if organization.logo? %>
+            <div class="logo">
+            <%= image_tag organization.logo.url(:medium), :alt=>"" %>
+            </div>
+        <% end %>
+
+        <table class="organization-details">
+        <% if organization.budget? %>
+            <tr>
+                <th>
+                Annual Budget
+                </th>
+                <td>
+                <%- if organization.budget_usd? -%>
+                    <%= number_to_currency(organization.budget_usd, precision: 0) %>
+                    <%- if organization.budget_currency? && organization.budget_currency != 'USD'  -%>
+                        (Converted from <%= organization.budget_currency %>)
+                    <%- end -%>
+                <%- else -%>
+                    <% if organization.budget_currency? %>
+                        <%= number_with_precision(organization.budget, :precision => 0, :delimiter => ',') %>
+                        (<%= organization.budget_currency %>)
+                    <%- else -%>
+                        <%= number_to_currency(organization.budget, precision: 0) %>
+                    <% end %>
+                <% end %>
+                </td>
+            </tr>
+        <% end %>
+
+        <% if organization.budget_fiscal_year? %>
+            <tr>
+                <th>
+                Fiscal Year (end date)
+                </th>
+                <td>
+                <%= organization.budget_fiscal_year.strftime("%B %d, %Y") %>
+                </td>
+            </tr>
+        <% end %>
+
+        <% if organization.website? %>
+            <tr>
+                <th>
+                Website
+                </th>
+                <td>
+                <a href="<%= organization.website %>"><%= URI.unescape(organization.website) %></a>
+                </td>
+            </tr>
+        <% end %>
+
+        <% if organization.twitter? %>
+            <tr>
+                <th>
+                Twitter
+                </th>
+                <td>
+                <a href="<%= organization.twitter %>"><%= URI.unescape(organization.twitter) %></a>
+                </td>
+            </tr>
+        <% end %>
+
+        <% if organization.facebook? %>
+            <tr>
+                <th>
+                Facebook
+                </th>
+                <td>
+                <a href="<%= organization.facebook %>"><%= URI.unescape(organization.facebook) %></a>
+                </td>
+            </tr>
+        <% end %>
+
+        <% if organization.hq_address? %>
+            <tr>
+                <th>
+                Primary Address
+                </th>
+                <td>
+                <p><%= organization.hq_address %></p>
+                <% if organization.hq_address2? %>
+                    <p><%= organization.hq_address2 %></p>
+                <% end %>
+                <% if organization.contact_city? && organization.contact_state? %>
+                    <p><%= organization.contact_city %>, <%= organization.contact_state %> <%= organization.contact_zip %></p>
+                <% end %>
+                <% if organization.contact_country? %>
+                    <p><%= organization.contact_country %></p>
+                <% end %>
+                </td>
+            </tr>
+        <% end %>
+
+        </table>
+    </div>
+</div>
