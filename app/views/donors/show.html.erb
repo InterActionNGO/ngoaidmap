@@ -6,11 +6,14 @@
     <section class="layout-content grid-12 offset-1">
 
       <%= render 'partials/project_list_header', type: 'Donor', title: @donor.name, css_class: 'donor' %>
-        <!--<h1 id="title-donor" class="section-title" data-id="<%= @donor.id %>" data-name="<%= @donor.name.html_safe %>"><%= @donor.name.html_safe %></h1>-->
 
       <p class="disclaimer">The projects presented here are voluntarily provided by InterAction members and are not intended to be a complete representation of this donor’s activities.</p>
+      
+      <%= render "partials/organization_details", organization: @donor %>
 
       <%= render "partials/index_projects" %>
+      
+      <%= render "partials/organization_media_resources", organization: @donor %>
 
     </section>
 
@@ -28,7 +31,18 @@
       <!-- Projects reporting organizations -->
       <div id="sidebar-organizations" class="mod-info"></div>
       
-      <script> var donor = <%= raw(@donor.to_json) %>;</script>
+      <% unless url_has_compound_filter %>
+        <!-- Organization Sidebar -->
+        <div id="sidebar-organization-resources" class="mod-info"></div>
+        <div id="sidebar-organization-infocontact" class="mod-info"></div>
+        <div id="sidebar-organization-mediacontact" class="mod-info"></div>
+        <div id="sidebar-organization-followus" class="mod-info"></div>
+      <% end %>
+
+        <script>
+            var organization = <%= raw(@donor.to_json) %>;
+            var organization_resources = <%= raw(@donor.resources.to_json) %>;
+        </script>
     </aside>
   </div>
 </div>
