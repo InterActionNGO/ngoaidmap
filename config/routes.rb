@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         get 'organizations',                  to: 'private#organizations'
         get 'organizations-count',            to: 'private#organizations_count'
         get 'donors',                         to: 'private#donors'
+     	get 'partners',			      to: 'private#partners'
         get 'donors-count',                   to: 'private#donors_count'
         get 'sectors',                        to: 'private#sectors'
         get 'sectors-count',                  to: 'private#sectors_count'

@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 define([
   'backbone',
@@ -15,19 +15,31 @@ define([
     template: Handlebars.compile(tpl),
 
     initialize: function(options) {
-      this.project  = options.project;
-      this.partners = options.partners;
       if (!this.$el.length) {
         return
       }
-      (this.project && (this.partners.local.length > 0 || this.partners.international.length > 0)) ? this.render() : this.$el.remove();
+      this.project  = options.project;
+      this.conexion = options.conexion;
+      this.conexion.getPartnersData(_.bind(function(response){
+        this.partners = response.partners;
+        (!!this.partners.length) ? this.render() : this.$el.remove();
+      },this))
     },
 
     parseData: function(){
-      return {partners: this.partners};
+      return {
+          partners: {
+              local: this.partners.filter(function (p) {
+                  return p.international != true
+              }),
+              international: this.partners.filter(function (p) {
+                  return p.international == true
+              })
+          }
+      }
     },
 
-    render: function(){
+    render: function(){ 
       this.$el.html(this.template(this.parseData()));
     }
 
