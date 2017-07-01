@@ -1,13 +1,13 @@
 <div class="mod-hero">
-	<h1>Explore</h1>
+	<h1><%= explore_page_title %></h1>
 	<nav class="section-nav">
 	    <ul>
 		<a href="/explore/stories">
                     <li class="menu-item <%= "active" if action_name.eql?('stories') %>">Stories</li>
                 </a>
-               <!-- <a href="/explore/data">
+                <a href="/explore/data">
                     <li class="menu-item <%= "active" if action_name.eql?('data') %>">Data</li>
-                </a>-->
+                </a>
 	    </ul>
 	</nav>
 </div>
