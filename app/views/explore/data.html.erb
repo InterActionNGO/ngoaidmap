@@ -1,15 +1,78 @@
 <div class="mod-explore activity">
     <%= render 'partials/explore/header', locals: { :page => 'data' } %>
         
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 text-center coming-soon">
-                <h2>Coming Soon!</h2>
-                <p>This section is under construction.</p>
-                <p>Check back again soon for updates.</p>
+        <!-- ORGANIZATIONS -->
+        <section class="organizations">
+            <h2>Organizations</h2>
+            <div id="OrgCarousel" class="explore-section carousel slide" data-interval="false">
+            
+                <div class="carousel-inner">
+                    <% i = 0 %>
+                    <% while !@organizations.slice(i,3).blank? do %>
+                        <div class='item<%= " active" if i == 0%>'>
+                            <% count = 1 %>
+                            <% @organizations.slice(i,3).each do |o| %>
+                                <%= render 'partials/explore/explore_carousel_activity_org', vars: { :item => o, :count => count } %>
+                                <% count += 1 %>
+                            <% end %>
+                        </div>
+                        <% i += 3 %>
+                    <% end %>
+                    
+                </div>
+                
+                <%= render 'partials/carousel_controls', target_id: "OrgCarousel" %>
             </div>
-        </div>
-    </div>
+        </section>
+        
+        <!-- SECTORS -->
+        <section class="sectors">
+            <h2>Sectors</h2>
+            <div id="SectorCarousel" class="explore-section carousel slide" data-interval="false">
+                <div class="carousel-inner">
+                    <% i = 0 %>
+                    <% while !@sectors.slice(i,4).blank? do %>
+                        <div class='item<%= " active" if i == 0%>'>
+                            <% count = 1 %>
+                            <% @sectors.slice(i,4).each do |o| %>
+                                <%= render 'partials/explore/explore_carousel_activity_sector', vars: { :item => o, :count => count } %>
+                                <% if [1,3].include?(count) %>
+                                    <div class="grid-1">&nbsp;</div>
+                                <% end %>
+                                <% count += 1 %>
+                            <% end %>
+                        </div>
+                        <% i += 4 %>
+                    <% end %>
+                </div>
+                
+                <%= render 'partials/carousel_controls', target_id: "SectorCarousel" %>
+            </div>
+        </section>
+        
+        <!-- COUNTRIES -->
+        <section class="countries">
+            <h2>Countries</h2>
+            <div id="CountryCarousel" class="explore-section carousel slide" data-interval="false">
+                <div class="carousel-inner">
+                    <% i = 0 %>
+                    <% while !@countries.slice(i,2).blank? do %>
+                        <div class='item<%= " active" if i == 0%>'>
+                            <% count = 1 %>
+                            <% @countries.slice(i,2).each do |o| %>
+                                <%= render 'partials/explore/explore_carousel_activity_country', vars: { :item => o, :count => count } %>
+                                <% if count == 1 %>
+                                    <div class="grid-1">&nbsp;</div>
+                                <% end %>
+                                <% count += 1 %>
+                            <% end %>
+                        </div>
+                        <% i += 2 %>
+                    <% end %>
+                </div>
+                <%= render 'partials/carousel_controls', target_id: "CountryCarousel" %>
+            </div>
+        </section>
         
     
 </div>
