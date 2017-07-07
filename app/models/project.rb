@@ -68,10 +68,10 @@ class Project < ActiveRecord::Base
                           joins(:regions).
                           includes(:countries).
                           where('countries_projects.project_id IS NULL AND regions.id IS NOT NULL')}
-  scope :organizations, -> (orgs){joins(:primary_organization).where(organizations: {id: orgs})}
+  scope :organizations, -> (orgs){where(organizations: {id: orgs})}
   scope :site, -> (site){joins(:sites).where(sites: {id: site})}
   scope :projects, -> (projects){where(projects: {id: projects})}
-  scope :sectors, -> (sectors){joins(:sectors).where(sectors: {id: sectors})}
+  scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){joins(:donations).where(donations: {donor_id: donors})}
   scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
@@ -89,7 +89,7 @@ class Project < ActiveRecord::Base
 
     #projects = Project.includes([:primary_organization, :geolocations, :sectors, :donors, :tags, :partners, :prime_awardee]).references(:organizations)
     # it's faster to use includes as needed downstream rather rather than clogging up this widely-used method
-    projects = self.preload(:primary_organization)
+    projects = self.includes(:primary_organization).references(:organizations)
     projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 12
     projects = projects.geolocation(options[:geolocation], level).includes(:geolocations)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
