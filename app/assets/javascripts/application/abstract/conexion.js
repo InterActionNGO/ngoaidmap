@@ -10,6 +10,7 @@ define([
   'application/abstract/countryCollection',
   'application/abstract/organizationCollection',
   'application/abstract/geolocationCollection',
+  'application/abstract/partnerCollection',
 
   // Count Models
   'application/abstract/projectCountModel',
@@ -25,7 +26,7 @@ define([
   'application/abstract/donorModel',
   'application/abstract/breadcrumbModel',
   ], function(Class, _,
-    mapCollection, sectorCollection, donorCollection, countryCollection, organizationCollection, geolocationCollection,
+    mapCollection, sectorCollection, donorCollection, countryCollection, organizationCollection, geolocationCollection, partnerCollection,
     projectCountModel, organizationCountModel, donorCountModel, countryCountModel, sectorCountModel,
     geolocationModel, organizationModel, sectorModel, donorModel, breadcrumbModel) {
 
@@ -203,6 +204,16 @@ define([
         callback(data);
       },this));
 
+    },
+    
+    // Fetch PARTNERS
+    getPartnersData: function(callback) {
+      this.partnerCollection = new partnerCollection();
+      this.partnerCollection.fetch({
+        data: _.extend({},this.filters,{})
+      }).done(_.bind(function(data){
+        callback(data);
+      },this));
     },
 
     // Fetch ORGANIZATIONS

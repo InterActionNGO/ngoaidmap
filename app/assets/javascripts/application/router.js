@@ -66,6 +66,8 @@ define([
       'sectors/:id/*params': 'sectors',
       'organizations/:id': 'organizations',
       'organizations/:id/*params': 'organizations',
+      'partners/:id': 'partners',
+      'partners/:id/*params': 'partners',
       'donors/:id': 'donors',
       'donors/:id/*params': 'donors',
       'location/:id': 'locations',
@@ -127,6 +129,21 @@ define([
       var filters = _.extend(this.defaultFilters,{
         'organizations[]' : _id,
         'site' : site_obj.id,
+      });
+      filters = _.extend({},filters,this.objetize(_filters));
+      this.conexion = new Conexion(params, filters);
+      this.initViews();
+      new GalleryView();
+    },
+
+    partners: function(_id,_filters) {
+      var params = {
+        'id': _id,
+        'name': 'partners[]',
+      };
+      var filters = _.extend(this.defaultFilters,{
+        'partners[]' : _id,
+	'site': site_obj.id,
       });
       filters = _.extend({},filters,this.objetize(_filters));
       this.conexion = new Conexion(params, filters);
@@ -222,12 +239,12 @@ define([
       this.projectModel = new projectModel({id:_id});
       this.projectModel.fetch().done(_.bind(function(_project){
         this.initViews();
-        this.initProjectViews(_project.project, _project.prime_awardee, _project.partners);
+        this.initProjectViews(_project.project, _project.prime_awardee);
       },this))
 
     },
 
-    initProjectViews: function(_project, _awardee, _partners) {
+    initProjectViews: function(_project, _awardee) {
       this.initViews();
 
       // Project Sidebar
@@ -239,7 +256,7 @@ define([
       new ProjectWebsite({ project: _project, conexion: this.conexion });
       new ProjectAwardee({ project: _project, awardee: _awardee, conexion: this.conexion });
       new ProjectTarget({ project: _project, conexion: this.conexion });
-      new ProjectPartnerOrganizations({ project: _project, partners: _partners, conexion: this.conexion });
+      new ProjectPartnerOrganizations({ project: _project, conexion: this.conexion });
       new ProjectLocations({ project: _project, conexion: this.conexion });
       new ProjectDonors({ project: _project, conexion: this.conexion });
       new ProjectReach({ project: _project, conexion: this.conexion });

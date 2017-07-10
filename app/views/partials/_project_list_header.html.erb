@@ -34,6 +34,10 @@
         <% if params[:sectors] && @sector = Sector.find(params[:sectors].first) || nil %>
             <%= render 'partials/project_list_header_filter', model: @sector, label: 'Sector', param: 'sectors' %>
         <% end %>
+      
+        <% if params[:partners] && @partner = Organization.joins(:partner_projects).find(params[:partners].first) || nil %>
+            <%= render 'partials/project_list_header_filter', model: @partner, label: 'Partner', param: 'partners' %>
+        <% end %>
     </ul>
   <% end %>
 </header>

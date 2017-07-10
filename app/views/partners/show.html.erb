@@ -1,0 +1,53 @@
+<%= render 'partials/map' %>
+<%= render 'partials/categories_selector' %>
+
+<div class="main-content">
+  <div class="row">
+    <section class="layout-content grid-12 offset-1">
+
+      <%= render 'partials/project_list_header', type: 'Partner', title: @partner.name, css_class: 'organization' %>
+
+      <%= render 'partials/organization_details', organization: @partner %>
+
+      <%= render "partials/index_projects" %>
+
+      <%= render "partials/organization_media_resources", organization: @partner %>
+      
+    </section>
+
+    <aside class="layout-sidebar grid-4">
+
+      <div class="mod-highlighted-results mod-info">
+        <div class="mod-sidebar-projects mod-info">
+          <h3>Projects</h3>
+          <span><%= @projects.count %></span>
+        </div>
+      </div>
+
+      <!-- Sectors by projects -->
+      <div id="sidebar-sectors" class="project-sectors mod-info"></div>
+
+      <!-- Projects locations -->
+      <div id="sidebar-locations" class="mod-info"></div>
+
+      <!-- Projects donors -->
+      <div id="sidebar-donors" class="project-donors mod-info"></div>
+      
+      <% unless url_has_compound_filter %>
+        <!-- Organization Sidebar -->
+        <div id="sidebar-organization-resources" class="mod-info"></div>
+        <div id="sidebar-organization-infocontact" class="mod-info"></div>
+        <div id="sidebar-organization-donationcontact" class="mod-info"></div>
+        <div id="sidebar-organization-mediacontact" class="mod-info"></div>
+        <div id="sidebar-organization-followus" class="mod-info"></div>
+      <% end %>
+
+
+      <script>
+        var organization = <%= raw(@partner.to_json) %>;
+        var organization_resources = <%= raw(@partner.resources.to_json) %>;
+      </script>
+      
+    </aside>
+  </div>
+</div>

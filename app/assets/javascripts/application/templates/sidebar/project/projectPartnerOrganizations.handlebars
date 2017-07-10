@@ -1,8 +1,8 @@
 {{#if partners.local }}
   <h3 class="margin">Local Partners</h3>
-  <ul>
+  <ul class="partner_list">
     {{#each partners.local }}
-      <li style="margin-bottom: 5px;"><p>{{ name }}</p></li>
+      <li><a href="{{url}}">{{name}}</a></li>
     {{/each}}
   </ul>
 {{/if}}
@@ -17,7 +17,7 @@
   <h3 class="margin">International Partners</h3>
   <ul>
     {{#each partners.international }}
-      <li style="margin-bottom: 5px;"><p>{{ name }}</p></li>
+      <li><a href="{{url}}">{{name}}</a></li>
     {{/each}}
   </ul>
 {{/if}}

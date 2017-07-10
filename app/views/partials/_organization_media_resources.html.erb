@@ -1,0 +1,16 @@
+<% unless organization.media_resources.empty? %>
+    <section>
+        <h2 class="screen-reader">Related Resources</h2>
+
+        <div class="mod-gallery chachi-slider">
+        <% organization.media_resources.each do |media_resource| %>
+            <% if media_resource.is_a_video? %>
+            <% image_tag(media_resource.video_thumb.url(:medium), :alt => media_resource.caption, :video_id => media_resource.id, :class => "chachi-item") %>
+            <div class="chachi-item"><%= CGI.unescapeHTML(media_resource.video_embed_html).html_safe %></div>
+            <% else %>
+            <%= image_tag(media_resource.image_url, :alt=> media_resource.caption, :class => "chachi-item") %>
+            <% end %>
+        <% end %>
+        </div>
+    </section>
+<% end %>

@@ -23,7 +23,11 @@ define([
       this.filters = this.conexion.getFilters();
       this.conexion.getSectorsData(_.bind(function(response){
         this.response = response.sectors;
-        (!!this.filters && ! !!this.filters['sectors[]']) ? this.render() : this.$el.remove();
+        if (!!this.filters && !this.filters['sectors[]'] && !!this.response.length) {
+          this.render();
+        } else {
+          this.$el.remove();
+        }
       },this))
     },
 

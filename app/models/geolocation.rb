@@ -39,6 +39,7 @@ class Geolocation < ActiveRecord::Base
   scope :donors, -> (donors){joins(projects: :donations).where(donations: {donor_id: donors})}
   scope :geolocation, -> (geolocation){where(geolocations: {uid: geolocation})}
   scope :organizations, -> (orgs){joins(:projects).joins('join organizations on projects.primary_organization_id = organizations.id').where(organizations: {id: orgs})}
+  scope :partners, -> (partners){joins(:projects).joins('join partnerships on partnerships.project_id = projects.id join organizations as partners on partnerships.partner_id = partners.id').where(partners: {id: partners})}
   def self.sum_projects(options='')
     where=''
     if options && options == 'active'
@@ -60,14 +61,15 @@ class Geolocation < ActiveRecord::Base
   end
   def self.fetch_all(options={})
     geolocations = Geolocation.all
-    geolocations = geolocations.site(options[:site])                                    if options[:site]
-    geolocations = geolocations.active                                                  if options[:status] && options[:status] == 'active'
-    geolocations = geolocations.projects(options[:projects])                            if options[:projects]
-    geolocations = geolocations.organizations(options[:organizations])                  if options[:organizations]
-    geolocations = geolocations.sectors(options[:sectors])                              if options[:sectors]
-    geolocations = geolocations.donors(options[:donors])                                if options[:donors]
-    geolocations = geolocations.countries(options[:countries])                          if options[:countries]
-    geolocations = geolocations.geolocation(options[:geolocation])                      if options[:geolocation]
+    geolocations = geolocations.site(options[:site])                   if options[:site]
+    geolocations = geolocations.active                                 if options[:status] && options[:status] == 'active'
+    geolocations = geolocations.projects(options[:projects])           if options[:projects]
+    geolocations = geolocations.organizations(options[:organizations]) if options[:organizations]
+    geolocations = geolocations.partners(options[:partners])           if options[:partners]
+    geolocations = geolocations.sectors(options[:sectors])             if options[:sectors]
+    geolocations = geolocations.donors(options[:donors])               if options[:donors]
+    geolocations = geolocations.countries(options[:countries])         if options[:countries]
+    geolocations = geolocations.geolocation(options[:geolocation])     if options[:geolocation]
     geolocations.uniq
   end
   def iati_uid
@@ -90,5 +92,5 @@ class Geolocation < ActiveRecord::Base
 #   def readable_path
 #     [self.g0, self.g1, self.g2, self.g3, self.g4].compact.map{|g| Geolocation.find_by(uid: g).try(:name)}.join('>')
 #   end
-  
+
 end

@@ -46,17 +46,90 @@
       padding: 7px 16px;
     }
 
+    &:hover .father {
+      color: white;
+    }
+
+    .sub-father {
+      box-sizing: border-box;
+      color: #8e5387;
+      display: block;
+      margin: 5px 0;
+      padding: 5px 16px;
+      font-weight: lighter;
+      font-size: inherit;
+      text-align: left;
+      text-transform: uppercase;
+      width: 100%;
+
+      &:first-child {
+        margin-top: 15px;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: #eeeeee;
+      }
+
+      &:after {
+        content: " ›";
+        display: inline;
+        font-size: 1.5em;
+        line-height: 1;
+        position: relative;
+        top: -2px;
+        vertical-align: middle;
+      }
+    }
+
+    .back-button {
+      background-color: #eeeeee;
+      display: block;
+      padding: 10px 20px 5px;
+      position: relative;
+      text-align: left;
+      width: 100%;
+      z-index: 100;
+
+      &:hover,
+      &:focus {
+        background-color: #dddddd;
+      }
+
+      &:before {
+        content: "‹ ";
+        display: inline;
+        font-size: 1.5em;
+        line-height: 1;
+        position: relative;
+        top: -1px;
+        vertical-align: middle;
+      }
+    }
+
+    .sub-menu.-hide {
+      display: none;
+    }
+
+
     &.search { padding: 0;}
     .no-touch &:hover, &.is-touched {
       color: $color-0;
     }
-    .no-touch &:hover .mod-go-up-menu,
-    &.is-touched .mod-go-up-menu,
-    .no-touch &:hover .mod-drop-down-menu,
-    &.is-touched .mod-drop-down-menu,
+    .no-touch &:hover .menu,
+    &.is-touched .menu,
+    .no-touch &:hover .menu,
+    &.is-touched .menu,
+    .menu.-show,
     .mod-go-up-menu.-show {
         display: block;
     }
+    
+    &.run-reports {
+      margin-right: 0;
+      float: right;
+    }
+    
     li {
       padding: 0;
       cursor: default;
@@ -68,6 +141,20 @@
     .mod-go-up-menu {
       z-index: 100;
     }
+    &.last {
+      margin-right: 0px;
+      float: right;
+    }
+
+    // if inside menu and not the menu itself, be bottom-aligned and on top
+    .menu .mod-go-up-menu {
+      top: 0;
+      z-index: 101;
+
+      &:before {
+        display: none;
+      }
+    }
   }
   .fedex-logo {
     float: right;
@@ -75,7 +162,7 @@
   }
   .search {
     height: 25px;
-    width: 170px;
+    width: 195px;
     margin-top: 4px;
     border-bottom: 2px solid $color-4;
     input#q {
@@ -85,10 +172,12 @@
     input[type="submit"] {
       height: 25px;
     }
-  }
-  .run-reports {
-    margin-right: 0px;
-    float: right;
+
+    @media screen and (min-width: 1130px) {
+      margin-left: 20px;
+      margin-right: 40px;
+      width: 265px;
+    }
   }
 
 
