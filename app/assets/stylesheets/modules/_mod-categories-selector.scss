@@ -451,6 +451,13 @@
       }
     }
   }
+  .submenu-info {
+    color: $color-5;
+    text-transform: none;
+    margin: 7px 16px 10px 16px;
+    border-top: 1px solid transparentize($color-5, 0.5);
+    padding-top: 10px;
+  }
 }
 
 .mod-logos-slider {
