@@ -22,7 +22,7 @@ class DownloadsController < ApplicationController
 #           :disposition => "attachment; filename=#{name}.xls"
 #       }
       format.kml {
-        @locations = Project.fetch_all(projects_params).pluck('geolocations.name', 'geolocations.longitude', 'geolocations.latitude')
+        @locations = Project.fetch_all(projects_params).includes(:geolocations).pluck('geolocations.name', 'geolocations.longitude', 'geolocations.latitude')
         stream = render_to_string(:template => "downloads/index" )
         send_data stream,
           :type        => 'application/vnd.google-earth.kml+xml',
