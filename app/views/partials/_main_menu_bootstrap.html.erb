@@ -1,6 +1,10 @@
 <ul class="menu">
   <li class="menu-item explore col-md-3 col-xs-6 no-pad">
     <a href="/explore" class="index-item explore <%= if controller_name == 'explore' then 'active' end %>">Explore</a>
+    <ul class="submenu hidden-sm">
+        <li class="submenu-item"><a href="/explore/stories">Stories</a></li>
+        <li class="submenu-item"><a href="/explore/data">Data (Coming Soon)</a></li>
+    </ul>
   </li>
   <li class="menu-item about col-md-3 col-xs-6 no-pad">
     <a href="/p/about" class="index-item about <% if @page.present? %><%= "active" if (@page.permalink == 'about' || @page.top_parent.permalink == 'about') %><% end %>">About</a>

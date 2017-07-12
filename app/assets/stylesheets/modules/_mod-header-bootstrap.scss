@@ -22,8 +22,6 @@
     }
   }
   .menu-item {
-/*     display: inline-block; */
-/*     margin: 0 1%; */
     margin-top: 1em;
     text-align: center;
     text-transform: uppercase;
@@ -50,6 +48,7 @@
     background-color: $color-0;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+    min-width: 150px;
     .submenu-item {
       float: none;
       text-align: left;
@@ -60,9 +59,6 @@
       padding: 10px 25px;
       font-weight: bold;
     }
-  }
-  .explore {
-    @include menu-item($color-3);
   }
   .about {
     @media (max-width: $screen-md-max) {
@@ -78,6 +74,14 @@
     }
     @media (min-width: $screen-md-min) {
         @include drop-down-menu($color-1);
+    }
+  }
+  .explore {
+    @media (max-width: $screen-md-max) {
+        @include menu-item($color-6);
+    }
+    @media (min-width: $screen-md-min) {
+        @include drop-down-menu($color-6);
     }
   }
   .access {

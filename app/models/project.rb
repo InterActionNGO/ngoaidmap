@@ -68,10 +68,10 @@ class Project < ActiveRecord::Base
                           joins(:regions).
                           includes(:countries).
                           where('countries_projects.project_id IS NULL AND regions.id IS NOT NULL')}
-  scope :organizations, -> (orgs){where(organizations: {id: orgs})}
+  scope :organizations, -> (orgs){joins(:primary_organization).where(organizations: {id: orgs})}
   scope :site, -> (site){joins(:sites).where(sites: {id: site})}
   scope :projects, -> (projects){where(projects: {id: projects})}
-  scope :sectors, -> (sectors){where(sectors: {id: sectors})}
+  scope :sectors, -> (sectors){joins(:sectors).where(sectors: {id: sectors})}
   scope :donors, -> (donors){joins(:donations).where(donations: {donor_id: donors})}
   scope :partners, -> (partners){joins(:partners).where(organizations: {id: partners})}
   scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
@@ -90,24 +90,23 @@ class Project < ActiveRecord::Base
 
     #projects = Project.includes([:primary_organization, :geolocations, :sectors, :donors, :tags, :partners, :prime_awardee]).references(:organizations)
     # it's faster to use includes as needed downstream rather rather than clogging up this widely-used method
-    projects = self.includes(:primary_organization).references(:organizations)
-    projects = projects.site(options[:site])                                              if options[:site] && options[:site].to_i != 12
-    projects = projects.geolocation(options[:geolocation], level).includes(:geolocations) if options[:geolocation]
-    projects = projects.projects(options[:projects])                                      if options[:projects]
-    projects = projects.countries(options[:countries]).includes(:geolocations)            if options[:countries]
-    projects = projects.organizations(options[:organizations])                            if options[:organizations]
-    projects = projects.partners(options[:partners])                                      if options[:partners]
-    projects = projects.sectors(options[:sectors]).includes(:sectors)                     if options[:sectors]
-    projects = projects.donors(options[:donors]).includes(:donors)                        if options[:donors]
-    projects = projects.text_query(options[:q])                                           if options[:q]
-    projects = projects.starting_after(options[:starting_after])                          if options[:starting_after]
-    projects = projects.ending_before(options[:ending_before])                            if options[:ending_before]
-    projects = projects.offset(options[:offset].to_i)                                     if options[:offset]
-    projects = projects.limit(options[:limit].to_i)                                       if options[:limit]
-    projects = projects.active                                                            if options[:status] && options[:status] == 'active'
-    projects = projects.inactive                                                          if options[:status] && options[:status] == 'inactive'
-    projects = projects.tags(options[:tags])                                              if options[:tags]
-    projects = projects.updated_since(options[:updated_since])                            if options[:updated_since]
+    projects = self.preload(:primary_organization).references(:organizations)
+    projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 12
+    projects = projects.geolocation(options[:geolocation], level).includes(:geolocations)               if options[:geolocation]
+    projects = projects.projects(options[:projects])                            if options[:projects]
+    projects = projects.countries(options[:countries]).includes(:geolocations)                          if options[:countries]
+    projects = projects.organizations(options[:organizations])                  if options[:organizations]
+    projects = projects.sectors(options[:sectors]).includes(:sectors)                              if options[:sectors]
+    projects = projects.donors(options[:donors]).includes(:donors)                                if options[:donors]
+    projects = projects.text_query(options[:q])                                 if options[:q]
+    projects = projects.starting_after(options[:starting_after])                if options[:starting_after]
+    projects = projects.ending_before(options[:ending_before])                  if options[:ending_before]
+    projects = projects.offset(options[:offset].to_i)                           if options[:offset]
+    projects = projects.limit(options[:limit].to_i)                             if options[:limit]
+    projects = projects.active                                                  if options[:status] && options[:status] == 'active'
+    projects = projects.inactive                                                if options[:status] && options[:status] == 'inactive'
+    projects = projects.tags(options[:tags]) if options[:tags]
+    projects = projects.updated_since(options[:updated_since]) if options[:updated_since]
     projects = projects.uniq
     if from_api
       projects
