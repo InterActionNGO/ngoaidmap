@@ -53,6 +53,13 @@ Rails.application.routes.draw do
   get 'profile/sector/:id', :to => 'reports#sector_profile', :as => 'report_sector_profile'
   get 'profile/donor/:id', :to => 'reports#donor_profile', :as => 'report_donor_profile'
 
+  # explore section
+  get 'explore', to: redirect('explore/stories')
+  get 'explore/stories'
+  get 'explore/data'
+  resources :stories, :only => [:show, :create]
+  
+  # These routes are old - delete?
   get 'about', to: 'sites#about'
   get 'about-interaction', to: 'sites#about_interaction'
   get 'about-data' , to: 'sites#about_data'

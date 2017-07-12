@@ -74,12 +74,12 @@ class Project < ActiveRecord::Base
   scope :sectors, -> (sectors){joins(:sectors).where(sectors: {id: sectors})}
   scope :donors, -> (donors){joins(:donations).where(donations: {donor_id: donors})}
   scope :partners, -> (partners){joins(:partners).where(organizations: {id: partners})}
-  scope :geolocation, -> (geolocation,level=0){where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
-  scope :countries, -> (countries){where(geolocations: {country_uid: countries})}
+  scope :geolocation, -> (geolocation,level=0){joins(:geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
+  scope :countries, -> (countries){joins(:geolocations).where(geolocations: {country_uid: countries})}
   scope :text_query, -> (q){where('projects.name ilike ? OR projects.description ilike ?', "%%#{q}%%", "%%#{q}%%")}
   scope :starting_after, -> (date){where "start_date > ?", date}
   scope :ending_before, -> (date){where "end_date < ?", date}
-  scope :tags, -> (tags){where(tags: {id: tags})}
+  scope :tags, -> (tags){joins(:tags).where(tags: {id: tags})}
   scope :updated_since, -> (timestamp){where "projects.updated_at > timestamp with time zone ?", timestamp }
   scope :with_partners, -> { joins(:partners).uniq }
   scope :with_international_partners, -> { with_partners.where('organizations.international = true') }
@@ -90,7 +90,7 @@ class Project < ActiveRecord::Base
 
     #projects = Project.includes([:primary_organization, :geolocations, :sectors, :donors, :tags, :partners, :prime_awardee]).references(:organizations)
     # it's faster to use includes as needed downstream rather rather than clogging up this widely-used method
-    projects = self.preload(:primary_organization).references(:organizations)
+    projects = self.preload(:primary_organization)
     projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 12
     projects = projects.geolocation(options[:geolocation], level).includes(:geolocations)               if options[:geolocation]
     projects = projects.projects(options[:projects])                            if options[:projects]
