@@ -96,6 +96,7 @@ class Project < ActiveRecord::Base
     projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries]).includes(:geolocations)                          if options[:countries]
     projects = projects.organizations(options[:organizations])                  if options[:organizations]
+    projects = projects.partners(options[:partners])                                      if options[:partners]
     projects = projects.sectors(options[:sectors]).includes(:sectors)                              if options[:sectors]
     projects = projects.donors(options[:donors]).includes(:donors)                                if options[:donors]
     projects = projects.text_query(options[:q])                                 if options[:q]
