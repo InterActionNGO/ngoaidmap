@@ -5,7 +5,7 @@
   <div class="row">
     <section class="layout-content grid-12 offset-1">
 
-      <%= render 'partials/project_list_header', type: 'Partner', title: @partner.name, css_class: 'organization' %>
+      <%= render 'partials/project_list_header', type: partner_type_label, title: @partner.name, css_class: 'organization' %>
 
       <%= render 'partials/organization_details', organization: @partner %>
 
