@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   get 'profile/donor/:id', :to => 'reports#donor_profile', :as => 'report_donor_profile'
 
   # explore section
-  get 'explore', to: redirect('explore/stories')
+  get 'explore', to: redirect('explore/stories'), status: 302
   get 'explore/stories'
   get 'explore/data', to: 'reports#index' , :as => :report_index
   resources :stories, :only => [:show, :create]

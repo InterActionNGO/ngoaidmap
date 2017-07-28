@@ -164,7 +164,7 @@ define([
         this.render();
 	this.setLegendWidth();
         this.setChart();
-        this.$el.removeClass('is-hidden');
+        this.$el.removeClass('is-hidden is-invisible');
         this.initMap();
       }, this));
     },

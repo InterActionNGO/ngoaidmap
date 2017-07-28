@@ -5,6 +5,9 @@
 .is-visible {
   display: block;
 }
+.is-invisible {
+    visibility: hidden;
+}
 
 .is-fixed {
   position: fixed;
