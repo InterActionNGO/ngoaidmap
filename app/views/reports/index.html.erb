@@ -1,15 +1,16 @@
-<div class="main-content">
+<div class="mod-report-builder container-fluid">
   <div class="row">
-    <nav class="layout-sidebar grid-5 is-unprintable">
+    <nav class="col-md-3 col-md-offset-1 is-unprintable">
       <% cache '#{@site.id}/reports' do %>
         <div class="mod-report-filter mod-form" id="reportFormView">
 
           <%= form_tag(report_generate_path(:format=>:json), :remote => true,  :method => :get) do %>
 
-            <div class="block search">
-              <label class="screen-reader" for="main-search">Search</label>
-              <input id="main-search" type="text" value="<%= params[:q] %>" placeholder = "Search Project Titles" name="q" class="main_search"/>
-              <%= submit_tag '' %>
+            
+            <label for="main-search">Project Title</label>
+            <div class="search">
+              <input id="main-search" type="text" value="<%= params[:q] %>" placeholder = "Search project titles" name="q" class="main_search"/>
+              <%= submit_tag '', :style => 'width: 1.5em' %>
             </div>
 
             <ul class="combo_search_select">
@@ -38,15 +39,19 @@
 
               <li>
                 <label for="budget_min">Project Budget Min (USD)</label>
-                $
-                <%= text_field_tag :budget_min, params[:budget_min], :style => "width: 83%" %>
+                <div class="budget-input-wrapper">
+                    <span>$</span>
+                    <%= text_field_tag :budget_min, params[:budget_min] %>
+                </div>
               </li>
 
 
               <li>
                 <label for="budget_max">Project Budget Max  (USD)</label>
-                $
-                <%= text_field_tag :budget_max, params[:budget_max], :style => "width: 83%" %>
+                <div class="budget-input-wrapper">
+                    <span>$</span>
+                    <%= text_field_tag :budget_max, params[:budget_max] %>
+                </div>
               </li>
 
               <li class="comboselect date" id="startDateSelector">
@@ -78,32 +83,32 @@
       <% end %>
     </nav>
 
-    <section class="layout-content grid-12">
+    <section class="col-md-7 filter-results-wrapper">
 
       <div class="report-spinner" id="spinView"></div>
 
       <article class="mod-content-article">
-        <h1 id="titleView" class="report-title">
-          <textarea placeholder="Type your title"></textarea>
+        <div id="titleView" class="report-title text-center">
+          <textarea placeholder="Your Title" autofocus=true></textarea>
           <button class="is-inline-btn is-unprintable">Edit</button>
-        </h1>
+        </div>
 
-        <div id="introView" class="mod-report mod-report-intro">
+        <div id="introView" class="mod-report-results mod-report-intro">
           <p>Start applying some filters to generate a report.</p>
           <p><%= image_tag "arrow-reports.svg" %></p>
         </div>
 
         <div id="filtersView" class="mod-applied-filters is-hidden"></div>
 
-        <div id="summaryView" class="mod-report mod-report-summary is-hidden"></div>
+        <div id="summaryView" class="mod-report-results mod-report-summary is-hidden"></div>
 
-        <div id="budgetsView" class="mod-report mod-report-budget is-hidden"></div>
+        <div id="budgetsView" class="mod-report-results mod-report-budget is-hidden"></div>
 
-        <div id="timelineChartsView" class="mod-report is-break-before is-hidden">
+        <div id="timelineChartsView" class="mod-report-results is-break-before is-hidden">
           <div id="modReportsTabs">
             <ul>
-              <li><a href="#projectTab">Number of Active Projects Over Time</a></li>
-              <li><a href="#organizationTab">Number of Active Organizations Over Time</a></li>
+              <li><a href="#projectTab">Active Projects Over Time</a></li>
+              <li><a href="#organizationTab">Active Organizations Over Time</a></li>
             </ul>
             <div id="projectTab">
               <div class="mod-report-line-chart" id="projectsChart"></div>
@@ -114,23 +119,23 @@
           </div>
         </div>
 
-        <div id="projectsListView" class="mod-report mod-report-lists is-break-before is-hidden"></div>
-        <div id="donorsListView" class="mod-report mod-report-lists is-break-before is-hidden"></div>
-        <div id="organizationsListView" class="mod-report mod-report-lists is-break-before is-hidden"></div>
-        <div id="countriesListView" class="mod-report mod-report-lists is-break-before is-hidden"></div>
-        <div id="sectorsListView" class="mod-report mod-report-lists is-break-before is-hidden"></div>
+        <div id="projectsListView" class="row mod-report-results mod-report-lists is-break-before is-hidden"></div>
+        <div id="donorsListView" class="row mod-report-results mod-report-lists is-break-before is-hidden"></div>
+        <div id="organizationsListView" class="row mod-report-results mod-report-lists is-break-before is-hidden"></div>
+        <div id="countriesListView" class="row mod-report-results mod-report-lists is-break-before is-hidden"></div>
+        <div id="sectorsListView" class="row mod-report-results mod-report-lists is-break-before is-hidden"></div>
+        
+        <div id="donorsSnapshotView" class="mod-report-results no-summary-wrap is-break-before"></div>
+        <div id="organizationsSnapshotView" class="mod-report-results no-summary-wrap is-break-before"></div>
+        <div id="countriesSnapshotView" class="mod-report-results no-summary-wrap is-break-before"></div>
+        <div id="sectorsSnapshotView" class="mod-report-results no-summary-wrap is-break-before"></div>
 
-        <div id="donorsSnapshotView" class="mod-report no-summary-wrap is-break-before is-hidden"></div>
-        <div id="organizationsSnapshotView" class="mod-report no-summary-wrap is-break-before is-hidden"></div>
-        <div id="countriesSnapshotView" class="mod-report no-summary-wrap is-break-before is-hidden"></div>
-        <div id="sectorsSnapshotView" class="mod-report no-summary-wrap is-break-before is-hidden"></div>
-
-        <div id="actionsView" class="mod-report mod-report-actions is-unprintable is-hidden is-clearfix">
-          <button id="printReport">Print</button>
+        <div id="actionsView" class="mod-report-results mod-report-actions text-center is-unprintable is-hidden is-clearfix">
+            <button id="printReport">Print</button>
           <!-- <button id="saveReport">Save PDF</button> -->
         </div>
 
-        <div id="limitationsView" class="mod-report mod-report-limitations is-hidden is-clearfix">
+        <div id="limitationsView" class="mod-report-results mod-report-limitations is-hidden is-clearfix">
           <h3>Limitations</h3>
           <ol type="1">
             <li id="limitations1">This reporting tool draws on the full NGO Aid Map database, including both inactive and currently active projects. This is a significantly larger set of data than that visible on the map, which only displays currently active projects. In addition, the database contains data contributed by both InterAction members and non-member organizations. Data may be added and/or modified by organizations at any time, which may lead to different results if two reports are run at different points in time using the same filter parameters. For additional information on data limitations, please visit: <a href="https://www.ngoaidmap.org/p/data">https://www.ngoaidmap.org/p/data</a></li>

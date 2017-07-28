@@ -44,7 +44,6 @@ Rails.application.routes.draw do
   mount Raddocs::App => "/docs"
 
   # report page
-  get 'p/analysis', to: 'reports#index' , :as => :report_index
   get 'report_generate', to: 'reports#report', :as => :report_generate
   get 'list', :to => 'reports#list', :as => :report_list
   get 'budgets', :to => 'reports#budgets', :as => :report_budgets
@@ -56,7 +55,7 @@ Rails.application.routes.draw do
   # explore section
   get 'explore', to: redirect('explore/stories')
   get 'explore/stories'
-  get 'explore/data'
+  get 'explore/data', to: 'reports#index' , :as => :report_index
   resources :stories, :only => [:show, :create]
   
   # These routes are old - delete?
@@ -89,6 +88,7 @@ Rails.application.routes.draw do
   get 'clusters/:id', to: 'clusters_sectors#show', :as => 'cluster'
 
   # pages
+  get '/p/analysis', to: redirect('/explore/data'), status: 302
   get '/p/:id' , to: 'pages#show', :as => :page
   # search
   get '/search', to: 'search#index', :as => :search

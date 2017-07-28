@@ -1,38 +1,39 @@
 <% cache("#{@site.id}/footer") do %>
-    <div class="mod-featured-projects-bootstrap container">
-        <div class="row">
-            <div class="col-md-3 col-xs-12">
-                <h2>Featured maps</h2>
-            </div>
+    <div class="mod-featured-projects-bootstrap">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-2 col-xs-12">
+                    <h2>Featured maps</h2>
+                </div>
 
-            <ul class="col-md-9">
-                <% if @site.featured_sites.any? %>
-                <% @site.featured_sites.each do |s|  %>
-                    <li class="col-md-3 col-xs-12">
-                        <a href="https://<%= s.url %>">
-                        <img
-                            src="<%= s.aid_map_image.url %>"
-                            alt=""
-                            class="img-responsive">
-                        <p><%= s.name %></p>
-                        </a>
-                    </li>
-                <% end %>
-                <% end %>
-            </ul>
+                <ul class="col-md-6 col-xs-12">
+                    <% if @site.featured_sites.any? %>
+                    <% @site.featured_sites.each do |s|  %>
+                        <li class="col-md-3 col-xs-12">
+                            <a href="https://<%= s.url %>">
+                            <img
+                                src="<%= s.aid_map_image.url %>"
+                                alt=""
+                                class="img-responsive">
+                            <p><%= s.name %></p>
+                            </a>
+                        </li>
+                    <% end %>
+                    <% end %>
+                </ul>
+            </div>
         </div>
     </div>
 
     <footer class="mod-footer-bootstrap">
         <div class="container-fluid">
-            <div class="container">
                 <nav class="mod-footer-top-bootstrap row">
                 
-                    <div class="col-md-3 col-md-offset-3 col-sm-2 col-xs-12">
+                    <div class="col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-1 col-xs-4 col-xs-offset-4">
                         <%= render 'partials/main_menu_bootstrap' %>
                     </div>
                     
-                    <div class="col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-6 col-xs-6">
+                    <div class="col-md-1 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-4 col-xs-offset-1">
                         <%- if Rails.env.production? -%>
                             <a href="https://<%= Settings.main_site_host %>" class="logo">
                         <%- else -%>
@@ -42,23 +43,22 @@
                         </a>
                     </div>
                     
-                    <div class="col-md-2 col-md-offset-1 col-sm-2 col-xs-6">
+                    <div class="col-md-1 col-md-offset-0 col-sm-2 col-sm-offset-0 col-xs-4 col-xs-offset-2">
                         <a href="http://www.interaction.org/" class="logo" target="_blank">
                             <%= image_tag "footer_interaction.svg", :alt  => "An initiative by Inter Action", :class => 'img-responsive' %>
                         </a>
                     </div>
                 </nav>
-            </div>
         </div>
 
-        <div class="mod-footer-bottom-bootstrap container-fluid">
-            <div class="container">
+        <div class="mod-footer-bottom-bootstrap">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-sm-4 col-sm-offset-2 col-xs-12">
                         <p>1400 16th Street, NW. Suite 210 Washington, DC 20036</p>
                     </div>
                     
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-sm-4 col-xs-12">
                         <p class="signature">Copyrighted by <a href="http://www.interaction.org/" target="_blank">InterAction</a> &copy; <%= Time.now.year %></p>
                     </div>
                 </div>

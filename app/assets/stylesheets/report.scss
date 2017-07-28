@@ -12,18 +12,22 @@
 
 @import "settings",
         "mixins",
-        "base",
-        "grid",
+        "bootstrap_overrides",
+	"bootstrap-sass/assets/stylesheets/_bootstrap",
+        "base-bootstrap",
         "layout",
         "states",
         "modules/mod-form",
-        "modules/mod-info",
-        "modules/mod-header",
-        "modules/mod-featured-projects",
-        "modules/mod-follow-us",
+        "modules/mod-info-bootstrap",
+        "modules/mod-hero",
+        "modules/mod-header-bootstrap",
+        "modules/mod-featured-projects-bootstrap",
+        "modules/mod-follow-us-bootstrap",
         "modules/mod-feedback",
-        "modules/mod-overlay",
-        "modules/mod-footer",
-        "modules/mod-report-filter",
-        "modules/mod-report-results",
-        "modules/mod-marker-cluster";
+        "modules/mod-overlay", /*might need revision*/
+        "modules/mod-footer-bootstrap",
+        "modules/mod-explore",
+        "modules/mod-report-builder",
+        "modules/mod-report-filter",/*might need revision*/
+        "modules/mod-report-results",/*might need revision*/
+        "modules/mod-marker-cluster";/*might need revision*/

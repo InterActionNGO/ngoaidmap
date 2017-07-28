@@ -29,8 +29,8 @@
 }
 .mod-footer-top-bootstrap {
   height: 190px;
-  background: image-url('footer_background_x2.svg') no-repeat left center;
-  background-size: auto 130px;
+  background: image-url('footer_background_x2.svg') no-repeat center;
+  background-size: contain;
   -ms-background-position-x: -60%;
   @media (max-width: $screen-sm-max) {
       background: image-url('footer_background_x2_light.svg') no-repeat center;
@@ -52,6 +52,7 @@
   }
   p {
       color: $color-11;
+      margin: 0;
       @media (max-width: $screen-xs-max) {
         &, &.signature {
         line-height: 1.6;

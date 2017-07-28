@@ -1,19 +1,10 @@
-<table>
-  <tr>
-    <td colspan="3" class="mod-report-budget-total">
-      <span class="small">$</span>{{commas budgets.total}} <span class="small">(Total Project Budgets) <sup><a href="#limitations2">2</a></sup></span>
-    </td>
-  </tr>
-  {{#if budgets}}
-    <tr>
-      <td class="mod-report-budget-min">min. (USD): ${{commas budgets.min}}</td>
-      <td class="mod-report-budget-average">median (USD): ${{commas budgets.median}}</td>
-      <td class="mod-report-budget-max">max. (USD): ${{commas budgets.max}}</td>
-    </tr>
-  {{/if}}
-</table>
-
-{{!-- {{#if budgets}}
-  <div class="mod-report-budget-chart is-clearfix" id="reportBudgetChart"
-    data-min="{{budgets.min}}" data-max="{{budgets.max}}" data-average="{{budgets.median}}"></div>
-{{/if}} --}}
+<div class="text-center mod-report-budget-total">
+	<span class="small">$</span>{{commas budgets.total}} <span class="small">(Total Project Budgets) <sup><a href="#limitations2">2</a></sup></span>
+</div>
+{{#if budgets}}
+<div class="row">
+	<div class="col-md-4 mod-report-budget-min">min. (USD): ${{commas budgets.min}}</div>
+	<div class="col-md-4 mod-report-budget-average">median (USD): ${{commas budgets.median}}</div>
+	<div class="col-md-4 mod-report-budget-max">max. (USD): ${{commas budgets.max}}</div>
+</div>
+{{/if}}

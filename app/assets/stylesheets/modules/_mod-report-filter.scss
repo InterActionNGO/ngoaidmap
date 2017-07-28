@@ -1,133 +1,109 @@
 .mod-report-filter {
-  ul.combo_search_select > li {
-    width: 100%;
-    margin-bottom: 10px;
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      text-transform: uppercase;
+    #s2id_start_date_year,
+    #start_date_year,
+    #s2id_start_date_month,
+    #s2id_start_date_day,
+    #s2id_end_date_year,
+    #s2id_end_date_month,
+    #s2id_end_date_day {
+        width: 31% !important;
+        background: image-url('form-background-lt.png') no-repeat center;
     }
-  }
-
-  .comboselect {
-    width: 100%;
-    margin-bottom: 20px;
-    label {
-      display: block;
-      margin-bottom: 5px;
-      text-transform: uppercase;
-    }
-    select, input {
-      height: 30px;
-    }
-
-    &.is-disabled {
-      opacity: 0.6;
-      pointer-events: none;
-    }
-  }
-  .applied-filters {
-    width: 90%;
-    padding: 5%;
-    border: 2px solid $color-4;
-  }
-  #s2id_start_date_year,
-  #start_date_year,
-  #s2id_start_date_month,
-  #s2id_start_date_day,
-  #s2id_end_date_year,
-  #s2id_end_date_month,
-  #s2id_end_date_day {
-    width: 31% !important;
-    background: image-url('form-background-lt.png') no-repeat center;
-  }
-
-  // .select2-container-multi .select2-choices .select2-search-choice:first-child {
-  //   margin-top: 20px;
-  // }
-
-  #activeProjects {
-    input {
-      height: auto;
-      width: auto;
-      margin: 0 5px 0 0;
-      padding: 0;
-      vertical-align: 2px;
+    #activeProjects {
+        input {
+            height: auto;
+            width: auto;
+            margin: 15px 0;
+            padding: 0;
+            vertical-align: -2px;
+        }
+        label {
+            text-transform: none;
+            font-weight: normal;
+        }
     }
     label {
-      text-transform: none;
+        text-transform: uppercase;
     }
-  }
-}
-
-.ui-tabs .ui-tabs-nav {
-  padding: 0;
-
-  li {
-    box-sizing: border-box;
-    width: 50%;
-    margin: 0;
-    font-weight: bold;
-    line-height: 30px;
-    height: 52px;
-    border: 2px solid transparent;
-    border-bottom-color: $color-4;
-    text-align: center;
-    &:first-child:before {
-      margin-right: 5px;
-      @include before('', inline-block, relative, 6px, 1px, 15px, 13px);
-      @include icons-sprite(icon-folder-hover);
-    }
-    &:last-child:before {
-      margin-right: 5px;
-      @include before('', inline-block, relative, 6px, 0, 20px, 14px);
-      @include icons-sprite(icon-schema-hover);
-    }
-    &:focus {
-      outline: 0;
-    }
-    &.ui-tabs-active {
-      border-top-color: $color-4;
-      border-left-color: $color-4;
-      border-right-color: $color-4;
-      border-bottom-color: transparent;
-      margin-bottom: 0;
-      padding-bottom: 0;
-      &:first-child:before {
-        @include before('', inline-block, relative, 6px, 1px, 15px, 13px);
-        @include icons-sprite(icon-folder);
-      }
-      &:last-child:before {
-        @include before('', inline-block, relative, 6px, 0, 20px, 14px);
-        @include icons-sprite(icon-schema);
-      }
-      .ui-tabs-anchor {
+    input::placeholder {
         color: $color-3;
-      }
     }
+    ul {
+        &.combo_search_select {
+            & > li {
+                width: 100%;
+                margin-bottom: 10px;
 
-    .ui-tabs-anchor, a {
-      display: inline-block;
-      font-size: 13px;
-      padding: 10px 8px 10px 5px;
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    text-transform: uppercase;
+                }
+            }
+        }
     }
-  }
-
-  .ui-tabs-anchor {
-    float: none;
-    display: inline-block;
-    position: relative;
-    color: $color-4;
-    font-size: 14px;
-    padding: 10px;
-    line-height: 32px;
-    &:focus {
-      outline: 0;
+    .comboselect {
+        width: 100%;
+        margin-bottom: 20px;
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        select,
+        input {
+            height: 40px;
+        }
+        &.is-disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
     }
-  }
+    .search {
+        width: auto;
+        border-radius: 0;
+        margin: 0 0 10px 0;
+        height: 40px;
+        padding: 0 1em;
+        input {
+            padding: 0;
+            font-family: sans-serif;
+        }
+    }
+    .applied-filters {
+        width: 90%;
+        padding: 5%;
+        border: 2px solid $color-4;
+    }
+    .budget-input-wrapper {
+        position: relative;
+        span {
+            position: absolute;
+            margin: 0 5px;
+            line-height: 40px;
+        }
+        input {
+            width: 100%;
+            margin-bottom: 0;
+            padding-left: 1.5em;
+        }
+    }
+    .select2-container {
+        .select2-choice {
+            font-size: 13px; 
+            background-color: $color-4;
+            
+        }
+    }
+    .select2-container-multi {
+        .select2-choices {
+            .select2-search-field {
+                input {
+                    padding-left: 1em;
+                }
+            }
+        }
+    }
 }
 
-.select2-container .select2-choice {
-  font-size: 13px;
-}
+

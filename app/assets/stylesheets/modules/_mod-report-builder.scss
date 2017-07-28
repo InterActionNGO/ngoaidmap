@@ -1,0 +1,101 @@
+.mod-report-builder {
+    padding-top: 100px;
+    h2 {
+        margin: 0 0 0.25em 0;
+        color: $color-3;
+        font-size: 26px;
+    }
+    h3 {
+        margin: 20px 0;
+/*         min-height: 30px; */
+        color: $color-3;
+        font-size: initial;
+    }
+    .report-title {
+        margin-bottom: 25px;
+        font-size: 40px;
+    }
+    .filter-results-wrapper {
+        @media (min-width: $screen-md-min) {
+            padding-left: 65px;
+        }
+    }
+    .ui-tabs {
+        .ui-tabs-nav {
+            padding: 0;
+            li {
+                box-sizing: border-box;
+                width: 50%;
+                margin: 0;
+                font-weight: bold;
+/*                 line-height: 30px; */
+/*                 height: 52px; */
+                border: 2px solid transparent;
+                border-bottom-color: $color-4;
+                text-align: center;
+                
+                &:first-child:before {
+                    margin-right: 5px;
+                    @include before('', inline-block, absolute, 6px, calc(50% - 6.5px), 15px, 13px);
+                    @include icons-sprite(icon-folder-hover);
+                }
+                
+                &:last-child:before {
+                    margin-right: 5px;
+                    @include before('', inline-block, absolute, 6px, calc(50% - 7px), 20px, 14px);
+                    @include icons-sprite(icon-schema-hover);
+                }
+                
+                &:focus {
+                    outline: 0;
+                }
+                
+                &.ui-tabs-active {
+                    border-top-color: $color-4;
+                    border-left-color: $color-4;
+                    border-right-color: $color-4;
+                    border-bottom-color: transparent;
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                    
+                    &:first-child:before {
+                        @include before('', inline-block, absolute, 6px, calc(50% - 6.5px), 15px, 13px);
+                        @include icons-sprite(icon-folder);
+                    }
+                    
+                    &:last-child:before {
+                        @include before('', inline-block, absolute, 6px, calc(50% - 7px), 20px, 14px);
+                        @include icons-sprite(icon-schema);
+                    }
+                    
+                    .ui-tabs-anchor {
+                        color: $color-3;
+                    }
+                }
+
+                .ui-tabs-anchor,
+                a {
+                    display: inline-block;
+                    font-size: 13px;
+/*                     padding: 10px 8px 10px 5px; */
+                    padding: 10px 10px 10px 21px;
+                    line-height: 1.4;
+                    white-space: normal;
+                }
+            }
+        }
+        .ui-tabs-anchor {
+            float: none;
+            display: inline-block;
+            position: relative;
+            color: $color-4;
+            font-size: 14px;
+            padding: 10px;
+            line-height: 32px;
+            
+            &:focus {
+                outline: 0;
+            }
+        }
+    }
+}

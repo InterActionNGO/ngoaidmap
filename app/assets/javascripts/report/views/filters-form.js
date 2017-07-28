@@ -41,7 +41,7 @@ define([
       this.sectorsCollection = new SectorsCollection();
 
       this.$el.find('select').select2({
-        width: 'element',
+        width: '100%',
         allowClear: true,
         formatResult: function(item){
           return _.str.unescapeHTML(item.text);
@@ -55,6 +55,7 @@ define([
       this.$startDateSelector = $('#startDateSelector');
       this.$endDateSelector = $('#endDateSelector');
       this.$activeProjects = $('#activeProjects');
+      this.$resultsSection = $('.filter-results-wrapper');
 
       if (window.location.search !== '') {
         this.fetchData();
@@ -67,7 +68,7 @@ define([
       Backbone.Events.trigger('spinner:start filters:fetch');
 
       _.delay(_.bind(function() {
-        this.$window.scrollTop(154);
+        this.$window.scrollTop(this.$resultsSection.position().top);
       }, this), 100);
 
 

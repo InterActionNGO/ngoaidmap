@@ -38,48 +38,49 @@ require([
   };
 
   // Highcharts
-  (function(H) {
-    H.wrap(H.Legend.prototype, 'render', function (proceed) {
-      var chart = this.chart;
-      var h;
+    (function(H) {
+        H.wrap(H.Legend.prototype, 'render', function (proceed) {
+            var chart = this.chart;
+            var h;
 
-      proceed.call(this);
+            proceed.call(this);
 
-      if (this.options.adjustChartSize && this.options.verticalAlign === 'bottom') {
-        h = this.legendHeight - 100;
-        chart.chartHeight += h;
-        chart.marginBottom += h;
-        chart.container.style.height = chart.container.firstChild.style.height = chart.chartHeight + 'px';
+            if (this.options.adjustChartSize && this.options.verticalAlign === 'bottom') {
+            h = this.legendHeight - 100;
+            chart.chartHeight += h;
+            chart.marginBottom += h;
+            chart.container.style.height = chart.container.firstChild.style.height = chart.chartHeight + 'px';
 
-        this.group.attr({
-          translateY: this.group.attr('translateY') + h
+            this.group.attr({
+                translateY: this.group.attr('translateY') + h
+            });
+            }
         });
-      }
+    } (Highcharts));
+
+    $(document).ready(function () {
+        // Initialize
+        new SpinView();
+        new IntroView();
+        new TitleView();
+        new FiltersView();
+        new SummaryView();
+        new BudgetsView();
+        new ActionsView();
+        new LimitationsView();
+
+        new TimelineChartsView();
+        new DonorsSnapshotView();
+        new OrganizationsSnapshotView();
+        new CountriesSnapshotView();
+        new SectorsSnapshotView();
+
+        new DonorsListView();
+        new OrganizationsListView();
+        new ProjectsListView();
+        new CountriesListView();
+        new SectorsListView();
+
+        new FiltersFormView();
     });
-  } (Highcharts));
-
-  // Initialize
-  new SpinView();
-  new IntroView();
-  new TitleView();
-  new FiltersView();
-  new SummaryView();
-  new BudgetsView();
-  new ActionsView();
-  new LimitationsView();
-
-  new TimelineChartsView();
-  new DonorsSnapshotView();
-  new OrganizationsSnapshotView();
-  new CountriesSnapshotView();
-  new SectorsSnapshotView();
-
-  new DonorsListView();
-  new OrganizationsListView();
-  new ProjectsListView();
-  new CountriesListView();
-  new SectorsListView();
-
-  new FiltersFormView();
-
 });

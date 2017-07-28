@@ -6,7 +6,7 @@
                     <li class="menu-item <%= "active" if action_name.eql?('stories') %>">Stories</li>
                 </a>
                 <a href="/explore/data">
-                    <li class="menu-item <%= "active" if action_name.eql?('data') %>">Data</li>
+                    <li class="menu-item <%= "active" if action_name.eql?('data') || (controller_name == 'reports') %>">Data</li>
                 </a>
 	    </ul>
 	</nav>

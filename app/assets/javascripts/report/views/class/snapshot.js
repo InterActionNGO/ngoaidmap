@@ -28,8 +28,7 @@ define([
           type: 'column',
           spacingLeft: 0,
           spacingRight: 0,
-          width: 188,
-          reflow: false
+          reflow: true
         },
         colors: ['#CBCBCB', '#323232', '#006C8D', '#AACED9', '#878787', '#8E921B', '#CDCF9A', '#C45017', '#E5B198', '#D7A900'],
         plotOptions: {
@@ -44,15 +43,13 @@ define([
         },
         legend: {
           useHTML: true,
-          width: 188,
-          itemWidth: 188,
           itemDistance: 0,
           itemMarginBottom: 10,
           itemStyle: {
-            width: 160,
             fontWeight: 'normal',
             fontFamily: 'Akzidenz',
-            fontSize: '13px'
+            fontSize: '13px',
+	    textOverflow: 'normal'
           },
           labelFormatter: function() {
             var value;
@@ -139,8 +136,15 @@ define([
       this._setListeners();
     },
 
+    setLegendWidth: function () {
+	var width = $('.mod-report-stacked-chart').width();
+	this.options.chart.legend.width = width;
+	this.options.chart.legend.itemWidth = width;
+	this.options.chart.legend.itemStyle.width = width - 21;
+    },
+
     _setListeners: function() {
-      Backbone.Events.on('filters:fetch', this.hide, this);
+      //Backbone.Events.on('filters:fetch', this.hide, this);
       Backbone.Events.on('filters:done', this.show, this);
     },
 
@@ -149,15 +153,16 @@ define([
       this.$el.html(template( this.data ));
     },
 
-    hide: function() {
+    /*hide: function() {
       this.$el.addClass('is-hidden');
-    },
+    },*/
 
     show: function() {
       $.when(
         this.getData()
       ).then(_.bind(function() {
         this.render();
+	this.setLegendWidth();
         this.setChart();
         this.$el.removeClass('is-hidden');
         this.initMap();

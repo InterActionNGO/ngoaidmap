@@ -199,3 +199,8 @@ input {
 .display-table {
     display: table;
 }
+.mobile-hidden {
+    @media (max-width: $screen-sm-max) {
+        display: none;
+    }
+}

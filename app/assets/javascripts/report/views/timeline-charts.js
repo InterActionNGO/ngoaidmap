@@ -20,8 +20,7 @@ define([
         type: 'line',
         spacingLeft: 0,
         spacingRight: 0,
-        zoomType: 'x',
-        width: 539
+        zoomType: 'x'
       },
       legend: {
         labelFormatter: function () {
@@ -68,11 +67,14 @@ define([
     },
 
     initialize: function() {
-      this.$projectChart = $('#projectsChart');
+      this.$projectsChart = $('#projectsChart');
       this.$organizationsChart = $('#organizationsChart');
+      this.$organizationTab = $("#organizationTab");
       $('#modReportsTabs').tabs();
       Backbone.Events.on('filters:fetch', this.hide, this);
       Backbone.Events.on('filters:done', this.showCharts, this);
+            
+
     },
 
     showCharts: function() {
@@ -146,17 +148,18 @@ define([
         data: activeProjectsData,
         color: '#006C8D'
       });
-
-      this.$projectChart.highcharts(_.extend({}, this.options, {
+        
+      this.$projectsChart.highcharts(_.extend({}, this.options, {
         title: {
-          text: 'Number of Active Projects Over Time'
+          text: 'Active Projects Over Time'
         },
         series: seriesData
       }));
-
+        
+      this.$organizationTab.show(); // Need to display this in order for width to render properly on hidden tab
       this.$organizationsChart.highcharts(_.extend({}, this.options, {
         title: {
-          text: 'Number of Active Organizations Over Time'
+          text: 'Active Organizations Over Time'
         },
         tooltip: {
           headerFormat: '{point.x:%b %Y}<br>',
@@ -168,6 +171,7 @@ define([
           color: '#006C8D'
         }]
       }));
+      this.$organizationTab.hide();
     },
 
     hide: function() {

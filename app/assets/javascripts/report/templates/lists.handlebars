@@ -1,225 +1,390 @@
 {{#if donors}}
-  <h2>Donors list</h2>
-  <div class="report-list-subtitle">
-    {{#if title}}<span class="">Top {{title}}</span>{{/if}}
-    <button class="is-inline-btn is-unprintable">Close list</button>
-  </div>
-  <ul class="mod-report-lists-selector">
-    <li>
-      <span class="current">Sort by number of projects</span>
-      <ul>
-        <li><a href="#projects" data-category="projectsCount">Sort by number of projects</a></li>
-        <li><a href="#countries" data-category="countriesCount">Sort by number of countries</a></li>
-        <li><a href="#sectors" data-category="sectorsCount">Sort by number of sectors</a></li>
-      </ul>
-    </li>
-    {{#if pagination}}
-      <div class="show-toolbar is-unprintable">
-        <button data-limit="all">All</button>
-        {{#each pagination}}
-          <button data-limit="{{this}}">{{this}}</button>
+    <div class="col-sm-6">
+        <h2>Donors list</h2>
+        <button class="is-inline-btn is-unprintable">Hide</button>
+        <div class="report-list-subtitle">
+            {{#if pagination}}
+                <div class="show-toolbar is-unprintable">
+                    Show: 
+                    <button data-limit="all">All</button>
+                    {{#each pagination}}
+                        <button data-limit="{{this}}">{{this}}</button>
+                    {{/each}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+    
+    <div class="col-sm-6 to-right-sm">
+        <ul class="mod-report-lists-selector visible-lg-inline-block visible-md-inline-block visible-xs-block visible-sm-inline-block">
+            <li>
+                <div class="current">By number of projects</div>
+                <ul>
+                    <li><a href="#projects" data-category="projectsCount">By number of projects</a></li>
+                    <li><a href="#countries" data-category="countriesCount">By number of countries</a></li>
+                    <li><a href="#sectors" data-category="sectorsCount">By number of sectors</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    {{!-- MOBILE-ONLY --}}
+    <div class="visible-xs col-xs-12 report-list">
+        {{#each donors}}
+            <div class="report-list-item row donors">
+                <h4 class="col-xs-12">{{name}}</h4>
+                <div class="col-xs-4 item-count-block">
+                    <h5>Projects</h5>
+                    <p class="item-count">{{projectsCount}}</p>
+                </div>
+                <div class="col-xs-4 item-count-block">
+                    <h5>Countries</h5>
+                    <p class="item-count">{{countriesCount}}</p>
+                </div>
+                <div class="col-xs-4 item-count-block">
+                    <h5>Sectors</h5>
+                    <p class="item-count">{{sectorsCount}}</p>
+                </div>
+            </div>
         {{/each}}
-      </div>
-    {{/if}}
-  </ul>
-  <table>
-    <tr>
-      <th>Donor</th>
-      <th>Projects</th>
-      <th>Countries</th>
-      <th>Sectors</th>
-    </tr>
-    {{#each donors}}
-      <tr>
-        <td>{{name}}</td>
-        {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
-      </tr>
-    {{/each}}
-  </table>
+    </div>
+    
+    {{!-- NON_MOBILE --}}
+    <div class="hidden-xs col-sm-12">
+        <table>
+            <tr>
+                <th>Donor</th>
+                <th>Projects</th>
+                <th>Countries</th>
+                <th>Sectors</th>
+            </tr>
+            {{#each donors}}
+                <tr>
+                    <td>{{name}}</td>
+                    {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
+                    {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
+                    {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+    
 {{/if}}
 
 
 {{#if organizations}}
-  <h2>Organizations list</h2>
-  <div class="report-list-subtitle">
-    {{#if title}}<span class="">Top {{title}}</span>{{/if}}
-    <button class="is-inline-btn is-unprintable">Close list</button>
-  </div>
-  <ul class="mod-report-lists-selector">
-    <li>
-      <span class="current">Sort by number of projects</span>
-      <ul>
-        <li><a href="#projects" data-category="projectsCount">Sort by number of projects</a></li>
-        <li><a href="#countries" data-category="countriesCount">Sort by number of countries</a></li>
-        <li><a href="#sectors" data-category="sectorsCount">Sort by number of sectors</a></li>
-      </ul>
-    </li>
-    {{#if pagination}}
-      <div class="show-toolbar is-unprintable">
-        <button data-limit="all">All</button>
-        {{#each pagination}}
-          <button data-limit="{{this}}">{{this}}</button>
+    <div class="col-sm-6">
+        <h2>Organizations list</h2>
+        <button class="is-inline-btn is-unprintable">Hide</button>
+        <div class="report-list-subtitle">
+            {{#if pagination}}
+                <div class="show-toolbar is-unprintable">
+                    Show:
+                    <button data-limit="all">All</button>
+                    {{#each pagination}}
+                        <button data-limit="{{this}}">{{this}}</button>
+                    {{/each}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+    
+    <div class="col-sm-6 to-right-sm">
+        <ul class="mod-report-lists-selector visible-lg-inline-block visible-md-inline-block visible-xs-block visible-sm-inline-block">
+            <li>
+                <div class="current">By number of projects</div>
+                <ul>
+                    <li><a href="#projects" data-category="projectsCount">By number of projects</a></li>
+                    <li><a href="#countries" data-category="countriesCount">By number of countries</a></li>
+                    <li><a href="#sectors" data-category="sectorsCount">By number of sectors</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+  
+    {{!-- MOBILE-ONLY --}}
+    <div class="visible-xs col-xs-12 report-list">
+        {{#each organizations}}
+            <div class="report-list-item row organizations">
+                <h4 class="col-xs-12">{{name}}</h4>
+                <div class="col-xs-4 item-count-block">
+                    <h5>Projects</h5>
+                    <p class="item-count">{{projectsCount}}</p>
+                </div>
+                <div class="col-xs-4 item-count-block">
+                    <h5>Countries</h5>
+                    <p class="item-count">{{countriesCount}}</p>
+                </div>
+                <div class="col-xs-4 item-count-block">
+                    <h5>Sectors</h5>
+                    <p class="item-count">{{sectorsCount}}</p>
+                </div>
+            </div>
         {{/each}}
-      </div>
-    {{/if}}
-  </ul>
-  <table>
-    <tr>
-      <th>Organization</th>
-      <th>Projects</th>
-      <th>Countries</th>
-      <th>Sectors</th>
-    </tr>
-    {{#each organizations}}
-      <tr>
-        <td>{{name}}</td>
-        {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
-      </tr>
-    {{/each}}
-  </table>
+    </div>
+    
+    {{!-- NON_MOBILE --}}
+    <div class="hidden-xs col-sm-12">
+        <table>
+            <tr>
+                <th>Organization</th>
+                <th>Projects</th>
+                <th>Countries</th>
+                <th>Sectors</th>
+            </tr>
+            {{#each organizations}}
+            <tr>
+                <td>{{name}}</td>
+                {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
+                {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
+                {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
+            </tr>
+            {{/each}}
+        </table>
+    </div>
 {{/if}}
 
 
 {{#if countries}}
-  <h2>Countries list</h2>
-  <div class="report-list-subtitle">
-    {{#if title}}<span>Top {{title}}</span>{{/if}}
-    <button class="is-inline-btn is-unprintable">Close list</button>
-  </div>
-  <ul class="mod-report-lists-selector">
-    <li>
-      <span class="current">Sort by number of organizations</span>
-      <ul>
-        <li><a href="#organizations" data-category="organizationsCount">Sort by number of organizations</a></li>
-        <li><a href="#donors" data-category="donorsCount">Sort by number of donors</a></li>
-        <li><a href="#countries" data-category="countriesCount">Sort by number of countries</a></li>
-        <li><a href="#sectors" data-category="sectorsCount">Sort by number of sectors</a></li>
-      </ul>
-    </li>
-    {{#if pagination}}
-      <div class="show-toolbar is-unprintable">
-        <button data-limit="all">All</button>
-        {{#each pagination}}
-          <button data-limit="{{this}}">{{this}}</button>
+    <div class="col-sm-6">
+        <h2>Countries list</h2>
+        <button class="is-inline-btn is-unprintable">Hide</button>
+        <div class="report-list-subtitle">
+            {{#if pagination}}
+                <div class="show-toolbar is-unprintable">
+                    Show: 
+                    <button data-limit="all">All</button>
+                    {{#each pagination}}
+                        <button data-limit="{{this}}">{{this}}</button>
+                    {{/each}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+    
+    <div class="col-sm-6 to-right-sm">
+        <ul class="mod-report-lists-selector visible-lg-inline-block visible-md-inline-block visible-xs-block visible-sm-inline-block">
+            <li>
+                <div class="current">By number of organizations</div>
+                <ul>
+                    <li><a href="#organizations" data-category="organizationsCount">By number of organizations</a></li>
+                    <li><a href="#donors" data-category="donorsCount">By number of donors</a></li>
+                    <li><a href="#countries" data-category="countriesCount">By number of countries</a></li>
+                    <li><a href="#sectors" data-category="sectorsCount">By number of sectors</a></li>
+                </ul>
+            </li>
+            
+        </ul>
+    </div>
+    
+    {{!-- MOBILE-ONLY --}}
+    <div class="visible-xs col-xs-12 report-list">
+        {{#each countries}}
+            <div class="report-list-item row countries">
+                <h4 class="col-xs-12">{{name}}</h4>
+                <div class="col-xs-3 item-count-block">
+                    <h5>Organizations</h5>
+                    <p class="item-count">{{organizationsCount}}</p>
+                </div>
+                <div class="col-xs-3 item-count-block">
+                    <h5>Donors</h5>
+                    <p class="item-count">{{donorsCount}}</p>
+                </div>
+                <div class="col-xs-3 item-count-block">
+                    <h5>Projects</h5>
+                    <p class="item-count">{{projectsCount}}</p>
+                </div>
+                <div class="col-xs-3 item-count-block">
+                    <h5>Sectors</h5>
+                    <p class="item-count">{{sectorsCount}}</p>
+                </div>
+            </div>
         {{/each}}
-      </div>
-    {{/if}}
-  </ul>
-  <table>
-    <tr>
-      <th>Country</th>
-      <th>Organizations</th>
-      <th>Donors</th>
-      <th>Projects</th>
-      <th>Sectors</th>
-    </tr>
-    {{#each countries}}
-      <tr>
-        <td>{{name}}</td>
-        {{#if organizationsCount}}<td>{{organizationsCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if donorsCount}}<td>{{donorsCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
-      </tr>
-    {{/each}}
-  </table>
+    </div>
+  
+    {{!-- NON-MOBILE --}}
+    <div class="hidden-xs col-sm-12">
+        <table>
+            <tr>
+                <th>Country</th>
+                <th>Organizations</th>
+                <th>Donors</th>
+                <th>Projects</th>
+                <th>Sectors</th>
+            </tr>
+            {{#each countries}}
+                <tr>
+                    <td>{{name}}</td>
+                    {{#if organizationsCount}}<td>{{organizationsCount}}</td>{{else}}<td></td>{{/if}}
+                    {{#if donorsCount}}<td>{{donorsCount}}</td>{{else}}<td></td>{{/if}}
+                    {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
+                    {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+  
 {{/if}}
 
 {{#if projects}}
-  <h2>Projects list</h2>
-  <div class="report-list-subtitle">
-    {{#if title}}<span class="">Top {{title}}</span>{{/if}}
-    <button class="is-inline-btn is-unprintable">Close list</button>
-  </div>
-  <ul class="mod-report-lists-selector">
-    <li>
-      <span class="current">Sort by number of donors</span>
-      <ul>
-        <li><a href="#organizations" data-category="organizationName">Sort by organization name</a></li>
-        <li><a href="#donors" data-category="donorsCount">Sort by number of donors</a></li>
-        <li><a href="#countries" data-category="countriesCount">Sort by number of countries</a></li>
-        <li><a href="#sectors" data-category="sectorsCount">Sort by number of sectors</a></li>
-      </ul>
-    </li>
-    {{#if pagination}}
-      <div class="show-toolbar is-unprintable">
-        <button data-limit="all">All</button>
-        {{#each pagination}}
-          <button data-limit="{{this}}">{{this}}</button>
+    <div class="col-sm-6">
+        <h2>Projects list</h2>
+        <button class="is-inline-btn is-unprintable">Hide</button>
+        <div class="report-list-subtitle">
+            {{#if pagination}}
+                <div class="show-toolbar is-unprintable">
+                    Show: 
+                    <button data-limit="all">All</button>
+                    {{#each pagination}}
+                        <button data-limit="{{this}}">{{this}}</button>
+                    {{/each}}
+                </div>
+            {{/if}}           
+        </div>
+    </div>
+    
+    <div class="col-sm-6 to-right-sm">
+        <ul class="mod-report-lists-selector visible-lg-inline-block visible-md-inline-block visible-xs-block visible-sm-inline-block">
+            <li>
+                <div class="current">By number of donors</div>
+                <ul>
+                    <li><a href="#organizations" data-category="organizationName">By organization name</a></li>
+                    <li><a href="#donors" data-category="donorsCount">By number of donors</a></li>
+                    <li><a href="#countries" data-category="countriesCount">By number of countries</a></li>
+                    <li><a href="#sectors" data-category="sectorsCount">By number of sectors</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    {{!-- MOBILE-ONLY --}}
+    <div class="visible-xs col-xs-12 report-list">
+        {{#each projects}}
+            <div class="report-list-item row projects">
+                <h4 class="col-xs-12">{{name}}</h4>
+                <h6 class="col-xs-12">{{organizationName}}</h6>
+                <div class="col-xs-4 item-count-block">
+                    <h5>Donors</h5>
+                    <p class="item-count">{{donorsCount}}</p>
+                </div>
+                <div class="col-xs-4 item-count-block">
+                    <h5>Countries</h5>
+                    <p class="item-count">{{countriesCount}}</p>
+                </div>
+                <div class="col-xs-4 item-count-block">
+                    <h5>Sectors</h5>
+                    <p class="item-count">{{sectorsCount}}</p>
+                </div>
+            </div>
         {{/each}}
-      </div>
-    {{/if}}
-  </ul>
-  <table>
-    <tr>
-      <th>Project</th>
-      <th>Donors</th>
-      <th>Countries</th>
-      <th>Sectors</th>
-    </tr>
-    {{#each projects}}
-      <tr>
-        <td class="mod-report-lists-project">{{#if organizationName}}<strong>{{organizationName}}</strong><br>{{/if}}{{name}}</td>
-        {{#if donorsCount}}<td>{{donorsCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
-      </tr>
-    {{/each}}
-  </table>
+    </div>
+    
+    {{!-- NON-MOBILE --}}
+    <div class="hidden-xs col-sm-12">
+        <table>
+            <tr>
+                <th>Project</th>
+                <th>Donors</th>
+                <th>Countries</th>
+                <th>Sectors</th>
+            </tr>
+            {{#each projects}}
+            <tr>
+                <td class="mod-report-lists-project">{{#if organizationName}}<strong>{{organizationName}}</strong><br>{{/if}}{{name}}</td>
+                {{#if donorsCount}}<td>{{donorsCount}}</td>{{else}}<td></td>{{/if}}
+                {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
+                {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+  
 {{/if}}
 
 {{#if sectors}}
-  <h2>Sectors list</h2>
-  <div class="report-list-subtitle">
-    {{#if title}}<span class="">Top {{title}}</span>{{/if}}
-    <button class="is-inline-btn is-unprintable">Close list</button>
-  </div>
-  <ul class="mod-report-lists-selector">
-    <li>
-      <span class="current">Sort by number of organizations</span>
-      <ul>
-        <li><a href="#organizations" data-category="organizationsCount">Sort by number of organizations</a></li>
-        <li><a href="#donors" data-category="donorsCount">Sort by number of donors</a></li>
-        <li><a href="#projects" data-category="projectsCount">Sort by number of projects</a></li>
-        <li><a href="#countries" data-category="countriesCount">Sort by number of countries</a></li>
-      </ul>
-    </li>
-    {{#if pagination}}
-      <div class="show-toolbar is-unprintable">
-        <button data-limit="all">All</button>
-        {{#each pagination}}
-          <button data-limit="{{this}}">{{this}}</button>
+    <div class="col-sm-6">
+        <h2>Sectors list</h2>
+        <button class="is-inline-btn is-unprintable">Hide</button>
+        <div class="report-list-subtitle">
+            {{#if pagination}}
+                <div class="show-toolbar is-unprintable">
+                    <button data-limit="all">All</button>
+                    {{#each pagination}}
+                        <button data-limit="{{this}}">{{this}}</button>
+                    {{/each}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+    
+    <div class="col-sm-6 to-right-sm">
+        <ul class="mod-report-lists-selector visible-lg-inline-block visible-md-inline-block visible-xs-block visible-sm-inline-block">
+            <li>
+                <div class="current">By number of organizations</div>
+                <ul>
+                    <li><a href="#organizations" data-category="organizationsCount">By number of organizations</a></li>
+                    <li><a href="#donors" data-category="donorsCount">By number of donors</a></li>
+                    <li><a href="#projects" data-category="projectsCount">By number of projects</a></li>
+                    <li><a href="#countries" data-category="countriesCount">By number of countries</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    {{!-- MOBILE-ONLY --}}
+    <div class="visible-xs col-xs-12 report-list">
+        {{#each sectors}}
+            <div class="report-list-item row sectors">
+                <h4 class="col-xs-12">{{name}}</h4>
+                <div class="col-xs-3 item-count-block">
+                    <h5>Organizations</h5>
+                    <p class="item-count">{{organizationsCount}}</p>
+                </div>
+                <div class="col-xs-3 item-count-block">
+                    <h5>Donors</h5>
+                    <p class="item-count">{{donorsCount}}</p>
+                </div>
+                <div class="col-xs-3 item-count-block">
+                    <h5>Projects</h5>
+                    <p class="item-count">{{projectsCount}}</p>
+                </div>
+                <div class="col-xs-3 item-count-block">
+                    <h5>Countries</h5>
+                    <p class="item-count">{{countriesCount}}</p>
+                </div>
+            </div>
         {{/each}}
-      </div>
-    {{/if}}
-  </ul>
-  <table>
-    <tr>
-      <th>Sector</th>
-      <th>Organizations</th>
-      <th>Donors</th>
-      <th>Projects</th>
-      <th>Countries</th>
-    </tr>
-    {{#each sectors}}
-      <tr>
-        <td>{{name}}</td>
-        {{#if organizationsCount}}<td>{{organizationsCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if donorsCount}}<td>{{donorsCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
-        {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
-      </tr>
-    {{/each}}
-  </table>
+    </div>
+    
+    {{!-- NON-MOBILE --}}
+    <div class="hidden-xs col-sm-12">
+        <table>
+            <tr>
+                <th>Sector</th>
+                <th>Organizations</th>
+                <th>Donors</th>
+                <th>Projects</th>
+                <th>Countries</th>
+            </tr>
+            {{#each sectors}}
+                <tr>
+                    <td>{{name}}</td>
+                    {{#if organizationsCount}}<td>{{organizationsCount}}</td>{{else}}<td></td>{{/if}}
+                    {{#if donorsCount}}<td>{{donorsCount}}</td>{{else}}<td></td>{{/if}}
+                    {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
+                    {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+
 {{/if}}
 
-{{#if isLong}}
-  <button class="is-btn is-show-all-btn is-unprintable">Show all</button>
-{{/if}}
-{{#if isActive}}
-  <button class="is-btn is-clear-all-btn is-unprintable">Clear show all</button>
-{{/if}}
+<div class="col-xs-12">
+    {{#if isLong}}
+        <button class="is-btn is-show-all-btn is-unprintable">Show all</button>
+    {{/if}}
+    {{#if isActive}}
+        <button class="is-btn is-clear-all-btn is-unprintable">Clear show all</button>
+    {{/if}}
+</div>

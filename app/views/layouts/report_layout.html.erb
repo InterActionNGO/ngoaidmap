@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Report · NGO Aid Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Explore Data · NGO Aid Map</title>
     <meta name="content" content="NGO Aid Map report generator.">
-    <meta name="viewport" content="width=980px">
+<!--     <meta name="viewport" content="width=980px"> -->
     <meta name="google-site-verification" content="r4LPeTYNAKGuj7MPrkGpDgZ2ZXaKpVqn-nV7ixs5-sQ">
 
     <%= stylesheet_link_tag "https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css", :media => 'all' %>
@@ -26,11 +27,15 @@
     <%= csrf_meta_tag %>
   </head>
   <body class="<%= params[:controller] %>-page theme-<%= @site.theme_id %> <%= "section-" + @page.top_parent.permalink if @page.present? %> <%= "linos-" + @page.permalink if @page.present? %>">
-    <%= render 'partials/header' %>
+    <%= render 'partials/header_bootstrap' %>
+    
+    <main id="main-content" class="mod-explore">
+        <h2 class="screen-reader">Main Content</h2>
+        <%= render 'partials/explore/header' %>
+        <%= yield %>
+    </main>
 
-    <%= yield %>
-
-    <%= render 'partials/footer' %>
+    <%= render 'partials/footer_bootstrap' %>
 
     <%= javascript_include_tag "https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js" %>
 
