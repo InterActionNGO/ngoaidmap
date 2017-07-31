@@ -145,7 +145,7 @@ define([
 
     _setListeners: function() {
       //Backbone.Events.on('filters:fetch', this.hide, this);
-      Backbone.Events.on('filters:done', this.show, this);
+        Backbone.Events.on('timelineCharts:done', this.show, this);
     },
 
     render: function() {
@@ -165,7 +165,7 @@ define([
 	this.setLegendWidth();
         this.setChart();
         this.$el.removeClass('is-hidden is-invisible');
-        this.initMap();
+//         this.initMap();
       }, this));
     },
 
@@ -314,32 +314,32 @@ define([
       }, this));
     },
 
-    initMap: function() {
-      var element = this.$el.find('.profile-map');
-
-      if (element.length > 0 && this.data.projects.length > 0) {
-        var map = L.map(element.get(0), this.options.map);
-        var markers = new L.MarkerClusterGroup(this.options.markers);
-
-        _.each(this.data.projects, function(p) {
-          _.each(p.the_geom, function(geom) {
-            var m = L.marker([geom.y, geom.x], {
-              icon: L.divIcon({
-                className: 'profile-marker'
-              })
-            });
-            markers.addLayer(m);
-          });
-        });
-
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
-
-        markers.addTo(map);
-        map.fitBounds(markers.getBounds());
-
-        map.invalidateSize(true);
-      }
-    }
+//     initMap: function() {
+//       var element = this.$el.find('.profile-map');
+// 
+//       if (element.length > 0 && this.data.projects.length > 0) {
+//         var map = L.map(element.get(0), this.options.map);
+//         var markers = new L.MarkerClusterGroup(this.options.markers);
+// 
+//         _.each(this.data.projects, function(p) {
+//           _.each(p.the_geom, function(geom) {
+//             var m = L.marker([geom.y, geom.x], {
+//               icon: L.divIcon({
+//                 className: 'profile-marker'
+//               })
+//             });
+//             markers.addLayer(m);
+//           });
+//         });
+// 
+//         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+// 
+//         markers.addTo(map);
+//         map.fitBounds(markers.getBounds());
+// 
+//         map.invalidateSize(true);
+//       }
+//     }
 
   });
 

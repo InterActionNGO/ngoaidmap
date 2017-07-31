@@ -73,7 +73,6 @@ define([
       $('#modReportsTabs').tabs();
       Backbone.Events.on('filters:fetch', this.hide, this);
       Backbone.Events.on('filters:done', this.showCharts, this);
-            
 
     },
 
@@ -85,8 +84,6 @@ define([
     setCharts: function() {
       var active = FilterModel.instance.get('active');
       var today = new Date(moment().utc()).getTime();
-
-      console.log(momentRange);
 
       var dateRange = moment().range(
         moment(FilterModel.instance.get('startDate')),
@@ -148,7 +145,7 @@ define([
         data: activeProjectsData,
         color: '#006C8D'
       });
-        
+
       this.$projectsChart.highcharts(_.extend({}, this.options, {
         title: {
           text: 'Active Projects Over Time'
@@ -170,10 +167,14 @@ define([
           data: activeOrganizationsData,
           color: '#006C8D'
         }]
-      }));
+      }), this.timelineChartsComplete);
       this.$organizationTab.hide();
     },
 
+    timelineChartsComplete: function () {
+        Backbone.Events.trigger('timelineCharts:done');
+    },
+    
     hide: function() {
       this.$el.addClass('is-hidden');
     }

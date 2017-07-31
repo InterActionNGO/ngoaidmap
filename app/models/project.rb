@@ -352,7 +352,7 @@ class Project < ActiveRecord::Base
       sql = <<-SQL
         SELECT p.id, p.name, p.budget_usd, p.start_date, p.end_date, o.id AS primary_organization, o.name AS organization_name,
         COUNT(DISTINCT d.id) AS donors_count,
-        COUNT(DISTINCT c.id) AS countries_count,
+        COUNT(DISTINCT g.country_uid) AS countries_count,
         COUNT(DISTINCT s.id) AS sectors_count
           FROM projects p
                  INNER JOIN projects_sectors ps ON (p.id = ps.project_id)
@@ -362,10 +362,8 @@ class Project < ActiveRecord::Base
                  INNER JOIN organizations o ON (p.primary_organization_id = o.id)
                  INNER JOIN geolocations_projects gp ON (p.id = gp.project_id)
                  INNER JOIN geolocations g ON (g.id = gp.geolocation_id)
-                 INNER JOIN geolocations c ON (g.country_uid = c.uid)
           WHERE true
          #{date_filter} #{form_query_filter} #{donors_filter} #{sectors_filter} #{countries_filter} #{organizations_filter} #{budget_filter}
-          AND c.adm_level = 0
           GROUP BY p.id, p.name, o.id, o.name, p.budget_usd, p.start_date, p.end_date
           ORDER BY p.name
           LIMIT #{the_limit}
