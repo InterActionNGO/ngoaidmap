@@ -9,7 +9,7 @@ module PreloadVars
     @countries              = Geolocation.where(adm_level: 0).order(:name).uniq.pluck(:uid, :name)
     @sectors                = Sector.counting_projects(status: 'active', site: @site.id)
     @partners               = Organization.joins(:partner_projects).merge(Project.active).order(:name).uniq.pluck(:id, :name)
-    @local_partners         = Organization.local.joins(:partner_projects).merge(Project.active).order(:name).uniq.pluck(:id, :name)
-    @international_partners = Organization.international.joins(:partner_projects).merge(Project.active).order(:name).uniq.pluck(:id, :name)
+#     @local_partners         = Organization.local.joins(:partner_projects).merge(Project.active).order(:name).uniq.pluck(:id, :name)
+#     @international_partners = Organization.international.joins(:partner_projects).merge(Project.active).order(:name).uniq.pluck(:id, :name)
   end
 end
