@@ -68,7 +68,7 @@
                         <li><a href="<%= organization_path(organization[0]) %>"><%= organization[1] %></a></li>
                       <% end %>
                     </ul>
-                    <input type="text" class="mod-categories-search" placeholder="Search Organization">
+                    <input type="text" class="mod-categories-search" placeholder="Search Reporting Organization">
                   </div>
 
                   <div id="all-partners-orgs-menu" class="mod-go-up-menu">
@@ -156,64 +156,76 @@
   </section>
 
   <script type="text/javascript">
-    var buttons = document.querySelectorAll('.categories-selector button.father');
-    for (var i=0, len=buttons.length; i<len; i++) {
-      var button = buttons[i];
-      var parent = button.parentElement;
+  (function () {
+        var buttons = document.querySelectorAll('.categories-selector button.father');
+        var subMenus = document.querySelectorAll('.sub-menu');
+        var subButtons = document.querySelectorAll('button.sub-father');
+        var backButtons = document.querySelectorAll('button.back-button');
+        
+        for (var i=0, len=buttons.length; i<len; i++) {
+            var button = buttons[i];
+            var parent = button.parentElement;
 
-      button.addEventListener('click', function(e) {
-        var target   = e.currentTarget;
-        var menu     = target.parentElement.querySelector('.menu');
-        var menus    = target.parentElement.parentElement.querySelectorAll('.menu');
-        var hasClass = menu.classList.contains('-show');
+            button.addEventListener('click', function(e) {
+            
+                var target   = e.currentTarget;
+                var menu     = target.parentElement.querySelector('.menu');
+                var menus    = target.parentElement.parentElement.querySelectorAll('.menu');
+                var hasClass = menu.classList.contains('-show');
 
-        for (var i=0, len=menus.length; i < len; i++) {
-          menus[i].classList.remove('-show');
+                for (var i=0, len=menus.length; i < len; i++) {
+                    menus[i].classList.remove('-show');
+                }
+
+                if (hasClass) {
+                    menu.classList.remove('-show');
+                } else {
+                    menu.classList.add('-show');
+                }
+                
+                menu.querySelector('input').focus();
+                
+            });
+
+            parent.addEventListener('mouseleave', function(e) {
+                var target = e.currentTarget;
+                var menus  = target.parentElement.querySelectorAll('.menu');
+                var button = target.querySelector('button.father');
+
+                for (var i=0, len=menus.length; i < len; i++) {
+                    menus[i].classList.remove('-show');
+                }
+                button.blur();
+            });
         }
 
-        if (hasClass) {
-          menu.classList.remove('-show');
-        } else {
-          menu.classList.add('-show');
+        for (var i=0, len=subButtons.length; i<len; i++) {
+            var button = subButtons[i];
+
+            button.addEventListener('click', function(e) {
+                var target = e.currentTarget;
+                var menuId = target.getAttribute('aria-controls');
+                var menu   = document.getElementById(menuId);
+                menu.classList.add('-show');
+                
+                for(var i=0, len=subMenus.length; i<len; i++) {
+                    subMenus[i].classList.add('-hide');
+                }
+                
+                menu.querySelector('input').focus();
+            });
         }
-      });
+    
+        for (var i=0, len=backButtons.length; i<len; i++) {
+            var button = backButtons[i];
 
-      parent.addEventListener('mouseleave', function(e) {
-        var target = e.currentTarget;
-        var menus  = target.parentElement.querySelectorAll('.menu');
-        var button = target.querySelector('button.father');
-
-        for (var i=0, len=menus.length; i < len; i++) {
-          menus[i].classList.remove('-show');
+            button.addEventListener('click', function(e) {
+                var target = e.currentTarget;
+                var menu   = target.parentElement;
+                menu.classList.remove('-show');
+                menu.parentElement.querySelector('.sub-menu').classList.remove('-hide');
+            });
         }
-        button.blur();
-      });
-    }
-
-    var subButtons = document.querySelectorAll('button.sub-father');
-    var subMenu    = document.querySelectorAll('.sub-menu');
-    for (var i=0, len=subButtons.length; i<len; i++) {
-      var button = subButtons[i];
-
-      button.addEventListener('click', function(e) {
-        var target = e.currentTarget;
-        var menuId = target.getAttribute('aria-controls');
-        var menu   = document.getElementById(menuId);
-        menu.classList.add('-show');
-        subMenu.classList.add('-hide');
-      });
-    }
-
-    var backButtons = document.querySelectorAll('button.back-button');
-    for (var i=0, len=backButtons.length; i<len; i++) {
-      var button = backButtons[i];
-
-      button.addEventListener('click', function(e) {
-        var target = e.currentTarget;
-        var menu   = target.parentElement;
-        menu.classList.remove('-show');
-        subMenu.classList.remove('-hide');
-      });
-    }
+    })();
   </script>
 <% end %>

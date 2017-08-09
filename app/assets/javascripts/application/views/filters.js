@@ -36,11 +36,13 @@ define(['backbone', 'liveupdate'], function(Backbone) {
     },
 
     liveUpdate: function() {
-      this.$el.find('.organizations input.mod-categories-search')
-        .liveUpdate('.organizations .mod-categories-child li a');
-
-      this.$el.find('.donors input.mod-categories-search')
-        .liveUpdate('.donors .mod-categories-child li a');
+        
+      $("#reporting-orgs-menu").find("input.mod-categories-search")
+        .liveUpdate('.organizations-child li a');
+      $("#all-partners-orgs-menu").find("input.mod-categories-search")
+        .liveUpdate('.partners-child li a');
+      $("#donor-orgs-menu").find("input.mod-categories-search")
+        .liveUpdate('.donors-child li a');
 
       this.$el.find('.countries input.mod-categories-search')
         .liveUpdate('.countries .mod-categories-child li a');
