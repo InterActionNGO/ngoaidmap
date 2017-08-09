@@ -30,7 +30,7 @@
                           <a class="<%= category.name.underscore.parameterize %>" href="<%= sector_path(category.id) %>">
                               <%= category.name %>
                           </a>
-                          <span><%= category.projects_count %> projects</span>
+                          <span><%= category.respond_to?(:projects_count) ? category.projects_count : 0 %> projects</span>
                         </li>
                       <% end %>
                     </ul>
