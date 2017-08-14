@@ -21,6 +21,7 @@ class Sector < ActiveRecord::Base
   scope :sectors, -> (sectors){where(sectors: {id: sectors})}
   scope :donors, -> (donors){joins(projects: :donations).where(donations: {donor_id: donors})}
   scope :site, -> (site){joins(projects: :sites).where(sites: {id: site})}
+  scope :global, -> { joins(:projects).where("projects.geographical_scope = 'global'") }
   scope :geolocation, -> (geolocation,level=0){joins(projects: :geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){joins(projects: :geolocations).where(geolocations: {country_uid: countries})}
 
@@ -35,7 +36,8 @@ class Sector < ActiveRecord::Base
     sectors = Sector.all
     sectors = sectors.site(options[:site])                      if options[:site]
     sectors = sectors.active                                    if options[:status] && options[:status] == 'active'
-    sectors = sectors.geolocation(options[:geolocation], level) if options[:geolocation]
+    sectors = sectors.geolocation(options[:geolocation], level) if options[:geolocation] && level >= 0
+    sectors = sectors.global if options[:geolocation] && level < 0
     sectors = sectors.projects(options[:projects])              if options[:projects]
     sectors = sectors.countries(options[:countries])            if options[:countries]
     sectors = sectors.organizations(options[:organizations])    if options[:organizations]

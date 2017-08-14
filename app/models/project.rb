@@ -74,6 +74,7 @@ class Project < ActiveRecord::Base
   scope :sectors, -> (sectors){joins(:sectors).where(sectors: {id: sectors})}
   scope :donors, -> (donors){joins(:donations).where(donations: {donor_id: donors})}
   scope :partners, -> (partners){joins(:partners).where(organizations: {id: partners})}
+  scope :global, -> { where(:geographical_scope => 'global') }
   scope :geolocation, -> (geolocation,level=0){joins(:geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){joins(:geolocations).where(geolocations: {country_uid: countries})}
   scope :text_query, -> (q){where('projects.name ilike ? OR projects.description ilike ?', "%%#{q}%%", "%%#{q}%%")}
@@ -92,7 +93,8 @@ class Project < ActiveRecord::Base
     # it's faster to use includes as needed downstream rather rather than clogging up this widely-used method
     projects = self.preload(:primary_organization)
     projects = projects.site(options[:site])                                    if options[:site] && options[:site].to_i != 12
-    projects = projects.geolocation(options[:geolocation], level).includes(:geolocations)               if options[:geolocation]
+    projects = projects.geolocation(options[:geolocation], level).includes(:geolocations)               if options[:geolocation] && level >= 0
+    projects = projects.global if options[:geolocation] && level < 0
     projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries]).includes(:geolocations)                          if options[:countries]
     projects = projects.organizations(options[:organizations])                  if options[:organizations]
@@ -112,10 +114,12 @@ class Project < ActiveRecord::Base
     if from_api
       projects
     else
-      project_gs = projects.pluck(:g0, :g1, :g2, :g3, :g4).flatten.uniq
-      region_groups = {}
-      region_groups['regions'] = Geolocation.where("uid IN (?)", project_gs)
-      [projects, region_groups]
+        unless options[:geolocation].eql?('global')
+            project_gs = projects.pluck(:g0, :g1, :g2, :g3, :g4).flatten.uniq
+            region_groups = {}
+            region_groups['regions'] = Geolocation.where("uid IN (?)", project_gs)
+            [projects, region_groups]
+        end
     end
   end
 

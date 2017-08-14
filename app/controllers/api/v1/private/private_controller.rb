@@ -96,7 +96,7 @@ module Api
 
         def countries_count
           result = fetch_redis_cache do
-            query = Geolocation.active.fetch_all(permitted_params).count('distinct(geolocations.country_uid)')
+            query = Geolocation.active.where("country_uid is not null and country_uid != ''").fetch_all(permitted_params).count('distinct(geolocations.country_uid)')
             json = {"countries_count" => query}.to_json
           end
           render json: result

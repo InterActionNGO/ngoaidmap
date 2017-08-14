@@ -5,7 +5,7 @@
   <div class="row">
     <section class="layout-content grid-12 offset-1" id="content">
     
-      <%= render 'partials/project_list_header', type: @geolocation.adm_level >= 1 ? 'Location' : 'Country', title: @geolocation.name, css_class: 'country' %>
+      <%= render 'partials/project_list_header', type: @geolocation.adm_level.eql?(0) ? 'Country' : 'Location', title: @geolocation.name, css_class: 'country' %>
       
         <!--<h1 id="title-country" data-id="<%= @geolocation.id %>" data-name="<%= @geolocation.name.html_safe %>" class="section-title"><%= @geolocation.name %></h1>-->
 
@@ -16,8 +16,10 @@
     <aside class="layout-sidebar grid-4">
 
       <div id="sidebar-highlights" class="mod-highlighted-results mod-info" data-highlights="[&#34;projects_count&#34;]"></div>
-
-      <div id="sidebar-location" class="location mod-info"></div>
+        
+        <% unless @geolocation.adm_level.eql?(-1) %>
+            <div id="sidebar-location" class="location mod-info"></div>
+        <% end %>
 
       <div id="sidebar-sectors" class="project-sectors mod-info"></div>
 
