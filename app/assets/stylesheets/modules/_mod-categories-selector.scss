@@ -35,7 +35,7 @@
       font-size: inherit;
       @include border-radius(20px);
       text-transform: uppercase;
-
+      color: inherit;
       &:focus {
         border-color: gray;
       }
@@ -44,10 +44,6 @@
     .reports-button.father {
       height: 33px;
       padding: 7px 16px;
-    }
-
-    &:hover .father {
-      color: white;
     }
 
     .sub-father {
