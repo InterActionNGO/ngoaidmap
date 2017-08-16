@@ -44,6 +44,15 @@
     td {
         padding: 2px 0;
     }
+    a {
+        color: $color-1;
+        text-decoration: none;
+        &:hover,
+        &:focus{
+            color: darken($color-1, 5%);
+            text-decoration: underline;
+        }
+    }
     .is-btn {
         @extend .apply;
         display: block;
@@ -394,42 +403,22 @@ ul.mod-report-locations-header-child {
         margin-right: 0;
         margin-left: 0;
         &.donors {
-            background: $color-7a;
-            box-shadow: 0 4px 4px 0 $color-7a;
-            h4 {
-                color: $color-7;
-            }
+            box-shadow: 0 1px 4px 2px $color-7a;
         }
         &.organizations {
-            background: $color-6a;
-            box-shadow: 0 4px 4px 0 $color-6a;
-            h4 {
-                color: $color-6;
-            }
+            box-shadow: 0 1px 4px 2px $color-6a;
         }
         &.countries {
-            background: $color-8a;
-            box-shadow: 0 4px 4px 0 $color-8a;
-            h4 {
-                color: $color-8;
-            }
+            box-shadow: 0 1px 4px 2px $color-8a;
         }
         &.projects {
-            background: lighten($color-9,40%);
-            box-shadow: 0 4px 4px 0 lighten($color-9,40%);
+            box-shadow: 0 1px 4px 2px lighten($color-9,40%);
             h4 {
-                color: $color-9;
-            }
-            h6 {
-                color: lighten($color-9, 10%);
+                margin-bottom: 0;
             }
         }
         &.sectors {
-            background: $color-2a;
-            box-shadow: 0 4px 4px 0 $color-2a;
-            h4 {
-                color: $color-2;
-            }
+            box-shadow: 0 1px 4px 2px $color-2a;
         }
         .item-count-block {
             background: $color-0;

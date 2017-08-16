@@ -32,7 +32,7 @@
     <div class="visible-xs col-xs-12 report-list">
         {{#each donors}}
             <div class="report-list-item row donors">
-                <h4 class="col-xs-12">{{name}}</h4>
+                <h4 class="col-xs-12"><a target="_blank" href="/donors/{{id}}">{{name}}</a></h4>
                 <div class="col-xs-4 item-count-block">
                     <h5>Projects</h5>
                     <p class="item-count">{{projectsCount}}</p>
@@ -60,7 +60,7 @@
             </tr>
             {{#each donors}}
                 <tr>
-                    <td>{{name}}</td>
+                    <td><a target="_blank" href="/donors/{{id}}">{{name}}</a></td>
                     {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
                     {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
                     {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
@@ -106,7 +106,7 @@
     <div class="visible-xs col-xs-12 report-list">
         {{#each organizations}}
             <div class="report-list-item row organizations">
-                <h4 class="col-xs-12">{{name}}</h4>
+                <h4 class="col-xs-12"><a target="_blank" href="/organizations/{{id}}">{{name}}</a></h4>
                 <div class="col-xs-4 item-count-block">
                     <h5>Projects</h5>
                     <p class="item-count">{{projectsCount}}</p>
@@ -134,7 +134,7 @@
             </tr>
             {{#each organizations}}
             <tr>
-                <td>{{name}}</td>
+                <td><a target="_blank" href="/organizations/{{id}}">{{name}}</a></td>
                 {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
                 {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
                 {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
@@ -181,20 +181,20 @@
     <div class="visible-xs col-xs-12 report-list">
         {{#each countries}}
             <div class="report-list-item row countries">
-                <h4 class="col-xs-12">{{name}}</h4>
-                <div class="col-xs-3 item-count-block">
+                <h4 class="col-xs-12"><a target="_blank" href="/location/{{uid}}">{{name}}</a></h4>
+                <div class="col-xs-6 item-count-block">
                     <h5>Organizations</h5>
                     <p class="item-count">{{organizationsCount}}</p>
                 </div>
-                <div class="col-xs-3 item-count-block">
+                <div class="col-xs-6 item-count-block">
                     <h5>Donors</h5>
                     <p class="item-count">{{donorsCount}}</p>
                 </div>
-                <div class="col-xs-3 item-count-block">
+                <div class="col-xs-6 item-count-block">
                     <h5>Projects</h5>
                     <p class="item-count">{{projectsCount}}</p>
                 </div>
-                <div class="col-xs-3 item-count-block">
+                <div class="col-xs-6 item-count-block">
                     <h5>Sectors</h5>
                     <p class="item-count">{{sectorsCount}}</p>
                 </div>
@@ -214,7 +214,7 @@
             </tr>
             {{#each countries}}
                 <tr>
-                    <td>{{name}}</td>
+                    <td><a target="_blank" href="/location/{{uid}}">{{name}}</a></td>
                     {{#if organizationsCount}}<td>{{organizationsCount}}</td>{{else}}<td></td>{{/if}}
                     {{#if donorsCount}}<td>{{donorsCount}}</td>{{else}}<td></td>{{/if}}
                     {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}
@@ -261,8 +261,8 @@
     <div class="visible-xs col-xs-12 report-list">
         {{#each projects}}
             <div class="report-list-item row projects">
-                <h4 class="col-xs-12">{{name}}</h4>
-                <h6 class="col-xs-12">{{organizationName}}</h6>
+                <h4 class="col-xs-12"><a target="_blank" href="/projects/{{id}}">{{name}}</a></h4>
+                <h6 class="col-xs-12"><a target="_blank" href="/organizations/{{organizationId}}">{{organizationName}}</a></h6>
                 <div class="col-xs-4 item-count-block">
                     <h5>Donors</h5>
                     <p class="item-count">{{donorsCount}}</p>
@@ -290,7 +290,7 @@
             </tr>
             {{#each projects}}
             <tr>
-                <td class="mod-report-lists-project">{{#if organizationName}}<strong>{{organizationName}}</strong><br>{{/if}}{{name}}</td>
+                <td><a target="_blank" href="/projects/{{id}}">{{name}}</a><strong><a class="block" target="_blank" href="/organizations/{{organizationId}}">{{organizationName}}</a></strong></td>
                 {{#if donorsCount}}<td>{{donorsCount}}</td>{{else}}<td></td>{{/if}}
                 {{#if countriesCount}}<td>{{countriesCount}}</td>{{else}}<td></td>{{/if}}
                 {{#if sectorsCount}}<td>{{sectorsCount}}</td>{{else}}<td></td>{{/if}}
@@ -335,20 +335,20 @@
     <div class="visible-xs col-xs-12 report-list">
         {{#each sectors}}
             <div class="report-list-item row sectors">
-                <h4 class="col-xs-12">{{name}}</h4>
-                <div class="col-xs-3 item-count-block">
+                <h4 class="col-xs-12"><a target="_blank" href="sectors/{{id}}">{{name}}</a></h4>
+                <div class="col-xs-6 item-count-block">
                     <h5>Organizations</h5>
                     <p class="item-count">{{organizationsCount}}</p>
                 </div>
-                <div class="col-xs-3 item-count-block">
+                <div class="col-xs-6 item-count-block">
                     <h5>Donors</h5>
                     <p class="item-count">{{donorsCount}}</p>
                 </div>
-                <div class="col-xs-3 item-count-block">
+                <div class="col-xs-6 item-count-block">
                     <h5>Projects</h5>
                     <p class="item-count">{{projectsCount}}</p>
                 </div>
-                <div class="col-xs-3 item-count-block">
+                <div class="col-xs-6 item-count-block">
                     <h5>Countries</h5>
                     <p class="item-count">{{countriesCount}}</p>
                 </div>
@@ -368,7 +368,7 @@
             </tr>
             {{#each sectors}}
                 <tr>
-                    <td>{{name}}</td>
+                    <td><a target="_blank" href="/sectors/{{id}}">{{name}}</a></td>
                     {{#if organizationsCount}}<td>{{organizationsCount}}</td>{{else}}<td></td>{{/if}}
                     {{#if donorsCount}}<td>{{donorsCount}}</td>{{else}}<td></td>{{/if}}
                     {{#if projectsCount}}<td>{{projectsCount}}</td>{{else}}<td></td>{{/if}}

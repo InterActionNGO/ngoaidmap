@@ -342,6 +342,7 @@ class Project < ActiveRecord::Base
 
     if countries && !countries.include?('All')
       countries_filter = "AND g.country_name IN (" + countries.map {|str| "#{ActiveRecord::Base.connection.quote(str)}"}.join(',') + ")"
+      countries_select = "g.uid,"
     end
 
     if organizations && !organizations.include?('All')
@@ -374,7 +375,7 @@ class Project < ActiveRecord::Base
       SQL
     else
       sql = <<-SQL
-        SELECT #{the_model}.name, #{the_model}.id,
+        SELECT #{the_model}.name, #{the_model}.id, #{countries_select}
         COUNT(DISTINCT p.id) AS projects_count,
         COUNT(DISTINCT d.id) AS donors_count,
         COUNT(DISTINCT c.id) AS countries_count,
@@ -393,7 +394,7 @@ class Project < ActiveRecord::Base
           WHERE true
          #{date_filter} #{form_query_filter} #{donors_filter} #{sectors_filter} #{countries_filter} #{organizations_filter} #{budget_filter}
          
-          GROUP BY #{the_model}.name, #{the_model}.id
+          GROUP BY #{the_model}.name, #{countries_select} #{the_model}.id
           ORDER BY projects_count DESC
           LIMIT #{the_limit}
       SQL
