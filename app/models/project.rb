@@ -342,7 +342,6 @@ class Project < ActiveRecord::Base
 
     if countries && !countries.include?('All')
       countries_filter = "AND g.country_name IN (" + countries.map {|str| "#{ActiveRecord::Base.connection.quote(str)}"}.join(',') + ")"
-      countries_select = "g.uid,"
     end
 
     if organizations && !organizations.include?('All')
@@ -350,6 +349,7 @@ class Project < ActiveRecord::Base
       organizations_filter = organizations_filter.gsub(/&amp;/, '&')
     end
 
+    countries_select = "c.uid," if the_model == 'c'
     if the_model == 'o'
       budget_line = ", SUM(p.budget_usd) AS budget_usd"
     end
