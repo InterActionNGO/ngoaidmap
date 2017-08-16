@@ -15,7 +15,7 @@
 
             <ul class="combo_search_select">
               <li class="comboselect">
-                <label for="organization">ORGANIZATION</label>
+                <label for="organization">REPORTING ORGANIZATION</label>
                 <%= select_tag :organization, options_for_select(@org_combo_values, params[:organization]), :class => :"chzn-select", :multiple => true, :size => 5, :placeholder => "Select organization" %>
               </li>
 
@@ -87,7 +87,7 @@
 
       <div class="report-spinner" id="spinView"></div>
 
-      <article class="mod-content-article">
+      <article class="mod-content-article mod-report-results">
         <div id="titleView" class="report-title text-center">
           <textarea placeholder="Your Title"></textarea>
           <button class="is-inline-btn is-unprintable">Edit</button>
@@ -139,8 +139,9 @@
           <h3>Limitations</h3>
           <ol type="1">
             <li id="limitations1">This reporting tool draws on the full NGO Aid Map database, including both inactive and currently active projects. This is a significantly larger set of data than that visible on the map, which only displays currently active projects. In addition, the database contains data contributed by both InterAction members and non-member organizations. Data may be added and/or modified by organizations at any time, which may lead to different results if two reports are run at different points in time using the same filter parameters. For additional information on data limitations, please visit: <a href="https://www.ngoaidmap.org/p/data">https://www.ngoaidmap.org/p/data</a></li>
-            <li id="limitations2">Not all organizations provide project budget information, and organizations may not provide budget information for all projects.</li>
-            <li id="limitations3">The collection of data for NGO Aid Map began in 2010, but the start dates of many of the projects that have been submitted precede that date. For more information about the history of NGO Aid Map, please visit: <a href="https://www.ngoaidmap.org/p/history">https://www.ngoaidmap.org/p/history</a>.</li>
+            <li id="limitations2">Global projects matching selected filters are included in the results.  Though distinct from country-level data, 'Global' is included here in the country counts and lists.</li>
+            <li id="limitations3">Not all organizations provide project budget information, and organizations may not provide budget information for all projects.</li>
+            <li id="limitations4">The collection of data for NGO Aid Map began in 2010, but the start dates of many of the projects that have been submitted precede that date. For more information about the history of NGO Aid Map, please visit: <a href="https://www.ngoaidmap.org/p/history">https://www.ngoaidmap.org/p/history</a>.</li>
           </ol>
         </div>
 

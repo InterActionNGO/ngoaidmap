@@ -71,7 +71,14 @@
         @include border-radius(10px);
         @include box-shadow(0 0 0 3px rgba($color-0, .6));
     }
-    
+    .footnote-link {
+        a {
+            display: inline;
+            color: $color-2;
+            font-weight: normal;
+            font-size: 12px;
+        }
+    }
 }
 .mod-report-actions {
     button {
@@ -84,11 +91,6 @@
     border: 3px solid #eee;
     margin-bottom: 50px;
     @include border-radius(10px);
-
-    a {
-        color: $color-2;
-        display: inline;
-    }
     p {
         margin: .5em 0;
     }
@@ -182,10 +184,6 @@
         .small {
             font-size: 14px;
             vertical-align: baseline;
-            a {
-                display: inline;
-                color: $color-2;
-            }
         }
     }
 
@@ -539,12 +537,4 @@ ul.mod-report-locations-header-child {
 }
 .mod-report-stacked-chart {
     width: calc(100% - 30px);
-}
-.mod-report-line-chart {
-    .highchart-label {
-        a {
-            color: $color-2;
-            display: inline;
-        }
-    }
 }

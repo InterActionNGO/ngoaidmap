@@ -25,7 +25,7 @@ define([
       legend: {
         labelFormatter: function () {
           return '<span class="highchart-label">' + this.name +
-            '<sup><a onclick="event.stopPropagation()" href="#limitations3">3</a></sup></span>';
+            '<sup class="footnote-link"><a onclick="event.stopPropagation()" href="#limitations4">4</a></sup></span>';
         },
         useHTML:true
       },

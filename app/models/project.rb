@@ -392,7 +392,7 @@ class Project < ActiveRecord::Base
                  INNER JOIN geolocations c ON (g.country_uid = c.uid)
           WHERE true
          #{date_filter} #{form_query_filter} #{donors_filter} #{sectors_filter} #{countries_filter} #{organizations_filter} #{budget_filter}
-          AND c.adm_level = 0
+         
           GROUP BY #{the_model}.name, #{the_model}.id
           ORDER BY projects_count DESC
           LIMIT #{the_limit}
