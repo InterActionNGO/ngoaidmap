@@ -13,7 +13,7 @@ class DownloadsController < ApplicationController
 #           send_data Project.fetch_all(projects_params).to_comma(:style => :brief),
 #             :type        => 'application/vnd.ms-excel',
 #             :disposition => "attachment; filename=#{name}.csv"
-            render :csv => Project.fetch_all(projects_params).includes(:tags,:sectors,:geolocations, :prime_awardee, :donors, :international_partners), :style => :brief, :filename => name
+            render :csv => Project.fetch_all(projects_params).includes(:primary_organization,:tags,:sectors,:geolocations, :prime_awardee, :donors, :partners), :style => :brief, :filename => name
         end
       }
 #       format.xls {
