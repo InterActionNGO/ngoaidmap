@@ -128,6 +128,7 @@ class Project < ActiveRecord::Base
     sql_options = sql_options_struct.new
     if options[:geolocation]
       sql_options.g_level = Geolocation.find_by(uid: options[:geolocation]).adm_level
+      sql_options.g_level = 0 if sql_options.g_level.eql?(-1)
       sql_options.geolocation = options[:geolocation]
     end
     sql_options.level = options[:level].to_i || 0

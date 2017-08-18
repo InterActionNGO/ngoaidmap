@@ -2,6 +2,9 @@
   position: relative;
   min-height: 500px;
   max-height: 670px;
+  &.global {
+    background: image-url('footer_background_x2.svg') no-repeat center;
+  }
 }
 
 .mod-go-to-projects {

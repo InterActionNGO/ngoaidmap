@@ -1,4 +1,8 @@
-<%= render 'partials/map' %>
+<% if @project.geographical_scope.eql?('global') %>
+    <%= render 'partials/map_global' %>
+<% else %>
+    <%= render 'partials/map' %>
+<% end %>
 <%= render 'partials/categories_selector' %>
 
 <div class="main-content">

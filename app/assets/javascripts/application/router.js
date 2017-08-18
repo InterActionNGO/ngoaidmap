@@ -172,9 +172,10 @@ define([
       };
       var filters = _.extend({'level' : 1},this.defaultFilters,{
         'geolocation' : _id,
-        'site' : site_obj.id,
+        'site' : site_obj.id
       });
       filters = _.extend({},filters,this.objetize(_filters));
+      this.global = _id == 'global' ? true : false
       this.conexion = new Conexion(params, filters);
       this.initViews();
     },
@@ -193,9 +194,11 @@ define([
       new DownloadsView({ conexion: this.conexion });
       new FilterSummaryView({ conexion: this.conexion });
       // Map Views
-      new MapView({ conexion: this.conexion });
-      new EmbedMapView({ conexion: this.conexion });
-      new LayerOverlayView({ conexion: this.conexion });
+      if (!this.global) {
+        new MapView({ conexion: this.conexion });
+        new EmbedMapView({ conexion: this.conexion });
+        new LayerOverlayView({ conexion: this.conexion });
+      }
       // Sidebar Views
       new SidebarHighlights({ conexion: this.conexion });
       new SidebarSectors({ conexion: this.conexion });
@@ -238,8 +241,8 @@ define([
       // Project Model FETCH
       this.projectModel = new projectModel({id:_id});
       this.projectModel.fetch().done(_.bind(function(_project){
-        this.initViews();
-        this.initProjectViews(_project.project, _project.prime_awardee);
+          this.global = _project.project.geographical_scope == 'global' ? true : false;
+          this.initProjectViews(_project.project, _project.prime_awardee);
       },this))
 
     },
