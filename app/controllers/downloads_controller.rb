@@ -8,12 +8,12 @@ class DownloadsController < ApplicationController
 #           send_data Project.fetch_all(projects_params).includes(:geolocations, :donors, :sectors).to_comma,
 #             :type        => 'application/vnd.ms-excel',
 #             :disposition => "attachment; filename=#{name}.csv"
-            render :csv => Project.fetch_all(projects_params).includes(:tags,:sectors,:geolocations,:primary_organization,:prime_awardee,:partners,:donors)
+            render :csv => Project.fetch_all(projects_params).includes(:tags,:sectors,:geolocations, :prime_awardee, :donors, :international_partners, :local_partners), :filename => name
         else
 #           send_data Project.fetch_all(projects_params).to_comma(:style => :brief),
 #             :type        => 'application/vnd.ms-excel',
 #             :disposition => "attachment; filename=#{name}.csv"
-            render :csv => Project.fetch_all(projects_params).includes(:primary_organization,:tags,:sectors,:geolocations, :prime_awardee, :donors, :partners), :style => :brief, :filename => name
+            render :csv => Project.fetch_all(projects_params).includes(:tags,:sectors,:geolocations, :prime_awardee, :donors, :international_partners, :local_partners), :style => :brief, :filename => name
         end
       }
 #       format.xls {
@@ -37,6 +37,6 @@ class DownloadsController < ApplicationController
   end
   private
   def projects_params
-    params.permit(:level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, :site, organizations:[], countries:[], donors:[], sectors:[], projects:[])
+    params.permit(:level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, :site, organizations:[], countries:[], donors:[], partners:[], sectors:[], projects:[])
   end
 end
