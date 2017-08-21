@@ -30,6 +30,11 @@ class DownloadsController < ApplicationController
       }
     end
   end
+  
+    def reports
+        render :csv => Project.where(:id => params['ids']).includes(:tags, :sectors, :geolocations, :prime_awardee, :donors, :international_partners, :local_partners), :style => :brief
+    end
+  
   def set_format
      request.format = 'csv' if params[:doc]=='csv'
 #      request.format = 'xls' if params[:doc]=='xls'
@@ -39,4 +44,5 @@ class DownloadsController < ApplicationController
   def projects_params
     params.permit(:level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, :site, organizations:[], countries:[], donors:[], partners:[], sectors:[], projects:[])
   end
+  
 end

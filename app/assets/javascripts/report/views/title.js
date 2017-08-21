@@ -15,6 +15,7 @@ define([
 
     initialize: function() {
       this.$textarea = this.$el.find('textarea');
+      this.$downloadLink = $("#download");
       this.autoResizeTextarea();
       this.checkStringWidth();
       Backbone.Events.on('filters:done', this.showFilters, this);
@@ -23,6 +24,7 @@ define([
     onKeyUp: function() {
       this.checkStringWidth();
       this.autoResizeTextarea();
+      this.updateDownloadFilename();
     },
 
     autoResizeTextarea: function() {
@@ -45,6 +47,10 @@ define([
 
     focus: function() {
       this.$textarea.focus();
+    },
+    
+    updateDownloadFilename: function () {
+        this.$downloadLink.attr('download', this.$textarea.val()+'.csv');
     }
 
   });
