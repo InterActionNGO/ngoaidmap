@@ -37,8 +37,6 @@
 
     <%= render 'partials/footer_bootstrap' %>
 
-    <%= javascript_include_tag "https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js" %>
-
     <%= requirejs_include_tag "report" %>
 
     <% if Rails.env.production? %>

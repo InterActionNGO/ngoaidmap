@@ -83,7 +83,10 @@ define([
         },
         credits: {
           enabled: false
-        }
+        },
+	title: {
+	  text: null
+	}
       },
       map: {
         center: [0, 0],

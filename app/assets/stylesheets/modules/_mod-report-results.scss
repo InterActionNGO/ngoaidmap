@@ -481,10 +481,15 @@ ul.mod-report-locations-header-child {
 }
 
 @media print {
-    .mod-header,
-    .featured-projects,
-    .mod-footer {
+    .mod-header-bootstrap,
+    .mod-featured-projects-bootstrap,
+    .mod-footer-bootstrap,
+    .mod-hero,
+    .is-unprintable {
         display: none;
+    }
+    a[href]:after {
+        content: none !important;
     }
     .grid-11.offset-1 {
         margin: 0 auto;
