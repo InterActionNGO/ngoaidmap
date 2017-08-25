@@ -5,13 +5,13 @@ define([
   '_string',
   'backbone',
   'handlebars',
-  'markerCluster',
+//   'markerCluster',
   'report/views/class/chart',
   'report/models/report',
   'report/models/profile',
   'text!report/templates/profile.handlebars',
   'text!report/templates/snapshot.handlebars'
-], function(_, _string, Backbone, Handlebars, markerCluster,
+], function(_, _string, Backbone, Handlebars, /*markerCluster,*/
   SnapshotChart, ReportModel, ProfileModel, profileTpl, snapshotTpl) {
 
   var SnapshotView = Backbone.View.extend({
@@ -100,7 +100,7 @@ define([
         doubleClickZoom: false,
         boxZoom: false,
         tap: false
-      },
+      }/*,
       markers: {
         showCoverageOnHover: false,
         zoomToBoundsOnClick: false,
@@ -123,7 +123,7 @@ define([
 
           return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(size, size) });
         }
-      }
+      }*/
     },
 
     profileTemplate: Handlebars.compile(profileTpl),
