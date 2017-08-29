@@ -8,7 +8,7 @@ RSpec.describe "viewing the homepage", :type => :feature do
     expect(page).to have_content('All projects')
   end
 
-  describe 'working with filters', js: true do
+  xdescribe 'working with filters', js: true do
     it "can select a country" do
       visit '/'
       find('#filtersView .countries .father').hover

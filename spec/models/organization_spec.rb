@@ -13,6 +13,6 @@ RSpec.describe Organization, type: :model do
   it { should have_many(:donations_made).with_foreign_key(:donor_id).dependent(:destroy).class_name("Donation") }
   it { should have_many(:offices).dependent(:destroy) }
   it { should have_many(:all_donated_projects).through(:donations_made).source(:project) }
-  it { should have_one(:user) }
+  it { should have_many(:users) }
 
 end
