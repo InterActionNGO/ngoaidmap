@@ -127,7 +127,6 @@ Then, update `config/database.yml` to match your setup. Here's what worked for m
 ```
 development:
   adapter: postgis
-  template: template_postgis
   encoding: unicode
   host: localhost
   database: iom_development
@@ -144,8 +143,6 @@ Fill in this file as necessary.
 
 #### Setup the database
 We'll use `rake` to setup the database. This dependency should have been installed when you ran `bundle install` earlier on.
-
-First, you'll need to set up a template database. [Start here.](https://stackoverflow.com/a/32941450). Then:
 
 ```
   bundle exec rake db:create
