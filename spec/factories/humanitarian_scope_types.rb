@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :humanitarian_scope_type do
-    code "MyString"
-    name "MyString"
+    code "1"
+    name "Emergency"
   end
 end

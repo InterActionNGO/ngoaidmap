@@ -1,8 +1,9 @@
-class CreateHumanitarianScopeTypes < ActiveRecord::Migration
+class CreateHumanitarianScopeVocabularies < ActiveRecord::Migration
   def change
-    create_table :humanitarian_scope_types do |t|
+    create_table :humanitarian_scope_vocabularies do |t|
       t.string :code, null: false
       t.string :name, null: false
+      t.string :url
 
       t.timestamps null: false
 

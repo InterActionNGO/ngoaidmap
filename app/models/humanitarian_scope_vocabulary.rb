@@ -1,4 +1,4 @@
-class HumanitarianScopeType < ActiveRecord::Base
+class HumanitarianScopeVocabulary < ActiveRecord::Base
   validates :name,
             :code,
             presence: true,
