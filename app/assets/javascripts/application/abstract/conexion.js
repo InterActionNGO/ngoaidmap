@@ -78,7 +78,7 @@ define([
       $.when(
           this.projectCountModel.fetch({ data: this.filters }),
 //           this.organizationCountModel.fetch({ data: this.filters }),
-          this.countryCountModel.fetch({ data: this.filters }),
+          this.countryCountModel.fetch({ data: this.filters })
 //           this.donorCountModel.fetch({ data: this.filters }),
 //           this.sectorCountModel.fetch({ data: this.filters })
         ).done(function(){
