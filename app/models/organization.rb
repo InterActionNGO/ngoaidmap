@@ -100,6 +100,7 @@ class Organization < ActiveRecord::Base
   scope :active_partnership_projects, -> { joins(:partnerships => :project).merge(Project.active) }
   scope :partnership_projects_site, -> (site) { joins(:partnerships => {:project => :sites}).where(:sites => {:id => site }) }
   scope :partnership_geolocation, -> (geolocation,level=0) { joins(:partnerships => {:project => :geolocations}).where("g#{level}=? and adm_level >= ?", geolocation, level) }
+  scope :partnership_global, -> { joins(partnerships: {project: :geolocations }).where("geolocations.uid = 'global'") }
   scope :partnership_countries, -> (countries) { joins(:partnerships => {:project => :geolocations }).where(:geolocations => {:country_uid => countries }) }
   scope :partnership_organizations, -> (orgs) { joins(:partnerships => :project).joins('join organizations o2 on projects.primary_organization_id = o2.id').where(:o2 => {:id => orgs}) }
   scope :partnership_partners, -> (partners) { joins(:partnerships).where(:partnerships => {:partner_id => partners}) }
@@ -155,7 +156,8 @@ class Organization < ActiveRecord::Base
     organizations = Organization.as_partner
     organizations = organizations.partnership_projects_site(options[:site])              if options[:site]
     organizations = organizations.active_partnership_projects                            if options[:status] && options[:status] == 'active'
-    organizations = organizations.partnership_geolocation(options[:geolocation], level) if options[:geolocation]
+    organizations = organizations.partnership_geolocation(options[:geolocation], level) if options[:geolocation] && level >= 0
+    organizations = organization.partnership_global if options[:geolocation] && level < 0
     organizations = organizations.partnership_projects(options[:projects])              if options[:projects]
     organizations = organizations.partnership_countries(options[:countries])            if options[:countries]
     organizations = organizations.partnership_organizations(options[:organizations])    if options[:organizations]

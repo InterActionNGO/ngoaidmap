@@ -330,7 +330,7 @@ HTML
   end
 
   def url_has_compound_filter
-    query_filters = ['sectors','geolocation','donors']
+    query_filters = ['sectors','geolocation','donors','partners']
     query_filters.each do |f|
        return true if request.query_parameters.include?(f) 
     end
@@ -355,7 +355,7 @@ HTML
         keys = request.query_parameters.keys
         q = request.query_parameters.clone
         # Controller priority order
-        controllers = ['organizations', 'geolocation', 'donors', 'sectors']
+        controllers = ['organizations', 'geolocation', 'donors', 'sectors','partners']
         # Remove current controller
         controllers.delete(param)
         # Assign a GET parameter as new controller based on priority

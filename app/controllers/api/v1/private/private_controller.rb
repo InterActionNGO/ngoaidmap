@@ -72,7 +72,7 @@ module Api
 
 	def partners
           result = fetch_redis_cache do
-            query = Organization.fetch_all_partners(permitted_params).select('organizations.id, organizations.name, organizations.international, count(distinct(projects.id))').group('organizations.id, organizations.name, organizations.international').order('name, count DESC')
+            query = Organization.fetch_all_partners(permitted_params.merge({status:'active'})).select('organizations.id, organizations.name, organizations.international, count(distinct(projects.id))').group('organizations.id, organizations.name, organizations.international').order('name, count DESC')
             json = {"partners" => query.map{|q| { 'id' => q.id, 'name' => q.name, 'international' => q.international, 'projects_count' => q.count } }}.to_json
           end
           render json: result

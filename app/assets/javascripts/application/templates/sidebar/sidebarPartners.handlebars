@@ -1,0 +1,13 @@
+<div class="">
+  <h3>Filter by Partner</h3>
+  <div class="mod-partners">
+    <ul>
+        {{#each partners}}
+        <li><a href="{{this.urlfiltered}}">{{this.name}}</a> ({{this.count}})</li>
+        {{/each}}
+        {{#if show_toggler}}
+        <li><a id="see-more-partners" href="#" class="{{toggle_class}}">{{toggle_text}}</a></li>
+        {{/if}}
+    </ul>
+  </div>
+</div>

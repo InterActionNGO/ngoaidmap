@@ -72,7 +72,7 @@ class Project < ActiveRecord::Base
   scope :site, -> (site){joins(:sites).where(sites: {id: site})}
   scope :projects, -> (projects){where(projects: {id: projects})}
   scope :sectors, -> (sectors){joins(:sectors).where(sectors: {id: sectors})}
-  scope :donors, -> (donors){joins(:donations).where(donations: {donor_id: donors})}
+  scope :donors, -> (donors){joins(:donors).where(donations: {donor_id: donors})}
   scope :partners, -> (partners){joins(:partners).where(organizations: {id: partners})}
   scope :global, -> { where(:geographical_scope => 'global') }
   scope :geolocation, -> (geolocation,level=0){joins(:geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
@@ -98,7 +98,7 @@ class Project < ActiveRecord::Base
     projects = projects.projects(options[:projects])                            if options[:projects]
     projects = projects.countries(options[:countries]).includes(:geolocations)                          if options[:countries]
     projects = projects.organizations(options[:organizations])                  if options[:organizations]
-    projects = projects.partners(options[:partners])                                      if options[:partners]
+    projects = projects.partners(options[:partners]).includes(:partners)                                     if options[:partners]
     projects = projects.sectors(options[:sectors]).includes(:sectors)                              if options[:sectors]
     projects = projects.donors(options[:donors]).includes(:donors)                                if options[:donors]
     projects = projects.text_query(options[:q])                                 if options[:q]
