@@ -73,7 +73,7 @@ class Project < ActiveRecord::Base
   scope :projects, -> (projects){where(projects: {id: projects})}
   scope :sectors, -> (sectors){joins(:sectors).where(sectors: {id: sectors})}
   scope :donors, -> (donors){joins(:donors).where(donations: {donor_id: donors})}
-  scope :partners, -> (partners){joins(:partners).where(organizations: {id: partners})}
+  scope :partners, -> (partners){joins(:partners).where(partnerships: {partner_id: partners})}
   scope :global, -> { where(:geographical_scope => 'global') }
   scope :geolocation, -> (geolocation,level=0){joins(:geolocations).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
   scope :countries, -> (countries){joins(:geolocations).where(geolocations: {country_uid: countries})}

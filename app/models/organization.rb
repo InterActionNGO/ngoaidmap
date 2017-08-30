@@ -84,6 +84,7 @@ class Organization < ActiveRecord::Base
   scope :organizations, -> (orgs){where(organizations: {id: orgs})}
   scope :site, -> (site){joins(projects: :sites).where(sites: {id: site})}
   scope :projects, -> (projects){joins(:projects).where(projects: {id: projects})}
+  scope :partners, -> (partners) { joins(projects: :partners).where(partnerships: {partner_id: partners}) }
   scope :sectors, -> (sectors){joins(:projects).joins('
     INNER JOIN projects_sectors ON (projects.id = projects_sectors.project_id)
     LEFT OUTER JOIN sectors ON (sectors.id = projects_sectors.sector_id)').where(sectors: {id: sectors})}
@@ -131,6 +132,7 @@ class Organization < ActiveRecord::Base
     organizations = organizations.organizations(options[:organizations])                  if options[:organizations]
     organizations = organizations.sectors(options[:sectors])                              if options[:sectors]
     organizations = organizations.donors(options[:donors])                                if options[:donors]
+    organizations = organizations.partners(options[:partners]) if options[:partners]
     organizations
   end
 
