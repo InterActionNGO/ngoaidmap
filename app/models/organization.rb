@@ -110,6 +110,7 @@ class Organization < ActiveRecord::Base
   scope :active_donated_projects, -> {joins(donations_made: :project).merge(Project.active)}
   scope :donated_projects_site, -> (site){joins(donations_made: {project: :sites}).where(sites: {id: site})}
   scope :donation_geolocation, -> (geolocation,level=0){joins(donations_made: {project: :geolocations}).where("g#{level}=?", geolocation).where('adm_level >= ?', level)}
+  scope :donation_global, -> { joins(donations_made: {project: :geolocations}).where("geolocations.uid = 'global'") }
   scope :donation_projects, -> (projects){joins(donations_made: :project).where(projects: {id: projects})}
   scope :donation_countries, -> (countries){joins(donations_made: {project: :geolocations}).where(geolocations: {country_uid: countries})}
   scope :donation_organizations, -> (orgs){joins(donations_made: :project).joins('join organizations o2 on projects.primary_organization_id = o2.id').where(o2: {id: orgs})}
@@ -137,9 +138,9 @@ class Organization < ActiveRecord::Base
     organizations = Organization.with_donations
     organizations = organizations.donated_projects_site(options[:site])              if options[:site]
 #     organizations = organizations.active_donated_projects                            if options[:status] && options[:status] == 'active'
-    organizations = organizations.active if options[:status] && options[:status] == 'active'
+    organizations = organizations.active_donated_projects if options[:status] && options[:status] == 'active'
     organizations = organizations.donation_geolocation(options[:geolocation], level) if options[:geolocation] && level >= 0
-    organizations = organizations.global if options[:geolocation] && level < 0
+    organizations = organizations.donation_global if options[:geolocation] && level < 0
     organizations = organizations.donation_projects(options[:projects])              if options[:projects]
     organizations = organizations.donation_countries(options[:countries])            if options[:countries]
     organizations = organizations.donation_organizations(options[:organizations])    if options[:organizations]
