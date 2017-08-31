@@ -6,6 +6,5 @@ class HumanitarianScope < ActiveRecord::Base
   validates :project,
             :humanitarian_scope_type,
             :humanitarian_scope_vocabulary,
-            :code,
             presence: true
 end

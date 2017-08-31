@@ -4,8 +4,6 @@ class CreateHumanitarianScopes < ActiveRecord::Migration
       t.integer :project_id, null: false
       t.integer :humanitarian_scope_type_id, null: false
       t.integer :humanitarian_scope_vocabulary_id, null: false
-      t.string :vocabulary_uri
-      t.string :code, null: false
       t.string :narrative
 
       t.timestamps null: false
