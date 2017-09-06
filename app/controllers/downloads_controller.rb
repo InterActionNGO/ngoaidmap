@@ -1,48 +1,51 @@
 class DownloadsController < ApplicationController
-  before_action :set_format
-  def index
-    name = params[:name]
-    respond_to do |format|
-      format.csv {
-        if params[:v] && params[:v] == 'full'
-#           send_data Project.fetch_all(projects_params).includes(:geolocations, :donors, :sectors).to_comma,
-#             :type        => 'application/vnd.ms-excel',
-#             :disposition => "attachment; filename=#{name}.csv"
-            render :csv => Project.fetch_all(projects_params).includes(:tags,:sectors,:geolocations, :prime_awardee, :donors, :international_partners, :local_partners), :filename => name
-        else
-#           send_data Project.fetch_all(projects_params).to_comma(:style => :brief),
-#             :type        => 'application/vnd.ms-excel',
-#             :disposition => "attachment; filename=#{name}.csv"
-            render :csv => Project.fetch_all(projects_params).includes(:tags,:sectors,:geolocations, :prime_awardee, :donors, :international_partners, :local_partners), :style => :brief, :filename => name
+    
+    before_action :set_format
+    
+    def index
+        
+        name = params[:name]
+        
+        respond_to do |format|
+            format.csv {
+                if params[:v] && params[:v] == 'full'
+                    render :csv => Project.fetch_all(projects_params).includes(included_associations), :filename => name
+                else
+                    render :csv => Project.fetch_all(projects_params).includes(included_associations), :style => :brief, :filename => name
+                end
+            }
+            format.kml {
+                @locations = Project.fetch_all(projects_params).includes(includes).pluck('geolocations.name', 'geolocations.longitude', 'geolocations.latitude')
+                stream = render_to_string(:template => "downloads/index" )
+                send_data stream,
+                :type        => 'application/vnd.google-earth.kml+xml',
+                :disposition => "attachment; filename=#{name}.kml"
+            }
         end
-      }
-#       format.xls {
-#         send_data Project.fetch_all(projects_params).to_xls,
-#           :type        => 'application/vnd.ms-excel',
-#           :disposition => "attachment; filename=#{name}.xls"
-#       }
-      format.kml {
-        @locations = Project.fetch_all(projects_params).includes(:geolocations).pluck('geolocations.name', 'geolocations.longitude', 'geolocations.latitude')
-        stream = render_to_string(:template => "downloads/index" )
-        send_data stream,
-          :type        => 'application/vnd.google-earth.kml+xml',
-          :disposition => "attachment; filename=#{name}.kml"
-      }
     end
-  end
   
     def reports
-        render :csv => Project.where(:id => params['ids']).includes(:tags, :sectors, :geolocations, :prime_awardee, :donors, :international_partners, :local_partners), :style => :brief
+        render :csv => Project.where(:id => params['ids']).includes(included_associations), :style => :brief
     end
   
-  def set_format
-     request.format = 'csv' if params[:doc]=='csv'
-#      request.format = 'xls' if params[:doc]=='xls'
-     request.format = 'kml' if params[:doc]=='kml'
-  end
-  private
-  def projects_params
-    params.permit(:level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, :site, organizations:[], countries:[], donors:[], partners:[], sectors:[], projects:[])
-  end
+    def set_format
+        request.format = 'csv' if params[:doc]=='csv'
+        request.format = 'kml' if params[:doc]=='kml'
+    end
+    
+    private
+    
+    def included_associations
+        includes = [:tags, :sectors, :geolocations, :prime_awardee, :donors, :international_partners, :local_partners].delete_if do |association|
+            projects_params.include?(association) ||
+                (projects_params.include?(:geolocation) && association.eql?(:geolocations)) ||
+                (projects_params.include?(:partners) && [:international_partners, :local_partners].include?(association))
+        end
+        includes
+    end
+    
+    def projects_params
+        params.permit(:level, :ids, :id, :geolocation, :status, :q, :starting_after, :ending_before, :site, organizations:[], countries:[], donors:[], partners:[], sectors:[], projects:[])
+    end
   
 end

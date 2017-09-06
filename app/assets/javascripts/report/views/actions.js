@@ -37,6 +37,7 @@ define([
     
     download: function () {
         var ids = _.pluck(ReportModel.instance.get('projects'), 'id');
+        console.log(ids);
         $.ajax({
             url: 'data/download',
             method: 'post',
