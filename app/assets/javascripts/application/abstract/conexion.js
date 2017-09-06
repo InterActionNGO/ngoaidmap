@@ -70,14 +70,14 @@ define([
     // Fetch HIGHLIGHTS
     getHighlightsData: function(callback) {
       this.projectCountModel = new projectCountModel();
-//       this.organizationCountModel = new organizationCountModel();
+      this.organizationCountModel = new organizationCountModel();
       this.countryCountModel = new countryCountModel();
 //       this.donorCountModel = new donorCountModel();
 //       this.sectorCountModel = new sectorCountModel();
 
       $.when(
           this.projectCountModel.fetch({ data: this.filters }),
-//           this.organizationCountModel.fetch({ data: this.filters }),
+          this.organizationCountModel.fetch({ data: this.filters }),
           this.countryCountModel.fetch({ data: this.filters })
 //           this.donorCountModel.fetch({ data: this.filters }),
 //           this.sectorCountModel.fetch({ data: this.filters })
