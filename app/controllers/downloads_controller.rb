@@ -15,7 +15,7 @@ class DownloadsController < ApplicationController
                 end
             }
             format.kml {
-                @locations = Project.fetch_all(projects_params).includes(includes).pluck('geolocations.name', 'geolocations.longitude', 'geolocations.latitude')
+                @locations = Project.fetch_all(projects_params).includes(included_associations).pluck('geolocations.name', 'geolocations.longitude', 'geolocations.latitude')
                 stream = render_to_string(:template => "downloads/index" )
                 send_data stream,
                 :type        => 'application/vnd.google-earth.kml+xml',
