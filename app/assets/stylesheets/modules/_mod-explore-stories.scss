@@ -187,11 +187,11 @@
     }
     .avatar-wrapper {
         margin-bottom: 1.5em;
-        text-align: center;
     }
     .avatar {
-        font-size: 79px;
-        color: #666;
+        @media (min-width: $screen-sm-min) {
+            width: 100%;
+        }
     }
     .avatar-label {
         text-align: center;

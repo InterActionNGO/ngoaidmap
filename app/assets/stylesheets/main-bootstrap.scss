@@ -8,8 +8,7 @@
         "compass/reset";
 
 $icons-spacing: 10px;
-@import "icons/*.png",
-	"OpenIconic/font/css/open-iconic-bootstrap.css";
+@import "icons/*.png";
 
 @import "settings",
         "mixins",
