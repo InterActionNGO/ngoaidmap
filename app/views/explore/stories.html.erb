@@ -10,7 +10,7 @@
                     <% @stories.order('created_at desc').each do |story| %>
                         <div class="row">
                             <div class="col-sm-3 avatar-wrapper">
-                                <%= image_tag 'avatar.svg', :class => 'avatar' %>
+                                <span class="oi oi-person avatar" title="oi-person" aria-hidden="true"></span>
                                 <div class="avatar-label">
                                     <%= user_profession(story) %>
                                 </div>
