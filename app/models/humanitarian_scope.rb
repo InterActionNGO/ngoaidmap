@@ -9,8 +9,8 @@ class HumanitarianScope < ActiveRecord::Base
             :code,
             presence: true
 
-  validates :vocabulary_uri, :presence => {
-    :if => lambda do |scope|
+  validates :vocabulary_uri, presence: {
+    if: -> (scope) do
       scope.humanitarian_scope_vocabulary &&
       scope.humanitarian_scope_vocabulary.url.blank?
     end
