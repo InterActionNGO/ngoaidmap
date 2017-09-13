@@ -218,6 +218,7 @@ class Project < ActiveRecord::Base
     date_updated 'date_updated'
     activity_status_for_export 'status'
     donors 'donors' do |donor| donor.map(&:name).join('|') end
+    humanitarian 'humanitarian'
   end
 
   comma do
@@ -256,6 +257,7 @@ class Project < ActiveRecord::Base
     donors_for_export 'donors'
     verbatim_location 'verbatim_location'
     idprefugee_camp 'idprefugee_camp'
+    humanitarian 'humanitarian'
   end
 
   def self.to_excel(options = {})
