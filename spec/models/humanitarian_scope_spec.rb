@@ -8,6 +8,7 @@ RSpec.describe HumanitarianScope, type: :model do
   it { should validate_presence_of(:project) }
   it { should validate_presence_of(:humanitarian_scope_type) }
   it { should validate_presence_of(:humanitarian_scope_vocabulary) }
+  it { should validate_presence_of(:code) }
 
   describe "deleting relationships" do
     let!(:scope) { create(:humanitarian_scope) }
