@@ -10,6 +10,28 @@ RSpec.describe HumanitarianScope, type: :model do
   it { should validate_presence_of(:humanitarian_scope_vocabulary) }
   it { should validate_presence_of(:code) }
 
+  describe "vocabulary_uri" do
+    it "is required if not specified by vocabulary" do
+      vocab = create(:humanitarian_scope_vocabulary, url: "")
+
+      scope = build(:humanitarian_scope,
+                     humanitarian_scope_vocabulary: vocab,
+                    vocabulary_uri: "")
+
+      scope.should_not be_valid
+    end
+
+    it "is not required if specified by vocabulary" do
+      vocab = create(:humanitarian_scope_vocabulary, url: "#")
+
+      scope = build(:humanitarian_scope,
+                     humanitarian_scope_vocabulary: vocab,
+                    vocabulary_uri: "")
+
+      scope.should be_valid
+    end
+  end
+
   describe "deleting relationships" do
     let!(:scope) { create(:humanitarian_scope) }
 

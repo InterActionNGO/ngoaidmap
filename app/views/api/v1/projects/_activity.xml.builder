@@ -120,4 +120,14 @@ x.tag!('iati-activity', {
        end
     end
             
+    p.humanitarian_scopes.each do |scope|
+        x.tag!(
+            'humanitarian-scope',
+            scope.narrative,
+            type: scope.humanitarian_scope_type.code,
+            vocabulary: scope.humanitarian_scope_vocabulary.code,
+            code: scope.code,
+            "vocabulary-uri": scope.vocabulary_uri.presence || scope.humanitarian_scope_vocabulary.url
+        )
+    end
 end

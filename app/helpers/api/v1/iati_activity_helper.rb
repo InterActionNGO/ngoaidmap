@@ -30,7 +30,7 @@ module Api::V1::IatiActivityHelper
         end
         
         def humanitarian
-            @project.sectors.any? { |s| s.id == 18 } ? 1 : 0
+            @project.humanitarian? ? 1 : 0
         end
         
         def interaction_ref
