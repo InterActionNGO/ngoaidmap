@@ -16,6 +16,7 @@ RSpec.describe Project, type: :model do
   it { should have_many(:donors).through(:donations) }
   it { should have_many(:partnerships).dependent(:destroy) }
   it { should have_many(:partners).through(:partnerships) }
+  it { should have_many(:humanitarian_scopes) }
   it { should have_and_belong_to_many(:sites) }
 
 end

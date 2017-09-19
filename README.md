@@ -31,6 +31,11 @@ Ensure you have [Homebrew](http://brew.sh/) installed on your machine. We'll use
   brew install postgresql
 ```
 
+#### Install PostGIS:
+```
+  brew install postgis
+```
+
 #### Install Redis:
 ```
   brew install redis
@@ -116,7 +121,18 @@ For the database:
 ```
   cp config/database.yml.sample config/database.yml
 ```
-After copying the file, leave `database.yml` as-is and don't bother setting up a local database. We'll use `rake` to do that automatically soon.
+
+Then, update `config/database.yml` to match your setup. Here's what worked for me:
+
+```
+development:
+  adapter: postgis
+  encoding: unicode
+  host: localhost
+  database: iom_development
+  username:
+  password:
+```
 
 For your environment:
 ```
@@ -147,7 +163,7 @@ We'll use NPM to install Bower and other npm dependencies. All dependency versio
 
 NPM should have installed everything we need (including Bower). Now that Bower is installed, use it to install further vendor files:
 ```
-  npm run bower install
+  npm run bower
 ```
 These vendor files will install at the directory `/public/app/vendor`.
 

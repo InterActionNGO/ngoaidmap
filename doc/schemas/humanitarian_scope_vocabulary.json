@@ -1,0 +1,28 @@
+{
+    "attributes": {
+        "category-codelist": null,
+        "complete": "0",
+        "name": "HumanitarianScopeVocabulary"
+    },
+    "data": [
+        {
+            "code": "1-2",
+            "name": "Glide",
+            "url": "http://glidenumber.net/glide/public/search/search.jsp"
+        },
+        {
+            "code": "2-1",
+            "name": "Humanitarian Plan",
+            "url": "http://ftsarchive.unocha.org/docs/IATICodelist_HS2-1.csv"
+        },
+        {
+            "code": "99",
+            "name": "Reporting Organisation"
+        }
+    ],
+    "metadata": {
+        "description": "\n                The Humanitarian Scope Vocabulary codelist defines a range of external codelists which themselves provide codes and descriptions for humanitarian events and actions.\n            ",
+        "name": "Humanitarian Scope Vocabulary",
+        "url": ""
+    }
+}

@@ -59,6 +59,7 @@ class Project < ActiveRecord::Base
   has_many :partners, through: :partnerships
   has_many :international_partners, -> { where('organizations.international = true') }, through: :partnerships, :source => :partner
   has_many :local_partners, -> { where('organizations.international = false') }, through: :partnerships, :source => :partner
+  has_many :humanitarian_scopes
   has_and_belongs_to_many :sites
 
   scope :active, -> {where("projects.end_date > ? AND projects.start_date <= ?", Date.today.to_s(:db), Date.today.to_s(:db))}
@@ -217,6 +218,7 @@ class Project < ActiveRecord::Base
     date_updated 'date_updated'
     activity_status_for_export 'status'
     donors 'donors' do |donor| donor.map(&:name).join('|') end
+    humanitarian 'humanitarian'
   end
 
   comma do
@@ -255,6 +257,7 @@ class Project < ActiveRecord::Base
     donors_for_export 'donors'
     verbatim_location 'verbatim_location'
     idprefugee_camp 'idprefugee_camp'
+    humanitarian 'humanitarian'
   end
 
   def self.to_excel(options = {})
