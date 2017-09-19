@@ -4,6 +4,9 @@
     font-weight: bold;
     padding-bottom: 0.25em;
     margin-bottom: 0.5em;
+    .role:not(:first-of-type) {
+        padding-left: 1em;
+    }
   }
   .skip-to-projects {
     margin-top: -20px;
@@ -79,20 +82,46 @@
     transition: color 0.25s;
     border-bottom: 5px solid $color-8a;
   }
+  .country-bg {
+    background: $color-8;
+  }
   .organization {
     color: $color-6;
     transition: color 0.25s;
-    border-bottom: 5px solid $color-6a;
+    &.with-border {
+        border-bottom: 5px solid $color-6a;
+    }
+  }
+  .organization-bg {
+    background: $color-6;
   }
   .sector {
     color: $color-2;
     transition: color 0.25s;
     border-bottom: 5px solid $color-2a;
   }
+  .sector-bg {
+    background: $color-2;
+  }
   .donor {
     color: $color-7;
     transition: color 0.25s;
-    border-bottom: 5px solid $color-7a;
+    &.with-border {
+        border-bottom: 5px solid $color-7a;
+    }
+  }
+  .donor-bg {
+    background: $color-7;
+  }
+  .partner {
+    color: $color-1;
+    transition: color 0.25s;
+    &.with-border {
+        border-bottom: 5px solid transparentize($color-1, 0.5);
+    }
+  }
+  .partner-bg {
+    background: $color-1;
   }
   .filter-heading {
     text-transform: uppercase;
@@ -102,4 +131,27 @@
     border-top: 1px solid $color-4;
     padding-top: 1em;
   }
+  .muted {
+      color: $color-10;
+  }
+  .muted-bg {
+      background: $color-10;
+  }
+  /* Bootstrap shim (temporary!) */
+  .badge-shim {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    }
+
+    .badge-shim:empty {
+        display: none;
+    }
 }
