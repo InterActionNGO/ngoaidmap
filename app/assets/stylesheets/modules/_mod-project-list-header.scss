@@ -1,157 +1,176 @@
 .mod-project-list-header {
-  .title-type {
-    text-transform: uppercase; 
-    font-weight: bold;
-    padding-bottom: 0.25em;
-    margin-bottom: 0.5em;
-    .role:not(:first-of-type) {
-        padding-left: 1em;
+    .title-type {
+        text-transform: uppercase; 
+        font-weight: bold;
+        padding-bottom: 0.25em;
+        margin-bottom: 0.5em;
+        .role-wrapper:not(:first-of-type) {
+            padding-left: 1em;
+            &.organization:hover {
+                .role {
+                    color: $color-6;
+                }
+                .badge-shim {
+                    background: $color-6;
+                }
+            }
+            &.partner:hover {
+                .role {
+                    color: $color-1;
+                }
+                .badge-shim {
+                    background: $color-1;
+                }
+            }
+            &.donor:hover {
+                .role {
+                    color: $color-7;
+                }
+                .badge-shim {
+                    background: $color-7;
+                }
+            }
+        }
     }
-  }
-  .skip-to-projects {
-    margin-top: -20px;
-    margin-bottom: 20px;
-    a {
-      color: $color-2;
-      font-size: 14px;
-      &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-      }
+    .skip-to-projects {
+        margin-top: -20px;
+        margin-bottom: 20px;
+        a {
+            color: $color-2;
+            font-size: 14px;
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
     }
-  }
-  .project-filter-list {
-    border-bottom: 1px solid $color-4;
-    padding-bottom: 0.5em;
-    li {
-      //display: flex;
-      //flex-direction: row-reverse;
-      //justify-content: right;
-      //align-items: center;
-      margin-bottom: 0.5em;
+    .project-filter-list {
+        border-bottom: 1px solid $color-4;
+        padding-bottom: 0.5em;
+        li {
+            margin-bottom: 0.5em;
+        }
+        h2:only-child {
+            margin-bottom: 0;
+        }
     }
-    h2:only-child {
-      margin-bottom: 0;
+    .close-x {
+        font-size: 0.8em;
+        font-family: arial;
+        transition: color 0.25s;
+        font-weight: bold;
+        margin-left: -2em;
+        z-index: 1;
+        padding: 0 0.5em;
+        position: absolute;
+        right: 0.6em;
+        top: 0.80em;
+        &:hover {
+            color: $color-5;
+            cursor: pointer;
+        }
     }
-  }
-  .close-x {
-    font-size: 0.8em;
-    font-family: arial;
-    transition: color 0.25s;
-    font-weight: bold;
-    margin-left: -2em;
-    z-index: 1;
-    padding: 0 0.5em;
-    position: absolute;
-    right: 0.6em;
-    top: 0.80em;
-    &:hover {
-      color: $color-5;
-      cursor: pointer;
-    //  & ~ .value-wrapper,
-   //   & ~ .project-filter-list-item-heading {
-    //    color: $color-10;
-   //   }
+    .faded {
+        color: $color-10;   
     }
-  }
-  .faded {
-    color: $color-10;   
-  }
-  .project-filter-list-item-heading {
-    font-size: 14px;
-    margin-right: 1em;
-    transition: color 0.25s;
-  }
-  .project-filter-list-item-description {
-    margin-top: -1em;
-    font-weight: bold;
-    font-size: 1.3em;
-    color: $color-5;
-  }
-  .value-wrapper {
-    transition: color 0.25s;
-    background: $color-4;
-    border-radius: 20px;
-    padding: 0.5em 2.5em 0.5em 1em;
-    font-size: 14px;
-    display: inline-block;
-    position: relative;
-  }
-  .country {
-    color: $color-8;
-    transition: color 0.25s;
-    border-bottom: 5px solid $color-8a;
-  }
-  .country-bg {
-    background: $color-8;
-  }
-  .organization {
-    color: $color-6;
-    transition: color 0.25s;
-    &.with-border {
-        border-bottom: 5px solid $color-6a;
+    .project-filter-list-item-heading {
+        font-size: 14px;
+        margin-right: 1em;
+        transition: color 0.25s;
     }
-  }
-  .organization-bg {
-    background: $color-6;
-  }
-  .sector {
-    color: $color-2;
-    transition: color 0.25s;
-    border-bottom: 5px solid $color-2a;
-  }
-  .sector-bg {
-    background: $color-2;
-  }
-  .donor {
-    color: $color-7;
-    transition: color 0.25s;
-    &.with-border {
-        border-bottom: 5px solid $color-7a;
+    .project-filter-list-item-description {
+        margin-top: -1em;
+        font-weight: bold;
+        font-size: 1.3em;
+        color: $color-5;
     }
-  }
-  .donor-bg {
-    background: $color-7;
-  }
-  .partner {
-    color: $color-1;
-    transition: color 0.25s;
-    &.with-border {
-        border-bottom: 5px solid transparentize($color-1, 0.5);
+    .value-wrapper {
+        transition: color 0.25s;
+        background: $color-4;
+        border-radius: 20px;
+        padding: 0.5em 2.5em 0.5em 1em;
+        font-size: 14px;
+        display: inline-block;
+        position: relative;
     }
-  }
-  .partner-bg {
-    background: $color-1;
-  }
-  .filter-heading {
-    text-transform: uppercase;
-    color: $color-5;
-    margin: 0.5em 0;
-    font-size: 0.8em;
-    border-top: 1px solid $color-4;
-    padding-top: 1em;
-  }
-  .muted {
-      color: $color-10;
-  }
-  .muted-bg {
-      background: $color-10;
-  }
-  /* Bootstrap shim (temporary!) */
-  .badge-shim {
-    display: inline-block;
-    padding: 0.25em 0.4em;
-    font-size: 75%;
-    font-weight: bold;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: 0.25rem;
+    .country {
+        color: $color-8;
+        transition: color 0.25s;
+        border-bottom: 5px solid $color-8a;
+    }
+    .country-bg {
+        background: $color-8;
+    }
+    .organization {
+        color: $color-6;
+        transition: color 0.25s;
+        &.with-border {
+            border-bottom: 5px solid $color-6a;
+        }
+    }
+    .organization-bg {
+        background: $color-6;
+    }
+    .sector {
+        color: $color-2;
+        transition: color 0.25s;
+        border-bottom: 5px solid $color-2a;
+    }
+    .sector-bg {
+        background: $color-2;
+    }
+    .donor {
+        color: $color-7;
+        transition: color 0.25s;
+        &.with-border {
+            border-bottom: 5px solid $color-7a;
+        }
+    }
+    .donor-bg {
+        background: $color-7;
+    }
+    .partner {
+        color: $color-1;
+        transition: color 0.25s;
+        &.with-border {
+            border-bottom: 5px solid transparentize($color-1, 0.85);
+        }
+    }
+    .partner-bg {
+        background: $color-1;
+    }
+    .filter-heading {
+        text-transform: uppercase;
+        color: $color-5;
+        margin: 0.5em 0;
+        font-size: 0.8em;
+        border-top: 1px solid $color-4;
+        padding-top: 1em;
+    }
+    .muted {
+        color: $color-10;
+    }
+    .muted-bg {
+        background: $color-10;
+    }
+    /* Bootstrap shim (temporary!) */
+    .badge-shim {
+        display: inline-block;
+        padding: 0.25em 0.4em;
+        font-size: 75%;
+        font-weight: bold;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25rem;
     }
 
     .badge-shim:empty {
         display: none;
+    }
+    .inline-block {
+        display: inline-block;
     }
 }
