@@ -172,7 +172,9 @@ Work with assets in the `/app/assets` directory. The Rails pipeline will compile
 TBD
 
 ### Deploying
-TBD
+
+Near as I can tell, production uses `rvm` to manage Ruby versions while staging uses `rbenv`. You'll need to alternate which
+of [these lines](https://github.com/InterActionNGO/ngoaidmap/blob/master/Capfile#L17-L18) is commented out depending on the environment you're deploying to.
 
 ### License
 Copyright (c) 2010 - 2017, InterAction
