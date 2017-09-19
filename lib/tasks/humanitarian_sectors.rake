@@ -1,10 +1,9 @@
 namespace :iom do
   desc "Mark projects with 'Humanitarian Aid' sector as humanitarian"
   task migrate_humanitarian_projects: :environment do
-    Project.find_each do |project|
-      if project.sectors.any? { |s| s.id == 18 }
+    Project.sectors(18).find_each do |project|
         project.update_attribute(:humanitarian, true)
-      end
+        puts "Project ##{project.id} marked as humanitarian: #{project.humanitarian}"
     end
   end
 

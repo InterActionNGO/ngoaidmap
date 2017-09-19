@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505203012) do
+ActiveRecord::Schema.define(version: 20170911194910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(version: 20170505203012) do
   add_index "geolocations", ["g2"], name: "index_geolocations_on_g2", using: :btree
   add_index "geolocations", ["g3"], name: "index_geolocations_on_g3", using: :btree
   add_index "geolocations", ["g4"], name: "index_geolocations_on_g4", using: :btree
+  add_index "geolocations", ["readable_path"], name: "index_geolocations_on_readable_path", using: :btree
   add_index "geolocations", ["uid"], name: "index_geolocations_on_uid", using: :btree
 
   create_table "geolocations_projects", id: false, force: :cascade do |t|
@@ -208,6 +209,40 @@ ActiveRecord::Schema.define(version: 20170505203012) do
 
   add_index "geolocations_projects", ["geolocation_id", "project_id"], name: "index_geolocations_projects_on_geolocation_id_and_project_id", using: :btree
   add_index "geolocations_projects", ["project_id"], name: "index_geolocations_projects_on_project_id", using: :btree
+
+  create_table "humanitarian_scope_types", force: :cascade do |t|
+    t.string   "code",       null: false
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "humanitarian_scope_types", ["code"], name: "index_humanitarian_scope_types_on_code", unique: true, using: :btree
+  add_index "humanitarian_scope_types", ["name"], name: "index_humanitarian_scope_types_on_name", unique: true, using: :btree
+
+  create_table "humanitarian_scope_vocabularies", force: :cascade do |t|
+    t.string   "code",       null: false
+    t.string   "name",       null: false
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "humanitarian_scope_vocabularies", ["code"], name: "index_humanitarian_scope_vocabularies_on_code", unique: true, using: :btree
+  add_index "humanitarian_scope_vocabularies", ["name"], name: "index_humanitarian_scope_vocabularies_on_name", unique: true, using: :btree
+
+  create_table "humanitarian_scopes", force: :cascade do |t|
+    t.integer  "project_id",                       null: false
+    t.integer  "humanitarian_scope_type_id",       null: false
+    t.integer  "humanitarian_scope_vocabulary_id", null: false
+    t.string   "vocabulary_uri"
+    t.string   "code",                             null: false
+    t.string   "narrative"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "humanitarian_scopes", ["project_id"], name: "index_humanitarian_scopes_on_project_id", using: :btree
 
   create_table "identifiers", force: :cascade do |t|
     t.string   "identifier",        limit: 255, null: false
@@ -327,6 +362,7 @@ ActiveRecord::Schema.define(version: 20170505203012) do
   end
 
   add_index "organizations", ["name"], name: "index_organizations_on_name", using: :btree
+  add_index "organizations", ["name"], name: "index_organizations_on_name_trigram", using: :gin
 
   create_table "organizations2", force: :cascade do |t|
     t.string   "name",                            limit: 255
@@ -465,6 +501,7 @@ ActiveRecord::Schema.define(version: 20170505203012) do
     t.integer  "prime_awardee_id"
     t.string   "geographical_scope",                      limit: 255,                                                       default: "regional"
     t.decimal  "budget_usd",                                                                       precision: 13, scale: 2
+    t.boolean  "humanitarian",                                                                                              default: false,         null: false
   end
 
   add_index "projects", ["end_date"], name: "index_projects_on_end_date", using: :btree
@@ -638,6 +675,27 @@ ActiveRecord::Schema.define(version: 20170505203012) do
 
   add_index "stats", ["site_id"], name: "index_stats_on_site_id", using: :btree
 
+  create_table "stories", force: :cascade do |t|
+    t.string   "name"
+    t.text     "story",                               null: false
+    t.string   "organization"
+    t.string   "email"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.boolean  "published"
+    t.boolean  "reviewed",            default: false, null: false
+    t.string   "user_profession"
+    t.integer  "last_reviewed_by_id"
+    t.datetime "last_reviewed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "stories", ["email"], name: "index_stories_on_email", using: :btree
+  add_index "stories", ["name"], name: "index_stories_on_name", using: :btree
+
   create_table "tags", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.integer  "count",                   default: 0
@@ -678,5 +736,8 @@ ActiveRecord::Schema.define(version: 20170505203012) do
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
+  add_foreign_key "humanitarian_scopes", "humanitarian_scope_types", on_delete: :restrict
+  add_foreign_key "humanitarian_scopes", "humanitarian_scope_vocabularies", on_delete: :restrict
+  add_foreign_key "humanitarian_scopes", "projects", on_delete: :cascade
   add_foreign_key "projects_regions", "regions", name: "region_id_fk"
 end
