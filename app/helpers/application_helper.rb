@@ -380,6 +380,39 @@ HTML
         
       end
   end
+  
+  def org_page_header_data
+        org = {
+            class_bg: 'organization-bg',
+            'class': 'organization',
+            label: 'Reporting Organization',
+            count: Organization.find(request[:id].to_i).projects.active.size,
+            url: organization_path(request[:id])
+        }
+        partner = {
+            class_bg: 'partner-bg',
+            'class': 'partner',
+            label: 'Partner',
+            count: Organization.active.partners(request[:id].to_i).size,
+            url: partner_path(request[:id])
+        }
+        donor = {
+            class_bg: 'donor-bg',
+            'class': 'donor',
+            label: 'Donor',
+            count: Organization.active.donors(request[:id].to_i).size,
+            url: donor_path(request[:id])
+        }
+        arr = []
+        if controller_name == 'organizations'
+            arr.push(org, partner, donor)
+        elsif controller_name == 'partners'
+            arr.push(partner, org, donor)
+        elsif controller_name == 'donors'
+            arr.push(donor, org, partner)
+        end
+        arr
+  end
 
 end
 
