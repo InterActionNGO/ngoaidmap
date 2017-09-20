@@ -381,7 +381,16 @@ HTML
       end
   end
   
+  def is_org_style_controller
+    if ['organizations','donors','partners'].include?(controller_name)
+        true
+    else
+        false
+    end
+  end
+  
   def org_page_header_data
+      return unless is_org_style_controller
         org = {
             class_bg: 'organization-bg',
             'class': 'organization',

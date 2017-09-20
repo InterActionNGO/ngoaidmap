@@ -3,11 +3,15 @@
   <% if !url_has_compound_filter %>
   
     <div class="title-type <%= css_class %> with-border">
-        <% org_page_header_data.each_with_index do |t, i| %>
-            <a href="<%= t[:url] %>" class="inline-block role-wrapper <%= t[:class] %>">
-                <span class="role <%= ' muted' if i > 0 %>"><%= t[:label] %></span>
-                <span class="badge-shim <%= t[:class_bg] %><%= ' muted-bg' if i > 0 %>"><%= t[:count] %></span>
-            </a>
+        <% if is_org_style_controller %>
+            <% org_page_header_data.each_with_index do |t, i| %>
+                <a href="<%= t[:url] %>" class="inline-block role-wrapper <%= t[:class] %>">
+                    <span class="role <%= ' muted' if i > 0 %>"><%= t[:label] %></span>
+                    <span class="badge-shim <%= t[:class_bg] %><%= ' muted-bg' if i > 0 %>"><%= t[:count] %></span>
+                </a>
+            <% end %>
+        <% else %>
+            <%= type %>
         <% end %>
     </div>
     
