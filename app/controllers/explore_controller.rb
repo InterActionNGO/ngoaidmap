@@ -16,6 +16,9 @@ class ExploreController < ApplicationController
         @countries = Geolocation.joins(:projects).select('distinct geolocations.country_name, max(projects.created_at) as max').group(:country_name).limit(25).order('max desc').all
     end
     
+    def use_cases
+    end
+    
     private
     def permit_params
 	params.permit(:page)

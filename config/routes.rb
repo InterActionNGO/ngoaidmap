@@ -55,9 +55,10 @@ Rails.application.routes.draw do
   # explore section
   get 'explore', to: redirect('explore/stories'), status: 302
   get 'explore/stories'
-  get 'explore/data', to: 'reports#index' , :as => :report_index
+  get 'explore/data', to: 'reports#index'
   post 'explore/data/download', to: 'downloads#reports', :as => :report_download
   resources :stories, :only => [:show, :create]
+  get 'explore/use-cases', to: 'explore#use_cases'
   
   
   # These routes are old - delete?
