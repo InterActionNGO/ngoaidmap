@@ -9,6 +9,9 @@
         display: inline-block;
         color: $color-2;
     }
+    i {
+        font-style: italic;
+    }
     .carousel {
         height: 500px;
         margin-top: 5em;
@@ -144,7 +147,7 @@
     }
     .embed {
         & > div {
-            background-image: radial-gradient(circle at center, rgba(255,255,255,0.9) 0, rgba(255,255,255,0.8) 80%, rgba(255,255,255,0.1) 100%);
+            background-image: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.9) 0, rgba(255,255,255,0.6) 80%, rgba(255,255,255,0.1) 100%);
         }
     }
     .embed-image{
