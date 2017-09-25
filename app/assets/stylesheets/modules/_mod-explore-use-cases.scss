@@ -11,7 +11,6 @@
     }
     .carousel {
         height: 500px;
-/*         background: #f1f1f1; */
         margin-top: 5em;
         h2 {
             color: $color-3;
@@ -25,6 +24,15 @@
                 max-width: 500px;
                 margin: 0 auto;
                 text-align: center;
+            }
+        }
+    }
+    .carousel-inner {
+        height: 93%;
+        .item {
+            height: 100%;
+            & > div {
+                height: 100%;
             }
         }
     }
@@ -67,7 +75,6 @@
     .carousel-link {
         text-align: center;
         padding-top: 2em;
-/*             background: #fff; */
         margin-top: 5px;
         margin-bottom: 5px;
         &:hover,
@@ -78,8 +85,6 @@
                 color: $color-2;
             }
         }
-/*             box-shadow: 0 0 3px -2px; */
-/*             border-radius: 3px; */
         .oi {
             font-size: 30px;
             color: $color-1;
@@ -97,13 +102,12 @@
         }
     }
     .hdx {
-        background: image-url('hdx_ss.png') no-repeat 50% 17%;
+        background: image-url('hdx_ss.png') no-repeat 50% 20%;
         & > div {
             background-image: linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.8) 80%, rgba(255,255,255,0.95));
         }
         p {
             &.centered {
-/*                 background-image: radial-gradient(ellipse rgba(255,255,255,0.9) 0,rgba(255,255,255,0.9) 40%, rgba(255,255,255,0) 100%); */
                 background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.4));
                 max-width: 650px;
             }
@@ -131,5 +135,24 @@
             color: #fff;
         }
         
+    }
+    .embed {
+        & > div {
+            background-image: radial-gradient(circle at center, rgba(255,255,255,0.9) 0, rgba(255,255,255,0.8) 80%, rgba(255,255,255,0.1) 100%);
+        }
+    }
+    .embed-image{
+        position: absolute;
+        width: 63%;
+        &.ss1 {
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+        }
+        &.ss2 {
+            top: 0;
+            left: 0;
+            z-index: -2;
+        }
     }
 }
