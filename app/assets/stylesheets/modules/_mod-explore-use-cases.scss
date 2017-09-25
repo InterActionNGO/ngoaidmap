@@ -101,6 +101,12 @@
             transition: color 0.4s;
         }
     }
+    .iati {
+        background: image-url('iati_ss.png') 50% 100%;
+        & > div {
+            background: rgba(255,255,255,0.92);
+        }
+    }
     .hdx {
         background: image-url('hdx_ss.png') no-repeat 50% 20%;
         & > div {
