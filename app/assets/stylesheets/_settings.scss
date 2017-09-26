@@ -1,7 +1,7 @@
 @include font-face("Akzidenz", font-files("akzidenz/12_akzidenz_grotesk_roman___05003-webfont.woff", "akzidenz/12_akzidenz_grotesk_roman___05003-webfont.ttf", "akzidenz/12_akzidenz_grotesk_roman___05003-webfont.svg"), "akzidenz/12_akzidenz_grotesk_roman___05003-webfont.eot", normal, normal);
 @include font-face("Akzidenz", font-files("akzidenz/12_akzidenz_grotesk_bold___07003-webfont.woff", "akzidenz/12_akzidenz_grotesk_bold___07003-webfont.ttf", "akzidenz/12_akzidenz_grotesk_bold___07003-webfont.svg"), "akzidenz/12_akzidenz_grotesk_bold___07003-webfont.eot", bold, normal);
 @include font-face("Akzidenz", font-files("akzidenz/12_akzidenz_grotesk_light___02003-webfont.woff", "akzidenz/12_akzidenz_grotesk_light___02003-webfont.ttf", "akzidenz/12_akzidenz_grotesk_light___02003-webfont.svg"), "akzidenz/12_akzidenz_grotesk_light___02003-webfont.eot", lighter, normal);
-
+@include font-face('Icons', font-files('open-iconic.otf', 'open-iconic.svg', 'open-iconic.ttf', 'open-iconic.woff'), 'open-iconic.eot', normal, normal);
 
 // Typography
 $font-family: "Akzidenz", Helvetica, Arial, sans-serif;
