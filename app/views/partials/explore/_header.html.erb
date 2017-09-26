@@ -1,16 +1,16 @@
-<div class="mod-hero">
-	<h1><%= explore_page_title %></h1>
-	<nav class="section-nav">
-	    <ul>
-		<a href="<%= explore_stories_path %>">
-                    <li class="menu-item <%= "active" if action_name.eql?('stories') %>">Stories</li>
-                </a>
-                <a href="<%= explore_data_path %>">
-                    <li class="menu-item <%= "active" if action_name.eql?('data') || (controller_name == 'reports') %>">Analysis</li>
-                </a>
-                <a href="<%= explore_use_cases_path %>">
-                    <li class="menu-item <%= "active" if action_name.eql?('use_cases') %>">Use Cases</li>
-                </a>
-	    </ul>
-	</nav>
+<div class="mod-hero container-fluid">
+    <h1><%= explore_page_title %></h1>
+    <nav class="section-nav">
+        <ul>
+            <a href="<%= explore_stories_path %>">
+                <li class="menu-item <%= "active" if action_name.eql?('stories') %>">Stories</li>
+            </a>
+            <a href="<%= explore_data_path %>">
+                <li class="menu-item <%= "active" if action_name.eql?('data') || (controller_name == 'reports') %>">Analysis</li>
+            </a>
+            <a href="<%= explore_use_cases_path %>">
+                <li class="menu-item <%= "active" if action_name.eql?('use_cases') %>">Use Cases</li>
+            </a>
+        </ul>
+    </nav>
 </div>
