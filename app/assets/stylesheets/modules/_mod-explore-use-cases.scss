@@ -13,7 +13,7 @@
         font-style: italic;
     }
     .carousel {
-        height: 500px;
+        min-height: 500px;
         margin-top: 5em;
         h2 {
             color: $color-3;
@@ -111,7 +111,7 @@
         }
     }
     .hdx {
-        background: image-url('hdx_ss.png') no-repeat 50% 20%;
+        background: image-url('hdx_ss.png') no-repeat 50% 30%;
         & > div {
             background-image: linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.8) 80%, rgba(255,255,255,0.95));
         }
@@ -133,6 +133,7 @@
     }
     .pdc {
         background: image-url('pdc_ss.png') no-repeat;
+        background-size: cover;
          & > div {
             background-image: linear-gradient(rgba(0,0,0,0.6), rgba(255,255,255,0.9));
         }
@@ -149,6 +150,11 @@
         & > div {
             background-image: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.9) 0, rgba(255,255,255,0.6) 80%, rgba(255,255,255,0.1) 100%);
         }
+        p {
+            &.centered {
+                max-width: 625px;
+            }
+        }
     }
     .embed-image{
         position: absolute;
@@ -162,6 +168,15 @@
             top: 0;
             left: 0;
             z-index: -2;
+        }
+    }
+    @media (max-width: $screen-xs-max) {
+        .item {
+            display: block;
+            margin-bottom: 1em;
+        }
+        .embed-image {
+            width: auto;
         }
     }
 }
