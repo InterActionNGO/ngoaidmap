@@ -53,7 +53,7 @@
         font-weight: bold;
         background: rgba($color-0, 0.1);
         border-radius: 25px;
-        margin: 0 5px;
+        margin: 0 5px 10px 5px;
         border: 3px solid transparent;
         transition: color,border-color 0.2s;
         &:hover:not(.active) {

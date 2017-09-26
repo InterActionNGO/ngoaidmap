@@ -6,7 +6,7 @@ module ExploreHelper
         elsif action_name == 'data' || controller_name.eql?('reports')
             "Discover Data Beyond The Map" 
         elsif action_name == 'use_cases'
-            "Open Data: Use Cases"
+            "Using Open Data"
         end
     end
 
