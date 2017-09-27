@@ -139,10 +139,14 @@ class Site < ActiveRecord::Base
     end
 
     # (4)
-    if project_context_tags_ids?
+#     if project_context_tags_ids?
       # from << "projects_tags"
       # where << "(projects_tags.project_id = projects.id AND projects_tags.tag_id IN (#{project_context_tags_ids}))"
-      projects = projects.joins(:tags).where("tags.id IN (#{project_context_tags_ids})")
+#       projects = projects.joins(:tags).where("tags.id IN (#{project_context_tags_ids})")
+#     end
+    
+    if tags.count > 0
+       projects = projects.joins(:tags).where("tags.id in (#{tags.pluck(:id).join(',')})") 
     end
 
     # (5)
