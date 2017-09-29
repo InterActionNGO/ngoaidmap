@@ -61,6 +61,7 @@ class Project < ActiveRecord::Base
   has_many :local_partners, -> { where('organizations.international = false') }, through: :partnerships, :source => :partner
   has_many :humanitarian_scopes
   has_and_belongs_to_many :sites
+  has_many :identifiers, :as => :identifiable, :dependent => :destroy
 
   scope :active, -> {where("projects.end_date > ? AND projects.start_date <= ?", Date.today.to_s(:db), Date.today.to_s(:db))}
   scope :inactive, -> {where("end_date < ? OR start_date > ?", Date.today.to_s(:db), Date.today.to_s(:db))}

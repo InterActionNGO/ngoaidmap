@@ -38,6 +38,7 @@ class ProjectSerializer < ActiveModel::Serializer
 
     has_one :reporting_organization, serializer: OrganizationPreviewSerializer
     has_one :prime_awardee, serializer: OrganizationPreviewSerializer
+    has_many :identifiers, serializer: IdentifierPreviewSerializer
     has_many :donors, serializer: OrganizationPreviewSerializer
     has_many :partners, serializer: OrganizationPreviewSerializer
     has_many :sectors, serializer: SectorPreviewSerializer

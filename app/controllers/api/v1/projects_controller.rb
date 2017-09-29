@@ -14,7 +14,7 @@ module Api
                     records_returned: @projects.count,
                     current_offset: projects_params[:offset].to_i
                 },
-                include: [:donors, :prime_awardee, :geolocations, :sectors, :tags, :reporting_organization]
+                include: [:donors, :prime_awardee, :geolocations, :sectors, :tags, :reporting_organization, :identifiers]
           }
           format.xml {
             if projects = $redis.get(@iati_projects_digest)
@@ -47,7 +47,7 @@ module Api
         respond_to do |format|
           format.json {
               render json: @project,
-                include: [:donors, :prime_awardee, :geolocations, :sectors, :tags, :reporting_organization]
+                include: [:donors, :prime_awardee, :geolocations, :sectors, :tags, :reporting_organization, :identifiers]
           }
           format.xml {@project}
         end
