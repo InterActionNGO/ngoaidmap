@@ -86,7 +86,6 @@ class ApplicationController < ActionController::Base
         # in draft mode.
         if params[:controller] !~ /\Aadmin\/?.+\Z/
           unless @site = Site.draft.where(:id => params[:site_id]).first
-              @site = Site.find_by_name('global')
             raise ActiveRecord::RecordNotFound
           else
             # If a project is a draft, the host of the project is the main_site_host
