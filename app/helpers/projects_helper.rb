@@ -1,5 +1,40 @@
 module ProjectsHelper
 
+    def months_to_end
+       d1 = Date.today
+       d2 = @project.end_date
+       (d2.year - d1.year) * 12 + d2.month - d1.month - (d2.day > d1.day ? 0:1)
+    end
+    
+    def days_to_end
+        @project.end_date - Date.today
+    end
+    
+    def time_remaining_text
+        if months_to_end > 0
+            "#{pluralize(months_to_end, "month")} left"
+        elsif months_to_end == 0
+            "#{pluralize(days_to_end.to_i, "day")} left"
+        end
+    end
+    
+    def timeline_bar_width
+        total_days = (@project.end_date - @project.start_date).to_i
+        if @project.active?
+            (total_days - days_to_end.to_i) / total_days.to_f
+        else
+            100
+        end
+    end
+    
+    def project_reach_bar_width
+        if @project.actual_project_reach == @project.target_project_reach
+            100
+        else
+            @project.actual_project_reach / @project.target_project_reach.to_f
+        end
+    end
+    
   String.class_eval do
     def indefinitize
       %w(a e i o u).include?(downcase.first) ? "an #{self}" : "a #{self}"

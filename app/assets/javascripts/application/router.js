@@ -253,21 +253,21 @@ define([
       this.initViews();
 
       // Project Sidebar
-      new ProjectOrganization({ project: _project, conexion: this.conexion });
+//       new ProjectOrganization({ project: _project, conexion: this.conexion });
       new ProjectTimeline({ project: _project, conexion: this.conexion });
-      new ProjectBudget({ project: _project, conexion: this.conexion });
-      new ProjectPeopleReached({ project: _project, conexion: this.conexion });
-      new ProjectContact({ project: _project, conexion: this.conexion });
-      new ProjectWebsite({ project: _project, conexion: this.conexion });
-      new ProjectAwardee({ project: _project, awardee: _awardee, conexion: this.conexion });
-      new ProjectTarget({ project: _project, conexion: this.conexion });
-      new ProjectPartnerOrganizations({ project: _project, conexion: this.conexion });
-      new ProjectLocations({ project: _project, conexion: this.conexion });
-      new ProjectDonors({ project: _project, conexion: this.conexion });
+//       new ProjectBudget({ project: _project, conexion: this.conexion });
+//       new ProjectPeopleReached({ project: _project, conexion: this.conexion });
+//       new ProjectContact({ project: _project, conexion: this.conexion });
+//       new ProjectWebsite({ project: _project, conexion: this.conexion });
+//       new ProjectAwardee({ project: _project, awardee: _awardee, conexion: this.conexion });
+//       new ProjectTarget({ project: _project, conexion: this.conexion });
+//       new ProjectPartnerOrganizations({ project: _project, conexion: this.conexion });
+//       new ProjectLocations({ project: _project, conexion: this.conexion });
+//       new ProjectDonors({ project: _project, conexion: this.conexion });
       new ProjectReach({ project: _project, conexion: this.conexion });
-      new ProjectSectors({ project: _project, conexion: this.conexion });
-
-      new GalleryView();
+//       new ProjectSectors({ project: _project, conexion: this.conexion });
+// 
+//       new GalleryView();
     },
 
     search: function() {

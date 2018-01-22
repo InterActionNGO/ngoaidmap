@@ -203,7 +203,6 @@ define([
       }).done(_.bind(function(data){
         callback(data);
       },this));
-
     },
     
     // Fetch PARTNERS

@@ -16,15 +16,21 @@ define([
     template: Handlebars.compile(tpl),
 
     initialize: function(options) {
-      if (!this.$el.length) {
-        return
-      }
-      this.project = options.project;
-      if (!!this.project.actual_project_reach && !_.isNaN(~~this.project.actual_project_reach) && !!this.project.target_project_reach && !_.isNaN(~~this.project.target_project_reach) && this.project.project_reach_unit) {
-        this.render();
-      }else {
-        this.$el.remove();
-      }
+//       if (!this.$el.length) {
+//         return
+//       }
+//       this.project = options.project;
+//       if (!!this.project.actual_project_reach && !_.isNaN(~~this.project.actual_project_reach) && !!this.project.target_project_reach && !_.isNaN(~~this.project.target_project_reach) && this.project.project_reach_unit) {
+//         this.render();
+//       }else {
+//         this.$el.remove();
+//       }
+        var parent = this.$el.find('.timeline');
+        if (parent) {
+            var parent_width = parent.width();
+            var bar = parent.find('.timeline-status');
+            bar.width(bar.attr('data-bar-width') == 100 ? '100%' : bar.attr('data-bar-width') * parent_width);
+        }
     },
 
     parseData: function(){

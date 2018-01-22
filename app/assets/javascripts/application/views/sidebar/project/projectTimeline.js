@@ -15,11 +15,20 @@ define([
     template: Handlebars.compile(tpl),
 
     initialize: function(options) {
-      if (!this.$el.length) {
-        return
-      }
-      this.project = options.project;
-      this.render();
+//       if (!this.$el.length) {
+//         return
+//       }
+//       this.project = options.project;
+//       this.render();
+        var parent_width = this.$el.find('.timeline').width();
+        var bar_width = this.$el.find('.timeline-status').attr("data-timeline-width");
+        if (bar_width == 100) {
+            bar_width = '100%';
+            this.$el.find('.timeline-status').css('border-radius', '15px');
+        } else {
+            bar_width = bar_width * parent_width;
+        }
+        this.$el.find('.timeline-status').width(bar_width);
     },
 
     parseData: function(){
