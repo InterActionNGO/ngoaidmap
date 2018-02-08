@@ -267,7 +267,7 @@ define([
       new ProjectReach({ project: _project, conexion: this.conexion });
 //       new ProjectSectors({ project: _project, conexion: this.conexion });
 // 
-//       new GalleryView();
+       new GalleryView();
     },
 
     search: function() {
