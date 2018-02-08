@@ -40,8 +40,6 @@ class ApplicationController < ActionController::Base
     def main_site_host
       case Rails.env
         when 'development'
-          # '192.168.1.140'  # to test in ie
-          # 'ngoaidmap.dev'
           'localhost'
         when 'test'
           'ngoaidmap.test'
@@ -60,39 +58,16 @@ class ApplicationController < ActionController::Base
         @site = Site.find(params[:force_site_id]) if params[:force_site_id]
         @site = Site.where('LOWER(name) = ?', params[:force_site_name].downcase).first if params[:force_site_name]
 
-        # self.default_url_options = {:force_site_id => @site.id} if @site
+        self.default_url_options = {:force_site_id => @site.id} if @site
         return
       end
 
       # If the request host isn't the main_site_host, it should be the host from a site
-      if request.subdomain == 'www' || request.subdomain == '' || request.subdomain == 'v2'
-        @site = Site.find_by_name('global')
-      elsif !Site.find_by_url(request.host) || Site.find_by_url(request.host).status == false || Site.find_by_url(request.host).featured == false
-        redirect_to "http://ngoaidmap.org" and return
-      elsif @site = Site.published.where(:url => request.host).first
-            #unless @site = Site.find_by_name("global")
-          # raise ActiveRecord::RecordNotFound
-        # end
-        @site
+      @subsite = Site.published.select{ |s| s.url.split('.').first == request.host.split('.').first }
+      if @subsite.present?
+          @site = @subsite.first
       else
-        # Sessions controller doesn't depend on the host
-        return true if %w(sessions passwords).include?(controller_name)
-        # If root path, just go out
-        return false if controller_name == 'sites' && params[:site_id].blank?
-        # Reports page
-        return false if controller_name == "reports"
-        # If the controller is not in the namespace /admin,
-        # and the host is the main_site_host, it should be a Site
-        # in draft mode.
-        if params[:controller] !~ /\Aadmin\/?.+\Z/
-          unless @site = Site.draft.where(:id => params[:site_id]).first
-            raise ActiveRecord::RecordNotFound
-          else
-            # If a project is a draft, the host of the project is the main_site_host
-            # and the site is guessed by the site_id attribute
-            # self.default_url_options = {:site_id => @site.id}
-          end
-        end
+        @site = Site.find_by_name('global')
       end
       if @site && params[:theme_id]
         @site.theme = Theme.find(params[:theme_id])
