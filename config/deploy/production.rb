@@ -1,4 +1,4 @@
-set :rbenv_type, :system
+set :rbenv_type, :user
 set :rbenv_ruby, '2.3.1'
 
 role :app, %w{deploy@52.179.82.220}
