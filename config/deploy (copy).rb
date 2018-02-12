@@ -1,9 +1,24 @@
 lock '3.4.1'
-set :application, 'ngoaidmap'
-set :user, "deploy"
+set :application, 'ngo-v2'
 set :repo_url, 'git@github.com:InterActionNGO/ngoaidmap.git'
 set :branch, ENV['BRANCH'] || "master"
-set :deploy_to, "/var/www/#{fetch :application}/code"
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+# Default deploy_to directory is /var/www/my_app
+set :deploy_to, '/home/ubuntu/www/ngo-v2'
+
+# Default value for :scm is :git
+# set :scm, :git
+set :rvm_type, :system
+
+# Default value for :format is :pretty
+# set :format, :pretty
+
+# Default value for :log_level is :debug
+# set :log_level, :debug
+
+# Default value for :pty is false
+# set :pty, true
 
 # Default value for :linked_files is []
 set :linked_files, %w{.env config/database.yml}
@@ -13,8 +28,14 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 set :whenever_identifier, ->{ "update_sites" }
 
+# Default value for default_env is {}
+# set :default_env, { path: "/usr/local/rvm/gems/ruby-2.2.1@ngo-api/bin/bundler" }
+# set :default_env, { rvm_bin_path: '/usr/local/rvm/bin/rvm' }
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
 # set the locations that we will look for changed assets to determine whether to precompile
-set :assets_dependencies, %w(app/assets Gemfile.lock config/routes.rb)
+set :assets_dependencies, %w(app/assets lib/asset/usr/local/rvm/bin/rvm's vendor/assets Gemfile.lock config/routes.rb)
 
 set :bower_bin, '/usr/bin/bower'
 
@@ -34,4 +55,6 @@ after :restart, :clear_cache do
     end
   end
 end
+
+ # after :failed, :rollback
 

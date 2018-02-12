@@ -1,14 +1,16 @@
-set :rvm_ruby_version, '2.3.1'
+set :rbenv_type, :system
+set :rbenv_ruby, '2.3.1'
 
-role :app, %w{ubuntu@23.92.20.76}
-role :web, %w{ubuntu@23.92.20.76}
-role :db,  %w{ubuntu@23.92.20.76}
+role :app, %w{deploy@52.179.82.220}
+role :web, %w{deploy@52.179.82.220}
+role :db,  %w{deploy@52.179.82.220}
 
-server '23.92.20.76', user: 'ubuntu', roles: %w{web app}
+set :ssh_options, {:forward_agent => true}
+set :linked_files, %w{.env config/database.yml config/secrets.yml}
 
-set :ssh_options, { forward_agent: true }
+set :bower_bin, '/usr/local/nvm/versions/node/v0.10.29/bin/bower'
 
-set :linked_files, %w{.env config/database.yml}
+server '52.179.82.220', user: 'deploy', roles: [:web, :db, :app]
 
 set :rails_env, "production"
 set :branch, 'master'
