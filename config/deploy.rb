@@ -3,7 +3,7 @@ set :application, 'ngoaidmap'
 set :user, "deploy"
 set :repo_url, 'git@github.com:InterActionNGO/ngoaidmap.git'
 set :branch, ENV['BRANCH'] || "master"
-set :deploy_to, "/var/www/#{fetch :application}/code"
+set :deploy_to, "/var/www/#{fetch :application}"
 
 # Default value for :linked_files is []
 set :linked_files, %w{.env config/database.yml}
