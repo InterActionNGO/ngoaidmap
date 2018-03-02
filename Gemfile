@@ -35,6 +35,7 @@ gem 'sql_query'
 gem 'whenever', :require => false
 gem 'builder', '>= 3.2'
 gem 'remotipart', '~> 1.2'
+gem 'gibbon'
 
 group :development do
   gem 'foreman'

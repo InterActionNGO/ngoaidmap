@@ -120,6 +120,16 @@ class Organization < ActiveRecord::Base
   scope :donation_donors, -> (donors){joins(:donations_made).where(donations: {donor_id: donors})}
   scope :donation_sectors, -> (sectors){joins(donations_made: {project: :sectors}).where(sectors: {id: sectors})}
 
+  scope :has_projects, -> { where('id in (select primary_organization_id from projects)') }
+  
+  def self.interaction_members(historic=false)
+      if historic
+          where("membership_status in ('Current Member', 'Former Member')")
+      else
+          where(membership_status: 'Current Member')
+      end
+  end
+  
   def self.fetch_all(options={})
     level = Geolocation.find_by(uid: options[:geolocation]).adm_level if options[:geolocation]
     organizations = Organization.all
