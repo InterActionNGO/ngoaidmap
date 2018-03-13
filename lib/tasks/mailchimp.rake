@@ -24,13 +24,13 @@ namespace :iom do
             to_remove = []
             
             nam_data_contacts.each do |c|
-                present = mc_data_contacts.select { |x| x.downcase == c.downcase }
+                present = mc_data_contacts.select { |x| x.downcase.strip == c.downcase.strip }
                 to_add << c if present.empty?
             end
             
             mc_data_contacts.each do |c|
-                absent = nam_data_contacts.select { |x| x.downcase == c.downcase }
-                to_remove << c if absent.empty?
+                absent = nam_data_contacts.select { |x| x.downcase.strip == c.downcase.strip }
+                to_remove << c.downcase.strip if absent.empty?
             end
             
             puts "to add: #{to_add.size}"
@@ -48,7 +48,7 @@ namespace :iom do
                     dates << org.projects.maximum(:updated_at)
                     body = {
                         status: "subscribed",
-                        email_address: c,
+                        email_address: c.downcase.strip,
                         merge_fields: {
                             "FNAME": name[0],
                             "LNAME": name[1, name.size].join(" "),
@@ -62,7 +62,7 @@ namespace :iom do
                     }
                     puts "Subscribing #{c}..."
                     begin
-                        g.lists(id).members(Digest::MD5.hexdigest c.downcase).
+                        g.lists(id).members(Digest::MD5.hexdigest c.downcase.strip).
                         upsert(body: body)
                     rescue Gibbon::MailChimpError => e
                             puts e.inspect
@@ -75,7 +75,7 @@ namespace :iom do
                 
             to_remove.each do |c|
                 puts "Removing #{c}..."
-                puts g.lists(id).members(Digest::MD5.hexdigest c.downcase).delete
+                puts g.lists(id).members(Digest::MD5.hexdigest c).delete
             end
             
             puts 'All done!'
