@@ -20,26 +20,20 @@ namespace :iom do
                 map { |m| m[:email_address] }
             puts "mc data contacts: #{mc_data_contacts.size}"
             
-            to_add = []
             to_remove = []
-            
-            nam_data_contacts.each do |c|
-                present = mc_data_contacts.select { |x| x.downcase.strip == c.downcase.strip }
-                to_add << c if present.empty?
-            end
             
             mc_data_contacts.each do |c|
                 absent = nam_data_contacts.select { |x| x.downcase.strip == c.downcase.strip }
                 to_remove << c.downcase.strip if absent.empty?
             end
             
-            puts "to add: #{to_add.size}"
-            puts to_add
+            puts "contacts in nam: #{nam_data_contacts.size}"
+            puts nam_data_contacts
             
             puts "to_remove: #{to_remove.size}"
             puts to_remove
             
-            to_add.each do |c|
+            nam_data_contacts.each do |c|
                 org = Organization.find_by(main_data_contact_email: c)
                 unless org.nil?
                     name = org.main_data_contact_name.present? ? org.main_data_contact_name.split(" ") : ["",""]
