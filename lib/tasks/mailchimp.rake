@@ -59,7 +59,7 @@ namespace :iom do
                             "M_USERS": org.users.where(blocked: false).map(&:email).join(", "),
                             "M_USERCNT": org.users.where(blocked: false).size,
                             "NAMACTIVE": Project.active.size,
-                            "NAMTOTAL": Project.count
+                            "NAMTOTAL": Project.count,
                             "ACTIVEORGS": Organization.active.distinct.size,
                             "ACTIVECTRY": Geolocation.joins(:projects).merge(Project.active).map(&:country_name).uniq.size
                         }
