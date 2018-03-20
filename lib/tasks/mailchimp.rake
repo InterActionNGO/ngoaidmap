@@ -5,7 +5,7 @@ namespace :iom do
        
        task sync: :environment do
            
-            g = Gibbon::Request.new(symbolize_keys: true)
+            g = Gibbon::Request.new(symbolize_keys: true, api_key: ENV['MAILCHIMP_API_KEY'])
             id = "02b981eb9e" # data contact list id in mailchimp
             
             # NGO Aid Map list
