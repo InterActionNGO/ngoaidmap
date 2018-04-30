@@ -15,6 +15,11 @@ class PagesController < ApplicationController
   def set_site_if_exists
     set_site rescue nil
   end
+  
+  def data_quality
+      @page = pages.published.find_by_permalink('data-quality')
+  end
+  
   private :set_site_if_exists
 
   def pages

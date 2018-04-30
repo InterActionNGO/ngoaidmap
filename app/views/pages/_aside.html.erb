@@ -1,0 +1,25 @@
+<aside class="layout-sidebar grid-4">
+    <div class="mod-info mod-sites-info" id="menuFixedView">
+
+        <% if @pages.present? -%>
+            <h3>About</h3>
+            <ul>
+            <% @pages.each do |child| %>
+                <li><%= link_to_unless(child==@page,child.title, page_path(child)) %></li>
+            <% end %>
+            </ul>
+        <% else %>
+            <% top_parent = @page.top_parent %>
+            <h3><%= link_to(top_parent.title, page_path(top_parent)) %></h3>
+            <% pages = top_parent.children.published %>
+            <% if pages.any? %>
+                <ul>
+                    <% pages.each do |child| %>
+                    <li><%= link_to_unless(child==@page,child.title, page_path(child)) %></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        <% end %>
+
+    </div>
+</aside>

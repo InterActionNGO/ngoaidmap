@@ -1,0 +1,98 @@
+<div class="about-subsections">
+
+  <div class="mod-hero"></div>
+
+  <div class="main-content">
+    <div class="row">
+      <section class="layout-content about grid-12 offset-1">
+        <h1>Data Quality</h1>
+        <article class="mod-content-article mod-data-quality">
+            <p>At NGO Aid Map, we think of data quality as having four dimensions:
+                <ul>
+                    <li><strong>Accuracy:</strong>  the degree to which information provided correctly reflects the work being done. We depend on InterAction members to provide accurate information on their work.</li>
+                    <li><strong>Completeness:</strong>   the percentage of projects with information for a given data field.</li>
+                    <li><strong>Comprehensiveness:</strong>   the share of an organization’s total work published on NGO Aid Map.</li>
+                    <li><strong>Timeliness:</strong>   how soon a project's information is shared after its start date.</li>
+                </ul>
+            </p>
+		
+            <p>To help our visitors better understand the quality of the data on the site, we’ve created visualizations for two of these elements: completeness and timeliness.</p>
+            
+            <ul>
+                <li id="viz1link" tabindex=1 class="li-click">Visualization #1:   Completeness (All Active Projects)</li>
+                <li id="viz2link" tabindex=2 class="li-click">Visualization #2:   Completeness by organization</li>
+                <li id="viz3link" tabindex=3 class="li-click">Visualization #3:   Most, Average, and Least Timely Organizations</li>
+            </ul>
+
+            <div id="viz1_anchor" class="subtitle-top">
+                <h3 id="viz_subtitle" class="viz-subtitle"><strong>Completeness</strong> | <span class='subtitle-smaller'>Provision of data per field</span></h3>
+                <p>Participants can provide a range of information for each project, with certain data fields required (indicated by an asterisk) and the others optional. Completeness is measured as the percentage of all projects for which data is provided for a given field. Please note that not all fields are applicable for all projects. Data for certain fields may also not be provided due to privacy, security or other concerns.</p>
+                <p>For more information about these fields, see the <a href="//www.interaction.org/sites/default/files/ngoaidmap/project-reporting-guidance.pdf" target="_blank">Project Reporting Guidance</a> document on the <a href="//www.ngoaidmap.org/p/data-guidance" target="_blank">Data Guidance</a> page.</p>
+            </div>
+                            
+            <h3>Completeness (All Active Projects)</h3>
+		<div id="viz_header">
+                    <p class="subtitle-project-count">
+                        <span class="subtitle-project-count-1"></span>
+                        <br>
+                        <span class="subtitle-project-count-2">Asterisk indicates a required field</span>
+                        <span class="sort-controls" title="click to sort">
+                                <svg version="1.1" class="sort-icon" xmlns="//www.w3.org/2000/svg" xmlns:xlink="//www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><g><path d="M19.882,44.328h60.236c0.769,0,1.469-0.44,1.802-1.133c0.334-0.691,0.241-1.514-0.238-2.114L51.564,3.324 c-0.38-0.476-0.955-0.753-1.563-0.753s-1.184,0.277-1.563,0.753L18.318,41.081c-0.479,0.601-0.572,1.423-0.238,2.114 C18.413,43.888,19.113,44.328,19.882,44.328z"/><path d="M80.118,55.672H19.882c-0.769,0-1.469,0.44-1.802,1.133c-0.334,0.691-0.241,1.514,0.238,2.114l30.119,37.757 c0.38,0.476,0.955,0.753,1.563,0.753s1.184-0.277,1.563-0.753l30.117-37.757c0.479-0.601,0.572-1.423,0.238-2.114 C81.587,56.112,80.887,55.672,80.118,55.672z"/></g></svg>
+                        </span>
+                    </p>
+                    <div class="sort-options-wrapper">
+                        <ul class="sort-options">
+                            <li>Sort A - Z</li>
+                            <li>Sort Z - A</li>
+                            <li>Sort by percent, asc.</li>
+                            <li>Sort by percent, desc.</li>
+                        </ul>
+                        <span class="sort-options-close-x">x</span>
+                    </div>
+		</div>
+		<div id="d3_chart" class="chart"></div>
+		<div class="chart-footnote"><sup>&#8224;</sup>Includes projects that are global in scope</div>
+
+		<h3 id="viz2_anchor">Completeness by Organization</h3>
+		<div id="d3_matrix_legend"></div>
+		<div id="d3_dq_matrix"></div>
+		<div class="chart-footnote"><sup>&#8224;</sup>Includes projects that are global in scope</div>
+		<div id="d3_org_modal" class="d3-org-modal">
+                    <div class="d3-org-modal-div">
+                        <div class="d3-org-modal-div-left">
+                            <div class="d3-org-modal-div-left-name"></div>
+                            <p class="d3-org-modal-div-left-subtitle">Overview of project data published for 24 fields on NGO Aid Map</p>
+                            <div class="d3-org-modal-div-left-graph"></div>
+                            <ul class="d3-org-modal-div-left-legend-top">
+                                <li id="legend1"></li>
+                                <li id="legend2"></li>
+                                <li id="legend3"></li>
+                            </ul>
+                            <ul class="d3-org-modal-div-left-legend-bottom">
+                                <li>Always/Usally Provided</li>
+                                <li>Often Provided</li>
+                                <li>Rarely/Never Provided</li>
+                            </ul>
+                        </div>
+                        <div class="d3-org-modal-div-right"></div>
+                        <div class="d3-org-modal-close">X</div>
+                        <div id="d3_info_tooltip" class="d3-tt tt-info"></div>
+                    </div>
+		</div>
+		
+		<div id="viz3_anchor" class="subtitle-top">
+                    <h3 class="viz-subtitle"><strong>Timeliness</strong> | <span class="subtitle-smaller">Time elapsed between project start and publication</span></h3>
+                    <p>Timeliness is measured as the difference between a project's start date and the date it is submitted to NGO Aid Map.  The visualization below shows the timeliness with which organizations provided information on projects starting in 2014 or later. Projects with earlier start dates are not included because prior to 2014 organizations could only submit data on projects taking place in certain countries or sectors.  NGO Aid Map became global, covering all countries and sectors, in 2014 <a href="//www.ngoaidmap.org/p/history">(more on its history here)</a>.</p>
+		</div>
+		<h6>Most, Average, and Least Timely Organizations</h6>
+		<div id="d3_timeliness"></div>
+        </article>
+      </section>
+
+      <%= render 'aside' %>
+      
+    </div>
+  </div>
+
+</div>
+<%= javascript_include_tag "data_quality" %>

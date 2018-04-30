@@ -45,4 +45,4 @@ Rails.application.config.assets.precompile += %w( backoffice/layout.css )
 Rails.application.config.assets.precompile += %w( backoffice/smbtc-layout.css )
 
 Rails.application.config.assets.precompile += %w( application.js )
-Rails.application.config.assets.precompile += %w( report.js explore.js)
+Rails.application.config.assets.precompile += %w( report.js explore.js data_quality.js)

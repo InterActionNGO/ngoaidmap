@@ -59,18 +59,7 @@ Rails.application.routes.draw do
   post 'explore/data/download', to: 'downloads#reports', :as => :report_download
   resources :stories, :only => [:show, :create]
   get 'explore/use-cases', to: 'explore#use_cases'
-  
-  
-  # These routes are old - delete?
-  get 'about', to: 'sites#about'
-  get 'about-interaction', to: 'sites#about_interaction'
-  get 'about-data' , to: 'sites#about_data'
-  get 'media', to: 'sites#media'
-  get 'testimonials' , to: 'sites#testimonials'
-  get 'link-ngo-aid-map' , to: 'sites#link_ngo_aid_map'
-  get 'make-your-own-map' , to: 'sites#make_your_own_map'
-  get 'faq', to: 'sites#faq'
-  get 'contact', to: 'sites#contact'
+
 
   # Front urls
   # resources :reports
@@ -92,7 +81,11 @@ Rails.application.routes.draw do
 
   # pages
   get '/p/analysis', to: redirect('/explore/data'), status: 302
+  get '/p/data-quality', to: 'pages#data_quality'
   get '/p/:id' , to: 'pages#show', :as => :page
+  
+  get '/doc/data/:file', to: 'files#show'
+  
   # search
   get '/search', to: 'search#index', :as => :search
   # list of regions of each level
