@@ -33,6 +33,7 @@
     "Class.js": "1.0.0",
     "amplify": "1.1.2",
     "bootstrap-sass": "3.3.7",
-    "open-iconic": "1.1.1"
+    "open-iconic": "1.1.1",
+    "d3":"3.3.5"
   }
 }
