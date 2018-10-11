@@ -49,5 +49,9 @@ class Sector < ActiveRecord::Base
   def donors
     Project.active.joins([:sectors, :donors]).where(sectors: {id: self.id}).pluck('organizations.id', 'organizations.name').uniq
   end
+  
+  comma :brief do
+     name 'name' 
+  end
 
 end

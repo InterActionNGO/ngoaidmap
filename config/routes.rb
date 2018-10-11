@@ -70,6 +70,9 @@ Rails.application.routes.draw do
   resources :organizations, :only => [:index, :show]
 
   get '/downloads', to: 'downloads#index', as: 'download'
+  get '/downloads/sectors', to: 'downloads#sectors'
+  get '/downloads/organizations', to: 'downloads#organizations'
+  get '/downloads/locations', to: 'downloads#locations'
 
   get 'regions/:id' => 'georegion#old_regions'
 

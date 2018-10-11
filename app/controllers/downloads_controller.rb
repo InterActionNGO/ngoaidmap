@@ -23,6 +23,18 @@ class DownloadsController < ApplicationController
             }
         end
     end
+    
+    def sectors
+       render :csv => Sector.order(:name), style: :brief
+    end
+    
+    def organizations
+        render :csv => Organization.order(:name), style: :brief
+    end
+    
+    def locations
+        render :csv => Geolocation.order(:country_name,:adm_level), style: :brief
+    end
   
     def reports
         render :csv => Project.where(:id => params['ids']).includes(included_associations), :style => :brief

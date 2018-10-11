@@ -182,6 +182,10 @@ class Organization < ActiveRecord::Base
   def projects_count
     self.projects.active.size
   end
+  
+  comma :brief do
+      name 'name'
+  end
 
   # IATI
 
