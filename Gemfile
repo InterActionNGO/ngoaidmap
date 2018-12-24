@@ -36,6 +36,7 @@ gem 'whenever', :require => false
 gem 'builder', '>= 3.2'
 gem 'remotipart', '~> 1.2'
 gem 'gibbon'
+gem 'recaptcha'
 
 group :development do
   gem 'foreman'

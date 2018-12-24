@@ -275,6 +275,8 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
+    recaptcha (4.13.1)
+      json
     redis (3.3.1)
     redis-actionpack (4.0.1)
       actionpack (~> 4)
@@ -438,6 +440,7 @@ DEPENDENCIES
   raddocs
   rails (= 4.2.7.1)
   rails_db
+  recaptcha
   redis
   redis-namespace
   redis-rack-cache
@@ -463,4 +466,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
