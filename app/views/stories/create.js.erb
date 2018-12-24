@@ -7,7 +7,7 @@ var form = $("#new_story");
     clear_errors(form);
     
     <% @story.errors.messages.each do |attr, errors| %>
-        
+    
         // Display field errors
         var input = form.find('input, textarea').filter(function () {
             var name = $(this).attr('name');
@@ -26,8 +26,8 @@ var form = $("#new_story");
         
     <% end %>
     
-    message = 'Whoops! Error.';
-    cssClass = 'bg-danger';
+    message = 'Whoops! Make sure to fill out all required fields.';
+    cssClass = 'alert alert-danger';
     
 <% else %>
 
