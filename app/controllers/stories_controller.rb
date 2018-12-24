@@ -1,8 +1,10 @@
 class StoriesController < ApplicationController
     
     def create
-        @story = Story.create(story_params)
-        verify_recaptcha(model: @story)
+        @story = Story.new(story_params)
+        if verify_recaptcha(model: @story)
+            @story.save
+        end
         respond_to do |format|
            format.js 
         end
