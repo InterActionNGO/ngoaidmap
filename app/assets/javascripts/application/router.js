@@ -24,7 +24,7 @@ define([
   'application/views/sidebar/sidebarHighlights',
   'application/views/sidebar/sidebarSectors',
   'application/views/sidebar/sidebarSectorsAll',
-  'application/views/sidebar/sidebarLocation',
+//   'application/views/sidebar/sidebarLocation',
   'application/views/sidebar/sidebarLocations',
   'application/views/sidebar/sidebarDonors',
   'application/views/sidebar/sidebarOrganizations',
