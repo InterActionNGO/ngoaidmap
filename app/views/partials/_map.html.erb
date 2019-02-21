@@ -6,7 +6,7 @@
       <div class="mod-map-controls">
 
         <nav class="control-navbar<% if @site.featured? %> featured-control-navbar<% end %>">
-          <% if SiteLayer.where({:site_id => @site.id}).length >= 1 %>
+          <!--<% if SiteLayer.where({:site_id => @site.id}).length >= 1 %>
             <div class="selector menu-item" id="layerSelector">
               <ul>
                 <li><span class="current-selector index-item">Layer</span>
@@ -20,7 +20,7 @@
                 </li>
               </ul>
             </div>
-          <% end %>
+          <% end %>-->
 
           <div class="selector menu-item" id="mapTypeSelector">
             <ul>
@@ -57,7 +57,7 @@
 
 </section>
 
-<% SiteLayer.where({:site_id => @site.id}).each do |sl| %>
+<!--<% SiteLayer.where({:site_id => @site.id}).each do |sl| %>
   <div id="Overlay<%= sl.layer.id %>" class="mod-overlay layer-overlay">
     <div class="mod-overlay-content">
       <div class="text">
@@ -68,5 +68,5 @@
       </div>
     </div>
   </div>
-<% end %>
+<% end %>-->
 <% end %>

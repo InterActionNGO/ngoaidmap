@@ -12,7 +12,7 @@ define([
   'application/views/filterSummary',
   'application/views/embed-map',
   'application/views/search',
-  'application/views/layer-overlay',
+//   'application/views/layer-overlay',
   'application/views/gallery',
   'application/views/filteredBubble',
   //Titles
@@ -54,8 +54,7 @@ define([
 
 
 
-], function(Backbone, Conexion, MapView, FiltersView, MenuFixedView, DownloadsView, FilterSummaryView, EmbedMapView, SearchView, LayerOverlayView,
-  GalleryView, FilteredBubble, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
+], function(Backbone, Conexion, MapView, FiltersView, MenuFixedView, DownloadsView, FilterSummaryView, EmbedMapView, SearchView,GalleryView, FilteredBubble, TitleSector, TitleDonor, TitleOrganization, TitleCountry, SidebarHighlights, SidebarSectors, SidebarSectorsAll, SidebarLocation, SidebarLocations, SidebarDonors, SidebarOrganizations,
   SidebarOrganizationsInfoContact, SidebarOrganizationsDonationContact, SidebarOrganizationsMediaContact, SidebarOrganizationsFollowUs, SidebarOrganizationsResources, SidebarOtherCountries, SidebarPartners,
   projectModel, ProjectOrganization, ProjectTimeline, ProjectBudget, ProjectPeopleReached, ProjectContact, ProjectWebsite, ProjectAwardee, ProjectTarget, ProjectPartnerOrganizations, ProjectLocations, ProjectDonors, ProjectReach, ProjectSectors) {
 
@@ -198,7 +197,7 @@ define([
       if (!this.global) {
         new MapView({ conexion: this.conexion });
         new EmbedMapView({ conexion: this.conexion });
-        new LayerOverlayView({ conexion: this.conexion });
+//         new LayerOverlayView({ conexion: this.conexion });
       }
       // Sidebar Views
       new SidebarHighlights({ conexion: this.conexion });
