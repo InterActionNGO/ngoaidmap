@@ -45,8 +45,8 @@ public/app/vendor/*
 public/assets
 public/system
 
-/public/files/*
-!/public/files/.gitkeep
+#/public/files/*
+#!/public/files/.gitkeep
 /install
 /install/rails
 stdout
