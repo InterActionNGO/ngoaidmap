@@ -1,0 +1,397 @@
+{
+    "headers": [
+            {
+                    "name": "NGO Aid Map",
+                    "subheaders": [
+                            {
+                                    "name": "Sector Name"
+                            }
+                    ]
+            },
+            {
+                    "name": "OECD DAC",
+                    "subheaders": [
+                            {
+                                    "name": "Code"
+                            },
+                            {
+                                    "name": "Code Name"
+                            }
+                    ]
+            },
+            {
+                    "name": "Notes",
+                    "subheaders": []
+            }
+    ],
+    "body": [
+            {
+                    "key": "Agriculture",
+                    "notes": "Includes agricultural development, education, training, and care of livestock.",
+                    "matches": [
+                            {
+                                    "name": "agriculture",
+                                    "code": "311",
+                                    "upper": true
+                            }
+                    ]
+            },
+            {
+                    "key": "Animal Welfare",
+                    "notes": "Projects focused on providing for the physical and/or mental needs of animals. <em>Please note:</em> Care of livestock should be coded as Agriculture and not Animal Protection.",
+                    "matches": [
+                            {
+                                    "name": "NA",
+                                    "code": "NA",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Capacity Strengthening for CSOs (general)",
+                    "notes": "Applies to efforts to strengthen the ability of civil society organizations to perform core functions sustainably. This may include areas such as fundraising, financial management, strategic planning, etc. It may also include support for maintaining or improving organizational facilities. <em>Please note:</em> If the work you are doing is capacity strengthening for a certain sector, then code the project to that specific sector, rather than Capacity Strengthening for CSOs (general).",
+                    "matches": [
+                            {
+                                    "name": "NA",
+                                    "code": "NA",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Communications/Technology",
+                    "notes": "Projects focused on creating or improving  communications/technology, such as telecommunications, media, and communication systems.",
+                    "matches": [
+                            {
+                                    "name": "Communications",
+                                    "code": "220",
+                                    "upper": true
+                            }
+                    ]
+            },
+            {
+                    "key": "Conflict Prevention and Resolution/Peace and Security",
+                    "notes": "Efforts toward de-escalation or conflict mediation, including oversight or scrutiny of the security system, activities related to peace building and conflict prevention/resolution, prevention and/or reduction small arms and landmines, and any activity related to child soldiers.",
+                    "matches": [
+                            {
+                                    "name": "Conflict prevention and resolution, peace and security",
+                                    "code": "152",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Construction",
+                    "notes": "Includes construction sector policy and non-sector specific construction activities. Construction activities within specific sectors, such as hospital or school construction, should be coded under those sectors.",
+                    "matches": [
+                            {
+                                    "name": "Construction",
+                                    "code": "323",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Debt Relief",
+                    "notes": "InterAction members' work in this area will most likely take the form of advocacy for debt relief.",
+                    "matches": [
+                            {
+                                    "name": "Action Relating to Debt",
+                                    "code": "600",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Disaster Prevention and Preparedness",
+                    "notes": "Efforts that seek to reduce the human and economic losses associated with disasters by reducing communities’ vulnerability to hazards and/or increasing their capacity to prevent or cope with such adverse events. This could be related to natural or man-made disasters.",
+                    "matches": [
+                            {
+                                    "name": "Disaster prevention and preparedness",
+                                    "code": "740",
+                                    "upper": false
+                            },
+                            {
+                                    "name": "Flood prevention/control",
+                                    "code": "41050",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Economic Recovery and Development",
+                    "notes": "Programs that seek to rebuild or improve economic systems, including informal financial services, banking, micro-credit, and employment related activities.",
+                    "matches": [
+                            {
+                                    "name": "banking and financial services",
+                                    "code": "240",
+                                    "upper": true
+                            },
+                            {
+                                    "name": "business and other services",
+                                    "code": "250",
+                                    "upper": true
+                            },
+                            {
+                                    "name": "industry",
+                                    "code": "321",
+                                    "upper": true
+                            },
+                            {
+                                    "name": "Employment policy and administrative management",
+                                    "code": "16020",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Education",
+                    "notes": "Includes early childhood education, primary education, secondary education, and higher education as well as life skills training, literacy and numeracy training, and vocational training. <em>Please note:</em> Sector-specific education activities, such as agricultural training, should be coded under the respective sector.",
+                    "matches": [
+                            {
+                                    "name": "education",
+                                    "code": "110",
+                                    "upper": true
+                            }
+                    ]
+            },
+            {
+                    "key": "Energy",
+                    "notes": "All efforts to support energy demand reduction, efficient cook-stoves and biogas projects, renewable energy, non-renewable energy, and energy distribution.",
+                    "matches": [
+                            {
+                                    "name": "energy generation, distribution and efficiency",
+                                    "code": "230",
+                                    "upper": true
+                            }
+                    ]
+            },
+            {
+                    "key": "Environment",
+                    "notes": "Activities concerned with the conservation and/or protection of the  environment. This includes biodiversity protection, cultural site preservation, environmental education and training, and climate change. <em>Please note:</em> This does not cover natural disaster (e.g. flood) prevention/control, which should be coded as Disaster Prevention and Preparedness.",
+                    "matches": [
+                            {
+                                    "name": "General environmental protection",
+                                    "code": "410",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Fishing",
+                    "notes": "Fishery development, fish stock protection, aquaculture, and fishery services, including fishing harbors, fish markets, and cold storage.",
+                    "matches": [
+                            {
+                                    "name": "fishing",
+                                    "code": "313",
+                                    "upper": true
+                            }
+                    ]
+            },
+            {
+                    "key": "Food Aid",
+                    "notes": "Providing the supply of food under international or national programs including transport costs, cash payments made for food supplies, and emergency food aid.",
+                    "matches": [
+                            {
+                                    "name": "Developmental food aid/food security assistance",
+                                    "code": "520",
+                                    "upper": false
+                            },
+                            {
+                                    "name": "Emergency food aid",
+                                    "code": "72040",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Forestry",
+                    "notes": "Includes forest surveys, afforestation for industrial and rural consumption, erosion control, desertification control, and fuelwood and charcoal production.",
+                    "matches": [
+                            {
+                                    "name": "forestry",
+                                    "code": "312",
+                                    "upper": true
+                            }
+                    ]
+            },
+            {
+                    "key": "Gender",
+                    "notes": "Projects addressing gender equality and women’s empowerment.",
+                    "matches": [
+                            {
+                                    "name": "Women's equality organizations and institutions",
+                                    "code": "15170",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Health",
+                    "notes": "Includes disease mitigation, nutrition, and family planning, training of health staff for basic health care services, medical services such as laboratories, clinics, and hospitals, mental health care, and drug and substance abuse control. <em>Please note:</em> This does not include education or other efforts for basic hygiene, which should be coded under Water Sanitation and Hygiene.",
+                    "matches": [
+                            {
+                                    "name": "health",
+                                    "code": "120",
+                                    "upper": true
+                            },
+                            {
+                                    "name": "population policies/programmes and reproductive health",
+                                    "code": "130",
+                                    "upper": true
+                            }
+                    ]
+            },
+            {
+                    "key": "Human Rights Democracy and Governance",
+                    "notes": "Includes institution building assistance to improve public sector management, anti-corruption efforts, domestic resource mobilization, legal and judicial development and education, elections monitoring, press freedom, and providing support to human rights organizations.",
+                    "matches": [
+                            {
+                                    "name": "Government and civil society, general",
+                                    "code": "151",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Humanitarian Aid",
+                    "notes": "Assistance designed to save lives, alleviate suffering, and maintain and protect human dignity during and in the aftermath of emergencies. This sector is used roughly like a tag, so that it is possible to easily identify humanitarian aid projects on NGO Aid Map. Whenever possible, humanitarian aid projects should be coded with one or more additional sectors so users can also see the type of humanitarian assistance being provided. Activities including camp coordination and management, logistics support, and the distribution of non-food items such as blankets, kitchen sets, clothes, etc. should currently be coded just under Humanitarian Aid.",
+                    "matches": [
+                            {
+                                    "name": "humanitarian aid",
+                                    "code": "700",
+                                    "upper": true
+                            },
+                            {
+                                    "name": "Reconstruction relief and rehabilitation",
+                                    "code": "730",
+                                    "upper": false
+                            },
+                            {
+                                    "name": "Relief co-ordination; protection and support services",
+                                    "code": "72050",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Mining and Extractive Resources",
+                    "notes": "Efforts related to mining and extractive resources such as oil, precious metals, and other metals. Includes advocacy for transparency within extractive industries as well as advocacy on behalf of the industry.",
+                    "matches": [
+                            {
+                                    "name": "mineral resources and mining",
+                                    "code": "322",
+                                    "upper": true
+                            }
+                    ]
+            },
+            {
+                    "key": "Other",
+                    "notes": "This code should only be used for projects that cannot be classified according to one of the other sectors, either because they do not fit or because there is insufficient information to sector code. <em>Please note:</em> If this sector is used, it should be the only one included.",
+                    "matches": [
+                            {
+                                    "name": "Unallocated/unspecified",
+                                    "code": "998",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Protection",
+                    "notes": "Efforts aimed at ensuring full respect for the rights of individuals in accordance with the letter and the spirit of the relevant bodies of law. Protection work may involve activities to prevent violations or abuses from occurring, or to address the consequences of such violations and abuses. Activities may include: establishment of child-friendly spaces in an emergency, registration of persons, such as refugees or internally displaced persons (IDPs), and anti-trafficking initiatives. Also includes support to programs designed to prevent and eliminate all forms of gender-based violence.",
+                    "matches": [
+                            {
+                                    "name": "Relief co-ordination; protection and support services",
+                                    "code": "72050",
+                                    "upper": false
+                            },
+                            {
+                                    "name": "Ending violence against women and girls",
+                                    "code": "15180",
+                                    "uppder": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Refugee Resettlement",
+                    "notes": "This is only resettlement of refugees in donor countries. Camp management or other projects related to refugee assistance should be coded as Humanitarian Aid or other appropriate sectors. ",
+                    "matches": [
+                            {
+                                    "name": "Refugees in donor countries",
+                                    "code": "930",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Shelter and Housing",
+                    "notes": "Efforts aimed at ensuring safe and decent housing for all, including provision of low-cost housing, slum clearance/upgrading, efforts to provide temporary or permanent shelter in emergencies or disasters, and housing finance operations.",
+                    "matches": [
+                            {
+                                    "name": "Housing policy and administrative management",
+                                    "code": "16030",
+                                    "upper": false
+                            },
+                            {
+                                    "name": "Low-cost housing",
+                                    "code": "16040",
+                                    "upper": false
+                            },
+                            {
+                                    "name": "Urban development and management",
+                                    "code": "43030",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Social Services",
+                    "notes": "Programs not categorized under health or education, aimed at providing for the needs of the disenfranchised. This includes institution capacity building and advice, social security and other social schemes, and special programs for the elderly, orphans, the disabled, street children.",
+                    "matches": [
+                            {
+                                    "name": "Social/welfare services",
+                                    "code": "16010",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Trade",
+                    "notes": "InterAction members' work in this area will most likely take the form of advocacy related to trade, including international and regional trade agreements. May include activities to facilitate trade, such as simplification of import and export procedures, trade education and training, and efforts to support countries effective participation in trade negotiations.",
+                    "matches": [
+                            {
+                                    "name": "Trade Policy and Regulations and Trade-Related Adjustment",
+                                    "code": "331",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Transport/Infrastructure",
+                    "notes": "Includes the creation and maintenance of transportation structures such as road, rail, water, and air transport, and related policy.",
+                    "matches": [
+                            {
+                                    "name": "Transport and storage",
+                                    "code": "210",
+                                    "upper": false
+                            }
+                    ]
+            },
+            {
+                    "key": "Water Sanitation and Hygiene",
+                    "notes": "All projects that focus on clean water and hygiene policy/training. Includes water resources conservation, basic drinking water supply schemes such as hand pumps or wells,  basic sanitation such as latrines, and waste management/disposal.",
+                    "matches": [
+                            {
+                                    "name": "water and sanitation",
+                                    "code": "140",
+                                    "upper": true
+                            },
+                            {
+                                    "name": "Health education",
+                                    "code": "12261",
+                                    "upper": false
+                            }
+                    ]
+            }
+    ]
+}
