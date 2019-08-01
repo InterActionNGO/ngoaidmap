@@ -17,6 +17,11 @@ class ReportsController < ApplicationController
         end
         params[:id] = 'report'
     end
+    
+    def weeklyReport
+       @dateEnd = Date.yesterday
+       @dateStart = @dateEnd - 7
+    end
 
     def list
         @table = Project.get_list(params)

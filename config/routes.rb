@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   get 'explore', to: redirect('explore/stories'), status: 302
   get 'explore/stories'
   get 'explore/data', to: 'reports#index'
+  get 'explore/data/weekly-report', to: 'reports#weeklyReport'
   post 'explore/data/download', to: 'downloads#reports', :as => :report_download
   resources :stories, :only => [:show, :create]
   get 'explore/use-cases', to: 'explore#use_cases'
