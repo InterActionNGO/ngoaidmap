@@ -65,6 +65,19 @@
   .access {
     @include menu-item($color-2);
   }
+  .relaunch-banner {
+    padding: 1.25em;
+    background: rgba($color-2, 0.18);
+    text-align: center;
+    margin-top: 1em;
+    font-weight: normal;
+    font-size: 1.2em;
+    border-top: 1px solid rgba($color-2, 0.31);
+    a {
+        display: inline-block;
+        color: $color-2;
+      }
+  }
 }
 
 .mod-footer .submenu {
